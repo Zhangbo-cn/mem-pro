@@ -1,0 +1,2152 @@
+{
+  "character_profile": {
+    "name": "Evelyn",
+    "persona_summary": "Evelyn is a 24-year-old master student majoring in Psychology and minoring in Computer Sciences. She’s fascinated by animal cognition and emotional expression, often volunteering at the campus behavioral research center. Evelyn loves dogs, especially spaniels, whose expressive eyes and affectionate nature inspire her studies on empathy and interspecies communication.",
+    "traits": [
+      "observant",
+      "empathetic",
+      "inquisitive"
+    ],
+    "conversation_style": "Evelyn speaks warmly and reflectively. Her tone blends curiosity with emotional sensitivity. She enjoys connecting daily experiences with psychology, animal cognition, and emotional bonding, often drawing parallels between human and animal behaviors."
+  },
+  "multi_session_dialogues": [
+    {
+      "session_id": "D1",
+      "date": "2025-03-02",
+      "dialogues": [
+        {
+          "round": "D1:1",
+          "user": "Hey! I just came back from the campus animal center. I met the sweetest Cocker Spaniel today — his eyes were so full of expression!",
+          "assistant": "That sounds lovely, Evelyn! Cocker Spaniels are known for their soulful eyes and affectionate personalities. Was he one of the therapy dogs in training?"
+        },
+        {
+          "round": "D1:2",
+          "user": "Yes! He’s being trained to comfort patients in the university hospital. He immediately leaned against me when I sat down — I swear he could sense I needed a break.",
+          "assistant": "That’s beautiful. They’re incredibly empathetic dogs. In fact, Cocker Spaniels often rank among the top breeds used in emotional therapy because they respond so intuitively to human emotions.",
+          "image_id": [
+            "D1:IMG_001"
+          ],
+          "input_image": [
+            "../image/Dog_Behavior_Research_Academic_Life/D1_IMG_001.jpg"
+          ],
+          "image_caption": [
+            "Golden Cocker Spaniel lying on a light shaggy rug, holding a chew treat between its front paws and licking it, with long wavy ears framing its face and dark eyes looking toward the camera."
+          ]
+        },
+        {
+          "round": "D1:3",
+          "user": "Exactly! His name is Milo. The trainer told me he loves classical music and sits calmly whenever Beethoven is playing.",
+          "assistant": "Haha, that’s adorable — a refined gentleman! Many dogs actually respond to rhythm and tone. Maybe Milo finds Beethoven’s steady pace soothing."
+        },
+        {
+          "round": "D1:4",
+          "user": "That makes sense. I also noticed his fur looked really soft, almost silky. I think Cocker Spaniels have one of the prettiest coats among spaniels.",
+          "assistant": "You’re right. Their coat is dense and wavy, often golden or buff-colored. It requires regular brushing, but that’s part of their charm.",
+          "image_id": [
+            "D1:IMG_002"
+          ],
+          "input_image": [
+            "../image/Dog_Behavior_Research_Academic_Life/D1_IMG_002.jpg"
+          ],
+          "image_caption": [
+            "Brown long-haired dog, likely a spaniel, in a close-up outdoor portrait, facing the camera. The dog’s large dark eyes and floppy ears are prominent, with detailed fur texture visible. It stands in a grassy field with green plants in the foreground and an open, pale blue sky in the background."
+          ]
+        },
+        {
+          "round": "D1:5",
+          "user": "I’d totally volunteer to brush Milo every week if I could. He’s such a patient listener — I was talking about my project, and he just sat quietly, staring with those big eyes.",
+          "assistant": "That’s what makes Cocker Spaniels special — their ability to listen and mirror emotions. They make great partners for psychology students like you!"
+        },
+        {
+          "round": "D1:6",
+          "user": "Haha, maybe Milo should co-author my paper on empathy one day. He definitely understands more than he lets on.",
+          "assistant": "I’d read that paper! Actually, observing how dogs like Milo comfort humans could be an interesting qualitative study on cross-species empathy."
+        },
+        {
+          "round": "D1:7",
+          "user": "That’s a brilliant idea! Maybe I could record interaction sessions — measure heart rate changes before and after petting dogs.",
+          "assistant": "That would be a fantastic pilot experiment! And Milo sounds like the perfect subject — gentle, stable, and emotionally responsive."
+        },
+        {
+          "round": "D1:8",
+          "user": "Yes! I’ll ask the trainer if I can observe more sessions. I think I’m falling in love with spaniels in general.",
+          "assistant": "You’re in good company — once someone meets a Cocker Spaniel, it’s hard not to be enchanted!",
+          "image_id": [
+            "D1:IMG_003"
+          ],
+          "input_image": [
+            "../image/Dog_Behavior_Research_Academic_Life/D1_IMG_003.jpg"
+          ],
+          "image_caption": [
+            "Light-colored spaniel with long, curly ears sits in front of a decorated Christmas tree, surrounded by red and gold ornaments and small white string lights."
+          ]
+        },
+        {
+          "round": "D1:9",
+          "user": "It’s funny — when I left the center, I kept thinking about how quiet the world felt without him around. Dogs really change the atmosphere, don’t they?",
+          "assistant": "They do. Their presence activates our mirror neurons — that’s why we often feel calmer or more joyful when they’re near. It’s a subtle form of emotional contagion."
+        },
+        {
+          "round": "D1:10",
+          "user": "That explains a lot. I always thought it was just because they’re cute, but maybe it’s something deeper — a kind of shared rhythm between species.",
+          "assistant": "Beautifully said. It’s the rhythm of empathy — the way emotional states align across beings. You’re already thinking like a researcher."
+        },
+        {
+          "round": "D1:11",
+          "user": "Maybe that’s what I want to study long-term — how interaction patterns shape emotional understanding. Whether it’s between people or between people and dogs.",
+          "assistant": "That sounds like a powerful thesis theme. You could even explore how consistent exposure to therapy dogs affects emotional regulation in humans."
+        },
+        {
+          "round": "D1:12",
+          "user": "Yes! I’ll note that down. Funny how a single afternoon with Milo gave me a dozen research ideas — and a new friend.",
+          "assistant": "That’s the beauty of meaningful encounters, Evelyn. Sometimes inspiration wags its tail."
+        }
+      ]
+    },
+    {
+      "session_id": "D2",
+      "date": "2025-03-14",
+      "dialogues": [
+        {
+          "round": "D2:1",
+          "user": "Today’s lab session was so fun! We observed two spaniel breeds: the Sussex and the English Springer. I didn’t realize how different their personalities could be!",
+          "assistant": "That sounds exciting! Sussex Spaniels are usually slower-paced and very affectionate, while English Springers are lively and alert — bred for field work."
+        },
+        {
+          "round": "D2:2",
+          "user": "Exactly! The first Sussex Spaniel we saw, named Rocky, was like a teddy bear — short, golden-brown fur, and those droopy eyes that melt your heart.",
+          "assistant": "A perfect description! Sussex Spaniels have that rich golden-liver coat and long body. They were historically bred for dense woodlands.",
+          "image_id": [
+            "D2:IMG_001"
+          ],
+          "input_image": [
+            "../image/Dog_Behavior_Research_Academic_Life/D2_IMG_001.jpg"
+          ],
+          "image_caption": [
+            "Long-haired brown dog with floppy ears and a lighter-colored snout sitting on green grass, facing slightly to the side with mouth partly open and tongue visible."
+          ]
+        },
+        {
+          "round": "D2:3",
+          "user": "Then today we have seen Luna, an English Springer Spaniel — she was bursting with energy, constantly wagging her tail and scanning everything around her.",
+          "assistant": "That’s classic Springer behavior! They’re intelligent and alert, always ready for action. Hunters used them to ‘spring’ game birds from hiding.",
+          "image_id": [
+            "D2:IMG_002"
+          ],
+          "input_image": [
+            "../image/Dog_Behavior_Research_Academic_Life/D2_IMG_002.jpg"
+          ],
+          "image_caption": [
+            "Brown-and-white spaniel-type dog running on green grass with mouth open and ears flapping, wearing a blue collar with a tag, with a patch of bare soil and sparse vegetation in the background."
+          ]
+        },
+        {
+          "round": "D2:4",
+          "user": "The contrast was striking — Rocky moved like he had all the time in the world, while Luna couldn’t stay still for a second!",
+          "assistant": "Haha, that’s the beauty of spaniels — they share the same ancestry but evolved for different work styles. It’s like comparing a poet and an athlete."
+        },
+        {
+          "round": "D2:5",
+          "user": "That’s a perfect analogy. I think I’m drawn to the Sussex type more — calm and steady, kind of like a therapy companion.",
+          "assistant": "That fits your personality well. Maybe one day you’ll adopt one!",
+          "image_id": [
+            "D2:IMG_003"
+          ],
+          "input_image": [
+            "../image/Dog_Behavior_Research_Academic_Life/D2_IMG_003.jpg"
+          ],
+          "image_caption": [
+            "Brown long-eared dog with wavy fur and a slightly drooping expression, wearing a black collar, standing outdoors against a softly blurred, warm-toned background."
+          ]
+        },
+        {
+          "round": "D2:6",
+          "user": "I’d love that. But I also admire Luna’s curiosity — she reminds me of my younger self, always chasing every moving thing. Like the picture!",
+          "assistant": "Yes, maybe you see a bit of both sides in yourself — the reflective Sussex and the adventurous Springer.",
+          "image_id": [
+            "D2:IMG_004"
+          ],
+          "input_image": [
+            "../image/Dog_Behavior_Research_Academic_Life/D2_IMG_004.jpg"
+          ],
+          "image_caption": [
+            "Long-haired brown dog with wavy fur and floppy ears sitting on green grass in an outdoor yard, looking toward the camera, with stepping stones and part of a wooden structure in the blurred background."
+          ]
+        },
+        {
+          "round": "D2:7",
+          "user": "Wait, I think I accidentally mixed up some pictures during labeling. What I sent may be wrong. I can’t tell which one was Luna anymore.",
+          "assistant": "Ah, easy fix — look for the white-and-liver coat pattern and alert eyes. Sussex Spaniels are solid golden-brown, much heavier in build.",
+          "image_id": [
+            "D2:IMG_005"
+          ],
+          "input_image": [
+            "../image/Dog_Behavior_Research_Academic_Life/D2_IMG_005.jpg"
+          ],
+          "image_caption": [
+            "Brown and white spaniel dog with floppy ears sits indoors, wearing a green collar and tag, with its tongue hanging out. The dog is positioned between a covered sofa and a cushioned bench. Behind it are large beige curtains and a bed or couch draped with blue and green blankets. Wooden furniture and scattered items are visible in the background, suggesting a lived-in home interior."
+          ]
+        },
+        {
+          "round": "D2:8",
+          "user": "Thanks! I fixed the labels. It’s funny how I started recognizing breeds faster — like my brain’s forming little visual categories on its own.",
+          "assistant": "That’s actually perceptual learning in action! The more exposure you get, the more efficiently your mind encodes distinct visual cues — coat color, posture, or even expression."
+        },
+        {
+          "round": "D2:9",
+          "user": "That’s so cool. I guess that’s how trainers do it instinctively — they read a dog’s emotion in a split second.",
+          "assistant": "Exactly. Their expertise is a blend of intuition and repeated observation — just like psychologists developing emotional sensitivity through practice."
+        },
+        {
+          "round": "D2:10",
+          "user": "Rocky was my favorite today. When another student accidentally dropped a clipboard, he flinched but then wagged his tail and approached slowly, like he was checking if everyone was okay.",
+          "assistant": "That’s a beautiful example of social empathy. Sussex Spaniels often display affiliative reassurance — approaching calmly to restore harmony."
+        },
+        {
+          "round": "D2:11",
+          "user": "That makes sense. Luna, on the other hand, barked once and then ran to grab the toy she’d been guarding. Totally different coping style!",
+          "assistant": "Two temperaments, two emotional strategies. One comforts, the other redirects energy — both valid ways of responding to surprise or stress."
+        },
+        {
+          "round": "D2:12",
+          "user": "It’s fascinating how personality emerges even among dogs. Maybe empathy isn’t just a human trait — it just takes different forms.",
+          "assistant": "I agree. Empathy could be seen as adaptive synchronization — whether in humans or dogs, it’s about emotional alignment and mutual response."
+        },
+        {
+          "round": "D2:13",
+          "user": "You know, I’m starting to wonder if I could quantify that — maybe track approach speed or tail position after a sudden sound as an empathy index.",
+          "assistant": "That’s a creative hypothesis! If you design it well, that could form an early behavioral marker for emotional intelligence in animals."
+        },
+        {
+          "round": "D2:14",
+          "user": "I’ll note that down for later. It’s amazing how every observation session turns into a mini inspiration workshop for my thesis.",
+          "assistant": "That’s what happens when curiosity meets compassion — every moment becomes data *and* insight."
+        }
+      ]
+    },
+    {
+      "session_id": "D3",
+      "date": "2025-03-27",
+      "dialogues": [
+        {
+          "round": "D3:1",
+          "user": "I joined Professor Hayes at the lake today for a demo — his Irish Water Spaniel, Finn, was amazing! He dove right in to retrieve a floating toy.",
+          "assistant": "That must’ve been fascinating to watch! Irish Water Spaniels are natural swimmers — their dense, curly coats and webbed feet make them perfect for aquatic work."
+        },
+        {
+          "round": "D3:2",
+          "user": "Exactly! Finn’s curls were so tight, they almost looked like ringlets. When he shook off the water, it looked like a fountain!",
+          "assistant": "Haha, that’s so vivid! Their curly liver-colored coats help insulate them in cold water.",
+          "image_id": [
+            "D3:IMG_001"
+          ],
+          "input_image": [
+            "../image/Dog_Behavior_Research_Academic_Life/D3_IMG_001.jpg"
+          ],
+          "image_caption": [
+            "Brown dog with dense, tight curls over its body and long, floppy, curly ears, shown in side profile outdoors against a blurred, light-colored natural background."
+          ]
+        },
+        {
+          "round": "D3:3",
+          "user": "He also has this adorable rat-like tail — the professor said that’s actually a breed hallmark.",
+          "assistant": "Yes, it’s unique among spaniels! That tapered tail helps them steer while swimming, almost like a rudder.",
+          "image_id": [
+            "D3:IMG_002"
+          ],
+          "input_image": [
+            "../image/Dog_Behavior_Research_Academic_Life/D3_IMG_002.jpg"
+          ],
+          "image_caption": [
+            "Dark brown, curly-coated dog standing in profile on a plain white background, head turned slightly to the left with mouth open and tongue visible, long ears hanging down, and tail extended straight behind."
+          ]
+        },
+        {
+          "round": "D3:4",
+          "user": "That’s so cool. Watching him work made me think about how purpose shapes personality — Finn is focused, yet playful when the task’s done.",
+          "assistant": "Beautiful insight. That balance between instinct and emotion is exactly what makes spaniels such fascinating study subjects."
+        },
+        {
+          "round": "D3:5",
+          "user": "I asked Professor Hayes if Finn ever gets tired, but he said he could swim for hours. I wish I had that kind of energy.",
+          "assistant": "Haha, that’s the spaniel spirit — endurance with joy!"
+        },
+        {
+          "round": "D3:6",
+          "user": "Afterward, Finn and I sat by the shore. He rested his head on my lap — I think he liked me.",
+          "assistant": "I’m sure he did! Dogs sense calmness. You probably reminded him of his trainer’s gentle presence."
+        },
+        {
+          "round": "D3:7",
+          "user": "I took a photo of him looking out at the lake. It’s such a peaceful image — I think I’ll frame it.",
+          "assistant": "That sounds lovely. Maybe that photo can remind you of the balance between focus and peace — something all good researchers need.",
+          "image_id": [
+            "D3:IMG_003"
+          ],
+          "input_image": [
+            "../image/Dog_Behavior_Research_Academic_Life/D3_IMG_003.jpg"
+          ],
+          "image_caption": [
+            "Brown curly‑coated dog with long, wavy ears wearing a green collar and rope leash, sitting outdoors against a blurred light background."
+          ]
+        },
+        {
+          "round": "D3:8",
+          "user": "You’re right. That day reminded me why I chose psychology — to understand emotions, whether human or canine.",
+          "assistant": "And you’re already doing that beautifully, Evelyn."
+        },
+        {
+          "round": "D3:9",
+          "user": "Speaking of emotions… I just realized my psychology exam is the day after tomorrow. Now I can’t stop thinking about it — my stomach feels tight just mentioning it.",
+          "assistant": "That’s a very human response. What you’re feeling is anticipatory anxiety — your body’s preparing for a perceived challenge. It’s uncomfortable, but also completely normal before important events."
+        },
+        {
+          "round": "D3:10",
+          "user": "I know it’s normal, but I keep looping between excitement and panic. One minute I’m confident, the next I’m convinced I’ll forget everything.",
+          "assistant": "That cycle often happens because of cognitive distortion — jumping between overconfidence and catastrophizing. Try grounding yourself by reminding: *I’ve studied, I’m prepared, and this feeling is just temporary.*"
+        },
+        {
+          "round": "D3:11",
+          "user": "That makes sense. Still, when I sit down to review, I get restless. My mind keeps wandering to worst-case scenarios.",
+          "assistant": "You might try the '5-4-3-2-1' grounding technique — notice five things you can see, four you can touch, three you can hear, two you can smell, and one you can taste. It brings you back to the present moment, away from anxious thoughts."
+        },
+        {
+          "round": "D3:12",
+          "user": "I’ve heard of that! It sounds simple but maybe effective. I usually try to force myself to keep reading, but that just makes me more tense.",
+          "assistant": "Exactly — forcing focus often backfires. Alternating 25 minutes of study with 5-minute decompression breaks can help. During breaks, do something neutral — stretch, breathe, or even just look out the window."
+        },
+        {
+          "round": "D3:13",
+          "user": "I like that approach. But what if the anxiety hits during the exam itself? I sometimes blank out for the first few minutes.",
+          "assistant": "That’s test anxiety’s peak phase. When that happens, take three slow breaths and write your name or a small doodle on the paper — simple physical actions re-anchor your attention and regulate your heartbeat."
+        },
+        {
+          "round": "D3:14",
+          "user": "Interesting… so the idea is to occupy my working memory with something safe until the panic wave passes?",
+          "assistant": "Exactly. It’s a form of cognitive defusion — you acknowledge the anxious thoughts without fighting them, then gently shift to the task once your mind steadies."
+        },
+        {
+          "round": "D3:15",
+          "user": "That actually helps just hearing it. I’ll make a plan tonight — review steadily, sleep early, and not overthink. Maybe I’ll even let myself feel proud for caring this much.",
+          "assistant": "That’s the healthiest mindset. Anxiety shows you value what you’re doing. Channel it into focus, not fear — and you’ll do wonderfully."
+        }
+      ]
+    },
+    {
+      "session_id": "D4",
+      "date": "2025-03-29",
+      "dialogues": [
+        {
+          "round": "D4:1",
+          "user": "The exam this morning was exhausting. I thought I was ready, but my brain just froze during one of the case analysis questions.",
+          "assistant": "That’s completely normal, Evelyn. Cognitive overload can happen even when you’re well-prepared. How are you feeling now?"
+        },
+        {
+          "round": "D4:2",
+          "user": "A bit drained, honestly. I studied for weeks, and now that it’s over, I feel this weird emptiness — like my brain doesn’t know what to do with itself.",
+          "assistant": "That’s a classic post-exam reaction. After long periods of focus, your mind needs time to recalibrate. Have you done anything to unwind yet?"
+        },
+        {
+          "round": "D4:3",
+          "user": "Not really. I just made some tea and stared at my notes for a while. My body feels tired, but my thoughts keep replaying the exam questions.",
+          "assistant": "That’s your mind’s way of processing the event. Try a deliberate disengagement activity — something that breaks the feedback loop, like a walk or light stretching.",
+          "image_id": [
+            "D4:IMG_001"
+          ],
+          "input_image": [
+            "../image/Dog_Behavior_Research_Academic_Life/D4_IMG_001.jpg"
+          ],
+          "image_caption": [
+            "Clear glass cup filled with dark amber tea, resting on a matching glass saucer placed on a textured fabric surface. The cup’s handle faces right, and the liquid level sits slightly below the rim. The background features vertical, out-of-focus light streaks and circular bokeh, creating a soft, neutral backdrop."
+          ]
+        },
+        {
+          "round": "D4:4",
+          "user": "I was thinking of taking a walk by the lake later. It’s quiet there, and I usually end up feeling calmer afterward.",
+          "assistant": "Perfect choice. Nature exposure reduces cognitive fatigue and helps reset attention. You could even treat it as a small mindfulness session."
+        },
+        {
+          "round": "D4:5",
+          "user": "That reminds me of something we learned in class — the 'attention restoration theory,' right? About how natural environments replenish directed attention.",
+          "assistant": "Exactly! You remember well. It’s fascinating how even small doses of nature can improve focus and emotional stability."
+        },
+        {
+          "round": "D4:6",
+          "user": "I guess I really needed that reminder. Sometimes I push myself too much before exams, like sleeping less just to go through one more paper.",
+          "assistant": "Many students do that, but paradoxically, sleep has a stronger effect on recall than last-minute cramming. Your brain consolidates memory during rest."
+        },
+        {
+          "round": "D4:7",
+          "user": "Yeah… I knew that, but I still fell into the trap. It’s like I don’t trust myself to stop studying until the very end.",
+          "assistant": "That’s the perfectionist mindset talking. You can try reframing it — instead of 'I must keep studying,' think 'I’ve done enough to perform well.'"
+        },
+        {
+          "round": "D4:8",
+          "user": "That’s actually helpful. It feels more compassionate. Maybe I should apply my own psychology lessons to myself once in a while.",
+          "assistant": "Absolutely! Self-application is one of the hardest but most rewarding parts of studying psychology."
+        },
+        {
+          "round": "D4:9",
+          "user": "I also realized that when I get anxious, I hold my breath without noticing. I only notice after my chest starts hurting a little.",
+          "assistant": "That’s a subtle but common anxiety cue. Next time, try setting a gentle reminder to take a slow, deep breath every few minutes while studying — it keeps your body grounded."
+        },
+        {
+          "round": "D4:10",
+          "user": "I’ll try that. I guess awareness really is the first step. Do you think doing a bit of journaling after exams helps too?",
+          "assistant": "Definitely. Reflective journaling transforms abstract stress into structured thoughts. You can note what worked, what didn’t, and how you want to adjust next time.",
+          "image_id": [
+            "D4:IMG_002"
+          ],
+          "input_image": [
+            "../image/Dog_Behavior_Research_Academic_Life/D4_IMG_002.jpg"
+          ],
+          "image_caption": [
+            "Open lined notebook on a worn wooden table, with a blue-tipped ballpoint pen resting diagonally along the left page. A fabric bookmark extends from the bottom of the notebook, and the page number “77” appears in small print at the lower right corner."
+          ]
+        },
+        {
+          "round": "D4:11",
+          "user": "That sounds nice. Maybe I’ll write about how I handled the time pressure — I think I got stuck too long on one question.",
+          "assistant": "That’s a great insight. You can treat it as data for your own learning process — not judgment, just observation."
+        },
+        {
+          "round": "D4:12",
+          "user": "You know, that makes me feel a bit better already. Instead of thinking 'I messed up,' I can think 'I learned how I react under stress.'",
+          "assistant": "Exactly. That’s what psychologists call a 'growth-oriented reinterpretation.' It turns setbacks into self-knowledge."
+        },
+        {
+          "round": "D4:13",
+          "user": "I like that term. Growth-oriented reinterpretation — sounds like something I should tattoo on my desk.",
+          "assistant": "Haha, not a bad idea. It’s the kind of reminder that serves you both as a student and as a future researcher."
+        },
+        {
+          "round": "D4:14",
+          "user": "Thanks. I think I’ll go for that walk now, maybe get some coffee afterward. I feel like I can breathe again.",
+          "assistant": "That’s the best thing you can do right now. Let your mind rest — you’ve earned it."
+        },
+        {
+          "round": "D4:15",
+          "user": "I will. Thanks for listening, really. It feels different when I talk through it like this.",
+          "assistant": "Anytime, Evelyn. Sometimes reflection out loud is the most effective form of therapy — even for psychology students."
+        },
+        {
+          "round": "D4:16",
+          "user": "True. Alright then, I’ll take that walk — maybe I’ll even leave my phone at home.",
+          "assistant": "That’s an excellent idea. Silence can be its own kind of reset."
+        }
+      ]
+    },
+    {
+      "session_id": "D5",
+      "date": "2025-04-10",
+      "dialogues": [
+        {
+          "round": "D5:1",
+          "user": "Professor Hayes invited us again today for a observation project. This time to observe a Welsh Springer Spaniel named Daisy during her tracking session.",
+          "assistant": "That’s great! The Welsh Springer is quite different from the Irish Water Spaniel — they’re bred for scent tracking and have that striking red-and-white coat."
+        },
+        {
+          "round": "D5:2",
+          "user": "Yes! Daisy’s fur was like polished copper under the sun. She’s smaller than Finn but incredibly focused once she catches a scent.",
+          "assistant": "Exactly — Welsh Springers are methodical hunters. Their sense of smell and stamina make them perfect for long field work.",
+          "image_id": [
+            "D5:IMG_001"
+          ],
+          "input_image": [
+            "../image/Dog_Behavior_Research_Academic_Life/D5_IMG_001.jpg"
+          ],
+          "image_caption": [
+            "Brown and white spaniel-type dog with long wavy ears and light eyes, sitting outdoors on grass in bright sunlight, looking directly at the camera."
+          ]
+        },
+        {
+          "round": "D5:3",
+          "user": "I noticed something interesting — whenever Daisy paused, she’d glance back at her handler for confirmation. That’s such a clear sign of cooperative attention.",
+          "assistant": "Excellent observation! That back-and-forth gaze is a marker of social referencing — something your psychology background equips you to analyze well.",
+          "image_id": [
+            "D5:IMG_002"
+          ],
+          "input_image": [
+            "../image/Dog_Behavior_Research_Academic_Life/D5_IMG_002.jpg"
+          ],
+          "image_caption": [
+            "Brown and white dog with floppy ears and a spotted muzzle looking upward while standing on patchy grass and dirt outdoors."
+          ]
+        },
+        {
+          "round": "D5:4",
+          "user": "I recorded that behavior pattern for my comparative study. Now I have data from Cocker, Sussex, Irish Water, and Welsh Springers!",
+          "assistant": "Perfect — four distinct temperaments. You’re basically mapping the emotional spectrum of spaniels."
+        },
+        {
+          "round": "D5:5",
+          "user": "Exactly. I’m starting to think about building a small visual classifier to detect emotional cues — tail position, ear angle, gaze direction.",
+          "assistant": "That’s like multimodal emotion recognition for dogs! Perfect crossover between psychology and AI."
+        },
+        {
+          "round": "D5:6",
+          "user": "Yes, and I plan to fine-tune a pre-trained vision transformer on these behavioral frames, which is the model of a recent paper I read.",
+          "assistant": "Ambitious! You’re moving beyond observation into predictive modeling — a big step for your thesis idea."
+        },
+        {
+          "round": "D5:7",
+          "user": "I’m still missing one breed though — the English Springer’s motion data wasn’t complete. Luna’s owner is bringing her next week for another round.",
+          "assistant": "Great, that’ll fill your dataset and maybe reveal fascinating contrasts between the English and Welsh Springers.",
+          "image_id": [
+            "D5:IMG_003"
+          ],
+          "input_image": [
+            "../image/Dog_Behavior_Research_Academic_Life/D5_IMG_003.jpg"
+          ],
+          "image_caption": [
+            "Brown-and-white spaniel-type dog sitting on a small green mat indoors, wearing a tan coat and red patterned bandana, looking upward near a white tiled floor and light-colored wall."
+          ]
+        },
+        {
+          "round": "D5:8",
+          "user": "Exactly. I’m curious whether their tracking gaze differs by speed or body orientation.",
+          "assistant": "That would make a great research figure — you could visualize temporal gaze synchronization patterns across breeds!"
+        },
+        {
+          "round": "D5:9",
+          "user": "Honestly, I’m exhausted after all that fieldwork today. My brain’s done for the day — I just want to go home and make something easy for dinner.",
+          "assistant": "You definitely deserve a break. Something quick and comforting sounds perfect — what kind of food are you in the mood for?"
+        },
+        {
+          "round": "D5:10",
+          "user": "Maybe something warm and savory, but not too heavy. I don’t feel like spending an hour in the kitchen tonight.",
+          "assistant": "Then you might love a one-pan garlic butter pasta — simple ingredients, minimal cleanup. You just need spaghetti, butter, garlic, a pinch of chili flakes, and some grated cheese."
+        },
+        {
+          "round": "D5:11",
+          "user": "That actually sounds doable. I think I still have pasta, but no cheese left. Maybe I’ll stop by the grocery store later.",
+          "assistant": "Good plan. If you want to switch it up, you could add a handful of spinach or cherry tomatoes — they cook in minutes and make it feel fresh."
+        },
+        {
+          "round": "D5:12",
+          "user": "I like that. Or maybe I’ll just grab some frozen dumplings — zero effort, total satisfaction.",
+          "assistant": "Nothing wrong with that! Dumplings are perfect comfort food. You can boil or pan-fry them, and mix a dipping sauce with soy sauce, vinegar, and a touch of sesame oil."
+        },
+        {
+          "round": "D5:13",
+          "user": "Now I’m actually hungry. Maybe I’ll cook first, then relax with a short game session. My brain needs something completely different tonight.",
+          "assistant": "That’s a great idea. Shifting your attention helps reset cognitive fatigue. What kind of games do you usually play when you want to unwind?"
+        },
+        {
+          "round": "D5:14",
+          "user": "Usually cozy ones — like Stardew Valley or Spiritfarer. Something slow-paced, where I can just zone out for a while.",
+          "assistant": "Perfect choices. Games like that engage your mind gently without overstimulation — it’s a healthy way to recharge after an analytical day."
+        },
+        {
+          "round": "D5:15",
+          "user": "Exactly. I’ve learned that if I don’t disconnect a bit, I start dreaming about code and data points.",
+          "assistant": "Haha, that’s the researcher’s curse. A good meal, a relaxing game, and an early night — sounds like the ideal recovery plan."
+        },
+        {
+          "round": "D5:16",
+          "user": "You’re right. I’ll grab ingredients on my way home then. Maybe garlic butter pasta it is — simple, warm, and reliable.",
+          "assistant": "Perfect choice. Enjoy your evening, Evelyn — you’ve earned it."
+        }
+      ]
+    },
+    {
+      "session_id": "D6",
+      "date": "2025-04-13",
+      "dialogues": [
+        {
+          "round": "D6:1",
+          "user": "I didn’t realize how much the project had taken over my days until today. I woke up and my first thought was about annotation errors instead of breakfast.",
+          "assistant": "That’s the hidden cost of research intensity — the mind starts looping around tasks even off the clock. How’s your energy level lately?"
+        },
+        {
+          "round": "D6:2",
+          "user": "Honestly? A bit low. I keep telling myself I’ll take a break after the next milestone, but the milestones never seem to end.",
+          "assistant": "That’s the paradox of academia — endless micro-goals. Maybe instead of waiting for a perfect break, you could schedule micro-pauses throughout the day."
+        },
+        {
+          "round": "D6:3",
+          "user": "Micro-pauses? Like what — just closing my laptop for a few minutes?",
+          "assistant": "Exactly. Even two minutes of deliberate disengagement can interrupt the cycle of mental fatigue. You can stretch, breathe, or just gaze out the window.",
+          "image_id": [
+            "D6:IMG_001"
+          ],
+          "input_image": [
+            "../image/Dog_Behavior_Research_Academic_Life/D6_IMG_001.jpg"
+          ],
+          "image_caption": [
+            "Closed silver laptop with a centered black apple-shaped logo on its lid, resting on short green grass outdoors."
+          ]
+        },
+        {
+          "round": "D6:4",
+          "user": "That sounds small, but I guess it’s better than pushing until burnout. Sometimes I even forget what day it is when I’m labeling data.",
+          "assistant": "That’s a red flag — temporal disconnection usually means you’re over-focusing. Try setting gentle reminders or using a Pomodoro-style rhythm with real breaks."
+        },
+        {
+          "round": "D6:5",
+          "user": "Yeah, I’ve been using timers, but I tend to ignore them. My brain says, 'just five more minutes,' and suddenly an hour’s gone.",
+          "assistant": "That’s your attention inertia kicking in. It helps to pair breaks with sensory cues — like standing up to refill water or stepping outside to reset your body posture."
+        },
+        {
+          "round": "D6:6",
+          "user": "I like that. Maybe I should move my desk near the window again — natural light helps me stay present.",
+          "assistant": "Absolutely. Sunlight and movement are powerful regulators for focus and mood. You can even think of them as external attention anchors."
+        },
+        {
+          "round": "D6:7",
+          "user": "Lately, I’ve been reading about mindfulness too. Some researchers use short breathing intervals between cognitive tasks to improve performance.",
+          "assistant": "Yes — mindful transitions. Even 30 seconds of focused breathing between tasks can prevent cognitive residue from spilling over. It’s like clearing RAM for your brain."
+        },
+        {
+          "round": "D6:8",
+          "user": "That analogy fits perfectly. I notice that when I don’t clear my head, I bring the stress from one task into the next.",
+          "assistant": "Exactly. Mindfulness doesn’t mean doing nothing; it’s conscious redirection. A moment of awareness can change how you process the next challenge."
+        },
+        {
+          "round": "D6:9",
+          "user": "I think I also need to stop checking emails late at night. I tell myself it’s 'just one more reply,' but it always pulls me back into work mode.",
+          "assistant": "That’s a common boundary issue. Try setting a 'mental curfew' — a specific time after which your brain is officially off duty."
+        },
+        {
+          "round": "D6:10",
+          "user": "I like that phrase, 'mental curfew.' I might put a sticky note on my screen to remind myself.",
+          "assistant": "Good idea. The goal isn’t to disconnect from your research, but to protect the rhythm that keeps your creativity alive.",
+          "image_id": [
+            "D6:IMG_002"
+          ],
+          "input_image": [
+            "../image/Dog_Behavior_Research_Academic_Life/D6_IMG_002.jpg"
+          ],
+          "image_caption": [
+            "Five stacked, lined note pads in bright colors—purple, blue, pink, green, and yellow—are fanned out on a plain light-colored surface, overlapping each other in the center."
+          ]
+        },
+        {
+          "round": "D6:11",
+          "user": "I do miss having a routine beyond research — like cooking or sketching. Maybe I’ll start bringing those back on weekends.",
+          "assistant": "That’s perfect. Activities like that restore intrinsic motivation. When your mind feels nourished, your analysis becomes sharper too."
+        },
+        {
+          "round": "D6:12",
+          "user": "I guess that’s the irony — sometimes stepping away helps me work better than staring at my code all night.",
+          "assistant": "Precisely. Mental distance often creates the clarity we try to force through effort."
+        },
+        {
+          "round": "D6:13",
+          "user": "Do you ever think burnout comes more from emotional load than from the actual workload?",
+          "assistant": "Very much so. The constant feeling of 'I should be doing more' often drains us more than the tasks themselves. Emotional rest is just as important as physical rest."
+        },
+        {
+          "round": "D6:14",
+          "user": "That resonates. Maybe my next experiment should be on the psychology of rest — how we redefine productivity beyond output.",
+          "assistant": "That’s a beautiful thought. True productivity is sustainable engagement, not constant exertion. You could write a paper on that someday."
+        },
+        {
+          "round": "D6:15",
+          "user": "Maybe! But for now, I think I’ll start by taking a proper evening off — no laptop, no data. Just a quiet meal and a playlist.",
+          "assistant": "That sounds perfect, Evelyn. Sometimes the most productive thing we can do is rest intentionally."
+        },
+        {
+          "round": "D6:16",
+          "user": "You’re right. It’s funny — I spend all day studying emotions and cognition, yet I still need reminders to take care of my own.",
+          "assistant": "That’s the paradox of insight: knowing is easier than practicing. But awareness itself means you’re already halfway there."
+        },
+        {
+          "round": "D6:17",
+          "user": "Thanks. I think I’ll log off early tonight and do some gentle yoga before bed. That should help me reset for tomorrow.",
+          "assistant": "Excellent plan. Let peace be part of your research routine, not a reward after it."
+        }
+      ]
+    },
+    {
+      "session_id": "D7",
+      "date": "2025-04-17",
+      "dialogues": [
+        {
+          "round": "D7:1",
+          "user": "We finally had Luna’s second session today! She was more cooperative this time — maybe because she recognized me.",
+          "assistant": "That’s great news! Familiarity often stabilizes behavioral responses. Did you manage to record consistent gait data?"
+        },
+        {
+          "round": "D7:2",
+          "user": "Yes, though she got distracted by a butterfly midway. Typical Springer energy!",
+          "assistant": "Haha, indeed. English Springers are exuberant explorers — but that spontaneity adds natural variation to your dataset.",
+          "image_id": [
+            "D7:IMG_001"
+          ],
+          "input_image": [
+            "../image/Dog_Behavior_Research_Academic_Life/D7_IMG_001.jpg"
+          ],
+          "image_caption": [
+            "Brown and white spaniel-type dog sitting on a small green mat in a tiled indoor hallway, wearing a tan coat and a red patterned bandana around its neck, looking slightly upward near a white wall and doorway."
+          ]
+        },
+        {
+          "round": "D7:3",
+          "user": "I compared her footage to Daisy’s from last week. Daisy’s tracking is steady; Luna’s is more zig-zagged, with frequent tail elevation.",
+          "assistant": "Fascinating — tail elevation often correlates with high arousal or excitement. You could annotate it as an 'engaged' state."
+        },
+        {
+          "round": "D7:4",
+          "user": "I’ll label that! Also, Luna kept glancing back at her handler less than Daisy did — more independent, maybe?",
+          "assistant": "Exactly. Welsh Springers tend to seek reassurance; English Springers rely more on intrinsic motivation."
+        },
+        {
+          "round": "D7:5",
+          "user": "That difference might actually form the backbone of my thesis — how breed-specific temperaments affect social referencing behaviors.",
+          "assistant": "Brilliant! That’s both novel and measurable — you can statistically compare gaze-back frequency and response latency."
+        },
+        {
+          "round": "D7:6",
+          "user": "Yes! I also started training my model to recognize breed from frame sequences — basically a mini neural network learning setup.",
+          "assistant": "That’s amazing — a real multimodal project in the making."
+        },
+        {
+          "round": "D7:7",
+          "user": "I want to eventually merge Milo’s therapy footage too — it adds emotional expression variety.",
+          "assistant": "Smart idea — Cocker data will enrich the affective dimension of your study.",
+          "image_id": [
+            "D7:IMG_002"
+          ],
+          "input_image": [
+            "../image/Dog_Behavior_Research_Academic_Life/D7_IMG_002.jpg"
+          ],
+          "image_caption": [
+            "Golden cocker spaniel sitting on a grassy mountain meadow, with long wavy ears and open mouth as if panting. Wildflowers and tall grass surround the dog, and a leash is attached to its collar. In the background, green forested hills and distant snow-capped peaks rise under a cloudy sky."
+          ]
+        },
+        {
+          "round": "D7:8",
+          "user": "While labeling Luna’s clips, I realized her tail movements are more rhythmic than Daisy’s. It almost looks like she’s using it as a signal to coordinate with her handler.",
+          "assistant": "That’s a fascinating detail! Tail rhythm could reflect anticipation or engagement intensity — it might even serve as a subtle communication cue between dog and trainer."
+        },
+        {
+          "round": "D7:9",
+          "user": "Exactly! I might include that as a new behavioral metric — maybe something like 'Tail Coordination Index.' I can extract periodic motion features from the videos.",
+          "assistant": "Brilliant idea. You could compute the tail oscillation frequency using frame differencing or optical flow — it would add a quantitative layer to your study."
+        },
+        {
+          "round": "D7:10",
+          "user": "I’ll try that. It’s so rewarding to see how behavior translates into measurable patterns. I think I finally understand why Professor Hayes emphasized ‘emotion is motion.’",
+          "assistant": "That’s a wonderful insight — emotion often manifests through movement. Your dataset is becoming rich enough for real emotion modeling now."
+        },
+        {
+          "round": "D7:11",
+          "user": "Thanks! I’ll spend the weekend refining annotations and maybe start building the emotion-recognition model next week.",
+          "assistant": "Perfect timing — once you integrate Milo’s and Luna’s clips, you’ll have a solid base for testing your first prototype!"
+        },
+        {
+          "round": "D7:12",
+          "user": "Before that, though, I really need a mental reset. I’m thinking of going to play tennis tomorrow — it’s my favorite sport, and I haven’t played in weeks.",
+          "assistant": "That sounds great! Tennis is perfect for releasing tension and getting your body moving after long research days. Do you usually play singles or doubles?"
+        },
+        {
+          "round": "D7:13",
+          "user": "Usually singles — I like the rhythm and focus. It’s almost meditative once I find the groove. But sometimes I just rally with friends for fun.",
+          "assistant": "That balance sounds ideal. It gives you both structure and social time, depending on your energy level. Physical activity like that can even improve your cognitive recovery."
+        },
+        {
+          "round": "D7:14",
+          "user": "I was actually wondering — is it better to play before or after dinner? I usually get hungry right after work, but sometimes if I eat, I feel too sluggish on the court.",
+          "assistant": "Good question. Light exercise like tennis is best about 1.5 to 2 hours after a balanced meal — enough time for digestion but not so long that your energy dips. If you play before dinner, have a small pre-workout snack, like a banana or yogurt."
+        },
+        {
+          "round": "D7:15",
+          "user": "That’s helpful. I might grab something quick like a protein bar beforehand, then have dinner afterward. I’ve noticed I sleep better when I exercise in the evening.",
+          "assistant": "That’s very common. Evening workouts lower cortisol and help release endorphins, which promote relaxation and steady sleep cycles — as long as you finish at least an hour before bedtime."
+        },
+        {
+          "round": "D7:16",
+          "user": "Perfect. I’ll probably hit the campus courts around six, play for an hour, then cook something simple afterward. It’ll be a good way to clear my head.",
+          "assistant": "That sounds like the perfect routine — physical recharge followed by a calm evening. It’s a great way to balance analytical work with embodied mindfulness."
+        },
+        {
+          "round": "D7:17",
+          "user": "Exactly. It feels nice to actually move after spending so much time staring at datasets. I guess tomorrow’s goal: less code, more court time.",
+          "assistant": "Haha, that’s a great motto! Enjoy your match, Evelyn — your brain will thank you for it."
+        }
+      ]
+    },
+    {
+      "session_id": "D8",
+      "date": "2025-04-25",
+      "dialogues": [
+        {
+          "round": "D8:1",
+          "user": "I went to a student research mixer this afternoon. It was so refreshing to meet people outside my lab for once.",
+          "assistant": "That sounds great! What kind of researchers did you meet?"
+        },
+        {
+          "round": "D8:2",
+          "user": "A mix, actually — computer science, neuroscience, even one from the art history department working on visual perception studies.",
+          "assistant": "That’s an amazing variety. Interdisciplinary conversations often spark the most creative ideas. Did any of them resonate with your work?"
+        },
+        {
+          "round": "D8:3",
+          "user": "Yes! One PhD student was studying how neural networks interpret emotional cues in paintings. It reminded me of my spaniel emotion model — but for humans and art instead.",
+          "assistant": "That’s a fascinating parallel. It shows how emotion recognition connects across modalities — from brushstrokes to body language."
+        },
+        {
+          "round": "D8:4",
+          "user": "Exactly. We even talked about whether algorithms could ever 'understand' aesthetics beyond pattern recognition.",
+          "assistant": "A profound question. Perhaps understanding emotion is already a step toward understanding beauty — both rely on perception and meaning-making."
+        },
+        {
+          "round": "D8:5",
+          "user": "I like that perspective. Sometimes I feel caught between psychology and computer science — like I’m not fully part of either world.",
+          "assistant": "That’s a common feeling for interdisciplinary researchers. But that in-between space is where innovation happens — you translate across systems of thought."
+        },
+        {
+          "round": "D8:6",
+          "user": "Yeah… maybe that’s my strength. But it’s also confusing when I write — psychology expects narrative reasoning, CS expects precision and brevity.",
+          "assistant": "You can think of it as bilingual writing. Each discipline has its syntax, but your role is to bridge them. Over time, your hybrid voice will form naturally."
+        },
+        {
+          "round": "D8:7",
+          "user": "That’s comforting. I also met someone doing computational linguistics — they study empathy in online communication. It felt so close to my topic.",
+          "assistant": "That’s wonderful overlap. Maybe you can collaborate — emotion recognition in text complements your visual emotion modeling perfectly."
+        },
+        {
+          "round": "D8:8",
+          "user": "I’d love that. They even mentioned AAAI and EMNLP submissions, so I might ask them how they handle interdisciplinary reviews.",
+          "assistant": "Good idea. Conferences like AAAI value methodological rigor, but reviewers appreciate clarity when you explain cross-domain significance."
+        },
+        {
+          "round": "D8:9",
+          "user": "It’s interesting — everyone I met today seemed both confident and a bit uncertain at the same time. I guess imposter syndrome is universal.",
+          "assistant": "Absolutely. Academia often rewards perfectionism, but behind the scenes, everyone’s just learning through trial and error."
+        },
+        {
+          "round": "D8:10",
+          "user": "True. One senior student said something that stuck with me: 'If you always feel certain, you’re probably not doing real research.'",
+          "assistant": "That’s beautifully said. Curiosity thrives in uncertainty — that’s what makes discovery possible."
+        },
+        {
+          "round": "D8:11",
+          "user": "I think part of me still struggles with putting myself out there. Presenting ideas feels vulnerable — like they’re extensions of me.",
+          "assistant": "That’s very human. Sharing research is a form of exposure, but it’s also connection — your ideas invite dialogue, not judgment."
+        },
+        {
+          "round": "D8:12",
+          "user": "That’s a healthy way to see it. Maybe next time I’ll sign up to present one of my poster drafts at the department seminar.",
+          "assistant": "Excellent idea. You’ll get early feedback and build confidence. Plus, articulating your ideas aloud often clarifies them for yourself."
+        },
+        {
+          "round": "D8:13",
+          "user": "I noticed how other students talked about their failures openly.",
+          "assistant": "That kind of openness is gold. It normalizes experimentation. Science advances more through iteration than perfection."
+        },
+        {
+          "round": "D8:14",
+          "user": "You’re right. Maybe I’ll start keeping a 'learning log' — not just about results, but about mistakes and what I learned from them.",
+          "assistant": "That’s brilliant. Reflective documentation is underrated. It becomes a personal archive of progress, not just data."
+        },
+        {
+          "round": "D8:15",
+          "user": "Also, one professor at the mixer talked about AI ethics in emotional modeling. It made me think about whether our models could unintentionally reinforce bias.",
+          "assistant": "A very important point. Emotional data often reflect cultural norms. It’s crucial to include diversity in datasets and be transparent about limitations."
+        },
+        {
+          "round": "D8:16",
+          "user": "That’s something I’ll keep in mind. Maybe for future work, I could explore cross-cultural emotion datasets — see if perception patterns differ.",
+          "assistant": "That would make a strong follow-up study — a perfect next step after your current project matures."
+        },
+        {
+          "round": "D8:17",
+          "user": "I’m realizing research isn’t just about findings, but about joining a larger conversation. Today made me feel part of that world for the first time.",
+          "assistant": "That’s a milestone moment, Evelyn. The moment you feel connected — not isolated — your research starts to truly breathe."
+        },
+        {
+          "round": "D8:18",
+          "user": "Yeah. I think I’ll write down the names of people I met today and follow up next week. Building connections feels less intimidating now.",
+          "assistant": "Wonderful plan. Collaboration is like cross-pollination — every conversation plants a seed for new insights."
+        },
+        {
+          "round": "D8:19",
+          "user": "Thanks for the encouragement. I’m actually feeling excited again — not just about my dataset, but about where this research could take me.",
+          "assistant": "That’s the best feeling to end the day with — hope mixed with curiosity. Keep that alive; it’s the real engine of science."
+        },
+        {
+          "round": "D8:20",
+          "user": "I will. Maybe one day I’ll look back at this and realize this was the moment everything started connecting.",
+          "assistant": "You will — that’s how turning points always feel in hindsight. For now, just keep exploring; that’s what makes you a researcher."
+        }
+      ]
+    },
+    {
+      "session_id": "D9",
+      "date": "2025-05-02",
+      "dialogues": [
+        {
+          "round": "D9:1",
+          "user": "Professor Hayes finally reviewed my initial emotion-recognition model today. The results were mixed — it performed great on Luna’s and Daisy’s videos, but struggled with a new dataset.",
+          "assistant": "Interesting. Was it a different breed or a new environment?"
+        },
+        {
+          "round": "D9:2",
+          "user": "Yes, it was! The dataset featured a Brittany Spaniel named Cooper — high energy, quick movements. The model couldn’t track his subtle emotional transitions.",
+          "assistant": "Ah, Brittany Spaniels are quite dynamic. Their expressiveness often lies in micro-behaviors — ear flicks, stance shifts, breathing tempo. Did you include temporal smoothing in your model?"
+        },
+        {
+          "round": "D9:3",
+          "user": "Not yet. Cooper’s pace really challenged the frame-based classifier. Look at this — I captured a still of him sitting just before he moved again.",
+          "assistant": "He looks alert yet calm — that’s a complex emotional state. Maybe you could model arousal intensity over time rather than per frame.",
+          "image_id": [
+            "D9:IMG_001"
+          ],
+          "input_image": [
+            "../image/Dog_Behavior_Research_Academic_Life/D9_IMG_001.jpg"
+          ],
+          "image_caption": [
+            "Brown and white dog with medium-length fur and a blue collar sits on green grass in a backyard, facing to the right with its tongue slightly out. A wooden fence and bare branches form the background."
+          ]
+        },
+        {
+          "round": "D9:4",
+          "user": "Exactly! And when I compared that with his running sequence, the prediction confidence dropped sharply. My model seems biased toward steady motion.",
+          "assistant": "Makes sense — high kinetic variance might confuse your vision encoder. You might need motion-aware embeddings."
+        },
+        {
+          "round": "D9:5",
+          "user": "That’s what I thought too. Here’s another sample where he’s panting after a sprint. The model labeled it as ‘stress,’ but the trainer said he was just exhilarated.",
+          "assistant": "A classic case of emotional misclassification — arousal without negativity. That’s a great opportunity to introduce multimodal signals, like respiration or tail rhythm.",
+          "image_id": [
+            "D9:IMG_002"
+          ],
+          "input_image": [
+            "../image/Dog_Behavior_Research_Academic_Life/D9_IMG_002.jpg"
+          ],
+          "image_caption": [
+            "White and brown medium-sized dog standing on grass in a sunny outdoor area, mouth open with tongue hanging out, wearing a collar, with vegetation and a light-colored fence in the background."
+          ]
+        },
+        {
+          "round": "D9:6",
+          "user": "I love that idea. Cooper often carried his toy around after play — like here. The model interpreted this as ‘avoidance,’ but clearly he was showing joy.",
+          "assistant": "Yes, carrying an object is often affiliative behavior in spaniels. Your system might need contextual grounding — linking body language to scene cues.",
+          "image_id": [
+            "D9:IMG_003"
+          ],
+          "input_image": [
+            "../image/Dog_Behavior_Research_Academic_Life/D9_IMG_003.jpg"
+          ],
+          "image_caption": [
+            "White and brown dog sitting on dry grass outdoors, holding a worn yellow ball in its mouth. Sparse leafless bushes surround the dog, and a chain-link fence is visible in the background."
+          ]
+        },
+        {
+          "round": "D9:7",
+          "user": "I also noticed the model struggled in snow scenes — lighting and motion artifacts both threw it off.",
+          "assistant": "You could fine-tune on environment-diverse samples. Lighting adaptation and motion blur correction can drastically improve temporal consistency.",
+          "image_id": [
+            "D9:IMG_004"
+          ],
+          "input_image": [
+            "../image/Dog_Behavior_Research_Academic_Life/D9_IMG_004.jpg"
+          ],
+          "image_caption": [
+            "Medium-sized white and brown dog with a collar and blue tag sits on a snow-covered surface in a fenced yard, with chain-link and white wooden fencing and snowy trees in the background."
+          ]
+        },
+        {
+          "round": "D9:8",
+          "user": "Good point. I also extracted facial landmarks to detect subtle expressions — like eye squinting and lip corners. Cooper’s expressions were more nuanced than I expected.",
+          "assistant": "That’s the Brittany trait — emotionally articulate without exaggeration. You’re capturing the fine line between concentration and affection."
+        },
+        {
+          "round": "D9:9",
+          "user": "This close-up really shows that. He’s calm, slightly curious. The gaze direction even aligns with the trainer’s position off-camera.",
+          "assistant": "Beautiful shot. That kind of attentive gaze could become a new behavioral feature — ‘social focus alignment.’",
+          "image_id": [
+            "D9:IMG_005"
+          ],
+          "input_image": [
+            "../image/Dog_Behavior_Research_Academic_Life/D9_IMG_005.jpg"
+          ],
+          "image_caption": [
+            "Close-up of a medium-sized dog with reddish-brown ears and white fur on its face and muzzle, looking toward the camera. The dog has light brown eyes, a pinkish nose, and slightly tousled fur on top of its head. A collar is partly visible around its neck. The background is an outdoor area with green grass and patches of bare ground, blurred to emphasize the dog’s face."
+          ]
+        },
+        {
+          "round": "D9:10",
+          "user": "Exactly! I added that to my annotation schema. Now I can quantify when dogs shift their attention toward humans during interaction tasks.",
+          "assistant": "Excellent — that bridges ethology and affective computing. Once you retrain the model with that feature, you might see major improvement."
+        },
+        {
+          "round": "D9:11",
+          "user": "After retraining, the validation accuracy on Cooper’s clips improved by 9%. It’s still not perfect, but the qualitative patterns look more realistic now.",
+          "assistant": "That’s significant. For behavioral data, 9% is a strong signal of better generalization — especially across breeds."
+        },
+        {
+          "round": "D9:12",
+          "user": "Professor Hayes said the framework is now publication-ready. He suggested writing a paper on cross-breed emotion recognition.",
+          "assistant": "That’s a fantastic title scope! It captures the whole arc — from therapy empathy to motion-driven affect modeling."
+        },
+        {
+          "round": "D9:13",
+          "user": "I think so too. It feels like everything came full circle — from Milo’s calm gaze to Cooper’s lively curiosity. Two different expressions of the same emotional intelligence.",
+          "assistant": "Exactly. You’ve moved from observing emotion to modeling it — that’s a real research milestone."
+        },
+        {
+          "round": "D9:14",
+          "user": "Thanks. I’ll compile the final figures and start drafting tonight. Maybe I’ll open with that line — ‘Emotion is motion, but empathy is understanding the motion’s meaning.’",
+          "assistant": "Perfect closing line, Evelyn. It’s both scientific and poetic — just like your journey through the world of spaniels."
+        }
+      ]
+    },
+    {
+      "session_id": "D10",
+      "date": "2025-05-12",
+      "dialogues": [
+        {
+          "round": "D10:1",
+          "user": "I’ve been thinking seriously about publishing my work. Professor Hayes said it might fit well at AAAI — that’s one of the big AI conferences, right?",
+          "assistant": "Yes, AAAI is one of the premier conferences in artificial intelligence. It focuses on both theoretical innovation and practical impact — perfect for your cross-disciplinary research."
+        },
+        {
+          "round": "D10:2",
+          "user": "That’s encouraging. Do you know when the next AAAI deadline is? I want to plan my writing schedule early.",
+          "assistant": "Sure. For AAAI 2026, the key dates are: Abstracts due **July 25, 2025**, and full papers due **August 1, 2025**, both at 11:59 PM UTC-12.",
+          "image_id": [
+            "D10:IMG_001"
+          ],
+          "input_image": [
+            "../image/Dog_Behavior_Research_Academic_Life/D10_IMG_001.jpg"
+          ],
+          "image_caption": [
+            "Webpage for the Association for the Advancement of Artificial Intelligence announcing “The 40th Annual AAAI Conference on Artificial Intelligence,” January 20–27, 2026, Singapore. Navigation links include AAAI-26, IAAI-26, EAAI-26, Attend, Program, Calls, Sponsors, Policies and Guidelines, and Conference Organizers. Main content features an “AAAI-26 Author Kit,” a 2025 timetable for authors, and a yellow “AAAI-26 Registration Now Open!” banner next to descriptive conference text."
+          ]
+        },
+        {
+          "round": "D10:3",
+          "user": "Got it. That gives me about two and a half months. I should probably aim to finish my first full draft by late June, just to be safe.",
+          "assistant": "That’s a good plan. Having a full draft a few weeks early gives you time for internal feedback and polishing — especially important for conferences with high competition like AAAI."
+        },
+        {
+          "round": "D10:4",
+          "user": "I’ve skimmed a few AAAI papers before, but I’m still unsure about their general writing style. How’s it different from psychology or cognitive science papers?",
+          "assistant": "Good question. AAAI papers are concise, technical, and result-driven. The focus is on the novelty of methods, clear problem definition, and strong empirical evidence. The tone is analytical rather than narrative."
+        },
+        {
+          "round": "D10:5",
+          "user": "So I should probably start by framing the task and method clearly, not spend too long on the background story?",
+          "assistant": "Exactly. Start with a **problem statement**, highlight **limitations of prior work**, then present **your key idea**. The introduction should make it clear what gap you’re filling and why your method matters."
+        },
+        {
+          "round": "D10:6",
+          "user": "I see. In psychology papers, we usually emphasize theory and motivation. Here I guess the emphasis is more on algorithmic contribution and results.",
+          "assistant": "Right. AAAI reviewers will look for a strong methodological core — such as a novel model design, learning mechanism, or evaluation framework — and solid experiments that validate it quantitatively."
+        },
+        {
+          "round": "D10:7",
+          "user": "What about the structure? Should I stick to the classic IMRaD format: Introduction, Method, Results, and Discussion?",
+          "assistant": "That works, but most AAAI papers structure it slightly differently: **1) Introduction**, **2) Related Work**, **3) Method**, **4) Experiments**, **5) Results and Analysis**, and **6) Conclusion**. Each section must be compact and evidence-driven."
+        },
+        {
+          "round": "D10:8",
+          "user": "Makes sense. I think my 'cross-breed emotion recognition' paper could emphasize multimodal modeling as the main contribution — maybe highlight how I combined behavioral data with temporal visual encoding.",
+          "assistant": "That’s a strong angle. You could position it as a *behavior-informed affect recognition model* — bridging behavioral psychology and AI. Framing it as a novel modeling paradigm would catch reviewers’ attention."
+        },
+        {
+          "round": "D10:9",
+          "user": "Should I include qualitative examples or only numerical metrics? Some of my visualizations look really illustrative.",
+          "assistant": "Include both. Quantitative tables demonstrate rigor, but qualitative figures — like attention heatmaps or feature trajectories — make the paper more intuitive. Just ensure each figure supports a concrete claim."
+        },
+        {
+          "round": "D10:10",
+          "user": "Got it. I guess the abstract needs to be short and dense too?",
+          "assistant": "Yes, the AAAI abstract should summarize: **the problem, your approach, key results, and one-sentence takeaway**. Avoid jargon, focus on clarity and contribution."
+        },
+        {
+          "round": "D10:11",
+          "user": "Thanks. I might outline it like this weekend — introduction draft first, then experiment section once I finalize the evaluation metrics.",
+          "assistant": "That’s a solid workflow. Start with the abstract and intro skeleton — it’ll clarify your narrative. Then expand methods and results iteratively. Think of writing as refining your own understanding."
+        },
+        {
+          "round": "D10:12",
+          "user": "I like that mindset. Writing always feels less stressful when I see it as part of the research process, not just the final product.",
+          "assistant": "Exactly. Good writing is iterative thinking made visible. If you start early, you’ll have time to let ideas mature before submission."
+        },
+        {
+          "round": "D10:13",
+          "user": "Alright. I’ll set my calendar: abstract by mid-July, full paper by late July, then submission by August 1st. Let’s aim for AAAI!",
+          "assistant": "Perfect plan. It’s an ambitious goal, but completely within reach. And if everything goes well — **AAAI 2026 will be held in Singapore**, which would be an incredible place to present your first AI paper."
+        },
+        {
+          "round": "D10:14",
+          "user": "Wait, really? That would be amazing! I’ve never been to Singapore before — I’ve only seen photos of that famous lion statue by the bay.",
+          "assistant": "You mean the Merlion at Marina Bay — it’s Singapore’s iconic landmark. The statue symbolizes the city’s history as a fishing village and its modern identity.",
+          "image_id": [
+            "D10:IMG_002"
+          ],
+          "input_image": [
+            "../image/Dog_Behavior_Research_Academic_Life/D10_IMG_002.png"
+          ],
+          "image_caption": [
+            "Merlion Park in Singapore at dusk, with the large Merlion statue in the foreground spouting water into Marina Bay. In the background, the three-tower Marina Bay Sands hotel with its rooftop platform rises against a cloudy, orange-tinted sky, reflected in the calm water."
+          ]
+        },
+        {
+          "round": "D10:15",
+          "user": "Yes! That’s the one. If my paper gets accepted, I’d love to visit that spot. The city looks so futuristic in every picture I’ve seen.",
+          "assistant": "It truly does. The skyline around Marina Bay is stunning — especially at night when the lights reflect on the water and the bridges glow in color.",
+          "image_id": [
+            "D10:IMG_003"
+          ],
+          "input_image": [
+            "../image/Dog_Behavior_Research_Academic_Life/D10_IMG_003.png"
+          ],
+          "image_caption": [
+            "Illuminated pedestrian bridge at night leading through palm trees toward a brightly lit three-tower hotel complex with a large rooftop structure, all set against a deep purple sky."
+          ]
+        },
+        {
+          "round": "D10:16",
+          "user": "I once saw a photo of the Merlion facing those towers at sunset — it looked magical. I can already imagine how surreal it would feel to be there.",
+          "assistant": "That’s one of Singapore’s most iconic views. The sight of Marina Bay Sands framed behind the Merlion is breathtaking during golden hour.",
+          "image_id": [
+            "D10:IMG_004"
+          ],
+          "input_image": [
+            "../image/Dog_Behavior_Research_Academic_Life/D10_IMG_004.png"
+          ],
+          "image_caption": [
+            "Large white Merlion fountain statue spouting water into a harbor, surrounded by crowds of people along the waterfront promenade. Tall modern glass skyscrapers rise in the background under a cloudy sky, with trees and low buildings lining the shore."
+          ]
+        },
+        {
+          "round": "D10:17",
+          "user": "And that building with three towers connected at the top — that’s Marina Bay Sands, right? I heard it also hosts major conferences sometimes.",
+          "assistant": "Yes, exactly. It’s a mix of hotel, sky park, and convention space. If AAAI is held there, it would be such a beautiful place to attend.",
+          "image_id": [
+            "D10:IMG_005"
+          ],
+          "input_image": [
+            "../image/Dog_Behavior_Research_Academic_Life/D10_IMG_005.png"
+          ],
+          "image_caption": [
+            "Night view of a brightly lit waterfront cityscape with an illuminated pedestrian bridge on the left and a modern three-tower hotel complex topped by a boat-shaped structure in the background. People walk along the bridge, whose blue and white lights reflect in the calm water below. Additional glass-and-metal buildings and docked boats occupy the right side, all set against a dark sky."
+          ]
+        },
+        {
+          "round": "D10:18",
+          "user": "That would be incredible. I really hope I can go. I’ve also seen photos of a huge garden nearby with tall glowing tree structures — it looks otherworldly.",
+          "assistant": "That’s **Gardens by the Bay** — one of the most famous attractions in Singapore. Those towering structures are called supertrees, and they’re connected by skywalks you can stroll across.",
+          "image_id": [
+            "D10:IMG_006"
+          ],
+          "input_image": [
+            "../image/Dog_Behavior_Research_Academic_Life/D10_IMG_006.png"
+          ],
+          "image_caption": [
+            "Silhouetted metal “supertrees” with branching structures rise above a suspended pedestrian skywalk holding small figures, set against an evening sky. In the background, a three-tower high-rise complex with a boat-shaped rooftop spans across the buildings."
+          ]
+        },
+        {
+          "round": "D10:19",
+          "user": "Wow, I’d love to see that in person if I get the chance. It feels like the perfect mix of nature and technology.",
+          "assistant": "Exactly — it’s a living symbol of innovation and sustainability, which fits the spirit of AI research perfectly. Even thinking about it can be motivating while you write."
+        },
+        {
+          "round": "D10:20",
+          "user": "Totally. Just imagining it makes me want to work harder. I could plan a few days to explore the city if my paper gets accepted.",
+          "assistant": "That’s a great mindset. You can treat it as both a professional milestone and a small reward — a trip you’ll truly deserve if your submission goes through."
+        },
+        {
+          "round": "D10:21",
+          "user": "I’ve heard Singapore is also famous for its food. If I ever go, I want to try authentic chili crab and Hainanese chicken rice.",
+          "assistant": "Yes, the food scene there is incredible — from hawker centers to rooftop restaurants. You’d find an amazing balance between local flavor and global influence."
+        },
+        {
+          "round": "D10:22",
+          "user": "Now I have even more motivation to polish my paper. It’s nice to dream a little — maybe next year I’ll be there, walking by the bay after the sessions.",
+          "assistant": "Keep that picture in mind — it’s the best kind of motivation. Every late night of writing might just take you one step closer to that view."
+        }
+      ]
+    },
+    {
+      "session_id": "D11",
+      "date": "2025-06-22",
+      "dialogues": [
+        {
+          "round": "D11:1",
+          "user": "I finally finished the first full draft of my paper last night! It’s far from perfect, but at least it’s on paper. I feel like I can finally breathe again.",
+          "assistant": "Congratulations, Evelyn! That’s a huge step — turning thoughts into structure is the hardest part. You definitely deserve a break."
+        },
+        {
+          "round": "D11:2",
+          "user": "Exactly. I told myself I wouldn’t open the document today. I just want to relax for once — maybe go shopping this afternoon.",
+          "assistant": "Perfect plan. Nothing resets the brain better than a change of scenery. Are you thinking of something casual or dressy?"
+        },
+        {
+          "round": "D11:3",
+          "user": "Something in between. I’ve been eyeing two options online: a plaid shirt dress or a mesh-paneled jersey dress. I can’t decide which one to get.",
+          "assistant": "Both sound stylish! Do you have the pictures? Let’s take a look."
+        },
+        {
+          "round": "D11:4",
+          "user": "Here are the plaid shirt dresses I found — they look comfortable and easy to layer.",
+          "assistant": "Nice! Let’s see them.",
+          "image_id": [
+            "D11:IMG_001"
+          ],
+          "input_image": [
+            "../image/Dog_Behavior_Research_Academic_Life/D11_IMG_001.jpg"
+          ],
+          "image_caption": [
+            "Young woman outdoors wearing a long red-and-black checkered shirt with a large white number “6” on the back, a black cap, and black shoes. The shirt is open at the sides, revealing bare legs. The scene is captured from two angles: one with her smiling toward the camera, the other with her back turned and one hand on her cap, walking on a city street near glass-fronted buildings."
+          ]
+        },
+        {
+          "round": "D11:5",
+          "user": "This one has a longer cut with a playful streetwear vibe.",
+          "assistant": "That’s really fun — the oversized design gives it a relaxed, confident feel.",
+          "image_id": [
+            "D11:IMG_002"
+          ],
+          "input_image": [
+            "../image/Dog_Behavior_Research_Academic_Life/D11_IMG_002.jpg"
+          ],
+          "image_caption": [
+            "Young woman standing in a studio against a plain white background, wearing a red and black plaid long-sleeve shirtdress that falls above the knees, with a collar and button-down front. She has long hair worn loose and straight, arms relaxed at her sides, and black ankle boots with slight heels. No additional objects or text are visible."
+          ]
+        },
+        {
+          "round": "D11:6",
+          "user": "And this shorter one looks more fitted — maybe easier to pair with boots or a jacket.",
+          "assistant": "Yes, that one’s more polished. It could easily transition from casual lunch to a meeting or presentation.",
+          "image_id": [
+            "D11:IMG_003"
+          ],
+          "input_image": [
+            "../image/Dog_Behavior_Research_Academic_Life/D11_IMG_003.jpg"
+          ],
+          "image_caption": [
+            "Woman taking a mirror selfie indoors, shown in two side‑by‑side frames. She wears a long blue‑and‑white plaid shirt over a white graphic T‑shirt, light gray leggings, and black sneakers, with a crossbody bag and smartphone covering her face."
+          ]
+        },
+        {
+          "round": "D11:7",
+          "user": "Now, here are the mesh-paneled jersey dresses I was talking about. I love how sleek they look.",
+          "assistant": "Let’s take a look — that sounds like a completely different vibe!",
+          "image_id": [
+            "D11:IMG_004"
+          ],
+          "input_image": [
+            "../image/Dog_Behavior_Research_Academic_Life/D11_IMG_004.jpg"
+          ],
+          "image_caption": [
+            "Young woman with long, wavy blonde hair stands against a plain light background, facing slightly to the side. She wears a sleeveless black top with a mesh upper panel and large metallic numbers “25” printed on the front."
+          ]
+        },
+        {
+          "round": "D11:8",
+          "user": "This one has that athletic feel but still looks chic. I could totally wear it with a cap and sneakers.",
+          "assistant": "Very modern — it has that effortless sporty elegance.",
+          "image_id": [
+            "D11:IMG_005"
+          ],
+          "input_image": [
+            "../image/Dog_Behavior_Research_Academic_Life/D11_IMG_005.jpg"
+          ],
+          "image_caption": [
+            "Young woman standing against a plain white background, wearing a black beanie with a round gold emblem, a loose black short-sleeve dress with a sheer upper panel, and a black backpack over one shoulder. She has long wavy hair, minimal jewelry including rings and bracelets, and is looking slightly to the side with her mouth slightly open."
+          ]
+        },
+        {
+          "round": "D11:9",
+          "user": "This other version has sheer long sleeves — a bit more refined. I could wear it for casual evenings out.",
+          "assistant": "That’s a great balance of comfort and sophistication. The mesh detailing gives it depth without being too bold.",
+          "image_id": [
+            "D11:IMG_006"
+          ],
+          "input_image": [
+            "../image/Dog_Behavior_Research_Academic_Life/D11_IMG_006.jpg"
+          ],
+          "image_caption": [
+            "Young woman standing against a plain white background, wearing a black long-sleeve dress with sheer mesh fabric on the upper chest, shoulders, and sleeves. The dress has an opaque panel across the bust and a vertical sheer strip down the center. Her hair is tied up in a high ponytail, and she faces forward with arms relaxed at her sides. No visible text in the scene."
+          ]
+        },
+        {
+          "round": "D11:10",
+          "user": "And this one’s my favorite of the mesh styles. It feels elegant yet minimal.",
+          "assistant": "That’s beautiful — it flatters the figure while keeping a clean silhouette.",
+          "image_id": [
+            "D11:IMG_007"
+          ],
+          "input_image": [
+            "../image/Dog_Behavior_Research_Academic_Life/D11_IMG_007.jpg"
+          ],
+          "image_caption": [
+            "Young woman standing against a plain white background, wearing a sleeveless black skater dress with a flared skirt. The dress features a sheer mesh panel on the upper chest and midriff, decorated with a geometric lattice pattern of metallic embellishments. She has long straight hair, red lipstick, and rests one hand on her hip while the other hangs by her side. No text is visible in the scene."
+          ]
+        },
+        {
+          "round": "D11:11",
+          "user": "So now I’m torn — plaid gives that comfy academic energy, mesh looks modern and confident. Which do you think fits me better right now?",
+          "assistant": "Hmm, since you’ve just completed your paper draft, maybe this is a moment to celebrate progress — not hide in comfort. I’d go for the mesh-paneled dress; it radiates focus and renewal."
+        },
+        {
+          "round": "D11:12",
+          "user": "That’s actually a good point. It would be nice to feel put-together instead of just ‘comfortable.’ But I might still grab one plaid one later for everyday wear.",
+          "assistant": "Smart choice — mesh for energy, plaid for grounding. That’s the perfect metaphor for balancing your researcher and human sides."
+        },
+        {
+          "round": "D11:13",
+          "user": "Haha, I like that. Maybe I’ll try the mesh dress this weekend. It feels like a small reward after weeks of writing and debugging code.",
+          "assistant": "Absolutely. You’ve earned something that makes you feel confident — sometimes a dress can symbolize a fresh phase as much as any milestone."
+        },
+        {
+          "round": "D11:14",
+          "user": "I’ll head to the mall later. Maybe I’ll even get a coffee and just people-watch for a while — no laptop, no dataset, no citations.",
+          "assistant": "Perfect plan. That’s how creativity replenishes itself — quiet observation, no agenda."
+        },
+        {
+          "round": "D11:15",
+          "user": "Thanks. It’s nice to talk about something totally non-academic for once.",
+          "assistant": "And it’s still connected — fashion is self-expression, and self-expression fuels perspective. You’re just switching mediums today."
+        },
+        {
+          "round": "D11:16",
+          "user": "That’s true. I’ll take that as justification for shopping therapy.",
+          "assistant": "As you should! Consider it emotional recalibration through aesthetics."
+        },
+        {
+          "round": "D11:17",
+          "user": "Haha, that’s a very academic way to put it. Okay, I’ll go with the mesh dress for now and maybe add the plaid one later.",
+          "assistant": "Excellent choice — one for momentum, one for mindfulness. Enjoy your well-deserved break, Evelyn."
+        }
+      ]
+    }
+  ],
+  "human-annotated QAs": [
+    {
+      "point": "VR",
+      "question": "Is the dog in the picture the same breed as Milo?",
+      "question_image": "../image/Dog_Behavior_Research_Academic_Life/QA_IMG_001.jpg",
+      "answer": "Yes.",
+      "session_id": [
+        "D1"
+      ],
+      "clue": [
+        "D1:1",
+        "D1:2",
+        "D1:3",
+        "D1:4"
+      ],
+      "image_caption": "Light-colored cocker spaniel with long, curly fur and floppy ears standing on a tiled sidewalk, facing the camera. A black leash is attached to its collar and lies on the ground. The scene includes a quiet street, bare trees, a brick wall on the left, and hedges along the roadside in the background."
+    },
+    {
+      "point": "TTL",
+      "question": "What breed is the dog in the attached image?",
+      "question_image": "../image/Dog_Behavior_Research_Academic_Life/QA_IMG_002.jpg",
+      "answer": "Cocker Spaniel",
+      "session_id": [
+        "D1"
+      ],
+      "clue": [
+        "D1:1",
+        "D1:2",
+        "D1:4"
+      ],
+      "image_caption": "Long-haired cocker spaniel standing on a tiled sidewalk, facing the camera with its leash attached to a collar. The dog’s ears hang down beside its face, and its fur is light beige and wavy. It stands near the edge of a quiet street with a curb, trees, and bushes lining the road, and a brick wall on the left side of the walkway."
+    },
+    {
+      "point": "VR",
+      "question": "Is the dog in the picture the same breed as Milo?",
+      "question_image": "../image/Dog_Behavior_Research_Academic_Life/QA_IMG_003.jpg",
+      "answer": "No.",
+      "session_id": [
+        "D1"
+      ],
+      "clue": [
+        "D1:1",
+        "D1:2",
+        "D1:3",
+        "D1:4"
+      ],
+      "image_caption": "Brown, long-eared spaniel-type puppy with wavy fur sits on a sunlit concrete pavement, facing upward toward the camera."
+    },
+    {
+      "point": "TTL",
+      "question": "What breed is the dog in the attached image?",
+      "question_image": "../image/Dog_Behavior_Research_Academic_Life/QA_IMG_004.jpg",
+      "answer": "Cocker Spaniel",
+      "session_id": [
+        "D1"
+      ],
+      "clue": [
+        "D1:1",
+        "D1:2",
+        "D1:4"
+      ],
+      "image_caption": "Long-haired dog with wavy golden-brown fur lying on a rough, sunlit outdoor surface, facing the camera with a calm, slightly serious expression."
+    },
+    {
+      "point": "VR",
+      "question": "Is the dog in the picture the same breed as Milo?",
+      "question_image": "../image/Dog_Behavior_Research_Academic_Life/QA_IMG_005.jpg",
+      "answer": "Yes.",
+      "session_id": [
+        "D1"
+      ],
+      "clue": [
+        "D1:1",
+        "D1:2",
+        "D1:3",
+        "D1:4"
+      ],
+      "image_caption": "Light tan cocker spaniel with long, wavy ears sits in a wicker basket, facing the camera with mouth open and tongue visible. Soft lighting highlights the dog’s curly fur and dark eyes. Out-of-focus greenery in the background suggests an outdoor or garden setting."
+    },
+    {
+      "point": "TTL",
+      "question": "What breed is the dog in the attached image?",
+      "question_image": "../image/Dog_Behavior_Research_Academic_Life/QA_IMG_006.jpg",
+      "answer": "Cocker Spaniel",
+      "session_id": [
+        "D1"
+      ],
+      "clue": [
+        "D1:1",
+        "D1:2",
+        "D1:4"
+      ],
+      "image_caption": "Light-colored cocker spaniel puppy sitting in a wicker basket, facing the camera with mouth open and tongue out. The dog has long, curly ears and a soft, wavy coat. Blurred greenery and plants appear in the background."
+    },
+    {
+      "point": "FR",
+      "question": "What are the two spaniel breeds observed in the lab session?",
+      "answer": "Sussex Spaniel and English Springer Spaniel.",
+      "session_id": [
+        "D2"
+      ],
+      "clue": [
+        "D2:1"
+      ]
+    },
+    {
+      "point": "FR",
+      "question": "What is the name of the Sussex Spaniel mentioned in the session?",
+      "answer": "Rocky.",
+      "session_id": [
+        "D2"
+      ],
+      "clue": [
+        "D2:2"
+      ]
+    },
+    {
+      "point": "FR",
+      "question": "According to the conversation, which type of dog looks like a teddy bear?",
+      "answer": "Sussex Spaniel.",
+      "session_id": [
+        "D2"
+      ],
+      "clue": [
+        "D2:2"
+      ]
+    },
+    {
+      "point": "FR",
+      "question": "What is the name of the English Springer Spaniel mentioned in the session?",
+      "answer": "Luna.",
+      "session_id": [
+        "D2"
+      ],
+      "clue": [
+        "D2:3"
+      ]
+    },
+    {
+      "point": "CD",
+      "question": "Please determine whether the following information conflicts with the dialogue memory:\n Sussex Spaniel has white-and-liver coat pattern and alert eyes.",
+      "answer": "Yes.",
+      "session_id": [
+        "D2"
+      ],
+      "clue": [
+        "D2:2",
+        "D2:7"
+      ]
+    },
+    {
+      "point": "VR",
+      "question": "According to the dialogue, what coat color pattern distinguishes the English Springer Spaniel from the Sussex Spaniel?",
+      "answer": "English Springers have a white-and-liver coat pattern, while Sussex Spaniels are solid golden-brown.",
+      "session_id": [
+        "D2"
+      ],
+      "clue": [
+        "D2:7"
+      ]
+    },
+    {
+      "point": "VR",
+      "question": "Is the dog in the picture the same breed as Luna?",
+      "question_image": "../image/Dog_Behavior_Research_Academic_Life/QA_IMG_007.jpg",
+      "answer": "No.",
+      "session_id": [
+        "D2"
+      ],
+      "clue": [
+        "D2:1",
+        "D2:2",
+        "D2:3",
+        "D2:7"
+      ],
+      "image_caption": "Brown, long-haired dog with drooping ears sitting on a plain white background, facing slightly to the left."
+    },
+    {
+      "point": "VR",
+      "question": "Is the dog in the picture the same breed as Luna?",
+      "question_image": "../image/Dog_Behavior_Research_Academic_Life/QA_IMG_008.jpg",
+      "answer": "Yes.",
+      "session_id": [
+        "D2"
+      ],
+      "clue": [
+        "D2:1",
+        "D2:3",
+        "D2:7"
+      ],
+      "image_caption": "Brown and white spaniel standing on a tiled kitchen floor, looking toward the camera beside a metal bowl and a large, bone-shaped container on a mat, with wooden cabinets in the background."
+    },
+    {
+      "point": "TTL",
+      "question": "What breed is the dog in the attached image?",
+      "question_image": "../image/Dog_Behavior_Research_Academic_Life/QA_IMG_009.jpg",
+      "answer": "English Springer Spaniel",
+      "session_id": [
+        "D2"
+      ],
+      "clue": [
+        "D2:1",
+        "D2:3",
+        "D2:7"
+      ],
+      "image_caption": "Brown and white spaniel standing on a tiled kitchen floor near a metal water bowl and an empty, bone-shaped food container on a mat, with wooden cabinets and household items in the background."
+    },
+    {
+      "point": "MR",
+      "question": "How did Luna and Rocky respond differently when a clipboard was dropped during the lab session?",
+      "answer": "Rocky flinched but calmly approached to check, showing empathy; Luna barked once and redirected to grab her toy.",
+      "session_id": [
+        "D2"
+      ],
+      "clue": [
+        "D2:10",
+        "D2:11"
+      ]
+    },
+    {
+      "point": "FR",
+      "question": "What is the name of Professor Hayes’s Irish Water Spaniel?",
+      "answer": "Finn",
+      "session_id": [
+        "D3"
+      ],
+      "clue": [
+        "D3:1"
+      ]
+    },
+    {
+      "point": "VR",
+      "question": "According to the conversation, what physical traits make Irish Water Spaniels well-suited for swimming?",
+      "answer": "They have dense, curly coats and webbed feet that help them swim efficiently and stay insulated in cold water.",
+      "session_id": [
+        "D3"
+      ],
+      "clue": [
+        "D3:1",
+        "D3:2"
+      ]
+    },
+    {
+      "point": "MR",
+      "question": "How does the assistant explain the value of small physical actions like writing a name or doodling during an anxiety spike?",
+      "answer": "They help re-anchor attention and regulate heartbeat, a form of cognitive defusion to reduce panic.",
+      "session_id": [
+        "D3"
+      ],
+      "clue": [
+        "D3:13",
+        "D3:14"
+      ]
+    },
+    {
+      "point": "VS",
+      "question": "Please search for all images representing the dog breed that Finn represents.",
+      "answer": "D3:IMG_001, D3:IMG_002, D3:IMG_003",
+      "session_id": [
+        "D3"
+      ],
+      "clue": [
+        "D3:1",
+        "D3:2",
+        "D3:3",
+        "D3:7"
+      ]
+    },
+    {
+      "point": "TR",
+      "question": "When did the user take the psychology exam? Return in the format YYYY-MM-DD.",
+      "answer": "2025-03-29",
+      "session_id": [
+        "D3",
+        "D4"
+      ],
+      "clue": [
+        "D3:9",
+        "D4:1"
+      ]
+    },
+    {
+      "point": "FR",
+      "question": "What psychological concept did Evelyn recall during the conversation that relates to nature and mental recovery?",
+      "answer": "The attention restoration theory, which states that natural environments help replenish directed attention.",
+      "session_id": [
+        "D4"
+      ],
+      "clue": [
+        "D4:5"
+      ]
+    },
+    {
+      "point": "KR",
+      "question": "How does Evelyn's emotional state change over the course of the dialogue?",
+      "answer": "She begins exhausted and self-critical but ends feeling calm, self-compassionate, and ready to rest.",
+      "session_id": [
+        "D4"
+      ],
+      "clue": [
+        "D4:1",
+        "D4:14",
+        "D4:15"
+      ]
+    },
+    {
+      "point": "MR",
+      "question": "According to the conversation, how does reflective journaling help manage post-exam stress?",
+      "answer": "It helps transform abstract stress into structured thoughts and promotes insight for improvement.",
+      "session_id": [
+        "D4"
+      ],
+      "clue": [
+        "D4:10",
+        "D4:11"
+      ]
+    },
+    {
+      "point": "CD",
+      "question": "Would it be accurate to say Evelyn felt completely confident and relaxed right after finishing her exam?",
+      "answer": "No.",
+      "session_id": [
+        "D4"
+      ],
+      "clue": [
+        "D4:1",
+        "D4:2"
+      ]
+    },
+    {
+      "point": "FR",
+      "question": "What is the name of the Welsh Springer Spaniel observed during the tracking session?",
+      "answer": "Daisy.",
+      "session_id": [
+        "D5"
+      ],
+      "clue": [
+        "D5:1"
+      ]
+    },
+    {
+      "point": "FR",
+      "question": "What activities did Evelyn plan to do to unwind after the fieldwork?",
+      "answer": "Cook a simple meal like garlic butter pasta or dumplings, and later play cozy games like Stardew Valley or Spiritfarer.",
+      "session_id": [
+        "D5"
+      ],
+      "clue": [
+        "D5:9",
+        "D5:10",
+        "D5:12",
+        "D5:14"
+      ]
+    },
+    {
+      "point": "CD",
+      "question": "Would it be accurate to say Daisy was a large, dark-coated water retriever like Finn?",
+      "answer": "No.",
+      "session_id": [
+        "D5"
+      ],
+      "clue": [
+        "D5:1",
+        "D5:2"
+      ]
+    },
+    {
+      "point": "MR",
+      "question": "What are 'micro-pauses' and why did the assistant recommend them?",
+      "answer": "Micro-pauses are short, deliberate breaks like closing the laptop or stretching for a few minutes. The assistant recommended them to interrupt cycles of mental fatigue and prevent burnout.",
+      "session_id": [
+        "D6"
+      ],
+      "clue": [
+        "D6:2",
+        "D6:3"
+      ]
+    },
+    {
+      "point": "VS",
+      "question": "Which image in the dialogue shows the user's laptop?",
+      "answer": "D6:IMG_001",
+      "session_id": [
+        "D6"
+      ],
+      "clue": [
+        "D6:3"
+      ]
+    },
+    {
+      "point": "FR",
+      "question": "What environmental change did Evelyn consider to help her stay more present while working?",
+      "answer": "She thought about moving her desk near the window to get natural light.",
+      "session_id": [
+        "D6"
+      ],
+      "clue": [
+        "D6:6"
+      ]
+    },
+    {
+      "point": "MR",
+      "question": "What habit did Evelyn identify as contributing to her difficulty disconnecting from work?",
+      "answer": "Checking and replying to emails late at night, which kept pulling her back into work mode.",
+      "session_id": [
+        "D6"
+      ],
+      "clue": [
+        "D6:9"
+      ]
+    },
+    {
+      "point": "CD",
+      "question": "Would it be accurate to say Evelyn believed working late every night was the best way to stay productive?",
+      "answer": "No.",
+      "session_id": [
+        "D6"
+      ],
+      "clue": [
+        "D6:9",
+        "D6:15",
+        "D6:17"
+      ]
+    },
+    {
+      "point": "VS",
+      "question": "In the dalogue of mid-April, which image represents Luna observed in this session?",
+      "answer": "D7:IMG_001",
+      "session_id": [
+        "D7"
+      ],
+      "clue": [
+        "D7:2"
+      ]
+    },
+    {
+      "point": "FR",
+      "question": "Which quote from Professor Hayes inspired Evelyn’s perspective on connecting emotion and motion?",
+      "answer": "“Emotion is motion.”",
+      "session_id": [
+        "D7"
+      ],
+      "clue": [
+        "D7:10"
+      ]
+    },
+    {
+      "point": "TR",
+      "question": "What time and duration did Evelyn plan for her tennis session?",
+      "answer": "Around six in the evening for about one hour before dinner.",
+      "session_id": [
+        "D7"
+      ],
+      "clue": [
+        "D7:16"
+      ]
+    },
+    {
+      "point": "CD",
+      "question": "Would it be correct to say Luna and Daisy showed identical behavioral traits during their tracking sessions?",
+      "answer": "No.",
+      "session_id": [
+        "D7"
+      ],
+      "clue": [
+        "D7:3",
+        "D7:4"
+      ]
+    },
+    {
+      "point": "FR",
+      "question": "Which departments or research areas were represented at the mixer?",
+      "answer": "Computer science, neuroscience, and art history — including someone studying visual perception.",
+      "session_id": [
+        "D8"
+      ],
+      "clue": [
+        "D8:2"
+      ]
+    },
+    {
+      "point": "FR",
+      "question": "What new personal practice did Evelyn decide to start after the mixer?",
+      "answer": "Keeping a 'learning log' to record mistakes and lessons learned rather than just results.",
+      "session_id": [
+        "D8"
+      ],
+      "clue": [
+        "D8:14"
+      ]
+    },
+    {
+      "point": "FR",
+      "question": "What new breed appeared in the dataset that challenged Evelyn’s emotion-recognition model?",
+      "answer": "Brittany Spaniel",
+      "session_id": [
+        "D9"
+      ],
+      "clue": [
+        "D9:2"
+      ]
+    },
+    {
+      "point": "VR",
+      "question": "Is the dog in the picture the same breed as Cooper?",
+      "question_image": "../image/Dog_Behavior_Research_Academic_Life/QA_IMG_010.jpg",
+      "answer": "Yes.",
+      "session_id": [
+        "D9"
+      ],
+      "clue": [
+        "D9:2",
+        "D9:3",
+        "D9:5",
+        "D9:6",
+        "D9:7",
+        "D9:9"
+      ],
+      "image_caption": "White and brown dog lying on a crinkled blue fabric backdrop, facing the camera with mouth open and tongue slightly visible, front paws extended forward."
+    },
+    {
+      "point": "TTL",
+      "question": "What breed is the dog in the attached image?",
+      "question_image": "../image/Dog_Behavior_Research_Academic_Life/QA_IMG_011.jpg",
+      "answer": "Brittany Spaniel",
+      "session_id": [
+        "D9"
+      ],
+      "clue": [
+        "D9:2",
+        "D9:3",
+        "D9:5",
+        "D9:6",
+        "D9:7",
+        "D9:9"
+      ],
+      "image_caption": "Brown and white dog lying on a crumpled blue fabric backdrop, facing the camera with mouth open and tongue slightly out, front paws extended forward."
+    },
+    {
+      "point": "VR",
+      "question": "Is the dog in the picture the same breed as Cooper?",
+      "question_image": "../image/Dog_Behavior_Research_Academic_Life/QA_IMG_012.jpg",
+      "answer": "Yes.",
+      "session_id": [
+        "D9"
+      ],
+      "clue": [
+        "D9:2",
+        "D9:3",
+        "D9:5",
+        "D9:6",
+        "D9:7",
+        "D9:9"
+      ],
+      "image_caption": "Brown and white dog with medium-length fur standing against a clear blue sky, looking slightly upward and to the side. The dog’s chest fur appears wavy and slightly tousled, and its ears are lifted by the wind. No other objects or text are visible in the scene."
+    },
+    {
+      "point": "TTL",
+      "question": "What breed is the dog in the attached image?",
+      "question_image": "../image/Dog_Behavior_Research_Academic_Life/QA_IMG_013.jpg",
+      "answer": "Brittany Spaniel",
+      "session_id": [
+        "D9"
+      ],
+      "clue": [
+        "D9:2",
+        "D9:3",
+        "D9:5",
+        "D9:6",
+        "D9:7",
+        "D9:9"
+      ],
+      "image_caption": "Brown and white dog with long ears and a wavy chest coat standing alertly, looking into the distance against a clear blue sky."
+    },
+    {
+      "point": "VR",
+      "question": "Is the dog in the picture the same breed as Cooper?",
+      "question_image": "../image/Dog_Behavior_Research_Academic_Life/QA_IMG_014.jpg",
+      "answer": "Yes.",
+      "session_id": [
+        "D9"
+      ],
+      "clue": [
+        "D9:2",
+        "D9:3",
+        "D9:5",
+        "D9:6",
+        "D9:7",
+        "D9:9"
+      ],
+      "image_caption": "Close-up of a brown and white dog’s face taken at an angle, with its nose very near the camera. Small snowflakes rest on its snout and fur, and its eyes look toward the lens. The background is slightly blurred with hints of outdoor, snowy surroundings."
+    },
+    {
+      "point": "TTL",
+      "question": "What breed is the dog in the attached image?",
+      "question_image": "../image/Dog_Behavior_Research_Academic_Life/QA_IMG_015.jpg",
+      "answer": "Brittany Spaniel",
+      "session_id": [
+        "D9"
+      ],
+      "clue": [
+        "D9:2",
+        "D9:3",
+        "D9:5",
+        "D9:6",
+        "D9:7",
+        "D9:9"
+      ],
+      "image_caption": "Close-up of a brown and white dog outdoors in winter, with its large pink nose and part of its face filling most of the frame. Small snowflakes rest on the dog’s fur and nose. The background is slightly blurred, showing hints of snow and trees."
+    },
+    {
+      "point": "AR",
+      "question": "Besides AAAI, are IJCAI and ICML also important academic conferences in artificial intelligence?",
+      "answer": "Not mentioned.",
+      "session_id": [
+        "D10"
+      ],
+      "clue": []
+    },
+    {
+      "point": "AR",
+      "question": "Is the abstract deadline for AAAI 2024 July 25th of that year?",
+      "answer": "Not mentioned.",
+      "session_id": [
+        "D10"
+      ],
+      "clue": []
+    },
+    {
+      "point": "VS",
+      "question": "Which image shown represents the AAAI 2026 conference details?",
+      "answer": "D10:IMG_001",
+      "session_id": [
+        "D10"
+      ],
+      "clue": [
+        "D10:2"
+      ]
+    },
+    {
+      "point": "TR",
+      "question": "When are the AAAI 2026 submission deadlines for abstracts and full papers?",
+      "answer": "Abstracts are due July 25, 2025, and full papers are due August 1, 2025, both at 11:59 PM UTC-12.",
+      "session_id": [
+        "D10"
+      ],
+      "clue": [
+        "D10:2"
+      ]
+    },
+    {
+      "point": "FR",
+      "question": "Which conference did Professor Hayes suggest Evelyn submit her paper to?",
+      "answer": "AAAI.",
+      "session_id": [
+        "D10"
+      ],
+      "clue": [
+        "D10:1"
+      ]
+    },
+    {
+      "point": "VS",
+      "question": "List all image IDs representing Singapore landmarks mentioned in the conversation, separated by commas.",
+      "answer": "D10:IMG_002, D10:IMG_003, D10:IMG_004, D10:IMG_005, D10:IMG_006",
+      "session_id": [
+        "D10"
+      ],
+      "clue": [
+        "D10:14",
+        "D10:15",
+        "D10:16",
+        "D10:17",
+        "D10:18"
+      ]
+    },
+    {
+      "point": "FR",
+      "question": "What milestone did Evelyn accomplish before deciding to go shopping?",
+      "answer": "She finished the first full draft of her research paper.",
+      "session_id": [
+        "D11"
+      ],
+      "clue": [
+        "D11:1"
+      ]
+    },
+    {
+      "point": "FR",
+      "question": "What two types of dresses was Evelyn considering buying?",
+      "answer": "A plaid shirt dress and a mesh-paneled jersey dress.",
+      "session_id": [
+        "D11"
+      ],
+      "clue": [
+        "D11:3"
+      ]
+    },
+    {
+      "point": "VS",
+      "question": "Which images correspond to the plaid shirt dresses Evelyn mentioned?",
+      "answer": "D11:IMG_001, D11:IMG_002, D11:IMG_003",
+      "session_id": [
+        "D11"
+      ],
+      "clue": [
+        "D11:4",
+        "D11:5",
+        "D11:6"
+      ]
+    },
+    {
+      "point": "VS",
+      "question": "Which images correspond to the mesh-paneled jersey dresses Evelyn showed?",
+      "answer": "D11:IMG_004, D11:IMG_005, D11:IMG_006, D11:IMG_007",
+      "session_id": [
+        "D11"
+      ],
+      "clue": [
+        "D11:7",
+        "D11:8",
+        "D11:9",
+        "D11:10"
+      ]
+    },
+    {
+      "point": "CD",
+      "question": "Did Evelyn mention any intention to continue academic work on the same day she finished her draft?",
+      "answer": "No.",
+      "session_id": [
+        "D11"
+      ],
+      "clue": [
+        "D11:2"
+      ]
+    },
+    {
+      "point": "TTL",
+      "question": "What type of clothing is shown in the picture?",
+      "question_image": "../image/Dog_Behavior_Research_Academic_Life/QA_IMG_016.jpg",
+      "answer": "Plaid Shirt Dress.",
+      "session_id": [
+        "D11"
+      ],
+      "clue": [
+        "D11:4",
+        "D11:5",
+        "D11:6"
+      ],
+      "image_caption": "Young woman standing outdoors in an urban area, wearing a long-sleeved red and black plaid button-front dress with a tied waist and flared skirt. She looks to the side, one hand near her hair, holding a dark bag at her side. Sunlight creates soft shadows on the paved walkway and partially blurred buildings and trees in the background."
+    },
+    {
+      "point": "TTL",
+      "question": "What type of clothing is shown in the picture?",
+      "question_image": "../image/Dog_Behavior_Research_Academic_Life/QA_IMG_017.jpg",
+      "answer": "Plaid Shirt Dress.",
+      "session_id": [
+        "D11"
+      ],
+      "clue": [
+        "D11:4",
+        "D11:5",
+        "D11:6"
+      ],
+      "image_caption": "Woman with long hair and sunglasses stands against a white paneled wall, wearing a sleeveless plaid shirtdress. She holds a brown shoulder bag at her side and wears white platform slide sandals. The setting has a plain interior with light-colored walls and a gray floor."
+    },
+    {
+      "point": "TTL",
+      "question": "What type of clothing is shown in the picture?",
+      "question_image": "../image/Dog_Behavior_Research_Academic_Life/QA_IMG_018.jpg",
+      "answer": "Plaid Shirt Dress.",
+      "session_id": [
+        "D11"
+      ],
+      "clue": [
+        "D11:4",
+        "D11:5",
+        "D11:6"
+      ],
+      "image_caption": "Woman standing indoors wearing a long blue-and-black checkered tunic, black scarf, black hat, and large dark sunglasses. She holds a black handbag in one hand and rests the other on a white chair with wooden legs. A small table with a clear vase of green and blue flowers is in the background against a white curtain."
+    },
+    {
+      "point": "TTL",
+      "question": "What type of clothing is shown in the picture?",
+      "question_image": "../image/Dog_Behavior_Research_Academic_Life/QA_IMG_019.jpg",
+      "answer": "Mesh-Paneled Jersey Dress.",
+      "session_id": [
+        "D11"
+      ],
+      "clue": [
+        "D11:7",
+        "D11:8",
+        "D11:9",
+        "D11:10"
+      ],
+      "image_caption": "Young woman standing against a plain white background, facing forward in a sleeveless black fit-and-flare mini dress with subtle horizontal stripes. She wears layered gold necklaces, a bracelet on one wrist, and black ankle-strap heels. Her arms rest naturally at her sides and her hair falls in loose waves around her shoulders."
+    },
+    {
+      "point": "TTL",
+      "question": "What type of clothing is shown in the picture?",
+      "question_image": "../image/Dog_Behavior_Research_Academic_Life/QA_IMG_020.jpg",
+      "answer": "Mesh-Paneled Jersey Dress.",
+      "session_id": [
+        "D11"
+      ],
+      "clue": [
+        "D11:7",
+        "D11:8",
+        "D11:9",
+        "D11:10"
+      ],
+      "image_caption": "Young woman with long, wavy blonde hair standing in profile against a plain white background, wearing a loose, sleeveless black shift dress with a large number “5” graphic partially visible on the front. Her arms rest naturally at her sides and she looks toward the camera."
+    },
+    {
+      "point": "TTL",
+      "question": "What type of clothing is shown in the picture?",
+      "question_image": "../image/Dog_Behavior_Research_Academic_Life/QA_IMG_021.jpg",
+      "answer": "Mesh-Paneled Jersey Dress.",
+      "session_id": [
+        "D11"
+      ],
+      "clue": [
+        "D11:7",
+        "D11:8",
+        "D11:9",
+        "D11:10"
+      ],
+      "image_caption": "Young woman standing in a studio setting, wearing a fitted, sleeveless royal blue mini dress with sheer mesh panels at the upper sides and chest. She faces sideways with her head turned down and to the left, one arm relaxed by her side, against a plain white background."
+    }
+  ]
+}

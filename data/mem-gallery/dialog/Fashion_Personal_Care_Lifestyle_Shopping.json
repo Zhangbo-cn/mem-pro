@@ -1,0 +1,2029 @@
+{
+  "character_profile": {
+    "name": "Chloe",
+    "persona_summary": "Chloe is a 22-year-old university student who is thoughtfully developing her personal style on a budget. She enjoys small acts of self-care and puts great effort into finding meaningful gifts for her friends and family.",
+    "traits": [
+      "thoughtful",
+      "style-conscious",
+      "inquisitive"
+    ],
+    "conversation_style": "Polite and specific, often provides context about her preferences and budget, asks clarifying questions to make informed decisions."
+  },
+  "multi_session_dialogues": [
+    {
+      "session_id": "D1",
+      "date": "2024-06-26",
+      "dialogues": [
+        {
+          "round": "D1:1",
+          "user": "In the current fashion panorama, trendy clothes seem to be constantly evolving. Initially, I thought it was all about following the latest styles blindly. But now, I'm curious. When it comes to materials, how do natural fabrics like cotton compare to synthetic ones in terms of comfort and durability for everyday wear? What studies or consumer feedback can shed light on this?",
+          "assistant": "You've raised an important aspect. Generally, cotton is lauded for its breathability and soft touch, providing great comfort, especially in warmer weather. However, synthetic fabrics like polyester can offer enhanced durability and wrinkle resistance. Consumer surveys often show that while students prefer cotton for its comfort during school hours, they also appreciate the low-maintenance nature of synthetics for casual outings. Research on fabric performance over repeated washes can provide more detailed comparisons.",
+          "image_id": [
+            "D1:IMG_001"
+          ],
+          "input_image": [
+            "../image/Fashion_Personal_Care_Lifestyle_Shopping/D1_IMG_001.jpg"
+          ],
+          "image_caption": [
+            "Runway model walking toward the camera wearing a dark floppy hat, black graphic sweatshirt with the text “LI-NING” and “ZHANGJIAJIE,” black pants, and gray sneakers. A black waist bag with orange straps and red Chinese characters is fastened at the waist. The model is on a wooden runway floor against a smooth, light-colored backdrop with a curved, darker arch shape."
+          ]
+        },
+        {
+          "round": "D1:2",
+          "user": "Given the diverse range of trendy clothing styles, from streetwear to preppy looks, it's assumed that each has its own unique charm. But I'm skeptical. In terms of versatility, which style allows for more mix-and-match options to create different outfits? What fashion blogs or style guides can offer insights?",
+          "assistant": "That's a valid question. Streetwear tends to be highly versatile, with items like graphic tees, hoodies, and sneakers that can be paired in numerous ways. For example, a simple white graphic tee can be worn under a denim jacket, paired with joggers or ripped jeans, and accessorized differently each time. Preppy styles, on the other hand, with their classic pieces like polo shirts and chinos, offer a more refined yet adaptable look. Fashion blogs often feature \"outfit of the day\" posts that showcase the versatility of different styles, helping you see the potential combinations."
+        },
+        {
+          "round": "D1:3",
+          "user": "Thanks, that's really helpful for thinking about how to build outfits. As I'm browsing some of those blogs you mentioned, I'm noticing a huge price range for items that look pretty similar. It makes me question if paying more actually means you're getting something that will last longer, especially when I'm on a student budget.",
+          "assistant": "That's a very smart way to approach building your wardrobe. It's easy to get caught up in the label, but understanding the real difference between price points is key to making savvy investments. The relationship between cost and quality can definitely be surprising."
+        },
+        {
+          "round": "D1:4",
+          "user": "The price tags on trendy clothes can vary significantly. It's commonly thought that high-end designer labels guarantee better quality. But now, I'm doubting it. When comparing similar pieces, like a basic denim jacket, how does the quality of a luxury brand stack up against a more affordable fast-fashion alternative? What aspects should one look at, such as stitching, hardware, or fabric weight?",
+          "assistant": "You've hit on a crucial comparison. Luxury denim jackets often use higher-quality denim, with denser weaves and better color retention. The stitching is usually more precise and durable, and the hardware, like buttons and zippers, is of a sturdier make. However, fast-fashion versions have come a long way. They can offer a similar aesthetic at a fraction of the cost. When comparing, check the inside seams for loose threads, test the zippers for smooth operation, and feel the fabric thickness. Consumer reviews on fashion retail websites can provide real-world experiences of the quality differences."
+        },
+        {
+          "round": "D1:5",
+          "user": "That's really helpful, thank you. It gives me a much clearer idea of what to look for. It also makes me think about the bigger picture behind the price tag. If the quality is sometimes a trade-off for a lower price, I wonder what other trade-offs are being made, especially when it comes to the environment.",
+          "assistant": "That's a very thoughtful connection to make. The conversation around fashion is definitely shifting to include not just the cost to our wallets, but the cost to the planet. It can be a confusing space to navigate. What aspects of sustainability are on your mind?"
+        },
+        {
+          "round": "D1:6",
+          "user": "In the pursuit of trendy clothes, sustainability has become a significant factor. It's generally believed that eco-friendly fashion is the way forward. But I'm wondering. Among the various sustainable options, like recycled polyester or organic cotton, which one has a lower environmental footprint in terms of production processes and resource consumption? What environmental impact reports or industry studies can clarify this?",
+          "assistant": "A very relevant concern. Organic cotton is grown without harmful pesticides and fertilizers, reducing soil and water pollution. However, the production process can be water-intensive. Recycled polyester, on the other hand, diverts waste from landfills and requires less virgin material extraction. Studies by environmental organizations often compare the carbon emissions, water usage, and waste generation of different fabric production methods. For example, a life-cycle assessment can show that while recycled polyester has a lower impact in terms of resource extraction, organic cotton may score better in terms of end-of-life biodegradability."
+        },
+        {
+          "round": "D1:7",
+          "user": "That's a great breakdown, thank you. It really highlights how much thought can go into a single piece of clothing, beyond just the look. Thinking about the origins and stories behind different fabrics has me considering the origins of certain styles as well.",
+          "assistant": "That's a very thoughtful connection to make. The story behind a garment is multifaceted, from its material to its design inspiration. What aspect of style origins are you curious about?"
+        },
+        {
+          "round": "D1:8",
+          "user": "Fashion trends are often influenced by cultural elements. It's assumed that ethnic-inspired clothing adds a unique flair. But I'm skeptical. When it comes to incorporating these elements into everyday student wear, how can one do it tastefully without it looking too overdone or culturally inappropriate? What fashion influencers or cultural experts can offer advice?",
+          "assistant": "You've tapped into a sensitive yet interesting area. Fashion influencers who focus on cultural fusion often suggest starting small. For example, adding a handwoven scarf with ethnic patterns to a simple jeans and T-shirt outfit can introduce an element of culture without overwhelming the look. Cultural experts emphasize respecting the origin of the designs and understanding the significance behind them. They recommend learning about the cultural context before incorporating elements, like wearing a traditional Japanese kimono-inspired jacket with modern pieces to create a balanced and respectful ensemble."
+        },
+        {
+          "round": "D1:9",
+          "user": "That's really helpful advice. Focusing on a single, well-chosen piece and understanding its background feels much more authentic and respectful. It also makes me realize something else—it's not just about the pattern or origin of an item, but how the actual cut of the clothing works on my body. If the overall shape is off, even the most beautiful piece won't look right.",
+          "assistant": "You've hit on a key element of truly developing personal style. The silhouette and how a garment makes you feel are just as important as the aesthetic. It's the foundation that makes any trend or specific piece work for you, not the other way around."
+        },
+        {
+          "round": "D1:10",
+          "user": "The fit of trendy clothes is paramount. It's commonly thought that a slim fit is the most fashionable. But now, I'm having second thoughts. For different body types, especially students with a more athletic or curvier build, which fit – slim, regular, or relaxed – offers the best combination of comfort and style? What body-positive fashion resources or size-inclusive brands can guide us?",
+          "assistant": "That's a great point. For athletic builds, a regular fit can provide room to move while still showing off the physique in a flattering way. Curvier body types often find that a relaxed fit with strategic tailoring, like a cinched waist on a flowy dress, accentuates the curves and offers comfort. Body-positive fashion blogs and size-inclusive brands showcase models of all shapes and sizes wearing different fits, helping you visualize how each can work. They also offer tips on alterations and styling to enhance the overall look based on your body type."
+        },
+        {
+          "round": "D1:11",
+          "user": "That's such a relief to hear. I've been so focused on finding the right silhouette, and your advice really clarifies things. It makes me realize that once I have a few key pieces that fit well, the real creativity comes from how I style them. Since I'm working with a limited budget, I can't just buy new outfits all the time.",
+          "assistant": "That's a very savvy way to build a wardrobe. Using styling to maximize the pieces you already love is the secret to great personal style. It sounds like you're thinking about the finishing touches that make an outfit your own."
+        },
+        {
+          "round": "D1:12",
+          "user": "In the world of trendy clothing, accessories play a crucial role. It's generally believed that statement accessories can elevate an outfit. But I'm wondering. When it comes to choosing accessories for a student budget, which ones – like hats, belts, or jewelry – offer the most impact for the least cost? What budget-friendly fashion hacks or DIY ideas can help?",
+          "assistant": "You've asked a practical question. Hats are a great option. A simple baseball cap can add a sporty or casual vibe to any outfit and is relatively inexpensive. DIY-ing your own jewelry, like making beaded bracelets or stringing together charms, can give you unique pieces at a fraction of the cost of store-bought ones. Belts can define the waist and transform the look of a dress or oversized shirt. Thrift stores are also a goldmine for finding budget-friendly, trendy accessories. Fashion hacks like using a scarf as a belt or repurposing old brooches as hair accessories can help you get creative without breaking the bank."
+        },
+        {
+          "round": "D1:13",
+          "user": "Thank you, that's really practical advice. I love the idea of DIY jewelry and hitting up thrift stores for unique finds. It's smart because accessories aren't really tied to one season; you can wear them anytime. That actually brings up another challenge I've been thinking about with my wardrobe as a whole. While a good belt works in October or April, the rest of my outfit feels so much trickier to plan for those in-between months.",
+          "assistant": "That’s a very insightful connection to make. Building a versatile wardrobe that can handle those unpredictable temperature swings, without needing a complete seasonal overhaul, is a smart way to approach style on a budget. What are your thoughts on tackling that?"
+        },
+        {
+          "round": "D1:14",
+          "user": "The seasonality of trendy clothes is something to consider. It's assumed that summer clothes are all about light fabrics and bright colors. But I'm skeptical. For those transitional seasons, like spring and fall, how can one build a capsule wardrobe with pieces that work well in both cooler mornings and warmer afternoons? What minimalist fashion blogs or capsule wardrobe guides can offer suggestions?",
+          "assistant": "A very smart consideration. Layering is key. A lightweight cardigan or denim jacket can be easily thrown on over a short-sleeved top in the morning and removed later. Long-sleeved T-shirts in neutral colors are versatile, pairing well with shorts in the warmer part of the day and with jeans or skirts when it cools down. Minimalist fashion blogs often recommend a few essential pieces like a white button-down shirt, which can be worn open over a tank top or fully buttoned under a sweater. They also suggest choosing fabrics with some thickness for those in-between temperatures, like a mid-weight cotton or a thin wool blend.",
+          "image_id": [
+            "D1:IMG_002"
+          ],
+          "input_image": [
+            "../image/Fashion_Personal_Care_Lifestyle_Shopping/D1_IMG_002.jpg"
+          ],
+          "image_caption": [
+            "Runway model wearing a layered outfit with a shiny green hooded top under a short-sleeved dress printed with traditional-style illustrations of a woman, a child, trees, and architectural elements. The knee-length dress has a central circular motif containing the word “PINK.” The model also wears pale pink knee-high socks and walks on a light-colored runway against a plain background."
+          ]
+        },
+        {
+          "round": "D1:15",
+          "user": "That's incredibly helpful, thank you. Thinking about building a wardrobe from the ground up really puts things in perspective. And speaking of the 'ground up,' that actually makes me think about my shoes. Since I'm walking all over campus every day, finding the right footwear feels just as crucial as picking out the right jacket.",
+          "assistant": "It absolutely is. The right pair of shoes is the foundation for not just your outfit, but your entire day's comfort. It's a smart place to focus your attention."
+        },
+        {
+          "round": "D1:16",
+          "user": "In the realm of trendy footwear, sneakers seem to dominate. It's generally believed that high-top sneakers are the coolest. But now, I'm having doubts. For students who are on their feet all day, like those with a long commute or active in sports, which type of sneaker – high-top, low-top, or slip-on – provides the best support and comfort? What sports medicine experts or sneaker reviews can advise?",
+          "assistant": "You've zeroed in on an important footwear choice. Low-top sneakers are often lighter and more flexible, great for those who need to move quickly, like in sports. However, for students with a long commute or who stand a lot, high-top sneakers can offer extra ankle support, reducing the risk of sprains. Slip-on sneakers are convenient for quick on-and-off but may not provide as much arch support. Sports medicine experts recommend looking for features like cushioned insoles, breathable uppers, and proper arch support. Sneaker reviews on athletic and lifestyle websites can share real users' experiences with different models in terms of comfort, durability, and support during various activities.",
+          "image_id": [
+            "D1:IMG_003"
+          ],
+          "input_image": [
+            "../image/Fashion_Personal_Care_Lifestyle_Shopping/D1_IMG_003.jpg"
+          ],
+          "image_caption": [
+            "Runway fashion show with a model walking forward in a long, stained beige-to-blue coat, shiny black pants, and sneakers, carrying a distressed leather bag. The model wears a brown paper bag mask with a cartoon face. Another masked model in black top and red shorts walks behind."
+          ]
+        },
+        {
+          "round": "D1:17",
+          "user": "That's super helpful, thank you! It's exactly the kind of balancing act I'm thinking about. You see these amazing-looking sneakers, but they might not be practical for running between classes. It kind of applies to my whole wardrobe, actually.",
+          "assistant": "I completely understand. That gap between 'fashionable' and 'functional' is something many students navigate. It's one thing to see an outfit online and another to wear it comfortably through a full day of lectures and activities."
+        },
+        {
+          "round": "D1:18",
+          "user": "The influence of social media on trendy clothes is undeniable. It's assumed that following fashion influencers guarantees a trendy wardrobe. But I'm skeptical. When it comes to adapting those Instagram-worthy looks to a student's practical life, like a busy school day, how can one make the necessary adjustments? What student fashion bloggers or back-to-school style guides can offer tips?",
+          "assistant": "You've raised a very relevant point. Student fashion bloggers often suggest simplifying complex looks. For example, if an influencer is wearing a multi-layered, accessorized outfit, you can take the key elements. Maybe just keep the statement top and pair it with basic jeans and sneakers for a school-appropriate yet trendy look. Back-to-school style guides recommend choosing wrinkle-resistant fabrics for those long days when you can't go home to change. They also emphasize practicality, like having pockets for storing essentials and opting for shoes that are easy to walk in between classes."
+        },
+        {
+          "round": "D1:19",
+          "user": "Thank you, that's incredibly helpful! Thinking about wrinkle-resistant fabrics and simplifying those complex influencer looks is a game-changer for my daily routine. It makes me realize how a single, practical piece can define an entire outfit. That seems especially true for outerwear, which I've been thinking about a lot lately.",
+          "assistant": "I'm glad that was useful! You're absolutely right. A jacket is often the first thing people see, and choosing the right one is key for both style and comfort. It's a really important part of building a versatile wardrobe."
+        },
+        {
+          "round": "D1:20",
+          "user": "In the world of trendy outerwear, jackets are a must-have. It's commonly thought that leather jackets are the epitome of cool. But now, I'm wondering. For different climates and occasions, like a rainy day or a formal event, which type of jacket – leather, waterproof, or blazer – is the most suitable? What weather-appropriate fashion resources or event styling guides can help?",
+          "assistant": "That's a useful question. For rainy days, a waterproof jacket with a hood is essential to keep you dry. Leather jackets are great for adding an edgy, casual look to an outfit but may not be practical in heavy rain. Blazers, on the other hand, are perfect for formal events or when you want to look more polished. Weather-appropriate fashion resources suggest having a lightweight, packable waterproof jacket for unexpected showers and a well-fitted blazer for important occasions. Event styling guides recommend pairing a blazer with dress pants or a skirt and accessorizing appropriately, while a leather jacket can be thrown over a T-shirt and jeans for a night out."
+        },
+        {
+          "round": "D1:21",
+          "user": "That’s super helpful, thank you! It clarifies which types of jackets are worth investing in. Thinking about a key piece like a blazer makes me consider my overall wardrobe strategy, especially for making a good impression. It's not just about the type of clothing, but the color, too.",
+          "assistant": "That's a very smart way to approach it. Building a versatile wardrobe is all about making sure the pieces work together. The right color palette is fundamental to that. What are you wondering about when it comes to color?"
+        },
+        {
+          "round": "D1:22",
+          "user": "The color palette of trendy clothes is constantly changing. It's generally believed that bold colors make a statement. But I'm skeptical. For students who want to express their personality while still looking professional for internships or presentations, which colors – neutrals, pastels, or muted tones – offer the best balance? What career fashion experts or professional dress code guides can offer advice?",
+          "assistant": "You've tapped into a key aspect for students' professional growth. Neutrals like black, white, gray, and navy are always a safe bet. They can be easily paired with other colors and give a polished look. Pastels can add a touch of softness and personality, especially when paired with neutrals. Muted tones, which are less vibrant than bold colors but still have character, are also great. Career fashion experts recommend having a few staple neutral pieces, like a black blazer or white shirt, and then adding pops of color with accessories or a pastel top. Professional dress code guides often stress the importance of maintaining a consistent color scheme and avoiding overly flashy colors that might distract from your professionalism."
+        },
+        {
+          "round": "D1:23",
+          "user": "That's incredibly helpful, thank you! Building a collection of tops with that color advice in mind feels much more manageable. That actually makes me think about the other half of my wardrobe. For my everyday, more casual outfits, I'm trying to find the right foundation, and that always starts with a good pair of jeans.",
+          "assistant": "That's a great way to think about it—creating a cohesive wardrobe from the ground up. Finding that perfect pair of jeans is a foundational step for any versatile closet. It can be just as tricky as picking professional colors, since fit and comfort are so personal."
+        },
+        {
+          "round": "D1:24",
+          "user": "In the world of trendy bottoms, jeans are a staple. It's commonly thought that skinny jeans are the most popular. But now, I'm having second thoughts. For different body shapes and comfort preferences, which style of jeans – skinny, bootcut, or wide-leg – flatters the most and provides the best comfort? What body shape fashion guides or denim brand fit experts can offer insights?",
+          "assistant": "You've asked an important denim question. For those with a pear-shaped body, bootcut jeans can balance out the proportions by skimming over the hips and flaring at the ankle. Wide-leg jeans are great for creating a flowy, relaxed look and are comfortable for all-day wear, especially for those who don't like the constricting feel of skinny jeans. Skinny jeans still have their charm and can show off a slim silhouette, especially on those with an athletic or straight body shape. Denim brand fit experts often have size charts and fit guides that take into account different body shapes, recommending the best rise (high, mid, or low) and style for maximum comfort and flattery."
+        },
+        {
+          "round": "D1:25",
+          "user": "That's so helpful for when I go shopping next, thank you! It actually makes me think about a few pairs of jeans I already have that just sit in my closet. Instead of buying a whole new pair, I'm wondering if I could just... update them myself somehow?",
+          "assistant": "That's a fantastic and sustainable idea. Giving older clothes a new life, often called 'upcycling,' is a great way to personalize your wardrobe on a budget. What kind of updates were you curious about trying?"
+        },
+        {
+          "round": "D1:26",
+          "user": "The trend of upcycling clothes is gaining momentum. It's generally believed that it's a creative and sustainable way to refresh your wardrobe. But I'm skeptical. When it comes to actual DIY projects, like turning an old T-shirt into a trendy crop top or adding patches to jeans, how difficult is it really? What beginner-friendly upcycling tutorials or craft blogs can offer step-by-step instructions?",
+          "assistant": "You've hit on a fun and eco-friendly trend. Many beginner-friendly upcycling tutorials are available online. For example, to turn an old T-shirt into a crop top, you usually just need to measure and cut it to the desired length, then hem the edges. Adding patches to jeans can be as simple as using fabric glue or sewing them on by hand. Craft blogs often feature detailed photo or video instructions, making it easy even for those with no sewing experience. They also offer ideas on sourcing materials, like using old fabric scraps or thrifted buttons to add unique touches to your upcycled pieces."
+        },
+        {
+          "round": "D1:27",
+          "user": "That's really helpful, thank you. It makes the idea of personalizing my clothes feel much more achievable. Thinking about sustainability and making my wardrobe last longer also makes me want to be more intentional when I do buy something new, instead of just grabbing whatever is trendy.",
+          "assistant": "That's a very thoughtful approach. Building a lasting wardrobe is about both creatively refreshing what you have and choosing new pieces wisely. Is there a particular type of clothing you're thinking about?"
+        },
+        {
+          "round": "D1:28",
+          "user": "In the world of trendy tops, graphic tees are everywhere. It's generally believed that they're a great way to showcase your interests. But I'm skeptical. When it comes to choosing graphic tees that won't go out of style quickly, which designs – classic logos, minimalist art, or pop culture references – have the longest shelf life? What streetwear trend analysts or vintage clothing experts can offer insights?",
+          "assistant": "You've asked a relevant question about graphic tees. Classic logos, like those of iconic brands or bands, tend to have enduring appeal. Minimalist art can also stay relevant as it has a timeless aesthetic. Pop culture references can be hit or miss; while they're trendy in the moment, they might fade quickly. Streetwear trend analysts watch the ebb and flow of these designs and often recommend investing in pieces with a broader cultural significance. Vintage clothing experts point out that tees with historical or subcultural nods, like a vintage concert tee or a logo from a bygone era, can become collector's items and retain their cool factor for years."
+        },
+        {
+          "round": "D1:29",
+          "user": "That's really helpful, thank you. It makes sense to invest in classic tees that will last. It actually got me thinking about the opposite problem: what to do about those really trendy pieces you know you'll only want to wear for a season or a specific event. I've been hearing a lot about clothing rental services as a way to handle that.",
+          "assistant": "That's a great point. Balancing timeless staples with fleeting trends is a key part of building a smart, modern wardrobe. It sounds like you're wondering if renting is a practical solution to that challenge."
+        },
+        {
+          "round": "D1:30",
+          "user": "The role of clothing rental services in the trendy fashion scene is growing. It's commonly thought that it's a cost-effective way to wear high-end or trendy pieces for special occasions. But I'm skeptical. When it comes to sizing, quality control, and return policies, how reliable are these services? What customer reviews or rental service comparisons can offer clarity?",
+          "assistant": "You've tapped into an important aspect of the rental fashion model. Customer reviews are crucial. Some rental services have been praised for their wide size ranges and accurate sizing charts, making it easier to find the right fit. However, others have had issues with inconsistent quality, like worn-out items or incorrect descriptions. Return policies vary; some offer hassle-free returns, while others have strict time limits and condition requirements. Rental service comparisons can look at factors like the variety of clothing available, the cost per rental, and the overall customer satisfaction rate to help you choose a reliable service."
+        },
+        {
+          "round": "D1:31",
+          "user": "Thank you, that's really insightful. It sounds like clothing rentals can be a bit of a gamble, which isn't ideal when you're on a student budget. It makes me think I should focus less on temporary pieces and more on building a smart, lasting wardrobe for myself.",
+          "assistant": "That's a fantastic way to look at it. Shifting focus from single-use rentals to creating a cohesive, personal collection is a great step. It's all about building a foundation that truly reflects you and works for your lifestyle."
+        },
+        {
+          "round": "D1:32",
+          "user": "Considering all these aspects of trendy clothes, from materials and styles to sustainability and budget, how can students build a well-rounded, trendy wardrobe that suits their needs and purchasing power? What personal style coaches or student fashion budgeting guides can offer a step-by-step plan?",
+          "assistant": "You've posed a comprehensive question. Personal style coaches often start by having you assess your lifestyle. If you're active in sports, prioritize comfortable activewear. Then, they suggest investing in a few high-quality basics, like a well-fitted pair of jeans and a white T-shirt. Student fashion budgeting guides recommend setting aside a monthly or quarterly budget for clothing. They advise looking for sales, shopping at thrift stores for unique finds, and prioritizing pieces that can be mixed and matched. For example, buying a versatile blazer that can be dressed up or down can save you money in the long run."
+        },
+        {
+          "round": "D1:33",
+          "user": "In the long run, as fashion trends continue to evolve, how can students stay updated while still being mindful of their budget and personal style? What long-term fashion trend forecasting resources or student fashion trendsetting blogs can offer tips?",
+          "assistant": "You've asked a forward-thinking question. Long-term fashion trend forecasting resources analyze cultural, technological, and social shifts to predict upcoming trends. They can give you a heads-up on colors, fabrics, and styles that will be popular in the next season or year. Student fashion trendsetting blogs often showcase how to adapt these trends in a budget-friendly and personal way. For example, if metallics are trending, they might suggest adding a metallic belt or shoelaces to an existing outfit. Subscribing to newsletters or following relevant hashtags can also keep you in the loop without breaking the bank."
+        }
+      ]
+    },
+    {
+      "session_id": "D2",
+      "date": "2024-07-27",
+      "dialogues": [
+        {
+          "round": "D2:1",
+          "user": "I’ve been thinking about buying some new clothes. Can you give me some suggestions?",
+          "assistant": "Of course! What kind of clothes are you looking for? Casual wear or something more formal?"
+        },
+        {
+          "round": "D2:2",
+          "user": "Mainly casual wear, something comfortable but also a bit stylish.",
+          "assistant": "Got it! For a comfortable and stylish look, you can go for some classic pieces like t-shirts, sweatshirts, jeans, and sneakers. If you want something a little different, you could try color combinations or add some small accessories."
+        },
+        {
+          "round": "D2:3",
+          "user": "Yeah, I’m mainly looking for a nice t-shirt. Any color recommendations?",
+          "assistant": "For a classic look, you can go for white, gray, or navy blue—they're versatile and timeless. If you want something a bit more lively, you could try light pink, light blue, or yellow."
+        },
+        {
+          "round": "D2:4",
+          "user": "Thanks, those are helpful starting points. To narrow it down, it helps to think about what I'd actually wear it with. My go-to is almost always a pair of jeans.",
+          "assistant": "That's a great way to think about it. The right t-shirt can be the perfect partner for jeans. Knowing that really helps focus the options."
+        },
+        {
+          "round": "D2:5",
+          "user": "I’m looking for a t-shirt that would go well with jeans, something not too flashy, and suitable for spring and autumn.",
+          "assistant": "If you're pairing it with jeans, white, light gray, or beige would be great choices. They go with any color of jeans and are perfect for the warmer weather in spring and autumn."
+        },
+        {
+          "round": "D2:6",
+          "user": "How about this t-shirt? Also, I’m looking for a pair of jeans. Any style recommendations?",
+          "assistant": "This white t-shirt is very versatile! As for jeans, there are a lot of options: classic straight-leg, slim-fit, and loose styles. Straight-leg jeans suit most body types, slim-fit jeans look more polished, while loose jeans are more casual and great for comfort.",
+          "image_id": [
+            "D2:IMG_001"
+          ],
+          "input_image": [
+            "../image/Fashion_Personal_Care_Lifestyle_Shopping/D2_IMG_001.jpg"
+          ],
+          "image_caption": [
+            "Plain white short-sleeve T-shirt laid flat on a light gray surface, viewed from the back. To the right lie a small Eiffel Tower figurine and a wristwatch. An open magazine with photos rests in the upper-right corner."
+          ]
+        },
+        {
+          "round": "D2:7",
+          "user": "I’m thinking of getting a slim-fit pair of jeans. That should look good with the white t-shirt, right?",
+          "assistant": "Absolutely! The white t-shirt and slim-fit jeans combo is a classic. It's clean and sharp, with just the right amount of style, without being too complicated. You could pair it with some simple white sneakers.",
+          "image_id": [
+            "D2:IMG_002"
+          ],
+          "input_image": [
+            "../image/Fashion_Personal_Care_Lifestyle_Shopping/D2_IMG_002.jpg"
+          ],
+          "image_caption": [
+            "Person in a black long-sleeve crop top, light blue high-waisted skinny jeans, and chunky white sneakers stands indoors, leaning with one leg bent against a wooden wall beside large floor-to-ceiling windows. A soft rug and cushion lie on the floor in the background."
+          ]
+        },
+        {
+          "round": "D2:8",
+          "user": "Great, I like it! What about adding a hat? How about this red baseball cap?",
+          "assistant": "A hat is a great choice! It adds a bit of street style and also makes the outfit look more layered.",
+          "image_id": [
+            "D2:IMG_003"
+          ],
+          "input_image": [
+            "../image/Fashion_Personal_Care_Lifestyle_Shopping/D2_IMG_003.jpg"
+          ],
+          "image_caption": [
+            "Red baseball cap on a plain white background, shown from a side angle. The cap has a curved brim, multiple stitched panels with small white ventilation eyelets, and an adjustable strap at the back with a metal buckle."
+          ]
+        },
+        {
+          "round": "D2:9",
+          "user": "I think so too! What about accessories? Do you recommend any necklaces?",
+          "assistant": "If you're going for a simple style, a delicate chain necklace would work well. You can go for a simple metal pendant or a dainty pearl necklace, both of which will add a touch of elegance."
+        },
+        {
+          "round": "D2:10",
+          "user": "I like the idea of a pearl necklace, it's really classy! What bag would go well with this outfit?",
+          "assistant": "Yes! For this outfit, a simple shoulder bag or a small backpack would work best. If you want something a bit more fashionable, a leather bag would be stylish and versatile."
+        },
+        {
+          "round": "D2:11",
+          "user": "Got it! I’ll look into that. What do you think of this pearl necklace? By the way, have you been keeping up with any fashion trends lately?",
+          "assistant": "That necklace looks beautiful! Pearls always add a touch of elegance and can elevate even a casual outfit. It’s timeless and works perfectly for both everyday wear and more formal occasions.",
+          "image_id": [
+            "D2:IMG_004"
+          ],
+          "input_image": [
+            "../image/Fashion_Personal_Care_Lifestyle_Shopping/D2_IMG_004.jpg"
+          ],
+          "image_caption": [
+            "Single-strand white pearl necklace displayed on a cream-colored jewelry bust, with uniformly sized round pearls arranged evenly along the strand against a dark, out-of-focus background."
+          ]
+        },
+        {
+          "round": "D2:12",
+          "user": "And here’s the bag I was thinking of pairing with it. Do they go well together?",
+          "assistant": "Yes, that bag complements the necklace really well! The leather texture adds a modern contrast to the classic pearls, creating a balanced look that’s both sophisticated and practical. Lately, combining elegant accessories with casual pieces like this has been a popular trend—it gives off a chic, effortless vibe.",
+          "image_id": [
+            "D2:IMG_005"
+          ],
+          "input_image": [
+            "../image/Fashion_Personal_Care_Lifestyle_Shopping/D2_IMG_005.jpg"
+          ],
+          "image_caption": [
+            "Person wearing a brown jacket and blue jeans with a black leather crossbody bag resting at hip level. The bag has a rectangular shape, smooth surface, zipper closure on top, and an adjustable black strap attached with metal hardware."
+          ]
+        },
+        {
+          "round": "D2:13",
+          "user": "That sounds interesting! Do you think colorful outfits would suit me?",
+          "assistant": "If you want to try colorful outfits, light shades like pink or mint green would be a good choice. They're lively but not overwhelming. Just avoid mixing too many colors at once to keep it simple."
+        },
+        {
+          "round": "D2:14",
+          "user": "I’ll think about it! By the way, do you think this minimalist style works for summer?",
+          "assistant": "Definitely! Minimalist styles are suitable for all seasons. In the summer, you can go for breathable materials like cotton t-shirts and shorts, which are cool and comfortable.",
+          "image_id": [
+            "D2:IMG_006"
+          ],
+          "input_image": [
+            "../image/Fashion_Personal_Care_Lifestyle_Shopping/D2_IMG_006.jpg"
+          ],
+          "image_caption": [
+            "Woman standing against a plain light-colored wall, wearing a fitted white short-sleeve top and high-waisted navy wide-leg pants with front slits. She holds a white drawstring shoulder bag and a striped bottle or container hanging from it. She wears white flat shoes, has wavy shoulder-length hair, and faces the camera with a neutral expression."
+          ]
+        },
+        {
+          "round": "D2:15",
+          "user": "What kind of outerwear should I look for in spring and autumn?",
+          "assistant": "For spring and autumn, you can go for lightweight outerwear like trench coats, denim jackets, or casual blazers. Trench coats are more formal, great for dressier occasions, while denim jackets are casual and versatile. Casual blazers work well with a sporty look."
+        },
+        {
+          "round": "D2:16",
+          "user": "I think a denim jacket is a good choice! Do you have any recommendations for sneakers?",
+          "assistant": "For sneakers, if you like minimalist styles, you can choose classic white or black ones like Nike Air Force 1 or Adidas Stan Smith. These styles are timeless and versatile."
+        },
+        {
+          "round": "D2:17",
+          "user": "I like both of those! One more question—how do you usually style your clothes?",
+          "assistant": "I typically go for minimalist styles, using neutral colors like black, white, and gray as the base and adding small accessories for a pop. For example, I like pairing a white t-shirt with black jeans, a simple backpack, and a subtle necklace. The key is to keep it layered but not too busy."
+        },
+        {
+          "round": "D2:18",
+          "user": "That sounds practical! Thanks for the advice. By the way, do you have any favorite brands?",
+          "assistant": "I like classic brands like Uniqlo, Zara, and H&M—they’re high-quality and affordable with a great minimalist selection. For something more high-end, Gucci and Saint Laurent also have timeless pieces."
+        },
+        {
+          "round": "D2:19",
+          "user": "Great, I’ll check them out. Lastly, do you think this minimalist style suits me?",
+          "assistant": "Definitely! Minimalist style is super versatile and never goes out of fashion. It can make you look stylish and sophisticated while keeping things simple."
+        },
+        {
+          "round": "D2:20",
+          "user": "That’s really reassuring to hear. I've always admired it on others, but I worry that 'simple' might just end up looking plain on me.",
+          "assistant": "That's a totally valid concern. The secret to minimalist style is focusing on strong silhouettes and quality textures. That’s what takes a look from plain to purposeful and chic."
+        },
+        {
+          "round": "D2:21",
+          "user": "Alright, I'll take a look. Lastly, do you think this minimalist style suits me?",
+          "assistant": "Of course! Minimalist style is very versatile, and it never goes out of fashion. It will make you look elegant and sophisticated. You can choose the colors and styles that best suit your preferences."
+        },
+        {
+          "round": "D2:22",
+          "user": "So, should I consider pairing a white top with jeans?",
+          "assistant": "Yes, a white top and jeans combo is classic. Depending on the weather, you can add an outer layer. For spring and autumn, a denim jacket or trench coat would add some layers and depth to the outfit."
+        },
+        {
+          "round": "D2:23",
+          "user": "Thanks, a trench coat is a great idea—I have one I never wear! I'm just trying to visualize how the whole silhouette would look.",
+          "assistant": "That's a great way to get more use out of your wardrobe! The overall shape is definitely key. The fit of each piece plays a big part in how it all comes together."
+        },
+        {
+          "round": "D2:24",
+          "user": "I’ve got a rough idea of these outfits now. Do you think this style suits my body shape?",
+          "assistant": "Based on your preference for comfort and style, this minimalist combo works well for most body types. The slim-fit jeans and simple top will highlight your body curves and look great on various body shapes."
+        },
+        {
+          "round": "D2:25",
+          "user": "Sounds great! I’ll go pick some pieces. Thanks for your help!",
+          "assistant": "You’re welcome! I hope you find clothes that you love and can create your own style. Feel free to reach out anytime if you have more questions!"
+        }
+      ]
+    },
+    {
+      "session_id": "D3",
+      "date": "2024-08-13",
+      "dialogues": [
+        {
+          "round": "D3:1",
+          "user": "Hi again! I wanted to thank you for the style advice last week. I actually found a great pair of slim-fit jeans on sale, and I'm feeling so much more confident styling my trench coat! It’s funny, now that my outfits feel more put-together, I can’t stop noticing how much my nails need some attention.",
+          "assistant": "That's wonderful to hear! I'm so glad you found pieces that make you feel confident. And you're absolutely right, sometimes pulling an outfit together makes you notice the little details. A fresh manicure can be the perfect finishing touch that makes everything feel complete."
+        },
+        {
+          "round": "D3:2",
+          "user": "I'm going to get my nails done today. Finally! They're a mess. Need some pampering.",
+          "assistant": "A manicure sounds lovely! Treating yourself is always a good idea. Do you know what kind of manicure you want?"
+        },
+        {
+          "round": "D3:3",
+          "user": "Thinking just a basic manicure. Clean up, shape, maybe some polish. Nothing too fancy this time. Just neat.",
+          "assistant": "A basic manicure is perfect for a clean and polished look. What shape are you leaning towards?"
+        },
+        {
+          "round": "D3:4",
+          "user": "Round, I think. Or maybe oval? What do you think is more… elegant? Hard to decide.",
+          "assistant": "Round and oval are both classic and elegant shapes. Oval tends to make fingers look a bit longer, if that's something you're going for."
+        },
+        {
+          "round": "D3:5",
+          "user": "Oval sounds nice. Longer fingers, yes, please! Okay, oval shape. Polish color… Endless choices! Help!",
+          "assistant": "Polish colors are endless! Are you thinking of something neutral, bold, classic, trendy…? What's your mood today?"
+        },
+        {
+          "round": "D3:6",
+          "user": "Hmm, mood… Something… polished but not too loud? Maybe a soft pink? Or is that too boring?",
+          "assistant": "Soft pink is definitely polished and classic, never boring! It's always a safe and elegant choice."
+        },
+        {
+          "round": "D3:7",
+          "user": "Here's a picture of a soft pink polish I saw. It's called “Ballet Slippers.” Cute name. Subtle.",
+          "assistant": "\"Ballet Slippers\" is a very popular and universally flattering soft pink. It's sheer and understated, perfect for an elegant look.",
+          "image_id": [
+            "D3:IMG_001"
+          ],
+          "input_image": [
+            "../image/Fashion_Personal_Care_Lifestyle_Shopping/D3_IMG_001.jpg"
+          ],
+          "image_caption": [
+            "Hand with manicured nails featuring a light purple base, red flower designs, and small silver dots on three nails, while two nails have solid light purple polish with thin vertical gold stripes, set against a blurred neutral background."
+          ]
+        },
+        {
+          "round": "D3:8",
+          "user": "Ballet Slippers sounds perfect! But… maybe a little something extra? Like… glitter? Too much for basic?",
+          "assistant": "A subtle glitter top coat over soft pink could add a touch of sparkle without being too overwhelming. It depends on how much \"extra\" you want!"
+        },
+        {
+          "round": "D3:9",
+          "user": "Just a tiny bit of sparkle. Yes. Okay, soft pink with a glitter top coat. Decided! Manicure plan complete.",
+          "assistant": "Soft pink with a subtle glitter top coat sounds beautiful and sophisticated. Perfectly polished with a hint of fun!"
+        },
+        {
+          "round": "D3:10",
+          "user": "Now, cuticle oil. Should I get some? Is it really necessary? Another product…",
+          "assistant": "Cuticle oil is definitely recommended to keep your cuticles hydrated and healthy, and it will extend the life of your manicure. Think of it as skincare for your nails!",
+          "image_id": [
+            "D3:IMG_002"
+          ],
+          "input_image": [
+            "../image/Fashion_Personal_Care_Lifestyle_Shopping/D3_IMG_002.jpg"
+          ],
+          "image_caption": [
+            "Round glass bottle of yellow “Sweet Almond Cuticle Oil” with a black label and black dropper cap, featuring a pink circular sticker labeled “ELLE.” A separate black dropper with a clear stem lies vertically to the left against a white background."
+          ]
+        },
+        {
+          "round": "D3:11",
+          "user": "Okay, cuticle oil too. Fine. Manicure, check. Polish, check. Glitter, check. Cuticle oil, check. Ready for pampering! Thanks for helping me decide!",
+          "assistant": "You're all set for a lovely manicure experience! Enjoy being pampered and your beautiful new nails!"
+        }
+      ]
+    },
+    {
+      "session_id": "D4",
+      "date": "2024-08-20",
+      "dialogues": [
+        {
+          "round": "D4:1",
+          "user": "This week has been so chaotic. Classes are picking up and I feel like I'm juggling too much.",
+          "assistant": "The early weeks always feel like that. Are you thinking about reorganizing your schedule a bit?"
+        },
+        {
+          "round": "D4:2",
+          "user": "Yeah, especially my study routine. I keep jumping between tasks.",
+          "assistant": "Then time-blocking might help you—short focused blocks can reduce that jumping."
+        },
+        {
+          "round": "D4:3",
+          "user": "Does it have to be super strict?",
+          "assistant": "Not at all. Even a loose 30–45 minute block gives each task its own breathing room."
+        },
+        {
+          "round": "D4:4",
+          "user": "Maybe I should pair time-blocking with a to-do list?",
+          "assistant": "Definitely. Try a 3-item priority list—it prevents overwhelm and still gives structure.",
+          "image_id": [
+            "D4:IMG_001"
+          ],
+          "input_image": [
+            "../image/Fashion_Personal_Care_Lifestyle_Shopping/D4_IMG_001.jpg"
+          ],
+          "image_caption": [
+            "Red and black pen lying on a brown desk beside a white sheet of paper. The paper has a red handwritten heading “To do list:” followed by the first item “Make list” with an empty checkbox, and several additional empty red checkboxes arranged in a vertical column."
+          ]
+        },
+        {
+          "round": "D4:5",
+          "user": "I always put like ten things on my list and then feel defeated.",
+          "assistant": "That’s exactly why limiting it works. Finishing three meaningful tasks feels empowering."
+        },
+        {
+          "round": "D4:6",
+          "user": "Maybe adding a tea break could help me reset too.",
+          "assistant": "Tea breaks are perfect—calming but not distracting like scrolling on your phone."
+        },
+        {
+          "round": "D4:7",
+          "user": "Ugh, I always doom-scroll between tasks.",
+          "assistant": "You’re not alone. Try stretching or a two-minute walk instead—it clears your head faster."
+        },
+        {
+          "round": "D4:8",
+          "user": "I like that idea. I want something simple I can stick with.",
+          "assistant": "Simplicity is key. A routine that’s gentle is one you’ll actually keep."
+        },
+        {
+          "round": "D4:9",
+          "user": "Do you think it's okay if my routine changes daily?",
+          "assistant": "Absolutely. Routines should adapt to energy levels—consistency doesn’t mean rigidity."
+        },
+        {
+          "round": "D4:10",
+          "user": "That’s reassuring. I thought it needed to be perfect.",
+          "assistant": "Nope! A good routine is one that supports you, not stresses you out."
+        },
+        {
+          "round": "D4:11",
+          "user": "Maybe I’ll start tomorrow with a small reset: clean desk, tea, one priority.",
+          "assistant": "That sounds like a perfect gentle start to the day."
+        },
+        {
+          "round": "D4:12",
+          "user": "Should I plan weekly too?",
+          "assistant": "A light weekly overview helps—just jot key deadlines and pick a focus theme."
+        },
+        {
+          "round": "D4:13",
+          "user": "A theme sounds fun. Like 'slow week' or 'focus week'?",
+          "assistant": "Exactly! Themes set a mood rather than strict rules—very Chloe-friendly."
+        },
+        {
+          "round": "D4:14",
+          "user": "I like that. Maybe next week will be a 'balanced week'.",
+          "assistant": "Perfect. It reminds you to pace yourself and not overload your schedule."
+        },
+        {
+          "round": "D4:15",
+          "user": "I'm already feeling less overwhelmed just talking about this.",
+          "assistant": "Sometimes clarity is all you need to feel grounded again."
+        },
+        {
+          "round": "D4:16",
+          "user": "Okay, I'm going to try this new routine. Wish me luck!",
+          "assistant": "You've got this! I’ll check in anytime you need a reboot."
+        }
+      ]
+    },
+    {
+      "session_id": "D5",
+      "date": "2024-08-27",
+      "dialogues": [
+        {
+          "round": "D5:1",
+          "user": "I just sprayed on my new perfume, but I think I might have used too much. It smells really strong. What should I do?",
+          "assistant": "Try to dab some of it off with a tissue. Gently press the tissue on the areas where you sprayed the perfume to absorb some of the excess.",
+          "image_id": [
+            "D5:IMG_001"
+          ],
+          "input_image": [
+            "../image/Fashion_Personal_Care_Lifestyle_Shopping/D5_IMG_001.jpg"
+          ],
+          "image_caption": [
+            "Vintage-style perfume bottles filled with yellow liquid arranged on a textured surface, including two ornate atomizers with fabric bulbs and smaller bottles with faceted crystal stoppers. A block of stone, artificial pink rose, and yellow flowers decorate the display, with green glassware and furniture blurred in the background."
+          ]
+        },
+        {
+          "round": "D5:2",
+          "user": "I'm worried that it might still be too strong even after dabbing.",
+          "assistant": "You could also try to ventilate the room you're in. Open a window or use a fan to help dissipate the scent a bit."
+        },
+        {
+          "round": "D5:3",
+          "user": "But what if I'm already outside? I can't really open a window or use a fan there.",
+          "assistant": "In that case, you could try to walk in an open area where there's more air circulation. Avoid confined spaces for a while."
+        },
+        {
+          "round": "D5:4",
+          "user": "Okay, that's a good tip for an emergency. It really just makes me want to learn how to avoid that situation altogether. I never want to be the person with the overpowering perfume.",
+          "assistant": "That's a very considerate way to think about it. Finding that perfect balance is key, and it's a really common question."
+        },
+        {
+          "round": "D5:5",
+          "user": "I'm not sure how much perfume is the right amount. Can you give me some tips?",
+          "assistant": "Start with a light spray, usually one or two sprays are enough for most perfumes. You can always add more if needed, but it's harder to take away if you use too much."
+        },
+        {
+          "round": "D5:6",
+          "user": "I'm also concerned about how long the strong smell will last.",
+          "assistant": "It depends on the type of perfume. Some lighter scents may fade faster, while stronger ones can last for hours. But with time and air circulation, the intensity should decrease."
+        },
+        {
+          "round": "D5:7",
+          "user": "I have a group meeting later. Will the strong smell be a problem?",
+          "assistant": "It might be. Try to minimize the scent as much as possible before the meeting. You don't want it to be a distraction.",
+          "image_id": [
+            "D5:IMG_002"
+          ],
+          "input_image": [
+            "../image/Fashion_Personal_Care_Lifestyle_Shopping/D5_IMG_002.jpg"
+          ],
+          "image_caption": [
+            "Modern conference room with a long wooden oval conference table surrounded by many black swivel chairs, each with a notepad and pen. A large projection screen at the front displays a computer desktop. Recessed ceiling lights and illuminated wall panels create warm lighting. A wide landscape artwork hangs on the left wall, and additional smaller tables or sideboards are visible along the right side of the room."
+          ]
+        },
+        {
+          "round": "D5:8",
+          "user": "I'm thinking about changing my perfume. Do you think I should?",
+          "assistant": "You could consider it. Maybe look for a lighter or more subtle fragrance next time. But if you really like this one, just be more careful with the amount you use."
+        },
+        {
+          "round": "D5:9",
+          "user": "I'm not sure how to choose a perfume that suits me. Any advice?",
+          "assistant": "You can go to a perfume store and test different samples. Try them on your skin and see how they interact with your body chemistry. Also, consider the occasion and your personal style."
+        },
+        {
+          "round": "D5:10",
+          "user": "That's really helpful advice, thank you. I think I've found one I really love after testing a few. It's a bit more than I usually spend, though, and I've had a perfume go 'off' before. I'd be so disappointed if that happened with this one. Is there anything I can do to make sure it lasts as long as possible?",
+          "assistant": "That's a very common concern, and it's smart to think about preserving your fragrance, especially when you've invested in one you love. How you care for the bottle itself plays a huge role in its longevity."
+        },
+        {
+          "round": "D5:11",
+          "user": "I'm ready to try and fix this issue. Any final tips?",
+          "assistant": "Remember to store your perfume properly. Keep it in a cool, dry place away from direct sunlight. This can help maintain its quality."
+        },
+        {
+          "round": "D5:12",
+          "user": "I'm worried about the alcohol content in the perfume irritating my skin. Is that a common problem?",
+          "assistant": "Some people may have sensitive skin and experience irritation. You can do a patch test before using a new perfume. Apply a small amount on your inner wrist and wait to see if there's any reaction."
+        }
+      ]
+    },
+    {
+      "session_id": "D6",
+      "date": "2024-09-05",
+      "dialogues": [
+        {
+          "round": "D6:1",
+          "user": "After the perfume mishap, I suddenly felt like refreshing my whole room today.",
+          "assistant": "A room reset does wonders for your mood. Where do you want to start?"
+        },
+        {
+          "round": "D6:2",
+          "user": "Probably my desk. It’s becoming a clutter monster.",
+          "assistant": "Try clearing everything off first—it gives you a clean canvas."
+        },
+        {
+          "round": "D6:3",
+          "user": "That sounds extreme but surprisingly appealing.",
+          "assistant": "It’s very satisfying. Then only return what you truly need."
+        },
+        {
+          "round": "D6:4",
+          "user": "Maybe I should add a small tray for essentials.",
+          "assistant": "Yes! A little tray keeps things tidy—pens, lip balm, maybe your favorite perfume."
+        },
+        {
+          "round": "D6:5",
+          "user": "I’ve also seen people put candles on their desk. But mixing scents worries me.",
+          "assistant": "Stick to soft scents—cotton, white tea, or linen. They won’t clash with perfume.",
+          "image_id": [
+            "D6:IMG_001"
+          ],
+          "input_image": [
+            "../image/Fashion_Personal_Care_Lifestyle_Shopping/D6_IMG_001.jpg"
+          ],
+          "image_caption": [
+            "A partially melted white candle stands on a dark metal candleholder placed on a long wooden table. The foreground is sharply focused while the rest of the table, additional candles, and warm wall lights blur into the background, creating a row of soft circular light spots."
+          ]
+        },
+        {
+          "round": "D6:6",
+          "user": "Good tip. I also want to reorganize my closet.",
+          "assistant": "Start with categories—tops, pants, outerwear—then organize by color."
+        },
+        {
+          "round": "D6:7",
+          "user": "Color-coding feels so aesthetic. Might keep me accountable.",
+          "assistant": "Exactly! A pretty system is easier to maintain."
+        },
+        {
+          "round": "D6:8",
+          "user": "I also have clothes I never wear… maybe I should donate them.",
+          "assistant": "That’s a great idea. It clears space and gives the clothes a second life."
+        },
+        {
+          "round": "D6:9",
+          "user": "What about storage boxes? Worth it?",
+          "assistant": "Totally. Clear boxes are great—you see what’s inside without digging."
+        },
+        {
+          "round": "D6:10",
+          "user": "Maybe I’ll label them too.",
+          "assistant": "Labels make everything feel intentional and organized."
+        },
+        {
+          "round": "D6:11",
+          "user": "I’m actually getting excited about cleaning. Who am I?",
+          "assistant": "You’re Chloe: turning chores into cozy rituals!"
+        },
+        {
+          "round": "D6:12",
+          "user": "Maybe I’ll play music while cleaning. Something soft.",
+          "assistant": "Perfect. A warm playlist makes the whole process relaxing."
+        },
+        {
+          "round": "D6:13",
+          "user": "Do you think I should add plants?",
+          "assistant": "If you like greenery—yes! Even low-maintenance ones brighten a room."
+        },
+        {
+          "round": "D6:14",
+          "user": "Maybe a small pothos. Like this photo. They never die, right?",
+          "assistant": "Pretty much—they’re the superheroes of houseplants.",
+          "image_id": [
+            "D6:IMG_002"
+          ],
+          "input_image": [
+            "../image/Fashion_Personal_Care_Lifestyle_Shopping/D6_IMG_002.jpg"
+          ],
+          "image_caption": [
+            "Variegated pothos houseplant with numerous heart-shaped leaves in shades of light and dark green, some mottled with yellow. The leaves are dense and overlapping, with small water droplets visible on their surfaces. The plant grows from a brown plastic pot set on a light wooden surface."
+          ]
+        },
+        {
+          "round": "D6:15",
+          "user": "Okay, desk first, then closet, then maybe plants.",
+          "assistant": "That sounds like a perfect room-refresh plan."
+        },
+        {
+          "round": "D6:16",
+          "user": "Thanks! I actually feel motivated now.",
+          "assistant": "Go Chloe! Your room is going to feel so peaceful."
+        }
+      ]
+    },
+    {
+      "session_id": "D7",
+      "date": "2024-09-16",
+      "dialogues": [
+        {
+          "round": "D7:1",
+          "user": "My best friend Jenny's birthday is next week, and I'm trying to find something just as special for her. I'm hoping to find a gift that feels both thoughtful and chic.",
+          "assistant": "I'm so glad I could help! It's wonderful that you're putting that same care and thought into finding the perfect gift for your friend. I'd be happy to help you brainstorm some ideas. To get started, could you tell me a little bit about her style or any hobbies she has?"
+        },
+        {
+          "round": "D7:2",
+          "user": "You can choose a birthday gift based on her interests, practicality, or the thoughtfulness behind it.",
+          "assistant": "Of course! Let me know what gifts you've selected, along with your friend's preferences or personality traits, and I can help analyze which one is more suitable or creative!"
+        },
+        {
+          "round": "D7:3",
+          "user": "First, a lipstick. My friend said she’s been practicing makeup lately, so I thought of getting her a cosmetic product.",
+          "assistant": "This lipstick looks very delicate, and the color is versatile, making it perfect for someone who is just learning makeup. Choosing lipstick as a gift is a thoughtful and practical choice, especially since your friend is practicing makeup—this gift will suit her needs.",
+          "image_id": [
+            "D7:IMG_001"
+          ],
+          "input_image": [
+            "../image/Fashion_Personal_Care_Lifestyle_Shopping/D7_IMG_001.jpg"
+          ],
+          "image_caption": [
+            "Pink-toned lipstick in a gold rectangular tube standing upright next to its matching pale beige cylindrical cap. The cap features the vertical gold text “Rare Beauty.” Both items are placed against a plain white background."
+          ]
+        },
+        {
+          "round": "D7:4",
+          "user": "My concern is that I might not choose the right color. If the shade doesn’t suit her preference, it would be awkward.",
+          "assistant": "If you're worried the color might not match her preference, you can consider a few options:"
+        },
+        {
+          "round": "D7:5",
+          "user": "Thanks for the advice, but I want to give her a surprise, so I’ll pass on this idea.",
+          "assistant": "I understand! If you want to keep the surprise but are worried about the color, you can consider pairing the lipstick with makeup tools, such as a brush set, makeup sponges, or a compact mirror. These items are related to makeup and are less likely to be subject to personal preference. That way, even if the lipstick color isn’t perfect, she’ll still appreciate your thoughtfulness! If you have other gift options, feel free to share!"
+        },
+        {
+          "round": "D7:6",
+          "user": "That’s a really thoughtful backup plan, but it makes me think maybe steering clear of cosmetics altogether is the safest bet. I was actually looking at something in a different category for her.",
+          "assistant": "That makes perfect sense! Sometimes a different type of gift is the best way to ensure it's a perfect fit. I'd love to hear what else you were considering."
+        },
+        {
+          "round": "D7:7",
+          "user": "I have other options! I also liked a dress, and I think she would love it.",
+          "assistant": "This dress has an elegant and sophisticated design, and the green color looks fresh. The style is chic and appropriate—it’s indeed a great gift choice!",
+          "image_id": [
+            "D7:IMG_002"
+          ],
+          "input_image": [
+            "../image/Fashion_Personal_Care_Lifestyle_Shopping/D7_IMG_002.jpg"
+          ],
+          "image_caption": [
+            "Long green shirt-dress with a wide, A-line skirt and button-down front, featuring six dark buttons. The dress has short rolled sleeves, a notched lapel collar, and a fitted waist with a matching belt and decorative side button. It is displayed against a plain white background."
+          ]
+        },
+        {
+          "round": "D7:8",
+          "user": "But my concern is that it’s winter now, and if I give her this dress, she wouldn’t be able to wear it until next spring or summer.",
+          "assistant": "You’re right. Since it’s winter, a spring/summer dress might not be wearable until the weather warms up. But if you feel this dress suits her style, you can make the gift more thoughtful by: Pairing it with a winter item: For example, a warm scarf or a knitted cardigan could complement the dress, creating an elegant ensemble that’s still practical for winter."
+        },
+        {
+          "round": "D7:9",
+          "user": "That's such a thoughtful way to make it work for the season! I think a scarf would be perfect, actually. It feels a bit more versatile than a cardigan for her style.",
+          "assistant": "I agree, a scarf is a lovely choice. It can add a pop of color or a cozy texture that really elevates the whole outfit."
+        },
+        {
+          "round": "D7:10",
+          "user": "Good point. A scarf is a great choice. What color do you think would work best?",
+          "assistant": "The color of the scarf can be matched with the dress’s green tone and her personality."
+        },
+        {
+          "round": "D7:11",
+          "user": "How about this one?",
+          "assistant": "This burgundy scarf looks great! The warm color and texture pair beautifully with the green dress, and it’s perfect for the winter atmosphere. Burgundy is both elegant and not too loud, and most people would love this classic style.",
+          "image_id": [
+            "D7:IMG_003"
+          ],
+          "input_image": [
+            "../image/Fashion_Personal_Care_Lifestyle_Shopping/D7_IMG_003.jpg"
+          ],
+          "image_caption": [
+            "Long, deep red scarf arranged in a loose loop against a plain white background, featuring a smooth fabric texture and fringed tassel ends hanging at the bottom."
+          ]
+        },
+        {
+          "round": "D7:12",
+          "user": "By the way, this is the toy rabbit I gave her last year. What do you think?",
+          "assistant": "This toy rabbit is adorable! Its outfit is well-designed, and the color scheme is tasteful, giving it a playful yet refined look. If you gave it to her last year and she liked it, you could base this year’s gift on it, perhaps by choosing items in a similar style or adding a small accessory to make it even more special.",
+          "image_id": [
+            "D7:IMG_004"
+          ],
+          "input_image": [
+            "../image/Fashion_Personal_Care_Lifestyle_Shopping/D7_IMG_004.jpg"
+          ],
+          "image_caption": [
+            "Plush beige bunny toy with long floppy ears, wearing a dark gray beret, matching scarf, and green coat with a single black button, seated against a plain white background."
+          ]
+        },
+        {
+          "round": "D7:13",
+          "user": "So, I’ve decided on the birthday gift. Do you think I should buy a birthday cake for her as well?",
+          "assistant": "Buying a birthday cake is definitely a good idea! It not only adds to the celebration but also makes the day sweeter."
+        },
+        {
+          "round": "D7:14",
+          "user": "Thanks for the suggestion. I’ll go check it out.",
+          "assistant": "You’re welcome! Hope you find the perfect cake, and that everything goes smoothly with the birthday plan. Wishing your friend a happy birthday! If you need any further help, feel free to ask!"
+        },
+        {
+          "round": "D7:15",
+          "user": "I found one! What do you think of this?",
+          "assistant": "This cake looks amazing! The layers of cream and fruit make it look fresh and rich, and the fireworks decoration on top really gives it a celebratory feel. It’s perfect for a joyful birthday occasion.",
+          "image_id": [
+            "D7:IMG_005"
+          ],
+          "input_image": [
+            "../image/Fashion_Personal_Care_Lifestyle_Shopping/D7_IMG_005.jpg"
+          ],
+          "image_caption": [
+            "Three-layer sponge cake on a glass stand, filled and topped with whipped cream and mixed berries including strawberries, blueberries, and raspberries. Four lit sparklers are inserted into the top layer, creating bright sparks against a dark background."
+          ]
+        },
+        {
+          "round": "D7:16",
+          "user": "Looks good. I’ll go place the order for the birthday gift and cake. Wish me luck!",
+          "assistant": "Good luck! I’m sure your thoughtful gifts and preparations will leave your friend surprised and touched, and the birthday will be perfect! If you need anything else, just reach out!"
+        }
+      ]
+    },
+    {
+      "session_id": "D8",
+      "date": "2024-09-29",
+      "dialogues": [
+        {
+          "round": "D8:1",
+          "user": "I’m thinking about buying a gift for my mom. Do you have any suggestions?",
+          "assistant": "If you're buying a gift for your mom, think about a custom necklace with her initials or a skincare set for relaxation. A silk scarf, handbag, personalized photo frame, or wall art are also good choices. If she likes tech, consider an e-reader or Bluetooth speaker."
+        },
+        {
+          "round": "D8:2",
+          "user": "She loves reading. Would a book be a good gift?",
+          "assistant": "A book would definitely make a great gift if she loves reading! You could consider a bestselling novel, a cookbook, or a self-help book depending on her interests. A book with beautiful illustrations or photography could also be a nice option.",
+          "image_id": [
+            "D8:IMG_001"
+          ],
+          "input_image": [
+            "../image/Fashion_Personal_Care_Lifestyle_Shopping/D8_IMG_001.jpg"
+          ],
+          "image_caption": [
+            "Stack of four thick hardcover books with plain covers in red, orange, and green tones, arranged in a slightly uneven pile on a wooden surface, against a warm, blurred yellow background."
+          ]
+        },
+        {
+          "round": "D8:3",
+          "user": "I know she enjoys reading poetry collections. What do you think about gifting her Rabindranath Tagore's Stray Birds?",
+          "assistant": "If your mom enjoys reading poetry collections, gifting her Rabindranath Tagore's \"Stray Birds\" would be a wonderful choice.",
+          "image_id": [
+            "D8:IMG_002"
+          ],
+          "input_image": [
+            "../image/Fashion_Personal_Care_Lifestyle_Shopping/D8_IMG_002.jpg"
+          ],
+          "image_caption": [
+            "Book cover of “Stray Birds,” featuring a minimalist white background with the title in large blue handwritten-style letters and a small orange bird silhouette above. Chinese text “飞鸟集” appears below the English title, with smaller Chinese text indicating the author and translator near the bottom."
+          ]
+        },
+        {
+          "round": "D8:4",
+          "user": "It sounds great, but I was also thinking about something more personalized. Any ideas?",
+          "assistant": "Personalized gifts are always special! You could get her a custom name necklace, a personalized photo album, or even a custom painting or illustration of a memorable moment in her life."
+        },
+        {
+          "round": "D8:5",
+          "user": "I like the idea of a custom necklace. Any recommendations on where I can get one?",
+          "assistant": "You can get a custom necklace from several places. Local jewelers allow for face - to - face consultations and you can see their previous work, like well - reviewed stores in your area. Online custom jewelry stores offer a wide variety of designs and customization tools. For example, Etsy has many independent designers, and Blue Nile has options for customizing diamonds and settings. Department stores with jewelry services, such as Macy's or Nordstrom, may also provide custom - making services with their in - house jewelers and might have promotions."
+        },
+        {
+          "round": "D8:6",
+          "user": "I’ve found a beautiful necklace on Etsy. What do you think of this design?",
+          "assistant": "The necklace is exquisitely designed. It features a delicate floral pendant with intricate detailing of flowers and a bow, which gives it a feminine and elegant touch. The gold chain complements the pendant beautifully, creating a simple yet stylish look. This kind of necklace would be suitable for various occasions, from casual outings to more formal events. It's a charming choice that is likely to appeal to those with a taste for refined and understated jewelry.",
+          "image_id": [
+            "D8:IMG_003"
+          ],
+          "input_image": [
+            "../image/Fashion_Personal_Care_Lifestyle_Shopping/D8_IMG_003.jpg"
+          ],
+          "image_caption": [
+            "Close-up of a person wearing a gold necklace with a delicate floral pendant featuring three different flower shapes and leaves. The necklace rests on bare skin above an open white shirt. A gold ring is visible on one hand."
+          ]
+        },
+        {
+          "round": "D8:7",
+          "user": "This necklace looks perfect. But I’m also thinking about adding something else to make the gift even more special. Any suggestions?",
+          "assistant": "You could pair the necklace with a matching bracelet or earrings to complete the set. Another idea is to include a heartfelt handwritten letter or a small luxury gift like a scented candle or skincare set to make the gift even more thoughtful."
+        },
+        {
+          "round": "D8:8",
+          "user": "I like the idea of adding a candle. Do you know any good brands for candles?",
+          "assistant": "Some good candle brands are recommended as follows. Voluspa, an American brand founded in 1999, is known for its luxurious appearance, wide variety of scents made with natural ingredients, and beautiful jars. Diptyque, a French brand established in 1961, offers high-end candles with excellent craftsmanship and classic fragrances. Jo Malone London, a British brand founded in 1994, features simple and elegant fragrances and packaging. The Beast from China, which developed from a flower shop, has unique scented candles like the Jungle Wild Peach Hibiscus. Capri Blue provides various products with interesting designs and a popular Volcano scent. Brooklyn Candle Studio, a local brand in Brooklyn, uses 100 percent soy wax and has a wide range of hand-poured scents. Otherland is popular among millennials for its beautiful packaging and unique fragrances with a blend of coconut and soy wax."
+        },
+        {
+          "round": "D8:9",
+          "user": "I’m leaning towards a Jo Malone candle like this picture.",
+          "assistant": "That's a great choice! The Jo Malone candle you're leaning towards is likely to be a wonderful addition to your gift. Jo Malone candles are known for their high quality and luxurious scents.",
+          "image_id": [
+            "D8:IMG_004"
+          ],
+          "input_image": [
+            "../image/Fashion_Personal_Care_Lifestyle_Shopping/D8_IMG_004.jpg"
+          ],
+          "image_caption": [
+            "White Jo Malone London “English Pear & Freesia” scented candle in a frosted glass jar with a cream label and black monogram square. A shiny silver lid tops the jar, tied with a neat black fabric bow."
+          ]
+        },
+        {
+          "round": "D8:10",
+          "user": "Which scent do you think my mom would like?",
+          "assistant": "Jo Malone has a variety of amazing scents! Lime Basil & Mandarin is refreshing and citrusy, while Pomegranate Noir is rich and sophisticated. If your mom prefers floral scents, Peony & Blush Suede is elegant and feminine."
+        },
+        {
+          "round": "D8:11",
+          "user": "Oh, the Peony & Blush Suede sounds perfect for her style. I'm actually trying to put together a little gift set, and I've already found a delicate personalized necklace for her.",
+          "assistant": "That's such a thoughtful idea! A curated gift is always so special. The elegance of a floral scent often pairs beautifully with delicate jewelry."
+        },
+        {
+          "round": "D8:12",
+          "user": "I think she’d love Peony & Blush Suede scent. Do you think these two gifts together will make a good combination?",
+          "assistant": "Yes, the personalized necklace paired with a Peony & Blush Suede candle will make a beautiful and thoughtful combination. It balances elegance with a personal touch and will surely make your mom feel special.",
+          "image_id": [
+            "D8:IMG_005"
+          ],
+          "input_image": [
+            "../image/Fashion_Personal_Care_Lifestyle_Shopping/D8_IMG_005.jpg"
+          ],
+          "image_caption": [
+            "Clear glass bottle of “JO MALONE LONDON PEONY & BLUSH SUEDE COLOGNE” standing upright on a light surface beside a large pink peony flower, with a red butterfly resting on the petals against a pale background."
+          ]
+        },
+        {
+          "round": "D8:13",
+          "user": "Great! I think this will be the perfect gift. I’ll order them now.",
+          "assistant": "That sounds like an amazing gift! I'm certain your mom will adore it. The pairing of a custom - made necklace with a luxurious candle will surely make her feel deeply cherished."
+        },
+        {
+          "round": "D8:14",
+          "user": "Thank you for your advice! And I’m really excited to give it to her.",
+          "assistant": "You're welcome! I'm so glad that my advice has been helpful. I'm sure your mom will be overjoyed when she receives such a thoughtful and wonderful gift. It's really sweet of you to put so much effort into choosing the perfect present for her."
+        }
+      ]
+    },
+    {
+      "session_id": "D9",
+      "date": "2024-10-10",
+      "dialogues": [
+        {
+          "round": "D9:1",
+          "user": "Deep autumn and winter are coming soon, and I just saw some really good deals online. I’m thinking of buying a few warm pieces in advance.",
+          "assistant": "Great idea! Buying ahead of the season usually means better prices. What pieces are you considering?"
+        },
+        {
+          "round": "D9:2",
+          "user": "I found two categories I really like. Let me share the first one—Collared Luxe Faux Fur Jackets.",
+          "assistant": "Nice! Faux fur jackets can instantly elevate a winter outfit. Show me what you found!"
+        },
+        {
+          "round": "D9:3",
+          "user": "Here’s the first one.",
+          "assistant": "This jacket has a luxurious deep burgundy tone paired with a black faux fur collar. The combination of textures—smooth leather-like trim and soft fur—gives it a premium look. Great for both casual and dressed-up winter outfits.",
+          "image_id": [
+            "D9:IMG_001"
+          ],
+          "input_image": [
+            "../image/Fashion_Personal_Care_Lifestyle_Shopping/D9_IMG_001.jpg"
+          ],
+          "image_caption": [
+            "Woman standing against a plain light background wearing a maroon coat with black leather lapels and a black fur collar over a long cream knit sweater, paired with black pants featuring a small embroidered patch near the knee; her hair is tied up and she holds one lapel of the coat with a neutral expression."
+          ]
+        },
+        {
+          "round": "D9:4",
+          "user": "And this is the second one.",
+          "assistant": "This light tan faux fur jacket looks incredibly cozy. The natural variation in the fur pattern makes it visually rich. It feels warm, plush, and perfect for colder days, especially paired with jeans.",
+          "image_id": [
+            "D9:IMG_002"
+          ],
+          "input_image": [
+            "../image/Fashion_Personal_Care_Lifestyle_Shopping/D9_IMG_002.jpg"
+          ],
+          "image_caption": [
+            "Woman modeling a light tan, spotted faux-fur jacket in two views: front and side. She stands against a plain light gray background, wearing dark blue jeans. In the side view she raises the high collar, while the front view shows her hands in the jacket pockets."
+          ]
+        },
+        {
+          "round": "D9:5",
+          "user": "Here’s the third jacket.",
+          "assistant": "This grey faux fur jacket has a chic, modern vibe. The subtle striping texture adds depth without being overwhelming. It’s versatile—both stylish and easy to match with winter basics.",
+          "image_id": [
+            "D9:IMG_003"
+          ],
+          "input_image": [
+            "../image/Fashion_Personal_Care_Lifestyle_Shopping/D9_IMG_003.jpg"
+          ],
+          "image_caption": [
+            "Woman with shoulder-length light red hair wearing a fluffy, light gray faux fur jacket over a white blouse and dark jeans, standing against a plain white background."
+          ]
+        },
+        {
+          "round": "D9:6",
+          "user": "And here’s the fourth one.",
+          "assistant": "This soft beige faux fur jacket looks light, feminine, and youthful. The texture is fluffy but not bulky, making it ideal for layering over skirts or slim jeans. It has a very gentle winter aesthetic.",
+          "image_id": [
+            "D9:IMG_004"
+          ],
+          "input_image": [
+            "../image/Fashion_Personal_Care_Lifestyle_Shopping/D9_IMG_004.jpg"
+          ],
+          "image_caption": [
+            "Young woman standing in a minimalist indoor setting with white walls and a concrete floor, wearing a light beige faux-fur jacket over a white top, a short white skirt with a black geometric pattern, and white sneakers. Her legs are crossed at the ankles, and her arms hang relaxed by her sides."
+          ]
+        },
+        {
+          "round": "D9:7",
+          "user": "Okay, now let’s move to the second category—Cowl Neck Fisherman Sweaters.",
+          "assistant": "Great! Fisherman sweaters are timeless and super warm. Show me the first one!"
+        },
+        {
+          "round": "D9:8",
+          "user": "Here’s sweater number one.",
+          "assistant": "A camel cable-knit cowl neck sweater—classic, warm, and extremely versatile. The rich texture and neutral color make it great for everyday wear.",
+          "image_id": [
+            "D9:IMG_005"
+          ],
+          "input_image": [
+            "../image/Fashion_Personal_Care_Lifestyle_Shopping/D9_IMG_005.jpg"
+          ],
+          "image_caption": [
+            "Young woman standing against a plain white background, wearing a black wide-brimmed hat, a long camel-colored cable-knit cowl-neck sweater, and black leggings, with one arm relaxed and slightly bent at her side."
+          ]
+        },
+        {
+          "round": "D9:9",
+          "user": "And here’s the second one.",
+          "assistant": "This light grey cowl neck sweater has a cozy, relaxed drape. The knit pattern is soft and casual, ideal for layering over denim for a comfy-but-stylish winter look.",
+          "image_id": [
+            "D9:IMG_006"
+          ],
+          "input_image": [
+            "../image/Fashion_Personal_Care_Lifestyle_Shopping/D9_IMG_006.jpg"
+          ],
+          "image_caption": [
+            "Young woman standing against a white background, wearing a loose, light gray knit cowl-neck sweater with long sleeves and a high-low hem over distressed blue jeans. She has long, light brown hair, dangle earrings, and multiple bracelets on her left wrist, with her left hand resting near her hip."
+          ]
+        },
+        {
+          "round": "D9:10",
+          "user": "Here’s the third sweater.",
+          "assistant": "This multicolored chunky knit has a really warm, handmade vibe. The shorter sleeves give it a unique twist, and the mix of earthy tones makes it stand out.",
+          "image_id": [
+            "D9:IMG_007"
+          ],
+          "input_image": [
+            "../image/Fashion_Personal_Care_Lifestyle_Shopping/D9_IMG_007.jpg"
+          ],
+          "image_caption": [
+            "Woman with long wavy hair wearing a multicolored, chunky knit cowl-neck sweater with short sleeves, standing indoors in front of wooden bookshelves filled with books and decorative items."
+          ]
+        },
+        {
+          "round": "D9:11",
+          "user": "This is the fourth one.",
+          "assistant": "A clean, creamy white sweater with a soft cowl neck—a simple but elegant winter essential. The bright color instantly freshens up cold-weather outfits.",
+          "image_id": [
+            "D9:IMG_008"
+          ],
+          "input_image": [
+            "../image/Fashion_Personal_Care_Lifestyle_Shopping/D9_IMG_008.jpg"
+          ],
+          "image_caption": [
+            "Woman with long blonde hair stands against a plain white background, wearing a white long-sleeve cowl-neck sweater and black pants with a red plaid pattern. One arm is crossed, and the other rests lightly on it, displaying a red bracelet on her wrist."
+          ]
+        },
+        {
+          "round": "D9:12",
+          "user": "And the fifth.",
+          "assistant": "A deep red cable-knit cowl sweater—bold, festive, and warm. Perfect for holiday season styling or when you want a strong pop of color.",
+          "image_id": [
+            "D9:IMG_009"
+          ],
+          "input_image": [
+            "../image/Fashion_Personal_Care_Lifestyle_Shopping/D9_IMG_009.jpg"
+          ],
+          "image_caption": [
+            "Young woman with long blond hair wearing an oversized red turtleneck sweater and blue jeans, standing against a plain white background with a relaxed, slightly angled pose."
+          ]
+        },
+        {
+          "round": "D9:13",
+          "user": "Finally, the last sweater.",
+          "assistant": "This beige cowl neck sweater with tassel detailing has a boho-chic touch. It combines comfort with playful texture, making it both stylish and cozy.",
+          "image_id": [
+            "D9:IMG_010"
+          ],
+          "input_image": [
+            "../image/Fashion_Personal_Care_Lifestyle_Shopping/D9_IMG_010.jpg"
+          ],
+          "image_caption": [
+            "Woman walking in a white studio wearing a long beige knit sweater with a tassel-trimmed cowl neck, fitted blue jeans, and brown ankle boots, looking slightly to the side with one hand raised."
+          ]
+        },
+        {
+          "round": "D9:14",
+          "user": "So many good options… For the faux fur jackets, which one would you recommend?",
+          "assistant": "If you want something both stylish and warm without being too bulky, I’d recommend the **first burgundy jacket**. The contrast textures make it unique, and the deep color is perfect for winter."
+        },
+        {
+          "round": "D9:15",
+          "user": "I actually like that one a lot too. What about the sweaters?",
+          "assistant": "For sweaters, the **camel cable-knit cowl neck** (the first one) is the most classic and versatile. It goes with almost anything and feels timeless."
+        },
+        {
+          "round": "D9:16",
+          "user": "Makes sense. The camel one does feel very wearable.",
+          "assistant": "Absolutely—it's an easy everyday winter staple that won’t go out of style."
+        },
+        {
+          "round": "D9:17",
+          "user": "Alright, I think I’ve made my decision.",
+          "assistant": "Great! Which pieces are you choosing?"
+        },
+        {
+          "round": "D9:18",
+          "user": "For the faux fur jackets, I’ll go with the first burgundy one. And for the sweaters, the camel cable-knit cowl neck.",
+          "assistant": "Excellent choices! Those two pieces will be super warm, stylish, and perfect for the upcoming deep autumn and winter."
+        },
+        {
+          "round": "D9:19",
+          "user": "Thanks for helping me go through all the details!",
+          "assistant": "Anytime! Winter shopping is always exciting, and you picked beautiful, practical pieces."
+        },
+        {
+          "round": "D9:20",
+          "user": "By the way, since we’re preparing for winter anyway… do you have any recommendations for shoes that are good for snowy days? Look at the snowy day last year.",
+          "assistant": "Absolutely! Snowy weather needs something warm, waterproof, and slip-resistant. What kind of style do you prefer—more practical, or something that balances warmth and aesthetics?",
+          "image_id": [
+            "D9:IMG_011"
+          ],
+          "input_image": [
+            "../image/Fashion_Personal_Care_Lifestyle_Shopping/D9_IMG_011.jpg"
+          ],
+          "image_caption": [
+            "A person in a red jacket skis through deep snow alongside a dog, following a faint trail across an open snowy field. Leafless and snow-covered evergreen trees rise on the surrounding hillsides under an overcast, gray sky."
+          ]
+        },
+        {
+          "round": "D9:21",
+          "user": "Maybe something practical but still cute? I don’t want super bulky boots.",
+          "assistant": "Then you might love mid-length winter boots with faux-fur lining. They’re slimmer than big snow boots but still warm and grippy. Many brands make lightweight versions that look stylish without the bulk."
+        },
+        {
+          "round": "D9:22",
+          "user": "That sounds nice. Should I choose leather or something waterproof like nylon?",
+          "assistant": "If you get heavy snow, waterproof nylon or treated synthetic material is usually better—it dries faster and handles slush well. But waterproof leather offers a more polished look while still protecting your feet, as long as the boots have sealed seams."
+        },
+        {
+          "round": "D9:23",
+          "user": "What about traction? I really don’t want to slip on icy sidewalks.",
+          "assistant": "Look for rubber outsoles with deep, multi-directional treads. Some winter boots even use special cold-weather rubber that stays flexible in low temperatures, improving grip. Avoid smooth soles—they're dangerous on icy surfaces."
+        },
+        {
+          "round": "D9:24",
+          "user": "Good to know. Are insulated boots a must-have?",
+          "assistant": "Highly recommended! Insulation like Thinsulate or faux shearling keeps your feet warm even in freezing temperatures. If you walk a lot outdoors, insulation makes a huge difference in comfort."
+        },
+        {
+          "round": "D9:25",
+          "user": "Great tips! I’ll start browsing winter boots later. Thanks again!",
+          "assistant": "You're welcome! With the jacket, sweater, and a good pair of winter boots, you’ll be completely ready for snowy days. Let me know if you want help picking specific pairs!"
+        }
+      ]
+    }
+  ],
+  "human-annotated QAs": [
+    {
+      "point": "AR",
+      "question": "Did the user consider purchasing Li Ning's clothing brand?",
+      "answer": "Not mentioned.",
+      "session_id": [
+        "D1"
+      ],
+      "clue": []
+    },
+    {
+      "point": "VS",
+      "question": "Which image shown in late-July is related to the T-shirt discussed in the conversation?",
+      "answer": "D2:IMG_001",
+      "session_id": [
+        "D2"
+      ],
+      "clue": [
+        "D2:6"
+      ]
+    },
+    {
+      "point": "CD",
+      "question": "Does the statement 'Chloe dislikes minimalist fashion styles' conflict with the conversation?",
+      "answer": "Yes.",
+      "session_id": [
+        "D2"
+      ],
+      "clue": [
+        "D2:14",
+        "D2:17",
+        "D2:19"
+      ]
+    },
+    {
+      "point": "TR",
+      "question": "Did Chloe focus on improving her outfits before she decided to get a manicure?",
+      "answer": "Yes.",
+      "session_id": [
+        "D1",
+        "D3"
+      ],
+      "clue": [
+        "D1:1",
+        "D1:25",
+        "D3:1"
+      ]
+    },
+    {
+      "point": "FR",
+      "question": "List the manicure-related terms and products Chloe mentioned considering or getting.",
+      "answer": "Chloe mentioned a basic manicure, polish, soft pink polish (\"Ballet Slippers\"), glitter top coat, and cuticle oil. She also considered round and oval nail shapes.",
+      "session_id": [
+        "D3"
+      ],
+      "clue": [
+        "D3:3",
+        "D3:4",
+        "D3:6",
+        "D3:7",
+        "D3:8",
+        "D3:9",
+        "D3:10"
+      ]
+    },
+    {
+      "point": "MR",
+      "question": "What nail shape was Chloe initially considering?",
+      "answer": "She was initially considering a round nail shape, or maybe oval.",
+      "session_id": [
+        "D3"
+      ],
+      "clue": [
+        "D3:4"
+      ]
+    },
+    {
+      "point": "KR",
+      "question": "When Chloe was uncertain about polish colors, what final choice did she settle on?",
+      "answer": "Soft pink with a subtle glitter top coat.",
+      "session_id": [
+        "D3"
+      ],
+      "clue": [
+        "D3:6",
+        "D3:8",
+        "D3:9"
+      ]
+    },
+    {
+      "point": "VS",
+      "question": "How many images are related to manicures or nail polish? Please answer using an Arabic numeral (e.g., “2” instead of “Two”).",
+      "answer": "2",
+      "session_id": [
+        "D3"
+      ],
+      "clue": [
+        "D3:7",
+        "D3:10"
+      ]
+    },
+    {
+      "point": "AR",
+      "question": "Did Chloe mention getting gel or acrylic nails?",
+      "answer": "Not mentioned.",
+      "session_id": [
+        "D3"
+      ],
+      "clue": []
+    },
+    {
+      "point": "FR",
+      "question": "What study routine strategies were discussed in the conversation?",
+      "answer": "Time-blocking with 30-45 minute focused blocks, creating a 3-item priority to-do list to prevent overwhelm, taking tea breaks to reset instead of doom-scrolling, stretching or taking two-minute walks between tasks, allowing routines to adapt to daily energy levels, starting the day with a small reset (clean desk, tea, one priority), creating weekly overviews with key deadlines and focus themes, and setting weekly mood themes like 'slow week', 'focus week', or 'balanced week'.",
+      "session_id": [
+        "D4"
+      ],
+      "clue": [
+        "D4:2",
+        "D4:4",
+        "D4:6",
+        "D4:7",
+        "D4:9",
+        "D4:11",
+        "D4:12",
+        "D4:13",
+        "D4:14"
+      ]
+    },
+    {
+      "point": "MR",
+      "question": "Why is a 3-item priority to-do list recommended over longer lists?",
+      "answer": "A 3-item priority list prevents overwhelm and still gives structure. Finishing three meaningful tasks feels empowering, whereas putting ten things on a list makes you feel defeated.",
+      "session_id": [
+        "D4"
+      ],
+      "clue": [
+        "D4:4",
+        "D4:5"
+      ]
+    },
+    {
+      "point": "VS",
+      "question": "Which image shows a to-do list?",
+      "answer": "D4:IMG_001",
+      "session_id": [
+        "D4"
+      ],
+      "clue": [
+        "D4:4"
+      ]
+    },
+    {
+      "point": "MR",
+      "question": "What alternative was suggested instead of doom-scrolling between tasks?",
+      "answer": "Try stretching or a two-minute walk instead—it clears your head faster. Tea breaks are also perfect because they're calming but not distracting like scrolling on your phone.",
+      "session_id": [
+        "D4"
+      ],
+      "clue": [
+        "D4:6",
+        "D4:7"
+      ]
+    },
+    {
+      "point": "KR",
+      "question": "What is Chloe's planned gentle start for her new routine?",
+      "answer": "A small reset with clean desk, tea, and one priority.",
+      "session_id": [
+        "D4"
+      ],
+      "clue": [
+        "D4:11"
+      ]
+    },
+    {
+      "point": "AR",
+      "question": "What book is Chloe currently reading?",
+      "answer": "Not mentioned.",
+      "session_id": [
+        "D4"
+      ],
+      "clue": []
+    },
+    {
+      "point": "AR",
+      "question": "Did Chloe use any specific study apps or productivity tools?",
+      "answer": "Not mentioned.",
+      "session_id": [
+        "D4"
+      ],
+      "clue": []
+    },
+    {
+      "point": "CD",
+      "question": "Does it contradict the conversation to say that Chloe always applies a heavy amount of perfume intentionally?",
+      "answer": "Yes.",
+      "session_id": [
+        "D5"
+      ],
+      "clue": [
+        "D5:1",
+        "D5:4",
+        "D5:5"
+      ]
+    },
+    {
+      "point": "FR",
+      "question": "What are the user's main concerns about the perfume they sprayed?",
+      "answer": "The user is concerned about the strong smell, how to reduce it, the appropriate amount of perfume to use, the duration of the strong smell, whether it will be a problem in a meeting, if they should change the perfume, how to choose a suitable perfume, proper storage of perfume, and potential skin irritation from the perfume.",
+      "session_id": [
+        "D5"
+      ],
+      "clue": [
+        "D5:1",
+        "D5:5",
+        "D5:6",
+        "D5:7",
+        "D5:8",
+        "D5:9",
+        "D5:10",
+        "D5:12"
+      ]
+    },
+    {
+      "point": "VS",
+      "question": "Which picture shown is about a meeting room?",
+      "answer": "D5:IMG_002",
+      "session_id": [
+        "D5"
+      ],
+      "clue": [
+        "D5:7"
+      ]
+    },
+    {
+      "point": "MR",
+      "question": "Based on the conversation, what steps can the user take to make the perfume smell less strong when outside?",
+      "answer": "The user can walk in an open area with more air circulation to help dissipate the scent. Avoiding confined spaces can also reduce the intensity of the smell.",
+      "session_id": [
+        "D5"
+      ],
+      "clue": [
+        "D5:3"
+      ]
+    },
+    {
+      "point": "AR",
+      "question": "Based on the conversation, would the user use a perfume with a very high concentration of essential oils if they are concerned about the strong smell?",
+      "answer": "Not mentioned.",
+      "session_id": [
+        "D5"
+      ],
+      "clue": []
+    },
+    {
+      "point": "TR",
+      "question": "Did Chloe experience the perfume mishap before she decided to refresh her room?",
+      "answer": "Yes.",
+      "session_id": [
+        "D5",
+        "D6"
+      ],
+      "clue": [
+        "D5:1",
+        "D6:1"
+      ]
+    },
+    {
+      "point": "MR",
+      "question": "What desk organization method was recommended, and why is it effective?",
+      "answer": "Clear everything off the desk first to give you a clean canvas. It's very satisfying, and then you only return what you truly need.",
+      "session_id": [
+        "D6"
+      ],
+      "clue": [
+        "D6:2",
+        "D6:3"
+      ]
+    },
+    {
+      "point": "VS",
+      "question": "Which image shows a candle on a table? Only return the image_id of the image.",
+      "answer": "D6:IMG_001",
+      "session_id": [
+        "D6"
+      ],
+      "clue": [
+        "D6:5"
+      ]
+    },
+    {
+      "point": "MR",
+      "question": "Why are clear storage boxes recommended over regular boxes?",
+      "answer": "Clear boxes are great because you see what's inside without digging. Adding labels makes everything feel intentional and organized.",
+      "session_id": [
+        "D6"
+      ],
+      "clue": [
+        "D6:9",
+        "D6:10"
+      ]
+    },
+    {
+      "point": "VS",
+      "question": "Which image shows the pothos plant that Chloe is considering?",
+      "answer": "D6:IMG_002",
+      "session_id": [
+        "D6"
+      ],
+      "clue": [
+        "D6:14"
+      ]
+    },
+    {
+      "point": "TTL",
+      "question": "What specific species of plant is shown in the provided image?",
+      "question_image": "../image/Fashion_Personal_Care_Lifestyle_Shopping/QA_IMG_001.jpg",
+      "answer": "Pothos",
+      "session_id": [
+        "D6"
+      ],
+      "clue": [
+        "D6:14"
+      ],
+      "image_caption": "Green leafy houseplant with variegated leaves growing densely from a smooth white pot, placed on a white surface against a plain light-colored wall in a minimal indoor setting."
+    },
+    {
+      "point": "VS",
+      "question": "Please search for all photos of the same plant species as this image shared in the conversation.",
+      "question_image": "../image/Fashion_Personal_Care_Lifestyle_Shopping/QA_IMG_002.jpg",
+      "answer": "D6:IMG_002",
+      "session_id": [
+        "D6"
+      ],
+      "clue": [
+        "D6:14"
+      ],
+      "image_caption": "Green leafy houseplant with broad, slightly variegated leaves growing densely from a smooth white pot, placed on a white surface against a plain light-colored wall."
+    },
+    {
+      "point": "MR",
+      "question": "Why was a pothos plant recommended for Chloe's room?",
+      "answer": "Pothos plants are low-maintenance—they're the superheroes of houseplants because they never die. Even a small one can brighten a room.",
+      "session_id": [
+        "D6"
+      ],
+      "clue": [
+        "D6:13",
+        "D6:14"
+      ]
+    },
+    {
+      "point": "KR",
+      "question": "What previous issue led Chloe to want to refresh her room?",
+      "answer": "After the perfume mishap, Chloe suddenly felt like refreshing her whole room.",
+      "session_id": [
+        "D6"
+      ],
+      "clue": [
+        "D6:1"
+      ]
+    },
+    {
+      "point": "TR",
+      "question": "When did Chloe plan to clean her room? Return in the format YYYY-MM-DD.",
+      "answer": "2024-09-05",
+      "session_id": [
+        "D6"
+      ],
+      "clue": [
+        "D6:1"
+      ]
+    },
+    {
+      "point": "AR",
+      "question": "Did Chloe mention painting her walls during this room refresh?",
+      "answer": "Not mentioned.",
+      "session_id": [
+        "D6"
+      ],
+      "clue": []
+    },
+    {
+      "point": "TR",
+      "question": "Which came first: Chloe seeking advice on styling casual outfits or Chloe choosing a birthday gift for Jenny?",
+      "answer": "She sought styling advice earlier.",
+      "session_id": [
+        "D2",
+        "D7"
+      ],
+      "clue": [
+        "D2:1",
+        "D2:25",
+        "D7:1"
+      ]
+    },
+    {
+      "point": "FR",
+      "question": "What is the name of the friend the user wants to give a birthday gift to?",
+      "answer": "Jenny",
+      "session_id": [
+        "D7"
+      ],
+      "clue": [
+        "D7:1"
+      ]
+    },
+    {
+      "point": "TR",
+      "question": "Did Chloe look at the green dress before picking a matching winter scarf for Jenny?",
+      "answer": "Yes.",
+      "session_id": [
+        "D7"
+      ],
+      "clue": [
+        "D7:7",
+        "D7:11"
+      ]
+    },
+    {
+      "point": "FR",
+      "question": "What birthday gifts did the user discuss?",
+      "answer": "Lipstick, dress, scarf, Toy Rabbit, birthday cake.",
+      "session_id": [
+        "D7"
+      ],
+      "clue": [
+        "D7:3",
+        "D7:7",
+        "D7:9",
+        "D7:11",
+        "D7:12",
+        "D7:13"
+      ]
+    },
+    {
+      "point": "AR",
+      "question": "What lipstick shade does Jenny usually wear?",
+      "answer": "Not mentioned.",
+      "session_id": [
+        "D7"
+      ],
+      "clue": []
+    },
+    {
+      "point": "KR",
+      "question": "What did the user finally decide on as the birthday gift?",
+      "answer": "The green dress and burgundy scarf.",
+      "session_id": [
+        "D7"
+      ],
+      "clue": [
+        "D7:7",
+        "D7:11",
+        "D7:13"
+      ]
+    },
+    {
+      "point": "VS",
+      "question": "Please help me search for the picture of the cute toy.",
+      "answer": "D7:IMG_004",
+      "session_id": [
+        "D7"
+      ],
+      "clue": [
+        "D7:12"
+      ]
+    },
+    {
+      "point": "AR",
+      "question": "What did Chloe get her mom for her birthday last year?",
+      "answer": "Not mentioned.",
+      "session_id": [
+        "D7"
+      ],
+      "clue": []
+    },
+    {
+      "point": "VS",
+      "question": "In which of the images that the user looked at is the necklace planned as a gift?",
+      "answer": "D8:IMG_003",
+      "session_id": [
+        "D8"
+      ],
+      "clue": [
+        "D8:6"
+      ]
+    },
+    {
+      "point": "MR",
+      "question": "What is the first candidate gift Chloe mentioned for her mom?",
+      "answer": "The book.",
+      "session_id": [
+        "D8"
+      ],
+      "clue": [
+        "D8:2"
+      ]
+    },
+    {
+      "point": "FR",
+      "question": "What two categories of autumn/winter clothing did Chloe consider purchasing?",
+      "answer": "Collared Luxe Faux Fur Jackets and Cowl Neck Fisherman Sweaters.",
+      "session_id": [
+        "D9"
+      ],
+      "clue": [
+        "D9:2",
+        "D9:7"
+      ]
+    },
+    {
+      "point": "VS",
+      "question": "Which image shows the first burgundy faux fur jacket with black collar?",
+      "answer": "D9:IMG_001",
+      "session_id": [
+        "D9"
+      ],
+      "clue": [
+        "D9:3"
+      ]
+    },
+    {
+      "point": "VR",
+      "question": "How many Collared Luxe Faux Fur Jackets did Chloe view? Please answer using an Arabic numeral (e.g., “2” instead of “Two”).",
+      "answer": "4",
+      "session_id": [
+        "D9"
+      ],
+      "clue": [
+        "D9:3",
+        "D9:4",
+        "D9:5",
+        "D9:6"
+      ]
+    },
+    {
+      "point": "TTL",
+      "question": "According to the conversation, what category is the clothing in the picture?",
+      "question_image": "../image/Fashion_Personal_Care_Lifestyle_Shopping/QA_IMG_003.jpg",
+      "answer": "Collared Luxe Faux Fur Jacket",
+      "session_id": [
+        "D9"
+      ],
+      "clue": [
+        "D9:3",
+        "D9:4",
+        "D9:5",
+        "D9:6"
+      ],
+      "image_caption": "Woman with straight dark hair stands against a plain light-colored wall, wearing a light beige faux fur coat draped over her shoulders, a white blouse with decorative details, and a light gray textured skirt. Her arms are crossed loosely in front of her body, and she looks slightly downward. A pale upholstered chair or furniture edge is partially visible on the left side of the frame. No prominent text is visible in the scene."
+    },
+    {
+      "point": "TTL",
+      "question": "According to the conversation, what category is the clothing in the picture?",
+      "question_image": "../image/Fashion_Personal_Care_Lifestyle_Shopping/QA_IMG_004.jpg",
+      "answer": "Collared Luxe Faux Fur Jacket",
+      "session_id": [
+        "D9"
+      ],
+      "clue": [
+        "D9:3",
+        "D9:4",
+        "D9:5",
+        "D9:6"
+      ],
+      "image_caption": "Woman wearing a long black belted coat with a large textured fur-like collar, standing against a plain neutral background. She has long wavy blonde hair, a black turtleneck underneath the coat, and holds a black handbag with metallic details in her left hand."
+    },
+    {
+      "point": "TTL",
+      "question": "According to the conversation, what category is the clothing in the picture?",
+      "question_image": "../image/Fashion_Personal_Care_Lifestyle_Shopping/QA_IMG_005.jpg",
+      "answer": "Collared Luxe Faux Fur Jacket",
+      "session_id": [
+        "D9"
+      ],
+      "clue": [
+        "D9:3",
+        "D9:4",
+        "D9:5",
+        "D9:6"
+      ],
+      "image_caption": "Woman with straight, shoulder-length dark hair stands against a plain light-colored wall, wearing a light beige faux fur coat draped over a white blouse and a light gray textured skirt, with arms loosely folded."
+    },
+    {
+      "point": "TTL",
+      "question": "According to the conversation, what category is the clothing in the picture?",
+      "question_image": "../image/Fashion_Personal_Care_Lifestyle_Shopping/QA_IMG_006.jpg",
+      "answer": "Collared Luxe Faux Fur Jacket",
+      "session_id": [
+        "D9"
+      ],
+      "clue": [
+        "D9:3",
+        "D9:4",
+        "D9:5",
+        "D9:6"
+      ],
+      "image_caption": "Young woman with long wavy brown hair stands against a plain light background, holding the front of a dark fur coat with a lighter fur collar closed around her neck, facing the camera and smiling slightly."
+    },
+    {
+      "point": "TTL",
+      "question": "According to the conversation, what category is the clothing in the picture?",
+      "question_image": "../image/Fashion_Personal_Care_Lifestyle_Shopping/QA_IMG_007.jpg",
+      "answer": "Collared Luxe Faux Fur Jacket",
+      "session_id": [
+        "D9"
+      ],
+      "clue": [
+        "D9:3",
+        "D9:4",
+        "D9:5",
+        "D9:6"
+      ],
+      "image_caption": "Woman standing against a plain light background, wearing a dark long-sleeve coat with a large brown faux fur collar over a white top. She has long, wavy brown hair and neutral expression, with one hand relaxed at her side. She is also wearing light blue distressed jeans. No visible text in the scene."
+    },
+    {
+      "point": "VR",
+      "question": "How many Cowl Neck Fisherman Sweaters did Chloe view? Please answer using an Arabic numeral (e.g., “2” instead of “Two”).",
+      "answer": "6",
+      "session_id": [
+        "D9"
+      ],
+      "clue": [
+        "D9:8",
+        "D9:9",
+        "D9:10",
+        "D9:11",
+        "D9:12",
+        "D9:13"
+      ]
+    },
+    {
+      "point": "TTL",
+      "question": "According to the conversation, what category is the clothing in the picture?",
+      "question_image": "../image/Fashion_Personal_Care_Lifestyle_Shopping/QA_IMG_008.jpg",
+      "answer": "Cowl Neck Fisherman Sweater",
+      "session_id": [
+        "D9"
+      ],
+      "clue": [
+        "D9:8",
+        "D9:9",
+        "D9:10",
+        "D9:11",
+        "D9:12",
+        "D9:13"
+      ],
+      "image_caption": "Young woman with long red hair wearing a chunky cream knit poncho and dark long-sleeve top stands outdoors beside a stone wall covered in ivy, holding onto the foliage. Green grass and a blurred landscape appear in the background."
+    },
+    {
+      "point": "TTL",
+      "question": "According to the conversation, what category is the clothing in the picture?",
+      "question_image": "../image/Fashion_Personal_Care_Lifestyle_Shopping/QA_IMG_009.jpg",
+      "answer": "Cowl Neck Fisherman Sweater",
+      "session_id": [
+        "D9"
+      ],
+      "clue": [
+        "D9:8",
+        "D9:9",
+        "D9:10",
+        "D9:11",
+        "D9:12",
+        "D9:13"
+      ],
+      "image_caption": "Woman with wavy blonde hair stands barefoot against a beige wall, wearing a long, chunky gray turtleneck sweater layered over a white shirt and loose, cuffed blue jeans. Her hands rest casually at her sides as she faces the camera in a relaxed pose. No visible text in the scene."
+    },
+    {
+      "point": "TTL",
+      "question": "According to the conversation, what category is the clothing in the picture?",
+      "question_image": "../image/Fashion_Personal_Care_Lifestyle_Shopping/QA_IMG_010.jpg",
+      "answer": "Cowl Neck Fisherman Sweater",
+      "session_id": [
+        "D9"
+      ],
+      "clue": [
+        "D9:8",
+        "D9:9",
+        "D9:10",
+        "D9:11",
+        "D9:12",
+        "D9:13"
+      ],
+      "image_caption": "Young woman with long brown hair wearing a gray chunky knit turtleneck sweater and light blue jeans, standing against a plain white background, facing the camera with one hand touching the sweater collar and the other arm lowered."
+    },
+    {
+      "point": "TTL",
+      "question": "According to the conversation, what category is the clothing in the picture?",
+      "question_image": "../image/Fashion_Personal_Care_Lifestyle_Shopping/QA_IMG_011.jpg",
+      "answer": "Cowl Neck Fisherman Sweater",
+      "session_id": [
+        "D9"
+      ],
+      "clue": [
+        "D9:8",
+        "D9:9",
+        "D9:10",
+        "D9:11",
+        "D9:12",
+        "D9:13"
+      ],
+      "image_caption": "Young woman with blond hair in a side braid stands outdoors with arms crossed, wearing a long beige cable‑knit turtleneck sweater and dark pants. She is positioned near a calm river or pond, with blurred trees and brownish foliage in the background, suggesting a cool or autumn setting."
+    },
+    {
+      "point": "TTL",
+      "question": "According to the conversation, what category is the clothing in the picture?",
+      "question_image": "../image/Fashion_Personal_Care_Lifestyle_Shopping/QA_IMG_012.jpg",
+      "answer": "Cowl Neck Fisherman Sweater",
+      "session_id": [
+        "D9"
+      ],
+      "clue": [
+        "D9:8",
+        "D9:9",
+        "D9:10",
+        "D9:11",
+        "D9:12",
+        "D9:13"
+      ],
+      "image_caption": "Woman standing against a plain white background, wearing a loose mustard-yellow knit turtleneck sweater, black shiny leggings, and black lace-up high-heeled sandals. She has long straight brown hair and faces forward with one hand touching the collar of her sweater and one leg slightly bent."
+    },
+    {
+      "point": "TTL",
+      "question": "According to the conversation, what category is the clothing in the picture?",
+      "question_image": "../image/Fashion_Personal_Care_Lifestyle_Shopping/QA_IMG_013.jpg",
+      "answer": "Cowl Neck Fisherman Sweater",
+      "session_id": [
+        "D9"
+      ],
+      "clue": [
+        "D9:8",
+        "D9:9",
+        "D9:10",
+        "D9:11",
+        "D9:12",
+        "D9:13"
+      ],
+      "image_caption": "Woman standing against a plain light background, wearing a long-sleeve gray cowl-neck sweater and blue jeans. She faces forward with a slight smile, arms relaxed at her sides, hair loose."
+    },
+    {
+      "point": "MR",
+      "question": "Why was the camel cable-knit cowl neck sweater recommended?",
+      "answer": "It's classic, warm, and extremely versatile. The rich texture and neutral color make it great for everyday wear. It goes with almost anything and feels timeless—an easy everyday winter staple that won't go out of style.",
+      "session_id": [
+        "D9"
+      ],
+      "clue": [
+        "D9:8",
+        "D9:15",
+        "D9:16"
+      ]
+    },
+    {
+      "point": "KR",
+      "question": "Which specific items did Chloe finally decide to purchase?",
+      "answer": "D9:IMG_001, D9:IMG_005",
+      "session_id": [
+        "D9"
+      ],
+      "clue": [
+        "D9:3",
+        "D9:8",
+        "D9:18"
+      ]
+    },
+    {
+      "point": "VS",
+      "question": "Which image shows a snowy day from last year?",
+      "answer": "D9:IMG_011",
+      "session_id": [
+        "D9"
+      ],
+      "clue": [
+        "D9:20"
+      ]
+    },
+    {
+      "point": "AR",
+      "question": "Did Chloe purchase winter gloves or scarves during the shopping session?",
+      "answer": "Not mentioned.",
+      "session_id": [
+        "D9"
+      ],
+      "clue": []
+    }
+  ]
+}

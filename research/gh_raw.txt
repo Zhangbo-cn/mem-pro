@@ -1,0 +1,16 @@
+letta-ai/letta	HTTP200	full_name=letta-ai/letta	stars=25119	forks=2642	open_issues=0	lang=None	license=Apache-2.0	archived=False	created=2023-10-11	pushed=2026-09-10
+mem0ai/mem0	HTTP200	full_name=mem0ai/mem0	stars=67115	forks=7890	open_issues=822	lang=Python	license=Apache-2.0	archived=False	created=2023-06-20	pushed=2026-10-12
+getzep/zep	HTTP200	full_name=getzep/zep	stars=4958	forks=653	open_issues=39	lang=Python	license=Apache-2.0	archived=False	created=2023-04-29	pushed=2026-10-12
+getzep/graphiti	HTTP200	full_name=getzep/graphiti	stars=31710	forks=3263	open_issues=471	lang=Python	license=Apache-2.0	archived=False	created=2024-08-08	pushed=2026-10-13
+topoteretes/cognee	HTTP200	full_name=topoteretes/cognee	stars=32182	forks=3342	open_issues=696	lang=Python	license=Apache-2.0	archived=False	created=2023-08-16	pushed=2026-10-13
+memodb-io/memobase	HTTP200	full_name=memodb-io/memobase	stars=2932	forks=239	open_issues=34	lang=Python	license=Apache-2.0	archived=False	created=2024-09-03	pushed=2026-01-11
+agiresearch/A-mem	HTTP200	full_name=agiresearch/A-mem	stars=1200	forks=123	open_issues=20	lang=Python	license=MIT	archived=False	created=2025-02-25	pushed=2025-12-12
+OSU-NLP-Group/HippoRAG	HTTP200	full_name=OSU-NLP-Group/HippoRAG	stars=4059	forks=437	open_issues=7	lang=Python	license=MIT	archived=False	created=2024-05-23	pushed=2026-10-06
+parthsarthi03/raptor	HTTP200	full_name=parthsarthi03/raptor	stars=1768	forks=235	open_issues=44	lang=Python	license=MIT	archived=False	created=2024-02-27	pushed=2024-09-03
+Mirix-AI/MIRIX	HTTP200	full_name=Mirix-AI/MIRIX	stars=3451	forks=273	open_issues=45	lang=Python	license=Apache-2.0	archived=False	created=2025-04-11	pushed=2026-10-08
+MemTensor/MemOS	HTTP200	full_name=MemTensor/MemOS	stars=11850	forks=1077	open_issues=138	lang=TypeScript	license=Apache-2.0	archived=False	created=2025-07-06	pushed=2026-10-10
+NevaMind-AI/memU	HTTP200	full_name=NevaMind-AI/memU	stars=14536	forks=1090	open_issues=132	lang=Python	license=NOASSERTION	archived=False	created=2025-07-29	pushed=2026-10-13
+supermemoryai/supermemory	HTTP200	full_name=supermemoryai/supermemory	stars=31204	forks=2748	open_issues=36	lang=TypeScript	license=MIT	archived=False	created=2024-02-27	pushed=2026-10-13
+langchain-ai/langmem	HTTP200	full_name=langchain-ai/langmem	stars=1700	forks=195	open_issues=75	lang=Python	license=MIT	archived=False	created=2025-01-21	pushed=2026-10-02
+neuml/txtai	HTTP200	full_name=neuml/txtai	stars=13014	forks=932	open_issues=20	lang=Python	license=Apache-2.0	archived=False	created=2020-08-09	pushed=2026-10-13
+run-llama/llama_index	HTTP200	full_name=run-llama/llama_index	stars=52478	forks=8334	open_issues=912	lang=Python	license=MIT	archived=False	created=2022-11-02	pushed=2026-10-12

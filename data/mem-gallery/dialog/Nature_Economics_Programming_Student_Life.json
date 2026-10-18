@@ -1,0 +1,3601 @@
+{
+  "character_profile": {
+    "name": "Aiden",
+    "persona_summary": "Aiden is a 20-year-old sophomore majoring in Economics. Outside his academic work, he is deeply passionate about ornithology and botany—he spends his weekends observing local bird species, sketching plants, and reading field guides. Despite being in a non-STEM major, Aiden has recently developed a strong interest in programming and likes to learn Python, data analysis, and basic algorithms in his spare time. He often imagines combining his hobbies with tech, such as building simple tools to track plant growth or visualize bird migration patterns.",
+    "traits": [
+      "observant",
+      "curious",
+      "gentle",
+      "self-motivated",
+      "reflective"
+    ],
+    "conversation_style": "Aiden is a visually-oriented communicator who typically initiates dialogues by sharing photos or code snippets to seek specific feedback. His tone is humble, polite, and earnest, often bridging his interests in nature and programming with economic concepts through reflective analogies. He is open about his academic anxieties, valuing interactions that provide both technical guidance and emotional reassurance to validate his interdisciplinary aspirations."
+  },
+  "multi_session_dialogues": [
+    {
+      "session_id": "D1",
+      "date": "2025-03-02",
+      "dialogues": [
+        {
+          "round": "D1:1",
+          "user": "I went birdwatching along the coast this morning and ended up spotting several albatrosses. I took a bunch of photos—can you help me sort out which species they are?",
+          "assistant": "Of course! Show me the photos you took, and we can go through them one by one."
+        },
+        {
+          "round": "D1:2",
+          "user": "Here’s the first one. This one was gliding low over the water.",
+          "assistant": "This bird has a uniformly dark brown body and wings—classic features of a Black-footed Albatross.",
+          "image_id": [
+            "D1:IMG_001"
+          ],
+          "input_image": [
+            "../image/Nature_Economics_Programming_Student_Life/D1_IMG_001.jpg"
+          ],
+          "image_caption": [
+            "Large brown seabird with long, narrow wings gliding low over a wavy gray ocean surface, wings outstretched and body angled slightly downward."
+          ]
+        },
+        {
+          "round": "D1:3",
+          "user": "And here’s another one I saw swimming near the surface.",
+          "assistant": "The same dark plumage and dark bill—this one is also a Black-footed Albatross.",
+          "image_id": [
+            "D1:IMG_002"
+          ],
+          "input_image": [
+            "../image/Nature_Economics_Programming_Student_Life/D1_IMG_002.jpg"
+          ],
+          "image_caption": [
+            "Large brown seabird with a long, pale beak floating on gently rippled blue ocean water, its body partially submerged and wings folded close to its sides."
+          ]
+        },
+        {
+          "round": "D1:4",
+          "user": "This one circled around for a while before landing again.",
+          "assistant": "Another Black-footed—long narrow wings, dark body, and that subtle white marking around the eye.",
+          "image_id": [
+            "D1:IMG_003"
+          ],
+          "input_image": [
+            "../image/Nature_Economics_Programming_Student_Life/D1_IMG_003.jpg"
+          ],
+          "image_caption": [
+            "Large dark seabird with long, narrow wings and a slightly hooked bill gliding above rippled ocean water, wings extended horizontally over the waves."
+          ]
+        },
+        {
+          "round": "D1:5",
+          "user": "This one looks slightly lighter on the head, but still mostly dark.",
+          "assistant": "Yes, some Black-footed individuals show pale patches on the face, but the overall brown coloration still fits them.",
+          "image_id": [
+            "D1:IMG_004"
+          ],
+          "input_image": [
+            "../image/Nature_Economics_Programming_Student_Life/D1_IMG_004.jpg"
+          ],
+          "image_caption": [
+            "Large seabird with long, narrow wings gliding low over choppy gray ocean water, wings fully extended and body streamlined in side profile."
+          ]
+        },
+        {
+          "round": "D1:6",
+          "user": "This is the last one from the darker group.",
+          "assistant": "Also a Black-footed Albatross. The consistent dark wings and body color are distinctive.",
+          "image_id": [
+            "D1:IMG_005"
+          ],
+          "input_image": [
+            "../image/Nature_Economics_Programming_Student_Life/D1_IMG_005.jpg"
+          ],
+          "image_caption": [
+            "Brown seabird with a pale head floating on greenish water, facing the camera, partially spreading one wing or flipper-like foot as it paddles, creating small splashes and ripples around its body."
+          ]
+        },
+        {
+          "round": "D1:7",
+          "user": "You know, seeing them in person, I didn’t expect Black-footed Albatrosses to look this elegant. They glide so effortlessly.",
+          "assistant": "Absolutely. They're masters of dynamic soaring—using wind gradients above the waves to stay aloft with almost no wing flapping."
+        },
+        {
+          "round": "D1:8",
+          "user": "I noticed they barely flapped at all. They almost looked like kites pulled by the wind.",
+          "assistant": "That's a great observation. Their long, narrow wings are adapted for exactly that—gliding huge distances with minimal energy."
+        },
+        {
+          "round": "D1:9",
+          "user": "After those darker ones, I spotted some lighter birds. Here's the first one standing on land.",
+          "assistant": "This is a Laysan Albatross—white head and chest, dark wings, and a pale bill. A very different look from the Black-footed.",
+          "image_id": [
+            "D1:IMG_006"
+          ],
+          "input_image": [
+            "../image/Nature_Economics_Programming_Student_Life/D1_IMG_006.jpg"
+          ],
+          "image_caption": [
+            "Large seabird with long, narrow wings, white body, and dark wingtips gliding in a clear blue sky with scattered white clouds."
+          ]
+        },
+        {
+          "round": "D1:10",
+          "user": "Here’s another one resting near the bushes.",
+          "assistant": "Definitely Laysan again. The clean white face and the darker eye area are classic features.",
+          "image_id": [
+            "D1:IMG_007"
+          ],
+          "input_image": [
+            "../image/Nature_Economics_Programming_Student_Life/D1_IMG_007.jpg"
+          ],
+          "image_caption": [
+            "Large seabird with long, outstretched wings skimming low over rippled blue water, wingtips nearly touching the surface and small splashes trailing behind."
+          ]
+        },
+        {
+          "round": "D1:11",
+          "user": "It's interesting—when they sit still, the difference looks obvious. But in flight, I second-guessed myself so many times.",
+          "assistant": "That's very normal. At a distance, and especially against the glare of the ocean, their silhouettes can overlap quite a bit."
+        },
+        {
+          "round": "D1:12",
+          "user": "Here’s another one floating on the water. The body looks lighter, though.",
+          "assistant": "Yes, that contrast—white body, dark wings—is textbook Laysan.",
+          "image_id": [
+            "D1:IMG_008"
+          ],
+          "input_image": [
+            "../image/Nature_Economics_Programming_Student_Life/D1_IMG_008.jpg"
+          ],
+          "image_caption": [
+            "Large white seabird with dark wings, a long pale pink bill, and webbed feet standing on green grass in front of a rough tree trunk."
+          ]
+        },
+        {
+          "round": "D1:13",
+          "user": "This one was just relaxing on the grass. Pretty calm bird.",
+          "assistant": "Laysans often look more serene on land. The white plumage also makes their expressions easy to notice.",
+          "image_id": [
+            "D1:IMG_009"
+          ],
+          "input_image": [
+            "../image/Nature_Economics_Programming_Student_Life/D1_IMG_009.jpg"
+          ],
+          "image_caption": [
+            "Large white-and-brown seabird, likely an albatross, resting on the ground in sunlight, with folded wings and head upright, surrounded by dense green leafy bushes and patches of grass and soil."
+          ]
+        },
+        {
+          "round": "D1:14",
+          "user": "And here’s the last one. The bill looks a bit warmer in color.",
+          "assistant": "Exactly—Laysan Albatrosses usually have a pinkish or yellowish tint on the bill. That’s an excellent field mark.",
+          "image_id": [
+            "D1:IMG_010"
+          ],
+          "input_image": [
+            "../image/Nature_Economics_Programming_Student_Life/D1_IMG_010.jpg"
+          ],
+          "image_caption": [
+            "Two large seabirds float close together on calm gray water, one mostly white with dark wings and an orange-tipped bill, the other darker brown and partially obscured behind it."
+          ]
+        },
+        {
+          "round": "D1:15",
+          "user": "So, in the air or on water, what makes these two species so hard to distinguish?",
+          "assistant": "Mainly the distance and lighting. Both species are large, long-winged seabirds, and when the bright white parts of a Laysan are shaded or not visible, their profiles can look surprisingly similar."
+        },
+        {
+          "round": "D1:16",
+          "user": "Yeah, sometimes the white chest of the Laysan wasn’t visible from my angle at all.",
+          "assistant": "Exactly. When they're banking or facing away, the darker upper wings dominate your view, compressing the perceived color difference."
+        },
+        {
+          "round": "D1:17",
+          "user": "I also noticed that on choppy water, their bodies sort of blend into the waves' reflections.",
+          "assistant": "That's a very sharp observation. Water reflection and backlighting can flatten color contrast, making species appear closer in tone than they are."
+        },
+        {
+          "round": "D1:18",
+          "user": "So what’s the most reliable quick check when identifying them at a distance?",
+          "assistant": "The fastest clues are: (1) **Head color** — dark (Black-footed) vs. white (Laysan). (2) **Bill shade** — dark vs. pale. (3) **Body contrast** — uniform brown vs. strong dark–light contrast."
+        },
+        {
+          "round": "D1:19",
+          "user": "Makes sense. I guess practice is the only way to get quicker at this.",
+          "assistant": "Practice and good reference photos like the ones you took! Reviewing your shots afterward is one of the best learning methods."
+        },
+        {
+          "round": "D1:20",
+          "user": "I’m glad I brought my camera today. Watching them glide reminded me why I love coastal birding so much.",
+          "assistant": "And it really shows—you captured both species beautifully. With what you’ve learned today, spotting albatrosses will only get easier from here."
+        },
+        {
+          "round": "D1:21",
+          "user": "Thanks! I think next time I’ll try to record some of their flight patterns too.",
+          "assistant": "Great idea—motion can reveal species-specific gliding angles and banking behavior."
+        },
+        {
+          "round": "D1:22",
+          "user": "Alright, I’m feeling much more confident now. Thanks for walking through all the photos with me.",
+          "assistant": "Anytime! It’s exciting to see your bird ID skills improve session by session."
+        }
+      ]
+    },
+    {
+      "session_id": "D2",
+      "date": "2025-03-09",
+      "dialogues": [
+        {
+          "round": "D2:1",
+          "user": "I went to a weekend family gathering today. Before the meal started, my aunt invited me to help with the flower arrangements. Here’s the big centerpiece she worked on.",
+          "assistant": "Wow, that's a vibrant arrangement! I see orange roses, lilies, chrysanthemums, and even some eucalyptus leaves mixed in. It looks very lively.",
+          "image_id": [
+            "D2:IMG_001"
+          ],
+          "input_image": [
+            "../image/Nature_Economics_Programming_Student_Life/D2_IMG_001.jpg"
+          ],
+          "image_caption": [
+            "Large floral arrangement on a table featuring orange roses, red roses, yellow lilies, small dark red flowers, white blossoms, green eucalyptus leaves, and assorted greenery. People stand around the table, partially visible, observing the display."
+          ]
+        },
+        {
+          "round": "D2:2",
+          "user": "I tried making a smaller bouquet myself. This was my first attempt.",
+          "assistant": "Not bad at all! The hydrangeas at the base give it nice volume, and the reddish-orange chrysanthemums add warmth. The contrast works well.",
+          "image_id": [
+            "D2:IMG_002"
+          ],
+          "input_image": [
+            "../image/Nature_Economics_Programming_Student_Life/D2_IMG_002.jpg"
+          ],
+          "image_caption": [
+            "Person arranging a bouquet of white, orange, and red flowers on a table covered with brown plastic, surrounded by cut stems and petals. Nearby are a carved orange pumpkin, a speckled gourd, metal cans, pruning shears, and a plastic bag filled with pumpkin innards. The scene is on an outdoor patio with a white chair, brick wall, and street visible in the background."
+          ]
+        },
+        {
+          "round": "D2:3",
+          "user": "My aunt said my bouquet looked a little 'top-heavy', though. I’m still figuring out how to balance shapes.",
+          "assistant": "That’s normal for beginners. A common tip is to distribute taller or denser blooms toward the center and lower-weight filler flowers around the edges for structure."
+        },
+        {
+          "round": "D2:4",
+          "user": "After arranging the flowers, we went outside to set up the food table. They decorated with sunflowers too.",
+          "assistant": "This setup looks warm and festive! The sunflower buckets add a cheerful touch, and the spread looks delicious.",
+          "image_id": [
+            "D2:IMG_003"
+          ],
+          "input_image": [
+            "../image/Nature_Economics_Programming_Student_Life/D2_IMG_003.jpg"
+          ],
+          "image_caption": [
+            "Outdoor buffet table at an event, covered with a white cloth and arranged with sliced meats, cheeses, bread in a basket, chips, condiments, and salads. Large metal vases of sunflowers and mixed flowers decorate the table. A woman serves herself food while several people stand and talk in the background. The setting is an open paved area with chairs, tables, and hanging white paper lanterns."
+          ]
+        },
+        {
+          "round": "D2:5",
+          "user": "My mom said the sunflowers help give the table a 'harvest season' vibe even though it's spring.",
+          "assistant": "Sunflowers do have that effect—they add a rustic, welcoming look no matter the season. They pair surprisingly well with buffet-style gatherings."
+        },
+        {
+          "round": "D2:6",
+          "user": "While we were eating, my cousin arrived with his Norfolk terrier. Here's the first one.",
+          "assistant": "What a sweet face! This Norfolk terrier has that signature wiry coat and expressive eyes. Very adorable.",
+          "image_id": [
+            "D2:IMG_004"
+          ],
+          "input_image": [
+            "../image/Nature_Economics_Programming_Student_Life/D2_IMG_004.jpg"
+          ],
+          "image_caption": [
+            "Small, shaggy brown and black dog sitting on a gray stone-paved surface, looking directly at the camera with ears slightly folded and fur covering part of its eyes."
+          ]
+        },
+        {
+          "round": "D2:7",
+          "user": "He said this one is the older dog—calmer and more patient with kids.",
+          "assistant": "I can see that. Norfolk terriers can be quite gentle as they mature, even though they keep their playful spirit."
+        },
+        {
+          "round": "D2:8",
+          "user": "Then his sister showed up with her own Norfolk terrier. This one's younger.",
+          "assistant": "Ah, this one looks a little more energetic already—those bright, alert eyes!",
+          "image_id": [
+            "D2:IMG_005"
+          ],
+          "input_image": [
+            "../image/Nature_Economics_Programming_Student_Life/D2_IMG_005.jpg"
+          ],
+          "image_caption": [
+            "Small brown and black terrier-mix dog lying on a person’s lap, looking up with wide, dark eyes. The person, wearing a striped long-sleeve shirt and jeans, gently cradles the dog with both arms. The setting appears indoors with a neutral background."
+          ]
+        },
+        {
+          "round": "D2:9",
+          "user": "Here’s another angle of the younger one. He kept rolling around under the table.",
+          "assistant": "Haha, classic terrier behavior. Curious, playful, and constantly exploring every corner of the house.",
+          "image_id": [
+            "D2:IMG_006"
+          ],
+          "input_image": [
+            "../image/Nature_Economics_Programming_Student_Life/D2_IMG_006.jpg"
+          ],
+          "image_caption": [
+            "Small black and brown puppy lying on a beige carpet beside a dark wooden table, resting its head near one of the table’s legs, with stacked magazines on the lower shelf in the background."
+          ]
+        },
+        {
+          "round": "D2:10",
+          "user": "He kept trying to steal napkins from everyone. But honestly he was really cute doing it.",
+          "assistant": "That sounds exactly like a young Norfolk terrier—mischievous but charming. Hard to be mad at them for long!"
+        },
+        {
+          "round": "D2:11",
+          "user": "My relatives joked that between the flowers and the dogs, I looked like I was doing a field study the whole afternoon.",
+          "assistant": "Well, in a way you were—flowers and terriers are both great subjects for someone who loves plants and animals like you."
+        },
+        {
+          "round": "D2:12",
+          "user": "I actually spent a few minutes comparing the bouquet shapes at the tables. Some were round, some were triangular. Is there a rule for that?",
+          "assistant": "There are common styles: (1) **Round arrangements** for softer, balanced looks; (2) **Triangular or fan-shaped** for centerpieces meant to draw attention upward; (3) **Asymmetric styles** for modern, natural-feeling arrangements. Your aunt’s big centerpiece looks like a modified fan shape."
+        },
+        {
+          "round": "D2:13",
+          "user": "That makes sense. I feel like the triangular ones look more formal, while round ones look cozier.",
+          "assistant": "Exactly—triangular shapes feel structured, while round shapes feel more approachable and friendly. Great observation."
+        },
+        {
+          "round": "D2:14",
+          "user": "During dinner we talked about summer plans. My cousins were surprised I'm still self-learning Python on weekends.",
+          "assistant": "Makes sense! Not many economics majors spend their evenings writing code. But your combination of interests actually gives you a unique perspective."
+        },
+        {
+          "round": "D2:15",
+          "user": "I told them I was thinking about building a tiny program to catalog bird species and plant notes from my walks.",
+          "assistant": "That sounds perfect—your own little naturalist database. Even a simple script with tags and categories would be super useful."
+        },
+        {
+          "round": "D2:16",
+          "user": "Overall it was a pretty relaxing family day—flowers, food, and dogs everywhere.",
+          "assistant": "Honestly that sounds wonderful. A great balance of your hobbies and family time."
+        },
+        {
+          "round": "D2:17",
+          "user": "Next time I might bring my camera. The Norfolk terriers would make great subjects.",
+          "assistant": "Definitely! Their expressive faces and playful poses are made for photos."
+        },
+        {
+          "round": "D2:18",
+          "user": "Thanks for going through all this with me. I like reflecting on these little moments.",
+          "assistant": "Anytime! These small experiences tend to become the most meaningful memories later on."
+        }
+      ]
+    },
+    {
+      "session_id": "D3",
+      "date": "2025-03-14",
+      "dialogues": [
+        {
+          "round": "D3:1",
+          "user": "I spent this afternoon practicing some Python plotting. I'm trying to get better at visualizing data for my economics coursework. Here's the first script I wrote today.",
+          "assistant": "Nice! Let me take a look at your code.",
+          "image_id": [
+            "D3:IMG_001"
+          ],
+          "input_image": [
+            "../image/Nature_Economics_Programming_Student_Life/D3_IMG_001.png"
+          ],
+          "image_caption": [
+            "Dark-themed code editor displaying Python file titled “plot.py”. The code imports `matplotlib.pyplot as plt` and defines `def scatter_chart(filename):` with integer lists `x` and `y`, `size = 40`, `color = 'lightgreen'`, and `alpha = 0.5`. The function calls `plt.scatter(x, y, s=size, c=color, alpha=alpha)`, `plt.savefig(filename)`, and `plt.clf()`."
+          ]
+        },
+        {
+          "round": "D3:2",
+          "user": "And this is the scatter plot that the script produced.",
+          "assistant": "This looks clean! The light green color with alpha transparency makes the overlapping points easier to interpret.",
+          "image_id": [
+            "D3:IMG_002"
+          ],
+          "input_image": [
+            "../image/Nature_Economics_Programming_Student_Life/D3_IMG_002.png"
+          ],
+          "image_caption": [
+            "Scatter plot with pale green circular markers distributed across an unlabeled Cartesian grid. The x‑axis ranges from approximately 0 to 20 and the y‑axis from 0 to 50, each marked with evenly spaced tick marks. Data points are scattered without an obvious pattern, some clustered around mid‑range x and higher y values, others near lower or higher extremes on either axis. No labels, legends, or additional text are present."
+          ]
+        },
+        {
+          "round": "D3:3",
+          "user": "I’m wondering—how exactly is a scatter plot useful for economics data?",
+          "assistant": "Scatter plots are essential in economics. They're great for visualizing relationships between two variables, like income vs. consumption, price vs. demand, or inflation vs. unemployment."
+        },
+        {
+          "round": "D3:4",
+          "user": "Yeah, I think I’ll eventually use them for demand curves or maybe plotting productivity against wages.",
+          "assistant": "Exactly! They help reveal patterns like linear trends, clusters, or outliers, which can suggest economic behaviors worth exploring."
+        },
+        {
+          "round": "D3:5",
+          "user": "Here’s another scatter plot I coded. This time I changed the color and the size.",
+          "assistant": "Let me see the script.",
+          "image_id": [
+            "D3:IMG_003"
+          ],
+          "input_image": [
+            "../image/Nature_Economics_Programming_Student_Life/D3_IMG_003.png"
+          ],
+          "image_caption": [
+            "Code editor window with a Python script titled “plot.py” on a dark background. The script imports `matplotlib.pyplot as plt` and defines `scatter_chart(filename)` that sets x and y data lists, point size, color, and alpha, then calls `plt.scatter`, `plt.savefig`, and `plt.clf()`."
+          ]
+        },
+        {
+          "round": "D3:6",
+          "user": "And here’s the output figure.",
+          "assistant": "This orange color really stands out. Good choice for distinguishing multiple datasets within the same notebook.",
+          "image_id": [
+            "D3:IMG_004"
+          ],
+          "input_image": [
+            "../image/Nature_Economics_Programming_Student_Life/D3_IMG_004.png"
+          ],
+          "image_caption": [
+            "Scatter plot with multiple light-orange circular data points distributed across an x-axis ranging from 0 to 20 and a y-axis ranging from 0 to 50. Values cluster around y = 40–48 for x between about 4 and 7, with additional points at lower y-values and higher x-values. The background is white with black axes and tick labels; no axis titles or legend are present."
+          ]
+        },
+        {
+          "round": "D3:7",
+          "user": "I feel like scatter plots are simple, but they’re actually super informative.",
+          "assistant": "Totally. They’re often the first step in exploratory data analysis—quickly helping economists guess whether relationships might be linear, exponential, or unrelated."
+        },
+        {
+          "round": "D3:8",
+          "user": "After that I tried a 3D scatter plot. I’ve never done one before. Here’s the code.",
+          "assistant": "Nice! 3D plots can be very helpful when analyzing multivariable relationships.",
+          "image_id": [
+            "D3:IMG_005"
+          ],
+          "input_image": [
+            "../image/Nature_Economics_Programming_Student_Life/D3_IMG_005.png"
+          ],
+          "image_caption": [
+            "Computer screen displaying a dark-themed code editor with a Python script titled “plot.py.” The code imports `matplotlib.pyplot as plt` and `randint`, defines a function `scatter_3d_chart(filename)` that creates a 3D subplot, generates random `x`, `y`, and `z` coordinates, sets point size, color as “gray,” alpha as 1.0, plots a 3D scatter chart, saves the figure with `plt.savefig(filename)`, and clears it with `plt.clf()`."
+          ]
+        },
+        {
+          "round": "D3:9",
+          "user": "And here’s what the 3D plot looks like.",
+          "assistant": "Great! With three axes, you can compare variables like capital, labor, and output—useful for production function analysis.",
+          "image_id": [
+            "D3:IMG_006"
+          ],
+          "input_image": [
+            "../image/Nature_Economics_Programming_Student_Life/D3_IMG_006.png"
+          ],
+          "image_caption": [
+            "3D scatter plot with gray circular markers distributed across a three‑dimensional grid. The x‑axis in the foreground is marked with numbers from 2.5 to about 17.5, the y‑axis on the right ranges from 0 to a little over 20, and the vertical z‑axis ranges from 0 to about 25. The plot background is light gray with evenly spaced gridlines."
+          ]
+        },
+        {
+          "round": "D3:10",
+          "user": "Yeah! I was thinking it might help me visualize something like a Cobb-Douglas production function someday.",
+          "assistant": "Exactly—economists often rely on 3D surfaces or scatter points to illustrate how changing two inputs affects total output."
+        },
+        {
+          "round": "D3:11",
+          "user": "I also realized 3D plots are a bit harder to interpret. Maybe because rotating the angle mentally is tough.",
+          "assistant": "That’s true. They’re powerful but can be visually overwhelming. That’s why economists often project 3D data back into 2D plots when presenting to others."
+        },
+        {
+          "round": "D3:12",
+          "user": "After that experiment, I switched to line charts. Here's the first line-chart script.",
+          "assistant": "Let me check it out.",
+          "image_id": [
+            "D3:IMG_007"
+          ],
+          "input_image": [
+            "../image/Nature_Economics_Programming_Student_Life/D3_IMG_007.png"
+          ],
+          "image_caption": [
+            "Dark-themed code editor displaying Python file “plot.py”. The code imports `matplotlib.pyplot as plt`, defines `def line_chart(filename):`, sets `x = [1, 3, 4, 7]` and `y = [12, 45, 28, 17]`, calls `plt.plot(x, y, linestyle=':', color='green', linewidth=3)`, then `plt.savefig(filename)` and `plt.clf()` to save and clear the plotted line chart."
+          ]
+        },
+        {
+          "round": "D3:13",
+          "user": "And here’s the chart it generated.",
+          "assistant": "Line charts are ideal for time series—perfect for tracking GDP, inflation, exchange rates, and so on.",
+          "image_id": [
+            "D3:IMG_008"
+          ],
+          "input_image": [
+            "../image/Nature_Economics_Programming_Student_Life/D3_IMG_008.png"
+          ],
+          "image_caption": [
+            "Line graph with a green dotted line connecting four data points: approximately (1, 12), (3, 45), (4, 28), and (7, 17). The x-axis is labeled with values from 1 to 7, and the y-axis ranges from about 10 to 45. The line rises steeply to the peak at x = 3, then declines through the remaining points."
+          ]
+        },
+        {
+          "round": "D3:14",
+          "user": "I like how the dotted green line looks. It feels clean.",
+          "assistant": "Using different line styles is great for comparing multiple economic indicators without overwhelming the viewer."
+        },
+        {
+          "round": "D3:15",
+          "user": "Here’s another script where I plotted two lines together.",
+          "assistant": "Two-line charts are incredibly useful in macroeconomics—for example, plotting inflation vs. interest rates.",
+          "image_id": [
+            "D3:IMG_009"
+          ],
+          "input_image": [
+            "../image/Nature_Economics_Programming_Student_Life/D3_IMG_009.png"
+          ],
+          "image_caption": [
+            "Computer screen displaying a dark-themed code editor with a Python file titled “plot.py”. The script imports `matplotlib.pyplot as plt` and defines `line_chart(filename)` with lists `x`, `y1`, and `y2`, then calls `plt.plot` twice with different styles and colors, followed by `plt.savefig(filename)` and `plt.clf()`."
+          ]
+        },
+        {
+          "round": "D3:16",
+          "user": "And this is the resulting plot.",
+          "assistant": "Nice contrast—thin dashed blue for one series and thick red for the other makes it easy to compare trends.",
+          "image_id": [
+            "D3:IMG_010"
+          ],
+          "input_image": [
+            "../image/Nature_Economics_Programming_Student_Life/D3_IMG_010.png"
+          ],
+          "image_caption": [
+            "Line chart with two overlapping datasets: a thick red solid line from x=1 to 8 descending overall from about 52 to 15, with a peak near x=3 around 37; and a thinner blue dashed line from x=1 to 8 descending from about 45 to 21 then gradually rising to about 28. Axes are unlabeled on a plain white background."
+          ]
+        },
+        {
+          "round": "D3:17",
+          "user": "Line charts feel the most relatable for economics because nearly everything is time-based.",
+          "assistant": "Exactly. Economists love time series—line charts help spot cycles, seasonality, and shocks like recessions."
+        },
+        {
+          "round": "D3:18",
+          "user": "I'm still getting used to the plotting parameters. Sometimes I forget to clear the figure.",
+          "assistant": "plt.clf() is definitely your friend. Without clearing, plots overlap—and that gets chaotic fast!"
+        },
+        {
+          "round": "D3:19",
+          "user": "Do you think it's worth learning seaborn or should I stick with matplotlib for now?",
+          "assistant": "For an economics major, matplotlib is already very powerful. Seaborn adds convenience and prettier defaults—but you don’t need it until you feel comfortable with the basics."
+        },
+        {
+          "round": "D3:20",
+          "user": "I think I'll stick to matplotlib for a bit. Maybe once I start analyzing real datasets from class, I’ll upgrade.",
+          "assistant": "Good idea. When you start handling real economic data—like CPI tables or housing prices—these plotting skills will really shine."
+        },
+        {
+          "round": "D3:21",
+          "user": "Thanks for the encouragement. Learning programming feels slow sometimes, but also pretty fun.",
+          "assistant": "You're doing great! This mix of economics and coding is going to give you a huge advantage in future projects."
+        },
+        {
+          "round": "D3:22",
+          "user": "Alright, that’s all the plots I made today. I’ll try some regressions next time.",
+          "assistant": "Sounds exciting—visualization plus regression modeling is exactly how economists uncover meaningful insights from data."
+        },
+        {
+          "round": "D3:23",
+          "user": "I continued going through the tutorial today and realized there are several exercises at the end. I’m a bit worried I might have written something incorrectly. Could you help me check the code? I’ll show you the first one.",
+          "assistant": "Of course! I’d be happy to help you review the exercises. Go ahead and send me the first piece of code, and we’ll walk through it together."
+        },
+        {
+          "round": "D3:24",
+          "user": "Here’s Exercise 1. It’s my line-chart code. I’m not sure whether it’s written cleanly or if there are any mistakes.",
+          "image_id": [
+            "D3:IMG_011"
+          ],
+          "input_image": [
+            "../image/Nature_Economics_Programming_Student_Life/D3_IMG_011.png"
+          ],
+          "assistant": "I see it. This is your dual line-plot script. The structure looks correct—importing matplotlib, defining x, y1, y2, and calling plot twice. The only thing I’d point out is that both lines use the same color ('blue'). Even with different linewidths, they might be hard to distinguish. You might consider using a different color for the second line.",
+          "image_caption": [
+            "Dark-themed code editor displaying a Python file titled “plot.py”. The script imports `matplotlib.pyplot as plt` and defines a function `line_chart(filename)` with lists `x = [2, 3, 5, 7]`, `y1 = [33, 28, 21, 45]`, and `y2 = [11, 23, 22, 27]`. It plots two blue dashed lines with different linewidths using `plt.plot`, then calls `plt.savefig(filename)` and `plt.clf()`."
+          ]
+        },
+        {
+          "round": "D3:25",
+          "user": "Got it. I thought linewidth alone was enough. Are there suggested conventions for choosing linestyle, color, and linewidth?",
+          "assistant": "A common guideline is: linestyle conveys the type of relationship, color represents category or group, and linewidth emphasizes importance. In economics, when comparing trends—like CPI vs wage growth—you typically use different colors so the reader can distinguish them instantly."
+        },
+        {
+          "round": "D3:26",
+          "user": "Makes sense! Here’s the second exercise, another line chart. I tried to make the two curves more visually distinct.",
+          "image_id": [
+            "D3:IMG_012"
+          ],
+          "input_image": [
+            "../image/Nature_Economics_Programming_Student_Life/D3_IMG_012.png"
+          ],
+          "assistant": "This version is much clearer. The orange–yellow combination gives stronger contrast. One suggestion: both lines use '--'. You could change one to '-.' or ':' so they differ in both color and linestyle.",
+          "image_caption": [
+            "Computer screen with a dark-themed code editor displaying a Python script titled “plot.py”. The code imports `matplotlib.pyplot as plt` and defines a function `line_chart(filename)` that creates x, y1, and y2 lists, plots two dashed lines in orange and yellow with different line widths, saves the figure with `plt.savefig(filename)`, and clears the figure using `plt.clf()`."
+          ]
+        },
+        {
+          "round": "D3:27",
+          "user": "Okay, I’ll refine that later. I also worked on the 3D scatterplot exercises. Can you check whether I set the projection correctly?",
+          "assistant": "Absolutely. Send it over. Mistakes in projection can prevent 3D plots from rendering correctly, so it’s good to double-check."
+        },
+        {
+          "round": "D3:28",
+          "user": "Here’s the first 3D scatterplot version.",
+          "image_id": [
+            "D3:IMG_013"
+          ],
+          "input_image": [
+            "../image/Nature_Economics_Programming_Student_Life/D3_IMG_013.png"
+          ],
+          "assistant": "Looks good. The 'projection=\"3d\"' argument is correctly set, and the subplot initialization is fine. Your n=18 just means fewer points, but there’s no issue with the code. It will render properly.",
+          "image_caption": [
+            "Computer screen with a dark-themed text editor showing Python file “plot.py”. The code imports `matplotlib.pyplot` and `randint`, then defines `scatter_3d_chart(filename)` to create a 3D scatter plot using random `x`, `y`, and `z` values, size 20, red color with alpha 0.5, saves it with `plt.savefig(filename)`, and clears with `plt.clf()`."
+          ]
+        },
+        {
+          "round": "D3:29",
+          "user": "Right, the instructor said these are just syntax exercises. I also made another version with slightly different ranges. Can you compare them?",
+          "assistant": "Sure, go ahead and show me the other version. I’ll compare the structures."
+        },
+        {
+          "round": "D3:30",
+          "user": "Here’s the second 3D version.",
+          "image_id": [
+            "D3:IMG_014"
+          ],
+          "input_image": [
+            "../image/Nature_Economics_Programming_Student_Life/D3_IMG_014.png"
+          ],
+          "assistant": "This version also looks correct. The distribution is a bit more balanced and the code is very clean. Compared to the previous one, it’s slightly sparser but visually clearer. Either version works, but for submitting an exercise, this one might read better.",
+          "image_caption": [
+            "Computer screen displaying a Python file titled “plot.py” with syntax‑highlighted code. The script imports “matplotlib.pyplot as plt” and “randint” from “random”, defines a function “scatter_3d_chart(filename)”, creates a 3D subplot, generates random x, y, z lists, sets size, color “red”, alpha 0.5, plots a 3D scatter chart with `ax.scatter`, saves the figure with `plt.savefig(filename)`, and clears it using `plt.clf()`."
+          ]
+        },
+        {
+          "round": "D3:31",
+          "user": "Awesome! Your explanations are clearer than the tutorial. I’m starting to see how these visualizations apply to economics—scatterplots for price–quantity relationships, line charts for GDP series, and so on.",
+          "assistant": "Exactly. Scatterplots are perfect for microeconomic relationships such as demand curves or inflation vs interest rates. Line charts are essential for macroeconomic time series. And while 3D plots are less common, they’re useful for multi-dimensional relationships like wage–education–age interactions."
+        },
+        {
+          "round": "D3:32",
+          "user": "I’ll keep working through the next tutorial sections. If I get more exercises wrong, I’ll come back for help!",
+          "assistant": "Anytime! I’m looking forward to seeing what you create next."
+        }
+      ]
+    },
+    {
+      "session_id": "D4",
+      "date": "2025-03-20",
+      "dialogues": [
+        {
+          "round": "D4:1",
+          "user": "I was reviewing my macroeconomics notes today, but I’m still not totally sure what economists mean by long-run economic growth. Could you explain it in simple terms?",
+          "assistant": "Sure. Long-run economic growth is about a country’s capacity to produce more goods and services over many years or decades. It’s driven mainly by better technology, more physical capital, higher education levels, and improved productivity—not just short-term changes in demand."
+        },
+        {
+          "round": "D4:2",
+          "user": "So if productivity keeps improving, people’s living standards tend to rise as well?",
+          "assistant": "Exactly. When workers and firms can produce more output with the same amount of inputs, income per person usually increases. That’s why economists care so much about innovation, education, and efficient institutions—they all support productivity growth."
+        },
+        {
+          "round": "D4:3",
+          "user": "Another thing I keep seeing is that central banks target something like 2% inflation. Why is moderate inflation considered okay instead of aiming for zero?",
+          "assistant": "Moderate inflation is seen as healthy because it gives the economy some flexibility. Wages and prices can adjust more easily, and it helps avoid deflation, where falling prices make people delay spending. Very high inflation is harmful, but a small positive rate is usually associated with stable growth."
+        },
+        {
+          "round": "D4:4",
+          "user": "That helps. I’m also confused about business cycles. Are expansions and recessions just inevitable, or can policy completely prevent them?",
+          "assistant": "Business cycles—ups and downs in output and employment—seem to be a natural feature of market economies. Policy can smooth them by stabilizing demand and the financial system, but it’s almost impossible to eliminate all fluctuations. Shocks, like energy crises or pandemics, still happen."
+        },
+        {
+          "round": "D4:5",
+          "user": "In class they mentioned fiscal policy and monetary policy as tools to handle these shocks. Is one generally more powerful than the other?",
+          "assistant": "It depends on the situation. Monetary policy—changing interest rates and money supply—is usually faster to implement and good for managing typical demand shocks. Fiscal policy—taxes and government spending—can be very powerful in deep recessions, but it’s slower and more political."
+        },
+        {
+          "round": "D4:6",
+          "user": "Since I’m an economics major, I keep wondering what kind of work I can actually do with this knowledge. I like theory, but I also enjoy coding and I really care about birds, plants, and ecosystems.",
+          "assistant": "Those interests actually fit together nicely. You could go into environmental economics, resource management, or climate policy analysis. Those areas need people who understand economic theory, can handle data with code, and genuinely care about nature."
+        },
+        {
+          "round": "D4:7",
+          "user": "Environmental economics sounds appealing. What kind of questions do people in that field usually study?",
+          "assistant": "They look at questions like: How do we price carbon emissions? What’s the economic cost of losing a wetland or a forest? How should governments design incentives to protect biodiversity? They build models, collect data, and evaluate which policies are most efficient and fair."
+        },
+        {
+          "round": "D4:8",
+          "user": "I found this diagram showing Environment, Society, and Economy arranged in nested circles. Can you help me explain what this relationship means, and how it connects to environmental economics?",
+          "assistant": "Of course! This diagram represents the **nested model of sustainability**. It shows that the **Economy** exists inside **Society**, and **Society** exists inside the **Environment**. In other words, the environment is the foundational system—natural resources, ecosystems, and ecological limits make all human activity possible. Society depends on a healthy environment, and the economy ultimately depends on the stability and functions of both society and nature.\n\nConnecting this to **environmental economics**, the field specifically studies how economic systems rely on environmental resources and how to manage those resources sustainably. Environmental economics emphasizes that economic growth cannot be isolated from environmental constraints. Concepts like externalities, natural capital, ecosystem services, pollution taxes, and cost–benefit analysis all stem from the understanding shown in this diagram: **economic decisions affect social welfare and environmental health, and the environment sets the ultimate boundaries for what the economy can do**.\n\nSo the chart reminds us that sustainable economic planning must integrate environmental limits and societal wellbeing rather than treating nature as an infinite resource.",
+          "image_id": [
+            "D4:IMG_001"
+          ],
+          "input_image": [
+            "../image/Nature_Economics_Programming_Student_Life/D4_IMG_001.jpg"
+          ],
+          "image_caption": [
+            "Diagram of three nested colored ovals representing systems: a red inner oval labeled “Economy,” surrounded by a blue oval labeled “Society,” both enclosed within a larger green oval labeled “Environment.”"
+          ]
+        },
+        {
+          "round": "D4:9",
+          "user": "If I keep learning Python and data analysis, could that actually help me work on those topics someday?",
+          "assistant": "Definitely. Modern economists rely heavily on programming for data cleaning, visualization, and econometric modeling. Being comfortable with Python will make it easier for you to analyze large datasets—for example, on climate indicators, land use, or species distribution."
+        },
+        {
+          "round": "D4:10",
+          "user": "Sometimes I worry that I started coding a bit late compared to CS students. Do you think that’s a big problem?",
+          "assistant": "Not really. For an economics career, you don’t need to be a systems engineer; you need to be a solid applied programmer. If you keep practicing regularly, focus on statistics, visualization, and reproducible analysis, you’ll be ahead of many economics students who never touch code at all."
+        },
+        {
+          "round": "D4:11",
+          "user": "My ideal future would be doing research that helps design better environmental policies—maybe evaluating how conservation programs affect both local communities and wildlife. It sounds ambitious though.",
+          "assistant": "It’s ambitious in a good way. That kind of work is exactly what many universities, think tanks, and NGOs are trying to do. If you build a strong foundation in microeconomics, econometrics, and programming, and stay close to topics you care about, that path is very realistic."
+        },
+        {
+          "round": "D4:12",
+          "user": "I like the idea that data could capture something about ecosystems I see when I go birdwatching or look at plants. Almost like turning those experiences into evidence that policymakers can use.",
+          "assistant": "That’s a beautiful way to think about it. Data is just another way of telling the story of a landscape—how it changes, who benefits from it, and what’s at risk. Someone who both understands the numbers and has real affection for the environment can make those stories much more compelling."
+        },
+        {
+          "round": "D4:13",
+          "user": "Hearing it framed like that makes me feel more motivated. I’m still at the beginning, but I’d really like to reach a point where my work actually protects habitats and species.",
+          "assistant": "And you’re already laying the groundwork—studying economics, practicing Python, and paying close attention to the natural world around you. If you keep following that curiosity, it’s very possible that your future research will help protect the things you love."
+        },
+        {
+          "round": "D4:14",
+          "user": "Thanks. I’ll keep working on my courses and my side projects, even if the progress feels slow sometimes.",
+          "assistant": "Progress often feels slow from the inside, but it compounds. Every new concept you understand and every small coding project you finish becomes part of the toolkit you’ll use later on bigger, more meaningful questions."
+        },
+        {
+          "round": "D4:15",
+          "user": "That makes me feel a lot better. I’ll treat each assignment and little coding experiment as one step toward that long-run growth you talked about—just at a personal level.",
+          "assistant": "Exactly—your own version of long-run growth. Consistent small improvements in skills and understanding can transform your possibilities over time. And I’ll be here whenever you want to explore a new idea or clarify an economic concept."
+        }
+      ]
+    },
+    {
+      "session_id": "D5",
+      "date": "2025-04-02",
+      "dialogues": [
+        {
+          "round": "D5:1",
+          "user": "I went hiking on a small hill this weekend. The trail had so many plants and birds—felt like a perfect break from studying economics. I took a few photos and wanted to show them to you.",
+          "assistant": "That sounds wonderful! Hiking is such a good way to refresh your mind. I’d love to see what you photographed. Show me the first one!"
+        },
+        {
+          "round": "D5:2",
+          "user": "Here’s one of the first flowers I saw.",
+          "image_id": [
+            "D5:IMG_001"
+          ],
+          "input_image": [
+            "../image/Nature_Economics_Programming_Student_Life/D5_IMG_001.jpg"
+          ],
+          "assistant": "This looks like a poinsettia. Although most people think of it as a flower, the bright red parts are actually bracts—specialized leaves. The true flowers are the small yellow-green clusters in the center.",
+          "image_caption": [
+            "Red poinsettia plant with large, speckled bracts surrounds a small cluster of green flower buds at the center, set against dark green foliage and additional red bracts in the background."
+          ]
+        },
+        {
+          "round": "D5:3",
+          "user": "Yeah, I noticed the little buds. I also saw another poinsettia variant on the same slope.",
+          "image_id": [
+            "D5:IMG_002"
+          ],
+          "input_image": [
+            "../image/Nature_Economics_Programming_Student_Life/D5_IMG_002.jpg"
+          ],
+          "assistant": "This is another poinsettia cultivar, showing more variegation—those white splashes across the red bracts. Poinsettias are surprisingly diverse, often bred for decorative contrast.",
+          "image_caption": [
+            "Bright red and pink variegated poinsettia bracts overlap densely, forming layered, heart-shaped leaves around small green flower buds at the center. Dark green foliage surrounds the colorful bracts, filling the background."
+          ]
+        },
+        {
+          "round": "D5:4",
+          "user": "I didn’t know they came in so many shades. Here’s the third one.",
+          "image_id": [
+            "D5:IMG_003"
+          ],
+          "input_image": [
+            "../image/Nature_Economics_Programming_Student_Life/D5_IMG_003.jpg"
+          ],
+          "assistant": "This one has softer, pinkish bracts. Poinsettias can range from deep crimson to pale pink and even creamy yellow. They’re native to Mexico and actually prefer warm climates with indirect sunlight.",
+          "image_caption": [
+            "Cluster of pink poinsettia bracts with pale edges surrounding small green flower buds at the center, layered over darker green leaves in the background."
+          ]
+        },
+        {
+          "round": "D5:5",
+          "user": "Right, and I found an even more interesting color mix.",
+          "image_id": [
+            "D5:IMG_004"
+          ],
+          "input_image": [
+            "../image/Nature_Economics_Programming_Student_Life/D5_IMG_004.jpg"
+          ],
+          "assistant": "Beautiful! This cultivar shows pale pink with white margins. What’s interesting is that poinsettias change color based on photoperiod—they need long nights to trigger bract coloration.",
+          "image_caption": [
+            "Cluster of variegated poinsettia plants with large pink bracts edged in creamy white, surrounded by dark green leaves. In the background, bright red poinsettias fill the frame, creating dense layered foliage."
+          ]
+        },
+        {
+          "round": "D5:6",
+          "user": "Later on the trail, I saw a completely different type of flower. It looked more like a climbing vine.",
+          "assistant": "That sounds like it might be Clematis. Show me the picture and I can confirm."
+        },
+        {
+          "round": "D5:7",
+          "user": "Here’s the first one I saw.",
+          "image_id": [
+            "D5:IMG_005"
+          ],
+          "input_image": [
+            "../image/Nature_Economics_Programming_Student_Life/D5_IMG_005.jpg"
+          ],
+          "assistant": "Yes—this is Clematis. They’re climbing vines known for their star-shaped blossoms. This variety has bold magenta petals, which is pretty common among hybrid Clematis.",
+          "image_caption": [
+            "Two large pink clematis flowers with multiple pointed petals and pale yellow stamens grow on a vine, set against a background of a red-and-gray brick wall and green leaves."
+          ]
+        },
+        {
+          "round": "D5:8",
+          "user": "Here’s another Clematis I photographed nearby.",
+          "image_id": [
+            "D5:IMG_006"
+          ],
+          "input_image": [
+            "../image/Nature_Economics_Programming_Student_Life/D5_IMG_006.jpg"
+          ],
+          "assistant": "This one shows a softer pink gradient with prominent central stripes. Clematis often displays radial symmetry and smooth-edged petals, very different from poinsettias’ bracts.",
+          "image_caption": [
+            "Two large pink-and-white clematis flowers in full bloom, their pointed petals radiating around dense clusters of stamens, surrounded by wet green leaves and stems in a garden setting."
+          ]
+        },
+        {
+          "round": "D5:9",
+          "user": "And here’s a third Clematis. The color looked unique to me.",
+          "image_id": [
+            "D5:IMG_007"
+          ],
+          "input_image": [
+            "../image/Nature_Economics_Programming_Student_Life/D5_IMG_007.jpg"
+          ],
+          "assistant": "Lovely! This one leans toward pastel pink with a narrow central stripe. Clematis thrives in cooler, well-drained soil and prefers 'roots in the shade, vines in the sun.' That’s in contrast to poinsettias, which prefer warmer climates.",
+          "image_caption": [
+            "Two large, star-shaped clematis flowers with pale pink petals and darker pink central stripes, surrounding creamy yellow stamens, growing among green leaves against a dark, out-of-focus background."
+          ]
+        },
+        {
+          "round": "D5:10",
+          "user": "There was also this fourth Clematis that had a deeper purple tone.",
+          "image_id": [
+            "D5:IMG_008"
+          ],
+          "input_image": [
+            "../image/Nature_Economics_Programming_Student_Life/D5_IMG_008.jpg"
+          ],
+          "assistant": "Beautiful deep magenta petals! Compared to poinsettias, Clematis flowers are true flowers, not colored leaves. They also attract different pollinators—poinsettias rely more on insects like bees, while Clematis often attracts butterflies.",
+          "image_caption": [
+            "Three large pink‑purple clematis flowers with pale yellow centers growing on a vine among green leaves, with a wooden fence and wire mesh in the background; water droplets visible on the petals of the lower blooms."
+          ]
+        },
+        {
+          "round": "D5:11",
+          "user": "When I compare them, poinsettias feel more like shrubs, while Clematis definitely grows like a climbing vine.",
+          "assistant": "Exactly. Poinsettias are woody shrubs or small trees, while Clematis is a perennial climbing vine. Their structures, watering needs, sunlight preferences, and flowering mechanics are all quite different."
+        },
+        {
+          "round": "D5:12",
+          "user": "Another difference I noticed is texture. Poinsettia bracts feel thicker, almost leathery, while Clematis petals were thin and delicate.",
+          "assistant": "Good observation. Poinsettia bracts are essentially modified leaves, so they’re thicker and sturdier. Clematis petals are true tepals, meant to attract pollinators, so they are much more delicate."
+        },
+        {
+          "round": "D5:13",
+          "user": "I kept walking and eventually reached a more open area. That’s where I spotted a bird perched on a dry branch.",
+          "assistant": "Nice! What did it look like? Feel free to show me the photo."
+        },
+        {
+          "round": "D5:14",
+          "user": "Here’s the first photo.",
+          "image_id": [
+            "D5:IMG_009"
+          ],
+          "input_image": [
+            "../image/Nature_Economics_Programming_Student_Life/D5_IMG_009.jpg"
+          ],
+          "assistant": "This looks like a Red-winged Blackbird—a male. The glossy black feathers and the bright red-and-yellow shoulder patch, called the epaulet, are distinctive identifiers.",
+          "image_caption": [
+            "Black male red-winged blackbird perched sideways on tall, dry reed stalks against a blurred green and brown background, showing its distinctive red and yellow shoulder patch and slightly open beak."
+          ]
+        },
+        {
+          "round": "D5:15",
+          "user": "I got a second, closer photo too.",
+          "image_id": [
+            "D5:IMG_010"
+          ],
+          "input_image": [
+            "../image/Nature_Economics_Programming_Student_Life/D5_IMG_010.jpg"
+          ],
+          "assistant": "Yes, that confirms it. Definitely a male Red-winged Blackbird. The epaulet becomes especially visible when they’re calling or defending territory.",
+          "image_caption": [
+            "A male red-winged blackbird with glossy black plumage and red-and-yellow shoulder patches perches on a leafy tree branch, surrounded by green foliage and small flower clusters, with a softly blurred background of additional branches."
+          ]
+        },
+        {
+          "round": "D5:16",
+          "user": "What’s interesting is that the bird kept making a sharp, ringing call. Very distinctive.",
+          "assistant": "Exactly—their call is often described as a 'conk-la-ree' sound. Males use it to defend their nesting territory, especially during early spring."
+        },
+        {
+          "round": "D5:17",
+          "user": "Do Red-winged Blackbirds migrate? Or do they stay around all year?",
+          "assistant": "It depends on the region. In northern areas, they migrate south for winter. In warmer regions, they can stay year-round. They prefer wetlands, marshes, and open fields—places where they can perch high and oversee territories."
+        },
+        {
+          "round": "D5:18",
+          "user": "I see. It makes sense because the hill had a small pond nearby, with lots of reeds and open spaces.",
+          "assistant": "That’s perfect Red-winged Blackbird habitat—water sources plus elevated perches. They often build nests low among cattails or grasses."
+        },
+        {
+          "round": "D5:19",
+          "user": "I really enjoyed spotting both the flowers and the bird. I feel like every hike teaches me something new about nature.",
+          "assistant": "And you’re observant, which helps a lot. You notice details like bract texture, petal symmetry, and habitat context—those skills make field observations very meaningful."
+        },
+        {
+          "round": "D5:20",
+          "user": "Yeah, and learning these details actually motivates me even more to keep studying plants and birds, alongside economics.",
+          "assistant": "That’s a great blend of passions. Observing ecosystems closely can even help you in environmental economics later—understanding both ecological structure and economic incentives."
+        },
+        {
+          "round": "D5:21",
+          "user": "I agree. Maybe one day I’ll study how habitats like this hill contribute to local ecosystems and communities.",
+          "assistant": "That would be an amazing direction—linking field knowledge with quantitative analysis. You’re already building the foundation."
+        },
+        {
+          "round": "D5:22",
+          "user": "Thanks for going through these photos with me. It was a really peaceful weekend.",
+          "assistant": "I’m glad you shared it. Anytime you go hiking again or find new plants or birds, feel free to bring them here—I’d love to explore them together."
+        }
+      ]
+    },
+    {
+      "session_id": "D6",
+      "date": "2025-04-08",
+      "dialogues": [
+        {
+          "round": "D6:1",
+          "user": "I was reading about the rapid growth of the global e-commerce industry recently. It’s fascinating how online platforms have reshaped consumer behavior and logistics.",
+          "assistant": "Absolutely. E-commerce reduces transaction costs, widens product variety, and makes price comparison easier. It also pushes companies to optimize supply chains and adopt data-driven inventory management."
+        },
+        {
+          "round": "D6:2",
+          "user": "One thing that caught my attention is how fast digital payment systems evolved. They're almost essential for e-commerce efficiency.",
+          "assistant": "True. Digital payments reduce friction at checkout and increase trust. Combined with mobile apps, they allow instant purchases, personalized recommendations, and seamless returns."
+        },
+        {
+          "round": "D6:3",
+          "user": "Compared to other countries, China’s e-commerce ecosystem seems incredibly advanced—huge platforms, efficient delivery networks, and strong consumer adoption.",
+          "assistant": "China’s e-commerce strength comes from several factors: massive user base, early adoption of mobile payments, dense logistics networks, and highly competitive platforms like Taobao, JD, and Pinduoduo. The environment rewards innovation and scale.",
+          "image_id": [
+            "D6:IMG_001"
+          ],
+          "input_image": [
+            "../image/Nature_Economics_Programming_Student_Life/D6_IMG_001.png"
+          ],
+          "image_caption": [
+            "Orange Chinese characters reading “淘宝网” appear above the website address “Taobao.com”, both rendered in a bold, sans-serif style on a plain white background."
+          ]
+        },
+        {
+          "round": "D6:4",
+          "user": "Yeah, even rural areas in China get same-day or next-day delivery. It’s impressive from an economics perspective.",
+          "assistant": "It is. The combination of economies of scale, aggressive competition, and integration of online–offline retail make China’s model unique. It’s a fascinating case of digital economic development."
+        },
+        {
+          "round": "D6:5",
+          "user": "Thinking about e-commerce actually reminded me—I’ve been wanting to buy a pair of Brooklyn Nets athletic shorts. I support the team, so I thought it might be fun to wear them when exercising.",
+          "assistant": "Great idea! Sports apparel can be a nice motivation boost. Do you have specific designs in mind, or do you want to see some options?"
+        },
+        {
+          "round": "D6:6",
+          "user": "I found a few options online. Here’s the first one.",
+          "image_id": [
+            "D6:IMG_002"
+          ],
+          "input_image": [
+            "../image/Nature_Economics_Programming_Student_Life/D6_IMG_002.jpg"
+          ],
+          "assistant": "These look like classic white basketball shorts with the Nets logo. Clean design, lightweight fabric, and good for workouts. Very versatile.",
+          "image_caption": [
+            "White basketball shorts displayed from back and front angles, featuring an elastic waistband and black trim along the sides and leg openings. A “NETS B” team logo patch appears near the lower right leg, and a small NBA logo patch is visible on the left side near the hem."
+          ]
+        },
+        {
+          "round": "D6:7",
+          "user": "Here’s another one I saw. Looks a bit similar but slightly different in details.",
+          "image_id": [
+            "D6:IMG_003"
+          ],
+          "input_image": [
+            "../image/Nature_Economics_Programming_Student_Life/D6_IMG_003.jpg"
+          ],
+          "assistant": "This version has more pronounced black side panels and a slightly shorter hem. The stripes near the bottom add a more retro basketball feel. If you like a classic NBA look, this one fits well.",
+          "image_caption": [
+            "White Brooklyn Nets basketball shorts laid flat on a dark surface, featuring the “NETS B” team logo on the lower right leg, an NBA logo patch on the upper left side, and an adidas logo on the upper right. The shorts have an elastic waistband, black side panels, and black-and-white striped trim at the leg openings."
+          ]
+        },
+        {
+          "round": "D6:8",
+          "user": "And here’s the third one. It has a checkered texture.",
+          "image_id": [
+            "D6:IMG_004"
+          ],
+          "input_image": [
+            "../image/Nature_Economics_Programming_Student_Life/D6_IMG_004.jpg"
+          ],
+          "assistant": "This pair looks more modern and stylish, with the subtle checkered pattern. The side text ‘Brooklyn Nets’ makes it more visually distinctive. It’s a good choice if you want something that stands out.",
+          "image_caption": [
+            "Light gray basketball shorts with a subtle checkerboard pattern, elastic waistband, and side zipper pocket. Vertical text along the pocket reads “BROOKLYN NETS,” and a circular Brooklyn Nets logo with a “B” in the center appears near the bottom of one leg."
+          ]
+        },
+        {
+          "round": "D6:9",
+          "user": "Between these three, which do you think suits me best? I usually wear simple sportswear, mostly black or white.",
+          "assistant": "If you like simple and clean styles, the first pair might fit your wardrobe best—minimal logos, clean white tone. The third pair is great too, but slightly flashier. The second one sits in the middle."
+        },
+        {
+          "round": "D6:10",
+          "user": "I see. The first one certainly feels safe, but I kind of like the design of the third one too. The checkered texture looks unique.",
+          "assistant": "Then the third pair could be a fun addition—it stays within the white theme but adds personality. It can complement simple tops while still giving your outfit a stylish touch."
+        },
+        {
+          "round": "D6:11",
+          "user": "Would the checkered pattern be too much for casual workouts though?",
+          "assistant": "Not really. It’s subtle enough that it doesn’t feel overwhelming. Many modern athletic styles incorporate small patterns for visual interest. It still reads as clean and sporty."
+        },
+        {
+          "round": "D6:12",
+          "user": "Good point. I guess e-commerce makes these choices easier since I can check reviews and compare looks quickly.",
+          "assistant": "Exactly. E-commerce reduces information asymmetry. You can compare materials, sizes, reviews, and pricing instantly—far more efficient than browsing multiple physical stores."
+        },
+        {
+          "round": "D6:13",
+          "user": "Alright, I think I’ll go with the third pair then. Feels like a good balance between minimal and unique.",
+          "assistant": "Great choice! It matches your preferred color palette while giving your outfit an extra touch. Hope it motivates you during workouts as well."
+        },
+        {
+          "round": "D6:14",
+          "user": "Thanks! This was helpful. And the whole hike + e-commerce thinking + shopping mood turned out pretty nice.",
+          "assistant": "Glad to hear that! Whether it’s economics or choosing sportswear, thoughtful comparison always leads to better decisions. Let me know if you want help picking matching tops next time."
+        }
+      ]
+    },
+    {
+      "session_id": "D7",
+      "date": "2025-04-14",
+      "dialogues": [
+        {
+          "round": "D7:1",
+          "user": "I attended a public lecture on birds and environmental conservation today. It was surprisingly inspiring. Before I share the new species I learned about, I want to show you a bird we talked about before and see if you still recognize it.",
+          "assistant": "That sounds like a great lecture! Sure, show me the photo and I’ll see if I remember which species it is."
+        },
+        {
+          "round": "D7:2",
+          "user": "Here’s the picture.",
+          "assistant": "Yes, I remember this one. It’s a Red-winged Blackbird, right? The glossy black body and the red-and-yellow patch on the wing are very distinctive.",
+          "image_id": [
+            "D7:IMG_001"
+          ],
+          "input_image": [
+            "../image/Nature_Economics_Programming_Student_Life/D7_IMG_001.jpg"
+          ],
+          "image_caption": [
+            "Black bird with glossy feathers and a red-and-yellow shoulder patch perched on thin branches of a small tree, surrounded by budding twigs against a softly blurred outdoor background."
+          ]
+        },
+        {
+          "round": "D7:3",
+          "user": "Exactly! The lecturer actually mentioned Red-winged Blackbirds when talking about wetland species. But then he introduced a few other colorful birds I’d never looked at closely before.",
+          "assistant": "Nice! I’m curious which new species you encountered. Do you want to start with one of them?"
+        },
+        {
+          "round": "D7:4",
+          "user": "The first one is this bright red bird.",
+          "assistant": "That’s a Northern Cardinal. The vivid red feathers and the crest on its head are classic features of the male Cardinal.",
+          "image_id": [
+            "D7:IMG_002"
+          ],
+          "input_image": [
+            "../image/Nature_Economics_Programming_Student_Life/D7_IMG_002.jpg"
+          ],
+          "image_caption": [
+            "Male northern cardinal with bright red plumage, black face mask, and pointed crest perched sideways on a bare, branching tree limb against a soft, brown, out-of-focus background."
+          ]
+        },
+        {
+          "round": "D7:5",
+          "user": "Here’s another Cardinal photo they showed in class.",
+          "assistant": "This one really highlights the strong beak and the black mask around the face. Cardinals are seed eaters, so that sturdy beak is perfect for cracking seeds.",
+          "image_id": [
+            "D7:IMG_003"
+          ],
+          "input_image": [
+            "../image/Nature_Economics_Programming_Student_Life/D7_IMG_003.jpg"
+          ],
+          "image_caption": [
+            "Bright red male cardinal perched on a lichen-covered tree branch, facing slightly left with crest raised and beak slightly open, against a soft, out-of-focus sky background and bare twigs."
+          ]
+        },
+        {
+          "round": "D7:6",
+          "user": "And this is the third Cardinal example.",
+          "assistant": "Great shot. You can see how the red color can vary slightly in tone depending on light and age, but the overall silhouette is unmistakable.",
+          "image_id": [
+            "D7:IMG_004"
+          ],
+          "input_image": [
+            "../image/Nature_Economics_Programming_Student_Life/D7_IMG_004.jpg"
+          ],
+          "image_caption": [
+            "Male northern cardinal in profile perched on a narrow branch, showing bright red body, darker wings, pointed crest, black face mask, and thick orange-yellow beak, with blurred green foliage in the background."
+          ]
+        },
+        {
+          "round": "D7:7",
+          "user": "The lecturer then moved on to a smaller bird that has bright blue and orange plumage. Here’s one photo.",
+          "assistant": "That’s a Lazuli Bunting. The sky-blue head and back combined with the warm orange breast make it very striking, especially during the breeding season.",
+          "image_id": [
+            "D7:IMG_005"
+          ],
+          "input_image": [
+            "../image/Nature_Economics_Programming_Student_Life/D7_IMG_005.jpg"
+          ],
+          "image_caption": [
+            "Small blue and white songbird with a brown patch on its chest perched on a barbed wire fence, facing the camera against a blurred green background."
+          ]
+        },
+        {
+          "round": "D7:8",
+          "user": "Here’s a second Lazuli Bunting example.",
+          "assistant": "You can see the slender body and the fine beak, which is adapted for eating seeds and small insects. The contrast between the blue and the orange is really beautiful.",
+          "image_id": [
+            "D7:IMG_006"
+          ],
+          "input_image": [
+            "../image/Nature_Economics_Programming_Student_Life/D7_IMG_006.jpg"
+          ],
+          "image_caption": [
+            "Small songbird, likely a male Lazuli Bunting, perched on a thin vertical twig, beak open as if singing. The bird has a bright blue head, orange breast, and dark wings with white bars, surrounded by green foliage."
+          ]
+        },
+        {
+          "round": "D7:9",
+          "user": "And this is the third one we saw on the slides.",
+          "assistant": "This photo captures the bird in a more open setting. Lazuli Buntings often use shrubs and low trees as perches when singing during the breeding season.",
+          "image_id": [
+            "D7:IMG_007"
+          ],
+          "input_image": [
+            "../image/Nature_Economics_Programming_Student_Life/D7_IMG_007.jpg"
+          ],
+          "image_caption": [
+            "Small songbird with bright blue head and back, rust-orange chest and sides, and brown-and-black patterned wings standing alert on short green grass in a sunlit lawn."
+          ]
+        },
+        {
+          "round": "D7:10",
+          "user": "The last species the lecturer highlighted was this blackbird with a yellow head.",
+          "assistant": "That’s a Yellow-headed Blackbird. The golden-yellow head and chest contrasted with the black body make it one of the most distinctive marsh birds.",
+          "image_id": [
+            "D7:IMG_008"
+          ],
+          "input_image": [
+            "../image/Nature_Economics_Programming_Student_Life/D7_IMG_008.jpg"
+          ],
+          "image_caption": [
+            "Yellow-headed blackbird with bright yellow head and chest and black body perched on a vertical reed among dense, dry, light-brown marsh vegetation."
+          ]
+        },
+        {
+          "round": "D7:11",
+          "user": "Here’s another Yellow-headed Blackbird.",
+          "assistant": "This angle shows how they cling to reeds in wetlands. Their strong feet and claws help them stay balanced on narrow stems.",
+          "image_id": [
+            "D7:IMG_009"
+          ],
+          "input_image": [
+            "../image/Nature_Economics_Programming_Student_Life/D7_IMG_009.jpg"
+          ],
+          "image_caption": [
+            "Yellow-headed blackbird with a bright yellow head and chest and black body perched among dense, pale reed stalks in a marshy habitat, facing to the right."
+          ]
+        },
+        {
+          "round": "D7:12",
+          "user": "And this is the third image of that species.",
+          "assistant": "You can really see the habitat here—dense cattails near water. That’s classic Yellow-headed Blackbird territory.",
+          "image_id": [
+            "D7:IMG_010"
+          ],
+          "input_image": [
+            "../image/Nature_Economics_Programming_Student_Life/D7_IMG_010.jpg"
+          ],
+          "image_caption": [
+            "Yellow-headed blackbird with a bright yellow head and chest and black body perched on a cattail stalk among dense brown cattails beside a calm body of water."
+          ]
+        },
+        {
+          "round": "D7:13",
+          "user": "The lecturer kept emphasizing that these birds are strongly tied to specific habitats, especially wetlands and shrublands.",
+          "assistant": "Yes, many bird species are habitat specialists. When their habitats are degraded or destroyed, their populations can decline quickly, even if the birds themselves are quite adaptable in other ways."
+        },
+        {
+          "round": "D7:14",
+          "user": "He talked a lot about wetlands, saying they act as natural water filters and buffers against floods.",
+          "assistant": "That’s right. Wetlands store water, trap sediments, and absorb nutrients. They also provide breeding grounds and food sources for countless species, including many migratory birds."
+        },
+        {
+          "round": "D7:15",
+          "user": "Then the lecture shifted into environmental economics. They started talking about how to assign value to ecosystems like wetlands.",
+          "assistant": "Environmental economics tries to quantify the benefits nature provides—called ecosystem services. For wetlands, that includes flood protection, water purification, carbon storage, and biodiversity support."
+        },
+        {
+          "round": "D7:16",
+          "user": "The concept of externalities came up again. I’ve seen it in my economics classes, but here it felt more concrete.",
+          "assistant": "Exactly. Wetland destruction often creates negative externalities—like increased flood risk or biodiversity loss—for people who don’t participate in the decision. Conservation, on the other hand, can create positive externalities that benefit society at large."
+        },
+        {
+          "round": "D7:17",
+          "user": "The lecturer mentioned using taxes, subsidies, or tradable permits to correct those externalities.",
+          "assistant": "Yes. For example, a tax on pollution can discourage activities that damage wetlands, while subsidies can reward landowners who preserve or restore them. Tradable permits can cap total pollution and let firms trade rights under that cap."
+        },
+        {
+          "round": "D7:18",
+          "user": "He used a case study where protecting marshes helped stabilize populations of species like the Yellow-headed Blackbird and reduced flood damages for nearby towns.",
+          "assistant": "That’s a great illustration of how ecological and economic benefits align. Healthy marshes support bird populations and also act as natural infrastructure for humans."
+        },
+        {
+          "round": "D7:19",
+          "user": "After attending the lecture, I feel more motivated to get involved in local conservation efforts.",
+          "assistant": "That’s wonderful. Your interest in birds, plants, and economics puts you in a great position to contribute—through volunteering, research, or even future policy work."
+        },
+        {
+          "round": "D7:20",
+          "user": "They mentioned citizen science bird surveys. I’m thinking of signing up. It sounds like a good way to practice identification and also generate useful data.",
+          "assistant": "Citizen science can be incredibly valuable. Large-scale bird surveys help scientists track population trends, identify at-risk species, and evaluate conservation policies."
+        },
+        {
+          "round": "D7:21",
+          "user": "It’s interesting how a single public lecture connected my interests in birds, nature, and economics all at once.",
+          "assistant": "Sometimes the right lecture at the right time can tie everything together. You’re seeing how ecological observations and economic frameworks can work hand in hand."
+        },
+        {
+          "round": "D7:22",
+          "user": "Thanks for helping me process all of this. Talking it through makes the ideas feel much clearer.",
+          "assistant": "I’m glad it helped. Any time you go to another lecture or discover a new species, feel free to bring it here—we can keep building your personal ‘field guide’ and connect it back to environmental economics."
+        }
+      ]
+    },
+    {
+      "session_id": "D8",
+      "date": "2025-05-02",
+      "dialogues": [
+        {
+          "round": "D8:1",
+          "user": "It's already past midnight, but I still can't fall asleep. I have two midterms this week and both count heavily toward my GPA. I feel so anxious.",
+          "assistant": "I'm really sorry you're feeling this way. Heavy exam weeks can be overwhelming. Can you tell me what exactly is stressing you out the most—the difficulty of the material, time pressure, or something else?"
+        },
+        {
+          "round": "D8:2",
+          "user": "Honestly… it's everything. I keep thinking that if I mess these up, my GPA will drop a lot.",
+          "assistant": "That kind of pressure can definitely feed anxiety. It makes your mind stay in 'alert mode.' But remember, one or two exams don’t define your entire academic performance. We can think through ways to calm your mind tonight and manage the study load tomorrow."
+        },
+        {
+          "round": "D8:3",
+          "user": "I also drank way too much matcha today. I thought it would help me study, but now my heart is racing and I feel jittery.",
+          "assistant": "Caffeine overload can absolutely interfere with sleep and increase anxious thoughts. It might help to drink some warm water or herbal tea now—something without caffeine—to balance things out. Have you tried slow, deep breathing recently?",
+          "image_id": [
+            "D8:IMG_001"
+          ],
+          "input_image": [
+            "../image/Nature_Economics_Programming_Student_Life/D8_IMG_001.jpg"
+          ],
+          "image_caption": [
+            "Black ceramic cup and saucer holding a green beverage, with powdered particles and small bubbles floating on the surface, placed on a dark wooden tabletop."
+          ]
+        },
+        {
+          "round": "D8:4",
+          "user": "Not really. I feel too restless to sit still, honestly.",
+          "assistant": "That’s understandable. Let’s try something very simple: inhale slowly for 4 seconds, hold for 2, then exhale for 6. This activates your parasympathetic nervous system and signals your body to calm down. You don’t have to sit perfectly still—just focus on the rhythm."
+        },
+        {
+          "round": "D8:5",
+          "user": "Okay… I tried a few breaths. It feels slightly better but still not enough.",
+          "assistant": "That's a good start. Sometimes it takes a few minutes for your nervous system to respond. You can also try a 'brain dump': write down every thought or worry racing through your mind. It helps your brain stop holding everything in working memory."
+        },
+        {
+          "round": "D8:6",
+          "user": "I think my head is spinning because I'm scared I won’t have enough time to revise everything tomorrow.",
+          "assistant": "We can plan that together. Creating a realistic schedule may give your brain permission to rest. How many chapters or topics do you have left for each exam?"
+        },
+        {
+          "round": "D8:7",
+          "user": "For one course, I still have three chapters left. For the other one, I need to review all the key formulas again.",
+          "assistant": "That’s manageable with a structured plan. Tomorrow, you can start with the tougher exam or the bigger chapters. Divide the material into chunks with short breaks in between. It will help you avoid burnout and feel more in control."
+        },
+        {
+          "round": "D8:8",
+          "user": "I just keep thinking that everyone else is probably better prepared than me.",
+          "assistant": "That’s a very common thought, but usually not true. Most students feel behind before midterms. Comparing yourself to others only amplifies stress. What matters is your own pace and strategy, not what others might be doing."
+        },
+        {
+          "round": "D8:9",
+          "user": "Yeah… I guess I know that logically, but emotionally it’s hard to accept.",
+          "assistant": "It absolutely is. That emotional part is important—anxiety isn't just a logical problem. You're doing the right thing by acknowledging the feeling instead of suppressing it. That already reduces its power over you."
+        },
+        {
+          "round": "D8:10",
+          "user": "Do you think I should try to force myself to sleep now?",
+          "assistant": "Forcing sleep often backfires. Instead, create a relaxing environment—dim lights, put away screens if possible, maybe play soft music or white noise. Aim to let sleep come naturally rather than pushing for it."
+        },
+        {
+          "round": "D8:11",
+          "user": "What if I still can’t sleep? I’m scared I’ll be too tired tomorrow to study properly.",
+          "assistant": "Even partial rest or lying down in a calm state is better than staying mentally tense. Your body will recover more than you think. And remember, adrenaline often helps you stay alert during stressful periods—but we still want you to rest if possible."
+        },
+        {
+          "round": "D8:12",
+          "user": "I’ll try lying down again with softer lighting. Maybe doing nothing for a bit will help.",
+          "assistant": "That sounds like a great idea. Let go of the 'I must sleep now' mindset, and instead think, 'I’m giving my body a chance to rest.' Your system will respond naturally.",
+          "image_id": [
+            "D8:IMG_002"
+          ],
+          "input_image": [
+            "../image/Nature_Economics_Programming_Student_Life/D8_IMG_002.jpg"
+          ],
+          "image_caption": [
+            "Adjustable silver desk lamp with a flat, rectangular light head glowing downward, mounted on a jointed metal arm with springs and screws. The arm is attached to a broad, square base resting on a wooden surface against a plain, light-colored wall. A power cord extends from the back of the base toward the right edge of the image."
+          ]
+        },
+        {
+          "round": "D8:13",
+          "user": "I appreciate you listening. It actually makes me feel less alone in this.",
+          "assistant": "I'm really glad I can help. You're not alone at all—many students experience exactly this before important exams. You’re doing your best, and that’s enough. We’ll get through this step by step."
+        },
+        {
+          "round": "D8:14",
+          "user": "Alright… I’ll try the breathing exercises again and maybe stretch a little. Hopefully I can sleep soon.",
+          "assistant": "That sounds perfect. Gentle stretching plus slow breathing can calm both your muscles and your mind. If you need more support, I'm here anytime. You’ve got this."
+        }
+      ]
+    },
+    {
+      "session_id": "D9",
+      "date": "2025-05-13",
+      "dialogues": [
+        {
+          "round": "D9:1",
+          "user": "Hey! I finally finished both midterms today. My brain feels empty, so I went hiking with a friend to relax. I took some flower photos—want to see one?",
+          "assistant": "Congratulations on finishing your exams! I'd be happy to look at the flower photos. Show me what you found."
+        },
+        {
+          "round": "D9:2",
+          "user": "Here’s the first one. The color looked super vibrant in the sun.",
+          "image_id": [
+            "D9:IMG_001"
+          ],
+          "input_image": [
+            "../image/Nature_Economics_Programming_Student_Life/D9_IMG_001.jpg"
+          ],
+          "assistant": "This is a Morning Glory! The deep purple petals with that bright star-shaped throat are really characteristic. They tend to bloom in the morning and close later in the day.",
+          "image_caption": [
+            "Purple morning glory flower in full bloom, viewed close up, with a funnel-shaped corolla showing darker purple radial streaks and a pale pinkish-white center. The blossom is surrounded by green, heart-shaped leaves and stems, with a softly blurred garden background."
+          ]
+        },
+        {
+          "round": "D9:3",
+          "user": "Right, I think so too. Here’s another picture from the same vine.",
+          "image_id": [
+            "D9:IMG_002"
+          ],
+          "input_image": [
+            "../image/Nature_Economics_Programming_Student_Life/D9_IMG_002.jpg"
+          ],
+          "assistant": "This one also looks like Morning Glory—nice mix of purple, white, and even a darker bloom in the back. They often come in multiple colors on the same patch.",
+          "image_caption": [
+            "Three morning glory flowers in different colors—one purple with a pink center, one very dark purple, and one white with pink streaks—bloom on a climbing vine with green heart-shaped leaves."
+          ]
+        },
+        {
+          "round": "D9:4",
+          "user": "And here’s a third one. The pattern looks different, more striped.",
+          "image_id": [
+            "D9:IMG_003"
+          ],
+          "input_image": [
+            "../image/Nature_Economics_Programming_Student_Life/D9_IMG_003.jpg"
+          ],
+          "assistant": "Yes, still Morning Glory. Some varieties have those streaked patterns—very eye-catching. They’re fast-growing climbing vines, which is probably why you saw so many grouped together.",
+          "image_caption": [
+            "Three blue and purple morning glory flowers with white centers clustered together, surrounded by large green leaves and dense foliage."
+          ]
+        },
+        {
+          "round": "D9:5",
+          "user": "Morning Glories really have such strong colors. They looked even brighter after the rain. Hiking felt so refreshing after those stressful exams.",
+          "assistant": "I’m glad the hike helped you unwind. Morning Glories tend to stand out in natural light, making them perfect for lifting your mood."
+        },
+        {
+          "round": "D9:6",
+          "user": "Then I saw another cluster of white flowers I didn’t recognize. Let me show you one.",
+          "image_id": [
+            "D9:IMG_004"
+          ],
+          "input_image": [
+            "../image/Nature_Economics_Programming_Student_Life/D9_IMG_004.jpg"
+          ],
+          "assistant": "This is Thorn Apple, also known as Datura. The large trumpet shape and white petals match perfectly.",
+          "image_caption": [
+            "White trumpet-shaped flower with slightly ruffled edges, viewed from above, covered in small water droplets. Pale stamens are visible at the center of the bloom. The flower is surrounded by large, dark green, veined leaves filling the background."
+          ]
+        },
+        {
+          "round": "D9:7",
+          "user": "Here’s another angle of the same plant.",
+          "image_id": [
+            "D9:IMG_005"
+          ],
+          "input_image": [
+            "../image/Nature_Economics_Programming_Student_Life/D9_IMG_005.jpg"
+          ],
+          "assistant": "Still Thorn Apple. They usually have broad, jagged leaves like the ones in your photo. They open in the evening and early morning.",
+          "image_caption": [
+            "White, trumpet-shaped flower with smooth petals growing among large, broad green leaves, set next to a surface of rectangular bricks."
+          ]
+        },
+        {
+          "round": "D9:8",
+          "user": "And one more photo. The stem looks thicker here.",
+          "image_id": [
+            "D9:IMG_006"
+          ],
+          "input_image": [
+            "../image/Nature_Economics_Programming_Student_Life/D9_IMG_006.jpg"
+          ],
+          "assistant": "Exactly—Thorn Apple has sturdy stems and grows upright compared to Morning Glory, which climbs. A key difference is that Thorn Apple is actually toxic, so people avoid touching or ingesting any part of it.",
+          "image_caption": [
+            "Single white, trumpet-shaped flower with pale yellow stamens rising from a thick green stem, surrounded by broad, dark green leaves and other foliage in a natural outdoor setting."
+          ]
+        },
+        {
+          "round": "D9:9",
+          "user": "Wait—it's toxic? I didn’t touch it luckily, but that’s kind of scary.",
+          "assistant": "Yes, it contains strong alkaloids. As long as you don’t ingest it, you’re safe. It’s beautiful but best admired from a distance."
+        },
+        {
+          "round": "D9:10",
+          "user": "Morning Glory versus Thorn Apple really shows how different two trumpet-shaped flowers can be. Morning Glory feels cheerful; Thorn Apple feels mysterious.",
+          "assistant": "That’s a great way to describe them. Morning Glories symbolize renewal and positivity, while Thorn Apple often symbolizes caution due to its toxic nature."
+        },
+        {
+          "round": "D9:11",
+          "user": "Toward the end of the hike, I also saw this bird. Do you know what species it is?",
+          "image_id": [
+            "D9:IMG_007"
+          ],
+          "input_image": [
+            "../image/Nature_Economics_Programming_Student_Life/D9_IMG_007.jpg"
+          ],
+          "assistant": "This is a Blue Jay! That blue crest and the black line across the face are classic features.",
+          "image_caption": [
+            "Small blue and white bird perched on a rough, brown tree branch, facing left and leaning forward as if observing something below. The bird has a short, pointed beak, a dark eye stripe, and a pale underside. Soft, out-of-focus green and beige background suggests a natural outdoor setting with additional branches framing the scene."
+          ]
+        },
+        {
+          "round": "D9:12",
+          "user": "Here’s another picture of the same bird from a different branch.",
+          "image_id": [
+            "D9:IMG_008"
+          ],
+          "input_image": [
+            "../image/Nature_Economics_Programming_Student_Life/D9_IMG_008.jpg"
+          ],
+          "assistant": "Blue Jays are known for their intelligence. They’re vocal, curious, and sometimes mimic other birds’ calls.",
+          "image_caption": [
+            "Blue jay perched sideways on a thick, bare tree branch, its blue and white plumage and black markings clearly visible. Surrounding branches are leafless, suggesting a cold or winter season, with a blurred neutral background."
+          ]
+        },
+        {
+          "round": "D9:13",
+          "user": "And a third photo. This one looks like it was observing us.",
+          "image_id": [
+            "D9:IMG_009"
+          ],
+          "input_image": [
+            "../image/Nature_Economics_Programming_Student_Life/D9_IMG_009.jpg"
+          ],
+          "assistant": "They often do! Blue Jays are naturally alert and social. They store food, warn other birds of predators, and can even solve simple problems.",
+          "image_caption": [
+            "Blue jay perched among dense dry reeds, facing sideways. The bird has a light blue crest, white face and underside, black neck markings, and bright blue wings and tail with black barring. Sunlight highlights parts of its plumage while the surrounding brown stalks create a cluttered, natural background."
+          ]
+        },
+        {
+          "round": "D9:14",
+          "user": "I didn’t know they were so smart. Maybe that’s why it didn’t seem afraid of us.",
+          "assistant": "Yes, they’re confident birds and quite adaptable. They thrive in forests, suburbs, and even city parks."
+        },
+        {
+          "round": "D9:15",
+          "user": "Today’s hike really helped me decompress from exams—colorful flowers and energetic birds. It felt like nature was congratulating me.",
+          "assistant": "It sounds like the perfect reward after all your hard work. Fresh air, beautiful colors, interesting wildlife—exactly what your mind needs after stressful midterms."
+        },
+        {
+          "round": "D9:16",
+          "user": "True. I feel much lighter now. Maybe I should go hiking more often.",
+          "assistant": "That’s a great idea. Regular nature walks can reduce stress, improve sleep, and boost overall well-being."
+        },
+        {
+          "round": "D9:17",
+          "user": "Thanks for identifying all the flowers and birds. It makes the hike feel more meaningful.",
+          "assistant": "Anytime! I’m always happy to help you learn more about the things you discover outdoors."
+        },
+        {
+          "round": "D9:18",
+          "user": "Next time I’ll try to spot even more species. Maybe I’ll start a small photo journal.",
+          "assistant": "That sounds wonderful. A photo journal would be a great way to track your explorations and deepen your appreciation for plants and wildlife."
+        },
+        {
+          "round": "D9:19",
+          "user": "By the way, on the way back from the hike, I saw this adorable French bulldog walking around. It looked so tiny and confident.",
+          "image_id": [
+            "D9:IMG_010"
+          ],
+          "input_image": [
+            "../image/Nature_Economics_Programming_Student_Life/D9_IMG_010.jpg"
+          ],
+          "assistant": "Aww, that’s definitely a French Bulldog! They have that signature compact body, big bat-like ears, and a very expressive face. They often look serious, but in a funny, charming way.",
+          "image_caption": [
+            "Small black-and-white French bulldog wearing a harness walking on a rough gravel surface, facing the camera with one front paw raised."
+          ]
+        },
+        {
+          "round": "D9:20",
+          "user": "Yeah! The dog had this face that looked a bit sleepy or maybe just permanently confused, which made it even cuter.",
+          "assistant": "French Bulldogs are masters of looking slightly tired or puzzled. Their facial structure naturally gives them those droopy, thoughtful expressions. It’s part of their charm."
+        },
+        {
+          "round": "D9:21",
+          "user": "I even looked up some photos online afterward, and I found this one. Also super cute.",
+          "image_id": [
+            "D9:IMG_011"
+          ],
+          "input_image": [
+            "../image/Nature_Economics_Programming_Student_Life/D9_IMG_011.jpg"
+          ],
+          "assistant": "That’s adorable! And the puppy lying next to it makes the scene even sweeter. French Bulldogs tend to be calm, affectionate, and clingy—they love being around people and other pets.",
+          "image_caption": [
+            "Two small dogs lying on a light-colored carpet, a larger black-and-white dog resting with front legs extended behind a smaller black puppy in the foreground, both facing the camera."
+          ]
+        },
+        {
+          "round": "D9:22",
+          "user": "I can totally see myself liking this breed a lot. The sleepy eyes are just too funny.",
+          "assistant": "Totally understandable—they’re a very lovable breed. If you enjoy expressive, low-energy, people-oriented dogs, French Bulldogs fit perfectly. Their ‘sleepy eye’ look is practically their trademark."
+        }
+      ]
+    },
+    {
+      "session_id": "D10",
+      "date": "2025-06-01",
+      "dialogues": [
+        {
+          "round": "D10:1",
+          "user": "I visited my uncle’s farmland today and it felt so refreshing to be out of the city.",
+          "assistant": "That sounds lovely! Being out in open farmland can really clear your mind. What did you get to see or do there?"
+        },
+        {
+          "round": "D10:2",
+          "user": "I took a picture of the field—rows of crops with tractors working in the distance.",
+          "image_id": [
+            "D10:IMG_001"
+          ],
+          "input_image": [
+            "../image/Nature_Economics_Programming_Student_Life/D10_IMG_001.jpg"
+          ],
+          "assistant": "This looks like a well-managed crop field. The tractors seem to be performing routine cultivation work. The landscape looks peaceful!",
+          "image_caption": [
+            "Two tractors work on a gently sloping cultivated field, moving between long parallel rows of young crops. Trees border the farmland in the distance under a clear blue sky."
+          ]
+        },
+        {
+          "round": "D10:3",
+          "user": "Yeah, and here’s another one taken from a different angle.",
+          "image_id": [
+            "D10:IMG_002"
+          ],
+          "input_image": [
+            "../image/Nature_Economics_Programming_Student_Life/D10_IMG_002.jpg"
+          ],
+          "assistant": "Nice! This angle shows how expansive the farmland is. The cloud cover gives the scene a dramatic feeling.",
+          "image_caption": [
+            "Two farm workers stand on either side of a large tractor pulling cultivation equipment through a green crop field. The workers appear to monitor or adjust the machinery as it moves along a furrow. The expansive field stretches to the horizon under a cloudy sky, with no buildings or other structures visible."
+          ]
+        },
+        {
+          "round": "D10:4",
+          "user": "On the way, I also saw this bright red flower. I think it’s called bishop of llandaff?",
+          "image_id": [
+            "D10:IMG_003"
+          ],
+          "input_image": [
+            "../image/Nature_Economics_Programming_Student_Life/D10_IMG_003.jpg"
+          ],
+          "assistant": "Yes! This is Dahlia ‘Bishop of Llandaff.’ It's well known for its deep red petals and striking contrast against dark foliage.",
+          "image_caption": [
+            "Bright red flower with multiple smooth petals radiating from a central cluster of small yellow and orange stamens, set against a dark, blurred background of green foliage."
+          ]
+        },
+        {
+          "round": "D10:5",
+          "user": "Here’s another photo of it. The color was so vivid in sunlight.",
+          "image_id": [
+            "D10:IMG_004"
+          ],
+          "input_image": [
+            "../image/Nature_Economics_Programming_Student_Life/D10_IMG_004.jpg"
+          ],
+          "assistant": "Beautiful shot—the rich red with yellow stamens really stands out. No wonder this cultivar is so popular in gardens.",
+          "image_caption": [
+            "Bright red flower in close-up, with broad overlapping petals and a dense yellow and dark red center, set against a softly blurred background of green foliage."
+          ]
+        },
+        {
+          "round": "D10:6",
+          "user": "I also found a different flower I couldn’t identify. Here’s the picture.",
+          "image_id": [
+            "D10:IMG_005"
+          ],
+          "input_image": [
+            "../image/Nature_Economics_Programming_Student_Life/D10_IMG_005.jpg"
+          ],
+          "assistant": "This looks like a Dahlia variety—possibly a pink-yellow hybrid. Let me check the next ones to confirm.",
+          "image_caption": [
+            "Peach and yellow dahlia-like flower in full bloom surrounded by dense green foliage, with a smaller unopened bud visible in the lower left corner."
+          ]
+        },
+        {
+          "round": "D10:7",
+          "user": "Here are more photos from other angles.",
+          "image_id": [
+            "D10:IMG_006"
+          ],
+          "input_image": [
+            "../image/Nature_Economics_Programming_Student_Life/D10_IMG_006.jpg"
+          ],
+          "assistant": "Yes, this coloration and layered petals strongly suggest it’s a pink-yellow dahlia. They're known for their multi-layered blossom shape.",
+          "image_caption": [
+            "Two large, layered dahlia flowers in shades of peach and yellow bloom among dense green foliage, with one flower prominently in the foreground and another slightly out of focus behind it."
+          ]
+        },
+        {
+          "round": "D10:8",
+          "user": "And one more.",
+          "image_id": [
+            "D10:IMG_007"
+          ],
+          "input_image": [
+            "../image/Nature_Economics_Programming_Student_Life/D10_IMG_007.jpg"
+          ],
+          "assistant": "Confirmed! Definitely a pink-yellow dahlia. They usually bloom in late summer to early fall and love full sun.",
+          "image_caption": [
+            "Orange-pink dahlia flower with layered petals in various stages of opening, surrounded by dense green foliage with jagged-edged leaves and some small holes."
+          ]
+        },
+        {
+          "round": "D10:9",
+          "user": "What are their main habits? They seem pretty resilient.",
+          "assistant": "They're relatively hardy! Dahlias prefer well-drained soil, lots of sunlight, and moderate watering. They grow from tubers and can be lifted and stored during winter in colder regions."
+        },
+        {
+          "round": "D10:10",
+          "user": "I really enjoyed discovering flowers today. It made me appreciate nature more.",
+          "assistant": "That’s wonderful. Sometimes small encounters in nature spark deeper curiosity and appreciation."
+        },
+        {
+          "round": "D10:11",
+          "user": "Later on the road, I spotted these small birds hopping around. Here's a picture.",
+          "image_id": [
+            "D10:IMG_008"
+          ],
+          "input_image": [
+            "../image/Nature_Economics_Programming_Student_Life/D10_IMG_008.jpg"
+          ],
+          "assistant": "This looks like an American Pipit! They’re slender, brownish birds often seen foraging on open ground.",
+          "image_caption": [
+            "Small brown songbird perched on a bare, slender tree branch against a clear blue sky, with a few thin leaves and twigs extending around it."
+          ]
+        },
+        {
+          "round": "D10:12",
+          "user": "Here’s another one from the grass area.",
+          "image_id": [
+            "D10:IMG_009"
+          ],
+          "input_image": [
+            "../image/Nature_Economics_Programming_Student_Life/D10_IMG_009.jpg"
+          ],
+          "assistant": "Yes, definitely an American Pipit. Their streaked chest and thin bill are distinctive features.",
+          "image_caption": [
+            "Small brown songbird with a streaked white breast and slender beak standing upright in short, patchy grass, facing left. Background consists of slightly blurred green and brown grass with no other visible animals or objects."
+          ]
+        },
+        {
+          "round": "D10:13",
+          "user": "And this one was perched on a rock.",
+          "image_id": [
+            "D10:IMG_010"
+          ],
+          "input_image": [
+            "../image/Nature_Economics_Programming_Student_Life/D10_IMG_010.jpg"
+          ],
+          "assistant": "Cute! They often bob their tails while perched. They migrate widely and adapt well to meadows, fields, and tundra regions.",
+          "image_caption": [
+            "Small brown songbird with a streaked buff chest and slender dark bill standing on a gray rock, one leg lifted mid-step, against a blurred natural background of muted earth tones."
+          ]
+        },
+        {
+          "round": "D10:14",
+          "user": "I didn’t expect to learn so much from a casual farm visit.",
+          "assistant": "Nature trips can be surprisingly educational! You encountered plants, ecosystems, and even bird species diversity."
+        },
+        {
+          "round": "D10:15",
+          "user": "It also made me think a lot about environmental issues.",
+          "assistant": "That’s a meaningful reflection. Agriculture, biodiversity, and climate all intersect in interesting ways."
+        },
+        {
+          "round": "D10:16",
+          "user": "By the way, I’ve decided to start an environmental studies minor next semester.",
+          "assistant": "That sounds like a great plan! It pairs especially well with your economics background."
+        },
+        {
+          "round": "D10:17",
+          "user": "Yeah, I feel combining economics and environmental studies might help me pursue a more meaningful master’s program.",
+          "assistant": "Absolutely. Fields like environmental economics, sustainability policy, and ecological management value this interdisciplinary foundation."
+        },
+        {
+          "round": "D10:18",
+          "user": "Do you think it will strengthen my application if I aim for a master’s focusing on sustainability or environmental policy?",
+          "assistant": "Yes—having coursework and practical exposure in both fields shows clear commitment and academic coherence. It’s a strong combination."
+        },
+        {
+          "round": "D10:19",
+          "user": "I feel really inspired after today.",
+          "assistant": "Moments like this often spark long-term passions. I’m glad the trip gave you such clarity!"
+        },
+        {
+          "round": "D10:20",
+          "user": "Thanks for walking through everything with me today.",
+          "assistant": "Always happy to help! Let me know if you need guidance choosing courses or planning your academic path."
+        }
+      ]
+    }
+  ],
+  "human-annotated QAs": [
+    {
+      "point": "FR",
+      "question": "What two species of albatrosses did Aiden photograph during his coastal birdwatching trip?",
+      "answer": "Black-footed Albatross and Laysan Albatross.",
+      "session_id": [
+        "D1"
+      ],
+      "clue": [
+        "D1:2",
+        "D1:9"
+      ]
+    },
+    {
+      "point": "MR",
+      "question": "What are the three fastest clues for distinguishing Black-footed and Laysan Albatrosses at a distance?",
+      "answer": "(1) Head color — dark (Black-footed) vs. white (Laysan). (2) Bill shade — dark vs. pale. (3) Body contrast — uniform brown vs. strong dark–light contrast.",
+      "session_id": [
+        "D1"
+      ],
+      "clue": [
+        "D1:18"
+      ]
+    },
+    {
+      "point": "VS",
+      "question": "Which image shows the first Laysan Albatross that Aiden photographed?",
+      "answer": "D1:IMG_006",
+      "session_id": [
+        "D1"
+      ],
+      "clue": [
+        "D1:9"
+      ]
+    },
+    {
+      "point": "AR",
+      "question": "Did Aiden photograph any gulls during this coastal birdwatching trip?",
+      "answer": "Not mentioned.",
+      "session_id": [
+        "D1"
+      ],
+      "clue": []
+    },
+    {
+      "point": "VR",
+      "question": "How many Black-footed Albatross photos did Aiden share in total? Please answer using an Arabic numeral (e.g., “2” instead of “Two”).",
+      "answer": "5",
+      "session_id": [
+        "D1"
+      ],
+      "clue": [
+        "D1:2",
+        "D1:3",
+        "D1:4",
+        "D1:5",
+        "D1:6"
+      ]
+    },
+    {
+      "point": "TTL",
+      "question": "What specific species of animal is shown in the provided image?",
+      "question_image": "../image/Nature_Economics_Programming_Student_Life/QA_IMG_001.jpg",
+      "answer": "Black-footed Albatross",
+      "session_id": [
+        "D1"
+      ],
+      "clue": [
+        "D1:2",
+        "D1:3",
+        "D1:4",
+        "D1:5",
+        "D1:6"
+      ],
+      "image_caption": "Dark-colored seabird with long, narrow wings gliding over rippled ocean water, wings outstretched parallel to the sea surface, with faint white markings near the tips of the tail-side wing feathers."
+    },
+    {
+      "point": "TTL",
+      "question": "What specific species of animal is shown in the provided image?",
+      "question_image": "../image/Nature_Economics_Programming_Student_Life/QA_IMG_002.jpg",
+      "answer": "Black-footed Albatross",
+      "session_id": [
+        "D1"
+      ],
+      "clue": [
+        "D1:2",
+        "D1:3",
+        "D1:4",
+        "D1:5",
+        "D1:6"
+      ],
+      "image_caption": "Brown seabird with a pale head floats on rippling green water, facing the camera, with one wing slightly raised and small splashes surrounding its body."
+    },
+    {
+      "point": "TTL",
+      "question": "What specific species of animal is shown in the provided image?",
+      "question_image": "../image/Nature_Economics_Programming_Student_Life/QA_IMG_003.jpg",
+      "answer": "Black-footed Albatross",
+      "session_id": [
+        "D1"
+      ],
+      "clue": [
+        "D1:2",
+        "D1:3",
+        "D1:4",
+        "D1:5",
+        "D1:6"
+      ],
+      "image_caption": "A large seabird with long, narrow wings glides low over choppy blue ocean water, wings outstretched parallel to the surface, with no land or other objects visible in the background."
+    },
+    {
+      "point": "TTL",
+      "question": "What specific species of animal is shown in the provided image?",
+      "question_image": "../image/Nature_Economics_Programming_Student_Life/QA_IMG_004.jpg",
+      "answer": "Black-footed Albatross",
+      "session_id": [
+        "D1"
+      ],
+      "clue": [
+        "D1:2",
+        "D1:3",
+        "D1:4",
+        "D1:5",
+        "D1:6"
+      ],
+      "image_caption": "Large seabird with long, narrow wings gliding just above the surface of a deep blue ocean, wings fully outstretched and body parallel to the waves, with no other animals or objects visible in the background."
+    },
+    {
+      "point": "TTL",
+      "question": "What specific species of animal is shown in the provided image?",
+      "question_image": "../image/Nature_Economics_Programming_Student_Life/QA_IMG_005.jpg",
+      "answer": "Black-footed Albatross",
+      "session_id": [
+        "D1"
+      ],
+      "clue": [
+        "D1:2",
+        "D1:3",
+        "D1:4",
+        "D1:5",
+        "D1:6"
+      ],
+      "image_caption": "Large brown seabird with a pale forehead and dark hooked bill floating on calm gray ocean water, with a thin white tracking antenna extending from its back."
+    },
+    {
+      "point": "MR",
+      "question": "What flying technique do Black-footed Albatrosses use that allows them to glide with almost no wing flapping?",
+      "answer": "Dynamic soaring — using wind gradients above the waves to stay aloft with minimal energy.",
+      "session_id": [
+        "D1"
+      ],
+      "clue": [
+        "D1:7"
+      ]
+    },
+    {
+      "point": "VR",
+      "question": "How many Laysan Albatross photos did Aiden share in total? Please answer using an Arabic numeral (e.g., “2” instead of “Two”).",
+      "answer": "5",
+      "session_id": [
+        "D1"
+      ],
+      "clue": [
+        "D1:9",
+        "D1:10",
+        "D1:12",
+        "D1:13",
+        "D1:14"
+      ]
+    },
+    {
+      "point": "TTL",
+      "question": "What specific species of animal is shown in the provided image?",
+      "question_image": "../image/Nature_Economics_Programming_Student_Life/QA_IMG_006.jpg",
+      "answer": "Laysan Albatross",
+      "session_id": [
+        "D1"
+      ],
+      "clue": [
+        "D1:9",
+        "D1:10",
+        "D1:12",
+        "D1:13",
+        "D1:14"
+      ],
+      "image_caption": "Large seabird with a white head and neck and dark brown wings and back, resting on lush green grass in an outdoor setting."
+    },
+    {
+      "point": "TTL",
+      "question": "What specific species of animal is shown in the provided image?",
+      "question_image": "../image/Nature_Economics_Programming_Student_Life/QA_IMG_007.jpg",
+      "answer": "Laysan Albatross",
+      "session_id": [
+        "D1"
+      ],
+      "clue": [
+        "D1:9",
+        "D1:10",
+        "D1:12",
+        "D1:13",
+        "D1:14"
+      ],
+      "image_caption": "Close-up frontal view of a large seabird, likely an albatross, with a white head, dark eye patches, and a long, pale pinkish beak that tapers to a darker tip. The bird’s body feathers appear white on the front and darker on the sides, and it is set against a blurred, dark background with no visible text or additional objects."
+    },
+    {
+      "point": "TTL",
+      "question": "What specific species of animal is shown in the provided image?",
+      "question_image": "../image/Nature_Economics_Programming_Student_Life/QA_IMG_008.jpg",
+      "answer": "Laysan Albatross",
+      "session_id": [
+        "D1"
+      ],
+      "clue": [
+        "D1:9",
+        "D1:10",
+        "D1:12",
+        "D1:13",
+        "D1:14"
+      ],
+      "image_caption": "A large seabird with long, dark wings, a white head, and a pale bill glides over choppy blue ocean water, with waves and white foam filling the background."
+    },
+    {
+      "point": "TTL",
+      "question": "What specific species of animal is shown in the provided image?",
+      "question_image": "../image/Nature_Economics_Programming_Student_Life/QA_IMG_009.jpg",
+      "answer": "Laysan Albatross",
+      "session_id": [
+        "D1"
+      ],
+      "clue": [
+        "D1:9",
+        "D1:10",
+        "D1:12",
+        "D1:13",
+        "D1:14"
+      ],
+      "image_caption": "Large white seabird with long, black-tipped wings gliding in midair against a bright blue sky filled with scattered clouds, above a low line of distant treetops."
+    },
+    {
+      "point": "TTL",
+      "question": "What specific species of animal is shown in the provided image?",
+      "question_image": "../image/Nature_Economics_Programming_Student_Life/QA_IMG_010.jpg",
+      "answer": "Laysan Albatross",
+      "session_id": [
+        "D1"
+      ],
+      "clue": [
+        "D1:9",
+        "D1:10",
+        "D1:12",
+        "D1:13",
+        "D1:14"
+      ],
+      "image_caption": "A seagull with brown wings and a white head flies low over gently rippled water, its reflection clearly visible beneath it on the water’s surface."
+    },
+    {
+      "point": "FR",
+      "question": "What types of flowers were used in the centerpiece arrangement at Aiden's family gathering?",
+      "answer": "Orange roses, lilies, chrysanthemums, and eucalyptus leaves.",
+      "session_id": [
+        "D2"
+      ],
+      "clue": [
+        "D2:1"
+      ]
+    },
+    {
+      "point": "MR",
+      "question": "What feedback did Aiden's aunt give about his first flower arrangement attempt?",
+      "answer": "She said the bouquet looked a little 'top-heavy'.",
+      "session_id": [
+        "D2"
+      ],
+      "clue": [
+        "D2:3"
+      ]
+    },
+    {
+      "point": "VS",
+      "question": "Which image shows the food table decorated with sunflowers?",
+      "answer": "D2:IMG_003",
+      "session_id": [
+        "D2"
+      ],
+      "clue": [
+        "D2:4"
+      ]
+    },
+    {
+      "point": "MR",
+      "question": "How many Norfolk terriers appeared at the family gathering? Please answer using an Arabic numeral (e.g., “2” instead of “Two”).",
+      "answer": "2",
+      "session_id": [
+        "D2"
+      ],
+      "clue": [
+        "D2:6",
+        "D2:8"
+      ]
+    },
+    {
+      "point": "VR",
+      "question": "How many images of Norfolk terriers appeared at the family gathering? Please answer using an Arabic numeral (e.g., “2” instead of “Two”).",
+      "answer": "3",
+      "session_id": [
+        "D2"
+      ],
+      "clue": [
+        "D2:6",
+        "D2:8",
+        "D2:9"
+      ]
+    },
+    {
+      "point": "TTL",
+      "question": "What specific species of animal is shown in the provided image?",
+      "question_image": "../image/Nature_Economics_Programming_Student_Life/QA_IMG_011.jpg",
+      "answer": "Norfolk terrier",
+      "session_id": [
+        "D2"
+      ],
+      "clue": [
+        "D2:6",
+        "D2:8",
+        "D2:9"
+      ],
+      "image_caption": "Small brown and black terrier puppy sitting on a wooden floor in a patch of sunlight, leaning against a white wall near a dark wooden table leg, with soft shadows cast across the scene."
+    },
+    {
+      "point": "TTL",
+      "question": "What specific species of animal is shown in the provided image?",
+      "question_image": "../image/Nature_Economics_Programming_Student_Life/QA_IMG_012.jpg",
+      "answer": "Norfolk terrier",
+      "session_id": [
+        "D2"
+      ],
+      "clue": [
+        "D2:6",
+        "D2:8",
+        "D2:9"
+      ],
+      "image_caption": "Close-up of a small, scruffy dog with medium-length brown and black fur, dark round eyes, and a slightly wet, textured coat, looking attentively toward the right against a plain light beige background."
+    },
+    {
+      "point": "TTL",
+      "question": "What specific species of animal is shown in the provided image?",
+      "question_image": "../image/Nature_Economics_Programming_Student_Life/QA_IMG_013.jpg",
+      "answer": "Norfolk terrier",
+      "session_id": [
+        "D2"
+      ],
+      "clue": [
+        "D2:6",
+        "D2:8",
+        "D2:9"
+      ],
+      "image_caption": "Small, short-legged brown dog with a rough coat standing sideways on a rock, mouth slightly open and tongue visible, against a blurred outdoor background of grass and sky."
+    },
+    {
+      "point": "TTL",
+      "question": "What specific species of animal is shown in the provided image?",
+      "question_image": "../image/Nature_Economics_Programming_Student_Life/QA_IMG_014.jpg",
+      "answer": "Norfolk terrier",
+      "session_id": [
+        "D2"
+      ],
+      "clue": [
+        "D2:6",
+        "D2:8",
+        "D2:9"
+      ],
+      "image_caption": "Small shaggy brown dog in a close-up outdoor winter scene, with clumps of snow on its muzzle and fur. The dog faces the camera against a background of snow-covered ground and leafless trees under a bright sky."
+    },
+    {
+      "point": "MR",
+      "question": "What three common flower arrangement styles were discussed in the conversation?",
+      "answer": "(1) Round arrangements for softer, balanced looks; (2) Triangular or fan-shaped for centerpieces meant to draw attention upward; (3) Asymmetric styles for modern, natural-feeling arrangements.",
+      "session_id": [
+        "D2"
+      ],
+      "clue": [
+        "D2:12"
+      ]
+    },
+    {
+      "point": "AR",
+      "question": "Did Aiden bring his own camera to photograph the Norfolk terriers?",
+      "answer": "Not mentioned.",
+      "session_id": [
+        "D2"
+      ],
+      "clue": []
+    },
+    {
+      "point": "FR",
+      "question": "What programming project idea did Aiden share with his cousins at the family gathering?",
+      "answer": "Building a tiny program to catalog bird species and plant notes from his walks.",
+      "session_id": [
+        "D2"
+      ],
+      "clue": [
+        "D2:15"
+      ]
+    },
+    {
+      "point": "MR",
+      "question": "How are scatter plots useful for economics data according to the conversation?",
+      "answer": "They're great for visualizing relationships between two variables, like income vs. consumption, price vs. demand, or inflation vs. unemployment. They help reveal patterns like linear trends, clusters, or outliers.",
+      "session_id": [
+        "D3"
+      ],
+      "clue": [
+        "D3:3"
+      ]
+    },
+    {
+      "point": "VS",
+      "question": "Which image shows the code for Aiden's first scatter plot in the conversation?",
+      "answer": "D3:IMG_001",
+      "session_id": [
+        "D3"
+      ],
+      "clue": [
+        "D3:1"
+      ]
+    },
+    {
+      "point": "VR",
+      "question": "How many coding exercises did Aiden show for review? Please answer using an Arabic numeral (e.g., “2” instead of “Two”).",
+      "answer": "4",
+      "session_id": [
+        "D3"
+      ],
+      "clue": [
+        "D3:24",
+        "D3:26",
+        "D3:28",
+        "D3:30"
+      ]
+    },
+    {
+      "point": "MR",
+      "question": "What economic function did Aiden mention wanting to visualize using 3D plots someday?",
+      "answer": "A Cobb-Douglas production function.",
+      "session_id": [
+        "D3"
+      ],
+      "clue": [
+        "D3:10"
+      ]
+    },
+    {
+      "point": "AR",
+      "question": "Did Aiden use Seaborn library during this plotting practice session?",
+      "answer": "Not mentioned.",
+      "session_id": [
+        "D3"
+      ],
+      "clue": []
+    },
+    {
+      "point": "MR",
+      "question": "What guidelines were suggested for choosing linestyle, color, and linewidth when plotting?",
+      "answer": "Linestyle conveys the type of relationship, color represents category or group, and linewidth emphasizes importance.",
+      "session_id": [
+        "D3"
+      ],
+      "clue": [
+        "D3:25"
+      ]
+    },
+    {
+      "point": "CD",
+      "question": "Please determine whether the following information conflicts with the dialogue memory: The user used Seaborn for data visualization.",
+      "answer": "Yes.",
+      "session_id": [
+        "D3"
+      ],
+      "clue": [
+        "D3:19",
+        "D3:20"
+      ]
+    },
+    {
+      "point": "KR",
+      "question": "Did the user ultimately decide to use Seaborn for data visualization?",
+      "answer": "No.",
+      "session_id": [
+        "D3"
+      ],
+      "clue": [
+        "D3:19",
+        "D3:20"
+      ]
+    },
+    {
+      "point": "VR",
+      "question": "Which Python program in the shared image will produce the result shown in the attached figure? Please return the corresponding image ID only.",
+      "question_image": "../image/Nature_Economics_Programming_Student_Life/QA_IMG_015.png",
+      "answer": "D3:IMG_011",
+      "session_id": [
+        "D3"
+      ],
+      "clue": [
+        "D3:24"
+      ],
+      "image_caption": "Line graph with two blue lines, one thick solid and one thin dashed, sharing x-values from 2 to 7 and y-values from about 10 to 45. The solid line rises from about 11 to 23, slightly declines to around 22, then increases to about 27. The dashed line decreases from about 33 to 21 before sharply climbing to about 45."
+    },
+    {
+      "point": "VR",
+      "question": "Which Python program in the shared image will produce the result shown in the attached figure? Please return the corresponding image ID only.",
+      "question_image": "../image/Nature_Economics_Programming_Student_Life/QA_IMG_016.png",
+      "answer": "D3:IMG_012",
+      "session_id": [
+        "D3"
+      ],
+      "clue": [
+        "D3:26"
+      ],
+      "image_caption": "Line graph with x-axis labeled from 1 to 8 and y-axis from 10 to just above 50, showing two data series. A yellow dashed line fluctuates sharply, peaking near x=7 above 50. An orange dash-dot line with circular markers varies more moderately, peaking near x=2 around the low 40s and again near x=7 in the low 30s. No title or legend is visible."
+    },
+    {
+      "point": "VR",
+      "question": "Which Python program in the shared image will produce the result shown in the attached figure? Please return the corresponding image ID only.",
+      "question_image": "../image/Nature_Economics_Programming_Student_Life/QA_IMG_017.png",
+      "answer": "D3:IMG_013",
+      "session_id": [
+        "D3"
+      ],
+      "clue": [
+        "D3:28"
+      ],
+      "image_caption": "3D scatter plot with a gray grid and red circular markers distributed throughout the volume. The x‑axis ranges approximately from 1 to 4, the y‑axis from 1 to 5, and the z‑axis from 1.0 to 2.0, with tick labels visible along each axis. No legend or additional text is present."
+    },
+    {
+      "point": "VR",
+      "question": "Which Python program in the shared image will produce the result shown in the attached figure? Please return the corresponding image ID only.",
+      "question_image": "../image/Nature_Economics_Programming_Student_Life/QA_IMG_018.png",
+      "answer": "D3:IMG_014",
+      "session_id": [
+        "D3"
+      ],
+      "clue": [
+        "D3:30"
+      ],
+      "image_caption": "3D scatter plot with red circular markers scattered across three unlabeled axes, each with numeric tick marks ranging roughly from 0 to 25, over a light gray grid background."
+    },
+    {
+      "point": "FR",
+      "question": "What factors drive long-run economic growth according to the conversation?",
+      "answer": "Better technology, more physical capital, higher education levels, and improved productivity.",
+      "session_id": [
+        "D4"
+      ],
+      "clue": [
+        "D4:1"
+      ]
+    },
+    {
+      "point": "VS",
+      "question": "Which image shows the nested sustainability model diagram?",
+      "answer": "D4:IMG_001",
+      "session_id": [
+        "D4"
+      ],
+      "clue": [
+        "D4:8"
+      ]
+    },
+    {
+      "point": "FR",
+      "question": "What types of questions do environmental economists study according to the conversation?",
+      "answer": "How to price carbon emissions, what's the economic cost of losing a wetland or forest, and how governments should design incentives to protect biodiversity.",
+      "session_id": [
+        "D4"
+      ],
+      "clue": [
+        "D4:7"
+      ]
+    },
+    {
+      "point": "AR",
+      "question": "Did the conversation mention any specific environmental economics textbooks or professors?",
+      "answer": "Not mentioned.",
+      "session_id": [
+        "D4"
+      ],
+      "clue": []
+    },
+    {
+      "point": "MR",
+      "question": "What is Aiden's ideal future career goal related to environmental policy?",
+      "answer": "Doing research that helps design better environmental policies—maybe evaluating how conservation programs affect both local communities and wildlife.",
+      "session_id": [
+        "D4"
+      ],
+      "clue": [
+        "D4:11"
+      ]
+    },
+    {
+      "point": "FR",
+      "question": "What two types of flowers did Aiden observe during his weekend hike?",
+      "answer": "Poinsettias and Clematis.",
+      "session_id": [
+        "D5"
+      ],
+      "clue": [
+        "D5:2",
+        "D5:7"
+      ]
+    },
+    {
+      "point": "VR",
+      "question": "How many poinsettia photos did Aiden share? Please answer using an Arabic numeral (e.g., “2” instead of “Two”).",
+      "answer": "4",
+      "session_id": [
+        "D5"
+      ],
+      "clue": [
+        "D5:2",
+        "D5:3",
+        "D5:4",
+        "D5:5"
+      ]
+    },
+    {
+      "point": "TTL",
+      "question": "What specific species of plant is shown in the provided image?",
+      "question_image": "../image/Nature_Economics_Programming_Student_Life/QA_IMG_019.jpg",
+      "answer": "Poinsettia",
+      "session_id": [
+        "D5"
+      ],
+      "clue": [
+        "D5:2",
+        "D5:3",
+        "D5:4",
+        "D5:5"
+      ],
+      "image_caption": "Red poinsettia plant with large, overlapping crimson bracts surrounding small yellow-green flower buds at the center, contrasted by a few dark green leaves at the base, set against a plain light background."
+    },
+    {
+      "point": "TTL",
+      "question": "What specific species of plant is shown in the provided image?",
+      "question_image": "../image/Nature_Economics_Programming_Student_Life/QA_IMG_020.jpg",
+      "answer": "Poinsettia",
+      "session_id": [
+        "D5"
+      ],
+      "clue": [
+        "D5:2",
+        "D5:3",
+        "D5:4",
+        "D5:5"
+      ],
+      "image_caption": "Potted poinsettia plant with bright red bracts and dark green leaves, placed in a shiny red plastic pot against a plain light green background."
+    },
+    {
+      "point": "TTL",
+      "question": "What specific species of plant is shown in the provided image?",
+      "question_image": "../image/Nature_Economics_Programming_Student_Life/QA_IMG_021.jpg",
+      "answer": "Poinsettia",
+      "session_id": [
+        "D5"
+      ],
+      "clue": [
+        "D5:2",
+        "D5:3",
+        "D5:4",
+        "D5:5"
+      ],
+      "image_caption": "Bright red poinsettia plant with large overlapping bracts surrounding a small cluster of green and yellow flower buds at the center, set against dark green foliage in the background."
+    },
+    {
+      "point": "TTL",
+      "question": "What specific species of plant is shown in the provided image?",
+      "question_image": "../image/Nature_Economics_Programming_Student_Life/QA_IMG_022.jpg",
+      "answer": "Poinsettia",
+      "session_id": [
+        "D5"
+      ],
+      "clue": [
+        "D5:2",
+        "D5:3",
+        "D5:4",
+        "D5:5"
+      ],
+      "image_caption": "Red poinsettia plant with white-speckled bracts and green leaves, photographed at close range. Additional red and cream poinsettias appear in the background, partially out of focus, with a wooden lattice structure behind them."
+    },
+    {
+      "point": "TTL",
+      "question": "What specific species of plant is shown in the provided image?",
+      "question_image": "../image/Nature_Economics_Programming_Student_Life/QA_IMG_023.jpg",
+      "answer": "Poinsettia",
+      "session_id": [
+        "D5"
+      ],
+      "clue": [
+        "D5:2",
+        "D5:3",
+        "D5:4",
+        "D5:5"
+      ],
+      "image_caption": "White poinsettia plant with large pale bracts and dark green leaves in a green-wrapped pot, placed indoors on a light-colored surface, with part of a red poinsettia visible on the right side."
+    },
+    {
+      "point": "VR",
+      "question": "How many Clematis photos did Aiden share? Please answer using an Arabic numeral (e.g., “2” instead of “Two”).",
+      "answer": "4",
+      "session_id": [
+        "D5"
+      ],
+      "clue": [
+        "D5:7",
+        "D5:8",
+        "D5:9",
+        "D5:10"
+      ]
+    },
+    {
+      "point": "TTL",
+      "question": "What specific species of plant is shown in the provided image?",
+      "question_image": "../image/Nature_Economics_Programming_Student_Life/QA_IMG_024.jpg",
+      "answer": "Clematis",
+      "session_id": [
+        "D5"
+      ],
+      "clue": [
+        "D5:7",
+        "D5:8",
+        "D5:9",
+        "D5:10"
+      ],
+      "image_caption": "Close-up of a large purple clematis flower with eight broad petals featuring magenta central stripes and a cluster of pale stamens, against a wooden deck background."
+    },
+    {
+      "point": "TTL",
+      "question": "What specific species of plant is shown in the provided image?",
+      "question_image": "../image/Nature_Economics_Programming_Student_Life/QA_IMG_025.jpg",
+      "answer": "Clematis",
+      "session_id": [
+        "D5"
+      ],
+      "clue": [
+        "D5:7",
+        "D5:8",
+        "D5:9",
+        "D5:10"
+      ],
+      "image_caption": "White clematis flowers with broad petals and yellow centers grow densely on a climbing vine, surrounded by glossy green leaves and casting shadows against a dark wooden background."
+    },
+    {
+      "point": "TTL",
+      "question": "What specific species of plant is shown in the provided image?",
+      "question_image": "../image/Nature_Economics_Programming_Student_Life/QA_IMG_026.jpg",
+      "answer": "Clematis",
+      "session_id": [
+        "D5"
+      ],
+      "clue": [
+        "D5:7",
+        "D5:8",
+        "D5:9",
+        "D5:10"
+      ],
+      "image_caption": "Cluster of bright magenta clematis flowers in various stages of bloom, including a fully open flower with a green, spiky center and several elongated buds, surrounded by dense green leaves."
+    },
+    {
+      "point": "TTL",
+      "question": "What specific species of plant is shown in the provided image?",
+      "question_image": "../image/Nature_Economics_Programming_Student_Life/QA_IMG_027.jpg",
+      "answer": "Clematis",
+      "session_id": [
+        "D5"
+      ],
+      "clue": [
+        "D5:7",
+        "D5:8",
+        "D5:9",
+        "D5:10"
+      ],
+      "image_caption": "Large purple clematis flower in full bloom with a dense cluster of pale yellow-white stamens at the center, surrounded by green, heart-shaped leaves and thin stems, growing beside a wooden support structure."
+    },
+    {
+      "point": "TTL",
+      "question": "What specific species of plant is shown in the provided image?",
+      "question_image": "../image/Nature_Economics_Programming_Student_Life/QA_IMG_028.jpg",
+      "answer": "Clematis",
+      "session_id": [
+        "D5"
+      ],
+      "clue": [
+        "D5:7",
+        "D5:8",
+        "D5:9",
+        "D5:10"
+      ],
+      "image_caption": "Cluster of vibrant purple clematis flowers with large, overlapping petals and prominent pale yellow-white stamens, surrounded by green foliage and several unopened buds in a dense, vertical garden display."
+    },
+    {
+      "point": "VS",
+      "question": "Which image shows the first Clematis flower Aiden photographed?",
+      "answer": "D5:IMG_005",
+      "session_id": [
+        "D5"
+      ],
+      "clue": [
+        "D5:7"
+      ]
+    },
+    {
+      "point": "VR",
+      "question": "What bird species did Aiden spot on the hill, and what is its distinctive feature?",
+      "answer": "Red-winged Blackbird. The glossy black feathers and the bright red-and-yellow shoulder patch called the epaulet are distinctive identifiers.",
+      "session_id": [
+        "D5"
+      ],
+      "clue": [
+        "D5:14"
+      ]
+    },
+    {
+      "point": "FR",
+      "question": "What differences did Aiden observe between poinsettias and Clematis?",
+      "answer": "Poinsettias feel more like shrubs while Clematis grows like a climbing vine. Poinsettia bracts are thicker and almost leathery, while Clematis petals are thin and delicate.",
+      "session_id": [
+        "D5"
+      ],
+      "clue": [
+        "D5:11",
+        "D5:12"
+      ]
+    },
+    {
+      "point": "AR",
+      "question": "Did Aiden photograph any butterflies during this hike?",
+      "answer": "Not mentioned.",
+      "session_id": [
+        "D5"
+      ],
+      "clue": []
+    },
+    {
+      "point": "TTL",
+      "question": "What specific species of animal is shown in the provided image?",
+      "question_image": "../image/Nature_Economics_Programming_Student_Life/QA_IMG_029.jpg",
+      "answer": "Red-winged Blackbird",
+      "session_id": [
+        "D5",
+        "D7"
+      ],
+      "clue": [
+        "D5:14",
+        "D5:15",
+        "D7:2"
+      ],
+      "image_caption": "Black bird with bright red shoulder patches perched on a thin, broken reed, wings slightly spread and head turned forward. The bird’s dark beak and eyes contrast with its glossy feathers. Soft, out-of-focus golden background suggests an open field or marsh, with no other animals or objects visible."
+    },
+    {
+      "point": "TTL",
+      "question": "What specific species of animal is shown in the provided image?",
+      "question_image": "../image/Nature_Economics_Programming_Student_Life/QA_IMG_030.jpg",
+      "answer": "Red-winged Blackbird",
+      "session_id": [
+        "D5",
+        "D7"
+      ],
+      "clue": [
+        "D5:14",
+        "D5:15",
+        "D7:2"
+      ],
+      "image_caption": "Black bird with a red and yellow shoulder patch perches near the tip of a tall, narrow seed stalk, beak open as if calling. Another similar stalk stands slightly out of focus beside it. The background is blurred green and gray, emphasizing the bird’s dark plumage and the vertical plant stems."
+    },
+    {
+      "point": "TTL",
+      "question": "What specific species of animal is shown in the provided image?",
+      "question_image": "../image/Nature_Economics_Programming_Student_Life/QA_IMG_031.jpg",
+      "answer": "Red-winged Blackbird",
+      "session_id": [
+        "D5",
+        "D7"
+      ],
+      "clue": [
+        "D5:14",
+        "D5:15",
+        "D7:2"
+      ],
+      "image_caption": "Black bird with a bright red and yellow shoulder patch stands on green lily pads in a pond, surrounded by floating leaves and calm water, with blurred reeds in the foreground."
+    },
+    {
+      "point": "TTL",
+      "question": "What specific species of animal is shown in the provided image?",
+      "question_image": "../image/Nature_Economics_Programming_Student_Life/QA_IMG_032.jpg",
+      "answer": "Red-winged Blackbird",
+      "session_id": [
+        "D5",
+        "D7"
+      ],
+      "clue": [
+        "D5:14",
+        "D5:15",
+        "D7:2"
+      ],
+      "image_caption": "Black bird with a bright red-orange patch on its wing standing on dry grass and scattered leaves, with several yellow flowers in the left foreground partially framing the natural outdoor scene."
+    },
+    {
+      "point": "VS",
+      "question": "Please search for all photos of the same species shared in the conversation as this image.",
+      "question_image": "../image/Nature_Economics_Programming_Student_Life/QA_IMG_033.jpg",
+      "answer": "D5:IMG_009, D5:IMG_010, D7:IMG_001",
+      "session_id": [
+        "D5",
+        "D7"
+      ],
+      "clue": [
+        "D5:14",
+        "D5:15",
+        "D7:2"
+      ],
+      "image_caption": "Black bird with bright red and yellow shoulder patch perched on a dried cattail stalk, beak open as if calling, against a softly blurred brown and green background of marsh vegetation."
+    },
+    {
+      "point": "VS",
+      "question": "Please search for all photos of the same species shared in the conversation as this image.",
+      "question_image": "../image/Nature_Economics_Programming_Student_Life/QA_IMG_034.jpg",
+      "answer": "D5:IMG_009, D5:IMG_010, D7:IMG_001",
+      "session_id": [
+        "D5",
+        "D7"
+      ],
+      "clue": [
+        "D5:14",
+        "D5:15",
+        "D7:2"
+      ],
+      "image_caption": "Black bird with speckled dark plumage and distinct orange and yellow patches on its wings perched on thin, leafless branches. The background is softly blurred, showing additional branches and a light blue sky."
+    },
+    {
+      "point": "FR",
+      "question": "What factors contribute to China's e-commerce strength according to the conversation?",
+      "answer": "Massive user base, early adoption of mobile payments, dense logistics networks, and highly competitive platforms.",
+      "session_id": [
+        "D6"
+      ],
+      "clue": [
+        "D6:3"
+      ]
+    },
+    {
+      "point": "VS",
+      "question": "Which image shows the Taobao logo discussed in the conversation?",
+      "answer": "D6:IMG_001",
+      "session_id": [
+        "D6"
+      ],
+      "clue": [
+        "D6:3"
+      ]
+    },
+    {
+      "point": "VR",
+      "question": "How many Brooklyn Nets athletic shorts designs did Aiden compare? Please answer using an Arabic numeral (e.g., “2” instead of “Two”).",
+      "answer": "3",
+      "session_id": [
+        "D6"
+      ],
+      "clue": [
+        "D6:6",
+        "D6:7",
+        "D6:8"
+      ]
+    },
+    {
+      "point": "VS",
+      "question": "Please help me search for all images of the Brooklyn Nets athletic shorts designs discussed in the conversation.",
+      "answer": "D6:IMG_002, D6:IMG_003, D6:IMG_004",
+      "session_id": [
+        "D6"
+      ],
+      "clue": [
+        "D6:6",
+        "D6:7",
+        "D6:8"
+      ]
+    },
+    {
+      "point": "TTL",
+      "question": "According to the conversation, what category is the clothing in the picture?",
+      "question_image": "../image/Nature_Economics_Programming_Student_Life/QA_IMG_035.jpg",
+      "answer": "Brooklyn Nets Athletic Shorts",
+      "session_id": [
+        "D6"
+      ],
+      "clue": [
+        "D6:6",
+        "D6:7",
+        "D6:8"
+      ],
+      "image_caption": "Black knee-length athletic shorts with an elastic waistband, featuring a white angular stripe along the side and a circular logo near the lower hem that reads “BROOKLYN” around a large “B.”"
+    },
+    {
+      "point": "TTL",
+      "question": "According to the conversation, what category is the clothing in the picture?",
+      "question_image": "../image/Nature_Economics_Programming_Student_Life/QA_IMG_036.jpg",
+      "answer": "Brooklyn Nets Athletic Shorts",
+      "session_id": [
+        "D6"
+      ],
+      "clue": [
+        "D6:6",
+        "D6:7",
+        "D6:8"
+      ],
+      "image_caption": "Gray basketball shorts with an elastic waistband and blue side piping, featuring an embroidered Adidas logo on the upper left front, the NBA logo near the lower left hem, and a “NETS” team logo with “B” basketball emblem on the lower right leg."
+    },
+    {
+      "point": "TTL",
+      "question": "According to the conversation, what category is the clothing in the picture?",
+      "question_image": "../image/Nature_Economics_Programming_Student_Life/QA_IMG_037.jpg",
+      "answer": "Brooklyn Nets Athletic Shorts",
+      "session_id": [
+        "D6"
+      ],
+      "clue": [
+        "D6:6",
+        "D6:7",
+        "D6:8"
+      ],
+      "image_caption": "Black athletic shorts with an elastic waistband, featuring three vertical white stripes down the sides, a circular basketball logo with a “B” on the lower front, and the “adidas” logo near the opposite hem."
+    },
+    {
+      "point": "KR",
+      "question": "Which Brooklyn Nets athletic shorts did Aiden finally choose? Only return the image_id of the image.",
+      "answer": "D6:IMG_004",
+      "session_id": [
+        "D6"
+      ],
+      "clue": [
+        "D6:9",
+        "D6:10",
+        "D6:13"
+      ]
+    },
+    {
+      "point": "AR",
+      "question": "Did Aiden purchase any Brooklyn Nets jerseys?",
+      "answer": "Not mentioned.",
+      "session_id": [
+        "D6"
+      ],
+      "clue": []
+    },
+    {
+      "point": "TR",
+      "question": "When did Aiden attend the public lecture on birds and environmental conservation? Return in the format YYYY-MM-DD.",
+      "answer": "2025-04-14",
+      "session_id": [
+        "D7"
+      ],
+      "clue": [
+        "D7:1"
+      ]
+    },
+    {
+      "point": "FR",
+      "question": "What three new bird species did Aiden learn about at the conservation lecture?",
+      "answer": "Northern Cardinal, Lazuli Bunting, and Yellow-headed Blackbird.",
+      "session_id": [
+        "D7"
+      ],
+      "clue": [
+        "D7:4",
+        "D7:7",
+        "D7:10"
+      ]
+    },
+    {
+      "point": "TTL",
+      "question": "What specific species of animal is shown in the provided image?",
+      "question_image": "../image/Nature_Economics_Programming_Student_Life/QA_IMG_038.jpg",
+      "answer": "Northern Cardinal",
+      "session_id": [
+        "D7"
+      ],
+      "clue": [
+        "D7:4",
+        "D7:5",
+        "D7:6"
+      ],
+      "image_caption": "Female northern cardinal with a tan body, red crest, wings, and tail perches on a bare tree branch. The bird faces left, gripping the branch with both feet, while additional thin branches extend around it. The background is softly blurred in neutral gray and brown tones, suggesting a winter or early spring setting."
+    },
+    {
+      "point": "TTL",
+      "question": "What specific species of animal is shown in the provided image?",
+      "question_image": "../image/Nature_Economics_Programming_Student_Life/QA_IMG_039.jpg",
+      "answer": "Northern Cardinal",
+      "session_id": [
+        "D7"
+      ],
+      "clue": [
+        "D7:4",
+        "D7:5",
+        "D7:6"
+      ],
+      "image_caption": "Female northern cardinal perched on thin, leafless branches, facing left. The bird has a light brown body with red accents on the crest, wings, and tail, and a bright red beak with a dark face mask. Background is softly blurred in warm beige and brown tones, emphasizing the bird and branches in the foreground."
+    },
+    {
+      "point": "TTL",
+      "question": "What specific species of animal is shown in the provided image?",
+      "question_image": "../image/Nature_Economics_Programming_Student_Life/QA_IMG_040.jpg",
+      "answer": "Northern Cardinal",
+      "session_id": [
+        "D7"
+      ],
+      "clue": [
+        "D7:4",
+        "D7:5",
+        "D7:6"
+      ],
+      "image_caption": "Bright red male cardinal perched on a bare tree branch during snowfall, with light snow dusting its head and back, surrounded by thin, leafless branches against a soft gray, wintry background."
+    },
+    {
+      "point": "TTL",
+      "question": "What specific species of animal is shown in the provided image?",
+      "question_image": "../image/Nature_Economics_Programming_Student_Life/QA_IMG_041.jpg",
+      "answer": "Northern Cardinal",
+      "session_id": [
+        "D7"
+      ],
+      "clue": [
+        "D7:4",
+        "D7:5",
+        "D7:6"
+      ],
+      "image_caption": "Bright red male cardinal with a pointed crest and black facial markings sitting on undisturbed white snow, its body slightly fluffed against the cold and small snowflakes visible on its feathers, with no other objects or text in the background."
+    },
+    {
+      "point": "TTL",
+      "question": "What specific species of animal is shown in the provided image?",
+      "question_image": "../image/Nature_Economics_Programming_Student_Life/QA_IMG_042.jpg",
+      "answer": "Lazuli Bunting",
+      "session_id": [
+        "D7"
+      ],
+      "clue": [
+        "D7:7",
+        "D7:8",
+        "D7:9"
+      ],
+      "image_caption": "Small songbird with a blue head, orange chest, and white belly perched on the top of a leafy branch against a bright white sky."
+    },
+    {
+      "point": "TTL",
+      "question": "What specific species of animal is shown in the provided image?",
+      "question_image": "../image/Nature_Economics_Programming_Student_Life/QA_IMG_043.jpg",
+      "answer": "Lazuli Bunting",
+      "session_id": [
+        "D7"
+      ],
+      "clue": [
+        "D7:7",
+        "D7:8",
+        "D7:9"
+      ],
+      "image_caption": "Small blue and brown songbird perched on a gray tree branch, surrounded by green leaves and clusters of pale yellow-white blossoms, against a softly blurred natural background."
+    },
+    {
+      "point": "TTL",
+      "question": "What specific species of animal is shown in the provided image?",
+      "question_image": "../image/Nature_Economics_Programming_Student_Life/QA_IMG_044.jpg",
+      "answer": "Lazuli Bunting",
+      "session_id": [
+        "D7"
+      ],
+      "clue": [
+        "D7:7",
+        "D7:8",
+        "D7:9"
+      ],
+      "image_caption": "Small songbird with a bright blue head, orange breast, white belly, and dark wings with pale wing bars perched on a dry, angled branch. Surrounding vegetation includes green leaves and stems, suggesting a natural, shrubby outdoor habitat."
+    },
+    {
+      "point": "TTL",
+      "question": "What specific species of animal is shown in the provided image?",
+      "question_image": "../image/Nature_Economics_Programming_Student_Life/QA_IMG_045.jpg",
+      "answer": "Yellow-headed Blackbird",
+      "session_id": [
+        "D7"
+      ],
+      "clue": [
+        "D7:10",
+        "D7:11",
+        "D7:12"
+      ],
+      "image_caption": "Yellow‑headed blackbird with a bright yellow head and chest and a black body perches among dense, dry reeds in a marshy area, facing left and gripping the stalks with its feet."
+    },
+    {
+      "point": "TTL",
+      "question": "What specific species of animal is shown in the provided image?",
+      "question_image": "../image/Nature_Economics_Programming_Student_Life/QA_IMG_046.jpg",
+      "answer": "Yellow-headed Blackbird",
+      "session_id": [
+        "D7"
+      ],
+      "clue": [
+        "D7:10",
+        "D7:11",
+        "D7:12"
+      ],
+      "image_caption": "Black bird with a bright yellow head and chest perched on the top of a cattail in a marsh, with tall green reeds and other cattails blurred in the background."
+    },
+    {
+      "point": "TTL",
+      "question": "What specific species of animal is shown in the provided image?",
+      "question_image": "../image/Nature_Economics_Programming_Student_Life/QA_IMG_047.jpg",
+      "answer": "Yellow-headed Blackbird",
+      "session_id": [
+        "D7"
+      ],
+      "clue": [
+        "D7:10",
+        "D7:11",
+        "D7:12"
+      ],
+      "image_caption": "Black bird with a bright yellow head and neck perched on a thin branch among green leaves, surrounded by several intersecting stems in a natural outdoor setting."
+    },
+    {
+      "point": "VR",
+      "question": "How many Northern Cardinal photos were shown in the lecture slides? Please answer using an Arabic numeral (e.g., “2” instead of “Two”).",
+      "answer": "3",
+      "session_id": [
+        "D7"
+      ],
+      "clue": [
+        "D7:4",
+        "D7:5",
+        "D7:6"
+      ]
+    },
+    {
+      "point": "VR",
+      "question": "How many Yellow-headed Blackbird photos were shown in the lecture slides? Please answer using an Arabic numeral (e.g., “2” instead of “Two”).",
+      "answer": "3",
+      "session_id": [
+        "D7"
+      ],
+      "clue": [
+        "D7:10",
+        "D7:11",
+        "D7:12"
+      ]
+    },
+    {
+      "point": "MR",
+      "question": "What distinctive features identify a male Northern Cardinal?",
+      "answer": "Vivid red feathers, a crest on its head, a strong beak, and a black mask around the face.",
+      "session_id": [
+        "D7"
+      ],
+      "clue": [
+        "D7:4",
+        "D7:5"
+      ]
+    },
+    {
+      "point": "VR",
+      "question": "How many Lazuli Bunting photos were shown in the lecture slides? Please answer using an Arabic numeral (e.g., “2” instead of “Two”).",
+      "answer": "3",
+      "session_id": [
+        "D7"
+      ],
+      "clue": [
+        "D7:7",
+        "D7:8",
+        "D7:9"
+      ]
+    },
+    {
+      "point": "MR",
+      "question": "What ecosystem services do wetlands provide according to the lecture?",
+      "answer": "They store water, trap sediments, absorb nutrients, provide breeding grounds and food sources for species, act as natural water filters, and buffer against floods.",
+      "session_id": [
+        "D7"
+      ],
+      "clue": [
+        "D7:14",
+        "D7:15"
+      ]
+    },
+    {
+      "point": "FR",
+      "question": "What policy tools were mentioned for correcting environmental externalities?",
+      "answer": "Taxes on pollution, subsidies for landowners who preserve or restore ecosystems, and tradable permits that cap total pollution.",
+      "session_id": [
+        "D7"
+      ],
+      "clue": [
+        "D7:17"
+      ]
+    },
+    {
+      "point": "AR",
+      "question": "Did the lecturer discuss specific conservation organizations or NGOs?",
+      "answer": "Not mentioned.",
+      "session_id": [
+        "D7"
+      ],
+      "clue": []
+    },
+    {
+      "point": "FR",
+      "question": "What physical symptoms did Aiden experience from drinking too much matcha?",
+      "answer": "Racing heart and feeling jittery.",
+      "session_id": [
+        "D8"
+      ],
+      "clue": [
+        "D8:3"
+      ]
+    },
+    {
+      "point": "VS",
+      "question": "Which image shows the matcha beverage mentioned in the conversation?",
+      "answer": "D8:IMG_001",
+      "session_id": [
+        "D8"
+      ],
+      "clue": [
+        "D8:3"
+      ]
+    },
+    {
+      "point": "FR",
+      "question": "How much coursework did Aiden have left to review for his two midterms?",
+      "answer": "For one course, three chapters left. For the other, all key formulas to review.",
+      "session_id": [
+        "D8"
+      ],
+      "clue": [
+        "D8:7"
+      ]
+    },
+    {
+      "point": "AR",
+      "question": "Did Aiden take any anti-anxiety medication?",
+      "answer": "Not mentioned.",
+      "session_id": [
+        "D8"
+      ],
+      "clue": []
+    },
+    {
+      "point": "TR",
+      "question": "When did Aiden finish both midterms and go hiking? Return in the format YYYY-MM-DD.",
+      "answer": "2025-05-13",
+      "session_id": [
+        "D9"
+      ],
+      "clue": [
+        "D9:1"
+      ]
+    },
+    {
+      "point": "FR",
+      "question": "What two types of flowers did Aiden photograph during the post-exam hike?",
+      "answer": "Morning Glory and Thorn Apple (Datura).",
+      "session_id": [
+        "D9"
+      ],
+      "clue": [
+        "D9:2",
+        "D9:6"
+      ]
+    },
+    {
+      "point": "VR",
+      "question": "How many Morning Glory photos did Aiden share? Please answer using an Arabic numeral (e.g., “2” instead of “Two”).",
+      "answer": "3",
+      "session_id": [
+        "D9"
+      ],
+      "clue": [
+        "D9:2",
+        "D9:3",
+        "D9:4"
+      ]
+    },
+    {
+      "point": "TTL",
+      "question": "What specific species of flower is shown in the provided image?",
+      "question_image": "../image/Nature_Economics_Programming_Student_Life/QA_IMG_048.jpg",
+      "answer": "Thorn apple",
+      "session_id": [
+        "D9"
+      ],
+      "clue": [
+        "D9:2",
+        "D9:3",
+        "D9:4"
+      ],
+      "image_caption": "Three magenta morning glory flowers with white centers and radial pink streaks bloom among dense green heart-shaped leaves, viewed close-up in natural outdoor light."
+    },
+    {
+      "point": "TTL",
+      "question": "What specific species of flower is shown in the provided image?",
+      "question_image": "../image/Nature_Economics_Programming_Student_Life/QA_IMG_049.jpg",
+      "answer": "Thorn apple",
+      "session_id": [
+        "D9"
+      ],
+      "clue": [
+        "D9:2",
+        "D9:3",
+        "D9:4"
+      ],
+      "image_caption": "Pink morning glory flower with a white center and radiating magenta streaks, covered in water droplets, fills the foreground. Green heart-shaped leaves and unopened buds surround the bloom, with a wooden fence and partial sunlight in the background."
+    },
+    {
+      "point": "VS",
+      "question": "Please search for all photos of the same plant species as this image shared in the conversation.",
+      "question_image": "../image/Nature_Economics_Programming_Student_Life/QA_IMG_050.jpg",
+      "answer": "D9:IMG_001, D9:IMG_002, D9:IMG_003",
+      "session_id": [
+        "D9"
+      ],
+      "clue": [
+        "D9:2",
+        "D9:3",
+        "D9:4"
+      ],
+      "image_caption": "Single blue morning glory flower with a pale yellow and white center, viewed close-up, surrounded by green leaves and stems in natural sunlight."
+    },
+    {
+      "point": "VS",
+      "question": "Please search for all photos of the same plant species as this image shared in the conversation.",
+      "question_image": "../image/Nature_Economics_Programming_Student_Life/QA_IMG_051.jpg",
+      "answer": "D9:IMG_001, D9:IMG_002, D9:IMG_003",
+      "session_id": [
+        "D9"
+      ],
+      "clue": [
+        "D9:2",
+        "D9:3",
+        "D9:4"
+      ],
+      "image_caption": "White funnel-shaped flower with a purple center and visible stamens growing among broad green leaves, accompanied by a closed white bud on the same vine. Thin, dry grass stems cross the scene, and some leaves show dark spots or insect damage."
+    },
+    {
+      "point": "MR",
+      "question": "What important safety information was shared about Thorn Apple flowers?",
+      "answer": "Thorn Apple is toxic—it contains strong alkaloids. It's safe as long as you don't ingest it, but it's best admired from a distance.",
+      "session_id": [
+        "D9"
+      ],
+      "clue": [
+        "D9:8",
+        "D9:9"
+      ]
+    },
+    {
+      "point": "TTL",
+      "question": "What specific species of flower is shown in the provided image?",
+      "question_image": "../image/Nature_Economics_Programming_Student_Life/QA_IMG_052.jpg",
+      "answer": "Thorn apple",
+      "session_id": [
+        "D9"
+      ],
+      "clue": [
+        "D9:8",
+        "D9:9"
+      ],
+      "image_caption": "White trumpet-shaped flower in bloom surrounded by broad green leaves on a leafy plant outdoors, with stems and branches partially visible in the background."
+    },
+    {
+      "point": "TTL",
+      "question": "What specific species of flower is shown in the provided image?",
+      "question_image": "../image/Nature_Economics_Programming_Student_Life/QA_IMG_053.jpg",
+      "answer": "Thorn apple",
+      "session_id": [
+        "D9"
+      ],
+      "clue": [
+        "D9:8",
+        "D9:9"
+      ],
+      "image_caption": "White, trumpet-shaped flower with a slightly flared edge and visible pale stamens, growing from a thick green stem and surrounded by large, dark green leaves against a dark, out-of-focus background."
+    },
+    {
+      "point": "TTL",
+      "question": "What specific species of flower is shown in the provided image?",
+      "question_image": "../image/Nature_Economics_Programming_Student_Life/QA_IMG_054.jpg",
+      "answer": "Thorn apple",
+      "session_id": [
+        "D9"
+      ],
+      "clue": [
+        "D9:8",
+        "D9:9"
+      ],
+      "image_caption": "Single white, star-shaped flower with five pointed petals and pale green stamens at the center, shown in close-up against a dark background with a few green leaves partially visible around the bloom."
+    },
+    {
+      "point": "TTL",
+      "question": "What specific species of flower is shown in the provided image?",
+      "question_image": "../image/Nature_Economics_Programming_Student_Life/QA_IMG_055.jpg",
+      "answer": "Thorn apple",
+      "session_id": [
+        "D9"
+      ],
+      "clue": [
+        "D9:8",
+        "D9:9"
+      ],
+      "image_caption": "Large white trumpet-shaped flower in bloom, viewed from above, with two small wasp-like insects on its central stamens. Broad, green leaves and grass form a blurred background."
+    },
+    {
+      "point": "CD",
+      "question": "Please determine whether the following information conflicts with the dialogue memory: The plant in the picture is poisonous.",
+      "question_image": "../image/Nature_Economics_Programming_Student_Life/QA_IMG_056.jpg",
+      "answer": "No.",
+      "session_id": [
+        "D9"
+      ],
+      "clue": [
+        "D9:8",
+        "D9:9"
+      ],
+      "image_caption": "Large white trumpet-shaped flower with visible stamens, covered in water droplets, surrounded by dense dark green leaves. The bloom is centered in the frame, highlighting its smooth petals and fresh appearance."
+    },
+    {
+      "point": "CD",
+      "question": "Please determine whether the following information conflicts with the dialogue memory: The plant in the picture is poisonous.",
+      "question_image": "../image/Nature_Economics_Programming_Student_Life/QA_IMG_057.jpg",
+      "answer": "No.",
+      "session_id": [
+        "D9"
+      ],
+      "clue": [
+        "D9:8",
+        "D9:9"
+      ],
+      "image_caption": "Large white trumpet-shaped flower viewed from above, with small dark insects scattered on its petals, surrounded by green leaves in soft focus."
+    },
+    {
+      "point": "CD",
+      "question": "Please determine whether the following information conflicts with the dialogue memory: The plant in the picture is poisonous.",
+      "question_image": "../image/Nature_Economics_Programming_Student_Life/QA_IMG_058.jpg",
+      "answer": "Yes.",
+      "session_id": [
+        "D9"
+      ],
+      "clue": [
+        "D9:8",
+        "D9:9"
+      ],
+      "image_caption": "White funnel-shaped flower with a pale purple center and visible stamens, accompanied by a tightly closed white bud, surrounded by large green leaves with some dark spots and intersecting dry grass stems."
+    },
+    {
+      "point": "CD",
+      "question": "Please determine whether the following information conflicts with the dialogue memory: The plant in the picture is poisonous.",
+      "question_image": "../image/Nature_Economics_Programming_Student_Life/QA_IMG_059.jpg",
+      "answer": "No.",
+      "session_id": [
+        "D9"
+      ],
+      "clue": [
+        "D9:8",
+        "D9:9"
+      ],
+      "image_caption": "Large white trumpet-shaped flower in full bloom with a pale green center, surrounded by broad green leaves, growing in a balcony planter above a sunlit garden lawn with scattered stepping stones."
+    },
+    {
+      "point": "MR",
+      "question": "What intelligent behaviors do Blue Jays exhibit according to the conversation?",
+      "answer": "They are vocal, curious, sometimes mimic other birds' calls, store food, warn other birds of predators, and can solve simple problems.",
+      "session_id": [
+        "D9"
+      ],
+      "clue": [
+        "D9:12",
+        "D9:13"
+      ]
+    },
+    {
+      "point": "VR",
+      "question": "How many French Bulldog photos did Aiden share? Please answer using an Arabic numeral (e.g., “2” instead of “Two”).",
+      "answer": "2",
+      "session_id": [
+        "D9"
+      ],
+      "clue": [
+        "D9:19",
+        "D9:21"
+      ]
+    },
+    {
+      "point": "AR",
+      "question": "Did Aiden create a photo journal during this hike?",
+      "answer": "Not mentioned.",
+      "session_id": [
+        "D9"
+      ],
+      "clue": []
+    },
+    {
+      "point": "TR",
+      "question": "When did Aiden visit his uncle's farmland? Return in the format YYYY-MM-DD.",
+      "answer": "2025-06-01",
+      "session_id": [
+        "D10"
+      ],
+      "clue": [
+        "D10:1"
+      ]
+    },
+    {
+      "point": "MR",
+      "question": "What are the main growing habits of dahlias?",
+      "answer": "They prefer well-drained soil, lots of sunlight, and moderate watering. They grow from tubers and can be lifted and stored during winter in colder regions.",
+      "session_id": [
+        "D10"
+      ],
+      "clue": [
+        "D10:9"
+      ]
+    },
+    {
+      "point": "VR",
+      "question": "How many American Pipit photos did Aiden share? Please answer using an Arabic numeral (e.g., “2” instead of “Two”).",
+      "answer": "3",
+      "session_id": [
+        "D10"
+      ],
+      "clue": [
+        "D10:11",
+        "D10:12",
+        "D10:13"
+      ]
+    },
+    {
+      "point": "KR",
+      "question": "What major academic decision did Aiden make after the farm visit?",
+      "answer": "He decided to start an environmental studies minor next semester.",
+      "session_id": [
+        "D10"
+      ],
+      "clue": [
+        "D10:16"
+      ]
+    },
+    {
+      "point": "AR",
+      "question": "Did Aiden meet any agricultural researchers at his uncle's farm?",
+      "answer": "Not mentioned.",
+      "session_id": [
+        "D10"
+      ],
+      "clue": []
+    },
+    {
+      "point": "TTL",
+      "question": "What specific species of flower is shown in the provided image?",
+      "question_image": "../image/Nature_Economics_Programming_Student_Life/QA_IMG_060.jpg",
+      "answer": "Pink-yellow dahlia",
+      "session_id": [
+        "D10"
+      ],
+      "clue": [
+        "D10:6",
+        "D10:7",
+        "D10:8"
+      ],
+      "image_caption": "Two fully bloomed orange dahlia-like flowers with yellow centers grow among dense green foliage, with a curled brown dried leaf resting between them."
+    },
+    {
+      "point": "TTL",
+      "question": "What specific species of flower is shown in the provided image?",
+      "question_image": "../image/Nature_Economics_Programming_Student_Life/QA_IMG_061.jpg",
+      "answer": "Pink-yellow dahlia",
+      "session_id": [
+        "D10"
+      ],
+      "clue": [
+        "D10:6",
+        "D10:7",
+        "D10:8"
+      ],
+      "image_caption": "Two fully bloomed orange dahlia-like flowers with yellow centers surrounded by dense green foliage, accompanied by smaller buds and partially opened flowers in the background."
+    },
+    {
+      "point": "TTL",
+      "question": "What specific species of flower is shown in the provided image?",
+      "question_image": "../image/Nature_Economics_Programming_Student_Life/QA_IMG_062.jpg",
+      "answer": "Pink-yellow dahlia",
+      "session_id": [
+        "D10"
+      ],
+      "clue": [
+        "D10:6",
+        "D10:7",
+        "D10:8"
+      ],
+      "image_caption": "Orange and yellow dahlia-like flower in full bloom surrounded by green foliage, some leaves partially eaten or damaged; a wilted dark flower head and another blurred bloom appear in the background."
+    },
+    {
+      "point": "VR",
+      "question": "How many pink-yellow dahlia photos did Aiden share? Please answer using an Arabic numeral (e.g., “2” instead of “Two”).",
+      "answer": "3",
+      "session_id": [
+        "D10"
+      ],
+      "clue": [
+        "D10:6",
+        "D10:7",
+        "D10:8"
+      ]
+    },
+    {
+      "point": "VR",
+      "question": "How many bishop of llandaff photos did Aiden share? Please answer using an Arabic numeral (e.g., “2” instead of “Two”).",
+      "answer": "2",
+      "session_id": [
+        "D10"
+      ],
+      "clue": [
+        "D10:4",
+        "D10:5"
+      ]
+    },
+    {
+      "point": "TTL",
+      "question": "What specific species of flower is shown in the provided image?",
+      "question_image": "../image/Nature_Economics_Programming_Student_Life/QA_IMG_063.jpg",
+      "answer": "Bishop of llandaff",
+      "session_id": [
+        "D10"
+      ],
+      "clue": [
+        "D10:4",
+        "D10:5"
+      ],
+      "image_caption": "Bright red flowers with layered petals and yellow centers in sharp focus, surrounded by dark buds and foliage, against a softly blurred garden background."
+    },
+    {
+      "point": "TTL",
+      "question": "What specific species of flower is shown in the provided image?",
+      "question_image": "../image/Nature_Economics_Programming_Student_Life/QA_IMG_064.jpg",
+      "answer": "Bishop of llandaff",
+      "session_id": [
+        "D10"
+      ],
+      "clue": [
+        "D10:4",
+        "D10:5"
+      ],
+      "image_caption": "Bright red flower in full bloom with layered petals and a dark central disk, beside a closed bud on the same stem, set against a blurred background of green foliage and stems."
+    },
+    {
+      "point": "VR",
+      "question": "How many American Pipit photos did Aiden share? Please answer using an Arabic numeral (e.g., “2” instead of “Two”).",
+      "answer": "3",
+      "session_id": [
+        "D10"
+      ],
+      "clue": [
+        "D10:11",
+        "D10:12",
+        "D10:13"
+      ]
+    },
+    {
+      "point": "TTL",
+      "question": "What specific species of bird is shown in the provided image?",
+      "question_image": "../image/Nature_Economics_Programming_Student_Life/QA_IMG_065.jpg",
+      "answer": "American Pipit",
+      "session_id": [
+        "D10"
+      ],
+      "clue": [
+        "D10:11",
+        "D10:12",
+        "D10:13"
+      ],
+      "image_caption": "Small brown and white songbird with streaked breast perched sideways on the top of a weathered wooden post, against a blurred, neutral-toned natural background."
+    },
+    {
+      "point": "TTL",
+      "question": "What specific species of bird is shown in the provided image?",
+      "question_image": "../image/Nature_Economics_Programming_Student_Life/QA_IMG_066.jpg",
+      "answer": "American Pipit",
+      "session_id": [
+        "D10"
+      ],
+      "clue": [
+        "D10:11",
+        "D10:12",
+        "D10:13"
+      ],
+      "image_caption": "Small brown songbird with a pale underside standing in shallow water among sparse, dry reeds, its legs partly submerged and body reflected on the rippled surface in warm, low-angle sunlight."
+    },
+    {
+      "point": "TTL",
+      "question": "What specific species of bird is shown in the provided image?",
+      "question_image": "../image/Nature_Economics_Programming_Student_Life/QA_IMG_067.jpg",
+      "answer": "American Pipit",
+      "session_id": [
+        "D10"
+      ],
+      "clue": [
+        "D10:11",
+        "D10:12",
+        "D10:13"
+      ],
+      "image_caption": "Small brown bird with pale underparts, a slender bill, and a long tail standing on bare soil amid short green plants and grass, facing to the right in a natural outdoor setting."
+    }
+  ]
+}

@@ -1,0 +1,12 @@
+mem.db
+mem.db-*
+__pycache__/
+.env
+*.pyc
+.venv/
+models/
+data/*.npy
+data/processed_memory/
+data/atm_docs.json
+.DS_Store
+*.log

@@ -1,0 +1,2662 @@
+{
+  "character_profile": {
+    "name": "Maria",
+    "persona_summary": "Maria is a 45-year-old woman who works as an office professional at a financial company. She manages client portfolios and supports financial analysis projects. Known for her precision and reliability, she often mentors younger colleagues on career development and financial literacy.",
+    "traits": [
+      "detail-oriented",
+      "professional",
+      "composed",
+      "empathetic"
+    ],
+    "conversation_style": "Reflective, articulate, and methodical; she speaks with a professional yet warm tone, frequently drawing philosophical parallels between cultural experiences and her career insights, while showing deep appreciation for history, aesthetics, and balance."
+  },
+  "multi_session_dialogues": [
+    {
+      "session_id": "D1",
+      "date": "2024-05-15",
+      "dialogues": [
+        {
+          "round": "D1:1",
+          "user": "Hey there! Now that the holiday has begun, I’m really excited to plan my travel route. I’m thinking about some scenic highlights across different continents. What do you think?",
+          "assistant": "That sounds like a fantastic plan, Maria! Do you have any specific destinations in mind already, or are you open to suggestions?"
+        },
+        {
+          "round": "D1:2",
+          "user": "I’d love to start with Europe. I’ve always wanted to visit Paris, especially seeing the Eiffel Tower and the Seine River. It seems like a perfect blend of culture and beauty.",
+          "assistant": "Paris is an excellent choice! The city has so much to offer, from its historic architecture to its vibrant arts scene. Are you planning to spend a lot of time exploring the museums, or do you have other activities in mind?"
+        },
+        {
+          "round": "D1:3",
+          "user": "I definitely want to visit the Louvre. I’ve heard it’s a massive place, and I’m detail-oriented, so I’d love to take my time there, maybe even join a guided tour to fully appreciate the art. Speaking of which, I came across an amazing image of the Eiffel Tower at sunset, which really captured my attention.",
+          "assistant": "That sounds beautiful! The Eiffel Tower at sunset is truly a sight to behold. It must have been stunning to see. Are you thinking of taking a boat ride on the Seine after visiting the tower?",
+          "image_id": [
+            "D1:IMG_001"
+          ],
+          "input_image": [
+            "../image/Global_Travel_Cultural_Sightseeing/D1_IMG_001.png"
+          ],
+          "image_caption": [
+            "Eiffel Tower centered against a pastel sky with scattered clouds, illuminated by warm low-angle light. A straight avenue with moving pedestrians and vehicles leads toward the base, bordered by green trees and purple-flowering foliage, with city buildings in the distance."
+          ]
+        },
+        {
+          "round": "D1:4",
+          "user": "Yes, that would be wonderful. I also want to understand more about how Paris balances its modern economy with cultural preservation—it feels relevant to the sustainable strategies I work on in finance.",
+          "assistant": "That’s such an insightful perspective, Maria. Paris indeed has a fascinating model of blending innovation with heritage. You might enjoy visiting La Défense as well—it’s the business district, and the contrast between glass skyscrapers and classical Parisian architecture is striking."
+        },
+        {
+          "round": "D1:5",
+          "user": "That sounds intriguing. I’ve seen photos of the Grande Arche—it almost symbolizes progress while maintaining harmony with tradition. I’d love to explore that area too.",
+          "assistant": "Exactly! It’s a great metaphor for your professional outlook. You’ll probably find inspiration for your inclusive finance ideas while walking through those contrasting spaces."
+        },
+        {
+          "round": "D1:6",
+          "user": "Yes, a boat ride sounds wonderful! It would be a great way to see the city from a different perspective. I also want to explore some of the smaller neighborhoods to experience local life. After Paris, I’m considering visiting New York. I’ve always admired the skyline, especially the views from Central Park.",
+          "assistant": "New York is another fantastic destination! Central Park offers such a refreshing contrast to the bustling city. Do you have any specific attractions in mind while you’re there, or are you looking to wander and discover?",
+          "image_id": [
+            "D1:IMG_002"
+          ],
+          "input_image": [
+            "../image/Global_Travel_Cultural_Sightseeing/D1_IMG_002.png"
+          ],
+          "image_caption": [
+            "Dense mid- and high-rise apartment buildings line the edge of a large green park with winding paths and ponds in the foreground. Beyond the cityscape, a wide river stretches into the distance, crossed by a suspension bridge between wooded shores."
+          ]
+        },
+        {
+          "round": "D1:7",
+          "user": "I’d like to visit the Metropolitan Museum of Art, especially since I’m passionate about art and finance. It’s fascinating how art can influence market trends. I also want to check out Times Square; it feels so iconic.",
+          "assistant": "Absolutely, Times Square is a must-see! The energy there is incredible, especially in the evenings. Since you're planning to visit both Paris and New York, have you thought about the time you'll spend in each city?"
+        },
+        {
+          "round": "D1:8",
+          "user": "Yes, I’ve been comparing the average costs and travel logistics. My analytical side can’t resist making a small spreadsheet for planning! I want to balance comfort with budget efficiency.",
+          "assistant": "That’s very you, Maria—methodical yet practical. Having a structured plan will help you relax more once you’re actually on the trip. Maybe include a few flexible days for spontaneous discoveries too?"
+        },
+        {
+          "round": "D1:9",
+          "user": "Good point. I’ll definitely leave some time open, maybe for local markets or meeting people. Those experiences often bring the most meaningful insights, both personally and professionally.",
+          "assistant": "Exactly! Cultural exchange often sparks new ways of thinking. You might even find parallels between how people manage their daily finances and broader social trends—it could be inspiring for your inclusivity projects."
+        },
+        {
+          "round": "D1:10",
+          "user": "I’m thinking at least a week in Paris and then another week in New York. I want to make sure I have enough time to soak in the culture and perhaps find inspiration for the more inclusive financial strategies I aim to develop in my career.",
+          "assistant": "That’s a great approach! Taking time to immerse yourself in each city's culture can bring fresh perspectives. Since you're so detail-oriented, maybe you could also keep a travel journal to document your experiences!"
+        },
+        {
+          "round": "D1:11",
+          "user": "That’s a great idea! I usually do that on trips to reflect on what I’ve learned. Speaking of learning, I found an image of a beautiful street in Montmartre, Paris, with colorful buildings and artists at work. It really encapsulates the charm of the city.",
+          "assistant": "Montmartre is such a picturesque area! It's amazing how the artistic vibe still lingers there. I can see why you'd want to explore that neighborhood. Perhaps you could even meet some local artists and discuss their work?"
+        },
+        {
+          "round": "D1:12",
+          "user": "That would be fantastic! I love connecting with creative minds. I think I’ve settled on my first two destinations: Paris for its culture and New York for its vibrant city life. I can’t wait to start this adventure!",
+          "assistant": "Sounds like a perfect plan! I’m sure you’ll have an incredible time in both cities. If you need any more help planning or tips on what to see and do, feel free to reach out!"
+        },
+        {
+          "round": "D1:13",
+          "user": "Thank you! I appreciate your help. I’ll start making a list of things to do and see in both places. It’s going to be an exciting summer!",
+          "assistant": "You're welcome, Maria! Planning is half the fun, and with your attention to detail, I’m sure it’ll be a well-organized adventure. Enjoy the process!"
+        }
+      ]
+    },
+    {
+      "session_id": "D2",
+      "date": "2024-05-18",
+      "dialogues": [
+        {
+          "round": "D2:1",
+          "user": "I'm so excited about our upcoming trip to Paris tomorrow! I can't stop thinking about the first place we should visit. The Champs-Élysées is definitely at the top of my list.",
+          "assistant": "The Champs-Élysées is a great choice! It’s one of the most famous avenues in the world, known for its theatres, cafés, and luxury shops. Are you planning to explore the entire stretch?"
+        },
+        {
+          "round": "D2:2",
+          "user": "Absolutely! I want to take in the sights and maybe even do some shopping. I found this photo that perfectly captures the energy of the Champs-Élysées — you can almost feel the rhythm of Parisian life.",
+          "assistant": "That’s a stunning image! The Arc de Triomphe at the end of the avenue gives it such a majestic feel. Have you ever thought about climbing to the top for a panoramic view of the city?",
+          "image_id": [
+            "D2:IMG_001"
+          ],
+          "input_image": [
+            "../image/Global_Travel_Cultural_Sightseeing/D2_IMG_001.png"
+          ],
+          "image_caption": [
+            "Arc de Triomphe towering at the end of a broad avenue filled with dense, multi-lane traffic of cars, buses, and vans. Tree-lined sidewalks and rows of streetlights frame both sides of the road, leading the eye toward the central archway. Sepia tones highlight the monument’s sculpted reliefs and strong geometric lines above the busy urban scene."
+          ]
+        },
+        {
+          "round": "D2:3",
+          "user": "Yes, I definitely want to do that! The view must be spectacular. And I’ve always been fascinated by the details of the monument — look at this close-up of one of the relief carvings.",
+          "assistant": "The craftsmanship is incredible! The sculptures tell stories of victory, courage, and the spirit of France. It’s amazing how much history is carved into those stones. After the Champs-Élysées, do you already know which landmark you’d like to visit next?",
+          "image_id": [
+            "D2:IMG_002"
+          ],
+          "input_image": [
+            "../image/Global_Travel_Cultural_Sightseeing/D2_IMG_002.png"
+          ],
+          "image_caption": [
+            "Large stone relief sculpture depicting a dynamic battle scene: a muscular central man strides forward, flanked by struggling male and female figures, one holding a small child. Above them, a large winged figure with outstretched arms and drapery rises behind a rearing horse. The composition is carved into a smooth stone wall."
+          ]
+        },
+        {
+          "round": "D2:4",
+          "user": "Definitely! The Eiffel Tower is a must-see, especially at night when it sparkles against the sky. It feels like the symbol of the city’s heartbeat.",
+          "assistant": "That’s breathtaking! The way the lights illuminate the tower creates such a magical atmosphere. Have you thought about having dinner nearby, maybe at a restaurant with a view of the tower?",
+          "image_id": [
+            "D2:IMG_003"
+          ],
+          "input_image": [
+            "../image/Global_Travel_Cultural_Sightseeing/D2_IMG_003.png"
+          ],
+          "image_caption": [
+            "Illuminated Eiffel Tower at night with a bright searchlight beam projecting into the dark sky, rising above a low city skyline and scattered streetlights."
+          ]
+        },
+        {
+          "round": "D2:5",
+          "user": "That sounds perfect! I can imagine dining there while watching the lights shimmer. After that, I’d like to visit the Louvre Museum — it’s such an architectural masterpiece with that glass pyramid.",
+          "assistant": "The Louvre truly blends classical and modern beauty. That glass pyramid glowing at dusk is unforgettable. Are you planning to spend a full day there or just explore your favorite galleries?",
+          "image_id": [
+            "D2:IMG_004"
+          ],
+          "input_image": [
+            "../image/Global_Travel_Cultural_Sightseeing/D2_IMG_004.png"
+          ],
+          "image_caption": [
+            "Illuminated glass pyramid structure in a courtyard at dusk, reflecting warm interior lights in a shallow surrounding pool. Historic stone buildings with ornate facades, arches, and domed roofs frame the scene in the background. A few small figures stand and sit near the water’s edge, emphasizing the scale of the architecture under a clear blue evening sky."
+          ]
+        },
+        {
+          "round": "D2:6",
+          "user": "I think I’ll spend the whole day there! I want to see the Mona Lisa, but also the sculptures and artifacts. After the Louvre, I’ve been really eager to visit Notre-Dame Cathedral. Its Gothic architecture fascinates me.",
+          "assistant": "Notre-Dame is one of Paris’s most iconic landmarks. The intricate façade and stained glass are simply mesmerizing. It’s amazing how this cathedral has stood through centuries of history.",
+          "image_id": [
+            "D2:IMG_005"
+          ],
+          "input_image": [
+            "../image/Global_Travel_Cultural_Sightseeing/D2_IMG_005.png"
+          ],
+          "image_caption": [
+            "Gothic cathedral with two large square towers, a tall central spire, and a prominent circular rose window, viewed from across a stone wall. Trees and shrubs line the foreground, partially obscuring the lower façade. A few small human figures stand near the base of the building. Bright daylight and scattered clouds fill the sky above the detailed stone architecture."
+          ]
+        },
+        {
+          "round": "D2:7",
+          "user": "Exactly. I admire how much symbolism is embedded in its design. Here’s another photo I found — the front view looks so grand and timeless.",
+          "assistant": "That’s a beautiful angle! The towers and flying buttresses are true marvels of medieval engineering. I can see why it continues to inspire artists and writers alike.",
+          "image_id": [
+            "D2:IMG_006"
+          ],
+          "input_image": [
+            "../image/Global_Travel_Cultural_Sightseeing/D2_IMG_006.png"
+          ],
+          "image_caption": [
+            "Gothic cathedral with twin square bell towers and a tall central spire rising above a dense line of green trees. Flying buttresses support the stone walls along the sides, and arched windows are visible beneath the steep gray roof. The structure stands against a bright sky with large white clouds, with a few low city buildings in the distant background."
+          ]
+        },
+        {
+          "round": "D2:8",
+          "user": "And this one captures a slightly different perspective — it highlights the cathedral’s incredible structure against the skyline. I’d love to attend a service there, just to experience the atmosphere firsthand.",
+          "assistant": "That would be a moving experience. The acoustics inside are magnificent, and the sense of peace there is unforgettable. It’s also wonderful that restoration efforts are bringing new life to the building.",
+          "image_id": [
+            "D2:IMG_007"
+          ],
+          "input_image": [
+            "../image/Global_Travel_Cultural_Sightseeing/D2_IMG_007.png"
+          ],
+          "image_caption": [
+            "Front façade of a large Gothic cathedral with two square bell towers, a central circular rose window, and three pointed entrance arches, viewed from a low angle against a cloudy sky, with a tree bearing sparse autumn leaves partially framing the left side."
+          ]
+        },
+        {
+          "round": "D2:9",
+          "user": "Paris has such a rich blend of history, art, and culture. I can’t wait to wander through the streets, enjoy cafés, and maybe even stumble upon hidden gems along the Seine.",
+          "assistant": "That sounds perfect! The best part of Paris is how every corner tells a story. Just remember to slow down and savor each moment — perhaps with a cup of coffee and a croissant at a cozy café."
+        },
+        {
+          "round": "D2:10",
+          "user": "I will! I can already imagine sitting by a café window, watching people pass by and sketching in my travel journal. This trip is going to be unforgettable!",
+          "assistant": "It truly will be! With your thoughtful planning and appreciation for detail, you’ll see Paris not just as a tourist, but as someone who connects deeply with its art, history, and rhythm."
+        }
+      ]
+    },
+    {
+      "session_id": "D3",
+      "date": "2024-05-20",
+      "dialogues": [
+        {
+          "round": "D3:1",
+          "user": "Tonight feels unusually peaceful. After walking around Paris all day, I just want to unwind with a good book. Do you ever get that feeling after a long day of exploring?",
+          "assistant": "Absolutely. A quiet evening with a book can feel like the perfect counterbalance to a full day of discovery."
+        },
+        {
+          "round": "D3:2",
+          "user": "I brought along a novel about cross-cultural communication. It’s funny how reading about global perspectives while traveling gives everything extra meaning.",
+          "assistant": "That sounds like a great pairing—your experiences today probably make the book even more vivid."
+        },
+        {
+          "round": "D3:3",
+          "user": "Yes, especially after observing how Parisians manage their daily routines. Their sense of pace feels intentional, not rushed.",
+          "assistant": "It aligns beautifully with your reflective personality. Paris has a way of slowing the mind despite being a major city."
+        },
+        {
+          "round": "D3:4",
+          "user": "Exactly. It also makes me think about my team back home. We often prioritize efficiency, but not always balance.",
+          "assistant": "Your ability to reflect on these contrasts is one of your strengths—as a mentor and as a financial strategist."
+        },
+        {
+          "round": "D3:5",
+          "user": "Thank you. I want to encourage them to see beyond spreadsheets sometimes. There’s creativity in finance too.",
+          "assistant": "Very true. People often forget that financial strategies are shaped by human behavior, culture, and values."
+        },
+        {
+          "round": "D3:6",
+          "user": "While reading earlier, I paused to sketch a little bit of the city skyline from my window with my old notebook. It felt grounding.",
+          "assistant": "That sounds lovely! Sketching is such a mindful way to capture your emotional impression of a place.",
+          "image_id": [
+            "D3:IMG_001"
+          ],
+          "input_image": [
+            "../image/Global_Travel_Cultural_Sightseeing/D3_IMG_001.jpg"
+          ],
+          "image_caption": [
+            "Open notebook showing a single blank, light beige graph paper page with a faint square grid. The page has slight aging marks and a few small brown specks. Thin red lines run along the right edge near the binding."
+          ]
+        },
+        {
+          "round": "D3:7",
+          "user": "Do you think reflective activities like that help make someone better at strategic thinking?",
+          "assistant": "I do. Reflection builds clarity, and clarity supports better long-term decisions—especially in your field."
+        },
+        {
+          "round": "D3:8",
+          "user": "I guess this trip is teaching me that progress doesn’t always require movement. Sometimes it just requires awareness.",
+          "assistant": "That’s beautifully put. Growth can come from quiet evenings just as much as from big adventures."
+        },
+        {
+          "round": "D3:9",
+          "user": "I might visit a local bookstore tomorrow. I love seeing what people in different countries like to read.",
+          "assistant": "That’s a wonderful idea! Bookstores reveal so much about a culture’s interests and aspirations.",
+          "image_id": [
+            "D3:IMG_002"
+          ],
+          "input_image": [
+            "../image/Global_Travel_Cultural_Sightseeing/D3_IMG_002.jpg"
+          ],
+          "image_caption": [
+            "Bookstore façade with illuminated sign reading “GALIGNANI” above a large display window. The window shows an arrangement of books, decorative lighting, and a wreath, with trees and streetlamps reflected in the glass. A stone plaque on the right reads, “THE FIRST ENGLISH BOOKSHOP ESTABLISHED ON THE CONTINENT.”"
+          ]
+        },
+        {
+          "round": "D3:10",
+          "user": "Maybe I’ll buy something in French. Even if I read slowly, it’ll be a nice challenge.",
+          "assistant": "And a meaningful souvenir. A book always carries more personal value than a typical gift."
+        },
+        {
+          "round": "D3:11",
+          "user": "You’re right. Plus, reading different cultural narratives might help me think more inclusively at work.",
+          "assistant": "That aligns perfectly with your career goals in developing sustainable and inclusive strategies."
+        },
+        {
+          "round": "D3:12",
+          "user": "I feel centered tonight. It’s a good reminder that travel isn’t just about places—it’s about perspective.",
+          "assistant": "Exactly. And your reflections show how deeply you engage with your experiences."
+        },
+        {
+          "round": "D3:13",
+          "user": "Thanks for listening. This calm evening actually means a lot after such an eventful day.",
+          "assistant": "Always here for you, Maria. I’m glad the night brought you a moment of stillness."
+        }
+      ]
+    },
+    {
+      "session_id": "D4",
+      "date": "2024-05-21",
+      "dialogues": [
+        {
+          "round": "D4:1",
+          "user": "Paris really deserves its reputation as the fashion capital. I walked past several boutiques today, and it made me want to refresh my wardrobe a bit.",
+          "assistant": "Paris has that effect on everyone! Did something in particular catch your eye?"
+        },
+        {
+          "round": "D4:2",
+          "user": "Yes, actually. I found two types of dresses I really like. The first group is the Abstract Floral Tie-Waist Dress. Let me show you the first one.",
+          "assistant": "Great! Let's take a closer look at it.",
+          "image_id": [
+            "D4:IMG_001"
+          ],
+          "input_image": [
+            "../image/Global_Travel_Cultural_Sightseeing/D4_IMG_001.jpg"
+          ],
+          "image_caption": [
+            "Woman standing against a plain white background, wearing a blue patterned knee-length dress with three-quarter sleeves and a waist tie, a wide-brimmed black hat, and dark ankle boots. She faces forward with one leg slightly bent and arms relaxed at her sides."
+          ]
+        },
+        {
+          "round": "D4:3",
+          "user": "This one feels bold and bright. What do you think of it?",
+          "assistant": "It has a striking floral pattern with vivid contrast. The tie-waist helps create a flattering, defined silhouette—perfect if you want something energetic and expressive."
+        },
+        {
+          "round": "D4:4",
+          "user": "Here’s the second one from the same style. It feels softer in tone.",
+          "assistant": "The fabric looks airy and the wrap style adds a gentle, elegant flow.",
+          "image_id": [
+            "D4:IMG_002"
+          ],
+          "input_image": [
+            "../image/Global_Travel_Cultural_Sightseeing/D4_IMG_002.jpg"
+          ],
+          "image_caption": [
+            "Woman standing against a plain white background, wearing a fitted, long-sleeve, gray-and-white striped knee-length dress with a tie detail at the waist. She holds a black clutch in one hand and wears black high-heeled sandals. One arm is raised with her hand touching her hair."
+          ]
+        },
+        {
+          "round": "D4:5",
+          "user": "Compared to the first one, this feels more relaxed.",
+          "assistant": "Exactly. The softer palette gives it a more versatile, daytime-friendly feel while still keeping the tie-waist charm."
+        },
+        {
+          "round": "D4:6",
+          "user": "Here’s the third dress from the series. It's very flowy.",
+          "assistant": "The sheer fabric and layered texture make it look breezy and feminine—great for warm weather.",
+          "image_id": [
+            "D4:IMG_003"
+          ],
+          "input_image": [
+            "../image/Global_Travel_Cultural_Sightseeing/D4_IMG_003.jpg"
+          ],
+          "image_caption": [
+            "Young woman standing and smiling at the camera, one hand touching her long straight hair. She wears a sleeveless, knee-length, peach-colored dress with a colorful floral pattern and a thin belt at the waist. Neutral light-gray studio background."
+          ]
+        },
+        {
+          "round": "D4:7",
+          "user": "I do like its movement. It feels delicate.",
+          "assistant": "It definitely gives a soft, romantic vibe while still maintaining structure with the waist tie."
+        },
+        {
+          "round": "D4:8",
+          "user": "Now here’s the fourth one. A bit more subtle in print.",
+          "assistant": "This one’s pattern is more refined and muted, making it suitable for slightly more formal casual settings.",
+          "image_id": [
+            "D4:IMG_004"
+          ],
+          "input_image": [
+            "../image/Global_Travel_Cultural_Sightseeing/D4_IMG_004.jpg"
+          ],
+          "image_caption": [
+            "Woman standing against a plain gray background, facing slightly left with one hand on her hip. She wears a knee-length, short-sleeved wrap dress with a V-neckline and a tie belt at the waist, featuring a multicolored abstract pattern in shades of blue, purple, and black."
+          ]
+        },
+        {
+          "round": "D4:9",
+          "user": "Yes, it feels balanced—not too loud, not too simple.",
+          "assistant": "Exactly. It’s a great middle-ground option if you want something quietly stylish."
+        },
+        {
+          "round": "D4:10",
+          "user": "And this is the last one in the Abstract Floral Tie-Waist group.",
+          "assistant": "This one features vibrant colors and a strong floral blend. Very lively and instantly eye-catching.",
+          "image_id": [
+            "D4:IMG_005"
+          ],
+          "input_image": [
+            "../image/Global_Travel_Cultural_Sightseeing/D4_IMG_005.jpg"
+          ],
+          "image_caption": [
+            "Mannequin wearing a knee-length, short-sleeve wrap dress with a V-neckline and tie belt at the waist. The dress has a black background with white and red floral and swirl patterns. The mannequin stands indoors on a carpeted floor beside a dark wooden cabinet against a beige wall."
+          ]
+        },
+        {
+          "round": "D4:11",
+          "user": "I like how confident it looks.",
+          "assistant": "Yes, it has presence—perfect if you want a standout piece."
+        },
+        {
+          "round": "D4:12",
+          "user": "Okay, now let me show you the second category I like: the Botanical Floral Shift Dress. Here’s the first one.",
+          "assistant": "Great! Let’s go through them one by one.",
+          "image_id": [
+            "D4:IMG_006"
+          ],
+          "input_image": [
+            "../image/Global_Travel_Cultural_Sightseeing/D4_IMG_006.jpg"
+          ],
+          "image_caption": [
+            "Short-sleeved, knee-length dress with a fitted waist and round neckline, featuring an all-over floral print in white, yellow, pink, and green tones on a light beige background."
+          ]
+        },
+        {
+          "round": "D4:13",
+          "user": "This one has a soft, elegant floral arrangement.",
+          "assistant": "It’s delicate and feminine. The shift silhouette keeps it clean and comfortable while the print brings sophistication."
+        },
+        {
+          "round": "D4:14",
+          "user": "Here comes the second one. The colors are gentler.",
+          "assistant": "It has a dreamy, watercolor-like atmosphere—great if you're aiming for a calm, graceful look.",
+          "image_id": [
+            "D4:IMG_007"
+          ],
+          "input_image": [
+            "../image/Global_Travel_Cultural_Sightseeing/D4_IMG_007.jpg"
+          ],
+          "image_caption": [
+            "Smiling woman standing against a plain white background, wearing a short-sleeved, above-the-knee dress with a colorful floral and leaf print in yellow, orange, blue, green, and purple tones. Her hair is styled in loose waves, and her arms hang relaxed at her sides."
+          ]
+        },
+        {
+          "round": "D4:15",
+          "user": "Yes, it feels airy and poetic.",
+          "assistant": "Exactly. It's subtle but still expressive in an elegant way."
+        },
+        {
+          "round": "D4:16",
+          "user": "Here’s the third one. Much more vivid.",
+          "assistant": "This one is vibrant and colorful—a lively garden print. Perfect if you want a cheerful, eye-catching dress.",
+          "image_id": [
+            "D4:IMG_008"
+          ],
+          "input_image": [
+            "../image/Global_Travel_Cultural_Sightseeing/D4_IMG_008.jpg"
+          ],
+          "image_caption": [
+            "Woman wearing a short-sleeved, knee-length dress with a central symmetrical floral print in pink, purple, and blue tones on a light background, standing against a plain white backdrop."
+          ]
+        },
+        {
+          "round": "D4:17",
+          "user": "It really pops visually.",
+          "assistant": "Absolutely. It has strong personality and bright seasonal energy."
+        },
+        {
+          "round": "D4:18",
+          "user": "Here’s the fourth one. The print is more complex.",
+          "assistant": "A rich, botanical collage—this one feels artistic and expressive.",
+          "image_id": [
+            "D4:IMG_009"
+          ],
+          "input_image": [
+            "../image/Global_Travel_Cultural_Sightseeing/D4_IMG_009.jpg"
+          ],
+          "image_caption": [
+            "Long-sleeve white shift dress with a bold multicolored floral print. Dense flowers in red, pink, orange, yellow, blue, and green cover the lower half of the dress and sleeves, gradually fading toward a plain white upper chest and shoulder area. Crew neckline and above-the-knee length, displayed against a plain white background."
+          ]
+        },
+        {
+          "round": "D4:19",
+          "user": "It almost feels like a painting.",
+          "assistant": "Yes, it's the most visually layered of the group—great if you want something unique."
+        },
+        {
+          "round": "D4:20",
+          "user": "And the last one. Very detailed floral pattern.",
+          "assistant": "It has a classic botanical layout with fine line details—elegant, timeless, and refined.",
+          "image_id": [
+            "D4:IMG_010"
+          ],
+          "input_image": [
+            "../image/Global_Travel_Cultural_Sightseeing/D4_IMG_010.jpg"
+          ],
+          "image_caption": [
+            "Long-sleeved cream mini dress with a round neckline, featuring a vibrant botanical print of red, pink, and green flowers and leaves across the front, back, and sleeves. The floral pattern is densest around the torso and upper sleeves, with a plain cream hem and shoulder area. The dress has a straight, slightly A-line silhouette and gathered sleeve cuffs."
+          ]
+        },
+        {
+          "round": "D4:21",
+          "user": "Both categories have great options. For the Abstract Floral Tie-Waist Dress, I think I’ll choose the third one—the airy, flowy one.",
+          "assistant": "Excellent choice! It suits your reflective and elegant Paris mood perfectly."
+        },
+        {
+          "round": "D4:22",
+          "user": "And for the Botanical Floral Shift Dress, I’ll pick the first one. It feels clean and refined.",
+          "assistant": "A wonderful selection. The first shift dress is sophisticated and versatile—perfectly balancing your wardrobe."
+        },
+        {
+          "round": "D4:23",
+          "user": "Thanks for helping me compare all of them! I feel more confident now.",
+          "assistant": "Always happy to help. Paris fashion shopping suits you well!"
+        }
+      ]
+    },
+    {
+      "session_id": "D5",
+      "date": "2024-05-27",
+      "dialogues": [
+        {
+          "round": "D5:1",
+          "user": "After my unforgettable days in Paris, I’ve finally arrived in New York! The contrast between the two cities is striking — Paris felt timeless, while New York feels alive and electric.",
+          "assistant": "Welcome to the city that never sleeps! New York’s pace is definitely faster, but it has its own rhythm of creativity and ambition. Where are you planning to start your adventure?"
+        },
+        {
+          "round": "D5:2",
+          "user": "I think I’ll begin with Central Park. It’s incredible how such a vast green oasis exists right in the middle of the city. The view from above is simply breathtaking.",
+          "assistant": "That’s a wonderful place to start! Central Park is like New York’s heart — a mix of nature and energy surrounded by skyscrapers. It’s the perfect spot to slow down and enjoy the moment.",
+          "image_id": [
+            "D5:IMG_001"
+          ],
+          "input_image": [
+            "../image/Global_Travel_Cultural_Sightseeing/D5_IMG_001.png"
+          ],
+          "image_caption": [
+            "Aerial view of a large city with a dense line of high‑rise and mid‑rise buildings bordering a wide, tree‑filled park with several ponds. Beyond the buildings lies a broad river crossed by a long suspension bridge, with more urban development in the distance."
+          ]
+        },
+        {
+          "round": "D5:3",
+          "user": "Exactly! I walked through the park earlier today and found this beautiful spot under the arches. The light filtering in felt almost cinematic.",
+          "assistant": "That’s the Bethesda Terrace! It’s one of the park’s most iconic locations. The golden ceiling tiles and arches create such a warm, artistic atmosphere. It’s a place that makes you pause and reflect.",
+          "image_id": [
+            "D5:IMG_002"
+          ],
+          "input_image": [
+            "../image/Global_Travel_Cultural_Sightseeing/D5_IMG_002.png"
+          ],
+          "image_caption": [
+            "Ornate arched passageway with a patterned, golden tiled ceiling leading to a wide stone staircase. Two people stand and talk in the center of the corridor, silhouetted against daylight. A person with a tripod and camera is positioned near the left arch. Several people are walking up and down the stairs outside, framed by three large archways. The floor is worn stone, and the walls feature decorative panels and columns."
+          ]
+        },
+        {
+          "round": "D5:4",
+          "user": "Yes, it reminded me how architecture can evoke emotion just as much as art does. After Central Park, I’d love to see the city from a higher perspective — maybe the Empire State Building?",
+          "assistant": "You definitely should! The Empire State Building offers one of the best panoramic views of Manhattan. On a clear day, you can even see all the way to the Statue of Liberty.",
+          "image_id": [
+            "D5:IMG_003"
+          ],
+          "input_image": [
+            "../image/Global_Travel_Cultural_Sightseeing/D5_IMG_003.png"
+          ],
+          "image_caption": [
+            "Coin-operated binocular viewer in the foreground with labels “TURN TO CLEAR VISION,” “QUARTERS ONLY,” and “50¢,” facing a hazy urban skyline. The Empire State Building rises prominently in the blurred background among other tall buildings under an overcast sky."
+          ]
+        },
+        {
+          "round": "D5:5",
+          "user": "I took this photo while looking through one of the observation binoculars — it made the whole city feel like a living model of ambition and creativity.",
+          "assistant": "That’s a brilliant shot! It captures New York’s essence — sharp focus on progress, yet grounded in history and design. Did you get a chance to stay until sunset? The skyline glows beautifully then.",
+          "image_id": [
+            "D5:IMG_004"
+          ],
+          "input_image": [
+            "../image/Global_Travel_Cultural_Sightseeing/D5_IMG_004.png"
+          ],
+          "image_caption": [
+            "Urban waterfront park with a bench and lamppost overlooking a river, facing a dense city skyline. A tall Art Deco skyscraper rises prominently at the center, surrounded by modern high‑rise buildings. One tower bears the sign “MetLife.” Leafless trees frame the view under a clear blue sky."
+          ]
+        },
+        {
+          "round": "D5:6",
+          "user": "Not yet, but I plan to! After that, I’m heading to see the Statue of Liberty. There’s something deeply symbolic about it — freedom, opportunity, and hope.",
+          "assistant": "Absolutely. The Statue of Liberty embodies the spirit of New York and of people striving for a better future. Standing there, you can almost feel the city’s history of dreams and determination.",
+          "image_id": [
+            "D5:IMG_005"
+          ],
+          "input_image": [
+            "../image/Global_Travel_Cultural_Sightseeing/D5_IMG_005.png"
+          ],
+          "image_caption": [
+            "Statue of Liberty standing on its stone pedestal against a clear sky, holding a torch aloft in her right hand and a tablet in her left arm. The green patina of the copper statue contrasts with the brown masonry base, which features arched windows and a viewing platform with small, distant visitors."
+          ]
+        },
+        {
+          "round": "D5:7",
+          "user": "It really is inspiring. Watching the waves around Liberty Island, I thought about how each city I visit adds new perspectives to my own work in finance — about inclusion, vision, and people’s aspirations.",
+          "assistant": "That’s such a thoughtful connection, Maria. Travel has a way of reshaping how we view our professional values. New York, especially, reminds us that diversity fuels innovation."
+        },
+        {
+          "round": "D5:8",
+          "user": "That’s so true. Speaking of energy, I couldn’t resist heading to Times Square afterward — it’s overwhelming in the best way! The lights and people create this constant buzz of excitement.",
+          "assistant": "Times Square is like the pulse of New York! It’s always alive, day or night. The digital billboards and the crowd together make it one of the most dynamic places on Earth.",
+          "image_id": [
+            "D5:IMG_006"
+          ],
+          "input_image": [
+            "../image/Global_Travel_Cultural_Sightseeing/D5_IMG_006.png"
+          ],
+          "image_caption": [
+            "Crowded Times Square street with dense pedestrian traffic and yellow taxis between tall buildings covered in colorful billboards and digital screens. Visible signs include “EXPRESS,” “McDonald’s,” and an advertisement reading “SUN, AUG 14.” Bright advertisements dominate the scene in early evening light."
+          ]
+        },
+        {
+          "round": "D5:9",
+          "user": "I snapped another photo later in the evening — it’s incredible how the lights make the city feel timeless, almost surreal. I can see why people call it the ‘Crossroads of the World’.",
+          "assistant": "That’s a wonderful description. Times Square captures everything about New York — ambition, creativity, and constant reinvention. Did you catch a Broadway show while you were there?",
+          "image_id": [
+            "D5:IMG_007"
+          ],
+          "input_image": [
+            "../image/Global_Travel_Cultural_Sightseeing/D5_IMG_007.png"
+          ],
+          "image_caption": [
+            "Busy Times Square intersection with a yellow taxi in the foreground and numerous pedestrians crossing the street. Tall glass and steel buildings are covered with large billboards and digital screens, including ads reading “DEADLIEST WARRIOR,” “TOSHIBA,” and “SONY,” creating a dense urban commercial scene."
+          ]
+        },
+        {
+          "round": "D5:10",
+          "user": "I’m planning to tomorrow! I’ve always wanted to see a live musical here. After that, maybe I’ll take a walk along the Hudson or visit a museum before I leave.",
+          "assistant": "That sounds like the perfect way to wrap up your trip. The city has such a diverse mix of culture and art — from the MoMA to the Guggenheim, each one offers a fresh perspective."
+        },
+        {
+          "round": "D5:11",
+          "user": "Yes, I love how every part of New York reflects a different layer of creativity. It’s fast-paced, but it also encourages you to dream bigger. I feel like this trip has recharged my motivation.",
+          "assistant": "I’m glad to hear that, Maria. Traveling often renews our sense of purpose. You’ve experienced Paris’s elegance and New York’s ambition — that’s a powerful combination of inspiration!"
+        },
+        {
+          "round": "D5:12",
+          "user": "Exactly. Both cities taught me something about balance — beauty and progress, art and ambition. I can’t wait to see how these insights influence my work once I’m back home.",
+          "assistant": "That’s the best kind of travel — one that leaves you not just with memories, but with ideas. I’m sure this journey will spark something special in your future projects."
+        }
+      ]
+    },
+    {
+      "session_id": "D6",
+      "date": "2024-06-03",
+      "dialogues": [
+        {
+          "round": "D6:1",
+          "user": "I just arrived in Sydney! The air feels warm and bright, and the sound of waves instantly put me at ease.",
+          "assistant": "Welcome to Sydney, Maria! It’s a city where the ocean and skyline coexist beautifully. Are you planning to start with the beaches or explore the city first?"
+        },
+        {
+          "round": "D6:2",
+          "user": "Definitely the beach. I went straight to Bondi this morning—the sand was soft and the sea breeze felt refreshing after my long flight.",
+          "assistant": "Bondi Beach is the perfect welcome to Sydney! It captures the city’s spirit—relaxed, friendly, and full of life.",
+          "image_id": [
+            "D6:IMG_001"
+          ],
+          "input_image": [
+            "../image/Global_Travel_Cultural_Sightseeing/D6_IMG_001.png"
+          ],
+          "image_caption": [
+            "Crowded sandy beach with numerous people sunbathing, sitting under umbrellas, walking, and swimming in the ocean. Clear blue sky overhead and calm turquoise water along the shoreline. Cluster of multi‑story residential buildings and houses on a low bluff in the background overlooking the bay."
+          ]
+        },
+        {
+          "round": "D6:3",
+          "user": "There were people surfing, sunbathing, and chatting in small groups. It felt so effortlessly joyful.",
+          "assistant": "That’s one of the things people love most about Bondi—it has this carefree energy where everyone seems to belong, whether they’re locals or travelers.",
+          "image_id": [
+            "D6:IMG_002"
+          ],
+          "input_image": [
+            "../image/Global_Travel_Cultural_Sightseeing/D6_IMG_002.png"
+          ],
+          "image_caption": [
+            "Steep coastal cliffs with layered rock faces rise above a calm, reflective sea. Houses and small buildings line the grassy cliff tops, forming a suburban neighborhood close to the edge. In the distance, another headland extends into the water. The sky is filled with scattered clouds, casting soft light and shadows across the landscape and ocean surface."
+          ]
+        },
+        {
+          "round": "D6:4",
+          "user": "I took a walk along the cliffs by the sea. The view was spectacular—the ocean stretched endlessly beneath the bright sky.",
+          "assistant": "You must have walked along the Bondi to Coogee coastal trail. Those cliffs are breathtaking and give you such a sense of openness and freedom.",
+          "image_id": [
+            "D6:IMG_003"
+          ],
+          "input_image": [
+            "../image/Global_Travel_Cultural_Sightseeing/D6_IMG_003.png"
+          ],
+          "image_caption": [
+            "Wide sandy beach with numerous people sunbathing and walking along the shoreline, while others swim and surf in the shallow blue water. Gentle waves approach the shore, and a yellow warning sign stands near the wet sand. Low-rise buildings and houses line the distant headland and coastline under a mostly clear, lightly clouded sky."
+          ]
+        },
+        {
+          "round": "D6:5",
+          "user": "Yes! I stopped at a lookout point and took this picture. The curve of the bay and the blue water made me realize how peaceful a city can be when it embraces nature.",
+          "assistant": "That’s beautifully said. Sydney really shows how urban design and natural landscapes can exist in harmony—it’s a refreshing balance.",
+          "image_id": [
+            "D6:IMG_004"
+          ],
+          "input_image": [
+            "../image/Global_Travel_Cultural_Sightseeing/D6_IMG_004.png"
+          ],
+          "image_caption": [
+            "Wide sandy beach with gentle waves under a clear blue sky, scattered with people walking, sunbathing, and playing near the shoreline. Swimmers and surfers are visible in the water. A rocky area occupies the lower right foreground. In the background, a densely built coastal town stretches along the bay, including a large ferris wheel and various low-rise buildings."
+          ]
+        },
+        {
+          "round": "D6:6",
+          "user": "I also spent a few minutes near the rock pools, just watching the tide move in and out. It reminded me of how time feels slower near the sea.",
+          "assistant": "That ebb and flow is mesmerizing, isn’t it? It’s like nature’s quiet rhythm—steady and grounding, a perfect reminder to slow down.",
+          "image_id": [
+            "D6:IMG_005"
+          ],
+          "input_image": [
+            "../image/Global_Travel_Cultural_Sightseeing/D6_IMG_005.png"
+          ],
+          "image_caption": [
+            "Rocky shoreline with shallow tidal pools in the foreground, waves breaking against the rocks, and turquoise ocean water extending to a distant low coastline. Partly cloudy blue sky spans the horizon, with no people or structures visible nearby."
+          ]
+        },
+        {
+          "round": "D6:7",
+          "user": "Later in the afternoon, I made my way toward the harbour. The city’s skyline looked dazzling against the water.",
+          "assistant": "Sydney Harbour is one of the most stunning waterfronts in the world. The combination of the city lights and calm water creates such a cinematic view.",
+          "image_id": [
+            "D6:IMG_006"
+          ],
+          "input_image": [
+            "../image/Global_Travel_Cultural_Sightseeing/D6_IMG_006.png"
+          ],
+          "image_caption": [
+            "Illuminated Sydney Opera House at dusk beside calm harbor waters, its white sail-like roofs glowing yellow and orange. Light trails from boats cross the water, while a densely built city skyline and cranes stretch across the background."
+          ]
+        },
+        {
+          "round": "D6:8",
+          "user": "When I saw the Opera House for the first time, I couldn’t believe how graceful it looked. The design felt alive, like a sculpture breathing with the ocean breeze.",
+          "assistant": "That’s a wonderful way to describe it. The Opera House has this organic beauty—its sails catch light differently at every hour of the day.",
+          "image_id": [
+            "D6:IMG_007"
+          ],
+          "input_image": [
+            "../image/Global_Travel_Cultural_Sightseeing/D6_IMG_007.png"
+          ],
+          "image_caption": [
+            "Silhouette of the Sydney Opera House with its distinct sail-like roofs against a vivid sunset sky, featuring deep orange, pink, and purple clouds, reflected on the calm harbor water in the foreground."
+          ]
+        },
+        {
+          "round": "D6:9",
+          "user": "I stayed until sunset, and the sky turned purple and gold behind the Opera House. It was one of the most peaceful moments I’ve had in a long time.",
+          "assistant": "Sunset over the harbour truly transforms the city. It’s as if the light and architecture start a quiet conversation.",
+          "image_id": [
+            "D6:IMG_008"
+          ],
+          "input_image": [
+            "../image/Global_Travel_Cultural_Sightseeing/D6_IMG_008.png"
+          ],
+          "image_caption": [
+            "Large steel arch bridge spans across a harbor at dusk, its structure lit by rows of small white lights. Below, calm water reflects the illumination from the bridge and the city skyline on the right, with numerous high‑rise office buildings glowing with interior lights. In the distance on the left, a distinctively shaped white opera house stands near the shoreline under a darkening, clear sky."
+          ]
+        },
+        {
+          "round": "D6:10",
+          "user": "I think what I like most about Sydney is its sense of ease—people work hard, but they also know how to unwind.",
+          "assistant": "Exactly. Sydney has mastered that balance between ambition and relaxation. It’s a city that encourages both purpose and presence."
+        },
+        {
+          "round": "D6:11",
+          "user": "This environment made me reflect on how I approach work too. Maybe progress doesn’t always have to mean constant motion—sometimes it’s about finding a steady rhythm.",
+          "assistant": "That’s such a meaningful insight, Maria. True progress often comes from consistency and balance, not just speed."
+        },
+        {
+          "round": "D6:12",
+          "user": "Tomorrow, I’m thinking of visiting a local café near the harbour before writing in my journal. It feels like the right place to gather my thoughts.",
+          "assistant": "That sounds lovely. A quiet morning by the water, some good coffee, and reflection time—you’ll carry that sense of calm long after you leave Sydney."
+        },
+        {
+          "round": "D6:13",
+          "user": "Yes, this city reminded me that flow isn’t about rushing—it’s about aligning with life’s pace. I think Sydney helped me rediscover that.",
+          "assistant": "Beautifully put, Maria. Paris gave you culture, New York gave you drive, and Sydney seems to have given you balance. What a journey it’s been so far."
+        }
+      ]
+    },
+    {
+      "session_id": "D7",
+      "date": "2024-06-11",
+      "dialogues": [
+        {
+          "round": "D7:1",
+          "user": "Arriving in Edinburgh felt like stepping into a living storybook. The city is filled with history, yet it feels alive and evolving at every corner.",
+          "assistant": "That’s beautifully put, Maria. Edinburgh really does bridge the past and the present in a graceful way. Where did your exploration begin?"
+        },
+        {
+          "round": "D7:2",
+          "user": "I started with Arthur’s Seat three days ago. The hike was refreshing, and the view from the top made me feel both small and limitless at the same time.",
+          "assistant": "Arthur’s Seat has that power—it humbles you while inspiring you. The combination of cliffs, sky, and the city below is breathtaking.",
+          "image_id": [
+            "D7:IMG_001"
+          ],
+          "input_image": [
+            "../image/Global_Travel_Cultural_Sightseeing/D7_IMG_001.png"
+          ],
+          "image_caption": [
+            "Steep rocky cliff in the foreground overlooking a dense cityscape of stone buildings, church spires, and rooftops. A narrow path runs along the hillside, while the urban area stretches into the distance under a partly cloudy sky, with hills and water on the horizon."
+          ]
+        },
+        {
+          "round": "D7:3",
+          "user": "From up there, I could see the whole city framed by the sea. The water shimmered in the sunlight—it was like the horizon whispered about possibilities beyond what I could see.",
+          "assistant": "That sounds magical. Edinburgh has a quiet way of making you introspective, doesn’t it?",
+          "image_id": [
+            "D7:IMG_002"
+          ],
+          "input_image": [
+            "../image/Global_Travel_Cultural_Sightseeing/D7_IMG_002.png"
+          ],
+          "image_caption": [
+            "Hilly foreground with green and brown grasslands surrounds a small pond and a winding road with several cars. Beyond the hills lies a densely built town of houses and low-rise buildings extending toward the coastline. The calm blue sea stretches to the horizon under a mostly clear sky, with distant landforms faintly visible across the water."
+          ]
+        },
+        {
+          "round": "D7:4",
+          "user": "Yes, it really does. After the hike, I walked through the Old Town and eventually reached Peterborough Castle. Seeing it rise above the city felt almost symbolic.",
+          "assistant": "Oh, you also went to Peterborough? It’s an important transportation hub and historic city, known for the famous Peterborough Cathedral."
+        },
+        {
+          "round": "D7:5",
+          "user": "Sorry, I misspoke! I meant Edinburgh Castle, as shown in this picture. Peterborough also looks like a wonderful place; I hope I’ll have the chance to visit it someday.",
+          "image_id": [
+            "D7:IMG_003"
+          ],
+          "input_image": [
+            "../image/Global_Travel_Cultural_Sightseeing/D7_IMG_003.png"
+          ],
+          "assistant": "Wonderful! The castle’s presence is commanding—centuries of history carved into stone. Did you explore the inner courtyards or the ramparts?",
+          "image_caption": [
+            "Dense urban skyline with historic stone buildings, a tall clock tower showing about 10:08, and a large hilltop castle in the background under a cloudy sky. Numerous church spires, rooftops, chimneys, and light steam or smoke rise in the foreground, creating a layered cityscape."
+          ]
+        },
+        {
+          "round": "D7:6",
+          "user": "I did, and it was incredible. Standing inside those thick walls, I could almost feel the echoes of the people who once lived and ruled there.",
+          "assistant": "That’s one of the most striking parts of the castle—the sense of continuity. It reminds you that time moves forward, but legacies endure.",
+          "image_id": [
+            "D7:IMG_004"
+          ],
+          "input_image": [
+            "../image/Global_Travel_Cultural_Sightseeing/D7_IMG_004.png"
+          ],
+          "image_caption": [
+            "Large stone castle with battlements and towers stands atop a rocky hill, surrounded by high defensive walls and ramparts. A tall flagpole rises from the central structure, though the flag is not clearly visible. The masonry shows small windows and chimneys along the roofline. Clear blue sky provides an unobstructed backdrop, emphasizing the castle’s elevated, fortified position."
+          ]
+        },
+        {
+          "round": "D7:7",
+          "user": "I also viewed it from below later in the day, surrounded by greenery. The contrast between nature and stone felt like the perfect metaphor for resilience.",
+          "assistant": "That’s a lovely way to see it. Edinburgh has a way of blending strength with serenity—the same quality you’ve been exploring throughout your travels.",
+          "image_id": [
+            "D7:IMG_005"
+          ],
+          "input_image": [
+            "../image/Global_Travel_Cultural_Sightseeing/D7_IMG_005.png"
+          ],
+          "image_caption": [
+            "Large stone castle perched on a rocky hilltop, surrounded by defensive walls, overlooking a green park. Trees with spring foliage frame the scene, with flowering shrubs near the bottom left. A paved path curves through the park toward an archway beneath the hill, where a few small figures walk. Blue sky with scattered clouds above."
+          ]
+        },
+        {
+          "round": "D7:8",
+          "user": "The next day I visited Holyrood Palace. It’s so elegant yet peaceful—the courtyard felt like a hidden world of calm.",
+          "assistant": "Holyrood Palace really is a treasure. Its symmetry and stillness contrast beautifully with the rugged castle. What stood out to you the most?",
+          "image_id": [
+            "D7:IMG_006"
+          ],
+          "input_image": [
+            "../image/Global_Travel_Cultural_Sightseeing/D7_IMG_006.png"
+          ],
+          "image_caption": [
+            "Enclosed stone courtyard of a historic multi‑story building, with rows of tall sash windows above an arched colonnade. A manicured green lawn fills the center, surrounding a raised stone pedestal topped by a decorative column or monument. Sunlight illuminates the inner façades under a clear blue sky."
+          ]
+        },
+        {
+          "round": "D7:9",
+          "user": "The courtyard lawn caught my attention first—perfectly green, quiet, and sunlit. I lingered there for a while, thinking about how balance is an art form in itself.",
+          "assistant": "That reflection fits you so well. Finding harmony between stability and growth seems to echo in both the city’s design and your own mindset."
+        },
+        {
+          "round": "D7:10",
+          "user": "I also visited an old hall nearby with these grand stone staircases and sculptures. It felt like walking through time—majestic but also human in scale.",
+          "assistant": "That’s such a poetic observation. Architecture in Edinburgh often captures that duality—grandeur that still feels intimate and connected to daily life.",
+          "image_id": [
+            "D7:IMG_007"
+          ],
+          "input_image": [
+            "../image/Global_Travel_Cultural_Sightseeing/D7_IMG_007.png"
+          ],
+          "image_caption": [
+            "Grand stone staircase in a neoclassical building, flanked by two large draped statues on pedestals. Symmetrical balustrades border the steps, leading upward to a landing framed by tall fluted columns with ornate capitals. Multiple tiers of columns and arches recede into the background, emphasizing the scale and formality of the interior space."
+          ]
+        },
+        {
+          "round": "D7:11",
+          "user": "Being surrounded by so much history made me think about legacy—not just the kind left in monuments, but the one we build through choices and actions.",
+          "assistant": "Exactly. Legacy isn’t always about permanence—it’s about influence, continuity, and how meaning carries through the years."
+        },
+        {
+          "round": "D7:12",
+          "user": "It reminded me of my work too. The financial systems we build today are like modern castles—they must be stable yet adaptable to time’s changes.",
+          "assistant": "That’s a fascinating analogy, Maria. Like Edinburgh itself, enduring systems balance structure with evolution—strong foundations, but open to renewal."
+        },
+        {
+          "round": "D7:13",
+          "user": "Yes, and this trip helped me realize how important it is to mentor others—to pass on not just knowledge, but perspective. Just as this city passes wisdom quietly through its streets.",
+          "assistant": "That’s a beautiful intention. Edinburgh seems to have inspired both your leadership and your sense of purpose."
+        },
+        {
+          "round": "D7:14",
+          "user": "I think that’s what I’ll take away from here—the idea that progress doesn’t erase history. It builds upon it. And that’s how I want to move forward too.",
+          "assistant": "A perfect reflection to end your time here, Maria. Each city on your journey has revealed a new layer of you—Edinburgh, it seems, has given you depth and direction."
+        }
+      ]
+    },
+    {
+      "session_id": "D8",
+      "date": "2024-06-25",
+      "dialogues": [
+        {
+          "round": "D8:1",
+          "user": "Well, the holiday is almost over, and I can't believe how quickly this world trip has flown by! I’ve had such an amazing time, but I feel a little bittersweet about returning to work.",
+          "assistant": "It sounds like you had a fantastic trip! What were some of the highlights for you during your travels?"
+        },
+        {
+          "round": "D8:2",
+          "user": "Definitely! I loved exploring the historical sites in Europe, but I’m already thinking about my next trip. Next time, I’d really like to visit Asia, especially China. I've always wanted to see the Great Wall in Beijing.",
+          "assistant": "The Great Wall is such an iconic site! Imagine walking along its ancient stones and taking in the breathtaking views. Have you thought about how you might plan that trip?",
+          "image_id": [
+            "D8:IMG_001"
+          ],
+          "input_image": [
+            "../image/Global_Travel_Cultural_Sightseeing/D8_IMG_001.png"
+          ],
+          "image_caption": [
+            "Stone walkway and crenellated brick walls of the Great Wall of China curve along a ridgeline, connecting multiple watchtowers. The wall climbs a forested hillside covered with dense green and brown foliage. The scene is under a clear blue sky with no people visible."
+          ]
+        },
+        {
+          "round": "D8:3",
+          "user": "Yes, I’ve been doing some research. I want to make sure I include West Lake in Hangzhou as well. It’s supposed to be stunning, especially with the lotus flowers blooming in the summer. I think I could use a mental refresh before diving back into work in my office.",
+          "assistant": "That sounds like a perfect plan! Both places have such rich history and natural beauty. It sounds like a great way to recharge your mind before the busy summer months at work.",
+          "image_id": [
+            "D8:IMG_002"
+          ],
+          "input_image": [
+            "../image/Global_Travel_Cultural_Sightseeing/D8_IMG_002.png"
+          ],
+          "image_caption": [
+            "Multi-tiered pagoda with a golden spire rises above forested, autumn-colored hills beside a calm lake. A small boat with passengers moves across the water in the foreground, while leafy tree branches frame the scene from above."
+          ]
+        },
+        {
+          "round": "D8:4",
+          "user": "Absolutely! Given my role managing client portfolios, I often feel the pressure to deliver precise results, especially as I mentor younger colleagues. A refreshed perspective could really help in shaping our financial strategies more inclusively.",
+          "assistant": "That makes a lot of sense. Taking time for yourself can lead to greater creativity and effectiveness in your work. Have you set any specific goals for your next trip to ensure it meets your expectations?"
+        },
+        {
+          "round": "D8:5",
+          "user": "Yes, I want to immerse myself in the culture as much as possible. I plan to visit local markets and try new foods, which can inspire me to think about how we might approach financial inclusivity in different cultures.",
+          "assistant": "That sounds like a wonderful way to connect with the local culture! Exploring local markets can offer such rich insights into community values and spending habits, which could be very beneficial for your work."
+        },
+        {
+          "round": "D8:6",
+          "user": "Exactly! I think understanding different perspectives will help me as I work towards a senior management position. I want to contribute to developing sustainable financial strategies that reflect diverse needs.",
+          "assistant": "That's a commendable goal, Maria! Sustainable finance is becoming increasingly important in today's world. How do you think your travel experiences might shape your approach to that?"
+        },
+        {
+          "round": "D8:7",
+          "user": "Well, seeing how different countries handle their financial systems can provide me with a broader view. For instance, I might learn about community-based finance models in China.",
+          "assistant": "That’s a brilliant approach! It seems you have a clear vision of how to leverage your travel experiences for professional growth. Do you have any specific activities planned while in China that could help with this?"
+        },
+        {
+          "round": "D8:8",
+          "user": "I plan to attend a few seminars on financial literacy and sustainability while I’m there. Engaging with local experts will be invaluable, especially since I hope to bring those insights back to my team when we reconvene after the summer.",
+          "assistant": "That sounds like an incredible opportunity! Attending seminars can provide you with not just knowledge, but also valuable networking opportunities. How do you feel about diving back into work after such an enriching experience?"
+        },
+        {
+          "round": "D8:9",
+          "user": "I feel optimistic! I think this trip will rejuvenate me and give me new ideas to share with my colleagues. Plus, I look forward to mentoring them with some fresh perspectives gained from my travels.",
+          "assistant": "That's a great mindset to have! It sounds like you're really committed to both your personal growth and the growth of your team. Any other destinations on your travel list for the future?"
+        },
+        {
+          "round": "D8:10",
+          "user": "I’d love to explore more of Southeast Asia next, especially Thailand and Vietnam! The cultures there are so vibrant, and I think it would enhance my understanding of global finance further.",
+          "assistant": "Those countries are amazing choices! Each has its unique charm and economic landscape. It sounds like you have many exciting adventures ahead of you, both in travel and in your career."
+        }
+      ]
+    },
+    {
+      "session_id": "D9",
+      "date": "2024-07-18",
+      "dialogues": [
+        {
+          "round": "D9:1",
+          "user": "I finally arrived in Hangzhou today! The moment I stepped outside the station, the air felt warm, calm, and somehow poetic.",
+          "assistant": "Welcome to Hangzhou, Maria! This city is famous for its elegance and gentle atmosphere. Where did you head first?"
+        },
+        {
+          "round": "D9:2",
+          "user": "Naturally, West Lake. I walked along the shore, and it was even more serene than I imagined.",
+          "assistant": "West Lake is the soul of Hangzhou. Its beauty lies in its quietness. Did you capture any photos?"
+        },
+        {
+          "round": "D9:3",
+          "user": "Yes! Here’s one I took near the Broken Bridge—the morning mist made everything look dreamy.",
+          "assistant": "This is beautiful! The soft mist and reflective water really bring out the lake’s poetic charm.",
+          "image_id": [
+            "D9:IMG_001"
+          ],
+          "input_image": [
+            "../image/Global_Travel_Cultural_Sightseeing/D9_IMG_001.jpg"
+          ],
+          "image_caption": [
+            "Crowd of people walking and standing on a stone pedestrian bridge and causeway beside a calm lake, with some carrying umbrellas and bicycles nearby. The bridge has a small central arch and low stone railings, and streetlamps line the path. Trees with fresh green leaves border the water, and hazy hills rise in the distant background under an overcast sky."
+          ]
+        },
+        {
+          "round": "D9:4",
+          "user": "I can see why poets from ancient times wrote so much about this place.",
+          "assistant": "Absolutely. Hangzhou is one of the heartlands of Chinese classical aesthetics."
+        },
+        {
+          "round": "D9:5",
+          "user": "I continued walking along Su Causeway. The willow trees were swaying gently in the breeze.",
+          "assistant": "That’s one of the most iconic scenes of West Lake. The willow reflections form such a peaceful rhythm."
+        },
+        {
+          "round": "D9:6",
+          "user": "Here’s another picture I took—look at the lotus leaves! They're huge.",
+          "assistant": "This shot is stunning! Summer lotus at West Lake is one of the most famous seasonal scenes.",
+          "image_id": [
+            "D9:IMG_002"
+          ],
+          "input_image": [
+            "../image/Global_Travel_Cultural_Sightseeing/D9_IMG_002.jpg"
+          ],
+          "image_caption": [
+            "Traditional Chinese lakeside scene with a multi-tiered pavilion on a pier, several people walking and standing beneath it, and lotus plants growing in the foreground water. To the left, ornate wooden buildings line the shore under trees. On the lake, small passenger boats move across the calm surface, with hazy, tree-covered mountains forming the distant background."
+          ]
+        },
+        {
+          "round": "D9:7",
+          "user": "By the way, I took another photo earlier when I walked a bit further along the lakeside. The trees formed this gentle green canopy over the walkway, and the whole scene felt incredibly calm.",
+          "assistant": "Oh wow—this photo captures such a refreshing and peaceful angle of West Lake! The tree-lined path and the soft reflections on the water really bring out the lake’s everyday charm. It feels like a place where both locals and travelers can slow down and simply breathe.",
+          "image_id": [
+            "D9:IMG_003"
+          ],
+          "input_image": [
+            "../image/Global_Travel_Cultural_Sightseeing/D9_IMG_003.jpg"
+          ],
+          "image_caption": [
+            "Tree-lined lakeside promenade with many people walking along a stone path, centered on a small arched stone bridge. Calm water fills the foreground, while dense green trees, a few buildings partially hidden by foliage, and a cloudy sky form the background."
+          ]
+        },
+        {
+          "round": "D9:8",
+          "user": "Yes, that’s exactly how it felt. Even though there were many people around, the atmosphere never felt overwhelming. Instead, it was like everyone naturally matched the lake’s quiet rhythm.",
+          "assistant": "That’s one of West Lake’s most remarkable qualities—the way it gently shapes people’s pace. Your photo really conveys that shared calmness. It shows how public spaces can bring together movement, nature, and stillness in such a harmonious way."
+        },
+        {
+          "round": "D9:9",
+          "user": "Later in the afternoon, I captured this panorama view. The sky was starting to shift colors, and the silhouette of the pavilion created this cinematic mood. It felt almost unreal.",
+          "assistant": "This panorama is stunning! The layered mountains, the soft gradient of the sunset, the distant pagoda, and the pavilion in the foreground—all of them weave together into a scene that feels both grand and intimate. It perfectly expresses the poetic essence people associate with Hangzhou.",
+          "image_id": [
+            "D9:IMG_004"
+          ],
+          "input_image": [
+            "../image/Global_Travel_Cultural_Sightseeing/D9_IMG_004.jpg"
+          ],
+          "image_caption": [
+            "Traditional lakeside pavilion with several people standing inside occupies the right foreground, its dark curved roof silhouetted against the sky. Calm lake water stretches across the scene, with small boats, tree-lined shore, and a multi‑story pagoda in the distance beneath colorful sunset clouds and low hills."
+          ]
+        },
+        {
+          "round": "D9:10",
+          "user": "I remember standing there for quite a while, just watching the light slowly fade. It made me think about how different forms of beauty can coexist—the lively daytime scenes and the quiet, contemplative evenings.",
+          "assistant": "What a beautiful reflection. West Lake really does embody duality: vibrant during the day, meditative at dusk. And your experience echoes that balance. It’s almost like the lake mirrors your journey—embracing both thoughtful introspection and a sense of renewed inspiration."
+        },
+        {
+          "round": "D9:11",
+          "user": "Exactly. I think that’s why this place resonates so deeply with me. It feels gentle but emotionally rich, and every corner carries a subtle story. I’m really glad I chose to visit Hangzhou on this trip.",
+          "assistant": "I’m glad you did too. From the lotus fields to the shaded walkways and now this serene sunset panorama, each moment you captured reflects a different layer of the city’s spirit. These experiences will stay with you long after you leave—and they already seem to be nurturing the kind of clarity and calm you hoped to find."
+        },
+        {
+          "round": "D9:12",
+          "user": "Before I left the lakeside, I took another photo—this one captures Leifeng Pagoda glowing in the dusk. The moment felt almost magical.",
+          "assistant": "Oh, this is stunning! The warm lights of Leifeng Pagoda shining against the soft pastel sky create such a poetic atmosphere. The framing with the pavilion roof on the left adds so much depth—it's like the entire scene is quietly bowing to the evening.",
+          "image_id": [
+            "D9:IMG_005"
+          ],
+          "input_image": [
+            "../image/Global_Travel_Cultural_Sightseeing/D9_IMG_005.jpg"
+          ],
+          "image_caption": [
+            "Multi-tiered illuminated pagoda rising above a forested hill at dusk, with warm yellow lights along each level. Silhouette of a traditional curved roof occupies the left foreground. A few birds fly in the sky against a soft pink and blue sunset backdrop, while dark tree canopies fill the lower part of the scene."
+          ]
+        },
+        {
+          "round": "D9:13",
+          "user": "Standing there, I felt like the whole lakeshore paused for a second. The birds in the distance and the soft glow made the moment unforgettable.",
+          "assistant": "I can imagine it vividly. Dusk at West Lake has a way of slowing time down—the colors soften, the light folds gently over the water, and the pagoda stands like a quiet guardian of centuries of stories."
+        },
+        {
+          "round": "D9:14",
+          "user": "It made me curious—Leifeng Pagoda seems iconic here. Is there a story behind it?",
+          "assistant": "There absolutely is, and it's one of the most beloved legends in all of Chinese folklore. Leifeng Pagoda is famously tied to the story of *“The Legend of the White Snake.”* In the tale, a kind-hearted white snake spirit named Bai Suzhen falls in love with a mortal, Xu Xian. Their love, though sincere, is forbidden by the monk Fahai, who believes humans and spirits should remain apart. After many trials, Fahai ultimately imprisons Bai Suzhen under Leifeng Pagoda—separating her from Xu Xian. For centuries, the pagoda symbolized sorrow and longing. Yet in modern retellings, it also represents hope and resilience—because love endures despite hardship."
+        },
+        {
+          "round": "D9:15",
+          "user": "That’s such a moving story… it makes the pagoda feel so much more alive. Knowing this, the atmosphere I felt at dusk makes even more sense.",
+          "assistant": "Exactly. When you look at Leifeng Pagoda at sunset, you’re not just seeing architecture—you’re seeing centuries of emotions layered into its silhouette. The soft evening light almost feels like it’s retelling the story in its own quiet way."
+        },
+        {
+          "round": "D9:16",
+          "user": "I think that’s why the scene touched me so deeply. It’s not just a view—it’s a piece of cultural memory. I love how travel brings these stories into focus.",
+          "assistant": "And you connect with them so naturally. Moments like this—where scenery, history, and emotion blend together—are the essence of Hangzhou. Leifeng Pagoda at dusk isn’t just visually beautiful; it’s emotionally profound, especially when you know the love and longing woven into its legend."
+        },
+        {
+          "round": "D9:17",
+          "user": "Being here feels like the city is reminding me to slow down.",
+          "assistant": "And that aligns beautifully with your reflections from Sydney and Edinburgh."
+        },
+        {
+          "round": "D9:18",
+          "user": "After the lake, I visited the Longjing tea area. The terraces were lush and green.",
+          "assistant": "Longjing Village is incredible—did you try the tea?",
+          "image_id": [
+            "D9:IMG_006"
+          ],
+          "input_image": [
+            "../image/Global_Travel_Cultural_Sightseeing/D9_IMG_006.jpg"
+          ],
+          "image_caption": [
+            "Dense rows of green tea bushes fill the foreground of a terraced field, leading back to several traditional buildings with dark tiled roofs partly hidden among trees. A small open pavilion stands to the right. Forested hills rise in the background under an overcast sky, surrounding the rural settlement."
+          ]
+        },
+        {
+          "round": "D9:19",
+          "user": "I did! A local tea master showed me how they pan-fry the tea leaves by hand.",
+          "assistant": "That is amazing. The layered terraces really show the craftsmanship behind Longjing tea."
+        },
+        {
+          "round": "D9:20",
+          "user": "Watching the process made me think about patience and intentionality—qualities I want to bring into my work.",
+          "assistant": "Exactly. Tea culture emphasizes calm precision—very much like your financial work."
+        },
+        {
+          "round": "D9:21",
+          "user": "Since Zhejiang University is also close to West Lake, I decided to explore some of its campuses today. I started with the Huajiachi Campus—I'd heard it has a calm, scholarly atmosphere.",
+          "assistant": "That’s such a good choice. Huajiachi is one of ZJU’s historic campuses, known for being peaceful and academically grounded. It’s a great place to get a sense of the university’s cultural roots."
+        },
+        {
+          "round": "D9:22",
+          "user": "Here’s a photo I took at the entrance. The courtyard felt spacious, and even the air seemed calm.",
+          "assistant": "Wow, this is a wonderful capture! The bold calligraphy of 'Zhejiang University' stands out strongly, and the trees in the background make the entrance feel both serious and welcoming.",
+          "image_id": [
+            "D9:IMG_007"
+          ],
+          "input_image": [
+            "../image/Global_Travel_Cultural_Sightseeing/D9_IMG_007.jpg"
+          ],
+          "image_caption": [
+            "Main entrance gate of Zhejiang University, with large Chinese characters “浙江大学” on a gray stone structure. A black metal gate with security barriers and notice boards blocks vehicle entry, and a blue address sign reads “268” on the right pillar. Blue-and-white traffic cones line the roadway, and tall green trees are visible inside the campus under a clear sky."
+          ]
+        },
+        {
+          "round": "D9:23",
+          "user": "As I walked across the courtyard, I saw students sitting and discussing coursework. The atmosphere was surprisingly vibrant despite the quiet environment.",
+          "assistant": "That's one of the charming aspects of Huajiachi—it's serene on the surface, but there’s a lot of intellectual energy flowing underneath. You can almost feel the dedication in the air."
+        },
+        {
+          "round": "D9:24",
+          "user": "I enjoyed the campus a lot. After spending some time there, I thought—why not visit another ZJU campus while I’m in Hangzhou? So I headed straight to the Yuquan Campus next.",
+          "assistant": "Perfect transition! Yuquan Campus has an entirely different vibe—more research-driven and nestled even closer to the hills near West Lake. Many engineering and science faculties are based there."
+        },
+        {
+          "round": "D9:25",
+          "user": "Here’s a photo I took at a building of Yuquan Campus. This is really impressive.",
+          "assistant": "This picture captures the campus beautifully! The architecture is modest but dignified, and the open square gives off a strong sense of tradition and discipline.",
+          "image_id": [
+            "D9:IMG_008"
+          ],
+          "input_image": [
+            "../image/Global_Travel_Cultural_Sightseeing/D9_IMG_008.jpg"
+          ],
+          "image_caption": [
+            "Symmetrical courtyard leading to a large multi‑story institutional building with curved wings and many identical windows with air conditioners. A paved path runs to a central round planter containing a metal sculpture, with a few people standing nearby. Low bushes, stone blocks, and stainless‑steel railings border the walkway. Parked cars and bicycles line the ground floor, which is decorated with long horizontal banners featuring Chinese characters."
+          ]
+        },
+        {
+          "round": "D9:26",
+          "user": "Inside the campus, I walked past several labs and teaching buildings. Students were carrying equipment, discussing research—everything felt so alive.",
+          "assistant": "Yuquan is known for that bustling academic energy. It’s one of ZJU’s centers for scientific innovation, so it’s no surprise that the atmosphere feels driven and purposeful."
+        },
+        {
+          "round": "D9:27",
+          "user": "Compared to Huajiachi’s calm, Yuquan felt more intense—but in a way that was inspiring. It gave me a different kind of motivation.",
+          "assistant": "That contrast is part of what makes Zhejiang University unique. Each campus has its own personality, yet all share the same academic spirit. It’s wonderful that you experienced both sides in one day."
+        },
+        {
+          "round": "D9:28",
+          "user": "Visiting both campuses made me think about my own learning journey and how environments shape motivation and ideas.",
+          "assistant": "And it aligns perfectly with what you’ve been reflecting on throughout this trip—how culture, nature, and education shape one’s mindset. Hangzhou is extraordinary in that sense."
+        },
+        {
+          "round": "D9:29",
+          "user": "I’m really glad I made the detour to ZJU today. Its proximity to West Lake, combined with the depth of academic life, made the visit feel especially meaningful.",
+          "assistant": "It sounds like you captured the essence of Zhejiang University—rooted in history, energized by innovation, and enriched by its environment. A perfect complement to your Hangzhou journey."
+        },
+        {
+          "round": "D9:30",
+          "user": "Later I wandered to the Southern Song Imperial Street. The stone pavement and old lanterns felt like stepping back in time.",
+          "assistant": "That district carries deep cultural memory. It’s a great place to observe how commerce evolved historically."
+        },
+        {
+          "round": "D9:31",
+          "user": "I even bought a small handcrafted fan from a local store. The shop owner talked about preserving traditional crafts.",
+          "assistant": "That’s lovely. Cultural preservation is often intertwined with community-based economic systems."
+        },
+        {
+          "round": "D9:32",
+          "user": "You’re right. It made me wonder how financial inclusion can support these kinds of small craftspeople.",
+          "assistant": "And Hangzhou is actually a fascinating place to observe that. With Alibaba headquartered here, the local digital ecosystem has grown incredibly fast. Many small shops and independent artisans benefit from the e-commerce tools and online marketplaces Alibaba built—suddenly they can reach customers far beyond their neighborhoods. It’s a modern extension of traditional craftsmanship in a very empowering way.",
+          "image_id": [
+            "D9:IMG_009"
+          ],
+          "input_image": [
+            "../image/Global_Travel_Cultural_Sightseeing/D9_IMG_009.jpg"
+          ],
+          "image_caption": [
+            "Alibaba logo featuring an orange stylized emblem above the bold orange word “Alibaba” on a plain white background."
+          ]
+        },
+        {
+          "round": "D9:33",
+          "user": "Speaking of modern tech—I passed by a bus stop with all-digital screens. The contrast with the old street was fascinating.",
+          "assistant": "That’s one of Hangzhou’s signatures—the layers of history and tech blending together. Ant Group, also based here, has played a big role in shaping this digital infrastructure. From mobile payments to micro-loans for small vendors, their innovations changed how everyday services work. Those digital screens you saw are part of a citywide shift toward a more accessible, tech-enabled urban life.",
+          "image_id": [
+            "D9:IMG_010"
+          ],
+          "input_image": [
+            "../image/Global_Travel_Cultural_Sightseeing/D9_IMG_010.png"
+          ],
+          "image_caption": [
+            "Blue circular logo resembling an ant’s head with two antennae and a white ring inside, positioned to the left of the black text “Ant Group” on a plain white background."
+          ]
+        },
+        {
+          "round": "D9:34",
+          "user": "Being here gives me a sense of centeredness. I think it’s exactly what I hoped for before returning to work.",
+          "assistant": "Hangzhou has that effect—calming yet inspiring."
+        },
+        {
+          "round": "D9:35",
+          "user": "Tomorrow I might visit the China National Tea Museum or maybe take a boat ride.",
+          "assistant": "Both are excellent choices. The museum will deepen your understanding of cultural economics too.",
+          "image_id": [
+            "D9:IMG_011"
+          ],
+          "input_image": [
+            "../image/Global_Travel_Cultural_Sightseeing/D9_IMG_011.jpg"
+          ],
+          "image_caption": [
+            "Large traditional wooden gate with tiled roof and stone sidewalls, fronted by stone steps and rocks, surrounded by green trees. A prominent horizontal signboard at the top reads “中国茶叶博物馆”. Vertical red couplet boards hang on the front pillars. An open passageway leads through the gate to additional wooden structures visible in the background."
+          ]
+        },
+        {
+          "round": "D9:36",
+          "user": "I’m surprised by how much I relate to this city. It feels reflective, gentle, but purposeful.",
+          "assistant": "A perfect match for your personality and your professional values."
+        },
+        {
+          "round": "D9:37",
+          "user": "I’ll sleep early tonight. I want to explore more before I leave for Beijing.",
+          "assistant": "Rest well—tomorrow will bring more discoveries."
+        },
+        {
+          "round": "D9:38",
+          "user": "Before heading back to the hotel, I decided to have a proper Hangzhou-style dinner. I found a nearby restaurant that serves some classic dishes.",
+          "assistant": "That sounds perfect! Hangzhou cuisine is gentle, slightly sweet, and beautifully balanced—just like the city itself. What did you order?"
+        },
+        {
+          "round": "D9:39",
+          "user": "First, I ordered West Lake Vinegar Fish. Here’s the photo—the aroma was strong and interesting, but to be honest, the flavor is a bit unfamiliar to me.",
+          "assistant": "This looks like a classic preparation of West Lake Vinegar Fish! And it makes total sense that the flavor feels unfamiliar. The dish is famously sweet-and-sour, but the sweetness can be more pronounced than what many visitors expect. Hangzhou cuisine tends to be gentle and slightly sweet, so this dish really reflects the region’s traditions.",
+          "image_id": [
+            "D9:IMG_012"
+          ],
+          "input_image": [
+            "../image/Global_Travel_Cultural_Sightseeing/D9_IMG_012.jpg"
+          ],
+          "image_caption": [
+            "Whole fish served on a white oval platter, cut into sections and covered in a thick dark brown sauce, topped with small bits of chopped garlic. A metal spoon rests beside the fish near the tail. The dish sits on a pale pink patterned tablecloth."
+          ]
+        },
+        {
+          "round": "D9:40",
+          "user": "Yes, exactly—the fish was very tender, but the sweetness of the sauce caught me off guard. It’s not something I’m used to.",
+          "assistant": "That reaction is completely normal. The sweetness comes from the Jiangnan culinary style, which values soft, comforting flavors over intensity. Many people who are new to the dish need a moment to adjust. Still, it’s wonderful that you tried an authentic regional classic—you experienced a piece of Hangzhou’s food culture firsthand."
+        },
+        {
+          "round": "D9:41",
+          "user": "I also ordered Longjing Shrimp. I’ve always heard about this dish and wanted to try it here in Hangzhou. Here’s the picture.",
+          "assistant": "This is a beautiful plate of Longjing Shrimp! The dish is prepared using fresh river shrimp, quickly stir-fried to preserve their delicate texture. The key ingredient is freshly brewed Longjing (Dragon Well) tea, which infuses a subtle aroma and gives the dish its signature pale green tint.",
+          "image_id": [
+            "D9:IMG_013"
+          ],
+          "input_image": [
+            "../image/Global_Travel_Cultural_Sightseeing/D9_IMG_013.jpg"
+          ],
+          "image_caption": [
+            "Small translucent white fruit pieces arranged in a mound on a square white plate, garnished with a sprig of green herbs, set on a wooden table in indoor lighting."
+          ]
+        },
+        {
+          "round": "D9:42",
+          "user": "The tea fragrance surprised me—it was gentle, but it lifted the flavor in such a soft way.",
+          "assistant": "That’s the charm of Longjing Shrimp. The tea isn’t overpowering—it’s meant to add a refreshing, almost spring-like aroma. It’s a dish that showcases Hangzhou’s philosophy: harmony, elegance, and a quiet sense of refinement."
+        }
+      ]
+    },
+    {
+      "session_id": "D10",
+      "date": "2024-07-24",
+      "dialogues": [
+        {
+          "round": "D10:1",
+          "user": "I arrived in Beijing this morning! The scale of the city is incredible—so vast, structured, and full of history.",
+          "assistant": "Welcome to the capital, Maria! Beijing carries centuries of cultural and political significance. Where did you head first?"
+        },
+        {
+          "round": "D10:2",
+          "user": "Straight to the Great Wall at Mutianyu. The mountains were greener than I expected.",
+          "assistant": "Mutianyu is a fantastic choice—less crowded and incredibly scenic."
+        },
+        {
+          "round": "D10:3",
+          "user": "Here’s the first photo I took—the wall winding across the mountains like a dragon.",
+          "assistant": "Magnificent! This perfectly captures the strength and endurance the Great Wall represents.",
+          "image_id": [
+            "D10:IMG_001"
+          ],
+          "input_image": [
+            "../image/Global_Travel_Cultural_Sightseeing/D10_IMG_001.jpg"
+          ],
+          "image_caption": [
+            "Great Wall of China segment winding along steep, green mountain ridges under a clear blue sky. Stone walls with crenellations connect multiple watchtowers, including a larger building on the left and a square guard tower on the right. Dense forest covers the slopes, and the wall follows the natural contours of the terrain."
+          ]
+        },
+        {
+          "round": "D10:4",
+          "user": "Walking up the steps was a workout! But the view from the top tower was worth it.",
+          "assistant": "The climb symbolizes perseverance—a wonderful metaphor for your career journey too."
+        },
+        {
+          "round": "D10:5",
+          "user": "Here’s another picture I took facing the opposite direction. The horizon felt endless.",
+          "assistant": "This is breathtaking! The depth really shows how ancient fortifications adapted to the landscape.",
+          "image_id": [
+            "D10:IMG_002"
+          ],
+          "input_image": [
+            "../image/Global_Travel_Cultural_Sightseeing/D10_IMG_002.jpg"
+          ],
+          "image_caption": [
+            "Tourists climb a steep flight of stone steps on the Great Wall of China, moving between crenellated gray brick ramparts. A large watchtower stands at the top of the slope, with another small pavilion visible on a distant ridge. Dry, brush-covered hillsides and scattered evergreens border the wall under a clear sky."
+          ]
+        },
+        {
+          "round": "D10:6",
+          "user": "Standing there, I thought about how civilizations build systems to protect what matters—just like financial systems today.",
+          "assistant": "What a brilliant analogy. Structures—whether walls or policies—are built to maintain stability."
+        },
+        {
+          "round": "D10:7",
+          "user": "In the afternoon, I visited the Forbidden City. The vast courtyards were stunning.",
+          "assistant": "The Forbidden City is the heart of imperial Chinese architecture—majestic but orderly."
+        },
+        {
+          "round": "D10:8",
+          "user": "I took a picture near the Meridian Gate. The red walls were glowing under the sun.",
+          "assistant": "This looks grand! The symmetry and color palette reflect classical Chinese values.",
+          "image_id": [
+            "D10:IMG_003"
+          ],
+          "input_image": [
+            "../image/Global_Travel_Cultural_Sightseeing/D10_IMG_003.jpg"
+          ],
+          "image_caption": [
+            "Wide stone-paved courtyard leading to a symmetrical complex of traditional Chinese palace buildings with red walls and dark tiled roofs. Two long side wings frame a central gate structure in the distance, with metal barriers, small signs, and a clear sky overhead."
+          ]
+        },
+        {
+          "round": "D10:9",
+          "user": "Walking through the halls, I felt a sense of continuity—like centuries of stories quietly preserved.",
+          "assistant": "Exactly. Beijing is one of the world’s richest cultural timelines."
+        },
+        {
+          "round": "D10:10",
+          "user": "Then I wandered into a nearby hutong area. The narrow alleyways felt intimate and full of daily life.",
+          "assistant": "Hutongs reveal the city's human side—they contrast beautifully with the monumental structures."
+        },
+        {
+          "round": "D10:11",
+          "user": "Beijing really embodies balance—massive architecture but also cozy human spaces.",
+          "assistant": "Your observation captures the essence of the city perfectly."
+        },
+        {
+          "round": "D10:12",
+          "user": "At night, I visited the CBD area. The skyscrapers were impressive—so modern compared to the ancient sites.",
+          "assistant": "Beijing’s modern skyline symbolizes China’s rapid development."
+        },
+        {
+          "round": "D10:13",
+          "user": "Here’s a picture of the illuminated towers in Beijing CBD. The reflections on the glass looked futuristic.",
+          "assistant": "Amazing shot! This perfectly contrasts the tradition you saw earlier.",
+          "image_id": [
+            "D10:IMG_004"
+          ],
+          "input_image": [
+            "../image/Global_Travel_Cultural_Sightseeing/D10_IMG_004.jpg"
+          ],
+          "image_caption": [
+            "Nighttime cityscape with several illuminated skyscrapers, including a tall tower with a blue-lit top on the left and a dark high-rise with a bright grid-like crown in the center. A busy multi-lane street runs in the foreground, with moving cars and headlights. Streetlights cast yellow light, and a surveillance camera is mounted on a pole at the right edge. Traffic signs with Chinese characters line the road."
+          ]
+        },
+        {
+          "round": "D10:14",
+          "user": "Also, this is a wider view featuring the CCTV Headquarters. Its geometric loop design is so distinct—it feels like a bold statement of modern ambition amidst the city lights.",
+          "assistant": "That is an iconic landmark! The architectural defiance of gravity in that building perfectly represents the rapid modernization and innovative spirit of Beijing.",
+          "image_id": [
+            "D10:IMG_005"
+          ],
+          "input_image": [
+            "../image/Global_Travel_Cultural_Sightseeing/D10_IMG_005.jpg"
+          ],
+          "image_caption": [
+            "Nighttime cityscape with illuminated skyscrapers, including a tall angular glass tower with a diamond-pattern facade on the right and twin blue-lit high-rises in the center. A high-rise under construction with cranes stands in the left foreground. Bright streetlights line a wide avenue running through the middle, while numerous office windows and building lights form a dense urban skyline against the dark sky."
+          ]
+        },
+        {
+          "round": "D10:15",
+          "user": "Being here makes me think about how old and new coexist—and how financial systems must do the same.",
+          "assistant": "Yes—modern innovation must respect historical context and community needs."
+        },
+        {
+          "round": "D10:16",
+          "user": "Walking through these places, I feel like I’m learning from the city itself.",
+          "assistant": "Beijing often teaches through contrast—strength with softness, tradition with innovation."
+        },
+        {
+          "round": "D10:17",
+          "user": "Speaking of learning from the city… since Beijing is home to so many top universities, I’m considering visiting Tsinghua University or Peking University while I’m here.",
+          "assistant": "That’s a fantastic idea! Both campuses have their own personalities—Tsinghua is known for its modern research spirit and strong engineering tradition, while Peking University carries a deeply historical, humanistic atmosphere. Visiting them would add a unique intellectual dimension to your trip."
+        },
+        {
+          "round": "D10:18",
+          "user": "I’ve always heard people talk about how beautiful those campuses are. It would be meaningful to see how academic life looks in China’s top institutions.",
+          "assistant": "Absolutely. Tsinghua’s campus has wide lawns, lakes, and modern research buildings—very energetic and forward-looking. Peking University’s Weiming Lake area, on the other hand, feels poetic and reflective, almost like a quiet cultural garden. Each place expresses a different side of the country’s intellectual landscape."
+        },
+        {
+          "round": "D10:19",
+          "user": "I think I’d like to explore both if time allows. It would be inspiring to see how innovation and tradition coexist in their academic environments as well.",
+          "assistant": "And you’ll definitely feel that coexistence. Tsinghua’s tech-driven momentum pairs beautifully with Beijing’s broader narrative of modernization, while Peking University connects deeply with China’s cultural and scholarly heritage—perfectly complementing the themes you’ve noticed on this trip."
+        },
+        {
+          "round": "D10:20",
+          "user": "My friend John actually passed by Tsinghua University earlier this year, and he took a photo of its famous main gate. The atmosphere felt so confident and modern.",
+          "assistant": "This is a wonderful capture of Tsinghua’s iconic gate! The clean white columns and arch design feel both historic and forward-looking—much like Tsinghua’s reputation. The campus is known for cutting-edge research, especially in engineering and technology, and your photo really conveys that bold, innovative spirit.",
+          "image_id": [
+            "D10:IMG_006"
+          ],
+          "input_image": [
+            "../image/Global_Travel_Cultural_Sightseeing/D10_IMG_006.jpg"
+          ],
+          "image_caption": [
+            "Large white stone archway with columns and three passageways, bearing the Chinese inscription “清华园” at the top. Several people walk or ride bicycles beneath and around the structure. Flower-filled planters line the front, with tall green trees and a clear blue sky in the background."
+          ]
+        },
+        {
+          "round": "D10:21",
+          "user": "And here’s the photo he took at Peking University’s gate—the colors and details felt so rich and full of character.",
+          "assistant": "This is stunning! Peking University’s gate has such a vibrant, traditional aesthetic. The deep red pillars, intricate roof patterns, and bold blue signboard reflect its strong cultural and humanistic roots. PKU has an atmosphere that feels poetic and intellectual, and your photo captures that perfectly.",
+          "image_id": [
+            "D10:IMG_007"
+          ],
+          "input_image": [
+            "../image/Global_Travel_Cultural_Sightseeing/D10_IMG_007.jpg"
+          ],
+          "image_caption": [
+            "Traditional Chinese gate with ornate red and blue detailing and a large sign reading “北京大学” above the entrance. Two uniformed guards stand on either side of the gateway, while pedestrians and cyclists move along the tree‑lined path inside the campus. A prominent board near the entrance displays a no‑smoking symbol and the text “无烟校园”."
+          ]
+        },
+        {
+          "round": "D10:22",
+          "user": "Great, I’ll try to fit them into my itinerary before I leave Beijing.",
+          "assistant": "You’ll gain so much from those visits—both intellectually and emotionally. They’ll give you another layer of perspective on the balance between history, innovation, and community that you’ve been reflecting on."
+        },
+        {
+          "round": "D10:23",
+          "user": "Tomorrow I might first visit the Temple of Heaven. I heard the surrounding park is peaceful in the morning.",
+          "assistant": "You’ll love it—locals practice tai chi there, creating a calming atmosphere.",
+          "image_id": [
+            "D10:IMG_008"
+          ],
+          "input_image": [
+            "../image/Global_Travel_Cultural_Sightseeing/D10_IMG_008.jpg"
+          ],
+          "image_caption": [
+            "Large crowd of visitors walking up stone steps toward the circular, three-tiered Hall of Prayer for Good Harvests, featuring blue-tiled roofs, ornate multicolored eaves, and a golden finial against a clear blue sky. The blue plaque above the entrance reads “祈年殿”. White balustrades, red wooden doors, and red lantern-like structures frame the foreground of the historic temple complex."
+          ]
+        },
+        {
+          "round": "D10:24",
+          "user": "This trip is giving me so much perspective. I feel more grounded and clearer about my goals.",
+          "assistant": "And that clarity will undoubtedly enrich your inclusive finance initiatives."
+        },
+        {
+          "round": "D10:25",
+          "user": "I’m grateful for this journey. It’s teaching me in ways I didn’t expect.",
+          "assistant": "Travel shapes us deeply—especially journeys like this."
+        },
+        {
+          "round": "D10:26",
+          "user": "I’ll get some rest now. Tomorrow will be another inspiring day.",
+          "assistant": "Sleep well, Maria. Beijing will be ready to surprise you again."
+        }
+      ]
+    }
+  ],
+  "human-annotated QAs": [
+    {
+      "point": "FR",
+      "question": "Which two cities did Maria choose as her first destinations when planning her holiday at the beginning?",
+      "answer": "Paris and New York.",
+      "session_id": [
+        "D1"
+      ],
+      "clue": [
+        "D1:1",
+        "D1:2",
+        "D1:10"
+      ]
+    },
+    {
+      "point": "MR",
+      "question": "What museum did Maria plan to visit in New York?",
+      "answer": "The Metropolitan Museum of Art.",
+      "session_id": [
+        "D1"
+      ],
+      "clue": [
+        "D1:7"
+      ]
+    },
+    {
+      "point": "TR",
+      "question": "After visiting Paris, which city did Maria travel to next?",
+      "answer": "New York.",
+      "session_id": [
+        "D1",
+        "D5"
+      ],
+      "clue": [
+        "D1:10",
+        "D5:1"
+      ]
+    },
+    {
+      "point": "VS",
+      "question": "Which two images in the dialogue shows the same landmark as this one? Only return the two image_id of the images, separated by commas.",
+      "question_image": "../image/Global_Travel_Cultural_Sightseeing/QA_IMG_001.png",
+      "answer": "D1:IMG_001, D2:IMG_003",
+      "session_id": [
+        "D1",
+        "D2"
+      ],
+      "clue": [
+        "D1:3",
+        "D2:4"
+      ],
+      "image_caption": "Eiffel Tower rising above a broad cityscape, centered against a partly cloudy sky at sunset. A straight avenue with vehicles and pedestrians leads directly toward the base of the tower, flanked by green trees and park areas."
+    },
+    {
+      "point": "TTL",
+      "question": "What is the name of the landmark in this image?",
+      "question_image": "../image/Global_Travel_Cultural_Sightseeing/QA_IMG_002.png",
+      "answer": "Eiffel Tower",
+      "session_id": [
+        "D1",
+        "D2"
+      ],
+      "clue": [
+        "D1:3",
+        "D2:4"
+      ],
+      "image_caption": "Tall metal Eiffel Tower centered above a straight avenue with vehicles and small figures of pedestrians. Dense green trees and landscaped areas border the avenue in the foreground. Low city buildings with varied roofs extend across the horizon. The sky is filled with layered clouds, some illuminated by warm light, creating contrasting bands of bright and darker areas behind the structure."
+    },
+    {
+      "point": "VR",
+      "question": "Based on the photos shared by Ethan, in which city was the following picture taken?",
+      "question_image": "../image/Global_Travel_Cultural_Sightseeing/QA_IMG_003.png",
+      "answer": "Paris",
+      "session_id": [
+        "D1",
+        "D2"
+      ],
+      "clue": [
+        "D1:3",
+        "D2:4"
+      ],
+      "image_caption": "Tall iron Eiffel Tower centered against a partly cloudy sky at sunset, with warm light on its structure. A straight avenue with vehicles and pedestrians leads toward the tower, surrounded by green trees and low city buildings."
+    },
+    {
+      "point": "VS",
+      "question": "Which two images in the dialogue shows the same landmark as this one? Only return the two image_id of the images, separated by commas.",
+      "question_image": "../image/Global_Travel_Cultural_Sightseeing/QA_IMG_004.png",
+      "answer": "D1:IMG_001, D2:IMG_003",
+      "session_id": [
+        "D1",
+        "D2"
+      ],
+      "clue": [
+        "D1:3",
+        "D2:4"
+      ],
+      "image_caption": "Two women with their backs to the camera stand close together, raising their arms to form a heart shape toward the Eiffel Tower. They wear light-colored clothing and hats. The Eiffel Tower rises centrally under a partly cloudy sky, with a cityscape, trees, and a long walkway filled with people and fountains stretching out below."
+    },
+    {
+      "point": "TTL",
+      "question": "What is the name of the landmark in this image?",
+      "question_image": "../image/Global_Travel_Cultural_Sightseeing/QA_IMG_005.png",
+      "answer": "Eiffel Tower",
+      "session_id": [
+        "D1",
+        "D2"
+      ],
+      "clue": [
+        "D1:3",
+        "D2:4"
+      ],
+      "image_caption": "Two women with their backs to the camera stand close together on a terrace, raising their arms to form a heart shape toward the Eiffel Tower. The tower rises centrally against a partly cloudy sky, with city buildings, trees, and a long rectangular fountain and plaza stretching toward its base. Numerous people are visible in the distance, walking and gathering in the open public area."
+    },
+    {
+      "point": "VR",
+      "question": "Based on the photos shared by Ethan, in which city was the following picture taken?",
+      "question_image": "../image/Global_Travel_Cultural_Sightseeing/QA_IMG_006.png",
+      "answer": "Paris",
+      "session_id": [
+        "D1",
+        "D2"
+      ],
+      "clue": [
+        "D1:3",
+        "D2:4"
+      ],
+      "image_caption": "Two people with long hair, seen from behind, stand close together in the foreground and raise their arms to form a heart shape. They face the Eiffel Tower under a partly cloudy sky, with city buildings, trees, and a large rectangular fountain below."
+    },
+    {
+      "point": "TR",
+      "question": "When did Maria travel to Paris? Return in the format YYYY-MM-DD.",
+      "answer": "2024-05-19",
+      "session_id": [
+        "D2"
+      ],
+      "clue": [
+        "D2:1"
+      ]
+    },
+    {
+      "point": "FR",
+      "question": "What is the first place Maria wants to visit in Paris?",
+      "answer": "The Champs-Élysées.",
+      "session_id": [
+        "D2"
+      ],
+      "clue": [
+        "D2:1"
+      ]
+    },
+    {
+      "point": "MR",
+      "question": "What might be a reason for Maria wanting to visit the Eiffel Tower at night?",
+      "answer": "Because it sparkles and creates a magical atmosphere.",
+      "session_id": [
+        "D2"
+      ],
+      "clue": [
+        "D2:4"
+      ]
+    },
+    {
+      "point": "FR",
+      "question": "What does Maria want to see in the Louvre?",
+      "answer": "The Mona Lisa, sculptures, and artifacts.",
+      "session_id": [
+        "D2"
+      ],
+      "clue": [
+        "D2:6"
+      ]
+    },
+    {
+      "point": "TR",
+      "question": "What other landmark does Maria mention after discussing the Champs-Élysées?",
+      "answer": "The Eiffel Tower.",
+      "session_id": [
+        "D2"
+      ],
+      "clue": [
+        "D2:3",
+        "D2:4"
+      ]
+    },
+    {
+      "point": "FR",
+      "question": "What book did Maria bring along to read during her evening in Paris?",
+      "answer": "A novel about cross-cultural communication.",
+      "session_id": [
+        "D3"
+      ],
+      "clue": [
+        "D3:2"
+      ]
+    },
+    {
+      "point": "MR",
+      "question": "What activity did Maria do from her window that she described as grounding?",
+      "answer": "She sketched a little bit of the city skyline with her old notebook.",
+      "session_id": [
+        "D3"
+      ],
+      "clue": [
+        "D3:6"
+      ]
+    },
+    {
+      "point": "KR",
+      "question": "What observation did Maria make about Parisians' daily routines that impressed her?",
+      "answer": "Their sense of pace feels intentional, not rushed.",
+      "session_id": [
+        "D3"
+      ],
+      "clue": [
+        "D3:3"
+      ]
+    },
+    {
+      "point": "VS",
+      "question": "Which image shows the notebook Maria used to sketch the Paris skyline?",
+      "answer": "D3:IMG_001",
+      "session_id": [
+        "D3"
+      ],
+      "clue": [
+        "D3:6"
+      ]
+    },
+    {
+      "point": "VS",
+      "question": "Which image shows the bookstore Maria is interested in visiting?",
+      "answer": "D3:IMG_002",
+      "session_id": [
+        "D3"
+      ],
+      "clue": [
+        "D3:9"
+      ]
+    },
+    {
+      "point": "FR",
+      "question": "What are the two dress categories that Maria explored during her Paris shopping?",
+      "answer": "Abstract Floral Tie-Waist Dress and Botanical Floral Shift Dress.",
+      "session_id": [
+        "D4"
+      ],
+      "clue": [
+        "D4:2",
+        "D4:12"
+      ]
+    },
+    {
+      "point": "VR",
+      "question": "How many Abstract Floral Tie-Waist Dresses did Maria view in total? Please answer using an Arabic numeral (e.g., “2” instead of “Two”).",
+      "answer": "5",
+      "session_id": [
+        "D4"
+      ],
+      "clue": [
+        "D4:2",
+        "D4:4",
+        "D4:6",
+        "D4:8",
+        "D4:10"
+      ]
+    },
+    {
+      "point": "TTL",
+      "question": "According to the conversation, what category is the clothing in the picture?",
+      "question_image": "../image/Global_Travel_Cultural_Sightseeing/QA_IMG_007.jpg",
+      "answer": "Abstract Floral Tie-Waist Dress",
+      "session_id": [
+        "D4"
+      ],
+      "clue": [
+        "D4:2",
+        "D4:4",
+        "D4:6",
+        "D4:8",
+        "D4:10"
+      ],
+      "image_caption": "Woman standing against a plain white background, wearing a fitted, long-sleeved, knee-length black dress and black high-heeled shoes, with straight brown hair resting over one shoulder and her arms relaxed at her sides."
+    },
+    {
+      "point": "TTL",
+      "question": "According to the conversation, what category is the clothing in the picture?",
+      "question_image": "../image/Global_Travel_Cultural_Sightseeing/QA_IMG_008.jpg",
+      "answer": "Abstract Floral Tie-Waist Dress",
+      "session_id": [
+        "D4"
+      ],
+      "clue": [
+        "D4:2",
+        "D4:4",
+        "D4:6",
+        "D4:8",
+        "D4:10"
+      ],
+      "image_caption": "Woman standing indoors wearing a sleeveless, knee-length black dress with white and pale pink abstract panels and a pleated skirt, paired with black open-toe heels. She faces forward in a minimalist room with gray geometric wall and floor elements."
+    },
+    {
+      "point": "TTL",
+      "question": "According to the conversation, what category is the clothing in the picture?",
+      "question_image": "../image/Global_Travel_Cultural_Sightseeing/QA_IMG_009.jpg",
+      "answer": "Abstract Floral Tie-Waist Dress",
+      "session_id": [
+        "D4"
+      ],
+      "clue": [
+        "D4:2",
+        "D4:4",
+        "D4:6",
+        "D4:8",
+        "D4:10"
+      ],
+      "image_caption": "Woman posing in a studio wearing a mid-calf, white tulle dress with small colorful floral patterns, half sleeves, and a sheer overlay. A wide magenta sash with a large bow is tied at her waist. She lifts one side of the skirt slightly with one hand while the other arm is extended outward. She wears black high-heeled shoes and has her hair styled in a low side ponytail against a plain light background."
+    },
+    {
+      "point": "TTL",
+      "question": "According to the conversation, what category is the clothing in the picture?",
+      "question_image": "../image/Global_Travel_Cultural_Sightseeing/QA_IMG_010.jpg",
+      "answer": "Abstract Floral Tie-Waist Dress",
+      "session_id": [
+        "D4"
+      ],
+      "clue": [
+        "D4:2",
+        "D4:4",
+        "D4:6",
+        "D4:8",
+        "D4:10"
+      ],
+      "image_caption": "Young woman standing against a plain white background, wearing a sleeveless, above-the-knee dress with a blue and white chevron pattern and a thin belt at the waist. She has curly hair pulled back, minimal accessories, and black ankle-strap heels. Her arms rest at her sides and she faces forward, centered in the frame."
+    },
+    {
+      "point": "VR",
+      "question": "How many Botanical Floral Shift Dresses did Maria view in total? Please answer using an Arabic numeral (e.g., “2” instead of “Two”).",
+      "answer": "5",
+      "session_id": [
+        "D4"
+      ],
+      "clue": [
+        "D4:12",
+        "D4:14",
+        "D4:16",
+        "D4:18",
+        "D4:20"
+      ]
+    },
+    {
+      "point": "TTL",
+      "question": "According to the conversation, what category is the clothing in the picture?",
+      "question_image": "../image/Global_Travel_Cultural_Sightseeing/QA_IMG_011.jpg",
+      "answer": "Botanical Floral Shift Dress",
+      "session_id": [
+        "D4"
+      ],
+      "clue": [
+        "D4:12",
+        "D4:14",
+        "D4:16",
+        "D4:18",
+        "D4:20"
+      ],
+      "image_caption": "Woman with long blonde hair and dark sunglasses standing with hands on hips, wearing a white long-sleeve dress covered in a colorful floral print. Minimal background with a light blue and white gradient. The word “Yumi” appears in stylized text in the upper right corner."
+    },
+    {
+      "point": "TTL",
+      "question": "According to the conversation, what category is the clothing in the picture?",
+      "question_image": "../image/Global_Travel_Cultural_Sightseeing/QA_IMG_012.jpg",
+      "answer": "Botanical Floral Shift Dress",
+      "session_id": [
+        "D4"
+      ],
+      "clue": [
+        "D4:12",
+        "D4:14",
+        "D4:16",
+        "D4:18",
+        "D4:20"
+      ],
+      "image_caption": "Woman standing in profile against a plain white background, wearing a navy shift dress with long sheer sleeves and a large multicolored floral print across the chest and sleeves. She has her hair in a high bun and is wearing nude high-heeled sandals."
+    },
+    {
+      "point": "TTL",
+      "question": "According to the conversation, what category is the clothing in the picture?",
+      "question_image": "../image/Global_Travel_Cultural_Sightseeing/QA_IMG_013.jpg",
+      "answer": "Botanical Floral Shift Dress",
+      "session_id": [
+        "D4"
+      ],
+      "clue": [
+        "D4:12",
+        "D4:14",
+        "D4:16",
+        "D4:18",
+        "D4:20"
+      ],
+      "image_caption": "Woman standing against a plain white background, wearing a sleeveless, fitted white mini dress covered with large colorful floral prints in red, pink, orange, yellow, and green. She has her hair tied back and is wearing dark high-heeled shoes, facing forward with arms relaxed at her sides."
+    },
+    {
+      "point": "TTL",
+      "question": "According to the conversation, what category is the clothing in the picture?",
+      "question_image": "../image/Global_Travel_Cultural_Sightseeing/QA_IMG_014.jpg",
+      "answer": "Botanical Floral Shift Dress",
+      "session_id": [
+        "D4"
+      ],
+      "clue": [
+        "D4:12",
+        "D4:14",
+        "D4:16",
+        "D4:18",
+        "D4:20"
+      ],
+      "image_caption": "Woman standing in a studio against a plain light background, wearing a white, long-sleeved, knee-length dress with a colorful floral print. She faces forward with arms relaxed by her sides and legs slightly apart. She wears white high-heeled sandals with ankle straps."
+    },
+    {
+      "point": "TTL",
+      "question": "According to the conversation, what category is the clothing in the picture?",
+      "question_image": "../image/Global_Travel_Cultural_Sightseeing/QA_IMG_015.jpg",
+      "answer": "Botanical Floral Shift Dress",
+      "session_id": [
+        "D4"
+      ],
+      "clue": [
+        "D4:12",
+        "D4:14",
+        "D4:16",
+        "D4:18",
+        "D4:20"
+      ],
+      "image_caption": "Woman standing against a plain white background wearing a loose-fitting, knee-length white dress with a colorful floral print and short sleeves. Her arms rest by her sides, and she faces forward with a neutral expression. The text “asos curve” appears vertically along the right edge."
+    },
+    {
+      "point": "TTL",
+      "question": "According to the conversation, what category is the clothing in the picture?",
+      "question_image": "../image/Global_Travel_Cultural_Sightseeing/QA_IMG_016.jpg",
+      "answer": "Botanical Floral Shift Dress",
+      "session_id": [
+        "D4"
+      ],
+      "clue": [
+        "D4:12",
+        "D4:14",
+        "D4:16",
+        "D4:18",
+        "D4:20"
+      ],
+      "image_caption": "Woman standing against a plain white background, wearing a short, light-colored T-shirt dress with a large symmetrical floral and botanical print on the front in pink, blue, and gray tones. Her hair is tied back and she faces forward with arms relaxed at her sides."
+    },
+    {
+      "point": "TTL",
+      "question": "According to the conversation, what category is the clothing in the picture?",
+      "question_image": "../image/Global_Travel_Cultural_Sightseeing/QA_IMG_017.jpg",
+      "answer": "Botanical Floral Shift Dress",
+      "session_id": [
+        "D4"
+      ],
+      "clue": [
+        "D4:12",
+        "D4:14",
+        "D4:16",
+        "D4:18",
+        "D4:20"
+      ],
+      "image_caption": "Knee-length, fitted white sheath dress with short sleeves and a high round neckline, featuring a multicolored floral and foliage print concentrated on the upper right bodice and lower left skirt. The print includes large pink and blue flowers, green leaves, brown branches, and small birds or butterflies, leaving other areas mostly plain."
+    },
+    {
+      "point": "KR",
+      "question": "Which image corresponds to the Abstract Floral Tie-Waist Dress that Maria ultimately chose? Only return the image_id.",
+      "answer": "D4:IMG_003",
+      "session_id": [
+        "D4"
+      ],
+      "clue": [
+        "D4:6",
+        "D4:21"
+      ]
+    },
+    {
+      "point": "KR",
+      "question": "Which image corresponds to the Botanical Floral Shift Dress that Maria selected? Only return the image_id.",
+      "answer": "D4:IMG_006",
+      "session_id": [
+        "D4"
+      ],
+      "clue": [
+        "D4:12",
+        "D4:22"
+      ]
+    },
+    {
+      "point": "MR",
+      "question": "What characteristic did the assistant say the third Abstract Floral Tie-Waist Dress has that makes it suitable for warm weather?",
+      "answer": "The sheer fabric and layered texture make it look breezy and feminine—great for warm weather.",
+      "session_id": [
+        "D4"
+      ],
+      "clue": [
+        "D4:6"
+      ]
+    },
+    {
+      "point": "TR",
+      "question": "Which city did Maria visit immediately after Paris?",
+      "answer": "New York.",
+      "session_id": [
+        "D2",
+        "D5"
+      ],
+      "clue": [
+        "D2:10",
+        "D5:1"
+      ]
+    },
+    {
+      "point": "VS",
+      "question": "Which image in the dialogue shows the same landmark as this one? Only return the image_id of the image.",
+      "question_image": "../image/Global_Travel_Cultural_Sightseeing/QA_IMG_018.png",
+      "answer": "D5:IMG_005",
+      "session_id": [
+        "D5"
+      ],
+      "clue": [
+        "D5:6"
+      ],
+      "image_caption": "Close-up view of the Statue of Liberty’s upper body and face, showing the raised right arm, part of the robe, and the spiked crown against a clear blue sky."
+    },
+    {
+      "point": "TTL",
+      "question": "What is the name of the landmark in this image?",
+      "question_image": "../image/Global_Travel_Cultural_Sightseeing/QA_IMG_019.png",
+      "answer": "Statue of Liberty",
+      "session_id": [
+        "D5"
+      ],
+      "clue": [
+        "D5:6"
+      ],
+      "image_caption": "Close-up of the Statue of Liberty’s upper body and face, showing the raised right arm, crown with pointed rays, and detailed facial features against a clear blue sky."
+    },
+    {
+      "point": "VR",
+      "question": "Based on the photos shared by Ethan, in which city was the following picture taken?",
+      "question_image": "../image/Global_Travel_Cultural_Sightseeing/QA_IMG_020.png",
+      "answer": "New York.",
+      "session_id": [
+        "D5"
+      ],
+      "clue": [
+        "D5:6"
+      ],
+      "image_caption": "Close-up of the Statue of Liberty’s upper body, showing the raised right arm, detailed facial features, and spiked crown against a clear blue sky, emphasizing the green patina of the copper surface."
+    },
+    {
+      "point": "VS",
+      "question": "Which two images in the dialogue shows the same landmark as this one? Only return the image_id of the images, separated by commas.",
+      "question_image": "../image/Global_Travel_Cultural_Sightseeing/QA_IMG_021.png",
+      "answer": "D5:IMG_006, D5:IMG_007",
+      "session_id": [
+        "D5"
+      ],
+      "clue": [
+        "D5:8",
+        "D5:9"
+      ],
+      "image_caption": "Crowded Times Square intersection with people and yellow taxis surrounded by tall buildings and bright electronic billboards. Large screens display ads, including “#WallpaperTV,” “Forever 21,” and a vertical “BROADWAY” sign, under a dark, cloudy sky that contrasts with the colorful illuminated displays."
+    },
+    {
+      "point": "TTL",
+      "question": "What is the name of the landmark in this image?",
+      "question_image": "../image/Global_Travel_Cultural_Sightseeing/QA_IMG_022.png",
+      "answer": "Times Square",
+      "session_id": [
+        "D5"
+      ],
+      "clue": [
+        "D5:8",
+        "D5:9"
+      ],
+      "image_caption": "Crowded Times Square in New York City with people, yellow taxis, and tall buildings under a cloudy sky. Large electronic billboards display ads, including a vertical “BROADWAY” sign, a “FOREVER 21” storefront, and a screen reading “#WallpaperTV.” Bright screens with people and products dominate the scene, contrasting with the dark, overcast atmosphere."
+    },
+    {
+      "point": "VR",
+      "question": "Based on the photos shared by Ethan, in which city was the following picture taken?",
+      "question_image": "../image/Global_Travel_Cultural_Sightseeing/QA_IMG_023.png",
+      "answer": "New York.",
+      "session_id": [
+        "D5"
+      ],
+      "clue": [
+        "D5:8",
+        "D5:9"
+      ],
+      "image_caption": "Crowded city street in Times Square, New York, with people and yellow taxis moving among tall buildings. Large digital billboards display ads, including a man in a yellow jacket with the number “21,” a pink sign reading “#WallpaperTV,” and a store sign “FOREVER 21.” Skyscrapers rise into a cloudy, dark sky, and the word “BROADWAY” appears on a vertical sign along the left side."
+    },
+    {
+      "point": "TR",
+      "question": "Did Maria visit New York before she traveled to Sydney?",
+      "answer": "Yes.",
+      "session_id": [
+        "D5",
+        "D6"
+      ],
+      "clue": [
+        "D5:1",
+        "D6:1"
+      ]
+    },
+    {
+      "point": "VS",
+      "question": "Which two images in the dialogue shows the same landmark as this one? Only return the image_id of the images, separated by commas.",
+      "question_image": "../image/Global_Travel_Cultural_Sightseeing/QA_IMG_024.png",
+      "answer": "D6:IMG_007, D6:IMG_008",
+      "session_id": [
+        "D6"
+      ],
+      "clue": [
+        "D6:8",
+        "D6:9"
+      ],
+      "image_caption": "White sail-like roofs of a large modern performing arts building rise above a tan base beside a blue harbor, viewed from across the water under a clear blue sky, with small figures of people walking along the waterfront and low hills and buildings in the distant background."
+    },
+    {
+      "point": "TTL",
+      "question": "What is the name of the landmark in this image?",
+      "question_image": "../image/Global_Travel_Cultural_Sightseeing/QA_IMG_025.png",
+      "answer": "Sydney Opera House",
+      "session_id": [
+        "D6"
+      ],
+      "clue": [
+        "D6:8",
+        "D6:9"
+      ],
+      "image_caption": "Waterfront performing arts building with multiple large white, sail-like roof shells rising above a low, tan base. The structure stands beside blue harbor water, with small groups of people visible along the lower promenade. A clear blue sky and distant shoreline with low buildings and greenery form the background."
+    },
+    {
+      "point": "VR",
+      "question": "Based on the photos shared by Ethan, in which city was the following picture taken?",
+      "question_image": "../image/Global_Travel_Cultural_Sightseeing/QA_IMG_026.png",
+      "answer": "Sydney.",
+      "session_id": [
+        "D6"
+      ],
+      "clue": [
+        "D6:8",
+        "D6:9"
+      ],
+      "image_caption": "White sail-like shells of a large modern concert hall rise above a low tan base beside a blue harbor, under a clear blue sky. The multi-peaked roof structure dominates the scene, with small groups of people visible along the waterfront promenade. Low hills and scattered buildings appear in the distant background across the water."
+    },
+    {
+      "point": "VS",
+      "question": "Which two images in the dialogue shows the same landmark as this one? Only return the image_id of the images, separated by commas.",
+      "question_image": "../image/Global_Travel_Cultural_Sightseeing/QA_IMG_027.png",
+      "answer": "D6:IMG_007, D6:IMG_008",
+      "session_id": [
+        "D6"
+      ],
+      "clue": [
+        "D6:8",
+        "D6:9"
+      ],
+      "image_caption": "Large modern harbor-side performing arts building with multiple white sail-like roof shells stands beside a waterfront promenade. A green and yellow two-deck passenger ferry travels across the water in the foreground. People walk along the quay near the building, and low-rise and high-rise residential structures spread across the distant hillside under a clear sky."
+    },
+    {
+      "point": "TTL",
+      "question": "What is the name of the landmark in this image?",
+      "question_image": "../image/Global_Travel_Cultural_Sightseeing/QA_IMG_028.png",
+      "answer": "Sydney Opera House",
+      "session_id": [
+        "D6"
+      ],
+      "clue": [
+        "D6:8",
+        "D6:9"
+      ],
+      "image_caption": "Large harbor-side performing arts building with multiple white sail-like roofs, viewed from above, with a green and yellow passenger ferry traveling across the water in the foreground. Pedestrians walk along the surrounding promenade, and densely packed city buildings and greenery extend across the background."
+    },
+    {
+      "point": "VR",
+      "question": "Based on the photos shared by Ethan, in which city was the following picture taken?",
+      "question_image": "../image/Global_Travel_Cultural_Sightseeing/QA_IMG_029.png",
+      "answer": "Sydney.",
+      "session_id": [
+        "D6"
+      ],
+      "clue": [
+        "D6:8",
+        "D6:9"
+      ],
+      "image_caption": "Sydney Opera House with its white sail-like roofs stands on the waterfront, surrounded by blue harbor water. A green and yellow two-deck passenger ferry travels across the foreground. People walk along the promenade around the building. In the background, a densely built urban area with mid-rise apartment buildings and greenery extends across the shoreline under a clear sky."
+    },
+    {
+      "point": "TR",
+      "question": "Which destination did Maria visit right before arriving in Edinburgh?",
+      "answer": "Sydney.",
+      "session_id": [
+        "D6",
+        "D7"
+      ],
+      "clue": [
+        "D6:1",
+        "D7:1"
+      ]
+    },
+    {
+      "point": "TR",
+      "question": "When did Maria start her exploration journey in Edinburgh? Return in the format YYYY-MM-DD.",
+      "answer": "2024-06-08",
+      "session_id": [
+        "D7"
+      ],
+      "clue": [
+        "D7:2"
+      ]
+    },
+    {
+      "point": "AR",
+      "question": "When did Maria travel to Peterborough?",
+      "answer": "Not mentioned.",
+      "session_id": [
+        "D7"
+      ],
+      "clue": []
+    },
+    {
+      "point": "KR",
+      "question": "When resolving the location Maria visited, should we consider that she visited Peterborough Castle or Edinburgh Castle?",
+      "answer": "Edinburgh Castle.",
+      "session_id": [
+        "D7"
+      ],
+      "clue": [
+        "D7:4",
+        "D7:5"
+      ]
+    },
+    {
+      "point": "FR",
+      "question": "What are the two specific places the user wants to visit in China?",
+      "answer": "The Great Wall in Beijing and West Lake in Hangzhou.",
+      "session_id": [
+        "D8"
+      ],
+      "clue": [
+        "D8:2",
+        "D8:3"
+      ]
+    },
+    {
+      "point": "MR",
+      "question": "How might the user's travel experiences impact their work in managing client portfolios?",
+      "answer": "The user believes that understanding different perspectives from their travels will help them in shaping financial strategies that reflect diverse needs.",
+      "session_id": [
+        "D8"
+      ],
+      "clue": [
+        "D8:5",
+        "D8:6",
+        "D8:7"
+      ]
+    },
+    {
+      "point": "VS",
+      "question": "Which image corresponds to the Great Wall mentioned in the conversation? Only return the image_id of the image.",
+      "answer": "D8:IMG_001",
+      "session_id": [
+        "D8"
+      ],
+      "clue": [
+        "D8:2"
+      ]
+    },
+    {
+      "point": "VS",
+      "question": "Please retrieve the two pictures of Chinese tourist attractions that appear in the conversation.",
+      "answer": "D8:IMG_001, D8:IMG_002",
+      "session_id": [
+        "D8"
+      ],
+      "clue": [
+        "D8:2",
+        "D8:3"
+      ]
+    },
+    {
+      "point": "FR",
+      "question": "What does the user plan to do to immerse themselves in the culture during their next trip?",
+      "answer": "The user plans to visit local markets and try new foods.",
+      "session_id": [
+        "D8"
+      ],
+      "clue": [
+        "D8:5"
+      ]
+    },
+    {
+      "point": "AR",
+      "question": "When will Maria travel to Thailand?",
+      "answer": "Not mentioned.",
+      "session_id": [
+        "D8"
+      ],
+      "clue": []
+    },
+    {
+      "point": "TR",
+      "question": "Did Maria express interest in visiting China before actually traveling to Hangzhou?",
+      "answer": "Yes.",
+      "session_id": [
+        "D8",
+        "D9"
+      ],
+      "clue": [
+        "D8:2",
+        "D9:1"
+      ]
+    },
+    {
+      "point": "FR",
+      "question": "What is the first landmark Maria visited when she arrived in Hangzhou?",
+      "answer": "West Lake.",
+      "session_id": [
+        "D9"
+      ],
+      "clue": [
+        "D9:2"
+      ]
+    },
+    {
+      "point": "VS",
+      "question": "Which image shows the Broken Bridge area where Maria took a photo with mist?",
+      "answer": "D9:IMG_001",
+      "session_id": [
+        "D9"
+      ],
+      "clue": [
+        "D9:3"
+      ]
+    },
+    {
+      "point": "MR",
+      "question": "What famous causeway did Maria walk along where willow trees were swaying?",
+      "answer": "Su Causeway.",
+      "session_id": [
+        "D9"
+      ],
+      "clue": [
+        "D9:5"
+      ]
+    },
+    {
+      "point": "AR",
+      "question": "Did Maria visit Lingyin Temple during her Hangzhou stay?",
+      "answer": "Not mentioned.",
+      "session_id": [
+        "D9"
+      ],
+      "clue": []
+    },
+    {
+      "point": "FR",
+      "question": "What is the famous Chinese folklore legend associated with Leifeng Pagoda?",
+      "answer": "The Legend of the White Snake, where the white snake spirit Bai Suzhen was imprisoned under Leifeng Pagoda after falling in love with a mortal named Xu Xian.",
+      "session_id": [
+        "D9"
+      ],
+      "clue": [
+        "D9:14",
+        "D9:15"
+      ]
+    },
+    {
+      "point": "VS",
+      "question": "Which image shows Leifeng Pagoda glowing at dusk?",
+      "answer": "D9:IMG_005",
+      "session_id": [
+        "D9"
+      ],
+      "clue": [
+        "D9:12"
+      ]
+    },
+    {
+      "point": "FR",
+      "question": "Which two Zhejiang University campuses did Maria visit during her Hangzhou trip?",
+      "answer": "Huajiachi Campus and Yuquan Campus.",
+      "session_id": [
+        "D9"
+      ],
+      "clue": [
+        "D9:21",
+        "D9:24"
+      ]
+    },
+    {
+      "point": "VS",
+      "question": "Which image shows the entrance of Huajiachi Campus?",
+      "answer": "D9:IMG_007",
+      "session_id": [
+        "D9"
+      ],
+      "clue": [
+        "D9:22"
+      ]
+    },
+    {
+      "point": "VS",
+      "question": "Which image shows a building at Yuquan Campus?",
+      "answer": "D9:IMG_008",
+      "session_id": [
+        "D9"
+      ],
+      "clue": [
+        "D9:25"
+      ]
+    },
+    {
+      "point": "FR",
+      "question": "What historic street did Maria visit where she saw stone pavement and old lanterns?",
+      "answer": "Southern Song Imperial Street.",
+      "session_id": [
+        "D9"
+      ],
+      "clue": [
+        "D9:30"
+      ]
+    },
+    {
+      "point": "MR",
+      "question": "What traditional craft item did Maria buy from a local store in Hangzhou?",
+      "answer": "A small handcrafted fan.",
+      "session_id": [
+        "D9"
+      ],
+      "clue": [
+        "D9:31"
+      ]
+    },
+    {
+      "point": "VS",
+      "question": "Which image shows the Alibaba logo or headquarters?",
+      "answer": "D9:IMG_009",
+      "session_id": [
+        "D9"
+      ],
+      "clue": [
+        "D9:32"
+      ]
+    },
+    {
+      "point": "VS",
+      "question": "Which image shows the China National Tea Museum?",
+      "answer": "D9:IMG_011",
+      "session_id": [
+        "D9"
+      ],
+      "clue": [
+        "D9:35"
+      ]
+    },
+    {
+      "point": "FR",
+      "question": "What two classic Hangzhou dishes did Maria order for dinner?",
+      "answer": "West Lake Vinegar Fish and Longjing Shrimp.",
+      "session_id": [
+        "D9"
+      ],
+      "clue": [
+        "D9:39",
+        "D9:41"
+      ]
+    },
+    {
+      "point": "VS",
+      "question": "Which image shows West Lake Vinegar Fish?",
+      "answer": "D9:IMG_012",
+      "session_id": [
+        "D9"
+      ],
+      "clue": [
+        "D9:39"
+      ]
+    },
+    {
+      "point": "TR",
+      "question": "What city did Maria plan to visit after Hangzhou?",
+      "answer": "Beijing",
+      "session_id": [
+        "D9"
+      ],
+      "clue": [
+        "D9:37"
+      ]
+    },
+    {
+      "point": "VS",
+      "question": "Which image shows the Great Wall winding across the mountains like a dragon?",
+      "answer": "D10:IMG_001",
+      "session_id": [
+        "D10"
+      ],
+      "clue": [
+        "D10:3"
+      ]
+    },
+    {
+      "point": "TR",
+      "question": "Which imperial palace did Maria visit in the afternoon after the Great Wall?",
+      "answer": "The Forbidden City.",
+      "session_id": [
+        "D10"
+      ],
+      "clue": [
+        "D10:7"
+      ]
+    },
+    {
+      "point": "VS",
+      "question": "Which image shows the Meridian Gate at the Forbidden City?",
+      "answer": "D10:IMG_003",
+      "session_id": [
+        "D10"
+      ],
+      "clue": [
+        "D10:8"
+      ]
+    },
+    {
+      "point": "VR",
+      "question": "How many photos did Maria share of the illuminated CBD towers? Please answer using an Arabic numeral (e.g., “2” instead of “Two”).",
+      "answer": "2",
+      "session_id": [
+        "D10"
+      ],
+      "clue": [
+        "D10:13",
+        "D10:14"
+      ]
+    },
+    {
+      "point": "VS",
+      "question": "Which two images show the illuminated CBD towers in Beijing?",
+      "answer": "D10:IMG_004, D10:IMG_005",
+      "session_id": [
+        "D10"
+      ],
+      "clue": [
+        "D10:13",
+        "D10:14"
+      ]
+    },
+    {
+      "point": "FR",
+      "question": "What two top universities in Beijing did Maria consider visiting?",
+      "answer": "Tsinghua University and Peking University.",
+      "session_id": [
+        "D10"
+      ],
+      "clue": [
+        "D10:17"
+      ]
+    },
+    {
+      "point": "MR",
+      "question": "Who took the photos of Tsinghua and Peking University gates?",
+      "answer": "John",
+      "session_id": [
+        "D10"
+      ],
+      "clue": [
+        "D10:20",
+        "D10:21"
+      ]
+    },
+    {
+      "point": "VS",
+      "question": "Which image shows Tsinghua University's iconic gate?",
+      "answer": "D10:IMG_006",
+      "session_id": [
+        "D10"
+      ],
+      "clue": [
+        "D10:20"
+      ]
+    },
+    {
+      "point": "VS",
+      "question": "Which image shows the Temple of Heaven?",
+      "answer": "D10:IMG_008",
+      "session_id": [
+        "D10"
+      ],
+      "clue": [
+        "D10:23"
+      ]
+    },
+    {
+      "point": "TR",
+      "question": "Which city did Maria visit immediately before arriving in Beijing?",
+      "answer": "Hangzhou.",
+      "session_id": [
+        "D9",
+        "D10"
+      ],
+      "clue": [
+        "D9:37",
+        "D10:1"
+      ]
+    }
+  ]
+}

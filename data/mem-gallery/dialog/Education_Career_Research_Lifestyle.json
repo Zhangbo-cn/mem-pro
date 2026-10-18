@@ -1,0 +1,3080 @@
+{
+  "character_profile": {
+    "name": "Lin",
+    "persona_summary": "Lin is an ambitious undergraduate student in China, preparing for a master's degree in Human-Computer Interaction in the US. She is deeply focused on skill development, from programming and research methods to learning ASL for accessibility design.",
+    "traits": [
+      "ambitious",
+      "methodical",
+      "curious",
+      "empathetic"
+    ],
+    "conversation_style": "Inquisitive and goal-oriented, often provides specific context about her learning projects and career goals to seek structured, actionable advice."
+  },
+  "multi_session_dialogues": [
+    {
+      "session_id": "D1",
+      "date": "2024-07-21",
+      "dialogues": [
+        {
+          "round": "D1:1",
+          "user": "I’ve been feeling really uninterested in my current major lately. I’m considering switching to something else.",
+          "assistant": "It’s important to study something you’re passionate about. Have you thought about which major you’d prefer?",
+          "image_id": [
+            "D1:IMG_001"
+          ],
+          "input_image": [
+            "../image/Education_Career_Research_Lifestyle/D1_IMG_001.jpg"
+          ],
+          "image_caption": [
+            "Two schoolchildren sit at desks in a classroom. A boy in a green sweater rests his head on folded arms near an open notebook and a stack of books, gazing sideways. Behind him, a girl in a white shirt leans on one arm, looking forward. Shelves and a chalkboard are visible in the background."
+          ]
+        },
+        {
+          "round": "D1:2",
+          "user": "Yes, I’m interested in psychology, but I’m worried about delaying my graduation if I switch now.",
+          "assistant": "That’s a valid concern. Have you discussed this with your academic advisor to understand the implications?"
+        },
+        {
+          "round": "D1:3",
+          "user": "Not yet. My family thinks I should stick with my current major for stability.",
+          "assistant": "Family advice is valuable, but it’s also crucial to pursue what aligns with your interests and career goals."
+        },
+        {
+          "round": "D1:4",
+          "user": "I guess I’m afraid of making the wrong choice and regretting it later.",
+          "assistant": "It’s natural to feel apprehensive. Perhaps you could explore introductory courses in psychology before making a decision."
+        },
+        {
+          "round": "D1:5",
+          "user": "That’s a good idea. I could take a psychology class next semester to see if I like it.",
+          "assistant": "That sounds like a prudent approach. It allows you to gauge your interest without fully committing to a major change."
+        },
+        {
+          "round": "D1:6",
+          "user": "I’ll also set up a meeting with my academic advisor to discuss my options.",
+          "assistant": "Excellent plan. They can provide insights into how a major change might affect your academic trajectory.",
+          "image_id": [
+            "D1:IMG_002"
+          ],
+          "input_image": [
+            "../image/Education_Career_Research_Lifestyle/D1_IMG_002.jpg"
+          ],
+          "image_caption": [
+            "Group of young adults wearing green lanyards sit in a circle of chairs around an older man holding a clipboard, engaged in a discussion. They are in a bright indoor common area with tiled floor, tables, and chairs in the background. Several participants lean forward, gesturing or listening attentively, suggesting a group meeting or class session."
+          ]
+        },
+        {
+          "round": "D1:7",
+          "user": "I spent some time reflecting after the meeting. Part of me still wonders if I’d be missing out by not fully switching majors.",
+          "assistant": "That’s a fair thought. Sometimes keeping your main track while adding a minor lets you explore deeply without giving up the stability you’ve built."
+        },
+        {
+          "round": "D1:8",
+          "user": "I spoke with my advisor, and they mentioned the possibility of minoring in psychology instead of switching majors.",
+          "assistant": "Minoring could be a great way to pursue your interest without the potential drawbacks of changing majors."
+        },
+        {
+          "round": "D1:9",
+          "user": "That sounds appealing. I can keep my current major and still study psychology.",
+          "assistant": "Indeed, it offers a balanced approach, combining stability with your newfound interest."
+        },
+        {
+          "round": "D1:10",
+          "user": "My family was relieved to hear this option. They were worried about the uncertainties of a major change.",
+          "assistant": "It’s understandable. This compromise addresses their concerns while allowing you to explore your passion."
+        },
+        {
+          "round": "D1:11",
+          "user": "I’m planning to enroll in a psychology course next semester as part of the minor program.",
+          "assistant": "That’s a positive step forward. Immersing yourself in the subject will help you determine if it’s the right fit."
+        },
+        {
+          "round": "D1:12",
+          "user": "I started searching for materials related to psychology in the library to prepare.",
+          "assistant": "Proactive learning is commendable. It will give you a head start and deepen your understanding.",
+          "image_id": [
+            "D1:IMG_003"
+          ],
+          "input_image": [
+            "../image/Education_Career_Research_Lifestyle/D1_IMG_003.jpg"
+          ],
+          "image_caption": [
+            "Young man wearing glasses and a white shirt stands in a library aisle, leaning against a shelf and typing on an open laptop, with rows of bookshelves and a bright corridor in the background."
+          ]
+        },
+        {
+          "round": "D1:13",
+          "user": "After much consideration, I’ve decided to declare a minor in psychology while keeping my current major.",
+          "assistant": "That sounds like a well-thought-out decision, combining both your interests and practical considerations."
+        },
+        {
+          "round": "D1:14",
+          "user": "I feel more confident about my academic path now. This decision feels right.",
+          "assistant": "Confidence in your choices is key to academic success. Wishing you the best in both fields of study."
+        },
+        {
+          "round": "D1:15",
+          "user": "My first psychology class was fascinating. I’m glad I chose to pursue this.",
+          "assistant": "It’s wonderful to hear that the class resonated with you. Enjoy the journey of learning."
+        },
+        {
+          "round": "D1:16",
+          "user": "We recently covered cognitive psychology — learning about how memory and attention work was fascinating.",
+          "assistant": "That’s one of the core areas of psychology. It also connects nicely with fields like computer science and AI if you ever explore interdisciplinary paths."
+        },
+        {
+          "round": "D1:17",
+          "user": "Balancing both my major and minor is challenging but rewarding.",
+          "assistant": "Juggling multiple disciplines can be demanding, but it often leads to a more enriching educational experience."
+        },
+        {
+          "round": "D1:18",
+          "user": "I’m considering how to integrate psychology into my future career plans.",
+          "assistant": "Combining insights from both fields could open unique and fulfilling career opportunities."
+        },
+        {
+          "round": "D1:19",
+          "user": "My professors have been supportive, offering guidance on managing both areas of study.",
+          "assistant": "Supportive faculty can make a significant difference. Don’t hesitate to seek their advice when needed."
+        },
+        {
+          "round": "D1:20",
+          "user": "Overall, I’m satisfied with my decision to minor in psychology. It complements my major well.",
+          "assistant": "It’s great to hear that your choice is proving beneficial. Best of luck as you continue your studies.",
+          "image_id": [
+            "D1:IMG_004"
+          ],
+          "input_image": [
+            "../image/Education_Career_Research_Lifestyle/D1_IMG_004.jpg"
+          ],
+          "image_caption": [
+            "Collage of classroom scenes showing a male instructor giving a lecture to large groups of students seated in yellow chairs, taking notes and reading handouts. The instructor stands near a blackboard with prominent red Chinese characters “辅修宣讲”. Additional views show the same lecture from different angles within a modern classroom with white walls, ceiling lights, and projection screens."
+          ]
+        }
+      ]
+    },
+    {
+      "session_id": "D2",
+      "date": "2024-07-30",
+      "dialogues": [
+        {
+          "round": "D2:1",
+          "user": "Thanks for the support! Finalizing the psychology minor feels like I've just locked in a key component of my plan. Now I'm shifting my focus to the next big project: the actual application process for a Master's in Human-Computer Interaction in the US. I want to be as organized as possible. Could you help me outline the major steps involved from start to finish?",
+          "assistant": "Of course, Lin. It's wise to map it all out ahead of time. Thinking of it as a project with clear milestones will definitely help manage the complexity. Broadly speaking, the journey involves preparing your academic credentials, researching and selecting programs, compiling your application materials, and finally, handling the visa and pre-departure arrangements. Where would you like to start?"
+        },
+        {
+          "round": "D2:2",
+          "user": "I'm thinking of studying abroad in the US. What's the general process?",
+          "assistant": "Studying abroad involves choosing a program, preparing application materials, taking standardized tests, applying to universities, getting a student visa, and preparing for departure. It is important to plan ahead."
+        },
+        {
+          "round": "D2:3",
+          "user": "I'm aiming for a Master’s in Human-Computer Interaction. Do I need both the GRE and TOEFL?",
+          "assistant": "Most likely, yes. Most US universities require both the GRE and TOEFL for international applicants to Computer Science Master's programs. There may be waivers based on certain conditions."
+        },
+        {
+          "round": "D2:4",
+          "user": "Here's a practice TOEFL question. How would you answer it? This question type seems very different.",
+          "assistant": "The image shows a sample TOEFL speaking question. It requires you to express an opinion and provide reasons within a limited time. To answer it well, you should speak clearly, organize your thoughts, and provide supporting examples.",
+          "image_id": [
+            "D2:IMG_001"
+          ],
+          "input_image": [
+            "../image/Education_Career_Research_Lifestyle/D2_IMG_001.jpg"
+          ],
+          "image_caption": [
+            "Slide titled “TOEFL Speaking: Example response B for Qu. 2 on Test 2” displaying a sample answer paragraph about preferring to study in collaborative pairs or groups. The text explains that this is representative of real-world working situations, such as business, science, or education, where people work in teams to reach objectives or goals. A left sidebar labels “Topic” and “Main Reason (1) + supporting details & examples” with red text and arrows."
+          ]
+        },
+        {
+          "round": "D2:5",
+          "user": "Thanks, that's a helpful framework. It’s a lot to juggle, preparing for all these different application tests. While the TOEFL is about expressing my own ideas, the GRE verbal section feels like a completely different challenge with its vocabulary demands.",
+          "assistant": "That's a very common feeling. They test distinct language skills—one is about communication, the other about comprehension and precision. Mastering the GRE's vocabulary is a unique part of the grad school application journey."
+        },
+        {
+          "round": "D2:6",
+          "user": "What are some good resources for improving my GRE vocabulary? It's so hard to memorize all these words.",
+          "assistant": "There are many GRE prep books, apps, and online resources that focus on vocabulary. Popular options include flashcards, vocabulary lists, and practice quizzes."
+        },
+        {
+          "round": "D2:7",
+          "user": "Thanks, I'll look into those apps. It helps to have a study plan, but I also need a target. I was looking at sample reports to understand what kind of score range I should be aiming for with my target HCI programs.",
+          "assistant": "That's a very strategic way to approach it. Understanding the end goal is just as important as the daily prep. Did you find an example that you'd like to break down?"
+        },
+        {
+          "round": "D2:8",
+          "user": "I found this score report online. What does it mean? Is this considered a good score?",
+          "assistant": "The image shows a test score report. It likely includes scores for different sections. Whether it's a \"good\" score depends on the specific test and the target universities' requirements. This report reflects a good score, indicating the test taker's ability to take the test.",
+          "image_id": [
+            "D2:IMG_002"
+          ],
+          "input_image": [
+            "../image/Education_Career_Research_Lifestyle/D2_IMG_002.jpg"
+          ],
+          "image_caption": [
+            "ACT student score report with columns for “Composite 21,” “Math 19,” “Science 18,” “STEM 19,” “English 24,” “Reading 23,” “Writing 08,” and “ELA 24.” Colored bars and markers show score ranges and benchmarks across subjects. Lower section displays horizontal bar charts labeled “US Rank” and “State Rank,” with categories “Composite,” “Math,” “Science,” “STEM,” “English,” “Reading,” and “Writing,” indicating percentile rankings for each area."
+          ]
+        },
+        {
+          "round": "D2:9",
+          "user": "How important is the undergraduate GPA when applying to US graduate programs? This is so confusing.",
+          "assistant": "Your undergraduate GPA is a significant factor. It reflects your academic performance. US universities generally consider a GPA of 3.0 or higher to be competitive."
+        },
+        {
+          "round": "D2:10",
+          "user": "What if my GPA is not that high? Do I still have a chance? I have done a lot of projects though.",
+          "assistant": "While GPA is important, it's not the only factor. Strong letters of recommendation, a compelling personal statement, and relevant research or work experience can compensate for a lower GPA."
+        },
+        {
+          "round": "D2:11",
+          "user": "This is my CV, what do you think? Any suggestions for improvement?",
+          "assistant": "The image shows a CV. It should highlight your academic background, research experience, skills, and relevant projects. Ensure it's well-formatted, concise, and tailored to your target programs.",
+          "image_id": [
+            "D2:IMG_003"
+          ],
+          "input_image": [
+            "../image/Education_Career_Research_Lifestyle/D2_IMG_003.jpg"
+          ],
+          "image_caption": [
+            "Single-page professional resume in black text on a white background, headed “FIRST LAST” and “Clinical Research Assistant,” with contact details below. Sections include “PROFESSIONAL EXPERIENCE,” “EDUCATION,” and “ADDITIONAL INFORMATION.” Multiple positions under organization titles such as “UNIVERSITY NAME” and “NONPROFIT” are listed with dates, locations, and bullet-pointed responsibilities related to clinical trials, data management, IRB submissions, and regulatory documentation."
+          ]
+        },
+        {
+          "round": "D2:12",
+          "user": "How long should a personal statement be, typically? I want it to be concise and clear.",
+          "assistant": "A typical personal statement for graduate school is around 500-1000 words. It should clearly articulate your goals, experiences, and reasons for applying to the program."
+        },
+        {
+          "round": "D2:13",
+          "user": "I'm also applying to some universities in Canada. Do I need different materials?",
+          "assistant": "While application requirements for Canadian universities are similar to those in the US, there might be slight differences. Check each university's website for specific requirements. Some may have specific requirements, such as scores."
+        },
+        {
+          "round": "D2:14",
+          "user": "Here's a picture of a Canadian university I'm considering. What do you think of the campus environment?",
+          "assistant": "The image shows a university campus. It appears modern and well-maintained, suggesting a positive learning environment. This campus looks pretty large and seems well-equipped.",
+          "image_id": [
+            "D2:IMG_004"
+          ],
+          "input_image": [
+            "../image/Education_Career_Research_Lifestyle/D2_IMG_004.jpg"
+          ],
+          "image_caption": [
+            "Large historic stone university building with multiple towers, arched windows, and decorative facades, set behind a wide green lawn and scattered trees under a clear blue sky."
+          ]
+        },
+        {
+          "round": "D2:15",
+          "user": "What's the cost of living like in major US or Canadian cities? I need to start planning a budget.",
+          "assistant": "The cost of living varies greatly depending on the city. Major cities like New York, San Francisco, Toronto, and Vancouver are generally more expensive than smaller cities or towns. Budget carefully."
+        },
+        {
+          "round": "D2:16",
+          "user": "Thanks, that's helpful for the financial side of things. It seems the cities with the best HCI programs are also the most expensive, which means making my application as strong as possible is even more critical. I'm trying to be strategic about every part of it.",
+          "assistant": "That's a very proactive approach. A strong application can certainly open doors to better funding opportunities, which helps with those costs. What aspect of your application strategy is on your mind?"
+        },
+        {
+          "round": "D2:17",
+          "user": "Should I contact professors beforehand? I want to show my interest, but afraid of bothering them.",
+          "assistant": "Contacting professors can be beneficial, especially for PhD programs. Express your interest in their research and inquire about potential openings in their lab. This can reflect your passion for this major and your willingness to contribute."
+        },
+        {
+          "round": "D2:18",
+          "user": "Okay, that's great advice. I'll start drafting some emails for the professors whose work in accessibility really interests me. Thinking about the whole application timeline, there's another major logistical hurdle I need to plan for as an international student.",
+          "assistant": "That's a very proactive way to approach it. Tackling the process step-by-step is key. What's the next big item on your planning list?"
+        },
+        {
+          "round": "D2:19",
+          "user": "What's the visa process like for international students? It seems so complicated. Here's some information I found on getting a student visa in Canada, what do you think?",
+          "assistant": "The student visa process involves applying to the relevant government agency (e.g., US Citizenship and Immigration Services for the US, IRCC for Canada), providing required documents, paying fees, and attending an interview if necessary. This application in the image includes various essential requirements for applying for a study visa. If you want to study abroad, prepare early, as the process can take time.",
+          "image_id": [
+            "D2:IMG_005"
+          ],
+          "input_image": [
+            "../image/Education_Career_Research_Lifestyle/D2_IMG_005.jpg"
+          ],
+          "image_caption": [
+            "Two smiling graduates in black caps and gowns stand on the right, one adjusting the other’s cap, in front of a large banner reading “STUDENT VISA INFO.” Stylized red and blue landmarks, including bridges and a Ferris wheel, form a cityscape along the bottom, with smaller text starting with “visit www.studentvisainfo.com” beneath them."
+          ]
+        },
+        {
+          "round": "D2:20",
+          "user": "Wow, that's a lot to handle! It is necessary to do some research on my own too. I am feeling a bit overwhelmed, how to handle all these at the same time?",
+          "assistant": "Don't worry, it's normal to feel overwhelmed. Break down the process into smaller, manageable steps and create a timeline. Many online resources and forums can help guide you. This ensures that nothing is left out."
+        },
+        {
+          "round": "D2:21",
+          "user": "I saw this online, what is it? It looks so official.",
+          "assistant": "This image appears to show a university acceptance letter. It's an official document from a university offering admission to a student. It signifies they have passed the first round of testing.",
+          "image_id": [
+            "D2:IMG_006"
+          ],
+          "input_image": [
+            "../image/Education_Career_Research_Lifestyle/D2_IMG_006.jpg"
+          ],
+          "image_caption": [
+            "Typed acceptance letter on white paper featuring the Hogwarts crest and heading “HOGWARTS SCHOOL of WITCHCRAFT and WIZARDRY.” The letter begins “Dear ___, We are pleased to inform you that you have been accepted at Hogwarts School of Witchcraft and Wizardry,” mentions enclosed book and equipment list, and notes term begins on September 1. It is signed “Minerva McGonagall, Deputy Headmistress.”"
+          ]
+        },
+        {
+          "round": "D2:22",
+          "user": "This whole process is making me anxious. Any tips for managing application anxiety? There is just too much.",
+          "assistant": "It's normal to feel anxious. Practice relaxation techniques, talk to friends or family, and focus on aspects you can control. Remember that this feeling is normal. Seek help if needed. Stay organized and don't give up."
+        }
+      ]
+    },
+    {
+      "session_id": "D3",
+      "date": "2024-08-26",
+      "dialogues": [
+        {
+          "round": "D3:1",
+          "user": "I'm eager to enhance my spoken English, but I'm clueless about where to begin.",
+          "assistant": "Start by immersing yourself in the language. Watch English - language movies, TV shows, and listen to English podcasts daily."
+        },
+        {
+          "round": "D3:2",
+          "user": "I often struggle to understand native speakers. What can I do?",
+          "assistant": "Focus on listening comprehension exercises. You can use apps like Duolingo or Babbel, which have listening drills. Also, try repeating what you hear to improve your pronunciation."
+        },
+        {
+          "round": "D3:3",
+          "user": "I'm too shy to speak English with others. How can I overcome this?",
+          "assistant": "Join online English - speaking communities. Platforms like HelloTalk or Tandem connect you with native speakers or fellow learners. Start with short, simple conversations to build confidence."
+        },
+        {
+          "round": "D3:4",
+          "user": "What's the best way to expand my vocabulary for better speaking?",
+          "assistant": "Read English books, newspapers, and magazines. When you encounter new words, note them down, learn their meanings, and try using them in sentences."
+        },
+        {
+          "round": "D3:5",
+          "user": "I'm worried my pronunciation is off. How can I correct it?",
+          "assistant": "Use pronunciation apps like ELSA Speak. It analyzes your speech and provides feedback. You can also imitate native speakers' intonation and rhythm."
+        },
+        {
+          "round": "D3:6",
+          "user": "Do I need to study grammar intensively for speaking?",
+          "assistant": "While grammar is important, don't over - emphasize it at the start. Focus on expressing yourself clearly. As you progress, you can gradually study grammar rules to refine your speaking.",
+          "image_id": [
+            "D3:IMG_001"
+          ],
+          "input_image": [
+            "../image/Education_Career_Research_Lifestyle/D3_IMG_001.jpg"
+          ],
+          "image_caption": [
+            "Hand holding a marker underlines the word “GRAMMAR” on a pink brushstroke, with black arrows pointing to related terms around it: “COMMUNICATION,” “LANGUAGE,” “SPEECH,” “IDIOMS,” “DICTIONARY,” “UNDERSTAND,” “PREPOSITIONS,” “EDUCATION,” “BOOK,” “SYNTAX,” and “RULES,” on a white background."
+          ]
+        },
+        {
+          "round": "D3:7",
+          "user": "I want to practice speaking English on specific topics. How can I find relevant materials?",
+          "assistant": "Look for TED Talks on the topics you're interested in. They have transcripts available, which you can read while listening. You can also search for topic - based English - language blogs."
+        },
+        {
+          "round": "D3:8",
+          "user": "How can I make my English conversations more natural?",
+          "assistant": "Learn common English idiomatic expressions and phrasal verbs. You can find them in language learning books or online resources. Using them appropriately can make your speech sound more native - like."
+        },
+        {
+          "round": "D3:9",
+          "user": "I'm considering taking an English - speaking course. Is it a good idea?",
+          "assistant": "It can be beneficial, especially if you need structured learning. Look for courses with interactive sessions and opportunities to practice speaking with others.",
+          "image_id": [
+            "D3:IMG_002"
+          ],
+          "input_image": [
+            "../image/Education_Career_Research_Lifestyle/D3_IMG_002.jpg"
+          ],
+          "image_caption": [
+            "Smiling woman with long dark hair, wearing a light blue short-sleeve shirt, stands with arms crossed on the left side of a white and red graphic background. Large black text on the right reads: “Online Spoken English Classes.”"
+          ]
+        },
+        {
+          "round": "D3:10",
+          "user": "What's the most effective way to track my progress in spoken English?",
+          "assistant": "Record yourself speaking at regular intervals. Compare your recordings to identify areas of improvement, like pronunciation, fluency, or vocabulary usage."
+        }
+      ]
+    },
+    {
+      "session_id": "D4",
+      "date": "2024-09-14",
+      "dialogues": [
+        {
+          "round": "D4:1",
+          "user": "Fall sales just started today, and I want to take advantage of the discounts to buy some stylish pieces. I found two categories I really like—Cap-Sleeved Midi Dresses and Cap-Sleeved Slub-Knit Tops. Can you help me go through each one?",
+          "assistant": "Of course! Autumn sales are the best time to grab stylish pieces. Show me what you’ve found—this sounds fun already."
+        },
+        {
+          "round": "D4:2",
+          "user": "Great! Let me start with the Cap-Sleeved Midi Dresses. Here’s the first one.",
+          "assistant": "Oh wow, the moment I opened this one, the shine caught my eye immediately. Let me take in the details.",
+          "image_id": [
+            "D4:IMG_001"
+          ],
+          "input_image": [
+            "../image/Education_Career_Research_Lifestyle/D4_IMG_001.jpg"
+          ],
+          "image_caption": [
+            "Woman standing against a plain white background, wearing a fitted, knee-length metallic dress with horizontal striped and lace-like patterns, cap sleeves, and no visible accessories, looking forward with one arm relaxed by her side."
+          ]
+        },
+        {
+          "round": "D4:3",
+          "user": "What do you think of this dress?",
+          "assistant": "This dress has such a striking metallic sheen—like it was made for evening lights. The bronze tones and scalloped stripes feel glamorous but still structured. It’s definitely a confidence-boosting piece."
+        },
+        {
+          "round": "D4:4",
+          "user": "Here's the second dress.",
+          "assistant": "Aww, this one immediately gives off a softer energy. The floral pattern feels calming in contrast to the first one.",
+          "image_id": [
+            "D4:IMG_002"
+          ],
+          "input_image": [
+            "../image/Education_Career_Research_Lifestyle/D4_IMG_002.jpg"
+          ],
+          "image_caption": [
+            "Woman standing against a plain light background, wearing a fitted, knee-length gray dress with a white floral pattern and short sleeves, looking slightly to the side with one arm resting by her hip."
+          ]
+        },
+        {
+          "round": "D4:5",
+          "user": "How would you describe this one?",
+          "assistant": "It’s gentle, elegant, and the pale floral print makes it feel so approachable. Compared to the metallic dress, this one whispers rather than shouts—perfect for daytime or semi-formal outings."
+        },
+        {
+          "round": "D4:6",
+          "user": "Here’s the third dress.",
+          "assistant": "Ooh, minimalism alert—this one has a very clean and streamlined look. Let me take a closer look.",
+          "image_id": [
+            "D4:IMG_003"
+          ],
+          "input_image": [
+            "../image/Education_Career_Research_Lifestyle/D4_IMG_003.jpg"
+          ],
+          "image_caption": [
+            "Woman standing in a studio against a plain white background, wearing a fitted, short-sleeve gray midi dress and bright coral lace-up platform ankle boots, with her arms relaxed by her sides and her head turned slightly to the left."
+          ]
+        },
+        {
+          "round": "D4:7",
+          "user": "What stands out about this one?",
+          "assistant": "Its simplicity. The heather gray tone and fitted silhouette make it the kind of dress you can shape into countless styles with jackets, scarves, or jewelry. A true mix-and-match piece."
+        },
+        {
+          "round": "D4:8",
+          "user": "Next, the fourth one.",
+          "assistant": "Oh! The blue floral pattern pops immediately—this one feels cheerful before I even zoom in.",
+          "image_id": [
+            "D4:IMG_004"
+          ],
+          "input_image": [
+            "../image/Education_Career_Research_Lifestyle/D4_IMG_004.jpg"
+          ],
+          "image_caption": [
+            "Woman standing against a plain white background, wearing a fitted, knee-length grey dress with blue floral print and short sleeves. She has long dark hair, looks slightly to the side, and keeps her arms relaxed by her sides. No visible text in the scene."
+          ]
+        },
+        {
+          "round": "D4:9",
+          "user": "How does this compare?",
+          "assistant": "It feels brighter and more lively compared to the pale floral dress. The blue on gray creates a nice contrast that really flatters the eyes. It gives me early-fall picnic or brunch vibes."
+        },
+        {
+          "round": "D4:10",
+          "user": "And here’s the fifth and last midi dress.",
+          "assistant": "Wow, the pattern on this one is so graphic—it immediately grabs attention in a cool, modern way.",
+          "image_id": [
+            "D4:IMG_005"
+          ],
+          "input_image": [
+            "../image/Education_Career_Research_Lifestyle/D4_IMG_005.jpg"
+          ],
+          "image_caption": [
+            "Woman standing against a plain white background, wearing a fitted, short-sleeve, mid-calf dress with black and white geometric patterns. She has long, straight brown hair and a neutral expression, holding one hand near her shoulder. A long pendant necklace hangs over the front of the dress, and a thin armband is worn on her left upper arm."
+          ]
+        },
+        {
+          "round": "D4:11",
+          "user": "What do you think of this one?",
+          "assistant": "It has that artsy, geometric charm. The pattern is bold yet not overwhelming. If you like dresses that look great both in-person and in photos, this one definitely qualifies."
+        },
+        {
+          "round": "D4:12",
+          "user": "Can you summarize these five midi dresses for me?",
+          "assistant": "Sure! Here’s the vibe check for each:\n\n1. **Image 1 – Metallic Bronze**: Bold, glamorous, evening-ready.\n2. **Image 2 – Soft Gray Floral**: Graceful, feminine, versatile for daytime.\n3. **Image 3 – Plain Heather Gray**: Minimal, easy to style, endlessly layerable.\n4. **Image 4 – Blue Floral on Gray**: Lively, youthful, photogenic.\n5. **Image 5 – Black/Ivory Geometric**: Modern, sharp, a statement without shine.\n\nAll lovely, but they definitely express different moods."
+        },
+        {
+          "round": "D4:13",
+          "user": "Okay, now let’s move on to the Cap-Sleeved Slub-Knit Tops. Here’s the first one.",
+          "assistant": "Oh! This purple immediately energizes the whole screen—it’s so vibrant.",
+          "image_id": [
+            "D4:IMG_006"
+          ],
+          "input_image": [
+            "../image/Education_Career_Research_Lifestyle/D4_IMG_006.jpg"
+          ],
+          "image_caption": [
+            "Young woman with long blond hair standing against a plain white background, wearing a fitted short-sleeve purple T-shirt and dark jeans, facing the camera with a neutral expression."
+          ]
+        },
+        {
+          "round": "D4:14",
+          "user": "How would you describe it?",
+          "assistant": "The color is striking yet fun. It feels like the kind of top that instantly brightens your mood—and your outfit. The slub texture keeps it casual and easy-going."
+        },
+        {
+          "round": "D4:15",
+          "user": "Here’s the next top.",
+          "assistant": "Ahh, this peach shade looks so gentle and warm—it’s almost calming to look at.",
+          "image_id": [
+            "D4:IMG_007"
+          ],
+          "input_image": [
+            "../image/Education_Career_Research_Lifestyle/D4_IMG_007.jpg"
+          ],
+          "image_caption": [
+            "Woman standing against a plain white background, wearing a loose, light pink three-quarter sleeve top with a wide round neckline and slightly longer hem in front, paired with white pants. Her arms hang relaxed at her sides and she faces forward, centered in the frame."
+          ]
+        },
+        {
+          "round": "D4:16",
+          "user": "What about this peach one?",
+          "assistant": "It’s soft and flowy—the kind of top that feels airy on the skin. The longer silhouette gives it a slightly elegant twist, perfect for soft fall light."
+        },
+        {
+          "round": "D4:17",
+          "user": "Here’s the next.",
+          "assistant": "Oh! This blue is so fresh and crisp—it instantly feels refreshing.",
+          "image_id": [
+            "D4:IMG_008"
+          ],
+          "input_image": [
+            "../image/Education_Career_Research_Lifestyle/D4_IMG_008.jpg"
+          ],
+          "image_caption": [
+            "Young woman with long dark hair stands against a plain light background, wearing a bright blue sleeveless top with a scoop neckline and asymmetrical hem, paired with light-wash jeans. Her hands rest casually in her front pockets as she faces the camera."
+          ]
+        },
+        {
+          "round": "D4:18",
+          "user": "Thoughts?",
+          "assistant": "It’s bright in a clean, modern way. The asymmetrical hem gives it a little personality without being loud. A great color pop for fall outfits."
+        },
+        {
+          "round": "D4:19",
+          "user": "Next one!",
+          "assistant": "Ahh, mint! This color always feels refreshing and gentle at the same time.",
+          "image_id": [
+            "D4:IMG_009"
+          ],
+          "input_image": [
+            "../image/Education_Career_Research_Lifestyle/D4_IMG_009.jpg"
+          ],
+          "image_caption": [
+            "Woman with wavy brown hair stands against a plain white background, wearing a fitted light green short-sleeve top and white pants. She holds a large navy and beige striped tote bag over one shoulder and wears a gold bracelet on her right wrist."
+          ]
+        },
+        {
+          "round": "D4:20",
+          "user": "How about this mint top?",
+          "assistant": "It’s clean, flattering, and super easy to match. The softness of the color fits early fall perfectly—fresh but still cozy."
+        },
+        {
+          "round": "D4:21",
+          "user": "Finally, the last top.",
+          "assistant": "This lavender tone feels sweet and youthful the moment it appears—very charming.",
+          "image_id": [
+            "D4:IMG_010"
+          ],
+          "input_image": [
+            "../image/Education_Career_Research_Lifestyle/D4_IMG_010.jpg"
+          ],
+          "image_caption": [
+            "Young woman standing against a plain white background, wearing a loose, sleeveless lavender top with front buttons and blue jeans, accessorized with multiple metallic bangles on her left wrist, hands resting on hips."
+          ]
+        },
+        {
+          "round": "D4:22",
+          "user": "What’s your impression of this lavender one?",
+          "assistant": "It’s playful and breezy, especially with that cropped, flowy shape. Great for layered fall outfits under cardigans or jackets."
+        },
+        {
+          "round": "D4:23",
+          "user": "Can you help me summarize the tops too?",
+          "assistant": "Of course!\n\n1. **Purple** – Bold, energetic, perfect for bright moods.\n2. **Peach** – Soft, airy, slightly elegant.\n3. **Blue** – Clean, modern, refreshing.\n4. **Mint** – Gentle, versatile, effortlessly matchable.\n5. **Lavender cropped** – Playful, youthful, great for layering.\n\nA very well-balanced selection."
+        },
+        {
+          "round": "D4:24",
+          "user": "Given all these, which Cap-Sleeved Midi Dress would you recommend I pick?",
+          "assistant": "If you want something beautiful for fall and also eye-catching in photos, I’d go with **the gray dress with blue floral prints**. It balances elegance and personality really well."
+        },
+        {
+          "round": "D4:25",
+          "user": "Okay! And for the tops, which two would you choose for me?",
+          "assistant": "I’d pick:\n\n**1. The mint top** — super wearable, fresh, and versatile for daily outfits.\n**2. The blue top** — it adds a clean pop of color and feels stylish without trying too hard.\n\nThese two complement each other beautifully."
+        },
+        {
+          "round": "D4:26",
+          "user": "Sounds good! I’ll take the blue floral dress and the mint + blue tops then.",
+          "assistant": "Great choices! You’re getting a trio that fits the fall season, flatters your style, and gives you lots of outfit flexibility. If you want, I can help you plan some full autumn outfits around them!"
+        }
+      ]
+    },
+    {
+      "session_id": "D5",
+      "date": "2024-11-02",
+      "dialogues": [
+        {
+          "round": "D5:1",
+          "user": "The winter is coming, so it's so cold.",
+          "assistant": "Dress in layers to keep yourself warm. Wear a base layer of moisture-wicking fabric, followed by insulating layers, and finally an outer layer to protect against wind and precipitation. Don't forget a hat, gloves, and scarf."
+        },
+        {
+          "round": "D5:2",
+          "user": "Should I feel happy or not?",
+          "assistant": "I hope you can keep a smile every day. Finding small joys might help you feel a bit happier."
+        },
+        {
+          "round": "D5:3",
+          "user": "No, I feel so bad, the final exams are coming up.",
+          "assistant": "Final exams can bring a lot of stress. Try making a study plan and breaking topics into manageable chunks. Also remember to relax a little—music or light exercise helps!"
+        },
+        {
+          "round": "D5:4",
+          "user": "This time, I really dislike math; it’s so hard to learn.",
+          "assistant": "It might be because you haven't found the study method that suits you best. Try making it more fun—puzzles, real-world examples, or videos that explain concepts visually.",
+          "image_id": [
+            "D5:IMG_001"
+          ],
+          "input_image": [
+            "../image/Education_Career_Research_Lifestyle/D5_IMG_001.jpg"
+          ],
+          "image_caption": [
+            "Green hand-drawn math doodles featuring the large central word “MATH” surrounded by geometric shapes (cubes, circles, triangles, cylinders) and algebraic and trigonometric expressions, including “π”, “√25”, and “a + b = c”, on a light background."
+          ]
+        },
+        {
+          "round": "D5:5",
+          "user": "That's a good point about study methods. It makes me wonder, though—some students in my programming classes grasp mathematical logic so fast.",
+          "assistant": "That’s common. Some people develop those foundations earlier, but everyone can improve with the right methods."
+        },
+        {
+          "round": "D5:6",
+          "user": "Why are some people so good at math?",
+          "assistant": "Different learning backgrounds, practice, and confidence levels all play a role. You can still improve a lot with the right approach."
+        },
+        {
+          "round": "D5:7",
+          "user": "I remember I was really bad at English when I was younger.",
+          "assistant": "Maybe you hadn’t found the right approach back then. With time and interest, people often become much better.",
+          "image_id": [
+            "D5:IMG_002"
+          ],
+          "input_image": [
+            "../image/Education_Career_Research_Lifestyle/D5_IMG_002.jpg"
+          ],
+          "image_caption": [
+            "Word cloud with large words “students,” “language,” and “English,” surrounded by smaller education- and linguistics-related terms such as “school,” “college,” “writing,” “literature,” “linguistic,” “dialect,” “variation,” and “social,” arranged in varying font sizes and orientations on a white background."
+          ]
+        },
+        {
+          "round": "D5:8",
+          "user": "I’m also not good at physics. Do you have any advice?",
+          "assistant": "Physics is challenging for many students. Try reviewing core concepts, doing more example problems, and asking questions when stuck.",
+          "image_id": [
+            "D5:IMG_003"
+          ],
+          "input_image": [
+            "../image/Education_Career_Research_Lifestyle/D5_IMG_003.jpg"
+          ],
+          "image_caption": [
+            "Illustrated physics-themed collage on a gray background featuring a Newton’s cradle, pendulum, atom model, molecules, U-shaped magnet, thermometer, stopwatch, calculator, electrical circuit symbols, and lab containers. Central text reads “PHYSICS,” with formulas and labels including “E = mc,” “S v t,” and letters “A,” “W,” and “P” near a pulley diagram."
+          ]
+        },
+        {
+          "round": "D5:9",
+          "user": "Thanks, I'll try that. All this thinking about study plans and physics has made me realize I completely forgot about lunch.",
+          "assistant": "It’s easy to forget when you’re stressed. Eating will help you recharge for studying."
+        },
+        {
+          "round": "D5:10",
+          "user": "I feel hungry now. It's time to eat.",
+          "assistant": "What food do you like best?"
+        },
+        {
+          "round": "D5:11",
+          "user": "Do you know sushi? I really enjoy eating it!",
+          "assistant": "Yes! It’s very good."
+        },
+        {
+          "round": "D5:12",
+          "user": "I found a photo, what do you think?",
+          "assistant": "Oh, Let me see. This looks so delicious!",
+          "image_id": [
+            "D5:IMG_004"
+          ],
+          "input_image": [
+            "../image/Education_Career_Research_Lifestyle/D5_IMG_004.jpg"
+          ],
+          "image_caption": [
+            "Assorted nigiri sushi arranged in a black plastic tray, including pieces topped with tamago omelet, squid, fatty tuna, salmon, tuna, shrimp, scallop, sea urchin, and salmon roe wrapped in nori. Green plastic grass dividers stand between the front and back rows of sushi on a white background."
+          ]
+        },
+        {
+          "round": "D5:13",
+          "user": "Actually, talking about sushi suddenly reminded me — I'm thinking about traveling to Japan during the winter break. I’ve never been there before, and it feels like the perfect time to relax after finals.",
+          "assistant": "That sounds wonderful! Japan in winter has amazing scenery. Hot springs, snowy landscapes, and amazing food—perfect for relaxing after finals. Do you have any places in mind?"
+        },
+        {
+          "round": "D5:14",
+          "user": "I was looking at some spots in Tokyo. For example, Senso-ji Temple — it looks stunning in every photo.",
+          "assistant": "Senso-ji is one of Tokyo’s most iconic temples. The architecture is gorgeous, especially at night when the lights highlight the red pagoda.",
+          "image_id": [
+            "D5:IMG_005"
+          ],
+          "input_image": [
+            "../image/Education_Career_Research_Lifestyle/D5_IMG_005.png"
+          ],
+          "image_caption": [
+            "Illuminated five-story pagoda at a Japanese temple at night, glowing with warm orange lights against a dark teal sky. The pagoda’s tiered roofs and central spire are centered in the frame, with part of another temple roof visible on the left. A paved courtyard leads to the entrance, and modern street lamps and low buildings are visible around the temple complex."
+          ]
+        },
+        {
+          "round": "D5:15",
+          "user": "I’ve always loved places with a strong cultural atmosphere. Temples feel calm, like they slow time down.",
+          "assistant": "Japan is perfect for that. Many temples have a quiet, grounding energy that feels completely different from city life."
+        },
+        {
+          "round": "D5:16",
+          "user": "Exactly. I imagine visiting Senso-ji early in the morning, when the streets aren’t crowded yet.",
+          "assistant": "That’s the best time—the air is crisp, and you can really appreciate the architecture without distractions."
+        },
+        {
+          "round": "D5:17",
+          "user": "Here’s another view of the temple — the details on the structure are so beautiful.",
+          "assistant": "The craftsmanship is incredible. The wooden beams, the curved roof tiles—everything shows traditional Japanese aesthetics.",
+          "image_id": [
+            "D5:IMG_006"
+          ],
+          "input_image": [
+            "../image/Education_Career_Research_Lifestyle/D5_IMG_006.png"
+          ],
+          "image_caption": [
+            "Traditional Japanese bell pavilion with red wooden pillars, ornate painted brackets, and a gray tiled roof, housing a large hanging bronze bell. The structure stands on a raised stone platform with a black metal railing and is surrounded by green trees under a clear blue sky."
+          ]
+        },
+        {
+          "round": "D5:18",
+          "user": "I also read that Nakamise Street near Senso-ji has lots of traditional snacks. Maybe I should try some.",
+          "assistant": "Definitely! Taiyaki, ningyo-yaki, senbei… it’s a perfect mix of sightseeing and tasting local treats."
+        },
+        {
+          "round": "D5:19",
+          "user": "And this one really captured my attention too. The symmetry looks amazing.",
+          "assistant": "Absolutely—Senso-ji has a timeless atmosphere. Visiting during winter gives it a calm, serene vibe.",
+          "image_id": [
+            "D5:IMG_007"
+          ],
+          "input_image": [
+            "../image/Education_Career_Research_Lifestyle/D5_IMG_007.png"
+          ],
+          "image_caption": [
+            "Red-painted temple entrance with large cylindrical columns framing a central black double door decorated with gold fittings and ornate corner designs. The smooth stone floor in the foreground leads toward the doorway, while green fence posts and additional architectural elements are visible on the sides. The scene is evenly lit, emphasizing the vivid red surfaces and symmetrical structure of the traditional building."
+          ]
+        },
+        {
+          "round": "D5:20",
+          "user": "Do you think Senso-ji is better to visit during daytime or evening?",
+          "assistant": "Both have their charm. Daytime shows all the vivid colors, while evening lighting makes it elegant and atmospheric."
+        },
+        {
+          "round": "D5:21",
+          "user": "I feel like I’d end up visiting it twice in the same day just to see both moods.",
+          "assistant": "That’s actually very common! Many travelers revisit temples at different times because each moment feels unique and memorable."
+        },
+        {
+          "round": "D5:22",
+          "user": "I also want to see Tokyo Tower. The night view looks unreal.",
+          "assistant": "Tokyo Tower at night is magical—it's bright, warm, and gives the entire skyline a golden tone.",
+          "image_id": [
+            "D5:IMG_008"
+          ],
+          "input_image": [
+            "../image/Education_Career_Research_Lifestyle/D5_IMG_008.png"
+          ],
+          "image_caption": [
+            "Dense nighttime cityscape with numerous mid- and high-rise buildings lit by office and street lights, intersected by brightly illuminated roads with moving traffic. A tall, orange-lit communications tower stands centrally in the distance, rising above the surrounding skyline under a dark blue, star-speckled sky."
+          ]
+        },
+        {
+          "round": "D5:23",
+          "user": "And the daytime view is completely different but just as amazing.",
+          "assistant": "Yes! In the daytime, you can really see the contrast between the red tower and the cityscape. It’s perfect for a winter city walk.",
+          "image_id": [
+            "D5:IMG_009"
+          ],
+          "input_image": [
+            "../image/Education_Career_Research_Lifestyle/D5_IMG_009.png"
+          ],
+          "image_caption": [
+            "Red and white lattice communication tower rising from a dense urban district, surrounded by mid-rise and high-rise office and residential buildings. Green tree-filled parks appear at the tower’s base, contrasting with the tightly packed city blocks. In the distance, a wide expanse of modern skyscrapers extends to the horizon under a bright blue sky with thin, layered clouds."
+          ]
+        },
+        {
+          "round": "D5:24",
+          "user": "Thanks. I'm still deciding where to go, though. Oh, we've gone off-topic! Please return to our discussion about the subject. My background is focused on HCI now, but in undergrad I actually liked different subjects.",
+          "assistant": "Oh? What other subjects did you enjoy?"
+        },
+        {
+          "round": "D5:25",
+          "user": "I like chemistry pretty much.",
+          "assistant": "That’s great! Having strengths in different subjects can make your learning experience richer.",
+          "image_id": [
+            "D5:IMG_010"
+          ],
+          "input_image": [
+            "../image/Education_Career_Research_Lifestyle/D5_IMG_010.jpg"
+          ],
+          "image_caption": [
+            "Assorted laboratory glassware containing colored liquids, including Erlenmeyer flasks, volumetric flasks, graduated cylinders, and beakers marked “1000 ml,” “500 ml,” and “200 ml.” A metal rack holds several test tubes with green solution. All items stand on a reflective white surface against a plain white background."
+          ]
+        },
+        {
+          "round": "D5:26",
+          "user": "Oh, I wish every subject could feel as natural as chemistry.",
+          "assistant": "Spending time and finding the right approach can make other subjects easier too."
+        },
+        {
+          "round": "D5:27",
+          "user": "No, I can’t do that!",
+          "assistant": "Believe in yourself—you’re capable of more than you think."
+        },
+        {
+          "round": "D5:28",
+          "user": "Maybe, but right now I should focus on passing my final exams. I feel so stressed.",
+          "assistant": "That’s completely understandable. Focus on your finals first. You’ll do great—just take it step by step!"
+        }
+      ]
+    },
+    {
+      "session_id": "D6",
+      "date": "2024-12-03",
+      "dialogues": [
+        {
+          "round": "D6:1",
+          "user": "I think it’s time for me to polish my academic CV. If I want to apply to HCI and related programs, I’ll need a version that really highlights research and relevant projects.",
+          "assistant": "That’s a great idea. A strong academic CV can make a big difference, especially for research-heavy programs. Do you already have a draft I can look at?"
+        },
+        {
+          "round": "D6:2",
+          "user": "Yes, here’s the Chinese CV draft my friend showed me as a reference. I feel like mine still looks too much like an undergraduate resume instead of a graduate-level academic profile.",
+          "assistant": "Let me take a look at this template. It’s structured well for basic reference, but for your actual graduate applications, we should highlight your research experience, HCI-related projects, and interdisciplinary background more clearly.",
+          "image_id": [
+            "D6:IMG_001"
+          ],
+          "input_image": [
+            "../image/Education_Career_Research_Lifestyle/D6_IMG_001.jpg"
+          ],
+          "image_caption": [
+            "Professional résumé layout in Chinese with a formal headshot of a young man in a suit at upper left. Large text beside the photo reads “锟子简历”. Sections with blue headers include “教育背景”, “工作经历”, “自我评价”, and contact details such as phone, email, and address, arranged in a clean two‑column format."
+          ]
+        },
+        {
+          "round": "D6:3",
+          "user": "That makes sense. Should I also rearrange the order of sections? Right now, work experience is near the top.",
+          "assistant": "Yes. For an HCI or CS-related graduate program, your CV should begin with: Education → Research / Projects → Technical Skills → Work/Internship Experience → Awards. That structure emphasizes your academic trajectory."
+        },
+        {
+          "round": "D6:4",
+          "user": "My friend also sent me a PMP certificate template as an example. Do you think having a PMP is useful for my application?",
+          "assistant": "Yes — even as a reference template, it’s a good reminder that project management certifications can strengthen an HCI application. They show your ability to coordinate user studies, design cycles, and cross-functional collaboration. If you ever earn one, you could list it in a 'Certifications' section.",
+          "image_id": [
+            "D6:IMG_002"
+          ],
+          "input_image": [
+            "../image/Education_Career_Research_Lifestyle/D6_IMG_002.jpg"
+          ],
+          "image_caption": [
+            "Framed certificate from the Project Management Institute awarding Ting Lian the title “Project Management Professional.” The document features gray decorative borders, a large heading “Project Management Institute,” the recipient’s name centered in bold, and the credential title beneath. A circular embossed seal appears on the lower left, while two signatures and dates are centered at the bottom, next to the PMI logo in blue on the lower right."
+          ]
+        },
+        {
+          "round": "D6:5",
+          "user": "Good to know. Should I include a personal photo on an academic CV? Some people say it’s unnecessary.",
+          "assistant": "For academic CVs in the US or Canada, personal photos are generally unnecessary and sometimes discouraged. But if your target programs explicitly allow it or if you're preparing an online portfolio, a clean and professional photo can still be useful."
+        },
+        {
+          "round": "D6:6",
+          "user": "Do you think that photo is appropriate if needed?",
+          "assistant": "Yes — it’s clean, professional, and neutral. If you decide to build a personal academic website or portfolio, this photo would work well."
+        },
+        {
+          "round": "D6:7",
+          "user": "I’m struggling with writing the ‘Personal Statement’ part of my application. Should I put a shorter version in my CV too?",
+          "assistant": "For the CV, you can include a 2–3 sentence ‘Research Interests’ section instead. Reserve the detailed personal statement for the SOP. Do you have a draft of your statement?"
+        },
+        {
+          "round": "D6:8",
+          "user": "Yes, here’s a draft. It still feels unfocused to me.",
+          "assistant": "The content is promising, but to align it with HCI, you can emphasize your interest in user-centered design, cross-modal interaction, or psychological foundations — since your minor in psychology is a strong advantage."
+        },
+        {
+          "round": "D6:9",
+          "user": "Should my academic CV highlight my psychology minor more strongly?",
+          "assistant": "Definitely. HCI programs appreciate candidates with interdisciplinary insight — psychology, cognition, perception, and human factors are all highly relevant. You can list related coursework or projects to strengthen that connection."
+        },
+        {
+          "round": "D6:10",
+          "user": "I’m also building a small project portfolio for my application. Do you think it should be integrated directly into the CV?",
+          "assistant": "You can briefly list your top 2–3 projects in the CV, but keep the detailed visuals and prototypes in a separate portfolio link. This makes your application clean yet comprehensive."
+        },
+        {
+          "round": "D6:11",
+          "user": "What about formatting? Mine feels a bit cramped.",
+          "assistant": "Try adding clearer spacing between sections and use consistent headings. Academic CVs can be 2–3 pages long, so don’t be afraid to let important parts breathe."
+        },
+        {
+          "round": "D6:12",
+          "user": "Thanks. With the GRE prep, TOEFL practice, and now CV editing, everything feels overwhelming. But I want to give it my best shot.",
+          "assistant": "You’re doing extremely well — planning ahead is already half the victory. Each piece you complete brings you one step closer to your application goals. And you’ve built a strong foundation already."
+        },
+        {
+          "round": "D6:13",
+          "user": "I’ll revise the CV tonight. Maybe tomorrow I can work on the SOP draft.",
+          "assistant": "Perfect plan. Step by step — and your application will come together beautifully."
+        },
+        {
+          "round": "D6:14",
+          "user": "Thanks for the encouragement. It feels less stressful when I break the process down like this.",
+          "assistant": "Exactly. Treat the application like an HCI project — iterative, structured, user-centered, and driven by clarity. You’re doing great."
+        }
+      ]
+    },
+    {
+      "session_id": "D7",
+      "date": "2024-12-12",
+      "dialogues": [
+        {
+          "round": "D7:1",
+          "user": "Hi! Since I’m preparing applications for HCI programs, I keep seeing people emphasize design thinking as a key methodology. Could you give me an overview so I can apply it to my portfolio project?",
+          "assistant": "Of course! Design thinking is a user-centered, iterative process with five stages: Empathize, Define, Ideate, Prototype, and Test. It’s widely used in HCI because it focuses on understanding real user needs. Do you already have a project in mind that you want to use for your portfolio?"
+        },
+        {
+          "round": "D7:2",
+          "user": "Yes, my team and I are working on a small product concept that I hope to include in my portfolio. But we often get lost during discussions and aren’t sure where to begin.",
+          "assistant": "Then starting with the Empathize stage is ideal. You need to understand your users' behaviors, frustrations, and motivations. Have you collected any preliminary research or created any user personas?"
+        },
+        {
+          "round": "D7:3",
+          "user": "We’ve done some initial interviews. I can upload the persona we drafted if that helps.",
+          "assistant": "Absolutely, upload it and I’ll help you analyze whether it accurately reflects user needs. Then we can move on to the Define stage together."
+        },
+        {
+          "round": "D7:4",
+          "user": "Here’s a user persona my teammate created as a reference template. We’re not sure if the needs and pain points are clearly captured.",
+          "assistant": "This reference persona is helpful as a starting point. It highlights user goals and frustrations, but we need to validate whether these insights came from your actual users. Do you have specific pain points or interview quotes we can examine?",
+          "image_id": [
+            "D7:IMG_001"
+          ],
+          "input_image": [
+            "../image/Education_Career_Research_Lifestyle/D7_IMG_001.jpg"
+          ],
+          "image_caption": [
+            "Infographic with two illustrated professionals holding ID cards, surrounded by labeled data points. A blue banner at the top reads “用户画像”. The left side, titled “信息数据”, lists personal information items, while the right side, titled “行为数据”, lists behavioral data categories in Chinese text bubbles."
+          ]
+        },
+        {
+          "round": "D7:5",
+          "user": "Yes, we collected some customer feedback about usability issues in similar products. Should I upload the feedback document?",
+          "assistant": "Yes, please upload it. Analyzing real feedback helps us define a precise problem statement before moving to ideation."
+        },
+        {
+          "round": "D7:6",
+          "user": "Here is a feedback summary my teammate organized. Many users said the interface was confusing.",
+          "assistant": "Great, this is actionable. A clear problem definition might be: “Users feel confused because the interface lacks clear hierarchy and guidance.” With this defined, we can move to the Ideate stage and brainstorm solutions.",
+          "image_id": [
+            "D7:IMG_002"
+          ],
+          "input_image": [
+            "../image/Education_Career_Research_Lifestyle/D7_IMG_002.jpg"
+          ],
+          "image_caption": [
+            "Infographic with five labeled panels categorizing user types using colored person icons. Top panel: “INACTIVE OVER 1 MONTH” with several black icons. Middle left: “NEW USERS” with a few multicolored icons. Middle right: “POWER USERS” with several differently colored icons. Bottom left: “TRUSTED LONG-TERM CUSTOMERS” with multiple colored icons. Bottom right: “PAYING $250+ PER MONTH” with four brightly colored icons. All panels sit on a light blue background."
+          ]
+        },
+        {
+          "round": "D7:7",
+          "user": "We brainstormed a few ideas, but we're not sure if they fit user needs. Are there any ideation techniques you recommend?",
+          "assistant": "Brainstorming is excellent, but you can also try methods like 'Crazy 8s', mind maps, or sketching multiple variations quickly. These help you explore diverse directions before narrowing down."
+        },
+        {
+          "round": "D7:8",
+          "user": "We made some rough interface sketches. Can you tell if our direction aligns with user needs?",
+          "assistant": "These sketches are promising as early concepts. The next step is to evaluate whether users can complete key tasks easily. For that, we’ll need to test low-fidelity prototypes with real users."
+        },
+        {
+          "round": "D7:9",
+          "user": "We haven’t created prototypes yet. Should we jump directly to digital prototypes or start with paper prototypes?",
+          "assistant": "Start simple. Paper prototypes are great for quick iteration and fast feedback. They also help you test task flows without spending time polishing visuals."
+        },
+        {
+          "round": "D7:10",
+          "user": "That makes sense. Once we finish the paper prototypes, what's the best way to test them?",
+          "assistant": "You can conduct quick user tests—ask participants to perform core tasks while thinking aloud. Observe where they hesitate or get confused. Those insights will guide your next iteration in the Prototype stage."
+        },
+        {
+          "round": "D7:11",
+          "user": "It sounds like if we follow this workflow properly, the entire project could become a complete design thinking case study.",
+          "assistant": "Exactly! A well-documented Empathize → Define → Ideate → Prototype → Test process is highly valuable for HCI applications. You can include each stage in your portfolio to demonstrate your understanding of user-centered design."
+        },
+        {
+          "round": "D7:12",
+          "user": "Great! I’ll start organizing each step so the project can strengthen my graduate application.",
+          "assistant": "Perfect. With clear documentation and thoughtful reasoning, this case study will significantly enhance your HCI application and show your ability to think like a designer and researcher."
+        }
+      ]
+    },
+    {
+      "session_id": "D8",
+      "date": "2024-12-22",
+      "dialogues": [
+        {
+          "round": "D8:1",
+          "user": "Winter is getting really cold, and I’m thinking of buying a cable-knit sweater to stay warm but still look put-together. Can you help me pick one?",
+          "assistant": "Of course! Cable-knit sweaters are perfect for cozy winter outfits. Do you already have some options in mind, or would you like general suggestions first?"
+        },
+        {
+          "round": "D8:2",
+          "user": "I’ve saved several reference photos of cable-knit sweaters I like. I’ll share them with you one by one, and I’d love your thoughts on each and then an overall comparison.",
+          "assistant": "Great idea. Go ahead and send the first photo when you’re ready, and I’ll describe its features, how it might feel and fit, and what kind of outfits it works best with."
+        },
+        {
+          "round": "D8:3",
+          "user": "Here’s the first one. It looks super cozy and oversized.",
+          "assistant": "Got it, I see the first cable-knit sweater.",
+          "image_id": [
+            "D8:IMG_001"
+          ],
+          "input_image": [
+            "../image/Education_Career_Research_Lifestyle/D8_IMG_001.jpg"
+          ],
+          "image_caption": [
+            "Woman standing against a plain light background, wearing an oversized cream cable-knit cardigan with large wooden buttons and a high collar. She rests one hand near her head and has the other arm relaxed by her side, paired with dark pants."
+          ]
+        },
+        {
+          "round": "D8:4",
+          "user": "What do you think about this design?",
+          "assistant": "This first sweater is an oversized, cream cable-knit with a button-up front and a slightly boxy, poncho-like silhouette. The large cables and chunky knit make it look very warm and soft. Because it’s wide and relaxed, it’s great for layering over thinner tops or even another sweater. Style-wise, it feels very cozy and casual, almost like a wearable blanket, and it would pair well with skinny jeans or leggings to balance the volume. The only downside is that the shape may look a bit bulky if you prefer something more fitted or easy to tuck into coats."
+        },
+        {
+          "round": "D8:5",
+          "user": "Okay, here’s the second one. This one is a simple black cable sweater.",
+          "assistant": "I see the second sweater.",
+          "image_id": [
+            "D8:IMG_002"
+          ],
+          "input_image": [
+            "../image/Education_Career_Research_Lifestyle/D8_IMG_002.jpg"
+          ],
+          "image_caption": [
+            "Black long-sleeve cable-knit sweater with a crew neckline, ribbed cuffs, and ribbed hem. The garment is displayed flat against a plain white background, showing its textured pattern and relaxed fit."
+          ]
+        },
+        {
+          "round": "D8:6",
+          "user": "How is this one compared to the first?",
+          "assistant": "The second sweater is a classic black cable-knit with a round neckline and a straight, slightly relaxed fit. Compared with the oversized cream cardigan:\n\n- **Silhouette**: This one is more streamlined and traditional, less boxy than the first. It should be easier to layer under coats.\n- **Color**: Black is very versatile and flattering, and it doesn’t show stains easily. It also feels a bit more polished and urban.\n- **Vibe**: Where the first is cozy and slouchy, this one is minimal and practical. It can go from casual to slightly dressy, depending on how you style it.\n\nOverall, this black sweater is great if you want something simple, low-maintenance, and easy to match with almost everything."
+        },
+        {
+          "round": "D8:7",
+          "user": "Here’s the third one. It’s a long, light pastel sweater.",
+          "assistant": "I see the third sweater now.",
+          "image_id": [
+            "D8:IMG_003"
+          ],
+          "input_image": [
+            "../image/Education_Career_Research_Lifestyle/D8_IMG_003.jpg"
+          ],
+          "image_caption": [
+            "Long-sleeve, light-colored cable-knit sweater laid flat on a white background, featuring a wide round neckline, ribbed cuffs and hem, and a slightly fitted, elongated body."
+          ]
+        },
+        {
+          "round": "D8:8",
+          "user": "What kind of feeling does this one give?",
+          "assistant": "The third sweater is a long, slim, pastel cable-knit with a softer, lighter color. It has a more fitted shape and extra length, which makes it nice for wearing over leggings or skinny jeans. The pastel tone feels gentle and feminine, and the longer hemline can make you look taller and more elongated.\n\nCompared to the first two:\n- It’s more **feminine and soft** than the black one.\n- It’s less oversized than the first cream cardigan, giving a more body-hugging silhouette.\n\nIt’s a good choice if you want something cozy but still relatively flattering and slightly dressy, especially for casual dates or café study days."
+        },
+        {
+          "round": "D8:9",
+          "user": "Here’s the fourth cable-knit sweater.",
+          "assistant": "Got it, I see the fourth option.",
+          "image_id": [
+            "D8:IMG_004"
+          ],
+          "input_image": [
+            "../image/Education_Career_Research_Lifestyle/D8_IMG_004.jpg"
+          ],
+          "image_caption": [
+            "Beige long-sleeve cable-knit sweater with a crew neckline, featuring prominent braided and diamond knit patterns on the front and ribbed cuffs and hem, hanging against a plain white background."
+          ]
+        },
+        {
+          "round": "D8:10",
+          "user": "Can you describe this one and how it compares with the others?",
+          "assistant": "The fourth sweater is a beige cable-knit with a classic crew neck and a medium-relaxed fit. The pattern has diamond-shaped cables in the center and tighter knit on the sides. The color is a warm neutral that can match denim, trousers, or skirts.\n\nCompared with the earlier ones:\n- It’s less bulky than the first oversized cardigan, but still cozy.\n- It’s lighter and softer in color than the black one, so it feels warmer and more casual.\n- It’s shorter and a bit more structured than the long pastel sweater.\n\nThis one gives a balanced, everyday look—easy to wear for class, the library, or casual outings without feeling too oversized or too tight."
+        },
+        {
+          "round": "D8:11",
+          "user": "Here is the fifth one. I like the outfit in this photo too.",
+          "assistant": "I see the fifth sweater and the full outfit.",
+          "image_id": [
+            "D8:IMG_005"
+          ],
+          "input_image": [
+            "../image/Education_Career_Research_Lifestyle/D8_IMG_005.jpg"
+          ],
+          "image_caption": [
+            "Adult woman standing against a plain gray wall, wearing a chunky red knit sweater, gray shorts, black tights, and shiny black ankle boots. She carries a large black shoulder bag and holds a smartphone in one hand, looking slightly toward the camera. Concrete pavement and a small strip of grass appear at her feet. No prominent text is visible."
+          ]
+        },
+        {
+          "round": "D8:12",
+          "user": "What’s special about this red sweater?",
+          "assistant": "The fifth sweater is a rich burgundy cable-knit, styled as an oversized tunic with tights and shorts. The deep wine color is very striking and feels sophisticated yet cozy. The length covers the hips, which is flattering and warm, and the thicker knit makes it great for cold weather.\n\nCompared to the others:\n- The color stands out the most—more bold and fashion-forward than the neutrals.\n- The length is similar to a sweater dress, so it’s great with tights or leggings.\n- It has that “street style” feel, especially paired with a structured bag and ankle boots.\n\nIf you want something that feels both warm and stylish for winter city walks, this burgundy sweater is a strong candidate."
+        },
+        {
+          "round": "D8:13",
+          "user": "Now here’s the sixth one, another light-colored sweater.",
+          "assistant": "I see the sixth sweater.",
+          "image_id": [
+            "D8:IMG_006"
+          ],
+          "input_image": [
+            "../image/Education_Career_Research_Lifestyle/D8_IMG_006.jpg"
+          ],
+          "image_caption": [
+            "Young woman with long blond hair stands against a plain white background, wearing a loose, cream-colored knit sweater with a cable and open-weave pattern and long sleeves. She pairs the sweater with light blue, slightly faded jeans with front pockets and visible seams. Her hands rest near her hips, and she faces the camera with a neutral expression."
+          ]
+        },
+        {
+          "round": "D8:14",
+          "user": "How is this one different from the other cream sweaters?",
+          "assistant": "The sixth sweater is a light cream cable-knit with a looser weave in the front, creating a more airy, textured pattern. The fit looks relaxed but not extremely oversized, and the open knit may feel lighter and slightly less insulating than the thicker solid knits.\n\nCompared with the other cream/beige options:\n- It’s **airier and more breathable** than the chunky turtleneck and the heavy cardigan.\n- It looks more casual and slightly delicate, especially styled with jeans.\n- Warmth-wise, it may be better for early winter or indoor wear rather than the coldest days.\n\nIt’s a nice choice if you want something cozy but not too heavy, and you often stay in heated indoor spaces."
+        },
+        {
+          "round": "D8:15",
+          "user": "Finally, here’s the seventh sweater.",
+          "assistant": "I can see the seventh option now.",
+          "image_id": [
+            "D8:IMG_007"
+          ],
+          "input_image": [
+            "../image/Education_Career_Research_Lifestyle/D8_IMG_007.jpg"
+          ],
+          "image_caption": [
+            "Blonde woman standing outdoors among large rocks, wearing a cream-colored cable-knit turtleneck sweater and light khaki pants, with one hand resting on a rock and neutral facial expression, in bright natural light."
+          ]
+        },
+        {
+          "round": "D8:16",
+          "user": "What do you think about this one overall?",
+          "assistant": "The seventh sweater is a classic cream cable-knit with a high turtleneck and a dense, traditional Aran-style pattern. It looks thick, warm, and quite structured. The turtleneck gives extra protection for your neck, which is perfect for really cold days or windy weather.\n\nCompared with the other six options:\n- It seems **the warmest**, thanks to the turtleneck and dense knit.\n- It’s more fitted and structured than the oversized cardigan, but still cozy.\n- The cream color is timeless and easy to style with coats, scarves, and neutral bottoms.\n\nIf your main goal is to survive winter in warmth while still looking classic and slightly polished, this one stands out a lot."
+        },
+        {
+          "round": "D8:17",
+          "user": "So, summarizing all seven options, which ones do you think are the strongest overall? I want something warm for winter, good for everyday campus outfits, and not too bulky under a coat. I also don’t want a color that’s too hard to match.",
+          "assistant": "Given your priorities—**warmth, everyday campus wear, easy layering, and versatile color**—I’d highlight these three as the strongest overall:\n\n1. **Black cable-knit (Image 2)** – Practical, slim enough for layering, very easy to match, and looks polished.\n2. **Beige crew-neck cable-knit (Image 4)** – Neutral, cozy, not too bulky, and works with many outfits.\n3. **Cream turtleneck cable-knit (Image 7)** – Probably the warmest, classic and versatile, still structured enough to fit under most coats.\n\nThe oversized cardigan (Image 1) is super cozy but more bulky; the pastel long sweater (Image 3) is cute but a bit niche in color; the burgundy tunic (Image 5) is stylish but more statement-like; and the airy cream sweater (Image 6) may be less warm. Among 2, 4, and 7, it depends how much you prioritize maximum warmth versus light layering."
+        },
+        {
+          "round": "D8:18",
+          "user": "I think warmth is really important because winter here is freezing, but I still want something that looks neat in photos and matches different coats. Between 2, 4, and 7, which would you push me toward?",
+          "assistant": "Based on that, I would lean most strongly toward **Image 7, the cream turtleneck cable-knit**.\n\n- It’s the warmest option thanks to the high neck and dense knit.\n- The cream color is neutral and photographs beautifully, especially outdoors in winter light.\n- The fit looks structured rather than sloppy, so it will still look neat under a wool coat or parka.\n- You can easily change the vibe with scarves: colorful scarves for fun, neutral ones for a minimalist look.\n\nImage 2 (black) is more low-key and practical, and Image 4 (beige) is a nice everyday basic, but if you want one sweater that feels special, photogenic, and truly winter-ready, Image 7 stands out."
+        },
+        {
+          "round": "D8:19",
+          "user": "If I choose the one from 7, do you think it will work well with jeans and also with a long wool coat?",
+          "assistant": "Yes, absolutely. The Image 7 sweater will pair really well with both:\n\n- **With jeans**: Blue or black skinny/straight jeans plus ankle boots or sneakers will give you a classic winter look. You can tuck just the front hem slightly into the waistband for a cleaner silhouette.\n- **With a long wool coat**: Because the sweater is structured and not super oversized, it should sit nicely under a tailored or straight-cut coat. The turtleneck will peek out at the top, which looks chic and cozy in photos.\n\nYou can also add a scarf, beanie, or simple gold jewelry to make the outfit look intentional without much effort."
+        },
+        {
+          "round": "D8:20",
+          "user": "That sounds perfect. I think I’ve made up my mind—I’ll go with the cream turtleneck cable-knit.",
+          "assistant": "Great choice! The cream turtleneck cable-knit from Image 7 will give you warmth, versatility, and a really classic winter look. It should be easy to style with most of your wardrobe and will look beautiful in photos.\n\nOnce it arrives, you can try pairing it with different bottoms—jeans, tailored trousers, or even a skirt with tights—and see which combination you like most. If you’d like, I can help you plan a few specific outfits around this sweater later."
+        },
+        {
+          "round": "D8:21",
+          "user": "Thanks a lot for walking through all the options with me. I feel much more confident about this purchase now.",
+          "assistant": "You’re very welcome! I’m glad we could compare all seven sweaters carefully and find one that really matches your needs. Enjoy staying warm and stylish this winter in your new cable-knit sweater. If you start planning the rest of your winter wardrobe—like coats, scarves, or boots—feel free to ask me for more ideas anytime."
+        }
+      ]
+    },
+    {
+      "session_id": "D9",
+      "date": "2025-01-16",
+      "dialogues": [
+        {
+          "round": "D9:1",
+          "user": "Hi again! Your advice on organizing my research has been incredibly helpful as I prepare for my Master's. While sorting through papers on inclusive design, I realized that understanding accessibility on a theoretical level isn't enough for the kind of HCI work I want to do. To truly design for and with the Deaf community, I felt I needed to start by learning their language firsthand.",
+          "assistant": "That's a fantastic and deeply empathetic approach, Lin. Connecting your academic preparation directly to lived experience will make you a much more effective designer. It’s a wonderful way to build that bridge between theory and practice. Learning ASL will also give you firsthand insight into multimodal interaction, which is extremely valuable for accessibility-oriented HCI programs."
+        },
+        {
+          "round": "D9:2",
+          "user": "I've started learning American Sign Language! It's a beautiful and expressive language. I want to communicate with more people.",
+          "assistant": "That's wonderful! Learning ASL can open up a whole new world of communication and connection. What resources are you using to learn?"
+        },
+        {
+          "round": "D9:3",
+          "user": "I'm using an app that teaches basic signs. It has videos and quizzes. It is very interactive.",
+          "assistant": "ASL learning apps can be very helpful, especially for beginners. They provide a convenient and engaging way to learn at your own pace."
+        },
+        {
+          "round": "D9:4",
+          "user": "Here's a picture of me practicing the sign for \"hello\". It is not easy.",
+          "assistant": "It looks like you're getting the hang of it! Remember that handshape, palm orientation, location, movement, and facial expressions are all important components of ASL signs.",
+          "image_id": [
+            "D9:IMG_001"
+          ],
+          "input_image": [
+            "../image/Education_Career_Research_Lifestyle/D9_IMG_001.jpg"
+          ],
+          "image_caption": [
+            "Cartoon woman with short brown hair and a light green shirt shown twice on a white background, smiling. In the left frame her right hand is near her forehead, palm facing out, with a black curved arrow indicating motion. In the right frame her right hand is raised slightly away from her head, suggesting a waving or greeting gesture. No visible text."
+          ]
+        },
+        {
+          "round": "D9:5",
+          "user": "I'm also watching videos of fluent signers. I'm trying to learn the flow of the language. It is a visual language.",
+          "assistant": "Watching fluent signers is a great way to improve your understanding of ASL grammar and sentence structure. You'll start to pick up on the nuances of the language."
+        },
+        {
+          "round": "D9:6",
+          "user": "I'm learning about Deaf culture, too. It's an important part of learning ASL. I want to be respectful.",
+          "assistant": "Understanding Deaf culture is crucial for anyone learning ASL. It's a rich and vibrant culture with its own history, values, and social norms."
+        },
+        {
+          "round": "D9:7",
+          "user": "Here's a picture of a sign language chart I found. It has the alphabet and numbers. I am practicing every day.",
+          "assistant": "That's a handy chart! The ASL alphabet, also known as fingerspelling, is used to spell out words that don't have specific signs.",
+          "image_id": [
+            "D9:IMG_002"
+          ],
+          "input_image": [
+            "../image/Education_Career_Research_Lifestyle/D9_IMG_002.jpg"
+          ],
+          "image_caption": [
+            "Ten small square panels display a right hand against a dark background, labeled beneath with the numbers “1” to “10.” Panels 1–5 show the palm increasing finger count from one to five. Panels 6–9 show three raised fingers in different combinations. Panel 10 shows a thumbs‑up gesture with a curved double‑headed arrow above the thumb, indicating rotation."
+          ]
+        },
+        {
+          "round": "D9:8",
+          "user": "I'm a little nervous about signing with Deaf people. I'm afraid I'll make mistakes. It is inevitable.",
+          "assistant": "It's normal to feel apprehensive about using a new language. Most Deaf people are very welcoming and appreciate the effort to communicate in their language."
+        },
+        {
+          "round": "D9:9",
+          "user": "That's good to know. To feel more confident, I think it's important to understand the context behind the language, not just the signs. It feels more respectful that way.",
+          "assistant": "That’s a very thoughtful approach. Understanding the cultural journey of a language can definitely make communication more meaningful. This deeper cultural awareness will also help you design more empathetic and inclusive interfaces in your future HCI projects."
+        },
+        {
+          "round": "D9:10",
+          "user": "I'm reading a book about the history of ASL. It's fascinating! It is a long history.",
+          "assistant": "ASL has a rich and complex history, influenced by various sign languages and educational philosophies."
+        },
+        {
+          "round": "D9:11",
+          "user": "I'm thinking of joining an ASL class. It would be helpful to have an instructor. I can also learn from others.",
+          "assistant": "Taking an ASL class is a great idea! A qualified instructor can provide personalized feedback, correct your mistakes, and guide you through the learning process."
+        },
+        {
+          "round": "D9:12",
+          "user": "I am practicing with a friend Lina. We are learning together. It is more fun to learn together.",
+          "assistant": "Practicing with a friend is a fantastic way to reinforce what you've learned and build your confidence in signing."
+        },
+        {
+          "round": "D9:13",
+          "user": "I'm trying to learn the grammar of ASL as my immediate goal. It's different from English. It has its own rules.",
+          "assistant": "ASL grammar is indeed distinct from English grammar. It has its own sentence structures, word order, and grammatical markers. Understanding this visual grammar will strengthen your perspective on multimodal design—something highly relevant to accessibility-driven HCI research."
+        },
+        {
+          "round": "D9:14",
+          "user": "I also found an online forum for ASL learners. It's a great community! There are many resources there.",
+          "assistant": "Online forums can be a valuable resource for language learners! You can connect with other learners, ask questions, share tips, and find practice partners."
+        },
+        {
+          "round": "D9:15",
+          "user": "I'm keeping a notebook of new signs I learn. With descriptions and diagrams. It helps me to remember them.",
+          "assistant": "Keeping a sign language notebook is an excellent strategy! It allows you to personalize your learning and create a reference guide tailored to your needs.",
+          "image_id": [
+            "D9:IMG_003"
+          ],
+          "input_image": [
+            "../image/Education_Career_Research_Lifestyle/D9_IMG_003.jpg"
+          ],
+          "image_caption": [
+            "Blue spiral-bound 1-subject notebook with “1-SUBJECT NOTEBOOK” printed near the top and a small “WIDE RULED” label in the upper right corner. The notebook has a metal wire spiral along the left edge and three pre-punched holes for binder use. Several small logos and barcode blocks appear near the lower right corner of the front cover."
+          ]
+        },
+        {
+          "round": "D9:16",
+          "user": "I'm a little frustrated with my progress. It's slower than I expected. But I will insist.",
+          "assistant": "Learning any new language takes time and effort. Be patient with yourself, celebrate your progress, and don't get discouraged by challenges."
+        },
+        {
+          "round": "D9:17",
+          "user": "That's a good perspective, thank you. It helps to reframe it. Instead of just focusing on the vocabulary speed, I've been thinking about the other, less obvious skills I'm picking up from the process.",
+          "assistant": "That's a fantastic mindset. Sometimes the most valuable lessons are the ones we don't expect. And these skills—like sensitivity to nonverbal communication—can make you a much more thoughtful designer in your future accessibility-related HCI work."
+        },
+        {
+          "round": "D9:18",
+          "user": "I've learned so much about nonverbal communication through learning ASL! It is very useful.",
+          "assistant": "ASL can enhance your awareness of nonverbal cues, such as facial expressions, body language, and the use of space."
+        },
+        {
+          "round": "D9:19",
+          "user": "I watched a video about famous Deaf people. It's inspiring! They have achieved a lot.",
+          "assistant": "Learning about successful Deaf individuals can be very motivating! It demonstrates the richness and diversity of the Deaf community."
+        },
+        {
+          "round": "D9:20",
+          "user": "I'm hoping to attend a Deaf event.This is my goal next year. I want to immerse myself in the language and culture. It will be a good chance.",
+          "assistant": "Attending a Deaf event is a fantastic way to experience Deaf culture firsthand and practice your signing skills in a real-world setting."
+        },
+        {
+          "round": "D9:21",
+          "user": "Exactly. The event feels like a necessary milestone. So far, my learning has been very structured for my HCI projects, but I know that's different from genuine, spontaneous conversation.",
+          "assistant": "That's a very insightful distinction to make. It shows you're thinking deeply about not just the language, but the connection behind it. This kind of immersion will also give you valuable qualitative insights when working on accessibility-focused HCI research in the future."
+        },
+        {
+          "round": "D9:22",
+          "user": "Learning ASL has been challenging but incredibly rewarding. I want to communicate with more people. It is meaningful to me.",
+          "assistant": "It's wonderful that you're finding the process of learning ASL so fulfilling! Your dedication and perseverance will undoubtedly pay off."
+        }
+      ]
+    },
+    {
+      "session_id": "D10",
+      "date": "2025-02-06",
+      "dialogues": [
+        {
+          "round": "D10:1",
+          "user": "The rise of artificial intelligence in education is changing how we learn. AI can provide personalized learning experiences for each student, making education more efficient.",
+          "assistant": "That’s an exciting development in education!",
+          "image_id": [
+            "D10:IMG_001"
+          ],
+          "input_image": [
+            "../image/Education_Career_Research_Lifestyle/D10_IMG_001.jpg"
+          ],
+          "image_caption": [
+            "Futuristic classroom with rows of students using laptop-like tablets at desks while humanoid robots walk between aisles and assist. A large digital wall display at the front shows a glowing brain diagram, interface icons, and the text “AI.” Bright windows line one side, and additional robots stand near interactive screens."
+          ]
+        },
+        {
+          "round": "D10:2",
+          "user": "Part of why I’m so interested in AI in education is because it connects directly with HCI. Educational tools are fundamentally about interaction design, and AI seems to open up a lot of new possibilities.",
+          "assistant": "Exactly. Education is one of the most active domains where HCI and AI intersect. When you design learning tools, you're designing interfaces, interactions, and experiences—AI just makes them more adaptive and responsive."
+        },
+        {
+          "round": "D10:3",
+          "user": "AI-powered platforms can assess students' strengths and weaknesses in real-time, enabling teachers to adjust lessons on the fly and provide more targeted support.",
+          "assistant": "It sounds like AI could really enhance the teaching process.",
+          "image_id": [
+            "D10:IMG_002"
+          ],
+          "input_image": [
+            "../image/Education_Career_Research_Lifestyle/D10_IMG_002.jpg"
+          ],
+          "image_caption": [
+            "Teacher and four young students gathered around a large horizontal touchscreen in a classroom, interacting with colorful charts and graphics on the display. The teacher leans in, pointing at the screen, while the children watch and touch it, engaged in a group activity. The background includes a chalkboard, apple decorations, and a world map on the wall, with books and classroom materials on shelves."
+          ]
+        },
+        {
+          "round": "D10:4",
+          "user": "With AI, students can have customized learning paths, with the content adapting to their learning speed and style. This could make education more engaging and effective.",
+          "assistant": "That’s an incredible way to cater to individual learning needs.",
+          "image_id": [
+            "D10:IMG_003"
+          ],
+          "input_image": [
+            "../image/Education_Career_Research_Lifestyle/D10_IMG_003.jpg"
+          ],
+          "image_caption": [
+            "Students sit in tiered lecture hall seats, reading or writing in notebooks while open textbooks lie on their desks. Semi-transparent digital charts and graphs are superimposed in front of them, suggesting an augmented-reality or technology-enhanced learning environment."
+          ]
+        },
+        {
+          "round": "D10:5",
+          "user": "One of the key advantages of AI in education is its ability to provide instant feedback to students, helping them learn faster and with more confidence.",
+          "assistant": "Instant feedback is a great way to improve learning outcomes."
+        },
+        {
+          "round": "D10:6",
+          "user": "Another benefit is the potential for AI to assist teachers with administrative tasks, giving them more time to focus on teaching and interacting with students.",
+          "assistant": "That would definitely help reduce the workload for educators."
+        },
+        {
+          "round": "D10:7",
+          "user": "However, as AI becomes more integrated into classrooms, it's important that students still develop critical thinking and problem-solving skills, rather than relying entirely on technology.",
+          "assistant": "Balancing technology with traditional skills will be crucial."
+        },
+        {
+          "round": "D10:8",
+          "user": "AI could also support students with learning disabilities by providing tools tailored to their needs, ensuring that all students have equal access to quality education.",
+          "assistant": "That’s a great application of AI in inclusive education. It also shows how important thoughtful interaction design is—AI works best when paired with interfaces that understand users’ needs and reduce cognitive load.",
+          "image_id": [
+            "D10:IMG_004"
+          ],
+          "input_image": [
+            "../image/Education_Career_Research_Lifestyle/D10_IMG_004.jpg"
+          ],
+          "image_caption": [
+            "Young girl with curly hair wearing a virtual reality headset sits at a classroom desk, raising her hands as if interacting with a virtual environment. Another child with a similar headset sits behind her, while an adult observes nearby."
+          ]
+        },
+        {
+          "round": "D10:9",
+          "user": "With AI, learning could become more interactive. For instance, AI tutors could answer questions in real-time and offer additional explanations when necessary.",
+          "assistant": "Real-time support would make learning much more accessible."
+        },
+        {
+          "round": "D10:10",
+          "user": "AI could also help identify students at risk of falling behind, providing early warnings so that interventions can be made to help them succeed.",
+          "assistant": "Early intervention is key to helping struggling students."
+        },
+        {
+          "round": "D10:11",
+          "user": "By enhancing the learning experience with AI, education could become more student-centered, focusing on their needs and interests rather than a one-size-fits-all approach.",
+          "assistant": "That would definitely make education more personalized and meaningful."
+        },
+        {
+          "round": "D10:12",
+          "user": "The idea of personalized learning also reminds me of adaptive interfaces in HCI. Both try to adjust to users instead of forcing users to adjust to the system.",
+          "assistant": "Exactly. Many modern HCI systems—whether in education, healthcare, or productivity—aim to respond dynamically to user behavior. AI gives these adaptive interfaces much more precision and responsiveness."
+        },
+        {
+          "round": "D10:13",
+          "user": "AI also has the potential to make education more accessible to people in remote or underserved areas by providing high-quality content and support through digital platforms.",
+          "assistant": "It could help bridge the education gap worldwide."
+        },
+        {
+          "round": "D10:14",
+          "user": "With AI, teachers could be supported with intelligent tools that provide insights into how students are performing across a variety of metrics, helping them tailor their lessons more effectively.",
+          "assistant": "AI could certainly help optimize teaching strategies."
+        },
+        {
+          "round": "D10:15",
+          "user": "Another application of AI in education is the ability to provide global learning experiences, allowing students from different cultures and countries to collaborate on projects in real time.",
+          "assistant": "It could promote global connectivity and cultural exchange."
+        },
+        {
+          "round": "D10:16",
+          "user": "As AI becomes more integrated, it's important to ensure that the technology remains ethical and transparent, so that students and educators can trust how their data is being used.",
+          "assistant": "Ethical considerations will be crucial as AI in education grows."
+        },
+        {
+          "round": "D10:17",
+          "user": "The future of AI in education looks promising, but it's also important that we ensure that the technology doesn't replace human connection and mentorship, which are crucial to students’ development.",
+          "assistant": "A balance between AI and human interaction will be essential for a well-rounded education."
+        },
+        {
+          "round": "D10:18",
+          "user": "By automating some aspects of education, AI could also reduce costs, making high-quality learning more affordable and accessible for everyone.",
+          "assistant": "That would make education more inclusive and equitable."
+        },
+        {
+          "round": "D10:19",
+          "user": "As we look to the future, AI could help create a more dynamic and flexible education system, where learning is no longer confined to the traditional classroom setting.",
+          "assistant": "It would definitely open up new possibilities for learning beyond the classroom."
+        },
+        {
+          "round": "D10:20",
+          "user": "Ultimately, AI in education has the potential to transform the way we learn and teach, making education more effective, personalized, and inclusive for everyone.",
+          "assistant": "The future of education is bright with AI!"
+        },
+        {
+          "round": "D10:21",
+          "user": "This direction really motivates me. AI-supported learning feels like an area where solid HCI research can make a real impact, especially in designing smoother interactions and better learning experiences.",
+          "assistant": "Absolutely. AI in education is ultimately an interaction problem—how systems communicate, respond, and support users. Your HCI-focused background positions you well to contribute to this space, whether through graduate research or future UX/HCI roles."
+        }
+      ]
+    },
+    {
+      "session_id": "D11",
+      "date": "2025-02-17",
+      "dialogues": [
+        {
+          "round": "D11:1",
+          "user": "That's exactly it. The potential for AI to create a truly personalized and effective education system is fascinating. It actually makes me critically evaluate my own learning methods as I prepare for my master's. I'm trying to structure my time to cover everything from statistical methods for research to practicing my ASL for accessibility projects, but I'm finding it hard to build a truly effective, continuous habit.",
+          "assistant": "It sounds like you're trying to design your own personalized learning system, which is a big undertaking alongside the learning itself. Juggling quantitative skills like statistics with a kinesthetic one like ASL requires different kinds of focus. What's the biggest barrier you're facing when you try to implement your study plan?"
+        },
+        {
+          "round": "D11:2",
+          "user": "I've been trying to maintain a continuous learning habit lately, but I always struggle to stick to it. Do you have any suggestions?",
+          "assistant": "The key to continuous learning is making it a habit. You could set a fixed study time each day, like in the morning or evening. You can also set small goals to keep yourself motivated. When do you usually schedule your study time?"
+        },
+        {
+          "round": "D11:3",
+          "user": "I've tried studying in the morning, but I can never seem to get up. Do you have any tips to make morning studying easier?",
+          "assistant": "You can try preparing your study materials in advance or make your study environment more comfortable, so it's easier to get into the learning mode when you wake up. Do you have a dedicated study space?"
+        },
+        {
+          "round": "D11:4",
+          "user": "My study space is actually a bit messy, which might be one of the reasons. How should I organize a more efficient study environment?",
+          "assistant": "A tidy and quiet study space can greatly improve your focus. You could consider organizing your desk, removing distractions, and even adding posters or books to motivate yourself. Have you ever tried cleaning up your environment?",
+          "image_id": [
+            "D11:IMG_001"
+          ],
+          "input_image": [
+            "../image/Education_Career_Research_Lifestyle/D11_IMG_001.jpg"
+          ],
+          "image_caption": [
+            "Crowded wooden desk covered with open notebooks, sketchbooks, loose papers, and stacks of books, surrounded by numerous jars of pens, pencils, markers, and paintbrushes. Two adjustable desk lamps illuminate the work surface. Additional books and supplies are piled along the edges of the table, with bookshelves filled with more volumes lining the background wall. No prominent readable text is visible."
+          ]
+        },
+        {
+          "round": "D11:5",
+          "user": "I haven’t tried using posters or books to motivate myself, but organizing the space has helped a bit. How can I manage my focus during study sessions?",
+          "assistant": "You can try the Pomodoro technique, which is a time-blocking method that helps you concentrate. For example, study for 25 minutes, then take a 5-minute break. Have you ever tried this method?",
+          "image_id": [
+            "D11:IMG_002"
+          ],
+          "input_image": [
+            "../image/Education_Career_Research_Lifestyle/D11_IMG_002.jpg"
+          ],
+          "image_caption": [
+            "Sunlit wooden desk by a large window, covered with open and closed notebooks, stacked books, and scattered pens and pencils in cups. A spiral notebook lies open at the center, with another notebook and pen beside it. A desk lamp, small potted plant, and vase of flowers sit near the back of the desk, while more books and stationery are arranged in small piles along the windowsill."
+          ]
+        },
+        {
+          "round": "D11:6",
+          "user": "I’ve heard of this method, but never actually implemented it. Do you think it would work for me?",
+          "assistant": "The Pomodoro technique is great for people who get distracted easily because it helps you focus for short bursts. You can start with 15 minutes and gradually extend it. Do you usually get distracted when studying?"
+        },
+        {
+          "round": "D11:7",
+          "user": "I tend to get distracted by my phone, especially social media. Do you have any tips to avoid this distraction?",
+          "assistant": "You could try using some focus apps like Forest or Focus@Will. These apps help you stay focused and even use a reward system to reduce phone usage. Have you heard of these apps?"
+        },
+        {
+          "round": "D11:8",
+          "user": "Yes, I've seen some of my classmates use Forest. The gamification aspect seems interesting from an HCI perspective, but I've never actually tried it. I'm curious if it's truly effective for deep work sessions.",
+          "assistant": "That's a great point. The effectiveness really depends on how you leverage its features to build a habit. The core idea is to create a positive feedback loop that reinforces your focus."
+        },
+        {
+          "round": "D11:9",
+          "user": "I’ve heard of Forest but never used it. How should I set up these apps to help myself?",
+          "assistant": "Forest has a feature where it grows a tree when you don’t use your phone. You can set a study session, and when you focus, you’ll see the “forest” you’ve grown. Have you tried studying in such an environment?"
+        },
+        {
+          "round": "D11:10",
+          "user": "That sounds interesting. I might give it a try! What else can I do, aside from using apps, to ensure I keep up with my learning habit?",
+          "assistant": "You can set clear learning goals and track your daily progress. This way, you can see your achievements and stay motivated. Also, finding a study buddy can help you stay accountable. Have you thought about studying with someone else?"
+        },
+        {
+          "round": "D11:11",
+          "user": "Actually, I have a friend who is also trying to study, so we can motivate each other. What kind of goals do you recommend setting?",
+          "assistant": "You can set specific, measurable goals, like studying five articles a week or finishing two chapters of a book. You can also break down larger goals into smaller ones so you can feel a sense of accomplishment every day. Do you have specific learning goals right now?"
+        },
+        {
+          "round": "D11:12",
+          "user": "I have some goals, but they aren’t specific enough. Maybe I can adjust them according to your suggestions. Thanks for the advice!",
+          "assistant": "I’m glad I could help! Remember, continuous learning is a gradual process, so don’t rush. Once you adjust your goals and environment, you’ll see results. Feel free to reach out if you have any questions!"
+        }
+      ]
+    },
+    {
+      "session_id": "D12",
+      "date": "2025-02-20",
+      "dialogues": [
+        {
+          "round": "D12:1",
+          "user": "Lately I've been thinking more seriously about my future in HCI. The application work has been intense, but I also want to plan long-term for my actual career after graduate school.",
+          "assistant": "That's a great mindset. HCI careers benefit from early planning—networking, building research experience, and developing interaction design skills all make a difference."
+        },
+        {
+          "round": "D12:2",
+          "user": "Networking still feels intimidating to me though… especially with researchers or designers I don’t know.",
+          "assistant": "That’s normal. One way to ease into it is to attend HCI-related meetups or online conferences, where conversations naturally revolve around design and research.",
+          "image_id": [
+            "D12:IMG_001"
+          ],
+          "input_image": [
+            "../image/Education_Career_Research_Lifestyle/D12_IMG_001.jpg"
+          ],
+          "image_caption": [
+            "Four young professionals stand in an open-plan office, engaged in conversation. A woman in a white blouse gestures with her hands while speaking to a woman with long hair in a light top, and two men in business attire listen attentively with arms crossed or hands clasped. Background features desks, partitions, and soft lighting, indicating a modern workplace environment."
+          ]
+        },
+        {
+          "round": "D12:3",
+          "user": "I always worry about not knowing what to say. Researchers seem so knowledgeable.",
+          "assistant": "You don’t need to impress them. Instead, be curious—ask about their projects, methods, or tools. In HCI, genuine curiosity is one of the strongest networking skills."
+        },
+        {
+          "round": "D12:4",
+          "user": "That makes sense. And honestly, the more I prepare for HCI applications and refine my interests, the easier it becomes to introduce myself.",
+          "assistant": "Exactly. A clear academic direction—like your interest in accessibility design and even learning ASL—naturally strengthens your self-introduction."
+        },
+        {
+          "round": "D12:5",
+          "user": "I also want to keep improving my skills. There are so many things to learn—UX research, prototyping, maybe even more programming.",
+          "assistant": "Skill-building is essential for HCI. It’s best to choose resources that match your immediate research or portfolio goals."
+        },
+        {
+          "round": "D12:6",
+          "user": "Are there any learning platforms you recommend specifically for HCI?",
+          "assistant": "For HCI paths: Coursera (HCI specialization), Interaction Design Foundation, and LinkedIn Learning are great. They cover user research, prototyping, accessibility, and design thinking.",
+          "image_id": [
+            "D12:IMG_002"
+          ],
+          "input_image": [
+            "../image/Education_Career_Research_Lifestyle/D12_IMG_002.jpg"
+          ],
+          "image_caption": [
+            "Young man seated at a table in a library, working on a laptop while writing on a sheet of paper. Open notebooks, pens, and a textbook lie nearby. Bookshelves filled with books and computer stations are visible in the background, with large windows letting in natural light."
+          ]
+        },
+        {
+          "round": "D12:7",
+          "user": "Should I focus more on design skills or technical skills like programming?",
+          "assistant": "Both—but prioritize based on your target subfield. If you're leaning toward accessibility and ASL-related interaction design, usability testing and prototyping may matter more than heavy engineering."
+        },
+        {
+          "round": "D12:8",
+          "user": "I've heard a mentor can make a big difference in HCI. Is it worth trying to find one?",
+          "assistant": "Absolutely. A mentor can guide your research direction, portfolio, and academic development. Many HCI programs encourage connecting with faculty or advanced students.",
+          "image_id": [
+            "D12:IMG_003"
+          ],
+          "input_image": [
+            "../image/Education_Career_Research_Lifestyle/D12_IMG_003.jpg"
+          ],
+          "image_caption": [
+            "Two colleagues wearing glasses sit at a desk in a modern office, engaged in discussion. The man on the left, in a suit jacket and checkered shirt, gestures with one hand while speaking. The woman on the right, in a light striped blouse, looks at him thoughtfully with her hand on her chin, seated behind an open laptop. Large windows in the background show an out-of-focus building."
+          ]
+        },
+        {
+          "round": "D12:9",
+          "user": "How should I look for a mentor? I don’t want to bother busy researchers.",
+          "assistant": "Start with small interactions—commenting on their work, attending their talks, or emailing thoughtful questions. Many researchers appreciate students who engage sincerely with their research."
+        },
+        {
+          "round": "D12:10",
+          "user": "I also want to set clearer goals for my HCI career. It feels overwhelming sometimes.",
+          "assistant": "Goal-setting can help immensely. Try breaking your HCI development into categories: research, portfolio, networking, and skills."
+        },
+        {
+          "round": "D12:11",
+          "user": "Is there a good structure for setting these goals?",
+          "assistant": "The SMART framework works well—Specific, Measurable, Achievable, Relevant, Time-bound. For example: “Complete a small accessibility-focused prototype by April.”",
+          "image_id": [
+            "D12:IMG_004"
+          ],
+          "input_image": [
+            "../image/Education_Career_Research_Lifestyle/D12_IMG_004.jpg"
+          ],
+          "image_caption": [
+            "Open ring-bound planner on a desk with the heading “GOALS” written at the top of a lined page, numbered 1 through 9. A hand holding a black pen begins writing, with a computer keyboard nearby."
+          ]
+        },
+        {
+          "round": "D12:12",
+          "user": "Should I check my progress frequently?",
+          "assistant": "Monthly reviews work well. HCI portfolios grow steadily—not overnight—and checking too often can create unnecessary pressure."
+        },
+        {
+          "round": "D12:13",
+          "user": "I’ve definitely had setbacks before, especially when trying new research methods.",
+          "assistant": "Setbacks are normal in HCI. Treat them as iterative feedback—just like user testing. Each challenge tells you what to refine next."
+        },
+        {
+          "round": "D12:14",
+          "user": "I like that perspective. A design iteration mindset makes it feel less discouraging.",
+          "assistant": "Exactly. Your experience learning ASL actually helps here—it's a reminder that gradual immersion and iteration build real expertise."
+        },
+        {
+          "round": "D12:15",
+          "user": "Balancing all of this—applications, learning, planning—can feel like a lot.",
+          "assistant": "That’s understandable. Try scheduling fixed HCI “focus sessions,” so your portfolio and skills grow steadily without overwhelming your week."
+        },
+        {
+          "round": "D12:16",
+          "user": "I’ll try that. I really want to stay consistent this year.",
+          "assistant": "Consistency matters more than speed. Even small weekly progress—one prototype sketch, one ASL practice session—builds long-term strength in HCI."
+        },
+        {
+          "round": "D12:17",
+          "user": "Hearing that makes me feel more confident. I’m starting to see my progress more clearly.",
+          "assistant": "That’s wonderful. You’ve already taken strong steps—building accessibility knowledge, learning ASL, developing research interests, designing early prototypes."
+        },
+        {
+          "round": "D12:18",
+          "user": "Do you think I’ll see real results if I keep this up?",
+          "assistant": "Absolutely. With steady improvement, you’ll enter graduate school well-prepared—and your HCI career foundation will already be strong."
+        },
+        {
+          "round": "D12:19",
+          "user": "Thank you. I’m excited to keep going!",
+          "assistant": "You're on the right track. Keep exploring, building, and iterating—just like every great HCI designer."
+        }
+      ]
+    }
+  ],
+  "human-annotated QAs": [
+    {
+      "point": "VS",
+      "question": "Which image shown represents Lin's efforts to explore psychology before making the decision?",
+      "answer": "D1:IMG_003",
+      "session_id": [
+        "D1"
+      ],
+      "clue": [
+        "D1:12"
+      ]
+    },
+    {
+      "point": "KR",
+      "question": "Did Lin ultimately switch majors or stay in their current one?",
+      "answer": "Lin stayed in their current major but declared a minor in psychology.",
+      "session_id": [
+        "D1"
+      ],
+      "clue": [
+        "D1:8",
+        "D1:13"
+      ]
+    },
+    {
+      "point": "CD",
+      "question": "Does the statement that Lin’s family encouraged her to switch majors early conflict with the dialogue?",
+      "answer": "Yes.",
+      "session_id": [
+        "D1"
+      ],
+      "clue": [
+        "D1:3"
+      ]
+    },
+    {
+      "point": "AR",
+      "question": "Did the conversation mention any specific philosopher who created the idea of moral luck?",
+      "answer": "Not mentioned.",
+      "session_id": [
+        "D1"
+      ],
+      "clue": []
+    },
+    {
+      "point": "TR",
+      "question": "Did Lin explore psychology through a class before officially deciding to declare a psychology minor?",
+      "answer": "Yes.",
+      "session_id": [
+        "D1"
+      ],
+      "clue": [
+        "D1:5",
+        "D1:13"
+      ]
+    },
+    {
+      "point": "FR",
+      "question": "Which countries were discussed for studying abroad?",
+      "answer": "The United States and Canada.",
+      "session_id": [
+        "D2"
+      ],
+      "clue": [
+        "D2:1",
+        "D2:2",
+        "D2:13",
+        "D2:14",
+        "D2:19"
+      ]
+    },
+    {
+      "point": "AR",
+      "question": "Did Lin mention the name of any professor she plans to email?",
+      "answer": "Not mentioned.",
+      "session_id": [
+        "D2"
+      ],
+      "clue": []
+    },
+    {
+      "point": "AR",
+      "question": "Did Lin need the SAT for her graduate school applications?",
+      "answer": "Not mentioned.",
+      "session_id": [
+        "D2"
+      ],
+      "clue": []
+    },
+    {
+      "point": "MR",
+      "question": "What are the common standardized tests for US graduate programs?",
+      "answer": "TOEFL or IELTS for English proficiency, and GRE or GMAT.",
+      "session_id": [
+        "D2"
+      ],
+      "clue": [
+        "D2:3",
+        "D2:4"
+      ]
+    },
+    {
+      "point": "TR",
+      "question": "Did Lin ask about standardized test requirements before asking about the importance of GPA?",
+      "answer": "Yes.",
+      "session_id": [
+        "D2"
+      ],
+      "clue": [
+        "D2:3",
+        "D2:9"
+      ]
+    },
+    {
+      "point": "VS",
+      "question": "Among the images we've looked in late-July, which ones are related to documents required for studying abroad?",
+      "answer": "D2:IMG_002, D2:IMG_003, D2:IMG_005",
+      "session_id": [
+        "D2"
+      ],
+      "clue": [
+        "D2:8",
+        "D2:11",
+        "D2:19"
+      ]
+    },
+    {
+      "point": "AR",
+      "question": "Did the conversation discuss specific scholarship opportunities?",
+      "answer": "Not mentioned.",
+      "session_id": [
+        "D2"
+      ],
+      "clue": []
+    },
+    {
+      "point": "AR",
+      "question": "Based on the conversation, would the user consider giving up on improving their spoken English if they find it difficult to understand native speakers even after months of practice?",
+      "answer": "Not mentioned.",
+      "session_id": [
+        "D3"
+      ],
+      "clue": []
+    },
+    {
+      "point": "TR",
+      "question": "Did Lin mention struggling with understanding native English speakers before discussing feeling stressed about final exams?",
+      "answer": "Yes.",
+      "session_id": [
+        "D3",
+        "D5"
+      ],
+      "clue": [
+        "D3:2",
+        "D5:3"
+      ]
+    },
+    {
+      "point": "CD",
+      "question": "Does it conflict with the dialogue to claim that Lin finds it easy to understand native English speakers?",
+      "answer": "Yes.",
+      "session_id": [
+        "D3"
+      ],
+      "clue": [
+        "D3:2"
+      ]
+    },
+    {
+      "point": "KR",
+      "question": "After receiving multiple suggestions, what is Lin’s updated approach to improving her spoken English?",
+      "answer": "Immersive listening practice combined with speaking practice through online communities and structured courses.",
+      "session_id": [
+        "D3"
+      ],
+      "clue": [
+        "D3:1",
+        "D3:3",
+        "D3:9"
+      ]
+    },
+    {
+      "point": "TR",
+      "question": "Did Lin finish reviewing all five cap-sleeved midi dresses before moving on to slub-knit tops?",
+      "answer": "Yes.",
+      "session_id": [
+        "D4"
+      ],
+      "clue": [
+        "D4:1",
+        "D4:13"
+      ]
+    },
+    {
+      "point": "VR",
+      "question": "How many Cap-Sleeved Midi Dresses did Lin review in total? Please answer using an Arabic numeral (e.g., “2” instead of “Two”).",
+      "answer": "5",
+      "session_id": [
+        "D4"
+      ],
+      "clue": [
+        "D4:2",
+        "D4:4",
+        "D4:6",
+        "D4:8",
+        "D4:10"
+      ]
+    },
+    {
+      "point": "VS",
+      "question": "Which dress image has a striking metallic sheen with bronze tones and scalloped stripes?",
+      "answer": "D4:IMG_001",
+      "session_id": [
+        "D4"
+      ],
+      "clue": [
+        "D4:2",
+        "D4:3"
+      ]
+    },
+    {
+      "point": "VS",
+      "question": "Which dress did the assistant describe as having a 'soft gray floral' pattern?",
+      "answer": "D4:IMG_002",
+      "session_id": [
+        "D4"
+      ],
+      "clue": [
+        "D4:4",
+        "D4:5"
+      ]
+    },
+    {
+      "point": "FR",
+      "question": "What color and style characteristics did the assistant highlight for the third midi dress?",
+      "answer": "Heather gray tone, fitted silhouette, minimalist, clean and streamlined look, easy to mix-and-match.",
+      "session_id": [
+        "D4"
+      ],
+      "clue": [
+        "D4:6",
+        "D4:7"
+      ]
+    },
+    {
+      "point": "MR",
+      "question": "How did the assistant compare the blue floral dress to the pale floral dress?",
+      "answer": "The blue floral dress feels brighter and more lively, with blue on gray creating a nice contrast that flatters the eyes, giving early-fall picnic or brunch vibes.",
+      "session_id": [
+        "D4"
+      ],
+      "clue": [
+        "D4:8",
+        "D4:9"
+      ]
+    },
+    {
+      "point": "VS",
+      "question": "Which dress image has bold geometric patterns described as 'artsy' and 'modern'?",
+      "answer": "D4:IMG_005",
+      "session_id": [
+        "D4"
+      ],
+      "clue": [
+        "D4:10",
+        "D4:11"
+      ]
+    },
+    {
+      "point": "VR",
+      "question": "How many Cap-Sleeved Slub-Knit Tops images did Lin share? Please answer using an Arabic numeral (e.g., “2” instead of “Two”).",
+      "answer": "5",
+      "session_id": [
+        "D4"
+      ],
+      "clue": [
+        "D4:13",
+        "D4:15",
+        "D4:17",
+        "D4:19",
+        "D4:21"
+      ]
+    },
+    {
+      "point": "VS",
+      "question": "Which top image is described as having vibrant purple color that 'energizes the whole screen'?",
+      "answer": "D4:IMG_006",
+      "session_id": [
+        "D4"
+      ],
+      "clue": [
+        "D4:13"
+      ]
+    },
+    {
+      "point": "TR",
+      "question": "When did Lin's fall fashion shopping session take place? Return in format YYYY-MM-DD.",
+      "answer": "2024-09-14",
+      "session_id": [
+        "D4"
+      ],
+      "clue": [
+        "D4:1"
+      ]
+    },
+    {
+      "point": "AR",
+      "question": "Did Lin purchase any jackets during this fall shopping session?",
+      "answer": "Not mentioned.",
+      "session_id": [
+        "D4"
+      ],
+      "clue": []
+    },
+    {
+      "point": "KR",
+      "question": "Which three items of clothing did the user ultimately choose during their autumn shopping trip? Only return the image_id of the images, separated by commas.",
+      "answer": "D4:IMG_004,D4:IMG_008, D4:IMG_009",
+      "session_id": [
+        "D4"
+      ],
+      "clue": [
+        "D4:8",
+        "D4:17",
+        "D4:18",
+        "D4:24",
+        "D4:25"
+      ]
+    },
+    {
+      "point": "TTL",
+      "question": "According to the conversation, what category is the clothing in the picture?",
+      "question_image": "../image/Education_Career_Research_Lifestyle/QA_IMG_001.jpg",
+      "answer": "Cap-sleeved midi dress",
+      "session_id": [
+        "D4"
+      ],
+      "clue": [
+        "D4:2",
+        "D4:4",
+        "D4:6",
+        "D4:8",
+        "D4:10"
+      ],
+      "image_caption": "Woman with long dark hair walks toward the camera wearing a fitted, short-sleeve, knee-length black dress and black high heels, standing against a plain white studio background with soft shadows."
+    },
+    {
+      "point": "TTL",
+      "question": "According to the conversation, what category is the clothing in the picture?",
+      "question_image": "../image/Education_Career_Research_Lifestyle/QA_IMG_002.jpg",
+      "answer": "Cap-sleeved midi dress",
+      "session_id": [
+        "D4"
+      ],
+      "clue": [
+        "D4:2",
+        "D4:4",
+        "D4:6",
+        "D4:8",
+        "D4:10"
+      ],
+      "image_caption": "Woman standing against a plain light background, wearing a fitted, knee-length beige dress with short sleeves. The dress features a dark lace panel around the waist with a scalloped lower edge. She faces forward with one hand on her hip and the other relaxed by her side, her long hair down and slightly tousled."
+    },
+    {
+      "point": "TTL",
+      "question": "According to the conversation, what category is the clothing in the picture?",
+      "question_image": "../image/Education_Career_Research_Lifestyle/QA_IMG_003.jpg",
+      "answer": "Cap-sleeved midi dress",
+      "session_id": [
+        "D4"
+      ],
+      "clue": [
+        "D4:2",
+        "D4:4",
+        "D4:6",
+        "D4:8",
+        "D4:10"
+      ],
+      "image_caption": "Woman standing sideways with back mostly facing the camera, wearing a fitted, short-sleeve, knee-length beige dress. She has long straight brown hair and neutral makeup. Plain light background with no visible text or additional objects."
+    },
+    {
+      "point": "TTL",
+      "question": "According to the conversation, what category is the clothing in the picture?",
+      "question_image": "../image/Education_Career_Research_Lifestyle/QA_IMG_004.jpg",
+      "answer": "Cap-sleeved midi dress",
+      "session_id": [
+        "D4"
+      ],
+      "clue": [
+        "D4:2",
+        "D4:4",
+        "D4:6",
+        "D4:8",
+        "D4:10"
+      ],
+      "image_caption": "Woman standing against a plain white background, wearing a fitted, knee-length, short-sleeve dress with a light blue and white floral pattern. She has long dark hair, one hand on her hip, and wears brown high-heeled sandals."
+    },
+    {
+      "point": "TTL",
+      "question": "According to the conversation, what category is the clothing in the picture?",
+      "question_image": "../image/Education_Career_Research_Lifestyle/QA_IMG_005.jpg",
+      "answer": "Cap-sleeved midi dress",
+      "session_id": [
+        "D4"
+      ],
+      "clue": [
+        "D4:2",
+        "D4:4",
+        "D4:6",
+        "D4:8",
+        "D4:10"
+      ],
+      "image_caption": "Woman standing against a plain white background, smiling slightly and looking down to her left. She wears a fitted, light beige peplum dress with a knee-length pencil skirt and a small V-shaped neckline. Her right hand touches her hair, and her left arm hangs by her side. She has long, straight, dark hair and wears black high-heeled peep-toe shoes."
+    },
+    {
+      "point": "TTL",
+      "question": "According to the conversation, what category is the clothing in the picture?",
+      "question_image": "../image/Education_Career_Research_Lifestyle/QA_IMG_006.jpg",
+      "answer": "Cap-sleeved midi dress",
+      "session_id": [
+        "D4"
+      ],
+      "clue": [
+        "D4:2",
+        "D4:4",
+        "D4:6",
+        "D4:8",
+        "D4:10"
+      ],
+      "image_caption": "Woman standing against a plain white background, wearing a fitted white peplum dress with short sleeves and a knee-length pencil skirt, paired with black high-heeled shoes. Her arms rest naturally at her sides and her long hair falls over her shoulders. No visible text."
+    },
+    {
+      "point": "TTL",
+      "question": "According to the conversation, what category is the clothing in the picture?",
+      "question_image": "../image/Education_Career_Research_Lifestyle/QA_IMG_007.jpg",
+      "answer": "Cap-sleeved slub-knit top",
+      "session_id": [
+        "D4"
+      ],
+      "clue": [
+        "D4:13",
+        "D4:15",
+        "D4:17",
+        "D4:19",
+        "D4:21"
+      ],
+      "image_caption": "Woman standing against a plain white background, wearing a long-sleeved purple top and black pants. She is facing slightly to the side with one arm relaxed by her hip and the other bent, looking toward the camera with a neutral expression."
+    },
+    {
+      "point": "TTL",
+      "question": "According to the conversation, what category is the clothing in the picture?",
+      "question_image": "../image/Education_Career_Research_Lifestyle/QA_IMG_008.jpg",
+      "answer": "Cap-sleeved slub-knit top",
+      "session_id": [
+        "D4"
+      ],
+      "clue": [
+        "D4:13",
+        "D4:15",
+        "D4:17",
+        "D4:19",
+        "D4:21"
+      ],
+      "image_caption": "Woman standing against a plain white background, wearing a loose-fitting black short-sleeve top with colorful floral embroidery on the sleeves and light blue distressed jeans. She has long, wavy brown hair and a neutral expression, with one hand resting on her hip and the other hanging by her side. No visible text in the scene."
+    },
+    {
+      "point": "TTL",
+      "question": "According to the conversation, what category is the clothing in the picture?",
+      "question_image": "../image/Education_Career_Research_Lifestyle/QA_IMG_009.jpg",
+      "answer": "Cap-sleeved slub-knit top",
+      "session_id": [
+        "D4"
+      ],
+      "clue": [
+        "D4:13",
+        "D4:15",
+        "D4:17",
+        "D4:19",
+        "D4:21"
+      ],
+      "image_caption": "Young woman standing and facing forward, wearing a light pink short-sleeve textured top with a loose fit and rounded hem, paired with blue jeans, against a plain white background."
+    },
+    {
+      "point": "TTL",
+      "question": "According to the conversation, what category is the clothing in the picture?",
+      "question_image": "../image/Education_Career_Research_Lifestyle/QA_IMG_010.jpg",
+      "answer": "Cap-sleeved slub-knit top",
+      "session_id": [
+        "D4"
+      ],
+      "clue": [
+        "D4:13",
+        "D4:15",
+        "D4:17",
+        "D4:19",
+        "D4:21"
+      ],
+      "image_caption": "Young woman standing against a plain white background, wearing a loose navy short-sleeve T-shirt tucked slightly into fitted black pants with a light brown belt. Her left hand rests in her pocket while her right arm hangs by her side. She faces the camera with a neutral expression, dark hair falling to one side. No visible text in the scene."
+    },
+    {
+      "point": "TTL",
+      "question": "According to the conversation, what category is the clothing in the picture?",
+      "question_image": "../image/Education_Career_Research_Lifestyle/QA_IMG_011.jpg",
+      "answer": "Cap-sleeved slub-knit top",
+      "session_id": [
+        "D4"
+      ],
+      "clue": [
+        "D4:13",
+        "D4:15",
+        "D4:17",
+        "D4:19",
+        "D4:21"
+      ],
+      "image_caption": "Short-sleeve, loose-fitting beige tunic top displayed on a decorative wire dress form, with a wide gathered neckline and subtle pleating down the front, set against a plain light-colored curtain background."
+    },
+    {
+      "point": "TTL",
+      "question": "According to the conversation, what category is the clothing in the picture?",
+      "question_image": "../image/Education_Career_Research_Lifestyle/QA_IMG_012.jpg",
+      "answer": "Cap-sleeved slub-knit top",
+      "session_id": [
+        "D4"
+      ],
+      "clue": [
+        "D4:13",
+        "D4:15",
+        "D4:17",
+        "D4:19",
+        "D4:21"
+      ],
+      "image_caption": "Young woman standing against a plain white background, wearing a loose white cap-sleeve T-shirt and light blue denim shorts. She faces forward with her arms relaxed at her sides, long wavy hair over one shoulder. No visible text or additional objects in the scene."
+    },
+    {
+      "point": "VR",
+      "question": "How many Cap-Sleeved Slub-Knit Tops did Lin review in total? Please answer using an Arabic numeral (e.g., “2” instead of “Two”).",
+      "answer": "5",
+      "session_id": [
+        "D4"
+      ],
+      "clue": [
+        "D4:13",
+        "D4:15",
+        "D4:17",
+        "D4:19",
+        "D4:21"
+      ]
+    },
+    {
+      "point": "AR",
+      "question": "Does Lin like history?",
+      "answer": "Not mentioned.",
+      "session_id": [
+        "D5"
+      ],
+      "clue": []
+    },
+    {
+      "point": "CD",
+      "question": "Does it contradict the dialogue to say that moral education is unnecessary in a future with advanced AI?",
+      "answer": "Yes.",
+      "session_id": [
+        "D5"
+      ],
+      "clue": [
+        "D5:6"
+      ]
+    },
+    {
+      "point": "FR",
+      "question": "What is the name of the temple that user is excited to see?",
+      "answer": "Senso-ji Temple",
+      "session_id": [
+        "D5"
+      ],
+      "clue": [
+        "D5:14"
+      ]
+    },
+    {
+      "point": "CD",
+      "question": "Is it a conflict to say that Lin stated math is easy for her during final exam preparation?",
+      "answer": "Yes.",
+      "session_id": [
+        "D5"
+      ],
+      "clue": [
+        "D5:4"
+      ]
+    },
+    {
+      "point": "TR",
+      "question": "Did concerns about AI misuse appear before the discussion of long-term alignment strategies?",
+      "answer": "Yes.",
+      "session_id": [
+        "D3",
+        "D5"
+      ],
+      "clue": [
+        "D3:4",
+        "D5:3"
+      ]
+    },
+    {
+      "point": "VS",
+      "question": "What images in the dialogue show the same landmark as this one in Japan?",
+      "question_image": "../image/Education_Career_Research_Lifestyle/QA_IMG_013.png",
+      "answer": "D5:IMG_005, D5:IMG_006, D5:IMG_007",
+      "session_id": [
+        "D5"
+      ],
+      "clue": [
+        "D5:14",
+        "D5:17",
+        "D5:19"
+      ],
+      "image_caption": "Multi-tiered red and white Japanese pagoda illuminated by warm lights at dusk, viewed from below against a clear blue sky. Each tier has upturned eaves with detailed wooden brackets, and a golden spire rises from the top. A darker tiled temple roof occupies the foreground, with tree branches framing the sides and a bright lamp glowing near the right edge."
+    },
+    {
+      "point": "TTL",
+      "question": "What is the name of the landmark in this image?",
+      "question_image": "../image/Education_Career_Research_Lifestyle/QA_IMG_014.png",
+      "answer": "Senso-ji Temple",
+      "session_id": [
+        "D5"
+      ],
+      "clue": [
+        "D5:14",
+        "D5:17",
+        "D5:19"
+      ],
+      "image_caption": "Five-story traditional Japanese pagoda illuminated with warm lights at dusk, its tiered roofs and intricate wooden eaves sharply outlined against a clear blue sky, with parts of adjacent temple rooftops and dark tree silhouettes framing the structure."
+    },
+    {
+      "point": "VS",
+      "question": "Please help me search for pictures of sushi.",
+      "question_image": "../image/Education_Career_Research_Lifestyle/QA_IMG_015.png",
+      "answer": "D5:IMG_004",
+      "session_id": [
+        "D5"
+      ],
+      "clue": [
+        "D5:12"
+      ],
+      "image_caption": "Five-story wooden pagoda illuminated with warm lights at dusk, its tiered eaves and detailed carvings standing out against a clear blue sky. A darker tiled temple roof occupies the lower foreground, with tree branches framing the sides of the scene."
+    },
+    {
+      "point": "VR",
+      "question": "What type of document is shown in the image D6:IMG_001?",
+      "answer": "A Chinese CV template provided by the user's friend as a reference.",
+      "session_id": [
+        "D6"
+      ],
+      "clue": [
+        "D6:2"
+      ]
+    },
+    {
+      "point": "VS",
+      "question": "Which image shows a certification template?",
+      "answer": "D6:IMG_002",
+      "session_id": [
+        "D6"
+      ],
+      "clue": [
+        "D6:4"
+      ]
+    },
+    {
+      "point": "AR",
+      "question": "Did the conversation mention experimental neuroscience data supporting or rejecting free will?",
+      "answer": "Not mentioned.",
+      "session_id": [
+        "D6"
+      ],
+      "clue": []
+    },
+    {
+      "point": "FR",
+      "question": "What does the assistant recommend placing in the CV instead of a full personal statement?",
+      "answer": "A short 2–3 sentence ‘Research Interests’ section.",
+      "session_id": [
+        "D6"
+      ],
+      "clue": [
+        "D6:7"
+      ]
+    },
+    {
+      "point": "KR",
+      "question": "What is the final position on whether human free will remains meaningful in an age of intelligent systems?",
+      "answer": "Free will remains essential even if algorithms influence human choices.",
+      "session_id": [
+        "D6"
+      ],
+      "clue": [
+        "D6:2",
+        "D6:7"
+      ]
+    },
+    {
+      "point": "KR",
+      "question": "Considering the full dialogue, what governance principle takes priority in regulating emerging technologies?",
+      "answer": "A responsible and transparent governance framework that balances innovation with accountability.",
+      "session_id": [
+        "D7"
+      ],
+      "clue": [
+        "D7:3",
+        "D7:7"
+      ]
+    },
+    {
+      "point": "MR",
+      "question": "Why is the \"user persona\" important in the \"Empathize\" stage?",
+      "answer": "The user persona helps the team clarify the target users' characteristics, needs, and pain points, allowing the team to better understand the users and gather valuable feedback in the \"Empathize\" stage, which in turn informs the subsequent design decisions.",
+      "session_id": [
+        "D7"
+      ],
+      "clue": [
+        "D7:2",
+        "D7:3",
+        "D7:4"
+      ]
+    },
+    {
+      "point": "KR",
+      "question": "Has Lin recently conducted user research?",
+      "answer": "Lin mentioned that she haven’t done detailed research yet, but she has conducted some initial interviews and gathered some data.",
+      "session_id": [
+        "D7"
+      ],
+      "clue": [
+        "D7:2",
+        "D7:3",
+        "D7:5"
+      ]
+    },
+    {
+      "point": "VS",
+      "question": "Which image in the conversation is related to the user persona?",
+      "answer": "D7:IMG_001",
+      "session_id": [
+        "D7"
+      ],
+      "clue": [
+        "D7:4"
+      ]
+    },
+    {
+      "point": "TR",
+      "question": "Did the conversation raise issues about personal data privacy before exploring governance frameworks for AI?",
+      "answer": "Yes.",
+      "session_id": [
+        "D4",
+        "D7"
+      ],
+      "clue": [
+        "D4:1",
+        "D7:3"
+      ]
+    },
+    {
+      "point": "AR",
+      "question": "Did the conversation cite any specific legal article regulating AI governance?",
+      "answer": "Not mentioned.",
+      "session_id": [
+        "D7"
+      ],
+      "clue": []
+    },
+    {
+      "point": "VR",
+      "question": "How many cable-knit sweater options did Lin review in total? Please answer using an Arabic numeral.",
+      "answer": "7",
+      "session_id": [
+        "D8"
+      ],
+      "clue": [
+        "D8:3",
+        "D8:5",
+        "D8:7",
+        "D8:9",
+        "D8:11",
+        "D8:13",
+        "D8:15"
+      ]
+    },
+    {
+      "point": "TTL",
+      "question": "According to the conversation, what category is the clothing in the picture?",
+      "question_image": "../image/Education_Career_Research_Lifestyle/QA_IMG_016.jpg",
+      "answer": "Cable-knit sweater",
+      "session_id": [
+        "D8"
+      ],
+      "clue": [
+        "D8:3",
+        "D8:5",
+        "D8:7",
+        "D8:9",
+        "D8:11",
+        "D8:13",
+        "D8:15"
+      ],
+      "image_caption": "Young woman standing against a plain light background, wearing a beige, thick-knit sweater with a textured cable and bobble pattern and a wide cowl neck. She has medium-length layered brown hair with lighter highlights and is looking slightly downward. Her hands rest near her sides, and she is dressed in dark plaid pants."
+    },
+    {
+      "point": "TTL",
+      "question": "According to the conversation, what category is the clothing in the picture?",
+      "question_image": "../image/Education_Career_Research_Lifestyle/QA_IMG_017.jpg",
+      "answer": "Cable-knit sweater",
+      "session_id": [
+        "D8"
+      ],
+      "clue": [
+        "D8:3",
+        "D8:5",
+        "D8:7",
+        "D8:9",
+        "D8:11",
+        "D8:13",
+        "D8:15"
+      ],
+      "image_caption": "Cream-colored, long-sleeve cable-knit sweater laid flat on a plain background, featuring intricate braided and diamond patterns, ribbed cuffs, hem, and crew neckline."
+    },
+    {
+      "point": "TTL",
+      "question": "According to the conversation, what category is the clothing in the picture?",
+      "question_image": "../image/Education_Career_Research_Lifestyle/QA_IMG_018.jpg",
+      "answer": "Cable-knit sweater",
+      "session_id": [
+        "D8"
+      ],
+      "clue": [
+        "D8:3",
+        "D8:5",
+        "D8:7",
+        "D8:9",
+        "D8:11",
+        "D8:13",
+        "D8:15"
+      ],
+      "image_caption": "Young woman standing against a plain gray background, wearing a cream-colored cable-knit sweater with long sleeves and a light pink pleated skirt, looking toward the camera with one hand raised near her shoulder."
+    },
+    {
+      "point": "TTL",
+      "question": "According to the conversation, what category is the clothing in the picture?",
+      "question_image": "../image/Education_Career_Research_Lifestyle/QA_IMG_019.jpg",
+      "answer": "Cable-knit sweater",
+      "session_id": [
+        "D8"
+      ],
+      "clue": [
+        "D8:3",
+        "D8:5",
+        "D8:7",
+        "D8:9",
+        "D8:11",
+        "D8:13",
+        "D8:15"
+      ],
+      "image_caption": "Cream-colored cable-knit turtleneck sweater laid flat on a white background, featuring a thick ribbed roll neck, long sleeves with cable patterns, and a ribbed hem and cuffs."
+    },
+    {
+      "point": "TTL",
+      "question": "According to the conversation, what category is the clothing in the picture?",
+      "question_image": "../image/Education_Career_Research_Lifestyle/QA_IMG_020.jpg",
+      "answer": "Cable-knit sweater",
+      "session_id": [
+        "D8"
+      ],
+      "clue": [
+        "D8:3",
+        "D8:5",
+        "D8:7",
+        "D8:9",
+        "D8:11",
+        "D8:13",
+        "D8:15"
+      ],
+      "image_caption": "Beige knit sweater with long sleeves and a crew neckline, featuring a cable-knit pattern down the front and ribbed cuffs and hem, hanging against a plain white background."
+    },
+    {
+      "point": "TTL",
+      "question": "According to the conversation, what category is the clothing in the picture?",
+      "question_image": "../image/Education_Career_Research_Lifestyle/QA_IMG_021.jpg",
+      "answer": "Cable-knit sweater",
+      "session_id": [
+        "D8"
+      ],
+      "clue": [
+        "D8:3",
+        "D8:5",
+        "D8:7",
+        "D8:9",
+        "D8:11",
+        "D8:13",
+        "D8:15"
+      ],
+      "image_caption": "Woman with long brown hair wearing a cream-colored, cable-knit V-neck sweater and blue jeans, standing against a plain dark gray background, with one hand touching her head and the other resting at her side."
+    },
+    {
+      "point": "KR",
+      "question": "Which cable-knit sweater did Lin finally choose? Only return the image_id of the image.",
+      "answer": "D8:IMG_007",
+      "session_id": [
+        "D8"
+      ],
+      "clue": [
+        "D8:15",
+        "D8:20"
+      ]
+    },
+    {
+      "point": "VS",
+      "question": "Which sweater image shows an oversized cream cable-knit with a button-up front described as 'like a wearable blanket'?",
+      "answer": "D8:IMG_001",
+      "session_id": [
+        "D8"
+      ],
+      "clue": [
+        "D8:3",
+        "D8:4"
+      ]
+    },
+    {
+      "point": "VR",
+      "question": "Which sweater is described as a long, slim, pastel cable-knit with a fitted shape? Only return the image_id.",
+      "answer": "D8:IMG_003",
+      "session_id": [
+        "D8"
+      ],
+      "clue": [
+        "D8:7",
+        "D8:8"
+      ]
+    },
+    {
+      "point": "MR",
+      "question": "How did the assistant compare the third pastel sweater to the first cream cardigan?",
+      "answer": "The third sweater is more feminine and soft than the black one, and less oversized than the first cream cardigan, giving a more body-hugging silhouette.",
+      "session_id": [
+        "D8"
+      ],
+      "clue": [
+        "D8:8"
+      ]
+    },
+    {
+      "point": "FR",
+      "question": "What distinctive pattern features does the fourth beige cable-knit sweater have?",
+      "answer": "Diamond-shaped cables in the center and tighter knit on the sides.",
+      "session_id": [
+        "D8"
+      ],
+      "clue": [
+        "D8:9",
+        "D8:10"
+      ]
+    },
+    {
+      "point": "VS",
+      "question": "Which sweater image shows a rich burgundy cable-knit styled as an oversized tunic with tights and shorts?",
+      "answer": "D8:IMG_005",
+      "session_id": [
+        "D8"
+      ],
+      "clue": [
+        "D8:11",
+        "D8:12"
+      ]
+    },
+    {
+      "point": "VS",
+      "question": "Which sweater is described as the warmest option with a high turtleneck and dense traditional Aran-style pattern?",
+      "answer": "D8:IMG_007",
+      "session_id": [
+        "D8"
+      ],
+      "clue": [
+        "D8:15",
+        "D8:16"
+      ]
+    },
+    {
+      "point": "KR",
+      "question": "Which sweater did Lin ultimately decide to purchase, and what were the final reasons?",
+      "answer": "The cream turtleneck cable-knit, because it's the warmest option with high neck and dense knit, neutral cream color photographs beautifully, structured fit looks neat under coats, and can be styled with different scarves.",
+      "session_id": [
+        "D8"
+      ],
+      "clue": [
+        "D8:18",
+        "D8:20"
+      ]
+    },
+    {
+      "point": "TR",
+      "question": "When did Lin's winter sweater shopping conversation session take place? Return in format YYYY-MM-DD.",
+      "answer": "2024-12-22",
+      "session_id": [
+        "D8"
+      ],
+      "clue": [
+        "D8:1"
+      ]
+    },
+    {
+      "point": "AR",
+      "question": "Did Lin mention trying on any sweaters in person before making the decision?",
+      "answer": "Not mentioned.",
+      "session_id": [
+        "D8"
+      ],
+      "clue": []
+    },
+    {
+      "point": "CD",
+      "question": "Is there a contradiction between Lin wanting something 'warm for winter' and choosing a turtleneck sweater that might be too hot indoors?",
+      "answer": "No.",
+      "session_id": [
+        "D8"
+      ],
+      "clue": [
+        "D8:16",
+        "D8:17",
+        "D8:18"
+      ]
+    },
+    {
+      "point": "CD",
+      "question": "Does it conflict with the dialogue to say that Lin found the ASL gestures effortless to learn?",
+      "answer": "Yes.",
+      "session_id": [
+        "D9"
+      ],
+      "clue": [
+        "D9:4"
+      ]
+    },
+    {
+      "point": "FR",
+      "question": "List the resources the user mentioned using to learn ASL.",
+      "answer": "The user mentioned using an app that teaches basic signs, videos of fluent signers, a book about the history of ASL, an online forum for ASL learners, a sign language chart, and a notebook of new signs.",
+      "session_id": [
+        "D9"
+      ],
+      "clue": [
+        "D9:3",
+        "D9:5",
+        "D9:7",
+        "D9:10",
+        "D9:14",
+        "D9:15"
+      ]
+    },
+    {
+      "point": "FR",
+      "question": "What is the user's next year goal related to experiencing ASL and Deaf culture?",
+      "answer": "Attend a Deaf event.",
+      "session_id": [
+        "D9"
+      ],
+      "clue": [
+        "D9:20"
+      ]
+    },
+    {
+      "point": "TR",
+      "question": "Did the depiction of a sustainable future city come before the mention of its emotional well-being systems?",
+      "answer": "Yes.",
+      "session_id": [
+        "D9"
+      ],
+      "clue": [
+        "D9:1",
+        "D9:6"
+      ]
+    },
+    {
+      "point": "VS",
+      "question": "How many images are related to learning ASL? Please answer using an Arabic numeral (e.g., 2 instead of 'two').",
+      "session_id": [
+        "D9"
+      ],
+      "answer": "3",
+      "clue": [
+        "D9:4",
+        "D9:7",
+        "D9:15"
+      ]
+    },
+    {
+      "point": "AR",
+      "question": "Did Lin say she was fluent in ASL?",
+      "answer": "Not mentioned.",
+      "session_id": [
+        "D9"
+      ],
+      "clue": []
+    },
+    {
+      "point": "AR",
+      "question": "Did Lin mention a specific DOI of any accessibility research paper she read?",
+      "answer": "Not mentioned.",
+      "session_id": [
+        "D9"
+      ],
+      "clue": []
+    },
+    {
+      "point": "MR",
+      "question": "Do you remember what the user said about the benefits of AI for students with learning disabilities?",
+      "answer": "The user mentioned that AI could support students with learning disabilities by providing tools tailored to their needs, ensuring equal access to quality education.",
+      "session_id": [
+        "D10"
+      ],
+      "clue": [
+        "D10:8"
+      ]
+    },
+    {
+      "point": "VS",
+      "question": "Which image shown represents description of AI enabling personalized learning experiences?",
+      "answer": "D10:IMG_002",
+      "session_id": [
+        "D10"
+      ],
+      "clue": [
+        "D10:3",
+        "D10:4"
+      ]
+    },
+    {
+      "point": "FR",
+      "question": "What methods were mentioned to help maintain a continuous learning habit?",
+      "answer": "The methods mentioned include setting a fixed study time, preparing study materials in advance, organizing the study space, using the Pomodoro technique, avoiding phone distractions, using focus apps (like Forest), setting clear learning goals, and studying with a learning partner.",
+      "session_id": [
+        "D11"
+      ],
+      "clue": [
+        "D11:2",
+        "D11:3",
+        "D11:4",
+        "D11:5",
+        "D11:7",
+        "D11:8",
+        "D11:9",
+        "D11:10",
+        "D11:11"
+      ]
+    },
+    {
+      "point": "MR",
+      "question": "Why does Lin find it difficult to maintain a continuous learning habit?",
+      "answer": "The reasons include difficulty getting up for morning study sessions, a messy study environment, and getting distracted, especially by the phone.",
+      "session_id": [
+        "D11"
+      ],
+      "clue": [
+        "D11:3",
+        "D11:4",
+        "D11:7"
+      ]
+    },
+    {
+      "point": "KR",
+      "question": "Has Lin changed the arrangement of her study environment?",
+      "answer": "Yes.",
+      "session_id": [
+        "D11"
+      ],
+      "clue": [
+        "D11:4",
+        "D11:7",
+        "D11:8"
+      ]
+    },
+    {
+      "point": "AR",
+      "question": "Was Lin used to studying in the evening?",
+      "answer": "Not mentioned.",
+      "session_id": [
+        "D11"
+      ],
+      "clue": []
+    },
+    {
+      "point": "FR",
+      "question": "What four HCI career development categories did the assistant suggest Lin use for goal-setting?",
+      "answer": "Research, portfolio, networking, and skills.",
+      "session_id": [
+        "D12"
+      ],
+      "clue": [
+        "D12:10"
+      ]
+    },
+    {
+      "point": "VS",
+      "question": "Which image shows a networking event?",
+      "answer": "D12:IMG_001",
+      "session_id": [
+        "D12"
+      ],
+      "clue": [
+        "D12:2"
+      ]
+    },
+    {
+      "point": "MR",
+      "question": "How did the assistant connect Lin's ASL learning to networking advantage?",
+      "answer": "A clear academic direction—like Lin's interest in accessibility design and even learning ASL—naturally strengthens self-introduction.",
+      "session_id": [
+        "D12"
+      ],
+      "clue": [
+        "D12:4"
+      ]
+    },
+    {
+      "point": "VS",
+      "question": "Which image shows online learning platforms?",
+      "answer": "D12:IMG_002",
+      "session_id": [
+        "D12"
+      ],
+      "clue": [
+        "D12:6"
+      ]
+    },
+    {
+      "point": "FR",
+      "question": "What HCI learning platforms did the assistant recommend?",
+      "answer": "Coursera (HCI specialization), Interaction Design Foundation, and LinkedIn Learning.",
+      "session_id": [
+        "D12"
+      ],
+      "clue": [
+        "D12:6"
+      ]
+    },
+    {
+      "point": "VS",
+      "question": "Which image illustrates the SMART goal-setting framework?",
+      "answer": "D12:IMG_004",
+      "session_id": [
+        "D12"
+      ],
+      "clue": [
+        "D12:11"
+      ]
+    },
+    {
+      "point": "FR",
+      "question": "What does SMART stand for in the goal-setting framework?",
+      "answer": "Specific, Measurable, Achievable, Relevant, Time-bound.",
+      "session_id": [
+        "D12"
+      ],
+      "clue": [
+        "D12:11"
+      ]
+    },
+    {
+      "point": "MR",
+      "question": "What example of a SMART goal did the assistant provide for Lin?",
+      "answer": "Complete a small accessibility-focused prototype by April.",
+      "session_id": [
+        "D12"
+      ],
+      "clue": [
+        "D12:11"
+      ]
+    },
+    {
+      "point": "FR",
+      "question": "How frequently should Lin check her HCI progress according to the assistant, and why?",
+      "answer": "Monthly reviews work well, as HCI portfolios grow steadily—not overnight—and checking too often can create unnecessary pressure.",
+      "session_id": [
+        "D12"
+      ],
+      "clue": [
+        "D12:12"
+      ]
+    },
+    {
+      "point": "MR",
+      "question": "How did the assistant reframe setbacks in HCI research methods?",
+      "answer": "Setbacks are normal in HCI. Treat them as iterative feedback—just like user testing. Each challenge tells you what to refine next.",
+      "session_id": [
+        "D12"
+      ],
+      "clue": [
+        "D12:13"
+      ]
+    },
+    {
+      "point": "MR",
+      "question": "How did the assistant connect Lin's ASL learning experience to handling HCI setbacks?",
+      "answer": "ASL learning is a reminder that gradual immersion and iteration build real expertise, applying a design iteration mindset that makes setbacks feel less discouraging.",
+      "session_id": [
+        "D12"
+      ],
+      "clue": [
+        "D12:14"
+      ]
+    },
+    {
+      "point": "MR",
+      "question": "What progress examples did the assistant highlight that Lin had already achieved?",
+      "answer": "Building accessibility knowledge, learning ASL, developing research interests, and designing early prototypes.",
+      "session_id": [
+        "D12"
+      ],
+      "clue": [
+        "D12:17"
+      ]
+    },
+    {
+      "point": "TR",
+      "question": "When did this HCI career planning conversation take place? Return in format YYYY-MM-DD.",
+      "answer": "2025-02-20",
+      "session_id": [
+        "D12"
+      ],
+      "clue": [
+        "D12:1"
+      ]
+    },
+    {
+      "point": "AR",
+      "question": "Did Lin mention specific HCI faculty members she wants to work with?",
+      "answer": "Not mentioned.",
+      "session_id": [
+        "D12"
+      ],
+      "clue": []
+    },
+    {
+      "point": "TR",
+      "question": "How many months passed between Lin's fall fashion shopping and winter sweater shopping?",
+      "answer": "3 months",
+      "session_id": [
+        "D4",
+        "D8"
+      ],
+      "clue": [
+        "D4:1",
+        "D8:1"
+      ]
+    }
+  ]
+}

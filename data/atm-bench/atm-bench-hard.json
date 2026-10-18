@@ -1,0 +1,475 @@
+[
+  {
+    "id": "c53f6cbe-01f4-4870-8946-f761dcf1ceba",
+    "question": "I really like the steel bridge in Porto. Can you help me find all the images and videos I took during my visit?",
+    "answer": "20250225_173637, 20250223_132602, 20250223_130249, 20250225_141559, 20250225_141720, 20250225_142539, 20250225_150659, 20250225_184511",
+    "notes": "",
+    "evidence_ids": [
+      "20250223_130249",
+      "20250223_132602",
+      "20250225_141559",
+      "20250225_141720",
+      "20250225_142539",
+      "20250225_150659",
+      "20250225_173637",
+      "20250225_184511"
+    ],
+    "qtype": "list_recall"
+  },
+  {
+    "id": "20242c87-f8d7-4d10-a8d0-b0d7e525b64b",
+    "question": "How much did I pay for the second hotel in my recent trip to Portugal?",
+    "answer": "434.97",
+    "notes": "The agent should first recognize that the user stayed at two different hotels in Porto and correctly determine the order of the stays. The agent should also realize that the email only provides an estimated cost, while the receipt photo contains the final, authoritative cost.",
+    "evidence_ids": [
+      "20250310_202208",
+      "email202502200013"
+    ],
+    "qtype": "number"
+  },
+  {
+    "id": "de07dd6e-ac2f-4517-a084-e193a3d93601",
+    "question": "During my NeurIPS 2023 North America trip (prior to returning home), list all cities I visited along with the specific dates associated with each location, and provide the total number of cities visited.",
+    "answer": "During your NeurIPS 2023 North America trip (before returning home on 2024-01-01), you visited 5 cities in total: Houston (layovers on 2023-12-09 and 2023-12-15), New Orleans (2023-12-09 to 2023-12-15), Boston (2023-12-15 to 2023-12-19), Cambridge, MA (2023-12-15 to 2023-12-19), and Toronto (2023-12-19 to 2023-12-31).",
+    "notes": "",
+    "evidence_ids": [
+      "20231209_122643",
+      "20231209_220616",
+      "20231215_141752",
+      "20231215_162852",
+      "20231215_214053",
+      "20231215_224448",
+      "20231219_103304",
+      "20231219_144134",
+      "20231231_234005",
+      "20240131_155737"
+    ],
+    "qtype": "open_end"
+  },
+  {
+    "id": "778461cd-4755-498f-b77b-43cc791b42c2",
+    "question": "How many days have I stayed in France from 2024 to 2025?",
+    "answer": "10 days",
+    "notes": "",
+    "evidence_ids": [
+      "20240708_170032",
+      "20240713_224255",
+      "20250208_125156",
+      "email202502020001",
+      "email202502040001"
+    ],
+    "qtype": "number"
+  },
+  {
+    "id": "c5eafc63-5b0b-43c8-b192-6381e5a8226e",
+    "question": "How much did I pay for my hotel during my recent trip to Portugal?",
+    "answer": "€842.97",
+    "notes": "",
+    "evidence_ids": [
+      "20250310_202208",
+      "email202502110008",
+      "email202502200013"
+    ],
+    "qtype": "number"
+  },
+  {
+    "id": "580a4fee-8595-4453-8368-f52eec0a3954",
+    "question": "Help me recall the image ids from Teayan Yuese (茶颜悦色) during my visit to Changsha.",
+    "answer": "20230403_114939, 20230403_114911, 20230401_115135",
+    "notes": "",
+    "evidence_ids": [
+      "20230401_115135",
+      "20230403_114911",
+      "20230403_114939"
+    ],
+    "qtype": "list_recall"
+  },
+  {
+    "id": "53ea4267-419b-4769-817c-add406463462",
+    "question": "I remember attending a talk on LLM inference, discussing compute-bound and memory-bound during NeurIPS conference. Recall the media ids of the slides.",
+    "answer": "20231210_123349, 20231210_124112, 20231210_124201, 20231210_124255,\n20231210_124635, 20231210_124834, 20231210_125002, 20231210_125339,\n20231210_125556, 20231210_125641, 20231210_125807, 20231210_125832,\n20231210_130147, 20231210_131358.",
+    "notes": "",
+    "evidence_ids": [
+      "20231210_123349",
+      "20231210_124112",
+      "20231210_124201",
+      "20231210_124255",
+      "20231210_124635",
+      "20231210_124834",
+      "20231210_125002",
+      "20231210_125339",
+      "20231210_125556",
+      "20231210_125641",
+      "20231210_125807",
+      "20231210_125832",
+      "20231210_130147",
+      "20231210_131358"
+    ],
+    "qtype": "list_recall"
+  },
+  {
+    "id": "a294b202-3353-4fc4-be18-7abd2a36962c",
+    "question": "How many nights have I stayed in Glasgow during my visits, and in which specific years did those stays occur?",
+    "answer": "6 nights in total. 1 night in 2022, 5 nights in 2024.",
+    "notes": "",
+    "evidence_ids": [
+      "email202206120004",
+      "email202410130002",
+      "email202411160004",
+      "email202411160005",
+      "email202411180007"
+    ],
+    "qtype": "open_end"
+  },
+  {
+    "id": "bb50a272-b5c8-4f0e-8fb5-530b16d73cd9",
+    "question": "During my NeurIPS 2023 trip, I travelled for a period of time. What were the start and end dates of the trip, and what was the total duration from departure until returning home?",
+    "answer": "You departed on 9 December 2023 and returned on 1 January 2024, making the total duration of your NeurIPS 2023 trip 24 days (inclusive).",
+    "notes": "",
+    "evidence_ids": [
+      "20231209_124050",
+      "20231231_234005",
+      "20240131_155737",
+      "email202311180004"
+    ],
+    "qtype": "open_end"
+  },
+  {
+    "id": "afa4bf6a-c459-4173-9de9-2aac6183a4a7",
+    "question": "I remember several moments when Grace was hiding in strange places, or being sneaky and peeking at me with her body partially hidden. I’d like to make a collection of those moments. Which photos or videos captured that?",
+    "answer": "20250509_232753, 20250509_232802, 20250509_232737, 20250221_002518, 20250221_002514, 20250119_000631, 20241117_115411, 20241117_115422, 20241004_213143, 20240715_125140, 20240715_125144, 20250511_120224, 20250606_231452",
+    "notes": "",
+    "evidence_ids": [
+      "20240715_125140",
+      "20240715_125144",
+      "20241004_213143",
+      "20241117_115411",
+      "20241117_115422",
+      "20250119_000631",
+      "20250221_002514",
+      "20250221_002518",
+      "20250509_232737",
+      "20250509_232753",
+      "20250509_232802",
+      "20250511_120224",
+      "20250606_231452"
+    ],
+    "qtype": "list_recall"
+  },
+  {
+    "id": "baec8204-c6ca-4c9a-bd82-7145e2126659",
+    "question": "I remember a day when I was walking outside and the weather suddenly became very bad, with heavy hail. Can you help me recall the slow-motion videos I took that day? Report the video ID.",
+    "answer": "20230307_161006",
+    "notes": "",
+    "evidence_ids": [
+      "20230307_150257",
+      "20230307_155858",
+      "20230307_155907",
+      "20230307_161006",
+      "20230307_161017",
+      "20230307_161038"
+    ],
+    "qtype": "list_recall"
+  },
+  {
+    "id": "429b218c-086e-4f77-905e-2951ad92f5d8",
+    "question": "Which hotels have I stayed at in Glasgow, and on what dates?",
+    "answer": "Z Hotel Glasgow: June 23–24, 2022\n\nDoubleTree by Hilton Glasgow Central: November 23–24, 2024\n\nHilton Glasgow: November 24–28, 2024",
+    "notes": "",
+    "evidence_ids": [
+      "email202206120004",
+      "email202410130002",
+      "email202411160004",
+      "email202411160005",
+      "email202411180007"
+    ],
+    "qtype": "open_end"
+  },
+  {
+    "id": "4028b70f-061e-4627-839e-9252ac387157",
+    "question": "How much did I spend on dental care in 2022?",
+    "answer": "£190",
+    "notes": "",
+    "evidence_ids": [
+      "20220906_134413",
+      "20220916_154434",
+      "20220924_194144"
+    ],
+    "qtype": "number"
+  },
+  {
+    "id": "ef912ea0-634f-4c1f-88d5-9e0543708258",
+    "question": "Can you help me recall the photos I took during my lunch at Fancett?",
+    "answer": "20250221_133131, 20250221_135227, 20250221_142725",
+    "notes": "The GPS metadata of the three images does not contain the correct restaurant names. However, the agent could address this issue by cross-referencing the restaurant reservation information in the email and then using the reservation time to narrow down the search window for the corresponding images.",
+    "evidence_ids": [
+      "20250221_133131",
+      "20250221_135227",
+      "20250221_142725",
+      "email202502110016",
+      "email202502190009"
+    ],
+    "qtype": "list_recall"
+  },
+  {
+    "id": "888b4502-9c70-413a-8c06-69e7e97a16b2",
+    "question": "I remember visiting a dessert shop in Guangzhou multiple times. The shop had several hundred items on its menu. Please retrieve all photos taken during those visits.",
+    "answer": "20230327_205909, 20230327_210005, 20240819_205823, 20240819_205827, 20240819_210159",
+    "notes": "Note that there was cofounding items like 20230327_210237, 20230327_210739 which comes from another shop that do not have such a large menu, thus, these items are not positive evidence. Similarly, 20240819_195336 is also a confounder.",
+    "evidence_ids": [
+      "20230327_205909",
+      "20230327_210005",
+      "20240819_205823",
+      "20240819_205827",
+      "20240819_210159"
+    ],
+    "qtype": "list_recall"
+  },
+  {
+    "id": "30ad0a48-89ef-46c4-a388-a3c872bd16b8",
+    "question": "Today is July, 1 2025, Help me recall all the acadamic conference I went to in the past two years. (Leave out one-day seminars/workshops)",
+    "answer": "NeurIPS 2023, UKIS 2024, ACL 2024, ECCV 2024, ECAI 2024, BMVC 2024, ROBOVIS 2025, WWW 2025",
+    "notes": "",
+    "evidence_ids": [
+      "20231210_111815",
+      "20240701_120945",
+      "20240811_150248",
+      "20240930_132654",
+      "20241021_153837",
+      "20241127_193516",
+      "20250223_100830",
+      "20250428_114056"
+    ],
+    "qtype": "open_end"
+  },
+  {
+    "id": "62e3fe3f-f301-47f1-9773-396920861220",
+    "question": "How many times have I visited Newcastle?",
+    "answer": "Only one time.",
+    "notes": "Although there are photos taken in Newcastle in 2022, these were captured while passing through the city by train and therefore should not be counted as a visit. As a result, the correct number of visits is one.",
+    "evidence_ids": [
+      "20220619_130516",
+      "20230903_174239"
+    ],
+    "qtype": "open_end"
+  },
+  {
+    "id": "92e4edaa-5b26-44a5-80d2-91acf53b3b9c",
+    "question": "Which Portuguese restaurant did I really like during my visit, and why?",
+    "answer": "Abadia do Porto, you went there twice during your visit.",
+    "notes": "",
+    "evidence_ids": [
+      "20250222_192936",
+      "20250222_195034",
+      "20250227_194636"
+    ],
+    "qtype": "open_end"
+  },
+  {
+    "id": "9a051aa3-a6b6-4e10-bb40-785cde684ad8",
+    "question": "After I arrived in Santiago, I wasn't able to get an Uber. Then, I queued for taxi for quite a while, how long did I wait before finally getting a taxi?",
+    "answer": "About 1 hour.",
+    "notes": "The user's memory does not provide the actual arrival time in Santiago. The boarding pass shows the flight departed London Gatwick at 20:25 (UK time). Accounting for flight duration (~2h20) and the +1 hour time difference, the estimated arrival in Santiago was around 22:50–23:00 local time.\nThe taxi receipt shows the taxi ride started at 00:31. The gap between arrival and taxi pickup is therefore approximately 1 to 1.5 hours, which can reasonably be summarized as around 1 hour of waiting.",
+    "evidence_ids": [
+      "20241020_191605",
+      "20241021_010743"
+    ],
+    "qtype": "number"
+  },
+  {
+    "id": "b6b46633-47a1-4fd6-88c4-42a7677d7fc5",
+    "question": "Which hotels did I stay at in Greater Cairo during my most recent visit?",
+    "answer": "Novotel Cairo Airport, Conrad Cairo and Hilton Pyramids Golf",
+    "notes": "This question is challenging because one of the hotels underwent a rebranding after the stay. At the time of the visit, the hotel operated as Conrad Cairo, but it was later rebranded as Sofitel Cairo. This creates a conflict between current geocoding or external metadata and the evidence captured in the user's personal records. The agent should rely on contemporaneous evidence—such as the Conrad logo visible on the building and in the breakfast area in the user's photos—rather than the hotel’s later name. This requires resolving temporal entity changes and conflicting signals between geolocation data and visual evidence from user-shot images.",
+    "evidence_ids": [
+      "20240730_024914",
+      "20240730_203024",
+      "20240731_102216",
+      "20240805_193244"
+    ],
+    "qtype": "open_end"
+  },
+  {
+    "id": "7665e37d-29a0-4450-8d03-6539122a6b3f",
+    "question": "I recall visiting a dessert shop in Guangzhou on multiple occasions. The shop had an extensive menu, with several hundred items available. On what exact dates did I last visit this dessert shop? What is the name of the shop?",
+    "answer": "The dessert shop is 百花传统甜品店.\nThe most recent visit dates were 27 March 2023 and 19 August 2024.",
+    "notes": "20230327_205909, 20230327_210005, 20240819_205823, 20240819_205827, 20240819_210159",
+    "evidence_ids": [
+      "20230327_205909",
+      "20230327_210005",
+      "20240819_205823"
+    ],
+    "qtype": "open_end"
+  },
+  {
+    "id": "e44b102b-d7e2-4a4f-bdc6-464529910081",
+    "question": "Can you help me recall all the photos I took during meals on my trip to Cornwall?",
+    "answer": "20230416_114842, 20230416_191938, 20230416_191943,\n20230417_133726, 20230418_121232, 20230418_184523,\n20230419_130151, 20230419_130159, 20230419_134456,\n20230419_194245, 20230419_195920, 20230419_200149,\n20230419_200211, 20230419_200232, 20230419_200302,\n20230419_200441, 20230419_200455.",
+    "notes": "",
+    "evidence_ids": [
+      "20230416_114842",
+      "20230416_191938",
+      "20230416_191943",
+      "20230417_133726",
+      "20230418_121232",
+      "20230418_184523",
+      "20230419_130151",
+      "20230419_130159",
+      "20230419_134456",
+      "20230419_194245",
+      "20230419_195920",
+      "20230419_200149",
+      "20230419_200211",
+      "20230419_200232",
+      "20230419_200302",
+      "20230419_200441",
+      "20230419_200455"
+    ],
+    "qtype": "list_recall"
+  },
+  {
+    "id": "2a976a38-20f4-4eaa-870b-03955fc612e8",
+    "question": "I am reimbursing my ECAI 2024 trip. What was the total cost of my taxi rides during the trip?",
+    "answer": "€62.8",
+    "notes": "23+9.15+10.35+10.80+9.50=62.8",
+    "evidence_ids": [
+      "20241021_010743",
+      "20241021_161431",
+      "20241022_103832",
+      "20241022_162859",
+      "20241023_105515"
+    ],
+    "qtype": "number"
+  },
+  {
+    "id": "6c73ad56-d84c-48b7-a7d4-bbc2ffd80c79",
+    "question": "Can you help me find all the memory pieces related to St Michael’s Mount? Report the ids.",
+    "answer": "20230418_135743, 20230418_135752, 20230418_135850, 20230418_195315, 20230418_195319, 20230418_195350, 20230418_135852.",
+    "notes": "",
+    "evidence_ids": [
+      "20230418_135743",
+      "20230418_135752",
+      "20230418_135850",
+      "20230418_135852",
+      "20230418_195315",
+      "20230418_195319",
+      "20230418_195350"
+    ],
+    "qtype": "list_recall"
+  },
+  {
+    "id": "7b24dbf3-dbe0-4382-9e9c-996cf614657e",
+    "question": "Which European countries have I visted?",
+    "answer": "United Kingdom, Spain, Portugal, Hungary, France, Italy.",
+    "notes": "",
+    "evidence_ids": [
+      "20220917_134113",
+      "20240930_180605",
+      "20241021_134620",
+      "20250208_123453",
+      "20250223_132602",
+      "20250407_201317"
+    ],
+    "qtype": "open_end"
+  },
+  {
+    "id": "716095fa-6f76-4f19-95e4-3c8bf079fbdd",
+    "question": "Help me recall all of my sheep related photo ids in Newcastle.",
+    "answer": "20230905_144627, 20230905_152531, 20230906_155344, 20230906_121455, 20230906_121206, 20230905_153627, 20230905_153314, 20230905_152605",
+    "notes": "",
+    "evidence_ids": [
+      "20230905_144627",
+      "20230905_152531",
+      "20230905_152605",
+      "20230905_153314",
+      "20230905_153627",
+      "20230906_121206",
+      "20230906_121455",
+      "20230906_155344"
+    ],
+    "qtype": "list_recall"
+  },
+  {
+    "id": "b8e85e9d-6701-4f66-885e-bdfabf03f7cd",
+    "question": "Today is June 1, 2025. I’ve enjoyed collecting conference badges over the past two years. Can you help me recall all the photos of my badges from that period? Show me the image ids.",
+    "answer": "20231210_111815, 20240701_120945, 20240811_150248, 20240930_132654, 20250428_114056, 20250428_114126, 20241003_184216",
+    "notes": "",
+    "evidence_ids": [
+      "20231210_111815",
+      "20240701_120945",
+      "20240811_150248",
+      "20240930_132654",
+      "20241003_184216",
+      "20250428_114056",
+      "20250428_114126"
+    ],
+    "qtype": "list_recall"
+  },
+  {
+    "id": "0f7fcf11-8516-4756-b791-6e76e8065b14",
+    "question": "Which cities have I visited in France?",
+    "answer": "Marseille, Apt, Pertuis, La Seyne-sur-Mer, Cassis, Toulon, Aubagne, Marignane, Istres, Paris",
+    "notes": "",
+    "evidence_ids": [
+      "20240708_170032",
+      "20240711_121848",
+      "20240711_125806",
+      "20240712_101712",
+      "20240712_142629",
+      "20240713_144451",
+      "20240713_192657",
+      "20240713_193044",
+      "20240713_224255",
+      "20250208_125156"
+    ],
+    "qtype": "open_end"
+  },
+  {
+    "id": "17b8b612-213a-4ab3-87f9-356b8cf0d7e5",
+    "question": "During my recent trip to Egypt, I remember staying at some Sofitel-branded hotels and having a very good experience. Could you remind me which hotels these were?\nI also recall taking a nice timelapse at one of the hotels, could you help me identify which hotel it was taken at and the ID of that timelapse?",
+    "answer": "The Sofitel hotels you stayed at were Sofitel Winter Palace Luxor and Sofitel Legend Old Cataract Aswan.\nThe timelapse was taken at Sofitel Winter Palace Luxor, and the ID of the timelapse is 20240801_201540.",
+    "notes": "This question involves several potential sources of confusion related to hotel rebranding and inconsistent metadata. First, Conrad Cairo, where the user previously stayed, was later rebranded to Sofitel Cairo, which may cause geocoding systems or external databases to incorrectly associate the user’s stay with a Sofitel hotel. This represents an incorrect metadata trap, since the user did not actually stay at the Sofitel-branded version of that property.\n\nAdditionally, the two correct hotels—Sofitel Winter Palace Luxor and Sofitel Legend Old Cataract Aswan—may themselves be rebranded to Mandarin Oriental properties in the future, creating further ambiguity if relying solely on current brand metadata. To mitigate this issue, the memory evidence explicitly includes the “Sofitel” name visible in the images.\n\nTo avoid these temporal inconsistencies, the agent should prioritize primary evidence from the user’s data, such as visible “Sofitel” logos or text captured in the images, rather than relying purely on external geocoding or updated hotel brand information. This ensures the system correctly resolves brand changes over time and conflicting metadata sources.\n\nTo avoid these temporal inconsistencies, the agent should prioritize primary evidence from the user’s data, such as visible “Sofitel” logos or text captured in the images, rather than relying purely on external geocoding or updated hotel brand information. This ensures the system correctly resolves brand changes over time and conflicting metadata sources.",
+    "evidence_ids": [
+      "20240731_155548",
+      "20240801_201540",
+      "20240802_182133"
+    ],
+    "qtype": "open_end"
+  },
+  {
+    "id": "361fef09-dbcc-4a68-aed2-187f9728b792",
+    "question": "I just returned from the first day of ECCV 2024. Help me gather all the interesting papers I discovered today and list their titles.",
+    "answer": "Safe-CLIP removing NSFW Concepts from VLM,  Towards Surprising Video Comprehension, Learning Anomalies with Normality Prior for Unsupervised Video Anomaly Detection, 3x2: 3D Object Part Segmentation by 2D Semantic Correspondences, Camera Calibration using a Collimator System, DSMix: Distortion-Induced Sensitivity Map Based Pre-training for No-Reference Image Quality Assessment, EA-VTR: Event-Aware Video-Text Retrieval, PosterLlama: Bridging Design Ability of Language Model to Contents-Aware Layout Generation, CTRLorALTer: Conditional LoRAdapter for Efficient 0-Shot Control & Altering of T2I Models, PreciseControl: Enhancing Text-To-Image Diffusion Models with Fine-Grained Attribute Control, Efficient Pre-Training for Localized Instruction Generation of Videos, Commonly Interesting Images",
+    "notes": "",
+    "evidence_ids": [
+      "20241001_171053",
+      "20241001_173039",
+      "20241001_174058",
+      "20241001_175310",
+      "20241001_180247",
+      "20241001_181259",
+      "20241001_182544",
+      "20241001_183401",
+      "20241001_184112",
+      "20241001_184155",
+      "20241001_184633",
+      "20241001_184746"
+    ],
+    "qtype": "open_end"
+  },
+  {
+    "id": "30be4a0e-8708-42fe-9a21-c73254c78270",
+    "question": "I remember Grace sitting with me during meals on several occasions, and I’d like to make a collection of those moments. Which photos or videos captured that?",
+    "answer": "20241116_174018, 20241116_174026, 20241017_140703, 20240926_131909, 20240628_105911",
+    "notes": "20240628_105911 is hard case, as the cat was inside the cat bag.",
+    "evidence_ids": [
+      "20240628_105911",
+      "20240926_131909",
+      "20241017_140703",
+      "20241116_174018",
+      "20241116_174026",
+      "email202304120007"
+    ],
+    "qtype": "list_recall"
+  }
+]

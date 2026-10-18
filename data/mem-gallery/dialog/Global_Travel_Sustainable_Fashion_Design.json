@@ -1,0 +1,2363 @@
+{
+  "character_profile": {
+    "name": "Sophie",
+    "persona_summary": "Sophie is a 29 year old woman who works as a fashion designer. She creates eco-friendly clothing lines with sustainable fabrics and collaborates with small ateliers. Her collections often highlight cultural identity and environmental awareness.",
+    "traits": [
+      "sustainability advocate",
+      "artistic",
+      "visionary",
+      "culturally curious",
+      "reflective"
+    ],
+    "conversation_style": "Sophie is articulate and sensory-driven, frequently using metaphors to bridge visual inspirations with tactile fashion concepts. Her tone blends professional enthusiasm with deep philosophical reflection on nature and culture. She treats the interaction as a creative partnership, actively sharing visual cues and seeking validation to connect her artistic vision with practical execution."
+  },
+  "multi_session_dialogues": [
+    {
+      "session_id": "D1",
+      "date": "2024-05-17",
+      "dialogues": [
+        {
+          "round": "D1:1",
+          "user": "I can’t believe I’m finally heading to Singapore for a month. I’m so excited to experience its culture, climate, and creative atmosphere.",
+          "assistant": "That sounds incredible! Singapore is known for its vibrant blend of cultures and striking architecture. What are you most eager to see when you arrive?"
+        },
+        {
+          "round": "D1:2",
+          "user": "I’m especially drawn to the skyline — the harmony between glass towers and lush greenery fascinates me. It feels like a living example of sustainability in design, which really speaks to my values as a fashion designer.",
+          "assistant": "You’ll love it then! Gardens by the Bay, with its Supertree Grove, is a perfect embodiment of that harmony. When it lights up at night, it feels like nature and innovation breathing together."
+        },
+        {
+          "round": "D1:3",
+          "user": "That’s exactly the kind of inspiration I’m hoping for. I want to observe how the city integrates nature into daily life — it might inspire new textures and patterns for my eco-friendly clothing line.",
+          "assistant": "That’s a wonderful approach, Sophie. And while you’re there, you should explore the local food markets too — they capture Singapore’s multicultural essence in such a colorful way."
+        },
+        {
+          "round": "D1:4",
+          "user": "I definitely plan to. I’ve heard the food scene reflects so many different heritages, and I love how each dish tells a story about the people behind it. It’s similar to how I think about fabric and craftsmanship.",
+          "assistant": "That’s beautifully put. You’ll also find that the city’s nature trails and parks offer a serene contrast to the urban rhythm — they might even inspire ideas for your next collection.",
+          "image_id": [
+            "D1:IMG_001"
+          ],
+          "input_image": [
+            "../image/Global_Travel_Sustainable_Fashion_Design/D1_IMG_001.png"
+          ],
+          "image_caption": [
+            "Hands using pink chopsticks and a spoon to eat a serving of dry egg noodles with slices of roasted pork, green vegetables, and dumplings on a yellow plate. A small yellow bowl of clear soup with chopped green onions sits beside the plate on a blue tabletop."
+          ]
+        },
+        {
+          "round": "D1:5",
+          "user": "I’m also curious about the tropical climate. It’ll be quite a change from what I’m used to, but I think the warmth and humidity might influence how I think about comfort and materials in my designs.",
+          "assistant": "That’s an insightful way to look at it. The climate there certainly encourages light, breathable fabrics — something many sustainable designers draw inspiration from."
+        },
+        {
+          "round": "D1:6",
+          "user": "Exactly. I want this trip to be more than just travel — I see it as a creative residency of sorts, a way to connect my personal growth with my professional vision.",
+          "assistant": "That’s a lovely mindset. Singapore’s art and design scene is flourishing; you might discover collaborations or exhibitions that align with your philosophy."
+        },
+        {
+          "round": "D1:7",
+          "user": "I’ve already looked up a few local galleries. I’m eager to see how artists there express cultural identity and environmental awareness — both are themes I care deeply about.",
+          "assistant": "That sounds perfect for you. And if you happen to be there during a cultural festival, you’ll get an even deeper glimpse into how tradition and modernity coexist.",
+          "image_id": [
+            "D1:IMG_002"
+          ],
+          "input_image": [
+            "../image/Global_Travel_Sustainable_Fashion_Design/D1_IMG_002.jpg"
+          ],
+          "image_caption": [
+            "Spacious multi-story atrium with white classical-style balconies lining both sides, a wide central staircase, and parallel escalators leading to a lower level. The floor is covered in light stone tiles, with warm recessed lighting along the walls. A large vertical banner hangs on the left, framed artworks are displayed in side galleries, and a glass ceiling with metal framework admits daylight from above."
+          ]
+        },
+        {
+          "round": "D1:8",
+          "user": "I’ll definitely keep an eye out for that. My goal has always been to create a global sustainable fashion label that celebrates diversity while staying true to ecological values.",
+          "assistant": "That’s such an inspiring goal, Sophie. I’m sure Singapore’s mix of traditions and forward-thinking design will spark something truly special in your creative process."
+        },
+        {
+          "round": "D1:9",
+          "user": "I can already imagine standing by the bay at sunset, reflecting on the day and sketching new design ideas. It feels like the perfect setting for inspiration.",
+          "assistant": "It really is — the colors of the sky reflecting off the skyline are breathtaking. Don’t forget to capture those moments; they’ll be wonderful memories and perhaps future motifs for your work."
+        },
+        {
+          "round": "D1:10",
+          "user": "I will. Thank you for the encouragement — I’m so looking forward to this journey and everything it might bring.",
+          "assistant": "You’re very welcome, Sophie. Enjoy every discovery, and I can’t wait to hear how Singapore shapes your next collection when you return."
+        },
+        {
+          "round": "D1:11",
+          "user": "By the way, I’m also curious to see what kinds of textiles or materials are commonly used in Singapore’s local markets. Maybe I’ll find something unexpected.",
+          "assistant": "You just might. Singapore’s markets often carry fabrics inspired by Peranakan, Malay, and Indian traditions. Their colors and motifs could give you a fresh palette to experiment with."
+        },
+        {
+          "round": "D1:12",
+          "user": "That sounds wonderful. I’ve always admired how Southeast Asian textiles use color so boldly yet harmoniously. It might help me rethink how I balance vibrancy with sustainability.",
+          "assistant": "Absolutely. Many artisans there also prioritize natural dyes or handcrafted methods — both align well with your eco-friendly design philosophy."
+        },
+        {
+          "round": "D1:13",
+          "user": "I’m hoping to talk to local designers too, maybe understand their views on sustainable production. It would be interesting to see how they navigate environmental challenges in a tropical city.",
+          "assistant": "That’s a great idea. Singapore has a growing community of eco-conscious designers. Some even explore circular fashion or upcycling, which could lead to some inspiring exchanges for you."
+        },
+        {
+          "round": "D1:14",
+          "user": "I love that. Collaborations across cultures always reveal new ways of thinking. Even just observing street style could give me hints about what people find comfortable in the humidity.",
+          "assistant": "Street style will definitely be insightful — locals often choose pieces that balance breathability, elegance, and practicality. You might discover silhouettes that could inform future collections."
+        },
+        {
+          "round": "D1:15",
+          "user": "I’m also wondering whether the vibrant urban landscapes — the gardens, the waterfronts — might help me explore organic shapes in my designs.",
+          "assistant": "Definitely. Singapore’s architecture often borrows from nature’s geometry — curves, layers, branching structures. Translating those into fashion silhouettes could lead to stunning concepts."
+        },
+        {
+          "round": "D1:16",
+          "user": "I feel like this trip will help me expand both my cultural perspective and design vocabulary. It’s rare to find a place that brings nature and innovation so close together.",
+          "assistant": "That’s what makes Singapore unforgettable. And for someone like you — who blends aesthetic sensitivity with sustainability — it’s the perfect creative environment."
+        },
+        {
+          "round": "D1:17",
+          "user": "I’m already imagining mood boards filled with tropical textures, humid-air palettes, and multicultural patterns. I can’t wait to start sketching once I settle in.",
+          "assistant": "Those mood boards are going to be beautiful, Sophie. Let the city guide you — its colors, climates, and cultures will naturally shape your next design chapter."
+        }
+      ]
+    },
+    {
+      "session_id": "D2",
+      "date": "2024-05-21",
+      "dialogues": [
+        {
+          "round": "D2:1",
+          "user": "I finally arrived in Singapore today! The air feels so warm and vibrant. I can already sense how alive this city is.",
+          "assistant": "Welcome to Singapore, Sophie! The energy here is incredible — modern yet deeply connected to nature. How was your first impression of the cityscape from the plane?"
+        },
+        {
+          "round": "D2:2",
+          "user": "It was stunning! I could see lush greenery weaving through the skyline. I’m so inspired by how urban and natural elements coexist here.",
+          "assistant": "That’s one of Singapore’s most defining traits. You’ll especially love Gardens by the Bay — it’s a masterpiece of ecological architecture.",
+          "image_id": [
+            "D2:IMG_001"
+          ],
+          "input_image": [
+            "../image/Global_Travel_Sustainable_Fashion_Design/D2_IMG_001.png"
+          ],
+          "image_caption": [
+            "Silhouetted metal “supertree” structures with vine-covered trunks rise against a dusk sky, connected by an elevated pedestrian walkway with small figures walking along it. In the background, the three-tower Marina Bay Sands building and other city skyscrapers are partly visible, creating an urban skyline behind the futuristic garden installation."
+          ]
+        },
+        {
+          "round": "D2:3",
+          "user": "Wow, this image is incredible! Those tree-like structures look surreal, almost like something from the future, yet they still feel organic.",
+          "assistant": "Exactly — they mimic natural ecosystems. The Supertrees collect rainwater, generate solar energy, and support vertical gardens. It’s sustainability made visible."
+        },
+        {
+          "round": "D2:4",
+          "user": "That’s brilliant! It gives me so many ideas about creating clothing that embodies both technology and nature — something futuristic yet grounded.",
+          "assistant": "I love that concept. Singapore often blends innovation with aesthetics. You might find similar inspiration at Marina Bay Sands, especially when it’s illuminated at night.",
+          "image_id": [
+            "D2:IMG_002"
+          ],
+          "input_image": [
+            "../image/Global_Travel_Sustainable_Fashion_Design/D2_IMG_002.png"
+          ],
+          "image_caption": [
+            "Illuminated pedestrian bridge lined with railings and palm trees leading toward the Marina Bay Sands complex at night, its three hotel towers and rooftop deck glowing with purple and yellow lights against a dark sky."
+          ]
+        },
+        {
+          "round": "D2:5",
+          "user": "This view is breathtaking! The curves and symmetry of the building almost resemble sculpted fabric — sleek and flowing.",
+          "assistant": "That’s such an artistic way to see it, Sophie. Here’s another perspective from the SkyPark area — the lighting really transforms the atmosphere after sunset.",
+          "image_id": [
+            "D2:IMG_003"
+          ],
+          "input_image": [
+            "../image/Global_Travel_Sustainable_Fashion_Design/D2_IMG_003.png"
+          ],
+          "image_caption": [
+            "Rows of docked sailboats line both sides of a calm marina at sunset, their masts forming vertical patterns reflected in the still water. The horizon glows with orange and yellow light beneath a band of low clouds, while the sky above transitions to deep purple tones. A narrow water channel leads toward the distant shoreline, emphasizing the symmetry of the boats and piers."
+          ]
+        },
+        {
+          "round": "D2:6",
+          "user": "That purple glow feels so luxurious and dreamy. I could imagine designing a collection inspired by these colors — deep indigo tones mixed with silver reflections.",
+          "assistant": "That would be beautiful. You could even draw parallels between the skyline’s metallic textures and the shimmer of eco-fabrics."
+        },
+        {
+          "round": "D2:7",
+          "user": "I can already see it taking shape in my mind! I also walked by the waterfront earlier and saw so many yachts — the light on the water at sunset was mesmerizing.",
+          "assistant": "That must have been at one of the marinas. The way the sunset reflects on the still water creates a stunning gradient — take a look at this.",
+          "image_id": [
+            "D2:IMG_004"
+          ],
+          "input_image": [
+            "../image/Global_Travel_Sustainable_Fashion_Design/D2_IMG_004.png"
+          ],
+          "image_caption": [
+            "Night view of Singapore’s Marina Bay Sands complex with its three illuminated towers and rooftop structure, reflected in the water. Pedestrians walk along the brightly lit Helix Bridge at left, whose metal lattice curves over the bay. Additional modern buildings and construction cranes are visible on the right, all set against a dark sky."
+          ]
+        },
+        {
+          "round": "D2:8",
+          "user": "This is breathtaking! The purple and gold hues blending into the horizon — it almost feels like nature painted its own couture palette.",
+          "assistant": "What a poetic way to describe it. Light and color transitions like these are often used by local designers to express Singapore’s tropical vibrancy."
+        },
+        {
+          "round": "D2:9",
+          "user": "I can see why. Tomorrow I plan to visit Merlion Park — I want to experience that iconic view in person.",
+          "assistant": "You’ll love it! The Merlion stands proudly against the skyline — a perfect symbol of Singapore’s heritage and modern progress.",
+          "image_id": [
+            "D2:IMG_005"
+          ],
+          "input_image": [
+            "../image/Global_Travel_Sustainable_Fashion_Design/D2_IMG_005.png"
+          ],
+          "image_caption": [
+            "Large white Merlion fountain in the foreground sprays water into a calm bay at dusk, with the three-tower Marina Bay Sands hotel and its rooftop deck in the background. An orange and gray sky reflects on the water, and the waterfront promenade and modern buildings are subtly illuminated."
+          ]
+        },
+        {
+          "round": "D2:10",
+          "user": "That’s such a powerful image! The sculpture’s elegance and the water flow almost feel symbolic — like creative energy constantly renewing itself.",
+          "assistant": "That’s a beautiful interpretation, Sophie. The view there at dawn or dusk is especially inspiring for artists and designers alike."
+        },
+        {
+          "round": "D2:11",
+          "user": "I also want to spend a day at Sentosa Island. It seems like the perfect balance of adventure and tranquility.",
+          "assistant": "It truly is. You can walk across its iconic rope bridge surrounded by lush trees and gentle waves.",
+          "image_id": [
+            "D2:IMG_006"
+          ],
+          "input_image": [
+            "../image/Global_Travel_Sustainable_Fashion_Design/D2_IMG_006.png"
+          ],
+          "image_caption": [
+            "Narrow rope suspension footbridge with wooden planks spans over green water, flanked by thick rope netting and metal chains. Two people wearing red clothing walk away from the camera toward the far end, where dense tropical trees and foliage line a sandy shoreline in bright sunlight."
+          ]
+        },
+        {
+          "round": "D2:12",
+          "user": "That looks incredible! I love how it brings out a sense of childhood wonder. The shadows and light patterns would photograph beautifully.",
+          "assistant": "Indeed. Sentosa offers so many perspectives — here’s another scene from the island, filled with tropical calm.",
+          "image_id": [
+            "D2:IMG_007"
+          ],
+          "input_image": [
+            "../image/Global_Travel_Sustainable_Fashion_Design/D2_IMG_007.png"
+          ],
+          "image_caption": [
+            "Stone statue of a nude woman standing with one arm raised beside a horse, both emerging from draped fabric. The figures are set within a tall arched niche made of large rectangular stone blocks, with decorative chains or garlands hanging above them."
+          ]
+        },
+        {
+          "round": "D2:13",
+          "user": "This place feels like a retreat for the senses. I can imagine spending a quiet morning there sketching fabric patterns inspired by palm leaves and waves.",
+          "assistant": "That sounds like a perfect creative escape. And if you stay until evening, the sea mist around the rocks can be almost ethereal.",
+          "image_id": [
+            "D2:IMG_008"
+          ],
+          "input_image": [
+            "../image/Global_Travel_Sustainable_Fashion_Design/D2_IMG_008.png"
+          ],
+          "image_caption": [
+            "A group of sea lions rests on a long, narrow rock formation rising from the ocean, with some animals lying close together and others sitting upright. Seabirds fly overhead in a foggy, overcast coastal setting."
+          ]
+        },
+        {
+          "round": "D2:14",
+          "user": "That’s magical. There’s something deeply grounding about being near the ocean — it reminds me why sustainability matters: to protect beauty like this.",
+          "assistant": "You express that connection so well. It’s exactly what sets your design philosophy apart — art that honors both people and the planet."
+        },
+        {
+          "round": "D2:15",
+          "user": "Thank you. This trip is opening my eyes to how design can exist in harmony with nature, just like this city does. I feel more inspired than ever.",
+          "assistant": "I’m so glad to hear that. Singapore has a way of blending creativity and consciousness — it seems to have found its way into your heart."
+        },
+        {
+          "round": "D2:16",
+          "user": "It truly has. I can’t wait to bring these impressions into my next collection — something that captures light, color, and sustainability in every thread.",
+          "assistant": "That sounds wonderful, Sophie. I’m sure your designs will carry the essence of Singapore’s elegance and eco-conscious spirit wherever you go."
+        }
+      ]
+    },
+    {
+      "session_id": "D3",
+      "date": "2024-06-11",
+      "dialogues": [
+        {
+          "round": "D3:1",
+          "user": "Now that I’m back from Singapore, I realized how intense summer sun can be. I want to update my wardrobe with light pieces that work well in hot weather and offer a bit of sun protection. Can you help me choose?",
+          "assistant": "Of course! After such a warm trip, lighter layers and breathable fabrics definitely make sense. What have you found?"
+        },
+        {
+          "round": "D3:2",
+          "user": "First, I found several Abstract Print Kimonos. They seem perfect for adding coverage without feeling heavy. Here’s the first one—I like the tie-dye stripes and fringe.",
+          "assistant": "Nice! Let me take a look.",
+          "image_id": [
+            "D3:IMG_001"
+          ],
+          "input_image": [
+            "../image/Global_Travel_Sustainable_Fashion_Design/D3_IMG_001.jpg"
+          ],
+          "image_caption": [
+            "Woman standing against a plain white background, wearing a loose black and white striped kimono-style cardigan with fringe over a white T-shirt and light denim shorts, paired with black strappy high-heeled sandals."
+          ]
+        },
+        {
+          "round": "D3:3",
+          "user": "It feels breezy and really easy to throw over a simple top.",
+          "assistant": "Absolutely. The monochrome tie-dye feels modern and effortless, and the fringe gives it movement—perfect for staying cool while adding style."
+        },
+        {
+          "round": "D3:4",
+          "user": "Here’s the second kimono—bigger floral patterns, almost dramatic.",
+          "assistant": "Ooh, bold florals! Show me the picture.",
+          "image_id": [
+            "D3:IMG_002"
+          ],
+          "input_image": [
+            "../image/Global_Travel_Sustainable_Fashion_Design/D3_IMG_002.jpg"
+          ],
+          "image_caption": [
+            "Woman standing against a plain white background, wearing a loose white dress and an open, knee-length kimono-style jacket with a large floral pattern in gray, yellow, and green. Her long dark hair is partly tied up in a top knot and falls over her shoulders. She faces the camera with a neutral expression, hands on hips, feet slightly apart."
+          ]
+        },
+        {
+          "round": "D3:5",
+          "user": "I feel this one makes a clear statement. Maybe too bold for everyday?",
+          "assistant": "It definitely has strong personality. The oversized florals feel like wearable artwork—great for standing out, though maybe less subtle than the first one."
+        },
+        {
+          "round": "D3:6",
+          "user": "This is the third kimono—soft earthy tones and a looser, bohemian drape.",
+          "assistant": "Let me have a look.",
+          "image_id": [
+            "D3:IMG_003"
+          ],
+          "input_image": [
+            "../image/Global_Travel_Sustainable_Fashion_Design/D3_IMG_003.jpg"
+          ],
+          "image_caption": [
+            "Woman standing with back to camera in a studio setting, wearing a wide-brimmed beige hat, a loose, draped kimono-style cardigan with geometric and floral patterns, slim blue jeans, and tan high-heeled ankle boots with fringe details."
+          ]
+        },
+        {
+          "round": "D3:7",
+          "user": "The back drapes very beautifully in person.",
+          "assistant": "Yes, it looks relaxed and serene. The soft palette makes it perfect for gentle summer evenings, and the drape gives it a graceful silhouette."
+        },
+        {
+          "round": "D3:8",
+          "user": "Here’s the fourth one—deep blue with a patterned print. Feels refreshing.",
+          "assistant": "Deep blues always look cooling. Show me!",
+          "image_id": [
+            "D3:IMG_004"
+          ],
+          "input_image": [
+            "../image/Global_Travel_Sustainable_Fashion_Design/D3_IMG_004.jpg"
+          ],
+          "image_caption": [
+            "Woman standing against a plain white background, wearing a loose blue patterned kimono over a white lace crop top and light blue denim shorts. She has long wavy hair down, layered necklaces, bracelets, and a ring. She is also wearing tall tan gladiator sandals that lace up to her knees, with her arms relaxed by her sides."
+          ]
+        },
+        {
+          "round": "D3:9",
+          "user": "It reminds me of ocean breeze and summer nights.",
+          "assistant": "Exactly! The pattern is intricate but not overwhelming, and the color feels naturally cooling—great for sunny days."
+        },
+        {
+          "round": "D3:10",
+          "user": "Last kimono—warm florals and a long, flowy silhouette.",
+          "assistant": "A long silhouette sounds so elegant. Let me see it.",
+          "image_id": [
+            "D3:IMG_005"
+          ],
+          "input_image": [
+            "../image/Global_Travel_Sustainable_Fashion_Design/D3_IMG_005.jpg"
+          ],
+          "image_caption": [
+            "Woman standing against a plain white background wearing a long, sheer, floral-patterned kimono with wide sleeves over a white top and high-waisted light blue denim shorts. She has long brown hair, neutral makeup, and a relaxed stance with one leg slightly forward. She wears light gray fringe high-heeled sandals."
+          ]
+        },
+        {
+          "round": "D3:11",
+          "user": "I like how dress-like it feels while still staying light.",
+          "assistant": "Yes, the warm floral palette and the cascading shape feel romantic and graceful—perfect when you want coverage without heat."
+        },
+        {
+          "round": "D3:12",
+          "user": "Okay, now the second category: Acid Washed Denim Skater Skirts. Here’s the first one—this one comes with suspenders.",
+          "assistant": "Fun! Let me take a look at it.",
+          "image_id": [
+            "D3:IMG_006"
+          ],
+          "input_image": [
+            "../image/Global_Travel_Sustainable_Fashion_Design/D3_IMG_006.jpg"
+          ],
+          "image_caption": [
+            "Woman from shoulders to mid-thigh wearing a short-sleeved black top under a light blue acid-wash denim overall dress. The dress has a bib front with metal buckle straps, a fitted waist, and a flared skirt. She holds the sides of the skirt slightly outward. Background is plain white with no visible text."
+          ]
+        },
+        {
+          "round": "D3:13",
+          "user": "It feels playful, especially for casual summer days.",
+          "assistant": "Yes, the suspender design adds personality, and the denim wash makes it youthful and energetic."
+        },
+        {
+          "round": "D3:14",
+          "user": "Here’s the second one—button-front denim, more classic.",
+          "assistant": "Classic silhouettes always age well. Let me see it.",
+          "image_id": [
+            "D3:IMG_007"
+          ],
+          "input_image": [
+            "../image/Global_Travel_Sustainable_Fashion_Design/D3_IMG_007.jpg"
+          ],
+          "image_caption": [
+            "Young woman with long blonde hair stands facing forward against a plain light background, wearing a fitted long-sleeve white top tucked into a high‑waisted blue denim skirt with front buttons and pockets. A thin brown belt cinches the skirt at the waist, and a long necklace with a large cross pendant hangs down the front."
+          ]
+        },
+        {
+          "round": "D3:15",
+          "user": "It looks structured but still soft.",
+          "assistant": "The button line adds structure, but the shape keeps it airy. It’s a simple, easy-to-style skirt."
+        },
+        {
+          "round": "D3:16",
+          "user": "Third skirt—the light wash makes it feel breezier.",
+          "assistant": "Light-wash denim is great in hot weather. Show me.",
+          "image_id": [
+            "D3:IMG_008"
+          ],
+          "input_image": [
+            "../image/Global_Travel_Sustainable_Fashion_Design/D3_IMG_008.jpg"
+          ],
+          "image_caption": [
+            "Woman standing outdoors, shown from neck to thighs, wearing a fitted black three-quarter-sleeve scoop-neck top tucked into a high-waisted light purple flared skirt. She holds a shiny clutch bag, wears a long pendant necklace and bracelets on one wrist."
+          ]
+        },
+        {
+          "round": "D3:17",
+          "user": "I think it feels vintage in a cute way.",
+          "assistant": "Exactly. Soft washes create that gentle vintage charm, and the flare adds beautiful movement."
+        },
+        {
+          "round": "D3:18",
+          "user": "Last one—super minimal and clean.",
+          "assistant": "Minimalist denim is always useful. Let me see it.",
+          "image_id": [
+            "D3:IMG_009"
+          ],
+          "input_image": [
+            "../image/Global_Travel_Sustainable_Fashion_Design/D3_IMG_009.jpg"
+          ],
+          "image_caption": [
+            "High-waisted, light-wash denim skater skirt with a flared A-line silhouette, subtle acid-wash texture, stitched waistband, and a seam running vertically down one side, displayed against a plain light background."
+          ]
+        },
+        {
+          "round": "D3:19",
+          "user": "I like that it’s versatile for different tops.",
+          "assistant": "Absolutely—its simple shape makes it easy to pair with anything from crop tops to loose shirts."
+        },
+        {
+          "round": "D3:20",
+          "user": "Alright, which kimono do you think is the best pick overall?",
+          "assistant": "I’d recommend the **deep blue kimono (IMG_004)**. It feels the most refreshing and offers light coverage while staying visually cool."
+        },
+        {
+          "round": "D3:21",
+          "user": "And which denim skirt would you choose?",
+          "assistant": "For breathability and versatility, I’d go with the **soft-toned acid washed skirt (IMG_008)**. It’s bright, airy, and pairs well with summer tops."
+        },
+        {
+          "round": "D3:22",
+          "user": "Perfect. I’ll take the deep blue kimono and the soft-washed skirt then.",
+          "assistant": "Great choices! Those two will keep you comfortable and stylish through the entire summer."
+        },
+        {
+          "round": "D3:23",
+          "user": "Thanks for helping me decide. I feel much more prepared for the hot weather now.",
+          "assistant": "Anytime! Summer outfits should be fun and effortless—and these pieces suit you perfectly."
+        }
+      ]
+    },
+    {
+      "session_id": "D4",
+      "date": "2024-07-02",
+      "dialogues": [
+        {
+          "round": "D4:1",
+          "user": "I’m so looking forward to the upcoming holiday! I’ve been planning a little trip around Europe — part relaxation, part creative exploration. Italy and the UK are both calling my name.",
+          "assistant": "That sounds like a perfect mix, Sophie! Both countries have so much to offer in terms of art, culture, and craftsmanship. Which one are you thinking of visiting first?"
+        },
+        {
+          "round": "D4:2",
+          "user": "Italy, definitely. Florence has been on my mind for years — the art, the architecture, the Renaissance energy. I feel like walking through those streets would be like stepping into a living canvas.",
+          "assistant": "Florence is a dream for any creative soul. The artisanal workshops, the textures, even the light itself — everything there feels crafted with intention. It’s very much in tune with your sustainable approach to fashion.",
+          "image_id": [
+            "D4:IMG_001"
+          ],
+          "input_image": [
+            "../image/Global_Travel_Sustainable_Fashion_Design/D4_IMG_001.png"
+          ],
+          "image_caption": [
+            "Panoramic view of a historic city with dense terracotta‑roofed buildings, a river running through the center, and an arched stone bridge lined with buildings crossing the water. Long colonnaded palaces and other large structures border the river, while trees and smaller houses fill the foreground. Construction cranes and modern buildings appear in the distance, backed by hazy mountains under an overcast sky."
+          ]
+        },
+        {
+          "round": "D4:3",
+          "user": "Exactly! I’d love to see how traditional craftsmanship can coexist with eco-conscious design. It’s that balance I’m always chasing in my collections.",
+          "assistant": "That philosophy fits perfectly with Italian artisanship. Many small ateliers there are reviving heritage techniques using natural materials — it might give you ideas for a collaboration."
+        },
+        {
+          "round": "D4:4",
+          "user": "After Florence, I’d really love to visit Rome. The city feels timeless — ancient ruins standing side by side with modern life. It’s such a powerful symbol of endurance and renewal.",
+          "assistant": "That’s beautifully said. Rome has this incredible duality — history carved in stone and a modern pulse that never stops. Walking through its streets feels like tracing humanity’s creative journey."
+        },
+        {
+          "round": "D4:5",
+          "user": "Yes, and I find that contrast inspiring. The weathered textures of the old buildings, the marble, the arches — they tell stories of time and resilience. I’d love to translate that feeling into fabric and form.",
+          "assistant": "That would be fascinating. You could experiment with layered materials or natural tones that capture that sense of age and authenticity — sustainable fashion that feels timeless rather than trendy."
+        },
+        {
+          "round": "D4:6",
+          "user": "After Italy, I want to spend some time in the UK — especially London. Its fashion scene is bold, diverse, and always experimenting with sustainability in new ways.",
+          "assistant": "London is the perfect playground for that. Between the Design Museum, fashion collectives, and emerging eco-labels, you’ll find endless inspiration. Are there any designers you’re hoping to meet?"
+        },
+        {
+          "round": "D4:7",
+          "user": "Yes, a few! I’ve been following some British designers who use recycled textiles and natural dyes. It would be amazing to exchange ideas about conscious creation and ethical production.",
+          "assistant": "That’s exactly the kind of dialogue that drives innovation. London’s creative energy thrives on collaboration — I can already imagine the synergies you’d create."
+        },
+        {
+          "round": "D4:8",
+          "user": "Beyond work, I want to take time to slow down a bit too — maybe explore the countryside or coastal areas. Nature always helps me reconnect with my creative rhythm.",
+          "assistant": "That’s a wonderful plan. The Lake District or the Scottish Highlands could be perfect for that — peaceful, inspiring, and full of natural palettes for your designs.",
+          "image_id": [
+            "D4:IMG_002"
+          ],
+          "input_image": [
+            "../image/Global_Travel_Sustainable_Fashion_Design/D4_IMG_002.jpg"
+          ],
+          "image_caption": [
+            "Two steep, rocky mountains rise side by side under a cloudy, mist-covered sky, with their dark slopes contrasting against patches of green vegetation. A broad valley of yellow, orange, and green grass spreads across the foreground, dotted with small clusters of trees. Narrow streams descend from the mountains and wind through the lower land, emphasizing the rugged, open landscape."
+          ]
+        },
+        {
+          "round": "D4:9",
+          "user": "I love that idea. I find that colors in nature often hold emotional weight — like the soft greens after rain or the muted blues of distant hills. They speak a language fashion can translate beautifully.",
+          "assistant": "Beautifully said. It’s that sensitivity to environment and emotion that makes your work so unique, Sophie. You see stories where others see scenery."
+        },
+        {
+          "round": "D4:10",
+          "user": "Thank you — that means a lot. I think this trip will help me evolve not just as a designer, but as a person who creates with purpose. It’s more than a journey; it’s a reminder of why I do what I do.",
+          "assistant": "That’s such a thoughtful perspective. Traveling often reminds us that creativity isn’t about chasing trends — it’s about staying connected to what truly moves us."
+        },
+        {
+          "round": "D4:11",
+          "user": "Exactly. I’ll take plenty of photos and keep a little sketchbook with me. Sometimes one fleeting moment — a light, a sound, a color — becomes the foundation for an entire collection.",
+          "assistant": "I can imagine that perfectly. When you return, those memories will weave themselves into your fabrics and designs like invisible threads of experience."
+        },
+        {
+          "round": "D4:12",
+          "user": "I hope so. This journey feels like a new chapter — one filled with curiosity, craftsmanship, and connection. I can’t wait to see where it leads me next.",
+          "assistant": "It sounds like a beautiful chapter already beginning, Sophie. Enjoy every discovery — Europe will surely reflect your artistry right back to you."
+        }
+      ]
+    },
+    {
+      "session_id": "D5",
+      "date": "2024-07-21",
+      "dialogues": [
+        {
+          "round": "D5:1",
+          "user": "I made a short stop in Milan on my way to Rome. Even just a few hours felt inspiring.",
+          "assistant": "Milan radiates creativity. What stood out to you in such a short visit?",
+          "image_id": [
+            "D5:IMG_001"
+          ],
+          "input_image": [
+            "../image/Global_Travel_Sustainable_Fashion_Design/D5_IMG_001.jpg"
+          ],
+          "image_caption": [
+            "Panoramic city skyline with a mix of historic low-rise buildings and modern glass skyscrapers, including a tall tower labeled “UniCredit” at center. Red-tiled roofs, church domes, and spires fill the foreground, while dense high-rises stand behind them. Mountains form a hazy backdrop under a partly cloudy sky."
+          ]
+        },
+        {
+          "round": "D5:2",
+          "user": "The street fashion! People dress with intention, not extravagance. Milan truly lives up to its reputation as the design capital.",
+          "assistant": "That minimal yet expressive style aligns beautifully with sustainable design principles."
+        },
+        {
+          "round": "D5:3",
+          "user": "Lots of neutral tones with sharp silhouettes — almost architectural.",
+          "assistant": "Sounds like a natural extension of what you love: structure meeting subtlety."
+        },
+        {
+          "round": "D5:4",
+          "user": "I visited a tiny fabric shop with deadstock linens. The textures were irresistible.",
+          "assistant": "Linen always brings authenticity. Did it spark ideas for future pieces?"
+        },
+        {
+          "round": "D5:5",
+          "user": "Definitely. I’m imagining relaxed forms with structured edges.",
+          "assistant": "That combination would speak beautifully to Milan’s aesthetic."
+        },
+        {
+          "round": "D5:6",
+          "user": "I also chatted with a local designer about how fashion changes across regions.",
+          "assistant": "What perspectives did they share?"
+        },
+        {
+          "round": "D5:7",
+          "user": "They said fashion is shaped by climate and culture as much as by creativity.",
+          "assistant": "An insightful point — it echoes what you observed in Singapore."
+        },
+        {
+          "round": "D5:8",
+          "user": "Yes. Cities feel like conversations, each speaking a different visual language.",
+          "assistant": "And you understand that language through textures, tones, and silhouettes."
+        },
+        {
+          "round": "D5:9",
+          "user": "I also made a small detour to visit Politecnico di Milano. It used to be my dream school when I was younger.",
+          "assistant": "That’s amazing! Politecnico di Milano has such a strong reputation in design and engineering. How did it feel to walk around the campus you once dreamed of attending?"
+        },
+        {
+          "round": "D5:10",
+          "user": "It felt surreal—almost like revisiting an old aspiration. The campus atmosphere was full of creative energy. I took a picture of one of the historic buildings.",
+          "assistant": "I’d love to see it! The combination of classical architecture and modern design values is one of Polimi’s signatures.",
+          "image_id": [
+            "D5:IMG_002"
+          ],
+          "input_image": [
+            "../image/Global_Travel_Sustainable_Fashion_Design/D5_IMG_002.jpg"
+          ],
+          "image_caption": [
+            "Large historic stone building with arched windows, columns, and decorative spires facing an open paved plaza. The façade bears the inscription “POLITECNICO DI MILANO” and “1863,” with several flags hanging between windows. A few groups of people walk or stand near the entrance, and bicycles are parked by railings. Trees and a small lawn border the left side of the scene."
+          ]
+        },
+        {
+          "round": "D5:11",
+          "user": "Here it is—this building has such a strong presence. The arches, the ornamentation, the symmetry… everything feels like a dialogue between tradition and innovation.",
+          "assistant": "It’s beautiful. You can really sense Milan’s design heritage in its architecture. No wonder the city is called a capital of both fashion and design."
+        },
+        {
+          "round": "D5:12",
+          "user": "I also visited a more modern section of the campus. The contrast was striking—industrial lines, exposed structures, reflective glass… It almost felt like walking through a design lab.",
+          "assistant": "That must have been inspiring! Polimi’s modern facilities often emphasize transparency and structure—perfect metaphors for contemporary design thinking.",
+          "image_id": [
+            "D5:IMG_003"
+          ],
+          "input_image": [
+            "../image/Global_Travel_Sustainable_Fashion_Design/D5_IMG_003.jpg"
+          ],
+          "image_caption": [
+            "Modern glass-fronted building with prominent yellow external staircases and structural beams, adjacent to a paved walkway lined with autumn trees and concrete benches. A person with a backpack walks up steps toward the entrance, where a sign partly reads “POLI”. Streetlights, trash bins, and low concrete walls are visible along the pathway."
+          ]
+        },
+        {
+          "round": "D5:13",
+          "user": "Exactly. Walking there reminded me why I pursued design in the first place. Even if I didn’t study here, visiting still felt meaningful—almost like closing an old loop.",
+          "assistant": "That’s a beautiful feeling—dreams can evolve, and sometimes revisiting them gives clarity. It sounds like the visit fueled your creative spirit."
+        },
+        {
+          "round": "D5:14",
+          "user": "It really did. Being surrounded by so much design history and innovation made me appreciate my own path even more.",
+          "assistant": "And you’re carrying that same spirit forward—polishing your own style while staying rooted in thoughtful design. Milan seems to have added another layer to your journey."
+        },
+        {
+          "round": "D5:15",
+          "user": "Before I left, I had espresso at a tiny café. Even that felt intentionally designed.",
+          "assistant": "Italy has a way of infusing beauty into the smallest rituals."
+        },
+        {
+          "round": "D5:16",
+          "user": "This little stopover refreshed me. I feel ready for Rome now.",
+          "assistant": "A perfect creative warm-up before diving into Rome’s depth of history."
+        },
+        {
+          "round": "D5:17",
+          "user": "I love how travel resets my creative rhythm.",
+          "assistant": "It realigns inspiration with purpose."
+        },
+        {
+          "round": "D5:18",
+          "user": "Exactly. I’m curious what new textures I’ll find in Rome.",
+          "assistant": "You’ll encounter a rich blend of stone, light, and timeless geometry."
+        },
+        {
+          "round": "D5:19",
+          "user": "I already feel ideas forming in my head.",
+          "assistant": "Your mind is a tapestry — every place adds a new thread."
+        },
+        {
+          "round": "D5:20",
+          "user": "That’s a lovely way to put it.",
+          "assistant": "It’s precisely how your creative journey feels: woven, layered, evolving."
+        },
+        {
+          "round": "D5:21",
+          "user": "This trip is teaching me to pay attention to quiet details.",
+          "assistant": "And those quiet details often shape the strongest designs."
+        },
+        {
+          "round": "D5:22",
+          "user": "I’ll keep listening to what each place has to say.",
+          "assistant": "And your work will reflect those voices with grace."
+        }
+      ]
+    },
+    {
+      "session_id": "D6",
+      "date": "2024-07-23",
+      "dialogues": [
+        {
+          "round": "D6:1",
+          "user": "I finally made it to Rome! The city feels like an open-air museum — every corner tells a story. The Colosseum is first on my list, and I found this breathtaking image of it under the moonlight.",
+          "assistant": "It’s magnificent! The contrast of the ancient stone and the glowing moon gives it such a mystical aura. You can almost feel the centuries of history whispering through the arches.",
+          "image_id": [
+            "D6:IMG_001"
+          ],
+          "input_image": [
+            "../image/Global_Travel_Sustainable_Fashion_Design/D6_IMG_001.png"
+          ],
+          "image_caption": [
+            "Ancient stone amphitheater with multiple arches viewed from below at night, illuminated by blue-tinted lighting. A bright full moon hangs in a starry sky above, while a narrow beam of light from the lower right points upward toward the sky."
+          ]
+        },
+        {
+          "round": "D6:2",
+          "user": "Exactly! It’s incredible to think that this structure has stood for nearly two thousand years. I also found another image that captures its golden glow in the evening — it’s pure magic.",
+          "assistant": "That warm illumination highlights the geometry so beautifully. The repetition of the arches almost feels like a rhythmic pattern — something that could inspire a design motif.",
+          "image_id": [
+            "D6:IMG_002"
+          ],
+          "input_image": [
+            "../image/Global_Travel_Sustainable_Fashion_Design/D6_IMG_002.png"
+          ],
+          "image_caption": [
+            "Ancient stone amphitheater with multiple rows of illuminated arches at dusk, set against a deep blue sky. Warm yellow lighting glows from within the structure, highlighting its curved facade and weathered details. A tall, narrow tree stands in the foreground near the right side. Small groups of people walk and gather along the perimeter at ground level, separated from the building by low barriers."
+          ]
+        },
+        {
+          "round": "D6:3",
+          "user": "That’s a lovely observation. I can already imagine a textile pattern based on those curved lines — something elegant but strong, like the Colosseum itself. Next, I’m visiting the Pantheon tomorrow.",
+          "assistant": "Perfect choice! The Pantheon is a marvel of proportion and light. Here’s an image that captures its majestic exterior — those columns seem to defy time.",
+          "image_id": [
+            "D6:IMG_003"
+          ],
+          "input_image": [
+            "../image/Global_Travel_Sustainable_Fashion_Design/D6_IMG_003.png"
+          ],
+          "image_caption": [
+            "Large ancient temple façade at night with a triangular pediment, massive stone columns, and a central wooden door, all illuminated by warm lights. Small figures stand at the base. The inscription on the pediment reads: “M AGRIPPA L F COS TERTIVM FECIT.”"
+          ]
+        },
+        {
+          "round": "D6:4",
+          "user": "It’s breathtaking! I love how the Pantheon combines simplicity with grandeur. The oculus at the top is such a clever way to bring natural light into the space. Here’s another image that shows it up close.",
+          "assistant": "The craftsmanship of the columns and carvings is remarkable — such refined detail in stone. It’s fascinating how ancient architects achieved this harmony between structure and artistry.",
+          "image_id": [
+            "D6:IMG_004"
+          ],
+          "input_image": [
+            "../image/Global_Travel_Sustainable_Fashion_Design/D6_IMG_004.png"
+          ],
+          "image_caption": [
+            "Close-up of an ancient stone structure with two large Corinthian columns and their ornate capitals supporting a marble entablature. Detailed acanthus leaf carvings decorate the capitals, which stand before a background of rough, weathered masonry and beams inside the building."
+          ]
+        },
+        {
+          "round": "D6:5",
+          "user": "Yes! The light that filters through feels symbolic — like a dialogue between earth and sky. It reminds me how in design, light can be as important as material.",
+          "assistant": "Beautifully said, Sophie. Light defines texture, mood, and emotion — just as in your designs, where each fabric tells a different story under illumination."
+        },
+        {
+          "round": "D6:6",
+          "user": "Exactly. After the Pantheon, I’m heading to St. Peter’s Basilica. Its dome architecture has always fascinated me. Just look at this incredible view of the interior!",
+          "assistant": "It’s mesmerizing! The gilded ceiling and intricate artwork radiate elegance. The symmetry and repetition could inspire stunning geometric embroidery.",
+          "image_id": [
+            "D6:IMG_005"
+          ],
+          "input_image": [
+            "../image/Global_Travel_Sustainable_Fashion_Design/D6_IMG_005.png"
+          ],
+          "image_caption": [
+            "Ornate domed ceiling viewed from directly below, featuring concentric rings of gold-toned coffers, arches, and decorative molding. The central medallion contains a large painted figure with outstretched arms, surrounded by smaller framed religious-style paintings and windows admitting soft light."
+          ]
+        },
+        {
+          "round": "D6:7",
+          "user": "I completely agree. There’s something so divine about the craftsmanship. I also found a close-up of the dome — the details are astonishing.",
+          "assistant": "That’s such a powerful image. The curves and the rhythm of those statues on top almost evoke the idea of movement frozen in stone.",
+          "image_id": [
+            "D6:IMG_006"
+          ],
+          "input_image": [
+            "../image/Global_Travel_Sustainable_Fashion_Design/D6_IMG_006.png"
+          ],
+          "image_caption": [
+            "Large stone dome with vertical ribs and a small lantern topped by a cross rises behind a balustrade lined with tall statues of robed figures, some holding crosses or other objects, set against a clear blue sky."
+          ]
+        },
+        {
+          "round": "D6:8",
+          "user": "You’re right — the sense of movement and balance is extraordinary. I think I’ll incorporate that flow into my next collection — perhaps through pleats or layered fabrics that echo these arches.",
+          "assistant": "That would be stunning! Translating architectural grace into wearable art really reflects your design philosophy — harmony between form, function, and emotion."
+        },
+        {
+          "round": "D6:9",
+          "user": "Now I’m also planning to spend a full day at the Vatican Museums. They hold such an immense collection of art — I feel like I could spend weeks there and still not see it all.",
+          "assistant": "It’s true! Even the entrance is a masterpiece. The sculptures and reliefs around it speak of centuries of human creativity and devotion.",
+          "image_id": [
+            "D6:IMG_007"
+          ],
+          "input_image": [
+            "../image/Global_Travel_Sustainable_Fashion_Design/D6_IMG_007.png"
+          ],
+          "image_caption": [
+            "Stone sculptures above an entrance labeled “MVSEI VATICANI,” featuring two seated male figures flanking an ornate central shield with keys and a crown. The statues rest on a carved ledge, with fruit and decorative elements around the coat of arms. A brick wall forms the background."
+          ]
+        },
+        {
+          "round": "D6:10",
+          "user": "I found this photo of the grand spiral staircase — it’s such an elegant design. I love how it captures both motion and stillness at once.",
+          "assistant": "That’s a wonderful observation. The spiral almost mirrors a creative journey — continuous, ascending, and full of perspective shifts.",
+          "image_id": [
+            "D6:IMG_008"
+          ],
+          "input_image": [
+            "../image/Global_Travel_Sustainable_Fashion_Design/D6_IMG_008.png"
+          ],
+          "image_caption": [
+            "Octagonal glass skylight seen from below, with a grid of translucent panes and decorative metal arches, forming a star-like pattern at the center. Concentric circular levels of a spiral staircase frame the skylight, featuring ornate railings with sculpted floral and scroll motifs in contrasting light and dark tones."
+          ]
+        },
+        {
+          "round": "D6:11",
+          "user": "That’s exactly how I feel about my design process. Every collection feels like an ascent — learning, reflecting, evolving. I also found a close-up shot from one of the museum halls — those sculptures are so lifelike.",
+          "assistant": "Incredible craftsmanship! The precision of those marble folds and expressions must resonate deeply with you as a designer.",
+          "image_id": [
+            "D6:IMG_009"
+          ],
+          "input_image": [
+            "../image/Global_Travel_Sustainable_Fashion_Design/D6_IMG_009.png"
+          ],
+          "image_caption": [
+            "Two classical marble statues displayed in an interior with tall fluted columns and gray stone walls: on the left, a nude male figure bent forward, holding a disc in one hand; on the right, a standing male figure wearing a helmet, short tunic, and cloak on a raised pedestal. Below the right statue, a carved frieze depicts multiple small human figures in relief."
+          ]
+        },
+        {
+          "round": "D6:12",
+          "user": "Absolutely. It’s a masterclass in form and detail. Seeing how sculptors captured motion in stillness makes me think about how fabric can do the same — freeze a feeling in time.",
+          "assistant": "That’s a profound connection. The best designs, like great sculptures, carry emotion even in silence."
+        },
+        {
+          "round": "D6:13",
+          "user": "You’re right. I think that’s what I love most about Rome — it celebrates endurance through beauty. Every structure feels alive with memory and meaning.",
+          "assistant": "That’s a beautiful way to put it. The city embodies resilience — and so does sustainable design. Both cherish what lasts, what’s made with intention."
+        },
+        {
+          "round": "D6:14",
+          "user": "Exactly. Visiting these places reminds me that fashion doesn’t have to be fleeting. It can be timeless, like these monuments — respectful of the past but looking toward the future.",
+          "assistant": "That’s such an inspiring insight, Sophie. It’s where art, history, and sustainability meet — an echo of your own philosophy as a designer."
+        },
+        {
+          "round": "D6:15",
+          "user": "Thank you. I’m already sketching a concept I’m calling ‘Echoes of Rome.’ It’ll explore structure, light, and organic textures — like marble translated into fabric.",
+          "assistant": "That sounds breathtaking! A collection that embodies Rome’s spirit — enduring, graceful, and deeply human. I can’t wait to see how it turns out."
+        },
+        {
+          "round": "D6:16",
+          "user": "I can’t either. This trip has been so meaningful — it’s more than sightseeing; it’s like rediscovering why I fell in love with design in the first place.",
+          "assistant": "It truly shows in your reflections. Rome has a way of stirring the soul — and it seems to have awakened a new chapter in your creative journey."
+        },
+        {
+          "round": "D6:17",
+          "user": "Yes, it has. I’ll take all these impressions back with me — the colors, the textures, the stories — and weave them into something lasting. Rome will always stay with me.",
+          "assistant": "That’s wonderful, Sophie. The timelessness of Rome will live on through your designs — a dialogue between ancient beauty and sustainable creation."
+        }
+      ]
+    },
+    {
+      "session_id": "D7",
+      "date": "2024-07-29",
+      "dialogues": [
+        {
+          "round": "D7:1",
+          "user": "I’ve just arrived in London yesterday! After Rome’s timeless elegance, this city feels alive with contrast — classic charm standing shoulder to shoulder with cutting-edge modernity.",
+          "assistant": "Welcome to London, Sophie! That blend of old and new defines the city’s rhythm. Are there any landmarks you’re planning to see first?"
+        },
+        {
+          "round": "D7:2",
+          "user": "Absolutely — I couldn’t resist visiting Big Ben first. Just look at this image! Its design feels like a heartbeat frozen in time.",
+          "assistant": "It’s magnificent! The tower’s intricate Gothic details and steady clock face truly symbolize resilience and timelessness — much like your approach to design.",
+          "image_id": [
+            "D7:IMG_001"
+          ],
+          "input_image": [
+            "../image/Global_Travel_Sustainable_Fashion_Design/D7_IMG_001.png"
+          ],
+          "image_caption": [
+            "Tall Gothic-style clock tower with an illuminated clock face showing approximately 6:40, detailed stonework, and spire topped with a finial, standing against a cloudy evening sky."
+          ]
+        },
+        {
+          "round": "D7:3",
+          "user": "Exactly! There’s something reassuring about its rhythm — like a reminder that craftsmanship endures. I think of it as a metaphor for sustainable design that withstands trends.",
+          "assistant": "That’s a beautiful parallel. Enduring artistry — not disposable fashion — that’s what defines meaningful creation."
+        },
+        {
+          "round": "D7:4",
+          "user": "Next, I spent the afternoon at the British Museum. The grandeur of its façade is breathtaking — all those columns make it feel eternal.",
+          "assistant": "It’s one of London’s most powerful symbols of human history. The architecture alone conveys a sense of cultural continuity across centuries.",
+          "image_id": [
+            "D7:IMG_002"
+          ],
+          "input_image": [
+            "../image/Global_Travel_Sustainable_Fashion_Design/D7_IMG_002.png"
+          ],
+          "image_caption": [
+            "Neoclassical museum courtyard with two wings forming an L-shape, each lined with tall stone columns and classical sculptures along the upper pediment. A wide staircase leads to a main entrance on the right, where a large vertical banner hangs between columns. Several people walk or stand in the open paved square below under a dark, overcast sky."
+          ]
+        },
+        {
+          "round": "D7:5",
+          "user": "Inside, the Great Court left me speechless. The geometric glass ceiling floods everything with light — it’s like standing beneath a modern cathedral of knowledge.",
+          "assistant": "It’s such a striking mix of tradition and innovation — just like the ideals of sustainable fashion. The balance between old stone and transparent modernity is poetic.",
+          "image_id": [
+            "D7:IMG_003"
+          ],
+          "input_image": [
+            "../image/Global_Travel_Sustainable_Fashion_Design/D7_IMG_003.png"
+          ],
+          "image_caption": [
+            "Spacious museum atrium with a circular central structure surrounded by wide staircases and visitors walking or standing. A patterned glass roof covers the hall. Text around the upper wall reads “ELIZABETH II AD 2000 THIS GREAT COURT.” Vertical banners on the central structure display exhibition graphics and the words “Living and Dying.” Classical-style stone façades line the sides of the hall."
+          ]
+        },
+        {
+          "round": "D7:6",
+          "user": "I agree. The natural light softened the classical sculptures in a way that made them feel alive again. I started sketching designs that combine organic drapes with structured lines — inspired by that harmony.",
+          "assistant": "That sounds stunning! The idea of weaving transparency and structure mirrors how London merges past and present."
+        },
+        {
+          "round": "D7:7",
+          "user": "Tomorrow, I’m visiting the London Eye. It’s such a modern icon — the way it overlooks the whole city fascinates me.",
+          "assistant": "That’s a great choice. From above, you’ll see London’s architectural evolution — bridges, domes, and towers all interwoven into one story.",
+          "image_id": [
+            "D7:IMG_004"
+          ],
+          "input_image": [
+            "../image/Global_Travel_Sustainable_Fashion_Design/D7_IMG_004.png"
+          ],
+          "image_caption": [
+            "Glass observation capsule of a large Ferris wheel with several people standing and looking out, supported by white metal beams and cables in the foreground. In the blurred background, a tall green-topped tower and other urban structures rise against a pale sky."
+          ]
+        },
+        {
+          "round": "D7:8",
+          "user": "Look at this close-up! I love how the capsules reflect the sky. It feels futuristic yet approachable — like sustainability made visible through design.",
+          "assistant": "That’s a wonderful observation. The circular structure itself is symbolic — a reminder of continuity and renewal, just like the principles of circular fashion.",
+          "image_id": [
+            "D7:IMG_005"
+          ],
+          "input_image": [
+            "../image/Global_Travel_Sustainable_Fashion_Design/D7_IMG_005.png"
+          ],
+          "image_caption": [
+            "Stone twin towers of Tower Bridge span the River Thames, connected by blue-painted suspension elements and an upper pedestrian walkway. The bascule sections of the roadway are closed, allowing light traffic to cross. Water flows beneath the bridge, and buildings line the opposite bank. A large leafy tree and stone wall appear in the foreground, while a cloudy sky with patches of evening light forms the backdrop."
+          ]
+        },
+        {
+          "round": "D7:9",
+          "user": "Exactly. The more I see of London, the more I realize it’s not afraid to evolve — it honors its history while embracing innovation. That duality really resonates with me.",
+          "assistant": "It’s the perfect environment for reflection. You might say London designs itself the way you do — with both heritage and vision."
+        },
+        {
+          "round": "D7:10",
+          "user": "I walked along the Thames this evening, and the view was breathtaking. The sunset over the skyline turned the water gold — it made me think of the emotional texture behind design.",
+          "assistant": "That’s such a vivid image. London’s twilight has inspired countless artists — it captures transformation, serenity, and strength all at once.",
+          "image_id": [
+            "D7:IMG_006"
+          ],
+          "input_image": [
+            "../image/Global_Travel_Sustainable_Fashion_Design/D7_IMG_006.png"
+          ],
+          "image_caption": [
+            "Urban riverfront at dusk with calm water, small boats, and floating platforms in the foreground. Dark silhouettes of people and a bridge frame the lower edge. Across the river, illuminated office buildings and historic structures form the skyline under a clear, fading sky."
+          ]
+        },
+        {
+          "round": "D7:11",
+          "user": "Later I crossed Tower Bridge, and I was struck by its structure — the Victorian Gothic details are so intricate yet functional.",
+          "assistant": "Tower Bridge embodies the spirit of London engineering — elegant yet durable. Its design is proof that beauty and practicality can coexist harmoniously."
+        },
+        {
+          "round": "D7:12",
+          "user": "Yes, and I think that’s exactly what fashion should strive for — beauty that serves purpose. My next collection might explore the dialogue between function and form, inspired by these bridges.",
+          "assistant": "That’s a brilliant concept. You could experiment with modular garments or transformable silhouettes — fashion that adapts, just like the city."
+        },
+        {
+          "round": "D7:13",
+          "user": "I love that idea! And what’s interesting is how the city seems to move — lights reflecting, people crossing — it’s all flow and structure intertwined. I feel like London is teaching me about movement itself.",
+          "assistant": "That’s so insightful. Movement is a design language of its own — in fabric, in architecture, and in the pulse of a city."
+        },
+        {
+          "round": "D7:14",
+          "user": "It really is. I think London has shown me the next step in my journey — that sustainability isn’t static; it’s about evolving gracefully. I feel ready to explore how global systems like finance can empower that transformation.",
+          "assistant": "That’s a perfect realization, Sophie. London bridges the creative and the economic — a natural transition into thinking about global sustainability from both an artistic and strategic lens."
+        },
+        {
+          "round": "D7:15",
+          "user": "Exactly. Tomorrow I’ll be visiting some eco-conscious investors here before heading back — it feels like the right bridge between inspiration and action.",
+          "assistant": "That sounds wonderful. From Big Ben’s timeless rhythm to the Eye’s futuristic circle, you’ve absorbed London’s essence — balance, renewal, and purpose."
+        }
+      ]
+    },
+    {
+      "session_id": "D8",
+      "date": "2024-07-30",
+      "dialogues": [
+        {
+          "round": "D8:1",
+          "user": "I walked around London today, and wow… the street fashion here is so beautifully British — structured, effortless, and stylish. I’m getting tempted again to buy some clothes.",
+          "assistant": "London really brings out that polished yet creative vibe. What styles caught your eye this time?"
+        },
+        {
+          "round": "D8:2",
+          "user": "I found two categories I really like. First, these Buttoned Denim Shirt Dresses. Let me share the first one.",
+          "assistant": "Great! Denim shirt dresses blend casual and chic perfectly. Let's take a look.",
+          "image_id": [
+            "D8:IMG_001"
+          ],
+          "input_image": [
+            "../image/Global_Travel_Sustainable_Fashion_Design/D8_IMG_001.jpg"
+          ],
+          "image_caption": [
+            "Young woman walking on an urban street, shown from front and back in a split image, wearing a long-sleeved blue denim shirt-dress with a belt. She has sunglasses on, carries a large black shoulder bag, and holds a smartphone and keys."
+          ]
+        },
+        {
+          "round": "D8:3",
+          "user": "Here’s the second denim shirt dress.",
+          "assistant": "This one feels more dramatic with the oversized silhouette — very London street style boldness.",
+          "image_id": [
+            "D8:IMG_002"
+          ],
+          "input_image": [
+            "../image/Global_Travel_Sustainable_Fashion_Design/D8_IMG_002.jpg"
+          ],
+          "image_caption": [
+            "Woman with long black hair walks on a city sidewalk wearing an oversized blue denim shirt and black knee‑high boots, holding a small item in her gloved hand. She passes in front of glass doors set in a brick building, with other casually dressed pedestrians and a black handbag visible in the background."
+          ]
+        },
+        {
+          "round": "D8:4",
+          "user": "Now the third.",
+          "assistant": "Classic cinched-waist styling — it highlights the figure and adds structure without losing comfort.",
+          "image_id": [
+            "D8:IMG_003"
+          ],
+          "input_image": [
+            "../image/Global_Travel_Sustainable_Fashion_Design/D8_IMG_003.jpg"
+          ],
+          "image_caption": [
+            "Woman walking on a city sidewalk, wearing a light blue denim shirtdress with a brown belt, black leggings, and brown knee-high boots. She has long blonde hair in a side braid. She carries a black handbag in one hand and a white rectangular box in the other, with storefronts and a glass door visible in the background."
+          ]
+        },
+        {
+          "round": "D8:5",
+          "user": "Fourth one.",
+          "assistant": "The rolled sleeves and belt make this dress look relaxed but intentionally styled — perfect for a London casual day.",
+          "image_id": [
+            "D8:IMG_004"
+          ],
+          "input_image": [
+            "../image/Global_Travel_Sustainable_Fashion_Design/D8_IMG_004.jpg"
+          ],
+          "image_caption": [
+            "Woman wearing a blue denim shirt dress with front buttons, a brown belt, and rolled-up sleeves, shown in two views against a plain white wall. In the left view she stands with one hand on her hip and the other in a pocket; in the right view she stands in profile. She wears tall brown leather boots and stands on a wooden floor."
+          ]
+        },
+        {
+          "round": "D8:6",
+          "user": "Fifth one.",
+          "assistant": "This lighter-wash denim gives it a fresher, softer vibe — excellent for those moody London mornings.",
+          "image_id": [
+            "D8:IMG_005"
+          ],
+          "input_image": [
+            "../image/Global_Travel_Sustainable_Fashion_Design/D8_IMG_005.jpg"
+          ],
+          "image_caption": [
+            "Woman standing indoors against a plain white wall, wearing a light blue denim shirt dress with long sleeves, button-down front, and two chest pockets. She has shoulder-length brown hair and a neutral expression, with one leg slightly bent. She wears black ankle boots and stands on a wooden floor. No visible text in the scene."
+          ]
+        },
+        {
+          "round": "D8:7",
+          "user": "And here is the sixth.",
+          "assistant": "This one is very clean and minimal — the straight shape is modern and flattering.",
+          "image_id": [
+            "D8:IMG_006"
+          ],
+          "input_image": [
+            "../image/Global_Travel_Sustainable_Fashion_Design/D8_IMG_006.jpg"
+          ],
+          "image_caption": [
+            "Woman with long wavy hair wearing sunglasses, a blue denim shirt dress, and black flat sandals walking on a quiet paved street beside a curb and green hedges, with trees and bushes in the background."
+          ]
+        },
+        {
+          "round": "D8:8",
+          "user": "Now here’s the second category — Chenille & Metallic Knit Skirts. Here’s the first one.",
+          "assistant": "A chenille-knit skirt adds beautiful texture. This first one looks soft while still structured.",
+          "image_id": [
+            "D8:IMG_007"
+          ],
+          "input_image": [
+            "../image/Global_Travel_Sustainable_Fashion_Design/D8_IMG_007.jpg"
+          ],
+          "image_caption": [
+            "Woman standing in a studio wearing a black sleeveless crop top, dark high-waisted shorts, and black ankle boots. A gray sweatshirt is tied around her waist, and a black-and-white plaid shirt hangs off her shoulders. She has long wavy hair and a pendant necklace, with arms relaxed by her sides, facing the camera against a plain white background."
+          ]
+        },
+        {
+          "round": "D8:9",
+          "user": "Second knit skirt.",
+          "assistant": "A more metallic touch — subtle shimmering makes it feel festive but still wearable.",
+          "image_id": [
+            "D8:IMG_008"
+          ],
+          "input_image": [
+            "../image/Global_Travel_Sustainable_Fashion_Design/D8_IMG_008.jpg"
+          ],
+          "image_caption": [
+            "Woman standing against a plain light background, wearing a white graphic T-shirt with the text “COOL TOM MARC,” a dark blue short skirt, and a white and black jacket draped over her shoulders. She faces forward with one hand resting by her side and the other lightly holding the jacket."
+          ]
+        },
+        {
+          "round": "D8:10",
+          "user": "Third one.",
+          "assistant": "This pleated version adds movement. It’s elegant and very British in its refined silhouette.",
+          "image_id": [
+            "D8:IMG_009"
+          ],
+          "input_image": [
+            "../image/Global_Travel_Sustainable_Fashion_Design/D8_IMG_009.jpg"
+          ],
+          "image_caption": [
+            "Woman standing in a studio against a plain white background, wearing a white short-sleeve top, a gray high-waisted pleated skirt with a double-buckle belt, and black platform shoes. A light-colored, black-checkered cardigan is draped over her shoulders, and her hair is tied up in a top bun."
+          ]
+        },
+        {
+          "round": "D8:11",
+          "user": "And the last one.",
+          "assistant": "This pencil-skirt style is sleek and modern, perfect for pairing with structured outerwear.",
+          "image_id": [
+            "D8:IMG_010"
+          ],
+          "input_image": [
+            "../image/Global_Travel_Sustainable_Fashion_Design/D8_IMG_010.jpg"
+          ],
+          "image_caption": [
+            "Young woman standing with hands on hips against a plain light background, wearing a sleeveless dark crop top with large faded letters, a high-waisted dark pencil skirt, and black lace-up ankle boots. She has long blonde hair, wears round sunglasses, and has bracelets on her right wrist."
+          ]
+        },
+        {
+          "round": "D8:12",
+          "user": "Now that we’ve gone through everything… which denim shirt dress do you think suits me best?",
+          "assistant": "Based on your style — elegant yet practical — I’d recommend the lighter-wash fifth one. It has a fresh tone and feels versatile for travel."
+        },
+        {
+          "round": "D8:13",
+          "user": "I actually like that one too. It feels soft and polished.",
+          "assistant": "Exactly — it's the perfect blend of effortless London chic and your design sensibilities."
+        },
+        {
+          "round": "D8:14",
+          "user": "What about the knit skirts? Which one stands out?",
+          "assistant": "I’d say the third pleated one. It has motion, elegance, and that subtle metallic depth without being too heavy."
+        },
+        {
+          "round": "D8:15",
+          "user": "Yes, the pleated one feels very London — classy but not overly dramatic.",
+          "assistant": "And it complements your sustainable design philosophy with its textured craftsmanship."
+        },
+        {
+          "round": "D8:16",
+          "user": "Alright, decision made — I’ll get the lighter-wash Buttoned Denim Shirt Dress and the pleated knit skirt.",
+          "assistant": "Perfect choices! They’ll blend seamlessly with your travel wardrobe and London’s aesthetic."
+        },
+        {
+          "round": "D8:17",
+          "user": "I’m excited. London fashion always surprises me in such inspiring ways.",
+          "assistant": "That’s the charm of London — timeless structure paired with creativity. A perfect match for you."
+        },
+        {
+          "round": "D8:18",
+          "user": "I feel like these pieces will remind me of this city’s energy every time I wear them.",
+          "assistant": "And that’s what makes fashion meaningful — carrying memories stitched into the fabric."
+        },
+        {
+          "round": "D8:19",
+          "user": "By the way, I just realized I missed two more Chenille & Metallic Knit Skirt images earlier. Let me send them now — I want to hear your thoughts too.",
+          "assistant": "Of course! Go ahead and share them. It’ll be great to compare them with the ones we discussed earlier."
+        },
+        {
+          "round": "D8:20",
+          "user": "Here’s the first one.",
+          "image_id": [
+            "D8:IMG_011"
+          ],
+          "input_image": [
+            "../image/Global_Travel_Sustainable_Fashion_Design/D8_IMG_011.jpg"
+          ],
+          "assistant": "This one has a very sleek, body-hugging silhouette. The horizontal stripe texture adds subtle movement, and the cropped top pairing creates a youthful but polished look. It’s modern, confident, and slightly sporty.",
+          "image_caption": [
+            "Young woman standing against a plain white background, wearing a navy blue strapless crop top and matching knee-length skirt, paired with black high-top sneakers. One hand rests on her hip while the other touches her hair as she faces the camera."
+          ]
+        },
+        {
+          "round": "D8:21",
+          "user": "And here’s the second missing one.",
+          "image_id": [
+            "D8:IMG_012"
+          ],
+          "input_image": [
+            "../image/Global_Travel_Sustainable_Fashion_Design/D8_IMG_012.jpg"
+          ],
+          "assistant": "Ah, this navy set feels clean and minimalist. The smooth knit fabric has a refined shine, and the bandeau-style top emphasizes a streamlined shape. It leans toward understated elegance with a contemporary twist.",
+          "image_caption": [
+            "Woman standing against a plain white background, wearing a black and gray horizontal striped short-sleeve crop top and matching knee-length pencil skirt. She has long wavy hair, black ankle socks, and black lace-up shoes, with her hands lightly clasped in front of her waist."
+          ]
+        },
+        {
+          "round": "D8:22",
+          "user": "Both of these look nice too… Do you think they change the final decision we picked earlier?",
+          "assistant": "They’re attractive additions for sure, but they don’t necessarily outperform the one you originally chose. The previous selection had a stronger balance of texture, structure, and versatility — especially for layering with London’s style sensibilities."
+        },
+        {
+          "round": "D8:23",
+          "user": "You’re right. After comparing everything again, I still prefer the original one I picked earlier.",
+          "assistant": "A great call. Your earlier choice really complements both your personal aesthetic and the London fashion vibe. It’s stylish, slightly bold, and easy to integrate into your wardrobe. Sticking with it is the perfect decision."
+        }
+      ]
+    },
+    {
+      "session_id": "D9",
+      "date": "2024-08-15",
+      "dialogues": [
+        {
+          "round": "D9:1",
+          "user": "I’ve been thinking a lot about how global finance is evolving, especially in cities like London and Singapore. When I visited London, the energy in the financial district was electrifying. It felt like the heartbeat of the city.",
+          "assistant": "Absolutely! London’s financial district has this fascinating balance between history and innovation. You can sense its centuries-old legacy, yet it’s constantly reinventing itself to stay relevant. What caught your attention the most during your time there?"
+        },
+        {
+          "round": "D9:2",
+          "user": "The architecture really stood out to me — the blend of classic stone structures with modern glass skyscrapers. I still remember looking up at the Shard; it seemed to pierce the clouds. To me, it symbolizes ambition and forward momentum.",
+          "assistant": "That’s such a great interpretation. The Shard is like a physical manifestation of London’s growth — grounded in tradition yet always reaching higher. It’s amazing how a building can embody a city’s financial confidence.",
+          "image_id": [
+            "D9:IMG_001"
+          ],
+          "input_image": [
+            "../image/Global_Travel_Sustainable_Fashion_Design/D9_IMG_001.png"
+          ],
+          "image_caption": [
+            "Illuminated cityscape at night featuring The Shard with its upper section glowing bright pink, surrounded by modern office buildings, including a cylindrical tower marked “Hilton.” Below, a brightly lit bridge with pink accents spans a river, whose surface reflects multicolored lights from the bridge and surrounding buildings."
+          ]
+        },
+        {
+          "round": "D9:3",
+          "user": "Exactly. That sense of upward motion inspires me as a designer. I often think of my collections in the same way — respecting heritage while experimenting with the future. Singapore, on the other hand, gave me a completely different feeling when I visited.",
+          "assistant": "Singapore’s energy is distinct, isn’t it? It’s futuristic, efficient, and deeply interconnected. Its skyline feels like a statement about innovation and discipline. What was your impression of its financial landscape?"
+        },
+        {
+          "round": "D9:4",
+          "user": "It’s remarkable how seamlessly Singapore integrates technology into everyday life, including finance. I remember standing near Marina Bay Sands, looking out over the skyline — it felt like witnessing the future of urban design and progress.",
+          "assistant": "Marina Bay Sands is definitely an icon of modern ambition. It’s not just architecture; it’s a symbol of how vision and investment can reshape an entire nation. How do you see that spirit influencing your own work?",
+          "image_id": [
+            "D9:IMG_002"
+          ],
+          "input_image": [
+            "../image/Global_Travel_Sustainable_Fashion_Design/D9_IMG_002.png"
+          ],
+          "image_caption": [
+            "Night view of Singapore’s Marina Bay with the three-tower Marina Bay Sands complex and rooftop garden centered, surrounded by illuminated skyscrapers. The Supertree Grove and curved glass domes of Gardens by the Bay stand to the right, their multicolored lights reflecting across the calm waterfront."
+          ]
+        },
+        {
+          "round": "D9:5",
+          "user": "Both cities — London and Singapore — influence me deeply. London’s historical richness reminds me to honor craftsmanship, while Singapore’s forward-thinking energy encourages innovation. I’ve started incorporating both perspectives into my sustainable fashion collections.",
+          "assistant": "That’s such a thoughtful synthesis. It’s like you’re translating economic and cultural philosophies into design language — timeless structure from London and technological precision from Singapore."
+        },
+        {
+          "round": "D9:6",
+          "user": "Exactly! For example, my latest collection blends natural fabrics with digitally printed patterns inspired by Singapore’s architecture. It’s my way of merging sustainability with the precision of modern engineering.",
+          "assistant": "That sounds incredible! It shows how design can bridge disciplines — art, technology, and even economics. Do you ever think about how the growth of global finance might influence sustainable fashion?"
+        },
+        {
+          "round": "D9:7",
+          "user": "Definitely. Financial growth can empower sustainability. More investments mean more resources for research, ethical production, and green innovation. I think finance can become a force for good if it prioritizes long-term value over short-term profit.",
+          "assistant": "That’s a profound point. You’re right — sustainability and finance share a common thread: longevity. True value lies in what endures. Have you been exploring any partnerships to support that vision?"
+        },
+        {
+          "round": "D9:8",
+          "user": "Yes, actually. I’ve been meeting with a few investors who specialize in eco-conscious ventures. They’re interested in how design can influence consumer awareness. It feels like the beginning of something meaningful.",
+          "assistant": "That’s exciting! Finding partners who share your values can make all the difference. It’s like building a creative ecosystem — one that supports both artistry and responsibility."
+        },
+        {
+          "round": "D9:9",
+          "user": "Exactly. I think of it as a circular system — finance fuels innovation, and innovation gives back through sustainability. It’s a cycle that benefits everyone if managed with care.",
+          "assistant": "That’s such a powerful way to put it. The idea of circularity applies beautifully to both fashion and finance. It’s all about designing systems that regenerate rather than deplete."
+        },
+        {
+          "round": "D9:10",
+          "user": "I couldn’t agree more. Looking back at my travels, I realize how much cities like London and Singapore have shaped my mindset — not just creatively but also strategically. They’ve shown me that progress doesn’t have to come at the cost of ethics.",
+          "assistant": "That’s an insightful reflection. Both cities are living examples of how innovation and accountability can coexist. They’ve each built reputations on adaptability and purpose."
+        },
+        {
+          "round": "D9:11",
+          "user": "Yes, and that’s exactly the balance I strive for. My dream is to establish a global sustainable fashion label that not only celebrates beauty but also drives positive change — a brand that stands as firmly as London’s skyline and shines as brightly as Singapore’s lights.",
+          "assistant": "That’s such an inspiring vision, Sophie. It captures everything you’ve been working toward — a harmony between artistry, responsibility, and ambition."
+        },
+        {
+          "round": "D9:12",
+          "user": "Thank you. It feels like this journey — from my travels to my collections — has been preparing me for that next step. I’m planning to launch an initiative that supports young designers in creating sustainable fashion startups.",
+          "assistant": "That’s wonderful! Mentorship can multiply impact. With your experience and global perspective, you’ll be able to guide others to design not just for style but for sustainability."
+        },
+        {
+          "round": "D9:13",
+          "user": "That’s my hope. I want to create a community that values creativity and consciousness equally. If finance can empower that movement — just like it drives the growth of cities — then fashion truly can become a global language for change.",
+          "assistant": "Beautifully said. It’s the perfect synthesis of your journey — from inspiration to influence. London gave you resilience, Singapore gave you innovation, and together, they’ve shaped your philosophy as a designer and a leader."
+        },
+        {
+          "round": "D9:14",
+          "user": "Exactly. It’s amazing how travel and reflection can reveal what really matters. I used to design to express myself; now I design to connect — with people, cultures, and the planet itself.",
+          "assistant": "That’s the essence of meaningful art — creation that unites rather than divides. Your journey from fashion to purpose truly mirrors the evolution of global cities themselves: grounded, evolving, and full of hope."
+        }
+      ]
+    }
+  ],
+  "human-annotated QAs": [
+    {
+      "point": "FR",
+      "question": "Which country’s humid climate might influence Sophie’s thinking about fabric design?",
+      "answer": "Singapore",
+      "session_id": [
+        "D1"
+      ],
+      "clue": [
+        "D1:5"
+      ]
+    },
+    {
+      "point": "MR",
+      "question": "What does Sophie want to explore in the local galleries they plan to visit?",
+      "answer": "Sophie is interested in how local artists are expressing cultural identities and environmental awareness through their work.",
+      "session_id": [
+        "D1"
+      ],
+      "clue": [
+        "D1:7"
+      ]
+    },
+    {
+      "point": "AR",
+      "question": "Did Sophie mention specific cultural festivals she plan to attend in Singapore?",
+      "answer": "Not mentioned.",
+      "session_id": [
+        "D1"
+      ],
+      "clue": []
+    },
+    {
+      "point": "TR",
+      "question": "When did Sophie start visiting Singapore? Return in the format YYYY-MM-DD.",
+      "answer": "2024-05-21",
+      "session_id": [
+        "D2"
+      ],
+      "clue": [
+        "D2:1"
+      ]
+    },
+    {
+      "point": "TR",
+      "question": "Which country did Sophie visit in May 2024?",
+      "answer": "Singapore",
+      "session_id": [
+        "D2"
+      ],
+      "clue": [
+        "D2:1"
+      ]
+    },
+    {
+      "point": "MR",
+      "question": "What is the notable feature of Marina Bay Sands mentioned in the conversation?",
+      "answer": "Marina Bay Sands is noted for its incredible views, especially at night when it lights up.",
+      "session_id": [
+        "D1",
+        "D2"
+      ],
+      "clue": [
+        "D1:2",
+        "D2:4"
+      ]
+    },
+    {
+      "point": "VS",
+      "question": "Which image in the dialogue shows the same landmark as this one?",
+      "question_image": "../image/Global_Travel_Sustainable_Fashion_Design/QA_IMG_001.png",
+      "answer": "D2:IMG_005",
+      "session_id": [
+        "D2"
+      ],
+      "clue": [
+        "D2:9"
+      ],
+      "image_caption": "White Merlion fountain statue spouting water toward the bay, surrounded by crowds on a waterfront promenade, with tall modern glass skyscrapers rising in the background under a cloudy sky."
+    },
+    {
+      "point": "TTL",
+      "question": "What is the name of the landmark in this image?",
+      "question_image": "../image/Global_Travel_Sustainable_Fashion_Design/QA_IMG_002.png",
+      "answer": "Merlion Park.",
+      "session_id": [
+        "D2"
+      ],
+      "clue": [
+        "D2:9"
+      ],
+      "image_caption": "Large white Merlion fountain statue spouting water toward the bay, with crowds of people gathered on a waterfront promenade, backed by tall glass and steel skyscrapers under a cloudy sky in Singapore’s central business district."
+    },
+    {
+      "point": "VR",
+      "question": "Based on the photos shared by Sophie, in which country was the following picture taken?",
+      "question_image": "../image/Global_Travel_Sustainable_Fashion_Design/QA_IMG_003.png",
+      "answer": "Singapore",
+      "session_id": [
+        "D2"
+      ],
+      "clue": [
+        "D2:9"
+      ],
+      "image_caption": "Large white Merlion fountain statue spouting water into a harbor, surrounded by a curved, tiled base. Crowds of people gather along the waterfront promenade, with tall modern glass skyscrapers forming the city skyline under a cloudy sky."
+    },
+    {
+      "point": "VR",
+      "question": "In the conversation, which number travel destination was the country shown in the image for Sophie?",
+      "question_image": "../image/Global_Travel_Sustainable_Fashion_Design/QA_IMG_004.png",
+      "answer": "It was her first travel destination.",
+      "session_id": [
+        "D2"
+      ],
+      "clue": [
+        "D2:9"
+      ],
+      "image_caption": "Large white merlion-style fountain statue spouting water into a waterfront basin, with many people gathered along the promenade in front of dense modern glass skyscrapers under a cloudy sky."
+    },
+    {
+      "point": "VS",
+      "question": "Which image in the dialogue shows the same landmark as this one?",
+      "question_image": "../image/Global_Travel_Sustainable_Fashion_Design/QA_IMG_005.png",
+      "answer": "D2:IMG_005",
+      "session_id": [
+        "D2"
+      ],
+      "clue": [
+        "D2:9"
+      ],
+      "image_caption": "Two people ride bicycles along a city street under an elevated train track, passing a chain-link fence and metal support columns. A stationary subway train with lit windows is on the track above. Sunlight creates strong shadows on the pavement, and a few parked cars line the side of the road."
+    },
+    {
+      "point": "TTL",
+      "question": "What is the name of the landmark in this image?",
+      "question_image": "../image/Global_Travel_Sustainable_Fashion_Design/QA_IMG_006.png",
+      "answer": "Merlion Park.",
+      "session_id": [
+        "D2"
+      ],
+      "clue": [
+        "D2:9"
+      ],
+      "image_caption": "Two paramedics carry a person on a stretcher toward an ambulance with red and blue emergency lights on. The word “AMBULANCE” is visible on the vehicle’s rear, which is open and prepared to receive the patient. The scene occurs at night on a wet roadway or driveway, with another emergency worker standing near the back of the ambulance."
+    },
+    {
+      "point": "VR",
+      "question": "Based on the photos shared by Sophie, in which country was the following picture taken?",
+      "question_image": "../image/Global_Travel_Sustainable_Fashion_Design/QA_IMG_007.png",
+      "answer": "Singapore",
+      "session_id": [
+        "D2"
+      ],
+      "clue": [
+        "D2:9"
+      ],
+      "image_caption": "Two people stand beside a grocery cart in the produce section of a supermarket, talking while examining vegetables. They are surrounded by bins of tomatoes and squash under a large sign reading “FARM FRESH PRODUCE.” Other shoppers and shelves of fruits and vegetables fill the background."
+    },
+    {
+      "point": "TR",
+      "question": "Did Sophie visit Singapore before or after updating her summer wardrobe?",
+      "answer": "Before.",
+      "session_id": [
+        "D1",
+        "D3"
+      ],
+      "clue": [
+        "D1:1",
+        "D3:1"
+      ]
+    },
+    {
+      "point": "FR",
+      "question": "What two categories of summer clothing did Sophie explore during the wardrobe refresh?",
+      "answer": "Abstract Print Kimono and Acid Washed Denim Skater Skirt.",
+      "session_id": [
+        "D3"
+      ],
+      "clue": [
+        "D3:2",
+        "D3:12"
+      ]
+    },
+    {
+      "point": "VR",
+      "question": "How many Abstract Print Kimonos did Sophie view in total? Please answer using an Arabic numeral (e.g., “2” instead of “Two”).",
+      "answer": "5",
+      "session_id": [
+        "D3"
+      ],
+      "clue": [
+        "D3:2",
+        "D3:4",
+        "D3:6",
+        "D3:8",
+        "D3:10"
+      ]
+    },
+    {
+      "point": "VR",
+      "question": "How many Acid Washed Denim Skater Skirts did Sophie examine? Please answer using an Arabic numeral (e.g., “2” instead of “Two”).",
+      "answer": "4",
+      "session_id": [
+        "D3"
+      ],
+      "clue": [
+        "D3:12",
+        "D3:14",
+        "D3:16",
+        "D3:18"
+      ]
+    },
+    {
+      "point": "TTL",
+      "question": "According to the conversation, what category is the clothing in the picture?",
+      "question_image": "../image/Global_Travel_Sustainable_Fashion_Design/QA_IMG_008.jpg",
+      "answer": "Acid Washed Denim Skater Skirt",
+      "session_id": [
+        "D3"
+      ],
+      "clue": [
+        "D3:12",
+        "D3:14",
+        "D3:16",
+        "D3:18"
+      ],
+      "image_caption": "Young woman standing on a city sidewalk beside a building with large windows, wearing a white sleeveless crop top, high-waisted blue denim skirt, and gray sneakers. She looks down while gently turning her body, holding her arms slightly out to the sides. A pink and white flower headband decorates her hair."
+    },
+    {
+      "point": "TTL",
+      "question": "According to the conversation, what category is the clothing in the picture?",
+      "question_image": "../image/Global_Travel_Sustainable_Fashion_Design/QA_IMG_009.jpg",
+      "answer": "Acid Washed Denim Skater Skirt",
+      "session_id": [
+        "D3"
+      ],
+      "clue": [
+        "D3:12",
+        "D3:14",
+        "D3:16",
+        "D3:18"
+      ],
+      "image_caption": "Person from waist to mid-thigh wearing a short, dark, textured flared skirt with an elastic waistband, standing with hands on hips against a plain white background."
+    },
+    {
+      "point": "TTL",
+      "question": "According to the conversation, what category is the clothing in the picture?",
+      "question_image": "../image/Global_Travel_Sustainable_Fashion_Design/QA_IMG_010.jpg",
+      "answer": "Acid Washed Denim Skater Skirt",
+      "session_id": [
+        "D3"
+      ],
+      "clue": [
+        "D3:12",
+        "D3:14",
+        "D3:16",
+        "D3:18"
+      ],
+      "image_caption": "Light blue denim flared skirt hanging on a wooden hanger with a metal hook, against a plain white background. The skirt features an elastic waistband with gathered fabric and a short front zipper detail at the center."
+    },
+    {
+      "point": "TTL",
+      "question": "According to the conversation, what category is the clothing in the picture?",
+      "question_image": "../image/Global_Travel_Sustainable_Fashion_Design/QA_IMG_011.jpg",
+      "answer": "Acid Washed Denim Skater Skirt",
+      "session_id": [
+        "D3"
+      ],
+      "clue": [
+        "D3:12",
+        "D3:14",
+        "D3:16",
+        "D3:18"
+      ],
+      "image_caption": "Person’s lower torso and upper legs wearing a short, flared blue textured skirt with a fitted waistband, against a plain white background."
+    },
+    {
+      "point": "TTL",
+      "question": "According to the conversation, what category is the clothing in the picture?",
+      "question_image": "../image/Global_Travel_Sustainable_Fashion_Design/QA_IMG_012.jpg",
+      "answer": "Acid Washed Denim Skater Skirt",
+      "session_id": [
+        "D3"
+      ],
+      "clue": [
+        "D3:12",
+        "D3:14",
+        "D3:16",
+        "D3:18"
+      ],
+      "image_caption": "Woman from shoulders to mid-thigh wearing a fitted black short-sleeve top and a blue acid-wash denim skater skirt with a flared hem. The skirt has a high waistband with two white horizontal stripes. She has a black bracelet on her right wrist and holds a black backpack by its strap in her left hand. Plain white background."
+    },
+    {
+      "point": "VS",
+      "question": "Which image shows the kimono with oversized bold floral patterns?",
+      "answer": "D3:IMG_002",
+      "session_id": [
+        "D3"
+      ],
+      "clue": [
+        "D3:4"
+      ]
+    },
+    {
+      "point": "VS",
+      "question": "Which image shows the deep blue kimono with patterned print that Sophie ultimately chose?",
+      "answer": "D3:IMG_004",
+      "session_id": [
+        "D3"
+      ],
+      "clue": [
+        "D3:8",
+        "D3:20"
+      ]
+    },
+    {
+      "point": "VS",
+      "question": "Which image shows the soft-toned acid washed skirt that Sophie selected?",
+      "answer": "D3:IMG_008",
+      "session_id": [
+        "D3"
+      ],
+      "clue": [
+        "D3:16",
+        "D3:21"
+      ]
+    },
+    {
+      "point": "MR",
+      "question": "What association did Sophie make with the deep blue kimono?",
+      "answer": "It reminds her of ocean breeze and summer nights.",
+      "session_id": [
+        "D3"
+      ],
+      "clue": [
+        "D3:9"
+      ]
+    },
+    {
+      "point": "TR",
+      "question": "Which country did Sophie visit immediately before this summer wardrobe refresh session?",
+      "answer": "Singapore.",
+      "session_id": [
+        "D2",
+        "D3"
+      ],
+      "clue": [
+        "D2:1",
+        "D3:1"
+      ]
+    },
+    {
+      "point": "FR",
+      "question": "What two countries does Sophie plan to visit in Europe?",
+      "answer": "Italy and the UK.",
+      "session_id": [
+        "D4"
+      ],
+      "clue": [
+        "D4:1",
+        "D4:2",
+        "D4:6"
+      ]
+    },
+    {
+      "point": "MR",
+      "question": "Why does Sophie feel that visiting Florence would be inspiring for their eco-friendly designs?",
+      "answer": "Because of its incredible art scene and the influence of the Renaissance.",
+      "session_id": [
+        "D4"
+      ],
+      "clue": [
+        "D4:2",
+        "D4:3"
+      ]
+    },
+    {
+      "point": "FR",
+      "question": "Which two Italian cities did Sophie mention? Please list them in the order they appeared in the conversation.",
+      "answer": "Florence and Rome.",
+      "session_id": [
+        "D4"
+      ],
+      "clue": [
+        "D4:2",
+        "D4:4"
+      ]
+    },
+    {
+      "point": "AR",
+      "question": "Has Sophie decided on any specific sustainable brands in London that they want to visit?",
+      "answer": "Not mentioned.",
+      "session_id": [
+        "D4"
+      ],
+      "clue": []
+    },
+    {
+      "point": "FR",
+      "question": "Which Italian city did Sophie make a short stop in on her way to Rome?",
+      "answer": "Milan.",
+      "session_id": [
+        "D5"
+      ],
+      "clue": [
+        "D5:1"
+      ]
+    },
+    {
+      "point": "VS",
+      "question": "Which image shows the wide-angle view of Milan?",
+      "answer": "D5:IMG_001",
+      "session_id": [
+        "D5"
+      ],
+      "clue": [
+        "D5:1"
+      ]
+    },
+    {
+      "point": "MR",
+      "question": "What aspect of Milan's street fashion particularly stood out to Sophie?",
+      "answer": "People dress with intention, not extravagance. The style features lots of neutral tones with sharp silhouettes—almost architectural.",
+      "session_id": [
+        "D5"
+      ],
+      "clue": [
+        "D5:2",
+        "D5:3"
+      ]
+    },
+    {
+      "point": "FR",
+      "question": "What type of fabric shop did Sophie visit in Milan?",
+      "answer": "A tiny fabric shop with deadstock linens.",
+      "session_id": [
+        "D5"
+      ],
+      "clue": [
+        "D5:4"
+      ]
+    },
+    {
+      "point": "FR",
+      "question": "What university did Sophie visit in Milan that used to be her dream school?",
+      "answer": "Politecnico di Milano.",
+      "session_id": [
+        "D5"
+      ],
+      "clue": [
+        "D5:9"
+      ]
+    },
+    {
+      "point": "VS",
+      "question": "Which image shows the historic building of Politecnico di Milano?",
+      "answer": "D5:IMG_002",
+      "session_id": [
+        "D5"
+      ],
+      "clue": [
+        "D5:10"
+      ]
+    },
+    {
+      "point": "VS",
+      "question": "Which image shows the modern section of Politecnico di Milano campus?",
+      "answer": "D5:IMG_003",
+      "session_id": [
+        "D5"
+      ],
+      "clue": [
+        "D5:12"
+      ]
+    },
+    {
+      "point": "MR",
+      "question": "What metaphor did Sophie use to describe cities and fashion?",
+      "answer": "Cities feel like conversations, each speaking a different visual language.",
+      "session_id": [
+        "D5"
+      ],
+      "clue": [
+        "D5:8"
+      ]
+    },
+    {
+      "point": "TR",
+      "question": "What city was Sophie planning to visit after Milan?",
+      "answer": "Rome.",
+      "session_id": [
+        "D5"
+      ],
+      "clue": [
+        "D5:1",
+        "D5:16"
+      ]
+    },
+    {
+      "point": "TR",
+      "question": "Did Sophie visit Milan before arriving in Rome?",
+      "answer": "Yes.",
+      "session_id": [
+        "D5",
+        "D6"
+      ],
+      "clue": [
+        "D5:1",
+        "D6:1"
+      ]
+    },
+    {
+      "point": "FR",
+      "question": "What are the main historical sites Sophie visits in Rome? Please list them in the order they appeared in the conversation.",
+      "answer": "Colosseum, Pantheon, St. Peter's Basilica, and Vatican Museums.",
+      "session_id": [
+        "D6"
+      ],
+      "clue": [
+        "D6:1",
+        "D6:3",
+        "D6:4",
+        "D6:6",
+        "D6:9"
+      ]
+    },
+    {
+      "point": "VS",
+      "question": "Which image did Sophie mention that showcases the Colosseum lit up beautifully?",
+      "answer": "D6:IMG_002",
+      "session_id": [
+        "D6"
+      ],
+      "clue": [
+        "D6:2"
+      ]
+    },
+    {
+      "point": "VS",
+      "question": "Which images in the dialogue shows the same landmark as this one?",
+      "question_image": "../image/Global_Travel_Sustainable_Fashion_Design/QA_IMG_013.png",
+      "answer": "D6:IMG_003, D6:IMG_004",
+      "session_id": [
+        "D6"
+      ],
+      "clue": [
+        "D6:3",
+        "D6:4"
+      ],
+      "image_caption": "Ancient stone temple with a large pediment supported by tall Corinthian columns, standing before a massive domed rotunda. Weathered surfaces show age and pockmarks, with the inscription “M·AGRIPPA·L·F·COS·TERTIVM·FECIT” across the frieze. Nearby buildings rise behind the structure, and an open umbrella from a street stall appears at the lower left. The scene is captured in black and white under an overcast sky."
+    },
+    {
+      "point": "TTL",
+      "question": "What is the name of the landmark in this image?",
+      "question_image": "../image/Global_Travel_Sustainable_Fashion_Design/QA_IMG_014.png",
+      "answer": "Pantheon.",
+      "session_id": [
+        "D6"
+      ],
+      "clue": [
+        "D6:3",
+        "D6:4"
+      ],
+      "image_caption": "Black-and-white view of the Pantheon in Rome, featuring its large portico with tall Corinthian columns supporting a triangular pediment. The stone frieze bears the inscription “M·AGRIPPA·L·F·COS·TERTIVM·FECIT.” Part of the rounded dome and surrounding city buildings are visible."
+    },
+    {
+      "point": "VR",
+      "question": "Based on the photos shared by Sophie, in which country was the following picture taken?",
+      "question_image": "../image/Global_Travel_Sustainable_Fashion_Design/QA_IMG_015.png",
+      "answer": "Italy",
+      "session_id": [
+        "D6"
+      ],
+      "clue": [
+        "D6:3",
+        "D6:4"
+      ],
+      "image_caption": "Ancient stone building with a large domed roof and a classical portico supported by tall Corinthian columns. A Latin inscription on the entablature reads “M·AGRIPPA·L·F·COS·TERTIVM·FECIT.” Surrounding urban buildings are partially visible on the right, with an overcast sky above and a canopy or umbrella structure in the lower left foreground."
+    },
+    {
+      "point": "VS",
+      "question": "Which images in the dialogue shows the same landmark as this one?",
+      "question_image": "../image/Global_Travel_Sustainable_Fashion_Design/QA_IMG_016.png",
+      "answer": "D6:IMG_003, D6:IMG_004",
+      "session_id": [
+        "D6"
+      ],
+      "clue": [
+        "D6:3",
+        "D6:4"
+      ],
+      "image_caption": "Architectural rendering of the Pantheon in Rome, showing a large brick-and-stone domed rotunda attached to a classical portico with tall Corinthian columns and triangular pediment. Inscription on the frieze reads “M AGRIPPA L F COS TERTIUM FECIT.”"
+    },
+    {
+      "point": "TTL",
+      "question": "What is the name of the landmark in this image?",
+      "question_image": "../image/Global_Travel_Sustainable_Fashion_Design/QA_IMG_017.png",
+      "answer": "Pantheon.",
+      "session_id": [
+        "D6"
+      ],
+      "clue": [
+        "D6:3",
+        "D6:4"
+      ],
+      "image_caption": "Digital rendering of the Pantheon in Rome, featuring a large cylindrical brick rotunda with a domed roof and an attached rectangular portico. The portico has a triangular pediment supported by rows of tall Corinthian columns. Faint Latin inscription “M AGRIPPA …” is visible on the entablature. The structure stands alone on a simple, light-colored base with no surrounding buildings or landscape."
+    },
+    {
+      "point": "VR",
+      "question": "Based on the photos shared by Sophie, in which country was the following picture taken?",
+      "question_image": "../image/Global_Travel_Sustainable_Fashion_Design/QA_IMG_018.png",
+      "answer": "Italy",
+      "session_id": [
+        "D6"
+      ],
+      "clue": [
+        "D6:3",
+        "D6:4"
+      ],
+      "image_caption": "Large classical building with a cylindrical brick and stone rotunda topped by a dome, attached to a rectangular portico supported by rows of tall Corinthian columns. The triangular pediment above the columns bears a Latin inscription, partially reading “M·AGRIPPA·L·F·COS·TERTIVM·FECIT.” The structure is isolated against a plain white background, emphasizing its architectural form and details."
+    },
+    {
+      "point": "TTL",
+      "question": "What is the name of the landmark in this image?",
+      "question_image": "../image/Global_Travel_Sustainable_Fashion_Design/QA_IMG_019.png",
+      "answer": "St. Peter's Basilica.",
+      "session_id": [
+        "D6"
+      ],
+      "clue": [
+        "D6:7"
+      ],
+      "image_caption": "Stone statue of Jesus in robes holding a large cross stands on a balustrade, one hand raised in blessing. Behind it rises an ornate church tower with columns, statues, and a golden sphere-topped dome, set against a clear blue sky."
+    },
+    {
+      "point": "VR",
+      "question": "Based on the photos shared by Sophie, in which country was the following picture taken?",
+      "question_image": "../image/Global_Travel_Sustainable_Fashion_Design/QA_IMG_020.png",
+      "answer": "Italy",
+      "session_id": [
+        "D6"
+      ],
+      "clue": [
+        "D6:7"
+      ],
+      "image_caption": "Stone statue of a robed figure holding a tall cross, standing on a balustrade ledge of an ornate building. Behind the statue rises a detailed dome with columns, decorative carvings, and a golden sphere and cross at the top, set against a clear blue sky."
+    },
+    {
+      "point": "TR",
+      "question": "From the conversation, which city did Sophie explore right before visiting London?",
+      "answer": "Rome.",
+      "session_id": [
+        "D6",
+        "D7"
+      ],
+      "clue": [
+        "D6:1",
+        "D7:1"
+      ]
+    },
+    {
+      "point": "TR",
+      "question": "When did Sophie go to London during her trip? Return in the format YYYY-MM-DD.",
+      "answer": "2024-07-28",
+      "session_id": [
+        "D7"
+      ],
+      "clue": [
+        "D7:1"
+      ]
+    },
+    {
+      "point": "TR",
+      "question": "Which countries did Sophie visit in July 2024?",
+      "answer": "Italy and the UK.",
+      "session_id": [
+        "D4",
+        "D6",
+        "D7"
+      ],
+      "clue": [
+        "D4:1",
+        "D6:1",
+        "D7:1"
+      ]
+    },
+    {
+      "point": "FR",
+      "question": "What landmark does Sophie admire for its symbolism of resilience and timelessness?",
+      "answer": "Big Ben",
+      "session_id": [
+        "D7"
+      ],
+      "clue": [
+        "D7:2"
+      ]
+    },
+    {
+      "point": "VS",
+      "question": "Which image in the dialogue shows the same landmark as this one?",
+      "question_image": "../image/Global_Travel_Sustainable_Fashion_Design/QA_IMG_021.png",
+      "answer": "D7:IMG_001",
+      "session_id": [
+        "D7"
+      ],
+      "clue": [
+        "D7:2"
+      ],
+      "image_caption": "Illuminated clock tower resembling Big Ben at night, its detailed golden stonework highlighted against a dark sky. Swirling, smoke-like light effects surround the tower, emphasizing the large clock faces on multiple sides."
+    },
+    {
+      "point": "TTL",
+      "question": "What is the name of the landmark in this image?",
+      "question_image": "../image/Global_Travel_Sustainable_Fashion_Design/QA_IMG_022.png",
+      "answer": "Big Ben.",
+      "session_id": [
+        "D7"
+      ],
+      "clue": [
+        "D7:2"
+      ],
+      "image_caption": "Illuminated clock tower resembling Big Ben at night, with two large clock faces showing Roman numerals and black clock hands. The stone structure is lit in warm golden tones, highlighting ornate architectural details. Swirling clouds or smoke-like light effects surround the tower against a dark, nearly black sky, giving the scene a dramatic, high-contrast appearance."
+    },
+    {
+      "point": "VR",
+      "question": "When did Sophie arrive in the city where the landmark in the image is located? Return in the format YYYY-MM-DD.",
+      "question_image": "../image/Global_Travel_Sustainable_Fashion_Design/QA_IMG_023.png",
+      "answer": "2024-07-28",
+      "session_id": [
+        "D7"
+      ],
+      "clue": [
+        "D7:1",
+        "D7:2"
+      ],
+      "image_caption": "Illuminated clock tower with ornate stone detailing standing against a dark sky, its large clock faces showing the time as approximately 10:08. Swirling, luminous clouds or smoke surround the upper sections of the tower, creating a dramatic contrast with the deep blue background. No other buildings or objects are visible."
+    },
+    {
+      "point": "FR",
+      "question": "Which iconic structure is noted for its Victorian Gothic architecture?",
+      "answer": "Tower Bridge",
+      "session_id": [
+        "D7"
+      ],
+      "clue": [
+        "D7:11"
+      ]
+    },
+    {
+      "point": "FR",
+      "question": "What two categories of clothing did Sophie explore during her London fashion shopping?",
+      "answer": "Buttoned Denim Shirt Dress and Chenille & Metallic Knit Skirt.",
+      "session_id": [
+        "D8"
+      ],
+      "clue": [
+        "D8:2",
+        "D8:8"
+      ]
+    },
+    {
+      "point": "VR",
+      "question": "How many Buttoned Denim Shirt Dresses did Sophie view in total? Please answer using an Arabic numeral (e.g., “2” instead of “Two”).",
+      "answer": "6",
+      "session_id": [
+        "D8"
+      ],
+      "clue": [
+        "D8:2",
+        "D8:3",
+        "D8:4",
+        "D8:5",
+        "D8:6",
+        "D8:7"
+      ]
+    },
+    {
+      "point": "VR",
+      "question": "In the image, which clothing item appeared in the dialogue—the one on the left, right, or both? What type is it?",
+      "question_image": "../image/Global_Travel_Sustainable_Fashion_Design/QA_IMG_024.jpg",
+      "answer": "Both, the buttoned denim shirt dress.",
+      "session_id": [
+        "D8"
+      ],
+      "clue": [
+        "D8:2",
+        "D8:3",
+        "D8:4",
+        "D8:5",
+        "D8:6",
+        "D8:7"
+      ],
+      "image_caption": "Two women stand against a plain light background, each wearing a belted shirt dress. The woman on the left wears a light blue denim shirt dress with rolled sleeves, a tied waist, and tan platform sandals. The woman on the right wears a long-sleeved black shirt dress with a brown belt and black heeled shoes. Both face forward with relaxed postures, highlighting the contrasting colors and styles of the outfits."
+    },
+    {
+      "point": "TTL",
+      "question": "According to the conversation, what category is the clothing in the picture?",
+      "question_image": "../image/Global_Travel_Sustainable_Fashion_Design/QA_IMG_025.jpg",
+      "answer": "Buttoned Denim Shirt Dress",
+      "session_id": [
+        "D8"
+      ],
+      "clue": [
+        "D8:2",
+        "D8:3",
+        "D8:4",
+        "D8:5",
+        "D8:6",
+        "D8:7"
+      ],
+      "image_caption": "Woman walking sideways in a studio setting, wearing a long light-blue denim shirt dress with high side slits and long sleeves. She has long, wavy dark hair and neutral makeup, and she is looking over her shoulder toward the camera. She wears flat tan sandals with ankle straps. Background is plain white with no visible text."
+    },
+    {
+      "point": "TTL",
+      "question": "According to the conversation, what category is the clothing in the picture?",
+      "question_image": "../image/Global_Travel_Sustainable_Fashion_Design/QA_IMG_026.jpg",
+      "answer": "Buttoned Denim Shirt Dress",
+      "session_id": [
+        "D8"
+      ],
+      "clue": [
+        "D8:2",
+        "D8:3",
+        "D8:4",
+        "D8:5",
+        "D8:6",
+        "D8:7"
+      ],
+      "image_caption": "Woman with short brown hair and red lipstick stands against a plain white wall, wearing a knee-length, short-sleeved blue dress with front buttons, a belt, and black ankle boots. One hand rests in her pocket while she faces forward. A worn wooden rocking horse is positioned on the floor to her right."
+    },
+    {
+      "point": "TTL",
+      "question": "According to the conversation, what category is the clothing in the picture?",
+      "question_image": "../image/Global_Travel_Sustainable_Fashion_Design/QA_IMG_027.jpg",
+      "answer": "Buttoned Denim Shirt Dress",
+      "session_id": [
+        "D8"
+      ],
+      "clue": [
+        "D8:2",
+        "D8:3",
+        "D8:4",
+        "D8:5",
+        "D8:6",
+        "D8:7"
+      ],
+      "image_caption": "Young woman wearing a blue long-sleeve dress and sunglasses stands in front of a white picket fence and tall green palm leaves, with one hand resting on her head. She carries a small black crossbody purse decorated with gold details and a white strap. She is positioned on a stone or brick ledge at the base of the fence in an outdoor setting."
+    },
+    {
+      "point": "VR",
+      "question": "How many Chenille & Metallic Knit Skirts did Sophie examine in total? Please answer using an Arabic numeral (e.g., “2” instead of “Two”).",
+      "answer": "6",
+      "session_id": [
+        "D8"
+      ],
+      "clue": [
+        "D8:8",
+        "D8:9",
+        "D8:10",
+        "D8:11",
+        "D8:20",
+        "D8:21"
+      ]
+    },
+    {
+      "point": "TTL",
+      "question": "According to the conversation, what category is the clothing in the picture?",
+      "question_image": "../image/Global_Travel_Sustainable_Fashion_Design/QA_IMG_028.jpg",
+      "answer": "Chenille & Metallic Knit Skirt",
+      "session_id": [
+        "D8"
+      ],
+      "clue": [
+        "D8:2",
+        "D8:3",
+        "D8:4",
+        "D8:5",
+        "D8:6",
+        "D8:7"
+      ],
+      "image_caption": "Female model shown in two outfits in an industrial studio with metal ladders and wooden platforms. On the left she wears a striped long-sleeve top under a loose gray sleeveless sweater, a knee-length denim skirt with visible seams, and black open-toe ankle boots. On the right she wears a patterned long-sleeve blouse tucked into a high-waisted, button-front denim skirt with a belt, paired with the same boots."
+    },
+    {
+      "point": "TTL",
+      "question": "According to the conversation, what category is the clothing in the picture?",
+      "question_image": "../image/Global_Travel_Sustainable_Fashion_Design/QA_IMG_029.jpg",
+      "answer": "Chenille & Metallic Knit Skirt",
+      "session_id": [
+        "D8"
+      ],
+      "clue": [
+        "D8:2",
+        "D8:3",
+        "D8:4",
+        "D8:5",
+        "D8:6",
+        "D8:7"
+      ],
+      "image_caption": "Knee-length straight skirt in brown fabric with a subtle textured finish, featuring vertical multitone stripes and patterns concentrated on one side. The skirt has a fitted, high waist with a dark, smooth waistband and a clean, streamlined silhouette, displayed against a plain white background."
+    },
+    {
+      "point": "VS",
+      "question": "Which six images show the Buttoned Denim Shirt Dresses?",
+      "answer": "D8:IMG_001, D8:IMG_002, D8:IMG_003, D8:IMG_004, D8:IMG_005, D8:IMG_006",
+      "session_id": [
+        "D8"
+      ],
+      "clue": [
+        "D8:2",
+        "D8:3",
+        "D8:4",
+        "D8:5",
+        "D8:6",
+        "D8:7"
+      ]
+    },
+    {
+      "point": "VS",
+      "question": "Which image shows the lighter-wash denim shirt dress that Sophie ultimately chose?",
+      "answer": "D8:IMG_005",
+      "session_id": [
+        "D8"
+      ],
+      "clue": [
+        "D8:6",
+        "D8:12"
+      ]
+    },
+    {
+      "point": "VS",
+      "question": "Which image shows the pleated metallic knit skirt that Sophie selected?",
+      "answer": "D8:IMG_009",
+      "session_id": [
+        "D8"
+      ],
+      "clue": [
+        "D8:10",
+        "D8:14"
+      ]
+    },
+    {
+      "point": "KR",
+      "question": "How did the assistant describe the second denim shirt dress?",
+      "answer": "It feels more dramatic with the oversized silhouette—very London street style boldness.",
+      "session_id": [
+        "D8"
+      ],
+      "clue": [
+        "D8:3"
+      ]
+    },
+    {
+      "point": "KR",
+      "question": "Which two additional images of Chenille & Metallic Knit Skirts did Sophie share later? Return the image_ids separated by commas.",
+      "answer": "D8:IMG_011, D8:IMG_012",
+      "session_id": [
+        "D8"
+      ],
+      "clue": [
+        "D8:20",
+        "D8:21"
+      ]
+    },
+    {
+      "point": "KR",
+      "question": "After seeing the two additional knit skirts, did Sophie change her original choice?",
+      "answer": "No.",
+      "session_id": [
+        "D8"
+      ],
+      "clue": [
+        "D8:23"
+      ]
+    },
+    {
+      "point": "CD",
+      "question": "Please determine whether the following information conflicts with the dialogue memory: Sophie change her original choice after seeing the two additional knit skirts.",
+      "answer": "Yes.",
+      "session_id": [
+        "D8"
+      ],
+      "clue": [
+        "D8:23"
+      ]
+    },
+    {
+      "point": "MR",
+      "question": "How does Sophie believe financial strength in cities like London and Singapore can impact sustainable fashion?",
+      "answer": "The financial strength can drive investment into sustainable practices, allowing designers to access eco-friendly materials and innovate further.",
+      "session_id": [
+        "D1",
+        "D9"
+      ],
+      "clue": [
+        "D1:3",
+        "D9:7"
+      ]
+    },
+    {
+      "point": "AR",
+      "question": "Is there any detailed information about Sophie’s planned mentorship initiative such as curriculum or partners?",
+      "answer": "Not mentioned.",
+      "session_id": [
+        "D9"
+      ],
+      "clue": []
+    },
+    {
+      "point": "MR",
+      "question": "What two cities did Sophie compare in terms of their financial advancements? Please list them in the order that Sophie visited in her trip.",
+      "answer": "Singapore and London.",
+      "session_id": [
+        "D9"
+      ],
+      "clue": [
+        "D9:1",
+        "D9:5",
+        "D9:7"
+      ]
+    }
+  ]
+}

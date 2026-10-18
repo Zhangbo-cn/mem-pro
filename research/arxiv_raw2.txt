@@ -1,0 +1,10 @@
+Can Language Models Resolve Real-World GitHub Issues	2310.06770v3	2023-10-10	SWE-bench: Can Language Models Resolve Real-World GitHub Issues?
+Self-RAG: Learning to Retrieve, Generate, and Critique	2310.11511v1	2023-10-17	Self-RAG: Learning to Retrieve, Generate, and Critique through Self-Reflection
+Memobase	NOT_FOUND
+MemoryAgentBench	2610.09193v1	2026-10-06	Bookkeeping, Composition, or Unreachable Gold? Reading MemoryAgentBench's Conflict-Resolution Scores Against a Frozen Last-Write Resolver
+Temporal Knowledge Graph Reasoning	2404.01695v1	2024-04-02	Selective Temporal Knowledge Graph Reasoning
+Temporal Knowledge Graph Reasoning	2110.08765v2	2021-10-17	Temporal Knowledge Graph Reasoning Triggered by Memories
+MemInsight	2503.21760v2	2025-03-27	MemInsight: Autonomous Memory Augmentation for LLM Agents
+Cognee	NOT_FOUND
+MemBench	2504.06813v1	2025-04-09	Introducing the Arm-membench Throughput Benchmark
+MemBench	2407.17095v2	2024-07-24	MemBench: Memorized Image Trigger Prompt Dataset for Diffusion Models

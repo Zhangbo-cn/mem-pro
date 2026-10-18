@@ -1,0 +1,2344 @@
+{
+  "character_profile": {
+    "name": "Lena",
+    "persona_summary": "Lena is a 21-year-old university student majoring in Life Sciences. She has always been fascinated by animals and spends much of her free time volunteering at the campus animal care center. Lena enjoys studying animal behavior and dreams of combining her academic knowledge with her love for pets to promote better human-animal relationships.",
+    "traits": [
+      "curious",
+      "caring",
+      "enthusiastic"
+    ],
+    "conversation_style": "Warm and inquisitive, Lena’s conversations often blend empathy with scientific curiosity. She expresses genuine interest in understanding how things work, especially in nature and animal behavior, and enjoys connecting personal experiences with broader scientific or technological ideas. Her tone is friendly, thoughtful, and full of quiet enthusiasm for learning and discovery."
+  },
+  "multi_session_dialogues": [
+    {
+      "session_id": "D1",
+      "date": "2024-05-12",
+      "dialogues": [
+        {
+          "round": "D1:1",
+          "user": "Hi! I’ve been really enjoying my Life Sciences major classes lately. Learning about how different animals behave and communicate is just fascinating!",
+          "assistant": "That sounds wonderful, Lena! Animal behavior is such a fascinating area. It bridges biology, psychology, and even evolution. What part of animal communication has caught your attention recently?"
+        },
+        {
+          "round": "D1:2",
+          "user": "I think it’s incredible how animals can express emotions and intentions without words. Like dogs wagging their tails or birds using songs to communicate. It feels like a whole different language!",
+          "assistant": "Exactly! Animals have rich communication systems. Dogs use body language and scent cues, while birds use complex sound patterns. Observing those subtle signals must be really rewarding for someone studying Life Sciences. Do you get to apply this knowledge in your volunteer work?"
+        },
+        {
+          "round": "D1:3",
+          "user": "Yes! I volunteer at our campus animal care center, and I’ve learned a lot just from spending time with the animals there. Each one has its own personality, especially the dogs. They’re so expressive!",
+          "assistant": "That’s amazing experience, Lena. Direct interaction with animals really helps reinforce what you learn in theory. Have you thought about adopting a pet yourself someday?"
+        },
+        {
+          "round": "D1:4",
+          "user": "Actually, yes! I’ve been thinking of adopting a small dog once I can balance my studies and daily routine better. I want a breed that’s gentle and easy to get along with.",
+          "assistant": "That’s such a thoughtful approach! Choosing a pet that fits your lifestyle is really important. Have you been looking into any specific breeds so far?"
+        },
+        {
+          "round": "D1:5",
+          "user": "I’ve been reading about Maltese dogs. They seem adorable, and I love how cheerful and affectionate they are. Do you know much about them?",
+          "assistant": "Yes, Maltese dogs are fantastic companions! They’re small, bright, and full of love. Their silky white fur makes them look elegant, but it also means you’ll need to groom them regularly. Would you like to learn about their personality or daily care routines?",
+          "image_id": [
+            "D1:IMG_001"
+          ],
+          "input_image": [
+            "../image/Academic_Animal_Pet_Research_Life/D1_IMG_001.jpg"
+          ],
+          "image_caption": [
+            "Small, fluffy white puppy sitting on a dark wooden chair in a black-and-white setting, facing slightly left, with its front paws close together and ears perked up against a plain indoor background."
+          ]
+        },
+        {
+          "round": "D1:6",
+          "user": "Both! I want to make sure I can take good care of one before adopting.",
+          "assistant": "You’re being very responsible — that’s great to see! Maltese dogs are affectionate, playful, and deeply bonded with their owners. They love cuddles and short play sessions indoors. As for care, they need brushing almost every day to prevent tangles and some light exercise, like short walks or indoor games.",
+          "image_id": [
+            "D1:IMG_002"
+          ],
+          "input_image": [
+            "../image/Academic_Animal_Pet_Research_Life/D1_IMG_002.jpg"
+          ],
+          "image_caption": [
+            "Small white long-haired dog with pink-dyed fur on its head and tail standing on green grass, facing the camera with mouth slightly open, near a brick building and concrete walkway in bright sunlight; shadow of the photographer visible in the foreground."
+          ]
+        },
+        {
+          "round": "D1:7",
+          "user": "That sounds perfect! I spend a lot of time studying at home, so I think I could give them plenty of attention. Are they okay being around other pets?",
+          "assistant": "Yes, as long as you socialize them early, Maltese dogs get along well with other pets. Their gentle nature makes them friendly with both people and animals. Since you already have experience working with dogs, I think you’d do great helping them adapt.",
+          "image_id": [
+            "D1:IMG_003"
+          ],
+          "input_image": [
+            "../image/Academic_Animal_Pet_Research_Life/D1_IMG_003.jpg"
+          ],
+          "image_caption": [
+            "Two small fluffy white dogs run across a grassy yard, ears and tails flying. Both dogs are low to the ground, moving toward the right, with a green wire fence in the background."
+          ]
+        },
+        {
+          "round": "D1:8",
+          "user": "That’s reassuring! I sometimes help take care of cats and rabbits at the animal center too, so it’d be nice if my future dog could get along with them.",
+          "assistant": "That’s awesome! Your patience and understanding of animal behavior will make introductions much smoother. When introducing a Maltese to other pets, start with short, calm meetings and positive reinforcement — it helps build trust quickly."
+        },
+        {
+          "round": "D1:9",
+          "user": "I’ll definitely keep that in mind. What about their diet? Do Maltese dogs have any special food requirements?",
+          "assistant": "Good question! They have small stomachs but can be a little picky eaters. A balanced diet with high-quality protein, some healthy fats, and light vegetables works well. Avoid overly salty or oily food. Since they’re small, portion control is key to prevent weight gain."
+        },
+        {
+          "round": "D1:10",
+          "user": "Got it! I think I’d really enjoy learning to cook simple, healthy meals for them — maybe using what I know from biology to understand nutrition better!",
+          "assistant": "That’s such a clever idea, Lena! Your background in Life Sciences could help you understand canine nutrition on a deeper level — like how proteins support muscle growth or how certain vitamins affect coat health. You could even start a student project on pet nutrition!"
+        },
+        {
+          "round": "D1:11",
+          "user": "That would be so fun! I could study diet patterns in small dogs and maybe even write a paper about it. I really want to find ways to combine science with my love for animals.",
+          "assistant": "You’re already on the right path! Many careers — from veterinary research to animal therapy — benefit from that mix of passion and knowledge. Maybe your future Maltese could even be your little research assistant someday!",
+          "image_id": [
+            "D1:IMG_004"
+          ],
+          "input_image": [
+            "../image/Academic_Animal_Pet_Research_Life/D1_IMG_004.jpg"
+          ],
+          "image_caption": [
+            "Small white puppy in a pink and green outfit walks toward the camera on a carpeted floor, tongue out, with a rubber chicken toy lying in the foreground and a TV stand in the background."
+          ]
+        },
+        {
+          "round": "D1:12",
+          "user": "Haha, I’d love that! A tiny assistant with a white fluffy coat. Thank you for all the advice. I feel even more motivated to plan this properly now.",
+          "assistant": "You’re very welcome, Lena! It’s heartwarming to see how much thought you’re putting into it. I’m sure your studies and your future pet will both thrive under your care. Keep me updated when you find your Maltese friend!"
+        }
+      ]
+    },
+    {
+      "session_id": "D2",
+      "date": "2024-05-23",
+      "dialogues": [
+        {
+          "round": "D2:1",
+          "user": "Guess what? I finally adopted a Maltese dog yesterday! I’m so happy — she’s even cuter than I imagined.",
+          "assistant": "That’s wonderful, Lena! Congratulations! How’s she settling in so far? Is she playful or still getting used to her new home?",
+          "image_id": [
+            "D2:IMG_001"
+          ],
+          "input_image": [
+            "../image/Academic_Animal_Pet_Research_Life/D2_IMG_001.jpg"
+          ],
+          "image_caption": [
+            "Small white dog sitting inside an open cardboard box filled with scattered papers and mail, including a flyer with the word “FREE” visible. The box is on a wooden floor near a light-colored wall and a white metal gate."
+          ]
+        },
+        {
+          "round": "D2:2",
+          "user": "She’s been so curious about everything! At first she was shy, but now she follows me everywhere. She even naps next to my study desk when I read or write notes.",
+          "assistant": "That’s adorable! Maltese dogs are known for forming very close bonds with their owners. It sounds like she already trusts you completely. Have you decided on a name yet?"
+        },
+        {
+          "round": "D2:3",
+          "user": "Not yet! I want something that fits her personality — gentle but lively. I’ve been asking my friends for ideas too. My friend Amy has a Cairn Terrier, and she gave me some tips.",
+          "assistant": "Oh, Cairn Terriers! They’re quite different from Maltese dogs — more energetic and adventurous. Amy’s must keep her busy! What did she say about naming pets?",
+          "image_id": [
+            "D2:IMG_002"
+          ],
+          "input_image": [
+            "../image/Academic_Animal_Pet_Research_Life/D2_IMG_002.jpg"
+          ],
+          "image_caption": [
+            "Small, shaggy, light-brown terrier standing alert on a grassy lawn, facing slightly left with ears perked and tail raised, in an outdoor garden bordered by dense green hedges and trees in the background."
+          ]
+        },
+        {
+          "round": "D2:4",
+          "user": "Amy said her Cairn Terrier is super active and always digging around in the yard. Apparently, that’s part of their nature — they were bred to hunt small animals in rocky areas!",
+          "assistant": "Exactly! Cairn Terriers are brave and curious little dogs. They love to explore and have tons of energy. They can be stubborn at times, but that’s just because they’re so independent. Did Amy mention if it’s hard to train her dog?",
+          "image_id": [
+            "D2:IMG_003"
+          ],
+          "input_image": [
+            "../image/Academic_Animal_Pet_Research_Life/D2_IMG_003.jpg"
+          ],
+          "image_caption": [
+            "Small tan dog with shaggy fur sits on a gray stone pavement, looking slightly to the side. In the foreground, bright pink hydrangea flowers with green leaves partially frame the view of the dog."
+          ]
+        },
+        {
+          "round": "D2:5",
+          "user": "She did! She said training takes patience, but it’s rewarding once they build trust. She uses a lot of positive reinforcement, and her dog responds really well to it. Apparently, consistency is key.",
+          "assistant": "That makes total sense. Cairn Terriers are smart but have strong personalities — they respect confident but gentle guidance. It sounds like Amy really understands her dog’s needs."
+        },
+        {
+          "round": "D2:6",
+          "user": "Yeah, and she told me she named her Cairn Terrier 'Pebble' because the breed’s name comes from the Scottish word for rock piles, 'cairns.' Isn’t that cute and meaningful?",
+          "assistant": "That’s such a creative name! It really fits a Cairn Terrier’s personality — small, tough, and full of spirit. I love how the name connects to the breed’s origin. Maybe you could do something similar for your Maltese, something symbolic or personal."
+        },
+        {
+          "round": "D2:7",
+          "user": "Yeah, I was thinking about that! Since Maltese dogs are from the island of Malta, maybe something inspired by the sea or sunshine would suit her.",
+          "assistant": "That’s a great idea! Names like 'Coral', 'Sunny', or 'Lumi' — which means 'light' in Finnish — could capture that Mediterranean warmth and brightness. Do any of those resonate with you?"
+        },
+        {
+          "round": "D2:8",
+          "user": "Hmm, 'Lumi' sounds really sweet, and it fits her white fur perfectly! I can totally imagine calling her that when she runs toward me.",
+          "assistant": "‘Lumi’ is a beautiful choice — soft, bright, and full of warmth. It suits a Maltese’s gentle nature perfectly. She’s going to love hearing it from you!"
+        },
+        {
+          "round": "D2:9",
+          "user": "I just tried calling her 'Lumi' a few times, and she wagged her tail every time! I think she approves. She’s been following me all morning with that tiny happy bounce.",
+          "assistant": "That’s so heartwarming, Lena! Dogs can really sense affection in our tone. It sounds like you and Lumi are already best friends. Have you taken her for her first walk yet?",
+          "image_id": [
+            "D2:IMG_004"
+          ],
+          "input_image": [
+            "../image/Academic_Animal_Pet_Research_Life/D2_IMG_004.jpg"
+          ],
+          "image_caption": [
+            "Small fluffy white puppy sitting on a beige carpet, facing the camera with its mouth open and tongue out. A blue cushion or dog bed with faint stains is on the floor to the left, and part of a rope toy is visible in the upper right corner."
+          ]
+        },
+        {
+          "round": "D2:10",
+          "user": "Yes, I took her out to a small park near campus. She was a little nervous at first, but then she started exploring the grass and chasing a leaf. I couldn’t stop smiling!",
+          "assistant": "That’s such a precious moment. First walks are always special — they show trust and curiosity at the same time. It sounds like Lumi is adjusting wonderfully to her new life with you."
+        },
+        {
+          "round": "D2:11",
+          "user": "She really is. I feel like adopting her was one of the best decisions I’ve ever made. She makes every day brighter — and somehow, studying animal behavior feels even more meaningful now.",
+          "assistant": "That’s beautiful, Lena. It’s like your studies and your heart have aligned — Lumi isn’t just your pet, she’s part of your journey in understanding life itself. You two make a perfect team."
+        },
+        {
+          "round": "D2:12",
+          "user": "Thank you! I’ll definitely keep you updated on Lumi’s adventures. Maybe next time I can show you a photo of her playing with Amy’s Cairn Terrier!",
+          "assistant": "I’d love that! It’ll be adorable to see Lumi and Pebble together — two little friends from different worlds. Congratulations again, Lena. Lumi’s lucky to have you!"
+        }
+      ]
+    },
+    {
+      "session_id": "D3",
+      "date": "2024-06-18",
+      "dialogues": [
+        {
+          "round": "D3:1",
+          "user": "Lumi has been such an inspiration lately. Spending time with her makes me think more about how animals think and learn. I’ve started wondering how technology, like AI, could help us study animal behavior in deeper ways.",
+          "assistant": "That’s a fascinating thought, Lena! AI is transforming Life Sciences — from decoding animal communication patterns to predicting ecological changes. Are you thinking about exploring this combination more seriously in your academic path?"
+        },
+        {
+          "round": "D3:2",
+          "user": "Yes! I’ve been reading research papers on using computer vision to analyze animal movement. It’s amazing how machine learning models can detect emotional states or stress behaviors in pets.",
+          "assistant": "Exactly — that’s one of the most exciting areas! Some researchers are even building reinforcement learning models to simulate animal cognition. For someone with your Life Sciences background, that kind of interdisciplinary study would be a perfect fit."
+        },
+        {
+          "round": "D3:3",
+          "user": "That’s why I’m planning to apply for a master’s in computer science. I really want to gain more technical skills so I can apply AI to life science research. I think that combination could lead to something meaningful.",
+          "assistant": "That’s a brilliant goal. With your foundation in animal behavior and biology, adding AI and computing skills would make you uniquely positioned for bio-AI research. Have you looked into specific programs yet?"
+        },
+        {
+          "round": "D3:4",
+          "user": "Yes! I’ve been looking into Carnegie Mellon University. Their computer science program is outstanding, and they also have strong interdisciplinary labs that blend AI with biology and robotics.",
+          "assistant": "Fantastic choice! CMU has world-class AI research and a collaborative culture that encourages cross-domain exploration. Their Computational Biology Department and Robotics Institute often collaborate on projects involving animal movement and sensory perception."
+        },
+        {
+          "round": "D3:5",
+          "user": "That’s exactly what drew me in! I want to work on something that bridges how animals process information and how machines can learn from that. Maybe something like biologically inspired AI models.",
+          "assistant": "That’s a deep and promising direction. Biologically inspired learning models are one of the key frontiers of modern AI. CMU’s labs have projects studying swarm intelligence and neural modeling — they’d be a perfect place for you to explore those ideas."
+        },
+        {
+          "round": "D3:6",
+          "user": "I think I’ll highlight that in my application — my background in animal behavior and my passion for understanding learning processes, both natural and artificial.",
+          "assistant": "Exactly! Admissions committees love applicants who bring unique perspectives. You could emphasize how your observations from real animals, like Lumi and the dogs at your care center, shape your understanding of learning dynamics."
+        },
+        {
+          "round": "D3:7",
+          "user": "Good point. I’ve also started reviewing online courses in Python and machine learning. I want to be well-prepared technically before applying.",
+          "assistant": "That’s a great idea! You could start with beginner ML frameworks like PyTorch or TensorFlow and practice small projects — maybe build a model that classifies dog behavior from videos. That would make a fantastic portfolio piece."
+        },
+        {
+          "round": "D3:8",
+          "user": "That’s what I was thinking too! I could record simple behavior videos at the animal center — like tail wagging, sitting, or pacing — and try training a model to recognize them. It’d combine everything I love.",
+          "assistant": "That’s perfect! It shows initiative, creativity, and domain understanding. You could even discuss the ethical side — how AI can assist animal welfare or veterinary diagnostics — which CMU really values in their interdisciplinary projects."
+        },
+        {
+          "round": "D3:9",
+          "user": "I like that idea a lot. I want my work to be both scientific and meaningful. Maybe I can even collaborate with a biology lab on data collection.",
+          "assistant": "Absolutely. Interdisciplinary collaboration is one of CMU’s strengths — professors love students who think beyond boundaries. You could mention your willingness to connect Life Sciences with AI in your statement of purpose to make it stand out."
+        },
+        {
+          "round": "D3:10",
+          "user": "I’ve started drafting my personal statement. I’m trying to show how my curiosity about animals naturally evolved into an interest in AI as a new tool for exploration. I want to keep the tone sincere but ambitious.",
+          "assistant": "That’s the perfect tone! You could structure it like a story — how your experiences with animal care, your academic studies, and your fascination with cognition led you toward computational approaches. That narrative flow feels genuine and compelling."
+        },
+        {
+          "round": "D3:11",
+          "user": "I’ll definitely do that. I also want to mention some professors whose work aligns with my interests. Do you think it’s good to name specific labs?",
+          "assistant": "Yes, but only if you’ve read their work! You could mention one or two professors in computational neuroscience, AI for biology, or behavioral modeling — and explain why their approach resonates with your goals. It shows focus and genuine enthusiasm."
+        },
+        {
+          "round": "D3:12",
+          "user": "Got it. I’m also preparing for the GRE and planning to polish my research proposal. I really want to make sure my application feels cohesive — from my motivation to my technical readiness.",
+          "assistant": "That’s the right mindset, Lena. And remember, CMU values not just technical skill, but also clarity of purpose. If you can articulate how your Life Sciences background gives you insight into intelligent behavior, you’ll stand out for sure."
+        },
+        {
+          "round": "D3:13",
+          "user": "Thanks, that helps a lot. By the way, I found something fun while reading about CMU — their mascot is a Scottish Terrier! Isn’t that adorable?",
+          "assistant": "Yes! Scotty the Scottish Terrier — a small but mighty symbol of CMU’s spirit. They’re clever, confident, and loyal, much like CMU’s culture of persistence and curiosity.",
+          "image_id": [
+            "D3:IMG_001"
+          ],
+          "input_image": [
+            "../image/Academic_Animal_Pet_Research_Life/D3_IMG_001.jpg"
+          ],
+          "image_caption": [
+            "Carnegie Mellon University athletics logo featuring a black Scottish Terrier in profile wearing a red tartan scarf inside a white and black shield, on a maroon background with the text “Carnegie Mellon University TARTANS.”"
+          ]
+        },
+        {
+          "round": "D3:14",
+          "user": "I looked up some photos of Scottish Terriers afterward — they’re so charming! Their little beards and proud posture make them look both serious and adorable.",
+          "assistant": "Exactly! Scottish Terriers have that unique mix of elegance and determination. They were originally bred for hunting in Scotland, so even though they’re small, they have incredible confidence and courage.",
+          "image_id": [
+            "D3:IMG_002"
+          ],
+          "input_image": [
+            "../image/Academic_Animal_Pet_Research_Life/D3_IMG_002.jpg"
+          ],
+          "image_caption": [
+            "Two black Scottish Terriers, one adult and one puppy, stand on a green grassy hill. The adult dog faces forward with tongue out, while the puppy looks toward it. A calm blue sea stretches in the background."
+          ]
+        },
+        {
+          "round": "D3:15",
+          "user": "That explains their alert look! I love how they seem to always stand tall, like they’re guarding something important. I’ve heard they can be a bit stubborn though?",
+          "assistant": "Yes, a little! But that’s part of their charm. They’re independent thinkers — very loyal once they trust you, but they like to do things their own way. It’s what makes them such strong-willed and lovable companions."
+        },
+        {
+          "round": "D3:16",
+          "user": "I love that! I actually adore terriers — they’re so smart and full of personality. It feels like another little sign that CMU might be the right place for me.",
+          "assistant": "It does seem like destiny, doesn’t it? From Lumi the Maltese to Scotty the Terrier — both embody curiosity, loyalty, and energy. Maybe that’s the spirit guiding your next chapter!",
+          "image_id": [
+            "D3:IMG_003"
+          ],
+          "input_image": [
+            "../image/Academic_Animal_Pet_Research_Life/D3_IMG_003.jpg"
+          ],
+          "image_caption": [
+            "Black Scottish Terrier in close-up profile outdoors, showing its wiry coat, pointed ears, and distinctive beard and eyebrows. The dog faces right, with a neutral expression, against a blurred background of wire fencing, pavement, and green grass."
+          ]
+        },
+        {
+          "round": "D3:17",
+          "user": "Haha, maybe! Thank you for helping me organize my thoughts. I feel a lot more confident about combining AI and Life Sciences now — and even more motivated to aim for CMU.",
+          "assistant": "You’re very welcome, Lena. You have the passion, the curiosity, and the compassion — all the makings of a great interdisciplinary researcher. I can already imagine Lumi cheering you on from your study desk while you prepare your CMU application!"
+        }
+      ]
+    },
+    {
+      "session_id": "D4",
+      "date": "2024-06-25",
+      "dialogues": [
+        {
+          "round": "D4:1",
+          "user": "I joined an online animal behavior seminar last night. It was pretty spontaneous, but I’m glad I clicked into it — the speaker discussed vocal communication in small mammals.",
+          "assistant": "That sounds fascinating! What part of the presentation caught your attention the most?"
+        },
+        {
+          "round": "D4:2",
+          "user": "She showed sonograms of rodent calls — some ultrasonic, some audible. I didn’t realize how rich their hidden sound vocabulary could be.",
+          "assistant": "Exactly! Many small mammals communicate in ranges humans never hear without equipment. Did she talk about how these calls relate to social behavior?",
+          "image_id": [
+            "D4:IMG_001"
+          ],
+          "input_image": [
+            "../image/Academic_Animal_Pet_Research_Life/D4_IMG_001.jpg"
+          ],
+          "image_caption": [
+            "Three stacked spectrogram-style graphs with labeled axes show distributions of dark vertical bands over time. The top plot is labeled “A” with a mark “X” near clustered bands between 8 and 9 on the horizontal axis. The middle plot is labeled “G,” with bands concentrated between 1 and 4. The bottom plot is labeled “A,” with scattered vertical patterns from 0 to about 5 on the horizontal axis."
+          ]
+        },
+        {
+          "round": "D4:3",
+          "user": "Yes! Some high-pitched squeaks indicate excitement or curiosity. It reminded me of Lumi’s little chirpy sounds when she's especially happy.",
+          "assistant": "That’s an adorable parallel. Your time observing Lumi gives you such intuitive insight into real animal behavior."
+        },
+        {
+          "round": "D4:4",
+          "user": "It made me wonder — if AI could visualize dog vocal patterns like those sonograms, maybe we could classify emotional states someday.",
+          "assistant": "That’s a brilliant interdisciplinary thought. Sound–emotion mapping is still early-stage research, so your idea definitely has room to grow."
+        },
+        {
+          "round": "D4:5",
+          "user": "The speaker also mentioned social mirroring. It reminded me of how Lumi imitates other pets during visits.",
+          "assistant": "Social learning is absolutely a real phenomenon — especially in dogs. Lumi observing others is a great natural example."
+        },
+        {
+          "round": "D4:6",
+          "user": "Someone asked if pets can learn bad habits from each other. That made everyone laugh.",
+          "assistant": "They definitely can — just like humans! They learn whatever behaviors get attention or seem rewarding."
+        },
+        {
+          "round": "D4:7",
+          "user": "I guess that’s why I always try to keep Lumi around calm animals. She copies calmness surprisingly well.",
+          "assistant": "And that’s excellent instinct on your part. Environment really shapes behavior."
+        },
+        {
+          "round": "D4:8",
+          "user": "The speaker encouraged students to keep a small behavior journal. I’m tempted to start one for Lumi.",
+          "assistant": "That would help sharpen your observational skills — and it fits perfectly with your academic goals."
+        },
+        {
+          "round": "D4:9",
+          "user": "I might even doodle her expressions. It sounds relaxing.",
+          "assistant": "That’s both scientific and creative — a wonderful combination."
+        },
+        {
+          "round": "D4:10",
+          "user": "It made me realize I’ve already been unintentionally collecting little data points about Lumi.",
+          "assistant": "Exactly — your everyday interactions are already a form of longitudinal study. You notice her micro-expressions, patterns, and reactions more precisely than you think."
+        },
+        {
+          "round": "D4:11",
+          "user": "I kind of wish Lumi could've attended the seminar too. The speaker would’ve loved her.",
+          "assistant": "Honestly? Lumi would’ve been the star guest — calm, expressive, and perfect for demonstrating subtle emotional signals."
+        },
+        {
+          "round": "D4:12",
+          "user": "Overall, the seminar made me feel more excited about connecting biology, behavioral science, and AI.",
+          "assistant": "Moments like that are so valuable — they reaffirm your direction and spark new questions."
+        },
+        {
+          "round": "D4:13",
+          "user": "I think I’ll try attending more talks like this. They keep me inspired.",
+          "assistant": "Great idea, Lena. Curiosity feeds growth — and you’re clearly nurturing both."
+        }
+      ]
+    },
+    {
+      "session_id": "D5",
+      "date": "2024-07-02",
+      "dialogues": [
+        {
+          "round": "D5:1",
+          "user": "Hey! It’s been a while since we last talked about Lumi. She has grown so much! She’s more confident now and has learned quite a few tricks.",
+          "assistant": "That’s wonderful, Lena! I was just wondering how Lumi’s been doing. What kind of tricks has she learned lately?"
+        },
+        {
+          "round": "D5:2",
+          "user": "She can sit, shake paws, and even do a small spin when I say 'turn around!' She picks things up so quickly — it’s amazing to see how intelligent and eager to please she is.",
+          "assistant": "That’s impressive! Maltese dogs are known for being quick learners when training is done with patience and positivity. It must be so satisfying to see her progress every week.",
+          "image_id": [
+            "D5:IMG_001"
+          ],
+          "input_image": [
+            "../image/Academic_Animal_Pet_Research_Life/D5_IMG_001.jpg"
+          ],
+          "image_caption": [
+            "Small white long‑haired dog with a topknot sits on a beige carpet near a white radiator and wall. Its mouth is open and tongue out, facing the camera. A small chew bone lies on the floor in front of it, and a white cable runs along the baseboard. Part of a blue chair and curtains are visible in the background."
+          ]
+        },
+        {
+          "round": "D5:3",
+          "user": "Absolutely! I think spending time training her also helps me understand animal behavior more deeply. Funny thing! One of my classmates, Lucy, just adopted a Toy Poodle, and we were comparing our training experiences!",
+          "assistant": "Oh, Toy Poodles are incredibly smart! They’re actually one of the top-ranked breeds in terms of intelligence. How’s your classmate finding the experience?",
+          "image_id": [
+            "D5:IMG_002"
+          ],
+          "input_image": [
+            "../image/Academic_Animal_Pet_Research_Life/D5_IMG_002.jpg"
+          ],
+          "image_caption": [
+            "Young woman with brown hair and bangs, wearing a white blouse and shoulder strap, holds a small curly-haired brown dog with its tongue out. They are outdoors in front of dense green foliage."
+          ]
+        },
+        {
+          "round": "D5:4",
+          "user": "Lucy said it’s been both fun and challenging! Her poodle, named Coco, learned 'sit' and 'fetch' in just a few days but also gets bored easily if the routine doesn’t change.",
+          "assistant": "That sounds exactly like a Toy Poodle! They thrive on mental stimulation and variety. If training becomes too repetitive, they’ll start looking for their own entertainment — which can be a little mischievous sometimes."
+        },
+        {
+          "round": "D5:5",
+          "user": "Haha yes, she told me Coco once figured out how to open a drawer just to grab her favorite toy! I can’t imagine Lumi trying that — she’d probably just look at me for help.",
+          "assistant": "That’s so funny! Toy Poodles have excellent problem-solving skills, and they love to show off. It’s one of the reasons they excel in obedience and agility competitions.",
+          "image_id": [
+            "D5:IMG_003"
+          ],
+          "input_image": [
+            "../image/Academic_Animal_Pet_Research_Life/D5_IMG_003.jpg"
+          ],
+          "image_caption": [
+            "Small curly-haired brown dog panting with its tongue out, sitting on green grass beside a metal bowl in a park, with blurred people walking in the background."
+          ]
+        },
+        {
+          "round": "D5:6",
+          "user": "That makes sense. My classmate said she’s thinking of teaching Coco to weave through cones or jump through small hoops. I’m kind of inspired to try something similar with Lumi too.",
+          "assistant": "That would be a great idea! Trick training and agility work are not only fun but also fantastic for bonding and cognitive enrichment. Lumi’s gentle personality would make her a perfect student for those activities."
+        },
+        {
+          "round": "D5:7",
+          "user": "Maybe we could even have a little 'dog playdate' between Lumi and Coco someday! It’d be so cute to see how a Maltese and a Toy Poodle interact.",
+          "assistant": "That sounds adorable! Both breeds are sociable and friendly, so they’d probably get along really well — Lumi’s calm curiosity and Coco’s playful energy would balance each other nicely."
+        },
+        {
+          "round": "D5:8",
+          "user": "Yeah, I can already imagine Lumi watching Coco figure things out, and then trying to copy her. Maybe they’d motivate each other to learn faster!",
+          "assistant": "That’s a real possibility! Dogs often learn socially — observing other dogs can reinforce behaviors. You could even turn those playdates into informal training sessions. It would be fun *and* educational!"
+        },
+        {
+          "round": "D5:9",
+          "user": "That’s such a great idea! It reminds me how fascinating it is that animals can learn by observing, just like humans. I guess Lumi’s teaching me just as much as I’m teaching her.",
+          "assistant": "Beautifully said, Lena. It’s exactly that mutual learning — between species — that makes your interest in AI and animal behavior so unique. Lumi isn’t just your pet; she’s part of your ongoing research journey.",
+          "image_id": [
+            "D5:IMG_004"
+          ],
+          "input_image": [
+            "../image/Academic_Animal_Pet_Research_Life/D5_IMG_004.jpg"
+          ],
+          "image_caption": [
+            "Small white dog with a fluffy coat and red harness stands on a pink mat indoors, tongue out, facing the camera. Three plush snowman and holiday-themed dolls are arranged around the dog against a bamboo-style backdrop."
+          ]
+        },
+        {
+          "round": "D5:10",
+          "user": "You’re right. Watching Lumi grow, and now seeing Coco too, really deepens my appreciation for intelligence in all its forms. Whether biological or artificial, it all starts with curiosity.",
+          "assistant": "That’s a beautiful perspective, Lena — and very true. I can see Lumi and Coco becoming the little muses behind your future research papers one day!"
+        }
+      ]
+    },
+    {
+      "session_id": "D6",
+      "date": "2024-07-21",
+      "dialogues": [
+        {
+          "round": "D6:1",
+          "user": "Speaking of Coco, my classmate told me that Toy Poodles actually have bigger cousins — the Miniature Poodle and the Standard Poodle. I didn’t realize there were size varieties within the same breed!",
+          "assistant": "Yes, that’s one of the fascinating things about Poodles! They all share the same intelligence and personality traits, but their sizes and energy levels vary a lot. Toy, Miniature, and Standard Poodles are essentially the same breed — just bred for different purposes."
+        },
+        {
+          "round": "D6:2",
+          "user": "That’s so interesting. So what’s the main difference besides size? Do they have very different temperaments or care needs?",
+          "assistant": "Good question! Miniature Poodles are slightly bigger than Toys and tend to be a bit more energetic. They’re great for families and love interactive play. Standard Poodles, on the other hand, were originally bred as water retrievers — they’re athletic, strong, and love outdoor adventures."
+        },
+        {
+          "round": "D6:3",
+          "user": "I’ve seen some photos of Standard Poodles — they look so tall and elegant compared to the smaller types. Their posture is really striking.",
+          "assistant": "Yes! Standard Poodles have a very distinctive physique — long legs, a straight back, and that graceful neck carriage that makes them look regal. They move with an effortless, springy gait that shows off their balance and athletic build.",
+          "image_id": [
+            "D6:IMG_001"
+          ],
+          "input_image": [
+            "../image/Academic_Animal_Pet_Research_Life/D6_IMG_001.jpg"
+          ],
+          "image_caption": [
+            "White standard poodle standing alert on a green grassy lawn, with one front paw raised and its tail curled upward, facing to the right against a blurred grass background."
+          ]
+        },
+        {
+          "round": "D6:4",
+          "user": "Ah, that explains why I’ve seen so many Standard Poodles in dog sports or agility videos. They seem so graceful and athletic compared to the smaller ones.",
+          "assistant": "Exactly! Standard Poodles are often described as elegant athletes. They have incredible endurance and coordination, and their intelligence makes them quick learners for complex routines.",
+          "image_id": [
+            "D6:IMG_002"
+          ],
+          "input_image": [
+            "../image/Academic_Animal_Pet_Research_Life/D6_IMG_002.jpg"
+          ],
+          "image_caption": [
+            "Woman in casual clothes stands on a paved driveway, positioning a large black poodle in a show stance. The groomed dog has a pom‑pom tail and fluffy legs, near a residential house."
+          ]
+        },
+        {
+          "round": "D6:5",
+          "user": "My sister actually loves Standard Poodles — she says their elegance and athletic build make them her dream dog.",
+          "assistant": "That totally makes sense! People who appreciate both intelligence and style often adore Standard Poodles. They’re such graceful companions and do so well in active families."
+        },
+        {
+          "round": "D6:6",
+          "user": "I think I’d love spending time with a Miniature Poodle. They seem like the perfect balance — smart, active, but still small enough for apartment life.",
+          "assistant": "You’re absolutely right, Lena. Miniature Poodles often fit well into both active and cozy lifestyles. They enjoy long walks and puzzles but also love curling up beside their owners. Given your interest in animal behavior, you’d probably find their problem-solving instincts fascinating.",
+          "image_id": [
+            "D6:IMG_003"
+          ],
+          "input_image": [
+            "../image/Academic_Animal_Pet_Research_Life/D6_IMG_003.jpg"
+          ],
+          "image_caption": [
+            "Small curly-haired beige poodle lying on a patterned blanket on a couch, facing the camera with its front legs extended and body relaxed."
+          ]
+        },
+        {
+          "round": "D6:7",
+          "user": "Totally! My classmate and I were joking that if Coco, the Toy Poodle, ever met a Standard Poodle, it would look like parent and child standing together.",
+          "assistant": "Haha, that’s such a funny but true image! Despite the size difference, they’d probably get along great. Poodles tend to be social and playful across all sizes — it’s like they recognize each other’s personality immediately."
+        },
+        {
+          "round": "D6:8",
+          "user": "Oh wait, I just realized I got it wrong earlier. My sister doesn’t actually like Standard Poodles. Her favorite breed is the Standard Schnauzer, as shown in the image!",
+          "assistant": "Ah, that explains it! Standard Schnauzers have a totally different charm — confident, spirited, and with those adorable beards. They’re smart and loyal too, just in their own unique way.",
+          "image_id": [
+            "D6:IMG_004"
+          ],
+          "input_image": [
+            "../image/Academic_Animal_Pet_Research_Life/D6_IMG_004.jpg"
+          ],
+          "image_caption": [
+            "Salt-and-pepper schnauzer with cropped ears and a long, dark beard sits facing the camera against a plain, light-colored background, head slightly tilted."
+          ]
+        },
+        {
+          "round": "D6:9",
+          "user": "I can imagine that! It’s so cool how one breed can adapt to different lifestyles — from companion dogs like Coco to athletic partners like the Standard Poodle. It really shows how diverse dog evolution can be.",
+          "assistant": "Exactly — Poodles are a perfect example of selective breeding for both intelligence and versatility. Their adaptability makes them one of the most scientifically interesting breeds to study too, especially if you’re looking at genetics and behavior correlations."
+        },
+        {
+          "round": "D6:10",
+          "user": "That’s true. I could totally see myself doing a small research project someday comparing how different Poodle types learn or respond to stimuli. It’d be such a fun mix of biology and psychology.",
+          "assistant": "That would be an amazing project, Lena! You could analyze learning curves across sizes or even study how their environments affect attention and memory. It would tie perfectly with your passion for Life Sciences and AI-driven behavior analysis."
+        },
+        {
+          "round": "D6:11",
+          "user": "I love that idea. Maybe Lumi could even be my little assistant again! She’s already used to following training cues, so she could help me test ideas about learning behaviors.",
+          "assistant": "That would be perfect! Lumi and your curiosity make a great team. Who knows — your future research might even help us understand how dogs of different breeds think, learn, and connect with humans in unique ways."
+        },
+        {
+          "round": "D6:12",
+          "user": "That’s my dream — to blend compassion, science, and technology to make life better for animals. Whether it’s Maltese, Poodles, or anything in between, they all have so much to teach us.",
+          "assistant": "That’s beautifully said, Lena. You’ve come such a long way — from caring for dogs to understanding their minds. I can’t wait to see how your passion and Lumi’s inspiration continue to shape your path ahead!"
+        }
+      ]
+    },
+    {
+      "session_id": "D7",
+      "date": "2024-07-28",
+      "dialogues": [
+        {
+          "round": "D7:1",
+          "user": "I’ve been feeling a bit overwhelmed this week — I had multiple assignments and lab reports due. Lumi has been my emotional support.",
+          "assistant": "Academic pressure can build up fast. How has Lumi been helping you unwind?"
+        },
+        {
+          "round": "D7:2",
+          "user": "She sits beside me when I study, and sometimes nudges my arm like she’s telling me to take breaks.",
+          "assistant": "Dogs have such a keen sense for human stress. Lumi sounds wonderfully attentive."
+        },
+        {
+          "round": "D7:3",
+          "user": "Yesterday she literally lay on my notebook during a debugging session. It forced me to pause, and somehow I solved the bug faster afterward.",
+          "assistant": "A perfect reminder to reset your brain. Mini breaks often restore clarity."
+        },
+        {
+          "round": "D7:4",
+          "user": "My roommate joked that Lumi should earn partial credit for my assignment.",
+          "assistant": "Honestly? She fully deserves emotional-support credit!"
+        },
+        {
+          "round": "D7:5",
+          "user": "I also wrote a tiny script to track how often I switch between windows when studying.",
+          "assistant": "That’s a clever productivity experiment. Did you notice any patterns?"
+        },
+        {
+          "round": "D7:6",
+          "user": "Apparently I switch tabs much more when I’m tired. And those moments align exactly with when Lumi nudges me.",
+          "assistant": "She’s basically functioning as your biological notification system!"
+        },
+        {
+          "round": "D7:7",
+          "user": "Haha yes. It made me wonder if I could model it someday just for fun.",
+          "assistant": "You absolutely could — a harmless side project without affecting your main academic plans."
+        },
+        {
+          "round": "D7:8",
+          "user": "I’ve also been reading beginner ML materials. Some parts are intimidating, but others are really exciting.",
+          "assistant": "That’s the natural learning curve. ML becomes intuitive once you see how patterns form."
+        },
+        {
+          "round": "D7:9",
+          "user": "A classmate shared clustering graphs that visualized the data. It made things feel more approachable.",
+          "assistant": "Visual examples can make abstract ideas suddenly click.",
+          "image_id": [
+            "D7:IMG_001"
+          ],
+          "input_image": [
+            "../image/Academic_Animal_Pet_Research_Life/D7_IMG_001.png"
+          ],
+          "image_caption": [
+            "Dense clusters of colored points are grouped in two main regions: a compact blue cluster with a smooth boundary on the left and an elongated green cluster with an irregular boundary on the right. Numerous isolated gray points are scattered around both groups."
+          ]
+        },
+        {
+          "round": "D7:10",
+          "user": "By the way, he use DBSCAN as the clustering model.",
+          "assistant": "Good! DBSCAN (Density-Based Spatial Clustering of Applications with Noise) is an unsupervised clustering algorithm that groups together data points that are closely packed while marking points in low-density regions as outliers. Unlike partition-based methods such as k-means, DBSCAN does not require specifying the number of clusters in advance and can discover clusters of arbitrary shape."
+        },
+        {
+          "round": "D7:11",
+          "user": "Lumi stared at the screen and tilted her head at the graphs. It was adorable.",
+          "assistant": "Little Lumi, the future research assistant!"
+        },
+        {
+          "round": "D7:12",
+          "user": "Studying with her around makes my room feel softer. It balances the technical intensity.",
+          "assistant": "A calm emotional environment makes learning more sustainable."
+        },
+        {
+          "round": "D7:13",
+          "user": "I think I’ll take her out for a long walk after I finish today’s tasks.",
+          "assistant": "Great plan. Fresh air always helps reset your mind."
+        },
+        {
+          "round": "D7:14",
+          "user": "Thanks. I’m grateful she’s in my life — even my routines feel lighter with her.",
+          "assistant": "That’s beautiful, Lena. Lumi really is your companion through both study and life."
+        }
+      ]
+    },
+    {
+      "session_id": "D8",
+      "date": "2024-08-10",
+      "dialogues": [
+        {
+          "round": "D8:1",
+          "user": "Hey! I’ve been really focused on my CMU application lately. I started taking some online courses in AI and programming to prepare myself for the computer science master’s program.",
+          "assistant": "That’s fantastic, Lena! Building a strong foundation in programming and AI concepts will definitely help you stand out. What kind of projects are you planning to work on for practice?"
+        },
+        {
+          "round": "D8:2",
+          "user": "I’m planning to create a small image classification project using a convolutional neural network — something that can identify different dog breeds. I thought it would be fun to focus on Boston Bulldogs as the main class.",
+          "assistant": "That’s such a cool idea! CNNs are perfect for image classification — they’re designed to automatically learn spatial hierarchies in images. Are you going to build the model from scratch or fine-tune a pre-trained one?",
+          "image_id": [
+            "D8:IMG_001"
+          ],
+          "input_image": [
+            "../image/Academic_Animal_Pet_Research_Life/D8_IMG_001.jpg"
+          ],
+          "image_caption": [
+            "Diagram of convolutional neural network architecture for classifying an input dog photo. From left to right: “Input image” of a small running dog, followed by stacked boxes labeled “Convolution Layer,” “ReLU Layer,” and “Pooling Layer,” connecting to a vertical bar labeled “Fully Connected Layer” and ending at “Output Classes” with two options: “Dog” and “Not Dog.” Figure caption reads: “Fig. 7 An example of CNN architecture for image classification.”"
+          ]
+        },
+        {
+          "round": "D8:3",
+          "user": "I’m thinking of starting with a pre-trained model like ResNet or VGG16. I’ll fine-tune it on a smaller dataset of dog images to recognize Boston Bulldogs accurately. I’m still learning about transfer learning though.",
+          "assistant": "That’s a perfect approach! Transfer learning helps you save time and computation since the model already knows basic visual features like edges and textures. You just need to retrain the final layers for your specific task. It’s efficient and gives surprisingly strong results even with small datasets."
+        },
+        {
+          "round": "D8:4",
+          "user": "Exactly! I thought it’d also be a great way to combine my interest in dogs with my AI studies. Plus, I can analyze which visual patterns the network learns — maybe features like the Boston Bulldog’s face shape or coloring.",
+          "assistant": "That’s a very thoughtful perspective! Interpreting model behavior is a crucial step in AI research. You could even use Grad-CAM to visualize which parts of the dog’s image the CNN focuses on during classification — that would make your project both practical and insightful.",
+          "image_id": [
+            "D8:IMG_002"
+          ],
+          "input_image": [
+            "../image/Academic_Animal_Pet_Research_Life/D8_IMG_002.jpg"
+          ],
+          "image_caption": [
+            "Research slide titled “Grad-CAM: Visual Explanations from Deep Networks via Gradient-based Localization” with author names and affiliations at the top. Below, a 3×4 grid of images shows a dog and cat and corresponding visualization methods labeled “Original Image,” “Guided Backprop,” “Grad-CAM,” “Guided Grad-CAM,” “Occlusion map,” and “ResNet Grad-CAM” for “Cat” and “Dog.”"
+          ]
+        },
+        {
+          "round": "D8:5",
+          "user": "That’s a great idea! I’ll definitely look into Grad-CAM visualizations. By the way, while collecting the dataset, I realized how adorable Boston Bulldogs are. They have such expressive faces!",
+          "assistant": "They really do! Boston Bulldogs — often called Boston Terriers — are small, sturdy dogs with a charming 'tuxedo' coat pattern. They’re known for their friendliness and alert expressions. Fun fact: they were originally bred in the U.S. as a mix between English Bulldogs and Terriers.",
+          "image_id": [
+            "D8:IMG_003"
+          ],
+          "input_image": [
+            "../image/Academic_Animal_Pet_Research_Life/D8_IMG_003.jpg"
+          ],
+          "image_caption": [
+            "Black and white Boston Terrier lying on a brown leather couch, resting its head and front paw on a large yellow bone-shaped plush toy, with household decorations blurred in the background."
+          ]
+        },
+        {
+          "round": "D8:6",
+          "user": "Oh, that explains their balanced look — muscular but still really graceful. My dataset has so many photos of them tilting their heads or smiling at the camera. They’re so photogenic!",
+          "assistant": "Absolutely! Their round eyes and short muzzle give them an expressive, human-like quality. That’s probably why CNNs will have strong visual cues to work with — their facial structure is quite distinctive among dog breeds.",
+          "image_id": [
+            "D8:IMG_004"
+          ],
+          "input_image": [
+            "../image/Academic_Animal_Pet_Research_Life/D8_IMG_004.jpg"
+          ],
+          "image_caption": [
+            "Black and white Boston Terrier sitting against a plain light gray background, facing the camera with an alert, calm expression and upright ears, showing a distinctive white stripe down its forehead and muzzle."
+          ]
+        },
+        {
+          "round": "D8:7",
+          "user": "I was also reading that Boston Bulldogs have pretty gentle temperaments — they’re great companions, especially in apartments. That kind of adaptability reminds me of Lumi a bit.",
+          "assistant": "That’s true! Boston Bulldogs are sociable and affectionate, much like Maltese dogs. They’re intelligent, too, which makes them easy to train — just like Lumi. You could even add a behavioral angle to your project someday, linking visual features with personality traits."
+        },
+        {
+          "round": "D8:8",
+          "user": "That’s an interesting idea! Maybe in the future, I could build a model that predicts temperament or activity levels from facial features or movement patterns. It’d be such a cool blend of computer vision and animal behavior science.",
+          "assistant": "Exactly the kind of interdisciplinary innovation CMU encourages! You’re already thinking like a researcher — connecting technical depth with biological insight. I can totally imagine your Boston Bulldog classifier being the first step toward a much bigger vision."
+        },
+        {
+          "round": "D8:9",
+          "user": "Thanks! That really motivates me to keep learning. I’ll spend the next few weeks refining my dataset and experimenting with different architectures. I hope I can include the project in my CMU application portfolio.",
+          "assistant": "That’s a great plan, Lena. Your combination of compassion, curiosity, and technical skill makes this project the perfect reflection of who you are as a future researcher. I can’t wait to see how your Boston Bulldog model turns out!"
+        },
+        {
+          "round": "D8:10",
+          "user": "I'm really excited! I feel so energized right now, and I can’t wait to dive back into my project.",
+          "assistant": "That’s wonderful to hear! I hope everything goes smoothly with your project, and feel free to share any new progress with me anytime."
+        }
+      ]
+    },
+    {
+      "session_id": "D9",
+      "date": "2024-08-25",
+      "dialogues": [
+        {
+          "round": "D9:1",
+          "user": "Hey! I just came back from road travel. I took Lumi on a little trip to the countryside today. She had the best time running around the fields and chasing butterflies!",
+          "assistant": "That sounds amazing, Lena! Lumi must’ve loved the open space and fresh air. Trips like that are great for dogs — they get to explore new scents and stay active.",
+          "image_id": [
+            "D9:IMG_001"
+          ],
+          "input_image": [
+            "../image/Academic_Animal_Pet_Research_Life/D9_IMG_001.jpg"
+          ],
+          "image_caption": [
+            "Small white long-haired dog sitting on green grass near the edge of a coastal cliff, attached to a red leash. Rocky shoreline, shallow water, and a narrow pebble beach stretch out below in the background, with sparse plants and bushes along the slope."
+          ]
+        },
+        {
+          "round": "D9:2",
+          "user": "She really did! She met a few other dogs too — super friendly ones — but after all that play, her fur got a little tangled. I was brushing her earlier and realized I might need to trim it a bit.",
+          "assistant": "That’s quite common after outdoor trips! Grass and small twigs can get caught easily in Maltese fur. Trimming at home can help a lot, especially for maintenance between professional grooming sessions."
+        },
+        {
+          "round": "D9:3",
+          "user": "Yeah, that’s what I was thinking. Do you think it’s okay to try grooming her myself? I’ve never done it before, and I don’t want to accidentally mess it up.",
+          "assistant": "It’s perfectly fine to try, Lena! Many pet owners groom their dogs at home — you just need the right tools and a calm environment. Start with a metal comb and round-tip scissors or a small pet clipper, and always brush her fur first to remove tangles."
+        },
+        {
+          "round": "D9:4",
+          "user": "That’s reassuring. My friend Amy trims Pebble’s fur at home, and it always looks great! She said it just takes patience and practice, and her dog actually enjoys the process now.",
+          "assistant": "Amy’s clearly got a good touch! Cairn Terriers have a tougher coat than Maltese, but the grooming principles are the same — small, slow cuts and lots of positive reinforcement. Maltese fur is silky and straight, so it’s even easier to shape neatly."
+        },
+        {
+          "round": "D9:5",
+          "user": "That’s good to know! Amy also told me to always keep her dog calm with treats and music in the background. Lumi gets a little nervous when she hears clipping sounds, though.",
+          "assistant": "That’s normal for first-timers. Try letting Lumi sniff the tools first so she doesn’t see them as scary. You can also run the clipper near her without trimming to get her used to the sound — it helps build trust."
+        },
+        {
+          "round": "D9:6",
+          "user": "I love that idea! Maybe I’ll play soft music while grooming her, so it feels more relaxing. Do I need to worry about trimming too close around her eyes or paws?",
+          "assistant": "Yes, those areas need extra care. Around the eyes, use small scissors and trim slowly from the sides, never pointing toward her face. For the paws, you can gently spread her toes and snip the hair that sticks out — it keeps her footing safer and cleaner.",
+          "image_id": [
+            "D9:IMG_002"
+          ],
+          "input_image": [
+            "../image/Academic_Animal_Pet_Research_Life/D9_IMG_002.jpg"
+          ],
+          "image_caption": [
+            "Small wet dog standing in a kitchen sink during a bath, supported by a person in dark clothing. The dog’s fur is soaked and hangs in strands, with its front paws resting on the edge of the sink. A chrome faucet and sprayer are in the foreground, and wooden cabinets and folded towels are visible in the background."
+          ]
+        },
+        {
+          "round": "D9:7",
+          "user": "Got it. I’ll start small — maybe just tidy her face and paws first. If she stays calm, I might try shaping the fur around her ears too.",
+          "assistant": "Perfect plan! Take short breaks so Lumi doesn’t get restless. Over time, she’ll associate grooming with affection and care — and you’ll get more confident too."
+        },
+        {
+          "round": "D9:8",
+          "user": "Thanks! I’m kind of excited now. Maybe it’ll become our little spa ritual at home — a calm Sunday grooming session after our walks.",
+          "assistant": "That sounds wonderful, Lena. I can already picture Lumi looking fresh and happy after her spa day. It’s such a lovely way to strengthen your bond while keeping her comfortable and stylish!"
+        },
+        {
+          "round": "D9:9",
+          "user": "Honestly, the countryside air made me feel so refreshed too. Watching Lumi run freely like that reminded me how nice it is to step away from screens for a bit.",
+          "assistant": "Absolutely — those quiet open spaces can reset your mind instantly. And seeing Lumi enjoy herself probably made the whole trip feel even more rewarding for you."
+        },
+        {
+          "round": "D9:10",
+          "user": "It made me wonder if she prefers these quieter weekend trips to the busy city walks we usually do.",
+          "assistant": "Many dogs do enjoy the space and calm of nature, but Lumi seems to adapt well to both. As long as she’s exploring with you, she’s happy — whether that’s a quiet meadow or a lively sidewalk."
+        },
+        {
+          "round": "D9:11",
+          "user": "That’s sweet. Maybe I should plan more small trips like this. They’re good for both of us, I think.",
+          "assistant": "Definitely. A few short getaways can do wonders for your mood and hers. And Lumi looks like the kind of dog who thrives on discovering new smells and landscapes."
+        }
+      ]
+    },
+    {
+      "session_id": "D10",
+      "date": "2024-09-10",
+      "dialogues": [
+        {
+          "round": "D10:1",
+          "user": "Hey! I just got back from visiting my brother. We went to his home the day before yesterday. He has a cat named Miso — and it was Lumi’s first time meeting my brother and a cat!",
+          "assistant": "Oh wow, that must’ve been interesting! How did Lumi react to Miso at first?",
+          "image_id": [
+            "D10:IMG_001"
+          ],
+          "input_image": [
+            "../image/Academic_Animal_Pet_Research_Life/D10_IMG_001.jpg"
+          ],
+          "image_caption": [
+            "Bearded man sitting on a couch uses an Apple laptop on his lap while a gray tabby cat lies across his forearms and keyboard. The man wears a white T-shirt with the partial word “Puhl” visible. They are in a warmly lit living room with beige furniture and orange walls, and the man’s hands rest on the keyboard as the cat looks toward the screen."
+          ]
+        },
+        {
+          "round": "D10:2",
+          "user": "She was super curious but kept her distance at first. Miso was lounging on my brother’s lap while he worked on his laptop — totally calm and pretending not to notice Lumi.",
+          "assistant": "Classic cat behavior! Miso probably wanted to make sure Lumi wasn’t a threat. Did they warm up to each other later?"
+        },
+        {
+          "round": "D10:3",
+          "user": "Yes, actually! By the end of the second day, they were sitting near each other peacefully. Lumi even shared a bit of her bed space.",
+          "assistant": "That’s wonderful! It shows Lumi’s adaptability and calm temperament. It must’ve been a proud moment seeing her being so gentle with Miso."
+        },
+        {
+          "round": "D10:4",
+          "user": "It really was. My brother joked that Miso probably thinks Lumi is a strange, fluffy creature that doesn't climb on keyboards.",
+          "assistant": "Haha, that’s adorable. It sounds like Miso and Lumi could become great friends with a few more visits!"
+        },
+        {
+          "round": "D10:5",
+          "user": "Totally. I even caught a photo of them both dozing off near my brother while he was typing. It made me realize how peaceful multi-pet households can be when everyone gets along.",
+          "assistant": "That’s such a lovely thought. It really shows your understanding of animal social behavior — you’re practically conducting a mini ethology experiment at home!"
+        },
+        {
+          "round": "D10:6",
+          "user": "Speaking of home routines — I made breakfast for everyone this morning, including Lumi and Miso! I cooked some boiled chicken for them.",
+          "assistant": "That’s so thoughtful! Home-cooked pet meals can be great when done safely. What about your own breakfast?"
+        },
+        {
+          "round": "D10:7",
+          "user": "I had a pita sandwich with grilled meat and salad. I thought Lumi would stare at me the whole time, but she was too busy watching Miso chase sunlight on the floor.",
+          "assistant": "That’s adorable — and it shows how comfortable they’ve become around each other. Shared space without tension means trust is forming.",
+          "image_id": [
+            "D10:IMG_002"
+          ],
+          "input_image": [
+            "../image/Academic_Animal_Pet_Research_Life/D10_IMG_002.jpg"
+          ],
+          "image_caption": [
+            "Pita bread sandwich containing a grilled meat patty on a white foam tray, accompanied by a side salad of lettuce and tomato and a portion of light-colored salad or mashed potatoes, with a computer keyboard visible in the background."
+          ]
+        },
+        {
+          "round": "D10:8",
+          "user": "Later, I had a banana and some cheese for a snack. Miso tried to sniff it but lost interest quickly. Lumi wagged her tail hoping for a bite!",
+          "assistant": "Haha, sounds just like them! Just be sure not to give Lumi too much cheese — small dogs can be sensitive to dairy.",
+          "image_id": [
+            "D10:IMG_003"
+          ],
+          "input_image": [
+            "../image/Academic_Animal_Pet_Research_Life/D10_IMG_003.jpg"
+          ],
+          "image_caption": [
+            "A ripe yellow banana resting on a white plate beside two rectangular slices of hard cheese, placed on a light-colored countertop."
+          ]
+        },
+        {
+          "round": "D10:9",
+          "user": "Good to know! I think Miso was the pickier one this time. It’s funny how their personalities complement each other — Lumi’s curious but polite, while Miso acts like a calm observer.",
+          "assistant": "That balance is what makes their interactions so endearing. You can really see interspecies understanding forming right before your eyes."
+        },
+        {
+          "round": "D10:10",
+          "user": "Exactly! I even started noting small gestures, like Miso blinking slowly and Lumi lowering her ears — they seemed to communicate peace that way.",
+          "assistant": "That’s such a great observation, Lena. You’re recognizing subtle body language cues — classic signs of mutual trust between animals."
+        },
+        {
+          "round": "D10:11",
+          "user": "It’s amazing how gentle they both became by the end of my stay. On the last night, they even shared the same blanket for a while!",
+          "assistant": "That’s such a sweet ending! Lumi’s calmness and Miso’s quiet confidence clearly made the visit a success."
+        },
+        {
+          "round": "D10:12",
+          "user": "I think so too. It’s been a lovely week — cozy breakfasts, quiet afternoons, and two animals learning to coexist peacefully. It makes me appreciate how patient they both are.",
+          "assistant": "It sounds like a truly heartwarming experience, Lena. You’re seeing harmony between species up close — that’s something special."
+        }
+      ]
+    },
+    {
+      "session_id": "D11",
+      "date": "2024-09-20",
+      "dialogues": [
+        {
+          "round": "D11:1",
+          "user": "I went to a small birthday gathering today — nothing big, just a few classmates. There were a couple of pets visiting as well.",
+          "assistant": "That sounds cozy! How did Lumi handle the livelier environment?"
+        },
+        {
+          "round": "D11:2",
+          "user": "She was shy for a few minutes, sniffed around, then settled next to me once she felt safe.",
+          "assistant": "That’s very typical for gentle dogs. New environments can be a bit overwhelming at first."
+        },
+        {
+          "round": "D11:3",
+          "user": "One of the pets was a calm mixed-breed dog. He approached Lumi really slowly, which helped her relax.",
+          "assistant": "That kind of respectful pacing is perfect for Lumi’s temperament."
+        },
+        {
+          "round": "D11:4",
+          "user": "They sniffed each other quietly and then just sat nearby. No jumping, no barking — just a peaceful vibe.",
+          "assistant": "A beautifully low-stress interaction. Lumi’s social skills are really growing."
+        },
+        {
+          "round": "D11:5",
+          "user": "Someone briefly brought out their guinea pig to show us. Lumi was fascinated but kept a polite distance.",
+          "assistant": "That’s adorable — guinea pigs communicate with such subtle cues. Lumi’s curiosity shows great self-control.",
+          "image_id": [
+            "D11:IMG_001"
+          ],
+          "input_image": [
+            "../image/Academic_Animal_Pet_Research_Life/D11_IMG_001.jpg"
+          ],
+          "image_caption": [
+            "Tri-colored guinea pig with brown, white, and black fur sitting on green grass inside a low wire enclosure outdoors."
+          ]
+        },
+        {
+          "round": "D11:6",
+          "user": "At one point the guinea pig made a soft chirp, and Lumi tilted her head like she was decoding it.",
+          "assistant": "A tiny cross-species communication moment — those are so precious to witness."
+        },
+        {
+          "round": "D11:7",
+          "user": "I’m glad she stayed calm. I was afraid she might get too excited.",
+          "assistant": "It shows how well-socialized she has become over time."
+        },
+        {
+          "round": "D11:8",
+          "user": "Someone joked that Lumi could be a 'peace ambassador' at gatherings.",
+          "assistant": "Honestly? That title fits her perfectly!"
+        },
+        {
+          "round": "D11:9",
+          "user": "After the pets left, we ate cake, talked, and Lumi just napped under my chair.",
+          "assistant": "Social events can be surprisingly tiring for pets. A nap was well deserved.",
+          "image_id": [
+            "D11:IMG_002"
+          ],
+          "input_image": [
+            "../image/Academic_Animal_Pet_Research_Life/D11_IMG_002.jpg"
+          ],
+          "image_caption": [
+            "Round birthday cake on a glass plate with many tall lit candles, decorated with white daisy-shaped flowers, walnuts, and citrus pieces around the base. A white disk on top reads “Happy Birthday.” Blurred bookshelves and a lamp in the background."
+          ]
+        },
+        {
+          "round": "D11:10",
+          "user": "A classmate asked me why dogs tilt their heads. I explained a bit about auditory angles and emotional processing.",
+          "assistant": "That’s a great explanation — and perfectly aligned with your Life Sciences background."
+        },
+        {
+          "round": "D11:11",
+          "user": "They seemed genuinely curious. It felt nice to share what I love so casually.",
+          "assistant": "That’s the best kind of conversation — natural and meaningful."
+        },
+        {
+          "round": "D11:12",
+          "user": "Overall, it was a warm evening. Lumi made some tiny animal friends, and I got to relax.",
+          "assistant": "It sounds like a lovely, balanced day filled with gentle moments."
+        }
+      ]
+    },
+    {
+      "session_id": "D12",
+      "date": "2024-09-28",
+      "dialogues": [
+        {
+          "round": "D12:1",
+          "user": "Hey! I took Lumi to the riverside park today — and we met the most adorable little dog with huge butterfly-like ears!",
+          "assistant": "That sounds lovely! From your description, it must’ve been a Papillon, right?",
+          "image_id": [
+            "D12:IMG_001"
+          ],
+          "input_image": [
+            "../image/Academic_Animal_Pet_Research_Life/D12_IMG_001.jpg"
+          ],
+          "image_caption": [
+            "Small black-and-white puppy lying on grass, wearing a green collar and draped with red, white, and blue award ribbons, next to a round medal with printed text, in an outdoor park setting."
+          ]
+        },
+        {
+          "round": "D12:2",
+          "user": "Yes! The owner confirmed it was a Papillon. I’d seen pictures before as shown in the image, but in person they look even more delicate — tiny, but so full of confidence.",
+          "assistant": "Exactly! Papillons are small but bold. Their name actually means 'butterfly' in French, referring to their distinctive fringed ears. Did Lumi get along with it?",
+          "image_id": [
+            "D12:IMG_002"
+          ],
+          "input_image": [
+            "../image/Academic_Animal_Pet_Research_Life/D12_IMG_002.jpg"
+          ],
+          "image_caption": [
+            "Long-haired black and white small dog with large, fluffy ears standing on a neatly cut green lawn, facing the camera with its mouth slightly open, in an outdoor yard with blurred buildings and plants in the background."
+          ]
+        },
+        {
+          "round": "D12:3",
+          "user": "At first, I thought she was a bit shy. Maybe because she seemed calm at the beginning. But after a few minutes, they started circling each other curiously. The Papillon kept trying to play tag!",
+          "assistant": "That’s such classic Papillon behavior — they’re known for agility and social curiosity. They often approach new dogs fearlessly, even much larger ones."
+        },
+        {
+          "round": "D12:4",
+          "user": "It was so fun to watch. Lumi is usually calm and polite, but she actually started chasing the Papillon back! They were running in small circles like two fluffy whirlwinds.",
+          "assistant": "Aww, that must’ve been adorable! It shows Lumi’s confidence has grown. Papillons have that effect — their playful energy can encourage quieter dogs to open up."
+        },
+        {
+          "round": "D12:5",
+          "user": "Yeah, I think Lumi’s time with Miso helped her too. She’s become gentler but also more social. The Papillon’s owner said they do dog sports sometimes — I can totally see why!",
+          "assistant": "Absolutely! Papillons excel in agility competitions. They’re lightweight, fast, and incredibly attentive to cues. It’s like they’re always ready to perform.",
+          "image_id": [
+            "D12:IMG_003"
+          ],
+          "input_image": [
+            "../image/Academic_Animal_Pet_Research_Life/D12_IMG_003.jpg"
+          ],
+          "image_caption": [
+            "Small black-and-white dog leaping midair over red, white, and blue agility bars in an indoor dirt arena, framed by blue and white lattice jump supports, with a blue tunnel and yellow obstacles in the blurred background."
+          ]
+        },
+        {
+          "round": "D12:6",
+          "user": "That makes sense. This one seemed so alert — its ears twitched with every sound, and it responded instantly when its owner called. Lumi just wagged her tail like, 'I’ll get there someday!'",
+          "assistant": "Haha, Lumi’s more of a calm scholar type, while Papillons are natural athletes. They both express intelligence differently — Lumi with patience, Papillons with precision."
+        },
+        {
+          "round": "D12:7",
+          "user": "I like that comparison. I also noticed how Papillons make direct eye contact when listening. It’s like they’re trying to read every detail of your tone.",
+          "assistant": "That’s a sharp observation! Papillons are extremely responsive to human cues — one reason they’re often used in obedience training studies related to canine cognition."
+        },
+        {
+          "round": "D12:8",
+          "user": "Interesting! I wonder if that’s genetic or from training. Maybe their small size made humans encourage eye contact for communication.",
+          "assistant": "That’s actually one of the theories! Selective breeding favored responsiveness and attentiveness — traits ideal for companionship and performance tasks."
+        },
+        {
+          "round": "D12:9",
+          "user": "I wish I had a photo of Lumi and the Papillon together. They looked like total opposites — Lumi with her straight silky coat, and the Papillon with its fluffy tail and feathery ears.",
+          "assistant": "That contrast must’ve been beautiful! Their different fur textures and energy levels almost make them a visual metaphor for calm and curiosity meeting halfway."
+        },
+        {
+          "round": "D12:10",
+          "user": "Exactly! I’m starting to appreciate how every breed seems to represent a different emotional 'style' of communication. Lumi’s gentle, the Papillon was expressive and bouncy — both in their own way.",
+          "assistant": "That’s such a thoughtful perspective. It’s like studying variations of social signaling across species — only this time, within dogs themselves!"
+        },
+        {
+          "round": "D12:11",
+          "user": "Haha, you’re right. Watching them felt like observing two dialects of the same language. I even took a few short clips — maybe I’ll analyze their gestures later for fun.",
+          "assistant": "That’s perfect! You could look at micro-interactions like tail posture or head tilts. You’re blending your passion and scientific eye again, just naturally."
+        },
+        {
+          "round": "D12:12",
+          "user": "I guess spending time with different animals keeps training my observation skills — whether it’s Lumi, Miso, or today’s Papillon. Every encounter teaches me something new.",
+          "assistant": "That’s the spirit, Lena. Curiosity, empathy, and attention — those are the real tools of a life scientist. And you’re mastering all three, one animal at a time."
+        }
+      ]
+    },
+    {
+      "session_id": "D13",
+      "date": "2024-10-09",
+      "dialogues": [
+        {
+          "round": "D13:1",
+          "user": "It’s been a long day, and I’m unwinding by browsing some dresses online… but now I’m stuck. I can’t decide between a Baroque Print Maxi Dress and an Abstract Floral Babydoll Dress.",
+          "assistant": "Both styles sound lovely! What kind of vibe are you looking for—elegant and flowing, or cute and playful?"
+        },
+        {
+          "round": "D13:2",
+          "user": "Here’s the first Baroque Print Maxi Dress I’m looking at.",
+          "assistant": "This one has a really elegant presence—structured bodice, long silhouette, and that intricate Baroque pattern.",
+          "image_id": [
+            "D13:IMG_001"
+          ],
+          "input_image": [
+            "../image/Academic_Animal_Pet_Research_Life/D13_IMG_001.jpg"
+          ],
+          "image_caption": [
+            "Strapless, floor-length maxi dress with a gathered, fitted bodice and flowing skirt, featuring an all-over blue and white geometric pattern, displayed on a dress form against a plain, light-colored background."
+          ]
+        },
+        {
+          "round": "D13:3",
+          "user": "Yeah, and here’s another version of the Baroque print in a slightly different cut.",
+          "assistant": "This version looks more relaxed and summery, with a casual elegance that works well for outdoor events.",
+          "image_id": [
+            "D13:IMG_002"
+          ],
+          "input_image": [
+            "../image/Academic_Animal_Pet_Research_Life/D13_IMG_002.jpg"
+          ],
+          "image_caption": [
+            "Woman standing sideways in a studio against a plain white background, wearing a patterned short-sleeve maxi dress, wide-brimmed straw hat, and open-toe block-heel sandals. She has long wavy hair and a bracelet on her right wrist, with one arm relaxed by her side and the other slightly bent."
+          ]
+        },
+        {
+          "round": "D13:4",
+          "user": "And here’s the last Baroque style—more dramatic with a mixed pattern.",
+          "assistant": "Wow, this one is bold! The flowing skirt and mixed motifs make it more artistic and eye-catching.",
+          "image_id": [
+            "D13:IMG_003"
+          ],
+          "input_image": [
+            "../image/Academic_Animal_Pet_Research_Life/D13_IMG_003.jpg"
+          ],
+          "image_caption": [
+            "Woman standing in a studio against a plain gray background, wearing a long, flowing maxi dress with thin spaghetti straps. The dress features a fitted bodice with dark and gold patterns and a wide, flared skirt with intricate black-and-white designs. She is looking slightly to the side, holding the sides of the skirt, and wearing high-heeled black platform shoes."
+          ]
+        },
+        {
+          "round": "D13:5",
+          "user": "Now switching to the other option… here’s the first Abstract Floral Babydoll Dress.",
+          "assistant": "This is definitely a cuter, more youthful look—short, breezy, and soft in tone.",
+          "image_id": [
+            "D13:IMG_004"
+          ],
+          "input_image": [
+            "../image/Academic_Animal_Pet_Research_Life/D13_IMG_004.jpg"
+          ],
+          "image_caption": [
+            "Young woman modeling a short, loose-fitting red dress with small white dot pattern and contrasting patterned front panel with buttons. She wears layered necklaces and bracelets, standing against a plain light background. Along the right side, four smaller images display the dress from full-length front, back, and side angles, highlighting the low back detail and overall fit."
+          ]
+        },
+        {
+          "round": "D13:6",
+          "user": "This one is another Babydoll dress, but in a deeper red tone.",
+          "assistant": "The combination of warm tones and patchwork pattern feels cozy and vintage-inspired.",
+          "image_id": [
+            "D13:IMG_005"
+          ],
+          "input_image": [
+            "../image/Academic_Animal_Pet_Research_Life/D13_IMG_005.jpg"
+          ],
+          "image_caption": [
+            "Full-length view of a woman standing against a plain gray background, wearing a sleeveless, short black dress with a floral print and lace detailing on the front. She faces forward with arms relaxed at her sides and legs slightly apart. She is wearing black ankle boots with cutout details and high heels."
+          ]
+        },
+        {
+          "round": "D13:7",
+          "user": "Here’s a black floral Babydoll variation.",
+          "assistant": "This one has a chic contrast—the floral pattern pops nicely and the length keeps it playful.",
+          "image_id": [
+            "D13:IMG_006"
+          ],
+          "input_image": [
+            "../image/Academic_Animal_Pet_Research_Life/D13_IMG_006.jpg"
+          ],
+          "image_caption": [
+            "Young woman standing against a blue and pink color-blocked wall, wearing a white T‑shirt under a blue floral dress and pink platform sandals. She has long wavy hair with a flower crown, holds a bouquet of purple and white flowers in one hand and a pale pink clutch in the other, facing the camera with a neutral expression."
+          ]
+        },
+        {
+          "round": "D13:8",
+          "user": "And this is the last Babydoll dress I’m considering.",
+          "assistant": "This one feels vibrant, modern, and artsy—definitely a cheerful summer vibe.",
+          "image_id": [
+            "D13:IMG_007"
+          ],
+          "input_image": [
+            "../image/Academic_Animal_Pet_Research_Life/D13_IMG_007.jpg"
+          ],
+          "image_caption": [
+            "Young woman with long reddish-brown hair wearing a sleeveless, above-the-knee sundress with thin spaghetti straps. The dress has a dark red background with large blue circular patterns and small scattered dots. She stands against a plain white backdrop, facing slightly toward the camera with one arm relaxed at her side."
+          ]
+        },
+        {
+          "round": "D13:9",
+          "user": "Price-wise, the Baroque maxi dresses are around $70–$90, while the Babydoll ones are about $40–$55.",
+          "assistant": "So the Babydoll dresses are more budget-friendly, but the Baroque maxi dresses offer more fabric, structure, and likely a more elegant silhouette."
+        },
+        {
+          "round": "D13:10",
+          "user": "Yeah… the Baroque maxi style looks so elegant. But I wonder if it’s too formal for everyday wear.",
+          "assistant": "It depends—if you enjoy feeling flowy and graceful, maxi dresses can be everyday wear. But the Baroque print definitely leans toward a dressier impression."
+        },
+        {
+          "round": "D13:11",
+          "user": "True. The Babydoll dresses look easier to move around in, especially for school days or casual outings.",
+          "assistant": "Absolutely—Babydoll cuts are comfortable, easy to style, and perfect for low-effort, cute looks."
+        },
+        {
+          "round": "D13:12",
+          "user": "I also wonder which suits my height better. Maxi dresses can be tricky sometimes.",
+          "assistant": "If you're on the petite side, some maxi dresses might require slight hemming. Babydoll dresses tend to suit all heights since they’re short and proportion-balanced."
+        },
+        {
+          "round": "D13:13",
+          "user": "Style-wise, I like the artistic feeling of the Baroque prints… but the Babydoll dresses feel more wearable.",
+          "assistant": "That’s a great way to summarize it—Baroque is expressive and statement-making; Babydoll is versatile, soft, and easy to style daily."
+        },
+        {
+          "round": "D13:14",
+          "user": "If I think about occasion… I’d probably wear the Babydoll one more frequently.",
+          "assistant": "Exactly—unless you have semi-formal events coming up, the Babydoll would give you more day-to-day value."
+        },
+        {
+          "round": "D13:15",
+          "user": "But I can’t stop looking at the flowy shapes of the Baroque maxi… it feels so dreamy.",
+          "assistant": "Then maybe consider which emotion you want to prioritize—practical comfort or expressive elegance."
+        },
+        {
+          "round": "D13:16",
+          "user": "If I had to choose just one, which direction do you think fits my usual style?",
+          "assistant": "Based on all the outfits you’ve mentioned before, you enjoy comfort and natural movement—but you also appreciate artistic patterns. So… either works, but Babydoll may match your everyday life more closely."
+        },
+        {
+          "round": "D13:17",
+          "user": "That makes sense. Maybe I’ll choose one tonight and keep the Baroque maxi dress in my wishlist.",
+          "assistant": "Perfect strategy! Buy the one you’ll enjoy immediately, and save the elegant one for when you feel like treating yourself."
+        },
+        {
+          "round": "D13:18",
+          "user": "Thanks, this helped a lot. I feel less conflicted now.",
+          "assistant": "Anytime, Lena! It’s always fun helping you balance style, mood, and practicality."
+        },
+        {
+          "round": "D13:19",
+          "user": "After all that thinking, I finally made a decision—I went ahead and ordered the first Abstract Floral Babydoll Dress. It felt like the best match for my daily style.",
+          "assistant": "That sounds like a perfect choice! It’s cute, comfortable, and versatile—something you’ll get plenty of wear out of. I’m sure it’ll look wonderful on you!"
+        }
+      ]
+    },
+    {
+      "session_id": "D14",
+      "date": "2024-11-29",
+      "dialogues": [
+        {
+          "round": "D14:1",
+          "user": "Happy (belated) Thanksgiving! I just took Lumi on a holiday road trip to Pittsburgh—we even passed through Allentown on the way.",
+          "assistant": "That sounds like such a cozy Thanksgiving break! How did the drive go, and did you two get to stretch your legs somewhere in Allentown?"
+        },
+        {
+          "round": "D14:2",
+          "user": "Oh wait, I just realized I got it wrong — it wasn’t Allentown we passed through, it was Erie! I always mix up those two cities for some reason.",
+          "assistant": "Haha, that’s an easy mix-up! Both are in Pennsylvania and have that same cozy-sounding vibe. Erie’s right by the lake, which gives the drive such a calm and scenic atmosphere.",
+          "image_id": [
+            "D14:IMG_001"
+          ],
+          "input_image": [
+            "../image/Academic_Animal_Pet_Research_Life/D14_IMG_001.jpg"
+          ],
+          "image_caption": [
+            "Urban waterfront with two marinas full of docked boats flanking a central pier and roadway under construction, lined with parked cars. A parking lot and low office building sit in the foreground. In the background, mid-rise brick and glass buildings include a hospital labeled “UPMC Hamot,” amid green trees."
+          ]
+        },
+        {
+          "round": "D14:3",
+          "user": "We stopped in Erie for coffee and a short walk. Lumi trotted around a small park, sniffing leaves like a little explorer. The town felt calm and friendly.",
+          "assistant": "Perfect pit stop vibes. A quiet walk and warm drink are the best road-trip combo. Did Lumi settle in the car afterward?"
+        },
+        {
+          "round": "D14:4",
+          "user": "She did—slept most of the way to Pittsburgh. When we arrived near CMU campus, the air felt crisp and bright. I could see students around the Gates–Hillman area even during the break.",
+          "assistant": "Ah, the energy of CMU never totally sleeps! Did you get a chance to wander around the School of Computer Science buildings?"
+        },
+        {
+          "round": "D14:5",
+          "user": "Yes! I walked by Gates–Hillman, then over to the Robotics Institute area. Even from the outside, it felt like a place where ambitious ideas come to life.",
+          "assistant": "That’s such a great impression to take in firsthand. Standing there, could you picture yourself doing your AI-and-animal-behavior projects at CMU?",
+          "image_id": [
+            "D14:IMG_002"
+          ],
+          "input_image": [
+            "../image/Academic_Animal_Pet_Research_Life/D14_IMG_002.jpg"
+          ],
+          "image_caption": [
+            "Modern multi-story glass and steel building with angular, cantilevered sections, viewed from below against a clear blue sky. Large windows line the facades, and elevated walkways connect different wings. A tall black light pole stands in the center foreground. Dense shrubs and trees cover the sloping ground at the base of the structure, framing the contemporary architecture."
+          ]
+        },
+        {
+          "round": "D14:6",
+          "user": "Absolutely. Being on campus made my grad-school goal feel real. I kept thinking about computer vision for behavior analysis—and how the interdisciplinary groups here could help me grow.",
+          "assistant": "Love it. You’ve been building toward this for months—Lumi as your muse, your ML prep, and that Boston Bulldog classifier idea. Seeing CMU in person must have clicked everything into place."
+        },
+        {
+          "round": "D14:7",
+          "user": "It did. I also walked Lumi through Schenley Park—she wore a tiny sweater and pranced like she owned the trail.",
+          "assistant": "Schenley strolls are a rite of passage! The park’s quiet corners are perfect for recharging. I bet Lumi drew a few smiles in that sweater.",
+          "image_id": [
+            "D14:IMG_003"
+          ],
+          "input_image": [
+            "../image/Academic_Animal_Pet_Research_Life/D14_IMG_003.jpg"
+          ],
+          "image_caption": [
+            "Calm pond in the foreground reflecting the sky, bordered by grassy banks and dense green trees. A tall, narrow skyscraper rises in the distant background above the treetops. A paved path runs along the far side of the water with a few lampposts and a small sign near the right edge. Blue sky with scattered clouds completes the park-like urban landscape."
+          ]
+        },
+        {
+          "round": "D14:8",
+          "user": "Haha, she definitely did. Later we passed the Phipps Conservatory area; even from outside, it looked beautiful with the holiday decorations.",
+          "assistant": "So picturesque. The contrast of glasshouse glow and cool air really sets a festive mood—perfect backdrop for big decisions and quiet reflection."
+        },
+        {
+          "round": "D14:9",
+          "user": "Exactly. I took a photo by a campus sign and told myself: this is where I want to be. Visiting sealed the deal—I’m applying to CMU for my master’s.",
+          "assistant": "Yes! That clarity is gold. When you write your statement, mention how being on campus strengthened your commitment and how your Life Sciences lens can contribute to AI research here."
+        },
+        {
+          "round": "D14:10",
+          "user": "I will. On the way back we made another quick stop—grabbed a snack, gave Lumi water, and watched the sunset fade behind the hills. It felt like a calm promise for the next chapter.",
+          "assistant": "What a perfect closing scene for the trip. From Erie’s gentle break to CMU’s spark, the whole journey reads like a prologue to your grad-school story."
+        },
+        {
+          "round": "D14:11",
+          "user": "That’s how it felt—like a beginning. I’m grateful for Lumi, for the support, and for finding a direction that excites me.",
+          "assistant": "Beautifully put. Hold onto that gratitude; it shines through your work. Let’s turn those road-trip reflections into a compelling application plan."
+        }
+      ]
+    }
+  ],
+  "human-annotated QAs": [
+    {
+      "point": "FR",
+      "question": "What subject is now Lena majoring in at university?",
+      "answer": "Life Sciences",
+      "session_id": [
+        "D1"
+      ],
+      "clue": [
+        "D1:1"
+      ]
+    },
+    {
+      "point": "TTL",
+      "question": "What breed is the dog in the attached image?",
+      "question_image": "../image/Academic_Animal_Pet_Research_Life/QA_IMG_001.jpg",
+      "answer": "Maltese",
+      "session_id": [
+        "D1",
+        "D2"
+      ],
+      "clue": [
+        "D1:5",
+        "D1:6",
+        "D1:7",
+        "D1:11",
+        "D2:1"
+      ],
+      "image_caption": "Small white fluffy dog lying on a tiled floor indoors, facing slightly to the side with ears perked and mouth slightly open. The dog wears a light-colored collar with a small round bell attached. Wooden furniture legs and part of a dark object, possibly a case or piece of furniture, are visible in the background."
+    },
+    {
+      "point": "TR",
+      "question": "When did Lena adopt her dog? Return in the format YYYY-MM-DD.",
+      "answer": "2024-05-22",
+      "session_id": [
+        "D2"
+      ],
+      "clue": [
+        "D2:1"
+      ]
+    },
+    {
+      "point": "TTL",
+      "question": "Is the dog in the picture the same breed as Amy's dog?",
+      "question_image": "../image/Academic_Animal_Pet_Research_Life/QA_IMG_002.jpg",
+      "answer": "No.",
+      "session_id": [
+        "D2"
+      ],
+      "clue": [
+        "D2:3"
+      ],
+      "image_caption": "Small white dog with shaggy fur and a collar stands with its front paws on a bed or sofa edge, looking forward. In the background are a refrigerator with photos, kitchen cabinets, and stacked boxes labeled “BUD LIGHT.”"
+    },
+    {
+      "point": "TTL",
+      "question": "What breed is the dog in the attached image?",
+      "question_image": "../image/Academic_Animal_Pet_Research_Life/QA_IMG_003.jpg",
+      "answer": "Cairn Terrier",
+      "session_id": [
+        "D2"
+      ],
+      "clue": [
+        "D2:3",
+        "D2:4"
+      ],
+      "image_caption": "Small, shaggy light-brown terrier sitting alertly on a couch, facing the camera. The dog has upright ears, dark eyes, and a black nose, with fur slightly tousled. It is positioned between patterned cushions and blankets, including a floral tapestry-style fabric and striped upholstery. No visible text."
+    },
+    {
+      "point": "VR",
+      "question": "Is the dog in the picture more similar to Amy’s Cairn Terrier or to Lena’s Maltese?",
+      "question_image": "../image/Academic_Animal_Pet_Research_Life/QA_IMG_004.jpg",
+      "answer": "It is more similar to Amy’s Cairn Terrier.",
+      "session_id": [
+        "D2"
+      ],
+      "clue": [
+        "D2:3",
+        "D2:4"
+      ],
+      "image_caption": "Small, shaggy tan dog with one ear upright sits on a hardwood floor, facing the camera. Behind the dog is a wooden cabinet with a shelf of books, one spine showing the text “ECO.” To the left is an open doorway leading to a hallway with a black-and-white checkered floor. The right edge of the image includes part of a cushioned chair with a wooden armrest."
+    },
+    {
+      "point": "VR",
+      "question": "Is the dog in the picture the same breed as the pet of any friend or classmate mentioned by Lena? Answer Yes or No. If yes, then please specify which person's pet it shares the same breed with.",
+      "question_image": "../image/Academic_Animal_Pet_Research_Life/QA_IMG_005.jpg",
+      "answer": "Yes. It is the same as Amy's.",
+      "session_id": [
+        "D2"
+      ],
+      "clue": [
+        "D2:3",
+        "D2:4"
+      ],
+      "image_caption": "Small shaggy light-brown dog sitting on a wooden floor in a room, facing the camera with one ear upright. Behind the dog is a wooden bookcase filled with books, next to a doorway leading to a hallway with a black-and-white checkered floor. The edge of a cushioned chair with a wooden armrest is visible on the right side of the image."
+    },
+    {
+      "point": "AR",
+      "question": "What is the name of Lena's friend Amy's cat?",
+      "answer": "Not mentioned.",
+      "session_id": [
+        "D2"
+      ],
+      "clue": []
+    },
+    {
+      "point": "FR",
+      "question": "What is the name of Amy’s Cairn Terrier?",
+      "answer": "Pebble",
+      "session_id": [
+        "D2"
+      ],
+      "clue": [
+        "D2:6"
+      ]
+    },
+    {
+      "point": "FR",
+      "question": "What candidate names have been listed when naming Lena's dog?",
+      "answer": "Coral, Sunny, Lumi.",
+      "session_id": [
+        "D2"
+      ],
+      "clue": [
+        "D2:7"
+      ]
+    },
+    {
+      "point": "CD",
+      "question": "Please determine whether the following information conflicts with the dialogue memory:\nLena’s pet Lumi is a cat.",
+      "answer": "Yes.",
+      "session_id": [
+        "D2"
+      ],
+      "clue": [
+        "D2:8"
+      ]
+    },
+    {
+      "point": "CD",
+      "question": "Please determine whether the following information conflicts with the dialogue memory:\nLena’s pet Momo is a dog.",
+      "answer": "Yes.",
+      "session_id": [
+        "D2"
+      ],
+      "clue": [
+        "D2:8"
+      ]
+    },
+    {
+      "point": "FR",
+      "question": "What is the name of Lena’s Maltese dog?",
+      "answer": "Lumi.",
+      "session_id": [
+        "D2"
+      ],
+      "clue": [
+        "D2:8"
+      ]
+    },
+    {
+      "point": "CD",
+      "question": "Please determine whether the following information conflicts with the dialogue memory:\n Lena has a Maltese dog called Coco.",
+      "answer": "Yes.",
+      "session_id": [
+        "D2"
+      ],
+      "clue": [
+        "D2:8"
+      ]
+    },
+    {
+      "point": "TTL",
+      "question": "Is the dog in the picture the same breed as Lumi?",
+      "question_image": "../image/Academic_Animal_Pet_Research_Life/QA_IMG_006.jpg",
+      "answer": "Yes.",
+      "session_id": [
+        "D2"
+      ],
+      "clue": [
+        "D2:1",
+        "D2:9"
+      ],
+      "image_caption": "Small white dog with a collar and red tag stands with its front paws on a yellow-and-orange plaid surface in a living room, with a kitchen, refrigerator, and “COORS LIGHT” box in the background."
+    },
+    {
+      "point": "TTL",
+      "question": "Is the dog in the picture the same breed as CMU’s mascot?",
+      "question_image": "../image/Academic_Animal_Pet_Research_Life/QA_IMG_007.jpg",
+      "answer": "Yes.",
+      "session_id": [
+        "D3"
+      ],
+      "clue": [
+        "D3:13",
+        "D3:14"
+      ],
+      "image_caption": "Black Scottish Terrier sitting on green grass with its mouth open and tongue out, facing the camera on a sunny day; white fences, trees, and part of a white house visible in the background."
+    },
+    {
+      "point": "TTL",
+      "question": "Is the dog in the picture the same breed as CMU’s mascot?",
+      "question_image": "../image/Academic_Animal_Pet_Research_Life/QA_IMG_008.jpg",
+      "answer": "No.",
+      "session_id": [
+        "D3"
+      ],
+      "clue": [
+        "D3:13",
+        "D3:14"
+      ],
+      "image_caption": "Long-haired Yorkshire Terrier lying on patterned bedding, with tan and black fur and hair partially covering its eyes, looking slightly to the side in a relaxed position."
+    },
+    {
+      "point": "VS",
+      "question": "Please help me find the image that shows CMU’s full name along with its mascot.",
+      "answer": "D3:IMG_001",
+      "session_id": [
+        "D3"
+      ],
+      "clue": [
+        "D3:13"
+      ]
+    },
+    {
+      "point": "CD",
+      "question": "Please determine whether the following information conflicts with the dialogue memory:\n The dog in the following attached image is the same breed as CMU's mascot dog.",
+      "question_image": "../image/Academic_Animal_Pet_Research_Life/QA_IMG_009.jpg",
+      "answer": "No.",
+      "session_id": [
+        "D3"
+      ],
+      "clue": [
+        "D3:13",
+        "D3:14"
+      ],
+      "image_caption": "Close-up of a black Scottish Terrier with long, wiry fur and large upright ears, facing the camera. A small piece of straw is caught in the hair around its mouth. The background consists of brown mulch or dried leaves, indicating an outdoor setting."
+    },
+    {
+      "point": "VS",
+      "question": "Which image shows vocalization sonograms?",
+      "answer": "D4:IMG_001",
+      "session_id": [
+        "D4"
+      ],
+      "clue": [
+        "D4:2"
+      ]
+    },
+    {
+      "point": "MR",
+      "question": "What practice did the seminar speaker encourage students to adopt?",
+      "answer": "The speaker encouraged students to keep a small behavior journal. Lena was tempted to start one for Lumi, perhaps even doodling her expressions.",
+      "session_id": [
+        "D4"
+      ],
+      "clue": [
+        "D4:8",
+        "D4:9"
+      ]
+    },
+    {
+      "point": "MR",
+      "question": "Why does Lena keep Lumi around calm animals?",
+      "answer": "Lena tries to keep Lumi around calm animals because she copies calmness surprisingly well. This is based on social learning and social mirroring principles.",
+      "session_id": [
+        "D4"
+      ],
+      "clue": [
+        "D4:7"
+      ]
+    },
+    {
+      "point": "AR",
+      "question": "Did the seminar speaker mention using machine learning to analyze animal vocalizations?",
+      "answer": "Not mentioned.",
+      "session_id": [
+        "D4"
+      ],
+      "clue": []
+    },
+    {
+      "point": "MR",
+      "question": "Which two dogs in the conversations are described as intelligent and quick learners?",
+      "answer": "Lena's Maltese dog Lumi and Lucy's Toy Poodle dog Coco.",
+      "session_id": [
+        "D5"
+      ],
+      "clue": [
+        "D5:2",
+        "D5:3"
+      ]
+    },
+    {
+      "point": "AR",
+      "question": "What is the name of Lucy's Scotch Terrier dog?",
+      "answer": "Not mentioned.",
+      "session_id": [
+        "D5"
+      ],
+      "clue": []
+    },
+    {
+      "point": "FR",
+      "question": "What is the name of Lucy’s Toy Poodle?",
+      "answer": "Coco.",
+      "session_id": [
+        "D5"
+      ],
+      "clue": [
+        "D5:3"
+      ]
+    },
+    {
+      "point": "AR",
+      "question": "What is the name of Lucy’s cat?",
+      "answer": "Not mentioned.",
+      "session_id": [
+        "D5"
+      ],
+      "clue": []
+    },
+    {
+      "point": "VS",
+      "question": "Please help me find the two images related to Lucy's pet. Only return the image_id of the two images (separate the answers with commas).",
+      "answer": "D5:IMG_002, D5:IMG_003",
+      "session_id": [
+        "D5"
+      ],
+      "clue": [
+        "D5:3",
+        "D5:5"
+      ]
+    },
+    {
+      "point": "FR",
+      "question": "What are the names of Lena, Amy, and Lucy’s pets (separate the answers with commas)?",
+      "answer": "Lumi, Pebble, Coco.",
+      "session_id": [
+        "D2",
+        "D5"
+      ],
+      "clue": [
+        "D2:6",
+        "D2:8",
+        "D5:3"
+      ]
+    },
+    {
+      "point": "VS",
+      "question": "Please find the image where a Standard Poodle is standing gracefully outdoors.",
+      "answer": "D6:IMG_001",
+      "session_id": [
+        "D6"
+      ],
+      "clue": [
+        "D6:3"
+      ]
+    },
+    {
+      "point": "TTL",
+      "question": "What breed is the dog in the attached image?",
+      "question_image": "../image/Academic_Animal_Pet_Research_Life/QA_IMG_010.jpg",
+      "answer": "Standard poodle.",
+      "session_id": [
+        "D6"
+      ],
+      "clue": [
+        "D6:3",
+        "D6:4"
+      ],
+      "image_caption": "Curly gray standard poodle running through tall grass in a meadow, ears flapping and mouth open, wearing a dark collar. Blurred green and brown vegetation fills the background."
+    },
+    {
+      "point": "KR",
+      "question": "Does Lena's sister like Standard Poodles?",
+      "answer": "No.",
+      "session_id": [
+        "D6"
+      ],
+      "clue": [
+        "D6:8"
+      ]
+    },
+    {
+      "point": "KR",
+      "question": "After Lena’s correction, which dog breed does her sister actually like?",
+      "answer": "Standard Schnauzer",
+      "session_id": [
+        "D6"
+      ],
+      "clue": [
+        "D6:8"
+      ]
+    },
+    {
+      "point": "KR",
+      "question": "Is the dog in the picture the breed that Lena's sister likes?",
+      "question_image": "../image/Academic_Animal_Pet_Research_Life/QA_IMG_011.jpg",
+      "answer": "Yes.",
+      "session_id": [
+        "D6"
+      ],
+      "clue": [
+        "D6:8"
+      ],
+      "image_caption": "Small gray schnauzer-type dog lying on a brown carpet indoors, facing the camera with ears perked up. The dog wears a dark collar with a round yellow tag and has a wiry beard and eyebrows. A white rope tug toy with frayed ends lies on the carpet in front of its front paws. Dark furniture legs and part of a wooden piece of furniture are visible in the background."
+    },
+    {
+      "point": "KR",
+      "question": "Is the dog in the picture the breed that Lena's sister likes?",
+      "question_image": "../image/Academic_Animal_Pet_Research_Life/QA_IMG_012.jpg",
+      "answer": "No.",
+      "session_id": [
+        "D6"
+      ],
+      "clue": [
+        "D6:8"
+      ],
+      "image_caption": "Curly-coated poodle standing alert on a sunlit grassy field, with blurred green foreground and shaded trees in the background."
+    },
+    {
+      "point": "FR",
+      "question": "How has Lumi been helping Lena cope with academic pressure?",
+      "answer": "Lumi sits beside Lena when she studies, nudges her arm to tell her to take breaks, and literally lay on her notebook during a debugging session forcing her to pause. Lumi functions as an emotional support companion and biological notification system for stress management.",
+      "session_id": [
+        "D7"
+      ],
+      "clue": [
+        "D7:1",
+        "D7:2",
+        "D7:3",
+        "D7:6"
+      ]
+    },
+    {
+      "point": "VS",
+      "question": "Which image shows DBSCAN density-based clustering data visualization?",
+      "answer": "D7:IMG_001",
+      "session_id": [
+        "D7"
+      ],
+      "clue": [
+        "D7:9"
+      ]
+    },
+    {
+      "point": "MR",
+      "question": "How did Lena feel about learning machine learning materials?",
+      "answer": "Some parts are intimidating, but others are really exciting. Visual examples like clustering graphs made things feel more approachable and helped abstract ideas suddenly click.",
+      "session_id": [
+        "D7"
+      ],
+      "clue": [
+        "D7:8",
+        "D7:9"
+      ]
+    },
+    {
+      "point": "AR",
+      "question": "Did Lena mention using any productivity apps or timers for studying?",
+      "answer": "Not mentioned.",
+      "session_id": [
+        "D7"
+      ],
+      "clue": []
+    },
+    {
+      "point": "FR",
+      "question": "What AI model did Lena use for her image classification project?",
+      "answer": "Convolutional neural network.",
+      "session_id": [
+        "D8"
+      ],
+      "clue": [
+        "D8:2"
+      ]
+    },
+    {
+      "point": "TTL",
+      "question": "What breed is the dog in the attached image?",
+      "question_image": "../image/Academic_Animal_Pet_Research_Life/QA_IMG_013.jpg",
+      "answer": "Boston Bulldog",
+      "session_id": [
+        "D8"
+      ],
+      "clue": [
+        "D8:5",
+        "D8:6"
+      ],
+      "image_caption": "Black and white Boston Terrier lying stretched out on a car dashboard, viewed through the windshield, with its head resting on the surface and eyes partially open, wearing a red collar; the interior of the vehicle and the road outside are visible in the background."
+    },
+    {
+      "point": "VS",
+      "question": "Please search the two images of the Boston Bulldog in the conversation.",
+      "question_image": "../image/Academic_Animal_Pet_Research_Life/QA_IMG_014.jpg",
+      "answer": "D8:IMG_003, D8:IMG_004",
+      "session_id": [
+        "D8"
+      ],
+      "clue": [
+        "D8:5",
+        "D8:6"
+      ],
+      "image_caption": "Black and white dog lying stretched out on a car dashboard behind the windshield, wearing a collar and resting its head sideways while looking forward."
+    },
+    {
+      "point": "TR",
+      "question": "When did Lena and Lumi go on a trip? Return in the format YYYY-MM-DD.",
+      "answer": "2024-08-25",
+      "session_id": [
+        "D9"
+      ],
+      "clue": [
+        "D9:1"
+      ]
+    },
+    {
+      "point": "FR",
+      "question": "Who trims her pet's fur at home?",
+      "answer": "Amy",
+      "session_id": [
+        "D9"
+      ],
+      "clue": [
+        "D9:4"
+      ]
+    },
+    {
+      "point": "TR",
+      "question": "When did Lumi first visit Lena’s brother’s house? Return in the format YYYY-MM-DD.",
+      "answer": "2024-09-08",
+      "session_id": [
+        "D10"
+      ],
+      "clue": [
+        "D10:1"
+      ]
+    },
+    {
+      "point": "AR",
+      "question": "What is the name of Lena’s brother’s dog?",
+      "answer": "Not mentioned.",
+      "session_id": [
+        "D10"
+      ],
+      "clue": []
+    },
+    {
+      "point": "MR",
+      "question": "What is the name of Lena’s brother’s cat?",
+      "answer": "Miso",
+      "session_id": [
+        "D10"
+      ],
+      "clue": [
+        "D10:1"
+      ]
+    },
+    {
+      "point": "FR",
+      "question": "What animals did Lena and Lumi encounter at the birthday gathering?",
+      "answer": "A calm mixed-breed dog and a guinea pig.",
+      "session_id": [
+        "D11"
+      ],
+      "clue": [
+        "D11:3",
+        "D11:5"
+      ]
+    },
+    {
+      "point": "VS",
+      "question": "Which image shows guinea pigs?",
+      "answer": "D11:IMG_001",
+      "session_id": [
+        "D11"
+      ],
+      "clue": [
+        "D11:5"
+      ]
+    },
+    {
+      "point": "VS",
+      "question": "Which image shows a birthday cake?",
+      "answer": "D11:IMG_002",
+      "session_id": [
+        "D11"
+      ],
+      "clue": [
+        "D11:9"
+      ]
+    },
+    {
+      "point": "AR",
+      "question": "Did Lena mention Lumi playing with any toys at the gathering?",
+      "answer": "Not mentioned.",
+      "session_id": [
+        "D11"
+      ],
+      "clue": []
+    },
+    {
+      "point": "TR",
+      "question": "When did Lena and Lumi meet the Papillon at the park? Return in the format YYYY-MM-DD.",
+      "answer": "2024-09-28",
+      "session_id": [
+        "D12"
+      ],
+      "clue": [
+        "D12:1"
+      ]
+    },
+    {
+      "point": "AR",
+      "question": "When did Lena meet her new pet: a Papillon dog?",
+      "answer": "Not mentioned.",
+      "session_id": [
+        "D12"
+      ],
+      "clue": []
+    },
+    {
+      "point": "VR",
+      "question": "Is the dog in the attached image the same breed as the one Lena met at the park?",
+      "question_image": "../image/Academic_Animal_Pet_Research_Life/QA_IMG_015.jpg",
+      "answer": "Yes.",
+      "session_id": [
+        "D12"
+      ],
+      "clue": [
+        "D12:1",
+        "D12:2",
+        "D12:5"
+      ],
+      "image_caption": "Black-and-white long-haired small dog being held in a person’s arms outdoors, with a leash visible and people walking in the background on a paved surface."
+    },
+    {
+      "point": "TTL",
+      "question": "What breed is the dog shown in the image?",
+      "question_image": "../image/Academic_Animal_Pet_Research_Life/QA_IMG_016.jpg",
+      "answer": "Papillon",
+      "session_id": [
+        "D12"
+      ],
+      "clue": [
+        "D12:1",
+        "D12:2",
+        "D12:5"
+      ],
+      "image_caption": "Small long-haired dog with large upright ears and a fluffy curled tail standing on green grass, looking to the left with its tongue out. The dog has white fur with brown and black patches."
+    },
+    {
+      "point": "CD",
+      "question": "Please determine whether the following information conflicts with the dialogue memory:\nLena said the Papillon she met was very shy and avoided other dogs.",
+      "answer": "Yes.",
+      "session_id": [
+        "D12"
+      ],
+      "clue": [
+        "D12:3"
+      ]
+    },
+    {
+      "point": "FR",
+      "question": "What two types of dresses was Lena deciding between?",
+      "answer": "Baroque Print Maxi Dress and Abstract Floral Babydoll Dress.",
+      "session_id": [
+        "D13"
+      ],
+      "clue": [
+        "D13:1"
+      ]
+    },
+    {
+      "point": "VR",
+      "question": "How many Baroque Print Maxi Dress options did Lena show? Please answer using an Arabic numeral.",
+      "answer": "3",
+      "session_id": [
+        "D13"
+      ],
+      "clue": [
+        "D13:2",
+        "D13:3",
+        "D13:4"
+      ]
+    },
+    {
+      "point": "TTL",
+      "question": "According to the conversation, what category is the clothing in the picture?",
+      "question_image": "../image/Academic_Animal_Pet_Research_Life/QA_IMG_017.jpg",
+      "answer": "Baroque Print Maxi Dress",
+      "session_id": [
+        "D13"
+      ],
+      "clue": [
+        "D13:2",
+        "D13:3",
+        "D13:4"
+      ],
+      "image_caption": "Woman standing on a plain white background, wearing a strapless, light pink maxi dress with a loose blouson waist and straight, floor-length skirt. Her long dark hair is worn over one shoulder, her arms rest at her sides, and she has neutral facial expression. She wears light-colored high-heeled shoes. No visible text in the setting."
+    },
+    {
+      "point": "TTL",
+      "question": "According to the conversation, what category is the clothing in the picture?",
+      "question_image": "../image/Academic_Animal_Pet_Research_Life/QA_IMG_018.jpg",
+      "answer": "Baroque Print Maxi Dress",
+      "session_id": [
+        "D13"
+      ],
+      "clue": [
+        "D13:2",
+        "D13:3",
+        "D13:4"
+      ],
+      "image_caption": "Woman standing against a plain light-colored wall, wearing a long red patterned maxi dress with thin straps and a fitted bodice. The dress features horizontal bands of geometric and floral designs in white, gray, and beige. She has long dark hair, minimal accessories, and flat sandals, with one hand resting by her side and the other lightly touching her hip."
+    },
+    {
+      "point": "TTL",
+      "question": "According to the conversation, what category is the clothing in the picture?",
+      "question_image": "../image/Academic_Animal_Pet_Research_Life/QA_IMG_019.jpg",
+      "answer": "Baroque Print Maxi Dress",
+      "session_id": [
+        "D13"
+      ],
+      "clue": [
+        "D13:2",
+        "D13:3",
+        "D13:4"
+      ],
+      "image_caption": "Female model posing against a plain white background, wearing a colorful, knee-length dress with a fitted bodice and flared red skirt featuring intricate, painting-like patterns. She stands in high-heeled ankle-strap shoes, slightly lifting the skirt as she turns."
+    },
+    {
+      "point": "TTL",
+      "question": "According to the conversation, what category is the clothing in the picture?",
+      "question_image": "../image/Academic_Animal_Pet_Research_Life/QA_IMG_020.jpg",
+      "answer": "Baroque Print Maxi Dress",
+      "session_id": [
+        "D13"
+      ],
+      "clue": [
+        "D13:2",
+        "D13:3",
+        "D13:4"
+      ],
+      "image_caption": "Young woman with long blonde hair standing against a plain white background, wearing a knee-length, kimono-style robe with three-quarter sleeves and a tie belt. The robe has an intricate floral and geometric pattern in gold, green, red, and blue tones."
+    },
+    {
+      "point": "TTL",
+      "question": "According to the conversation, what category is the clothing in the picture?",
+      "question_image": "../image/Academic_Animal_Pet_Research_Life/QA_IMG_021.jpg",
+      "answer": "Baroque Print Maxi Dress",
+      "session_id": [
+        "D13"
+      ],
+      "clue": [
+        "D13:2",
+        "D13:3",
+        "D13:4"
+      ],
+      "image_caption": "Woman standing in profile on a plain white background, wearing a long, sleeveless maxi dress with thin straps and a mixed pattern of vertical panels in black, yellow, blue, and white with ornate designs. Her hair is tied back in a high ponytail, and her arms rest naturally at her sides."
+    },
+    {
+      "point": "VS",
+      "question": "Search for images of clothing in the same category as those in the attached image.",
+      "question_image": "../image/Academic_Animal_Pet_Research_Life/QA_IMG_022.jpg",
+      "answer": "D13:IMG_001, D13:IMG_002, D13:IMG_003",
+      "session_id": [
+        "D13"
+      ],
+      "clue": [
+        "D13:2",
+        "D13:3",
+        "D13:4"
+      ],
+      "image_caption": "Woman standing in profile against a plain white background, wearing a long-sleeved, floor-length dress with a black and white geometric pattern and a very high side slit revealing her leg. She has long wavy hair, bracelets on one wrist, and black lace-up block-heel shoes."
+    },
+    {
+      "point": "VS",
+      "question": "Search for images of clothing in the same category as those in the attached image.",
+      "question_image": "../image/Academic_Animal_Pet_Research_Life/QA_IMG_023.jpg",
+      "answer": "D13:IMG_001, D13:IMG_002, D13:IMG_003",
+      "session_id": [
+        "D13"
+      ],
+      "clue": [
+        "D13:2",
+        "D13:3",
+        "D13:4"
+      ],
+      "image_caption": "Woman standing against a plain white background wearing a strapless, brightly colored maxi dress with red, pink, teal, and cream sections and intricate paisley and floral patterns. She has wavy, shoulder-length hair, a necklace, bracelets on her right wrist, and flat sandals. Her arms rest loosely at her sides as she faces forward."
+    },
+    {
+      "point": "VS",
+      "question": "Search for images of clothing in the same category as those in the attached image.",
+      "question_image": "../image/Academic_Animal_Pet_Research_Life/QA_IMG_024.jpg",
+      "answer": "D13:IMG_001, D13:IMG_002, D13:IMG_003",
+      "session_id": [
+        "D13"
+      ],
+      "clue": [
+        "D13:2",
+        "D13:3",
+        "D13:4"
+      ],
+      "image_caption": "Woman with long wavy hair wearing a strapless, knee-length, black-and-white patterned dress with a black waist belt, standing against a plain white background and holding a rectangular black clutch in front of her."
+    },
+    {
+      "point": "VR",
+      "question": "How many Abstract Floral Babydoll Dress options did Lena show? Please answer using an Arabic numeral.",
+      "answer": "4",
+      "session_id": [
+        "D13"
+      ],
+      "clue": [
+        "D13:5",
+        "D13:6",
+        "D13:7",
+        "D13:8"
+      ]
+    },
+    {
+      "point": "TTL",
+      "question": "According to the conversation, what category is the clothing in the picture?",
+      "question_image": "../image/Academic_Animal_Pet_Research_Life/QA_IMG_025.jpg",
+      "answer": "Abstract Floral Babydoll Dress",
+      "session_id": [
+        "D13"
+      ],
+      "clue": [
+        "D13:5",
+        "D13:6",
+        "D13:7",
+        "D13:8"
+      ],
+      "image_caption": "Young woman standing with her back to the camera, wearing a sleeveless, light-colored floral dress with a short, flared skirt. She has long blonde hair and is wearing black platform wedge sandals. The background is plain white."
+    },
+    {
+      "point": "TTL",
+      "question": "According to the conversation, what category is the clothing in the picture?",
+      "question_image": "../image/Academic_Animal_Pet_Research_Life/QA_IMG_026.jpg",
+      "answer": "Abstract Floral Babydoll Dress",
+      "session_id": [
+        "D13"
+      ],
+      "clue": [
+        "D13:5",
+        "D13:6",
+        "D13:7",
+        "D13:8"
+      ],
+      "image_caption": "Woman standing in profile against a plain light background, wearing a loose, above‑knee dress with a pink and beige abstract pattern and wide, flowing long sleeves. Her long wavy hair falls over her shoulders, and she rests one hand on her hip while the other touches her hair. She wears large dangling earrings and neutral makeup."
+    },
+    {
+      "point": "TTL",
+      "question": "According to the conversation, what category is the clothing in the picture?",
+      "question_image": "../image/Academic_Animal_Pet_Research_Life/QA_IMG_027.jpg",
+      "answer": "Abstract Floral Babydoll Dress",
+      "session_id": [
+        "D13"
+      ],
+      "clue": [
+        "D13:5",
+        "D13:6",
+        "D13:7",
+        "D13:8"
+      ],
+      "image_caption": "Young woman standing in a studio against a plain white background, wearing a sleeveless, V‑neck, short dress with thin spaghetti straps. The dress has a flared, tiered skirt and a light pastel pattern featuring blue floral prints on a pale pink base. She faces forward with one hand resting on her hip and the other hanging by her side, with long wavy hair loose over her shoulders."
+    },
+    {
+      "point": "TTL",
+      "question": "According to the conversation, what category is the clothing in the picture?",
+      "question_image": "../image/Academic_Animal_Pet_Research_Life/QA_IMG_028.jpg",
+      "answer": "Abstract Floral Babydoll Dress",
+      "session_id": [
+        "D13"
+      ],
+      "clue": [
+        "D13:5",
+        "D13:6",
+        "D13:7",
+        "D13:8"
+      ],
+      "image_caption": "Young woman standing against a plain light background, wearing a loose, knee-length, sleeveless peach dress with a gathered halter neckline. Her hair is tied back, and she has minimal accessories, including a thin bracelet on one wrist."
+    },
+    {
+      "point": "MR",
+      "question": "What are the price ranges for the two dress categories?",
+      "answer": "The Baroque maxi dresses are around $70–$90, while the Babydoll ones are about $40–$55.",
+      "session_id": [
+        "D13"
+      ],
+      "clue": [
+        "D13:9"
+      ]
+    },
+    {
+      "point": "KR",
+      "question": "Which dress did Lena finally order, and what was the reasoning?",
+      "answer": "D13:IMG_004",
+      "session_id": [
+        "D13"
+      ],
+      "clue": [
+        "D13:5",
+        "D13:17",
+        "D13:19"
+      ]
+    },
+    {
+      "point": "AR",
+      "question": "Did Lena mention considering any accessories to pair with the dresses?",
+      "answer": "Not mentioned.",
+      "session_id": [
+        "D13"
+      ],
+      "clue": []
+    },
+    {
+      "point": "VR",
+      "question": "How many total dress pictures were shared? Please answer using an Arabic numeral.",
+      "answer": "7",
+      "session_id": [
+        "D13"
+      ],
+      "clue": [
+        "D13:2",
+        "D13:3",
+        "D13:4",
+        "D13:5",
+        "D13:6",
+        "D13:7",
+        "D13:8"
+      ]
+    },
+    {
+      "point": "KR",
+      "question": "Did Lena and Lumi pass through Allentown on their way to Pittsburgh?",
+      "answer": "No.",
+      "session_id": [
+        "D14"
+      ],
+      "clue": [
+        "D14:2"
+      ]
+    },
+    {
+      "point": "AR",
+      "question": "What did Lena and Lumi think of the scenery in Allentown during their trip?",
+      "answer": "Not mentioned.",
+      "session_id": [
+        "D14"
+      ],
+      "clue": []
+    }
+  ]
+}

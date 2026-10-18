@@ -1,0 +1,21 @@
+MemGPT	2310.08560v2	2023-10-12	Charles Packer、Sarah Wooders、Kevin Lin	MemGPT: Towards LLMs as Operating Systems
+Mem0: Building Production-Ready AI Agents with Scalable Long-Term Memory	2504.19413v1	2025-04-28	Prateek Chhikara、Dev Khant、Saket Aryan	Mem0: Building Production-Ready AI Agents with Scalable Long-Term Memory
+Zep: A Temporal Knowledge Graph Architecture for Agent Memory	2501.13956v1	2025-01-20	Preston Rasmussen、Pavlo Paliychuk、Travis Beauvais	Zep: A Temporal Knowledge Graph Architecture for Agent Memory
+A-MEM: Agentic Memory for LLM Agents	2502.12110v11	2025-02-17	Wujiang Xu、Zujie Liang、Kai Mei	A-MEM: Agentic Memory for LLM Agents
+HippoRAG	2405.14831v3	2024-05-23	Bernal Jiménez Gutiérrez、Yiheng Shu、Yu Gu	HippoRAG: Neurobiologically Inspired Long-Term Memory for Large Language Models
+From RAG to Memory: Non-Parametric Continual Learning	2502.14802v2	2025-02-20	Bernal Jiménez Gutiérrez、Yiheng Shu、Weijian Qi	From RAG to Memory: Non-Parametric Continual Learning for Large Language Models
+RAPTOR: Recursive Abstractive Processing	2401.18059v1	2024-01-31	Parth Sarthi、Salman Abdullah、Aditi Tuli	RAPTOR: Recursive Abstractive Processing for Tree-Organized Retrieval
+MIRIX	2507.07957v1	2025-07-10	Yu Wang、Xi Chen	MIRIX: Multi-Agent Memory System for LLM-Based Agents
+MemOS	2507.03724v4	2025-07-04	Zhiyu Li、Chenyang Xi、Chunyu Li	MemOS: A Memory OS for AI System
+LongMemEval	2410.10813v2	2024-10-14	Di Wu、Hongwei Wang、Wenhao Yu	LongMemEval: Benchmarking Chat Assistants on Long-Term Interactive Memory
+Evaluating Very Long-Term Conversational Memory of LLM Agents	2402.17753v1	2024-02-27	Adyasha Maharana、Dong-Ho Lee、Sergey Tulyakov	Evaluating Very Long-Term Conversational Memory of LLM Agents
+Generative Agents: Interactive Simulacra of Human Behavior	2304.03442v2	2023-04-07	Joon Sung Park、Joseph C. O'Brien、Carrie J. Cai	Generative Agents: Interactive Simulacra of Human Behavior
+From Local to Global: A Graph RAG Approach	2404.16130v2	2024-04-24	Darren Edge、Ha Trinh、Newman Cheng	From Local to Global: A Graph RAG Approach to Query-Focused Summarization
+LightRAG	2410.05779v3	2024-10-08	Zirui Guo、Lianghao Xia、Yanhua Yu	LightRAG: Simple and Fast Retrieval-Augmented Generation
+MemoryBank: Enhancing Large Language Models with Long-Term Memory	2305.10250v3	2023-05-17	Wanjun Zhong、Lianghong Guo、Qiqi Gao	MemoryBank: Enhancing Large Language Models with Long-Term Memory
+A Survey on the Memory Mechanism of Large Language Model based Agents	2404.13501v1	2024-04-21	Zeyu Zhang、Xiaohe Bo、Chen Ma	A Survey on the Memory Mechanism of Large Language Model based Agents
+Cognitive Architectures for Language Agents	2309.02427v3	2023-09-05	Theodore R. Sumers、Shunyu Yao、Karthik Narasimhan	Cognitive Architectures for Language Agents
+SWE-bench	2505.23419v2	2025-05-29	Linghao Zhang、Shilin He、Chaoyun Zhang	SWE-bench Goes Live!
+Lost in the Middle: How Language Models Use Long Contexts	2307.03172v3	2023-07-06	Nelson F. Liu、Kevin Lin、John Hewitt	Lost in the Middle: How Language Models Use Long Contexts
+ExpeL: LLM Agents Are Experiential Learners	2308.10144v3	2023-08-20	Andrew Zhao、Daniel Huang、Quentin Xu	ExpeL: LLM Agents Are Experiential Learners
+Knowledge Conflicts for LLMs: A Survey	2403.08319v2	2024-03-13	Rongwu Xu、Zehan Qi、Zhijiang Guo	Knowledge Conflicts for LLMs: A Survey
