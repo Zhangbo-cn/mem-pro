@@ -10,3 +10,12 @@ data/processed_memory/
 data/atm_docs.json
 .DS_Store
 *.log
+*.db
+*.db-wal
+*.db-shm
+.pytest_cache/
+.coverage
+htmlcov/
+doctor.json
+smoke*.json
+nohup.out

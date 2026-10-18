@@ -1,0 +1,35 @@
+# GitHub Actions 工作流模板。
+# 因当前 gh token 缺少 workflow scope，先放在 deploy/ 下；启用方式：
+#   mkdir -p .github/workflows && cp deploy/ci.yml .github/workflows/ci.yml
+#   gh auth refresh -h github.com -s workflow   # 授权后再提交该文件
+
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        python: ["3.10", "3.12"]
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: ${{ matrix.python }}
+      - name: Unit + end-to-end tests
+        run: python -m unittest discover -s tests -v
+      - name: Contract + replay + smoke (hash mode)
+        run: bash scripts/verify.sh
+      - name: Doctor (hash mode, warnings allowed)
+        run: python tools/doctor.py --json > doctor.json || true
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: doctor-${{ matrix.python }}
+          path: doctor.json

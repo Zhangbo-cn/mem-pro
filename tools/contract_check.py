@@ -9,13 +9,21 @@ from __future__ import annotations
 import base64
 import hashlib
 import json
+import os
 import sys
 import time
 import urllib.error
 import urllib.request
 
+ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+sys.path.insert(0, os.path.join(ROOT, "service"))
+
+import dotenv  # noqa: E402
+
+dotenv.load()
+
 BASE = (sys.argv[1] if len(sys.argv) > 1 else "http://127.0.0.1:8080").rstrip("/")
-KEY = ""
+KEY = os.environ.get("MEMORY_SYSTEM_KEY", "").strip()
 if "--key" in sys.argv:
     KEY = sys.argv[sys.argv.index("--key") + 1]
 

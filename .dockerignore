@@ -1,0 +1,15 @@
+.venv/
+models/
+data/
+research/
+tests/
+*.md
+.git/
+.github/
+__pycache__/
+*.pyc
+*.db
+*.db-*
+.env
+.env.*
+!.env.example

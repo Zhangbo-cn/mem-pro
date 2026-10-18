@@ -1,0 +1,32 @@
+[Unit]
+Description=mem-pro Add/Search service (Agent Memory Leaderboard)
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+Type=simple
+User=mempro
+Group=mempro
+WorkingDirectory=/opt/mem-pro
+EnvironmentFile=/opt/mem-pro/service/.env
+ExecStart=/usr/bin/python3 service/server.py
+Restart=always
+RestartSec=2
+TimeoutStopSec=20
+# 退出前最多等 10s，让在途 Add 写完
+KillSignal=SIGTERM
+
+# 安全加固
+NoNewPrivileges=true
+PrivateTmp=true
+ProtectSystem=strict
+ProtectHome=true
+ReadWritePaths=/opt/mem-pro/service
+ProtectKernelTunables=true
+ProtectKernelModules=true
+ProtectControlGroups=true
+RestrictSUIDSGID=true
+LockPersonality=true
+
+[Install]
+WantedBy=multi-user.target

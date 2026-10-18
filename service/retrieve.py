@@ -11,16 +11,27 @@ import json
 import math
 import os
 import re
+import threading
 import urllib.request
 from collections import Counter
 
-from embed import norm, unpack
+import dotenv
+
+dotenv.load()
+
+from embed import norm, unpack  # noqa: E402
+
+try:  # numpy 是可选的加速路径；没有也完全能跑
+    import numpy as _np
+except Exception:  # pragma: no cover - 取决于运行环境
+    _np = None
 
 RRF_K = 60
 DENSE_WEIGHT = float(os.environ.get("DENSE_WEIGHT", "1.0"))
 SPARSE_WEIGHT = float(os.environ.get("SPARSE_WEIGHT", "1.0"))
 RECALL_N = int(os.environ.get("RECALL_N", "50"))       # 粗排进精排的候选数
 DEDUP_COS = float(os.environ.get("DEDUP_COS", "0.97"))  # 近重复阈值
+DEDUP_POOL = int(os.environ.get("DEDUP_POOL", "200"))   # 只对头部候选做去重（控制 O(n²)）
 
 RERANK_MODE = os.environ.get("RERANK_MODE", "none").lower()
 RERANK_KIND = os.environ.get("RERANK_KIND", "tei").lower()   # tei | dashscope
@@ -45,13 +56,35 @@ def tokens(text: str) -> list[str]:
 
 
 # ---------- BM25 ----------
+_TOK_CACHE: dict[str, list[str]] = {}
+_TOK_LOCK = threading.Lock()
+_TOK_MAX = 100_000
+
+
+def doc_tokens(d: dict) -> list[str]:
+    """按 memory id 缓存分词结果；记忆正文不可变，缓存安全。"""
+    key = d.get("id") or ""
+    if key:
+        with _TOK_LOCK:
+            got = _TOK_CACHE.get(key)
+        if got is not None:
+            return got
+    out = tokens(d["text"])
+    if key:
+        with _TOK_LOCK:
+            if len(_TOK_CACHE) >= _TOK_MAX:
+                _TOK_CACHE.clear()
+            _TOK_CACHE[key] = out
+    return out
+
+
 def bm25_scores(query: str, docs: list[dict]) -> list[float]:
     if not docs:
         return []
     q = tokens(query)
     if not q:
         return [0.0] * len(docs)
-    doc_toks = [tokens(d["text"]) for d in docs]
+    doc_toks = [doc_tokens(d) for d in docs]
     avgdl = sum(len(t) for t in doc_toks) / len(doc_toks) or 1.0
     dfs = Counter()
     for t in doc_toks:
@@ -86,8 +119,22 @@ def _rank(scores: list[float]) -> list[int]:
     return idx
 
 
+def dense_scores(qvec: list[float], docs: list[dict]) -> list[float]:
+    dim = len(qvec)
+    if _np is not None and len(docs) >= 128:
+        try:
+            blobs = [d["vec"] for d in docs]
+            if all(len(b) == dim * 4 for b in blobs):
+                mat = _np.frombuffer(b"".join(blobs), dtype="<f4").reshape(len(blobs), dim)
+                q = _np.asarray(qvec, dtype="<f4")
+                return (mat @ q).astype(float).tolist()
+        except Exception:  # 回退到纯 Python，检索绝不因加速失败而中断
+            pass
+    return [cosine(qvec, unpack(d["vec"])) for d in docs]
+
+
 def hybrid(qvec: list[float], query_text: str, docs: list[dict]) -> list[tuple[int, float]]:
-    dense = [cosine(qvec, unpack(d["vec"])) for d in docs]
+    dense = dense_scores(qvec, docs)
     sparse = bm25_scores(query_text, docs)
     rd, rs = _rank(dense), _rank(sparse)
     rrf = [0.0] * len(docs)
@@ -105,19 +152,29 @@ def _norm_text(s: str) -> str:
 
 
 def dedup(ranked: list[tuple[int, float]], docs: list[dict]) -> list[tuple[int, float]]:
+    """头部候选去重：先比正文指纹，再比向量；尾部原样保留。
+
+    只对前 DEDUP_POOL 条做向量比较，避免 O(n²) 把延迟拖垮；
+    精排只吃 RERANK_TOP（30）条，因此头部去重已覆盖实际收益区间。
+    """
+    pool, tail = ranked[:DEDUP_POOL], ranked[DEDUP_POOL:]
+    if not pool:
+        return ranked
     seen: list[tuple[str, list[float]]] = []
-    out = []
-    for i, sc in ranked:
-        d = docs[i]
-        key = _norm_text(d["text"])
+    out: list[tuple[int, float]] = []
+    vecs = [unpack(docs[i]["vec"]) for i, _ in pool]
+    kept: list[int] = []
+    for pos, (i, sc) in enumerate(pool):
+        key = _norm_text(docs[i]["text"])
         if any(key == k for k, _ in seen):
             continue
-        v = unpack(d["vec"])
-        if any(cosine(v, sv) > DEDUP_COS for _, sv in seen):
+        v = vecs[pos]
+        if any(cosine(v, vecs[j]) > DEDUP_COS for j in kept[-40:]):
             continue
         seen.append((key, v))
+        kept.append(pos)
         out.append((i, sc))
-    return out
+    return out + tail
 
 
 # ---------- 可选精排（唯一不受模型限制的环节）----------

@@ -1,0 +1,17 @@
+# 自动申请 Let's Encrypt 证书；DOMAIN 由 compose 环境变量传入
+{$DOMAIN:mem.example.com} {
+	encode zstd gzip
+
+	# 平台单次请求最长 30 分钟，反代超时要大于它
+	reverse_proxy mem-pro:8080 {
+		transport http {
+			read_timeout 31m
+			write_timeout 31m
+		}
+	}
+
+	log {
+		output stdout
+		format console
+	}
+}
