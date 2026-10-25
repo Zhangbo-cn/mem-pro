@@ -1,24 +1,28 @@
-"""混合检索：dense(cosine) + sparse(BM25) → RRF 融合 → 去重 → 可选精排。
+"""混合检索：dense(cosine) + sparse(BM25) → 加权融合 → 去重 → 可选精排。
 
 设计取舍（见 research/13、14）：
-- user_id 隔离 ⇒ 每次检索只扫该 user 的分块，规模小，暴力 cosine 足够
+- user_id 隔离 ⇒ 每次只对该用户的记忆做精确打分；热数据与 query-independent 索引有界缓存
+- Search 只部分排序到 top_k 与去重/精排所需的 overfetch，避免全量排序
 - 精排是唯一不受模型限制的环节，但只对短名单做（延迟预算）
 - 并列必须全序 tie-break（score desc, created_at asc, id asc）⇒ 复现确定
 """
 from __future__ import annotations
 
+import heapq
 import json
+import calendar
 import math
 import os
 import re
 import threading
+import time
 import urllib.request
-from collections import Counter
+from array import array
+from collections import Counter, OrderedDict
 
 import dotenv
 
 dotenv.load()
-
 from embed import norm, unpack  # noqa: E402
 
 try:  # numpy 是可选的加速路径；没有也完全能跑
@@ -26,89 +30,448 @@ try:  # numpy 是可选的加速路径；没有也完全能跑
 except Exception:  # pragma: no cover - 取决于运行环境
     _np = None
 
-RRF_K = 60
-DENSE_WEIGHT = float(os.environ.get("DENSE_WEIGHT", "1.0"))
-SPARSE_WEIGHT = float(os.environ.get("SPARSE_WEIGHT", "1.0"))
-RECALL_N = int(os.environ.get("RECALL_N", "50"))       # 粗排进精排的候选数
+# math.sumprod (3.12+) is a C-level dot product; zip+generator is ~4x slower
+_DOT = getattr(math, "sumprod", None) if _np is None else None
+
+# ---------- 融合配置 ----------
+# FUSION=linear（默认）：α·cos + β·bm25_norm，保留幅度信息，score 可当相关性阈值用
+# FUSION=rrf            ：旧行为（只取名次），保留用于 A/B 对照
+FUSION = os.environ.get("FUSION", "linear").strip().lower()
+# 默认值来自 tools/tune.py 的实测（149 条标注 query，见 README §六）：
+#   α=0.95/β=0.05 是「总分最高且没有任何 query 类型掉超过 0.02」的唯一候选点
+DENSE_WEIGHT = float(os.environ.get("DENSE_WEIGHT", "0.95"))   # α
+SPARSE_WEIGHT = float(os.environ.get("SPARSE_WEIGHT", "0.05"))  # β
+RRF_K = int(os.environ.get("RRF_K", "60"))
+# 稀疏侧校准：max=除以最大值（会饱和）；sat=饱和函数 s/(s+k·mean)（弱匹配保持弱）
+SPARSE_NORM = os.environ.get("SPARSE_NORM", "sat").strip().lower()
+# 只让「稀有词」（df/N ≤ 该值）参与 BM25：专有名词、证件号、型号等，避免「住/城市」这类高频字掀翻 dense
+BM25_RARE_DF = float(os.environ.get("BM25_RARE_DF", "0.15"))
 DEDUP_COS = float(os.environ.get("DEDUP_COS", "0.97"))  # 近重复阈值
 DEDUP_POOL = int(os.environ.get("DEDUP_POOL", "200"))   # 只对头部候选做去重（控制 O(n²)）
+# 时态一致性规则：off / tense。查询里的时间词 + 记忆正文里的时间词做确定性微调，不依赖 LLM。
+# 只调「近分平局」：权重远小于融合分差，纯 dense 的强赢家不会被掀翻。
+TEMPORAL_RULE = os.environ.get("TEMPORAL_RULE", "tense").strip().lower()
+TEMPORAL_WEIGHT = float(os.environ.get("TEMPORAL_WEIGHT", "0.06"))
+_PRESENT_CUES = ("现在", "目前", "当前", "如今", "现阶段", "最新",
+                 "currently", "now", "nowadays", "latest")
+_PAST_CUES = ("以前", "之前", "过去", "原来", "曾经", "去年", "上次", "上一份", "前一份",
+              "used to", "previously", "former", "last year")
+_PAST_MARKERS = ("去年", "前年", "以前", "之前", "曾经", "原先", "原来", "早年", "当时",
+                 "上一份", "前一份", "离职", "旧地址", "旧工位",
+                 "used to", "previously", "formerly", "former", "last year", "in the past")
+# 一条记忆常同时陈述旧事实与新事实（「去年在慕尼黑，现在住柏林」）：这种要中立，不能扣分
+_PRESENT_MARKERS = ("现在", "目前", "当前", "如今", "现阶段", "今年",
+                    "currently", "now ", "nowadays")
 
 RERANK_MODE = os.environ.get("RERANK_MODE", "none").lower()
 RERANK_KIND = os.environ.get("RERANK_KIND", "tei").lower()   # tei | dashscope
 RERANK_URL = os.environ.get("RERANK_URL", "").rstrip("/")
 RERANK_MODEL = os.environ.get("RERANK_MODEL", "")
-RERANK_TOP = int(os.environ.get("RERANK_TOP", "30"))
+RERANK_TOP = int(os.environ.get("RERANK_TOP", "10"))   # 精排候选数：实测 10 与 30 质量相同，延迟 ÷3
 RERANK_TIMEOUT = float(os.environ.get("RERANK_TIMEOUT", "8"))  # 单次精排超时（秒）
 RERANK_API_KEY = os.environ.get("RERANK_API_KEY", "")
+RERANK_FAILS = int(os.environ.get("RERANK_FAILS", "3"))      # 连续失败几次后熔断
+RERANK_COOLDOWN = float(os.environ.get("RERANK_COOLDOWN", "60"))  # 熔断冷却秒数
+
+# 熔断状态：精排是旁路，宕机时必须秒级降级，不能每个 query 都等 timeout
+_rerank_fails = 0
+_rerank_cooldown_until = 0.0
 
 
 # ---------- 分词：英文按词，中文按字符 bigram ----------
 _W = re.compile(r"[a-z0-9_]+")
-_CJK = re.compile(r"[\u4e00-\u9fff]")
+_CJK_RUN = re.compile(r"[\u4e00-\u9fff]+")
+CJK_TOKENS = os.environ.get("CJK_TOKENS", "bigram_unigram").strip().lower()
 
 
 def tokens(text: str) -> list[str]:
+    """英文按词；中文按「连续汉字片段」切，可选单字 + bigram。
+
+    CJK_TOKENS=bigram_unigram（默认）| bigram | unigram
+    只切 bigram 时「下周几开会」与「会议安排在周五」零重叠 ⇒ BM25 全零，
+    退化成按文档顺序打分；单字回退补上「会」这类共享字，零依赖且够用。
+    """
     t = text.lower()
     out = _W.findall(t)
-    cjk = _CJK.findall(t)
-    out.extend(cjk[i] + cjk[i + 1] for i in range(len(cjk) - 1) if i + 1 < len(cjk))
+    for run in _CJK_RUN.findall(t):
+        if CJK_TOKENS in ("unigram", "bigram_unigram"):
+            out.extend(run)
+        if CJK_TOKENS in ("bigram", "bigram_unigram"):
+            out.extend(run[i:i + 2] for i in range(len(run) - 1))
     return out
 
 
 # ---------- BM25 ----------
-_TOK_CACHE: dict[str, list[str]] = {}
+_TOK_CACHE: dict[tuple[int, int], list[str]] = {}
 _TOK_LOCK = threading.Lock()
 _TOK_MAX = 100_000
+_SEARCH_INDEX_MIN_DOCS = 32
+_SEARCH_INDEX_MAX_ENTRIES = 16
+_SEARCH_INDEX_MAX_BYTES = max(1, int(float(os.environ.get("RANK_INDEX_MAX_MB", "64")) * 1024 * 1024))
+_SEARCH_INDEX: OrderedDict[object, "_SearchIndex"] = OrderedDict()
+_SEARCH_INDEX_BYTES = 0
+_SEARCH_INDEX_LOCK = threading.Lock()
 
 
 def doc_tokens(d: dict) -> list[str]:
-    """按 memory id 缓存分词结果；记忆正文不可变，缓存安全。"""
-    key = d.get("id") or ""
-    if key:
-        with _TOK_LOCK:
-            got = _TOK_CACHE.get(key)
-        if got is not None:
-            return got
-    out = tokens(d["text"])
-    if key:
-        with _TOK_LOCK:
-            if len(_TOK_CACHE) >= _TOK_MAX:
-                _TOK_CACHE.clear()
-            _TOK_CACHE[key] = out
+    """Cache tokens by text content, not by memory id.
+
+    Memory bodies are immutable, so content-keyed entries stay valid; keying on
+    `id` would go stale if an id is ever reused with different text (the tests
+    do exactly that, and a rebuild could otherwise disagree with the fallback).
+    """
+    text = d["text"]
+    key = (len(text), hash(text))
+    with _TOK_LOCK:
+        got = _TOK_CACHE.get(key)
+    if got is not None:
+        return got
+    out = tokens(text)
+    with _TOK_LOCK:
+        if len(_TOK_CACHE) >= _TOK_MAX:
+            _TOK_CACHE.clear()
+        _TOK_CACHE[key] = out
     return out
 
 
-def bm25_scores(query: str, docs: list[dict]) -> list[float]:
+def _docs_signature(docs: list[dict]) -> tuple:
+    if not docs:
+        return (0, CJK_TOKENS)
+    return (len(docs), docs[0].get("id"), docs[0].get("seq"),
+            docs[-1].get("id"), docs[-1].get("seq"), CJK_TOKENS)
+
+
+class _SearchIndex:
+    def __init__(self, signature, postings, doc_lengths, avgdl, matrix, dim,
+                 estimated_bytes):
+        self.signature = signature
+        self.postings = postings
+        self.doc_lengths = doc_lengths
+        self.avgdl = avgdl
+        self.matrix = matrix      # numpy fast path (None without numpy)
+        self.dim = dim            # vector width shared by matrix / rows
+        self.rows = None          # decoded rows for the pure-Python fast path
+        self.estimated_bytes = estimated_bytes
+        # anchors for append-only growth (Add never rewrites an existing memory)
+        self.count = len(doc_lengths) if doc_lengths is not None else signature[0]
+        self.total_terms = 0
+        self.posting_bytes = 0
+        self.first_key = None
+        self.last_key = None
+
+
+def _uniform_dim(docs: list[dict]) -> int:
+    """Vector width when float32 blobs are uniform and decodable, else 0."""
+    if not docs:
+        return 0
+    first = docs[0]["vec"]
+    if not first or len(first) % 4:
+        return 0
+    if any(len(d["vec"]) != len(first) for d in docs):
+        return 0
+    return len(first) // 4
+
+
+def _matrix_size(docs: list[dict]) -> int:
+    """Bytes of the numpy matrix, or of decoded rows when numpy is unavailable."""
+    dim = _uniform_dim(docs)
+    if not dim:
+        return 0
+    if _np is not None and len(docs) >= _SEARCH_INDEX_MIN_DOCS:
+        return len(docs) * dim * 4
+    if _np is None and _DOT is not None:
+        return len(docs) * dim * 4
+    return 0
+
+
+def _estimate_search_index_bytes(docs: list[dict]) -> int:
+    # 256 B/doc bookkeeping + 96 B row overhead, matching _build_search_index.
+    return _matrix_size(docs) + len(docs) * 352
+
+
+def _doc_key(d: dict) -> tuple:
+    return (d.get("id"), d.get("seq"))
+
+
+def _append_postings(postings, doc_lengths, docs, start: int, budget: int):
+    """Append docs[start:] to postings/doc_lengths; return (bytes_used, total_terms) or None."""
+    used = 0
+    total_terms = 0
+    posting_bytes = 2 * array("I").itemsize + 2  # include array growth slack
+    for i in range(start, len(docs)):
+        tf = Counter(doc_tokens(docs[i]))
+        doc_length = sum(tf.values()) or 1
+        doc_lengths.append(doc_length)
+        total_terms += doc_length
+        for term, count in tf.items():
+            posting = postings.get(term)
+            extra = posting_bytes + (260 + len(term) * 4 if posting is None else 0)
+            if used + extra > budget:
+                return None
+            if posting is None:
+                posting = (array("I"), array("I"))
+                postings[term] = posting
+            posting[0].append(i)
+            posting[1].append(count)
+            used += extra
+    return used, total_terms
+
+
+def _build_search_index(docs: list[dict]) -> _SearchIndex | None:
+    signature = _docs_signature(docs)
+    dim = _uniform_dim(docs)
+    matrix = None
+    if dim and len(docs) >= _SEARCH_INDEX_MIN_DOCS and _np is not None:
+        blobs = [d["vec"] for d in docs]
+        try:
+            matrix = _np.frombuffer(b"".join(blobs), dtype="<f4").reshape(len(blobs), dim)
+        except Exception:  # malformed vectors remain on the exact fallback path
+            matrix = None
+
+    # Without numpy, keep decoded float32 rows so dense scoring avoids unpack+zip per query.
+    rows = None
+    if matrix is None and dim and _DOT is not None:
+        try:
+            rows = [array("f", unpack(d["vec"])) for d in docs]
+        except Exception:  # pragma: no cover - defensive; blobs were already width-checked
+            rows = None
+
+    vector_bytes = 0
+    if matrix is not None:
+        vector_bytes = matrix.nbytes
+    elif rows is not None:
+        vector_bytes = len(rows) * dim * 4 + len(rows) * 96
+
+    base_bytes = len(docs) * 256 + vector_bytes
+    if base_bytes > _SEARCH_INDEX_MAX_BYTES:
+        return None
+
+    postings: dict[str, tuple[array, array]] = {}
+    doc_lengths = array("I")
+    appended = _append_postings(postings, doc_lengths, docs, 0,
+                                _SEARCH_INDEX_MAX_BYTES - base_bytes)
+    if appended is None:
+        # Keep the vector matrix/rows even when sparse postings exceed their budget.
+        partial = _SearchIndex(signature, None, None, 1.0, matrix, dim, base_bytes)
+        partial.rows = rows
+        partial.first_key = _doc_key(docs[0])
+        partial.last_key = _doc_key(docs[-1])
+        partial.count = len(docs)
+        return partial
+    posting_bytes, total_terms = appended
+
+    avgdl = total_terms / len(doc_lengths) if doc_lengths else 1.0
+    index = _SearchIndex(signature, postings, doc_lengths, avgdl, matrix, dim,
+                         base_bytes + posting_bytes)
+    index.rows = rows
+    index.total_terms = total_terms
+    index.posting_bytes = posting_bytes
+    index.first_key = _doc_key(docs[0])
+    index.last_key = _doc_key(docs[-1])
+    index.count = len(docs)
+    return index
+
+
+def _extend_search_index(index: _SearchIndex, docs: list[dict]) -> _SearchIndex | None:
+    """Grow an index for an Add that only appended memories.
+
+    Add never rewrites existing rows, so an old index is reusable whenever its
+    document list is still a prefix of the new one. Copy-on-write keeps readers
+    of the old index valid while the extension is built.
+    """
+    start = index.count
+    if index.first_key is None or start <= 0 or start >= len(docs):
+        return None
+    if _doc_key(docs[0]) != index.first_key or _doc_key(docs[start - 1]) != index.last_key:
+        return None
+    if index.signature[-1] != CJK_TOKENS:  # tokenizer changed ⇒ the old postings are invalid
+        return None
+
+    dim = _uniform_dim(docs[start:])
+    matrix, rows, vector_bytes = None, None, 0
+    if index.matrix is not None:
+        if not dim or dim != index.dim or _np is None:
+            return None
+        try:
+            extra = _np.frombuffer(b"".join(d["vec"] for d in docs[start:]),
+                                   dtype="<f4").reshape(len(docs) - start, dim)
+            matrix = _np.vstack([index.matrix, extra])
+        except Exception:
+            return None
+        vector_bytes = matrix.nbytes
+    elif index.rows is not None:
+        if not dim or dim != index.dim or _DOT is None:
+            return None
+        try:
+            rows = list(index.rows) + [array("f", unpack(d["vec"])) for d in docs[start:]]
+        except Exception:  # pragma: no cover - defensive
+            return None
+        vector_bytes = len(rows) * dim * 4 + len(rows) * 96
+
+    base_bytes = len(docs) * 256 + vector_bytes
+    if base_bytes > _SEARCH_INDEX_MAX_BYTES:
+        return None
+
+    postings, doc_lengths, posting_bytes, total_terms = None, None, 0, index.total_terms
+    if index.postings is not None:
+        # Only touched terms need copying; untouched posting lists stay shared.
+        postings = dict(index.postings)
+        doc_lengths = array("I", index.doc_lengths)
+        touched = set()
+        for doc in docs[start:]:
+            touched.update(Counter(doc_tokens(doc)))
+        for term in touched:
+            old = postings.get(term)
+            postings[term] = ((array("I", old[0]), array("I", old[1]))
+                              if old is not None else (array("I"), array("I")))
+        appended = _append_postings(postings, doc_lengths, docs, start,
+                                    _SEARCH_INDEX_MAX_BYTES - base_bytes - index.posting_bytes)
+        if appended is None:
+            return None
+        posting_bytes, extra_terms = appended
+        posting_bytes += index.posting_bytes
+        total_terms += extra_terms
+
+    avgdl = total_terms / len(docs) if total_terms else 1.0
+    extended = _SearchIndex(_docs_signature(docs), postings, doc_lengths, avgdl, matrix,
+                            dim or index.dim, base_bytes + posting_bytes)
+    extended.rows = rows
+    extended.total_terms = total_terms
+    extended.posting_bytes = posting_bytes
+    extended.first_key = index.first_key
+    extended.last_key = _doc_key(docs[-1])
+    extended.count = len(docs)
+    return extended
+
+
+def _get_search_index(cache_key, docs: list[dict], stats: dict | None = None):
+    global _SEARCH_INDEX_BYTES
+    if cache_key is None or len(docs) < _SEARCH_INDEX_MIN_DOCS:
+        if stats is not None:
+            stats["index_cache_hit"] = False
+        return None
+
+    signature = _docs_signature(docs)
+    cached = None
+    with _SEARCH_INDEX_LOCK:
+        cached = _SEARCH_INDEX.get(cache_key)
+        if cached is not None and cached.signature == signature:
+            _SEARCH_INDEX.move_to_end(cache_key)
+            if stats is not None:
+                stats["index_cache_hit"] = True
+            return cached
+    if cached is not None:
+        extended = _extend_search_index(cached, docs)
+        if extended is not None and extended.estimated_bytes <= _SEARCH_INDEX_MAX_BYTES:
+            with _SEARCH_INDEX_LOCK:
+                current = _SEARCH_INDEX.get(cache_key)
+                if current is cached:
+                    _SEARCH_INDEX_BYTES += extended.estimated_bytes - cached.estimated_bytes
+                    _SEARCH_INDEX[cache_key] = extended
+                    _SEARCH_INDEX.move_to_end(cache_key)
+                    if stats is not None:
+                        stats["index_cache_hit"] = False
+                        stats["index_extended"] = True
+                    return extended
+                if current is not None and current.signature == signature:
+                    return current
+        with _SEARCH_INDEX_LOCK:
+            if _SEARCH_INDEX.get(cache_key) is cached:
+                _SEARCH_INDEX_BYTES -= cached.estimated_bytes
+                del _SEARCH_INDEX[cache_key]
+
+    if _estimate_search_index_bytes(docs) > _SEARCH_INDEX_MAX_BYTES:
+        if stats is not None:
+            stats["index_cache_hit"] = False
+        return None
+
+    index = _build_search_index(docs)
+    if stats is not None:
+        stats["index_cache_hit"] = False
+    if index is None or index.estimated_bytes > _SEARCH_INDEX_MAX_BYTES:
+        return None
+
+    with _SEARCH_INDEX_LOCK:
+        current = _SEARCH_INDEX.get(cache_key)
+        if current is not None and current.signature == signature:
+            _SEARCH_INDEX.move_to_end(cache_key)
+            return current
+        if current is not None:
+            _SEARCH_INDEX_BYTES -= current.estimated_bytes
+            del _SEARCH_INDEX[cache_key]
+        while _SEARCH_INDEX and (
+            len(_SEARCH_INDEX) >= _SEARCH_INDEX_MAX_ENTRIES
+            or _SEARCH_INDEX_BYTES + index.estimated_bytes > _SEARCH_INDEX_MAX_BYTES
+        ):
+            _, evicted = _SEARCH_INDEX.popitem(last=False)
+            _SEARCH_INDEX_BYTES -= evicted.estimated_bytes
+        _SEARCH_INDEX[cache_key] = index
+        _SEARCH_INDEX_BYTES += index.estimated_bytes
+    return index
+
+
+def bm25_scores(query: str, docs: list[dict], index=None) -> list[float]:
     if not docs:
         return []
     q = tokens(query)
     if not q:
         return [0.0] * len(docs)
-    doc_toks = [doc_tokens(d) for d in docs]
-    avgdl = sum(len(t) for t in doc_toks) / len(doc_toks) or 1.0
-    dfs = Counter()
-    for t in doc_toks:
-        for term in set(t):
-            dfs[term] += 1
     n = len(docs)
     k1, b = 1.5, 0.75
-    out = []
-    for t in doc_toks:
-        tf = Counter(t)
-        s = 0.0
+
+    if index is not None and index.postings is not None:
+        postings = index.postings
+        rare = []
+        if BM25_RARE_DF > 0:
+            rare = [t for t in q
+                    if 0 < len(postings.get(t, ((), ()))[0]) / n <= BM25_RARE_DF]
+            q = rare or q
+        idfs = {}
         for term in q:
-            if term not in tf:
+            posting = postings.get(term)
+            if posting:
+                df = len(posting[0])
+                idfs[term] = math.log(1 + (n - df + 0.5) / (df + 0.5))
+        out = [0.0] * n
+        for term in q:
+            posting = postings.get(term)
+            if not posting:
+                continue
+            idf = idfs[term]
+            for i, count in zip(posting[0], posting[1]):
+                dl = index.doc_lengths[i]
+                out[i] += idf * (count * (k1 + 1)) / (
+                    count + k1 * (1 - b + b * dl / index.avgdl)
+                )
+        return out
+
+    doc_tf = [Counter(doc_tokens(d)) for d in docs]
+    dfs = Counter()
+    for tf in doc_tf:
+        dfs.update(tf.keys())
+    avgdl = sum(sum(tf.values()) for tf in doc_tf) / n or 1.0
+    if BM25_RARE_DF > 0:
+        rare = [t for t in q if 0 < dfs[t] / n <= BM25_RARE_DF]
+        q = rare or q
+    out = []
+    for tf in doc_tf:
+        dl = sum(tf.values()) or 1
+        score = 0.0
+        for term in q:
+            count = tf.get(term, 0)
+            if not count:
                 continue
             idf = math.log(1 + (n - dfs[term] + 0.5) / (dfs[term] + 0.5))
-            dl = len(t) or 1
-            s += idf * (tf[term] * (k1 + 1)) / (tf[term] + k1 * (1 - b + b * dl / avgdl))
-        out.append(s)
+            score += idf * (count * (k1 + 1)) / (count + k1 * (1 - b + b * dl / avgdl))
+        out.append(score)
     return out
 
 
 def cosine(qv: list[float], dv: list[float]) -> float:
     if len(qv) != len(dv):
         return 0.0
+    if _DOT is not None:
+        return _DOT(qv, dv)
     return sum(a * b for a, b in zip(qv, dv))
 
 
@@ -119,8 +482,14 @@ def _rank(scores: list[float]) -> list[int]:
     return idx
 
 
-def dense_scores(qvec: list[float], docs: list[dict]) -> list[float]:
+def dense_scores(qvec: list[float], docs: list[dict], index=None) -> list[float]:
     dim = len(qvec)
+    if index is not None and index.matrix is not None and index.matrix.shape[1] == dim:
+        try:
+            q = _np.asarray(qvec, dtype="<f4")
+            return (index.matrix @ q).astype(float).tolist()
+        except Exception:  # fall through to the exact compatibility path
+            pass
     if _np is not None and len(docs) >= 128:
         try:
             blobs = [d["vec"] for d in docs]
@@ -130,57 +499,262 @@ def dense_scores(qvec: list[float], docs: list[dict]) -> list[float]:
                 return (mat @ q).astype(float).tolist()
         except Exception:  # 回退到纯 Python，检索绝不因加速失败而中断
             pass
+    if index is not None and index.rows is not None and index.dim == dim:
+        try:
+            q = [float(x) for x in qvec]
+            return [_DOT(q, row) for row in index.rows]
+        except Exception:  # pragma: no cover - defensive; decoded rows are width-checked
+            pass
     return [cosine(qvec, unpack(d["vec"])) for d in docs]
 
 
-def hybrid(qvec: list[float], query_text: str, docs: list[dict]) -> list[tuple[int, float]]:
-    dense = dense_scores(qvec, docs)
-    sparse = bm25_scores(query_text, docs)
-    rd, rs = _rank(dense), _rank(sparse)
-    rrf = [0.0] * len(docs)
+def _order(scores: list[float], docs: list[dict], limit: int | None = None) -> list[int]:
+    """全序 tie-break：score desc → created_at asc → id asc（契约要求复现确定）。"""
+    n = len(scores)
+    if limit is not None and 0 <= limit < n:
+        if limit == 0:
+            return []
+        # Head selection by score only is cheap; ties at the cutoff still need the
+        # full tie-break, so every item scoring >= cutoff becomes a candidate.
+        head = heapq.nsmallest(limit, range(n), key=lambda i: -scores[i])
+        cutoff = scores[head[-1]]
+        chosen = set(head)
+        candidates = head + [i for i, s in enumerate(scores) if s == cutoff and i not in chosen]
+        candidates.sort(key=lambda i: (-scores[i], docs[i].get("created_at", ""),
+                                       docs[i].get("id", "")))
+        return candidates[:limit]
+    return sorted(range(n), key=lambda i: (-scores[i], docs[i].get("created_at", ""),
+                                           docs[i].get("id", "")))
+
+
+def bm25_norm(sparse: list[float], mode: str | None = None) -> list[float] | None:
+    """把 BM25 压到 0–1，并让「零命中」这件事可表达。
+
+    返回 None 表示本 query 对所有文档都零命中（无词面证据）：
+    此时稀疏侧整体弃权，只由 dense 决定顺序 —— 这修掉了旧实现里
+    `_rank()` 在全零时按插入顺序打分、最早写入的分块白拿名次分的缺陷。
+    """
+    mode = (mode or SPARSE_NORM or "sat").lower()
+    mx = 0.0
+    pos_sum = 0.0
+    pos_n = 0
+    for s in sparse:
+        if s > mx:
+            mx = s
+        if s > 0.0:
+            pos_sum += s
+            pos_n += 1
+    if mx <= 0.0:
+        return None
+    if mode == "max":
+        return [s / mx if s > 0.0 else 0.0 for s in sparse]
+    # sat：s/(s+k)，k 取正分均值 ⇒ 弱匹配停在低区间，不会与强 dense 争夺名额
+    k = (pos_sum / pos_n) if pos_n else 1.0
+    return [s / (s + k) if s > 0.0 else 0.0 for s in sparse]
+
+
+def fuse_linear(dense: list[float], sparse: list[float]) -> list[float]:
+    """α·cos⁺ + β·bm25_norm，按有效权重归一 ⇒ score ∈ [0,1] 且可做阈值。"""
+    bn = bm25_norm(sparse)
+    a = max(0.0, DENSE_WEIGHT)
+    b = max(0.0, SPARSE_WEIGHT) if bn is not None else 0.0
+    if a + b <= 0.0:
+        a, b = 0.5, 0.5 if bn is not None else 0.0
+    total = a + b or 1.0
+    inv = 1.0 / total
+    if bn is None:
+        return [(a * dv * inv if dv > 0.0 else 0.0) if a else 0.0 for dv in dense]
+    out = []
+    for dv, sv in zip(dense, bn):
+        s = a * dv if dv > 0.0 else 0.0
+        out.append((s + b * sv) * inv)
+    return out
+
+
+def fuse_rrf(dense: list[float], sparse: list[float]) -> list[float]:
+    """旧行为：纯名次融合（保留用于 A/B 对照，不参与默认路径）。"""
+    rd = _rank(dense)
+    rrf = [0.0] * len(dense)
     for pos, i in enumerate(rd):
         rrf[i] += DENSE_WEIGHT / (RRF_K + pos + 1)
-    for pos, i in enumerate(rs):
-        rrf[i] += SPARSE_WEIGHT / (RRF_K + pos + 1)
-    order = _rank(rrf)
-    return [(i, rrf[i]) for i in order]
+    if bm25_norm(sparse) is not None:  # 零命中时稀疏侧同样不该投票
+        for pos, i in enumerate(_rank(sparse)):
+            rrf[i] += SPARSE_WEIGHT / (RRF_K + pos + 1)
+    return rrf
+
+
+def hybrid(qvec: list[float], query_text: str, docs: list[dict],
+           limit: int | None = None, cache_key=None,
+           stats: dict | None = None) -> list[tuple[int, float]]:
+    index = _get_search_index(cache_key, docs, stats)
+    dense = dense_scores(qvec, docs, index)
+    sparse = bm25_scores(query_text, docs, index)
+    fused = fuse_rrf(dense, sparse) if FUSION == "rrf" else fuse_linear(dense, sparse)
+    if TEMPORAL_RULE == "tense":
+        bias = tense_bias(docs, query_tense(query_text))
+        if bias is not None:
+            fused = [min(1.0, max(0.0, s + b)) for s, b in zip(fused, bias)]
+    return [(i, fused[i]) for i in _order(fused, docs, limit)]
+
+
+# ---------- 时态一致性：查询问「现在」就压旧事实，问「以前」就抬旧事实 ----------
+def query_tense(text: str) -> str | None:
+    """返回 "present" / "past" / None。同时含两个时态时视为不确定。"""
+    low = text.lower()
+    present = any(c in low for c in _PRESENT_CUES)
+    past = any(c in low for c in _PAST_CUES)
+    if present == past:
+        return None
+    return "present" if present else "past"
+
+
+_TENSE_CACHE: dict[tuple[int, int], str] = {}
+_TENSE_LOCK = threading.Lock()
+
+
+def doc_tense_state(d: dict) -> str:
+    """记忆正文只陈述旧事实时为 "past"；新旧混合或纯现时陈述时为 "neutral"。
+
+    按正文缓存（正文不可变）。混合陈述必须中立：它往往正是含答案的那一条。
+    """
+    text = d["text"]
+    key = (len(text), hash(text))
+    with _TENSE_LOCK:
+        got = _TENSE_CACHE.get(key)
+    if got is not None:
+        return got
+    low = " " + text.lower() + " "
+    has_past = any(m in low for m in _PAST_MARKERS)
+    has_present = any(m in low for m in _PRESENT_MARKERS)
+    state = "past" if has_past and not has_present else "neutral"
+    with _TENSE_LOCK:
+        if len(_TENSE_CACHE) >= _TOK_MAX:
+            _TENSE_CACHE.clear()
+        _TENSE_CACHE[key] = state
+    return state
+
+
+def tense_bias(docs: list[dict], tense: str | None,
+               weight: float | None = None) -> list[float] | None:
+    """现时提问 ⇒ 带旧时标记的记忆扣分；过去时提问 ⇒ 加分。
+
+    只看正文措辞，不看写入时间：同一会话里「去年住在慕尼黑」可能几分钟前才写，
+    时间戳反映的是写入顺序而不是事实有效期。没有命中任何旧时标记时整体不启用。
+    """
+    if tense not in ("present", "past") or len(docs) < 2:
+        return None
+    w = TEMPORAL_WEIGHT if weight is None else weight
+    if w <= 0:
+        return None
+    past = [doc_tense_state(d) == "past" for d in docs]
+    if not any(past):
+        return None
+    if tense == "present":
+        return [-w if f else 0.0 for f in past]
+    return [w if f else 0.0 for f in past]
 
 
 # ---------- 近重复去重（同一事实的多副本只留一条）----------
 def _norm_text(s: str) -> str:
-    return re.sub(r"\s+", "", s.lower())[:400]
+    return "".join(s.lower().split())[:400]
 
 
-def dedup(ranked: list[tuple[int, float]], docs: list[dict]) -> list[tuple[int, float]]:
+def dedup(ranked: list[tuple[int, float]], docs: list[dict], index=None,
+          want: int | None = None) -> list[tuple[int, float]]:
     """头部候选去重：先比正文指纹，再比向量；尾部原样保留。
 
     只对前 DEDUP_POOL 条做向量比较，避免 O(n²) 把延迟拖垮；
-    精排只吃 RERANK_TOP（30）条，因此头部去重已覆盖实际收益区间。
+    精排只处理 RERANK_TOP 条，因此头部去重已覆盖实际收益区间。
+    向量优先复用检索索引里已解码的矩阵/行，避免每次 Search 重新 unpack。
+    `want` 给出时只贪心到够用为止（Search 只要前 top_k 条，不值得把池子比完）。
     """
     pool, tail = ranked[:DEDUP_POOL], ranked[DEDUP_POOL:]
     if not pool:
         return ranked
-    seen: list[tuple[str, list[float]]] = []
+    pool_rows = [i for i, _ in pool]
+    matrix = None
+    rows = None
+    if index is not None and pool_rows:
+        n_rows = max(pool_rows) + 1
+        if index.matrix is not None and n_rows <= index.matrix.shape[0]:
+            matrix = index.matrix
+        elif index.rows is not None and n_rows <= len(index.rows):
+            rows = index.rows
+    vecs = None if (matrix is not None or rows is not None) else [
+        unpack(docs[i]["vec"]) for i, _ in pool]
+    gram = None
+    if matrix is not None:
+        try:
+            pool_matrix = matrix[pool_rows]
+            gram = pool_matrix @ pool_matrix.T
+        except Exception:  # pragma: no cover - defensive; fall back to decoded rows
+            gram = None
+
+    seen: set[str] = set()
     out: list[tuple[int, float]] = []
-    vecs = [unpack(docs[i]["vec"]) for i, _ in pool]
     kept: list[int] = []
     for pos, (i, sc) in enumerate(pool):
         key = _norm_text(docs[i]["text"])
-        if any(key == k for k, _ in seen):
+        if key in seen:
             continue
-        v = vecs[pos]
-        if any(cosine(v, vecs[j]) > DEDUP_COS for j in kept[-40:]):
-            continue
-        seen.append((key, v))
+        window = kept[-40:]
+        if gram is not None:
+            if window and float(gram[pos][window].max()) > DEDUP_COS:
+                continue
+        elif matrix is not None:
+            if window:
+                sims = matrix[[pool_rows[j] for j in window]] @ matrix[pool_rows[pos]]
+                if float(sims.max()) > DEDUP_COS:
+                    continue
+        elif rows is not None:
+            if window:
+                row = rows[pool_rows[pos]]
+                if any(cosine(row, rows[pool_rows[j]]) > DEDUP_COS for j in window):
+                    continue
+        elif window:
+            v = vecs[pos]
+            if any(cosine(v, vecs[j]) > DEDUP_COS for j in window):
+                continue
+        seen.add(key)
         kept.append(pos)
         out.append((i, sc))
+        if want is not None and len(out) >= want:
+            return out
     return out + tail
 
 
 # ---------- 可选精排（唯一不受模型限制的环节）----------
+def _rebased(head: list[tuple[int, float]], scored: list[tuple[int, float]]) -> list[tuple[int, float]]:
+    """把精排分单调映射回「融合分区间」，避免两种分的量纲混在一起。
+
+    精排分（sigmoid 后的 cross-encoder 分）与融合分不可比：直接拼接会出现
+    「尾部融合分 > 头部精排分」的倒挂，`score` 也就不再单调可解释。
+    这里把头部精排分线性压到 [min(head), max(head)]：
+      · 头部内部顺序 = 精排顺序（保序）
+      · 头部任何一条都 ≥ 尾部首条（融合分递减）
+      · 仍在 [0,1] 内，可当阈值用
+    """
+    if not scored:
+        return head
+    fused = [s for _, s in head]
+    hi, lo = max(fused), min(fused)
+    vals = [s for _, s in scored]
+    vmin, vmax = min(vals), max(vals)
+    span = hi - lo
+    if vmax - vmin <= 1e-9:
+        return head  # 无排序信号时保留融合序及其分数
+    out = []
+    for i, s in scored:
+        out.append((i, lo + (s - vmin) / (vmax - vmin) * span))
+    return out
+
+
 def rerank(query_text: str, ranked: list[tuple[int, float]], docs: list[dict]) -> list[tuple[int, float]]:
-    if RERANK_MODE != "http" or not RERANK_URL:
+    global _rerank_fails, _rerank_cooldown_until
+    if RERANK_MODE != "http" or not RERANK_URL or RERANK_TOP <= 0:
         return ranked
+    if time.time() < _rerank_cooldown_until:
+        return ranked  # 熔断中：旁路失效不影响 Search
     head = ranked[:RERANK_TOP]
     tail = ranked[RERANK_TOP:]
     payload = {
@@ -213,20 +787,51 @@ def rerank(query_text: str, ranked: list[tuple[int, float]], docs: list[dict]) -
         else:
             rows = resp.get("results", resp) if isinstance(resp, dict) else resp
         scored = []
+        seen = set()
+        if not isinstance(rows, list):
+            raise ValueError("rerank results must be a list")
         for row in rows:
-            j = int(row.get("index", row.get("corpus_id", 0)))
+            if not isinstance(row, dict):
+                raise ValueError("rerank result row must be an object")
+            raw_index = row.get("index", row.get("corpus_id"))
+            if isinstance(raw_index, bool) or raw_index is None:
+                raise ValueError("rerank result has invalid index")
+            j = int(raw_index)
+            if not 0 <= j < len(head) or j in seen:
+                raise ValueError("rerank result indices must be unique and in range")
             s = float(row.get("relevance_score", row.get("score", 0.0)))
-            if 0 <= j < len(head):
-                scored.append((head[j][0], s))
-        if not scored:
-            return ranked
+            if not math.isfinite(s):
+                raise ValueError("rerank result score must be finite")
+            seen.add(j)
+            scored.append((head[j][0], s))
+        if len(seen) != len(head):
+            raise ValueError(f"rerank returned {len(seen)}/{len(head)} unique results")
         scored.sort(key=lambda t: (-t[1], docs[t[0]]["created_at"], t[0]))
-        return scored + tail
+        _rerank_fails = 0
+        return _rebased(head, scored) + tail
     except Exception:
-        return ranked  # 精排失败降级为融合序，绝不阻断 Search
+        # 精排是旁路：失败降级为融合序，绝不阻断 Search；失败多了就熔断一段时间
+        _rerank_fails += 1
+        if _rerank_fails >= RERANK_FAILS:
+            _rerank_fails = 0
+            _rerank_cooldown_until = time.time() + RERANK_COOLDOWN
+        return ranked
 
 
-def run(qvec: list[float], query_text: str, docs: list[dict]) -> list[tuple[int, float]]:
-    ranked = hybrid(qvec, query_text, docs)
-    ranked = dedup(ranked, docs)
-    return rerank(query_text, ranked, docs)
+def run(qvec: list[float], query_text: str, docs: list[dict],
+        limit: int | None = None, cache_key=None,
+        stats: dict | None = None) -> list[tuple[int, float]]:
+    if limit is not None and limit <= 0:
+        return []
+    rank_limit = None
+    if limit is not None:
+        rank_limit = min(len(docs), limit + max(0, DEDUP_POOL) + max(0, RERANK_TOP))
+    index = _get_search_index(cache_key, docs, stats)
+    dense = dense_scores(qvec, docs, index)
+    sparse = bm25_scores(query_text, docs, index)
+    fused = fuse_rrf(dense, sparse) if FUSION == "rrf" else fuse_linear(dense, sparse)
+    ranked = [(i, fused[i]) for i in _order(fused, docs, rank_limit)]
+    ranked = dedup(ranked, docs, index, want=None if limit is None else
+                   limit + (max(0, RERANK_TOP) if RERANK_MODE == "http" else 0))
+    ranked = rerank(query_text, ranked, docs)
+    return ranked if limit is None else ranked[:limit]

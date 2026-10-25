@@ -19,3 +19,4 @@ htmlcov/
 doctor.json
 smoke*.json
 nohup.out
+.playwright-mcp/

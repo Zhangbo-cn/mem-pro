@@ -18,7 +18,8 @@ cleanup() {
 }
 trap cleanup EXIT
 
-EMBED_MODE=hash DB_PATH="$TMP/verify.db" MEMORY_SYSTEM_KEY="$KEY" \
+# 默认离线 hash（免费、可复现）；VERIFY_EMBED_MODE=api 可让同一套契约跑真实 embedding
+EMBED_MODE="${VERIFY_EMBED_MODE:-hash}" DB_PATH="$TMP/verify.db" MEMORY_SYSTEM_KEY="$KEY" \
   PORT="$PORT" HOST=127.0.0.1 STARTUP_CHECK=0 \
   "$PY" service/server.py >"$TMP/server.log" 2>&1 &
 PID=$!

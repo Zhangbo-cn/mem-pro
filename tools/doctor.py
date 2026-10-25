@@ -117,6 +117,24 @@ def check_storage() -> None:
         add(FAIL, "SQLite", f"{db} ping 失败", "删除损坏的库或换 DB_PATH")
 
 
+def check_retrieval() -> None:
+    try:
+        import retrieve
+    except Exception as e:  # noqa: BLE001
+        add(WARN, "检索加速", f"retrieve 导入失败：{e}")
+        return
+    if retrieve._np is not None:
+        add(OK, "dense 加速", f"numpy {retrieve._np.__version__}（矩阵内积）")
+    elif retrieve._DOT is not None:
+        add(WARN, "dense 加速", "纯 Python + math.sumprod（未装 numpy）",
+            "装 numpy 可把 6.7k×1024 维单次 Search 从 ~240ms 降到 ~25ms：pip install numpy")
+    else:
+        add(WARN, "dense 加速", "纯 Python 逐元素点积（既无 numpy 也无 math.sumprod）",
+            "建议 Python ≥ 3.12，或安装 numpy")
+    add(OK, "检索索引预算",
+        f"{retrieve._SEARCH_INDEX_MAX_BYTES // (1024 * 1024)} MiB（RANK_INDEX_MAX_MB）")
+
+
 def check_auth() -> None:
     key = env("MEMORY_SYSTEM_KEY")
     if not key:
@@ -215,6 +233,9 @@ DB_PATH=./mem.db
 # 平台调你接口用的鉴权 key（已随机生成）
 MEMORY_SYSTEM_KEY={key}
 
+# 检索索引：单条 Search 的复用缓存上限（MiB）
+RANK_INDEX_MAX_MB=64
+
 # 可选精排
 RERANK_MODE=none
 # RERANK_MODE=http
@@ -248,6 +269,7 @@ def main() -> int:
     check_env_files()
     check_embedding()
     check_storage()
+    check_retrieval()
     check_auth()
     check_port()
     check_rerank()

@@ -1,7 +1,7 @@
 """精排模型横向评测（同一语料 / 同一候选集 / 同一指标）。
 
-指标：Recall@10、MRR@10、nDCG@10、P50 延迟（每 query）
-候选集：dense(text-embedding-v4) + BM25 → RRF 取 top-K，再交由各精排器重排
+指标：Recall@10、MRR@10、nDCG@10、每 query 推理延迟 P50/P95 与模型加载时间
+候选集：dense(text-embedding-v4) + BM25 → 当前配置融合排序 → 同一 top-K 候选交由各精排器重排
 
 语料为**确定性合成**（含同实体干扰项、时间更新、中英混排），
 用于在拿不到 ATM-Bench/Mem-Gallery 数据时做**相对**比较，不可当绝对分数。
@@ -17,6 +17,7 @@ import json
 import math
 import os
 import random
+import statistics
 import sys
 import time
 import urllib.request
@@ -106,14 +107,14 @@ def build(n_docs: int, n_queries: int, seed: int = 7):
 
 # ---------------- 精排器 ----------------
 class NoRerank:
-    name = "none (RRF)"
+    name = "none (dense+BM25)"
 
     def score(self, q, docs):
         return [0.0] * len(docs)
 
 
 class LocalSeqCls:
-    def __init__(self, path, name, maxlen=256, batch=32, threads=12):
+    def __init__(self, path, name, maxlen=256, batch=32, threads=8):
         import torch
         from transformers import AutoModelForSequenceClassification, AutoTokenizer
         torch.set_num_threads(threads)
@@ -135,7 +136,7 @@ class LocalSeqCls:
 class Qwen3Rerank:
     name = "Qwen3-Reranker-0.6B"
 
-    def __init__(self, path, maxlen=512, batch=8, threads=12):
+    def __init__(self, path, maxlen=512, batch=8, threads=8):
         import torch
         from transformers import AutoModelForCausalLM, AutoTokenizer
         torch.set_num_threads(threads)
@@ -203,7 +204,10 @@ def main():
     ap.add_argument("--docs", type=int, default=2000)
     ap.add_argument("--queries", type=int, default=60)
     ap.add_argument("--seed", type=int, default=7)
+    ap.add_argument("--threads", type=int, default=max(1, min(8, os.cpu_count() or 4)))
     a = ap.parse_args()
+    if min(a.docs, a.queries, a.topk, a.threads) <= 0:
+        ap.error("--docs, --queries, --topk, and --threads must be positive")
 
     docs, queries = build(a.docs, a.queries, a.seed)
     print(f"语料 {len(docs)} 条 / 查询 {len(queries)} 条 / 候选 top-{a.topk}\n")
@@ -227,35 +231,38 @@ def main():
         cand.append((qt, pool, ranked[: a.topk]))
     print(f"  粗排完成 {time.time()-t0:.1f}s\n", flush=True)
 
-    scorers = []
-    for m in a.models.split(","):
-        m = m.strip()
-        if m == "none":
-            scorers.append(NoRerank())
-        elif m == "bge":
-            scorers.append(LocalSeqCls(f"{ROOT}/models/bge-reranker-v2-m3", "bge-reranker-v2-m3"))
-        elif m == "jina":
-            scorers.append(LocalSeqCls(f"{ROOT}/models/jina-reranker-v2", "jina-reranker-v2-base"))
-        elif m == "qwen3":
-            scorers.append(Qwen3Rerank(f"{ROOT}/models/qwen3-reranker-0.6b"))
-        elif m == "gte-api":
-            if not DS_KEY:
-                print("跳过 gte-api（无 key）")
-                continue
-            scorers.append(GteApi())
-        else:
-            print(f"未知模型 {m}")
     del dv
 
     rows = []
-    for sc in scorers:
+    for model_name in (m.strip() for m in a.models.split(",")):
+        load_started = time.perf_counter()
+        if model_name == "none":
+            sc = NoRerank()
+        elif model_name == "bge":
+            sc = LocalSeqCls(f"{ROOT}/models/bge-reranker-v2-m3", "bge-reranker-v2-m3",
+                             threads=a.threads)
+        elif model_name == "jina":
+            sc = LocalSeqCls(f"{ROOT}/models/jina-reranker-v2", "jina-reranker-v2-base",
+                             threads=a.threads)
+        elif model_name == "qwen3":
+            sc = Qwen3Rerank(f"{ROOT}/models/qwen3-reranker-0.6b", threads=a.threads)
+        elif model_name == "gte-api":
+            if not DS_KEY:
+                print("跳过 gte-api（无 key）")
+                continue
+            sc = GteApi()
+        else:
+            print(f"未知模型 {model_name}")
+            continue
+        load_ms = (time.perf_counter() - load_started) * 1000
+
         rec = mrr = ndcg_ = 0.0
         lat = []
         for qt, pool, head in cand:
             texts = [pool[i]["text"] for i, _ in head]
-            t = time.time()
+            t = time.perf_counter()
             scores = sc.score(qt["query"], texts)
-            lat.append((time.time() - t) * 1000)
+            lat.append((time.perf_counter() - t) * 1000)
             order = sorted(range(len(head)), key=lambda j: (-scores[j], j))
             ids = [pool[head[j][0]]["id"] for j in order]
             r, m, n = metrics(ids, qt["gold"])
@@ -263,17 +270,21 @@ def main():
         n = len(cand)
         lat.sort()
         rows.append([sc.name, rec / n, mrr / n, ndcg_ / n,
-                     lat[len(lat) // 2], lat[int(len(lat) * 0.95)] if len(lat) > 2 else lat[-1]])
-        print(f"  ✓ {sc.name}  nDCG@10={ndcg_/n:.4f}", flush=True)
+                     statistics.median(lat), lat[math.ceil(len(lat) * 0.95) - 1], load_ms])
+        print(f"  ✓ {sc.name}  nDCG@10={ndcg_/n:.4f}  load={load_ms/1000:.1f}s", flush=True)
+        del sc
+        if model_name in ("bge", "jina", "qwen3"):
+            import gc
+            gc.collect()
 
-    print("\n| 精排器 | Recall@10 | MRR@10 | nDCG@10 | P50 ms | P95 ms |")
-    print("|---|---|---|---|---|---|")
+    print("\n| 精排器 | Recall@10 | MRR@10 | nDCG@10 | P50 ms | P95 ms | Load s |")
+    print("|---|---|---|---|---|---|---|")
     for r in sorted(rows, key=lambda x: -x[3]):
-        print(f"| {r[0]} | {r[1]:.4f} | {r[2]:.4f} | {r[3]:.4f} | {r[4]:.0f} | {r[5]:.0f} |")
+        print(f"| {r[0]} | {r[1]:.4f} | {r[2]:.4f} | {r[3]:.4f} | {r[4]:.0f} | {r[5]:.0f} | {r[6]/1000:.1f} |")
 
-    base = next((x for x in rows if "none" in x[0]), None)
+    base = next((x for x in rows if x[0].startswith("none ")), None)
     if base:
-        print("\n相对 RRF 基线的 nDCG@10 提升：")
+        print("\n相对 dense+BM25 基线的 nDCG@10 提升：")
         for r in sorted(rows, key=lambda x: -x[3]):
             print(f"  {r[0]:26s} {'+' if r[3]>=base[3] else ''}{(r[3]-base[3])*100:.1f}%")
 

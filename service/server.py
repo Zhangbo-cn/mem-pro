@@ -237,7 +237,8 @@ def do_add(req: dict) -> dict:
         return resp
 
 
-def do_search(req: dict) -> dict:
+def do_search(req: dict, timings: dict | None = None) -> dict:
+    timings = timings if timings is not None else {}
     for k in ("query", "user_id", "top_k"):
         if req.get(k) in (None, ""):
             raise Bad(f"缺少必填字段 {k}")
@@ -250,27 +251,50 @@ def do_search(req: dict) -> dict:
     if APPEND_OPTIONS and isinstance(req.get("options"), list):
         qtext += "\n" + "\n".join(str(o) for o in req["options"])
 
-    docs = store.fetch_user(req["user_id"])          # 严格 user_id 隔离；不读图片
+    started = time.perf_counter()
+    store_stats = {}
+    docs = store.fetch_user(req["user_id"], stats=store_stats)
+    timings["search_store_ms"] = round((time.perf_counter() - started) * 1000, 2)
+    timings["search_store_cache_hit"] = store_stats.get("cache_hit", False)
+    timings["search_docs"] = len(docs)
     if not docs:
+        timings["search_results"] = 0
         return {"data": []}
 
+    started = time.perf_counter()
     try:
         qvec = embed.embed([qtext])[0]
     except Exception as e:
         raise Upstream(f"embedding failed: {e}") from e
-    ranked = retrieve.run(qvec, qtext, docs)
+    finally:
+        timings["search_embed_ms"] = round((time.perf_counter() - started) * 1000, 2)
+
+    rank_stats = {}
+    started = time.perf_counter()
+    try:
+        ranked = retrieve.run(qvec, qtext, docs, limit=req["top_k"],
+                              cache_key=(store.DB_PATH, req["user_id"]), stats=rank_stats)
+    finally:
+        timings["search_rank_ms"] = round((time.perf_counter() - started) * 1000, 2)
+    timings["search_index_cache_hit"] = rank_stats.get("index_cache_hit", False)
+    if rank_stats.get("index_extended"):
+        timings["search_index_extended"] = True
+    timings["search_results"] = len(ranked)
 
     items = []
-    for i, score in ranked[: req["top_k"]]:
+    for i, score in ranked:
         d = docs[i]
         items.append({"id": d["id"], "text": d["text"], "images": [],
                       "score": round(float(score), 6), "created_at": d["created_at"]})
+    started = time.perf_counter()
     if items:
         images = store.fetch_images([it["id"] for it in items], req["user_id"])
         for it in items:
             it["images"] = images.get(it["id"], [])
-    items = budget.clip(items, req["top_k"], MAX_IMAGES)
+    timings["search_images_ms"] = round((time.perf_counter() - started) * 1000, 2)
 
+    started = time.perf_counter()
+    items = budget.clip(items, req["top_k"], MAX_IMAGES)
     data = []
     for it in items:
         if it["images"]:
@@ -280,6 +304,7 @@ def do_search(req: dict) -> dict:
             content = it["text"]
         data.append({"id": it["id"], "content": content,
                      "score": it["score"], "created_at": it["created_at"]})
+    timings["search_format_ms"] = round((time.perf_counter() - started) * 1000, 2)
     return {"data": data}
 
 
@@ -383,6 +408,7 @@ class Handler(BaseHTTPRequestHandler):
         self.req_id = self.headers.get("X-Request-Id", "")[:128]
         path = self.path.split("?", 1)[0].rstrip("/")
         acquired = False
+        search_timings = {}
         try:
             if path not in ("/add", "/search"):
                 self._log(404, started)
@@ -400,19 +426,23 @@ class Handler(BaseHTTPRequestHandler):
                     return self._send(429, {"detail": {"reason": "too many in-flight requests"}},
                                       {"Retry-After": "1", "Connection": "close"})
             req = self._read_json()
-            out = do_add(req) if path == "/add" else do_search(req)
+            if path == "/add":
+                out = do_add(req)
+            else:
+                out = do_search(req, search_timings)
             self._log(200, started, user=uid_hash(str(req.get("user_id", ""))),
-                      items=len(out.get("data", [])) if isinstance(out, dict) else None)
+                      items=len(out.get("data", [])) if isinstance(out, dict) else None,
+                      **search_timings)
             return self._send(200, out)
         except Bad as e:
-            self._log(422, started, reason=str(e)[:200])
+            self._log(422, started, **search_timings, reason=str(e)[:200])
             return self._send(422, {"detail": {"reason": str(e)}})
         except Upstream as e:
-            self._log(503, started, reason=str(e)[:200])
+            self._log(503, started, **search_timings, reason=str(e)[:200])
             return self._send(503, {"detail": {"reason": str(e)}}, {"Retry-After": "5"})
         except Exception as e:  # 明确 5xx，便于平台退避重试
             traceback.print_exc()
-            self._log(500, started, reason=type(e).__name__)
+            self._log(500, started, **search_timings, reason=type(e).__name__)
             return self._send(500, {"detail": {"reason": f"internal: {type(e).__name__}"}})
         finally:
             if acquired and _INFLIGHT is not None:

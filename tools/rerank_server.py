@@ -2,7 +2,7 @@
 
 用法：
   .venv/bin/python tools/rerank_server.py                     # 默认 models/bge-reranker-v2-m3:8010
-  RERANK_MODEL_DIR=models/xxx PORT=8010 .venv/bin/python tools/rerank_server.py
+  RERANK_HOST=0.0.0.0 RERANK_MODEL_DIR=models/xxx PORT=8010 .venv/bin/python tools/rerank_server.py  # 需要远程访问时才覆盖默认监听地址
 
 接口（与 HuggingFace TEI 一致，便于换模型/换服务）：
   POST /rerank {"query": "...", "documents": ["...", ...], "top_n": 10}
@@ -22,6 +22,7 @@ from transformers import AutoModelForSequenceClassification, AutoTokenizer
 
 MODEL_DIR = os.environ.get("RERANK_MODEL_DIR", "models/bge-reranker-v2-m3")
 PORT = int(os.environ.get("PORT", "8010"))
+HOST = os.environ.get("RERANK_HOST", "127.0.0.1")
 BATCH = int(os.environ.get("RERANK_BATCH", "16"))
 MAX_LEN = int(os.environ.get("RERANK_MAXLEN", "512"))
 THREADS = int(os.environ.get("TORCH_THREADS", "8"))
@@ -84,5 +85,5 @@ class H(BaseHTTPRequestHandler):
 
 
 if __name__ == "__main__":
-    print(f"[rerank] listen 0.0.0.0:{PORT}", flush=True)
-    ThreadingHTTPServer(("0.0.0.0", PORT), H).serve_forever()
+    print(f"[rerank] listen {HOST}:{PORT}", flush=True)
+    ThreadingHTTPServer((HOST, PORT), H).serve_forever()

@@ -107,6 +107,88 @@ class RetrieveTest(unittest.TestCase):
         for a, b in zip(fast, slow):
             self.assertAlmostEqual(a, b, places=5)
 
+    def test_cached_search_index_and_limited_order_match_exact_prefix(self):
+        docs = self._docs([f"unique memory record {i} contains token {i % 17}" for i in range(260)])
+        q = embed.embed(["record 37"])[0]
+        exact = retrieve.run(q, "record 37", docs)
+        key = ("unit-index", "u-" + str(id(self)))
+        first_stats = {}
+        limited = retrieve.run(q, "record 37", docs, limit=11, cache_key=key, stats=first_stats)
+        self.assertEqual(limited, exact[:11])
+        self.assertFalse(first_stats["index_cache_hit"])
+
+        hit_stats = {}
+        cached = retrieve.run(q, "record 37", docs, limit=11, cache_key=key, stats=hit_stats)
+        self.assertEqual(cached, exact[:11])
+        self.assertTrue(hit_stats["index_cache_hit"])
+        cached_index = retrieve._SEARCH_INDEX[key]
+        for query in ("record 37", "token record record", "unique memory", "missing word"):
+            expected_sparse = retrieve.bm25_scores(query, docs)
+            cached_sparse = retrieve.bm25_scores(query, docs, cached_index)
+            for expected_score, cached_score in zip(expected_sparse, cached_sparse):
+                self.assertAlmostEqual(cached_score, expected_score, places=12)
+        cached_dense = retrieve.dense_scores(q, docs, cached_index)
+        for expected_score, got_score in zip(retrieve.dense_scores(q, docs), cached_dense):
+            self.assertAlmostEqual(got_score, expected_score, places=5)
+
+        grown = docs + self._docs(["new memory appended at the end"])
+        grown[-1]["id"] = "new-last-id"
+        stale_stats = {}
+        got = retrieve.run(q, "record 37", grown, limit=11, cache_key=key, stats=stale_stats)
+        expected = retrieve.run(q, "record 37", grown)[:11]
+        self.assertEqual(got, expected)
+        self.assertFalse(stale_stats["index_cache_hit"])
+        # Append-only growth reuses the cached index instead of rebuilding it from scratch.
+        self.assertTrue(stale_stats["index_extended"])
+        self.assertEqual(retrieve._SEARCH_INDEX[key].count, len(grown))
+        for query in ("record 37", "new memory"):
+            expected_sparse = retrieve.bm25_scores(query, grown)
+            cached_sparse = retrieve.bm25_scores(query, grown, retrieve._SEARCH_INDEX[key])
+            for expected_score, cached_score in zip(expected_sparse, cached_sparse):
+                self.assertAlmostEqual(cached_score, expected_score, places=12)
+
+        # Rewriting an existing memory is not append-only: the index must be rebuilt.
+        replaced = [dict(d) for d in grown]
+        replaced[3]["text"] = "rewritten third record about tokens"
+        rewrite_stats = {}
+        got = retrieve.run(q, "record 37", replaced, limit=11, cache_key=key, stats=rewrite_stats)
+        self.assertNotIn("index_extended", rewrite_stats)
+        self.assertEqual(got, retrieve.run(q, "record 37", replaced)[:11])
+
+        saved_max = retrieve._SEARCH_INDEX_MAX_BYTES
+        try:
+            retrieve._SEARCH_INDEX_MAX_BYTES = 1
+            oversized_key = ("unit-index-cap", key[1])
+            no_cache_stats = {}
+            no_cache = retrieve.run(q, "record 37", docs, limit=11,
+                                    cache_key=oversized_key, stats=no_cache_stats)
+            self.assertEqual(no_cache, exact[:11])
+            self.assertFalse(no_cache_stats["index_cache_hit"])
+            self.assertNotIn(oversized_key, retrieve._SEARCH_INDEX)
+        finally:
+            retrieve._SEARCH_INDEX_MAX_BYTES = saved_max
+
+    def test_sparse_budget_exhaustion_keeps_vector_path_exact(self):
+        docs = self._docs([f"semi structured log line {i} keyword{i % 5}" for i in range(60)])
+        q = embed.embed(["log line 3"])[0]
+        exact = retrieve.run(q, "log line 3", docs)
+        key = ("unit-index-sparse-cap", str(id(self)))
+        saved_max = retrieve._SEARCH_INDEX_MAX_BYTES
+        try:
+            # Room for vectors, not for the posting lists: BM25 falls back, dense stays indexed.
+            retrieve._SEARCH_INDEX_MAX_BYTES = retrieve._estimate_search_index_bytes(docs) + 64
+            got = retrieve.run(q, "log line 3", docs, limit=7, cache_key=key)
+            self.assertEqual(got, exact[:7])
+            index = retrieve._SEARCH_INDEX[key]
+            self.assertIsNone(index.postings)
+            self.assertTrue(index.matrix is not None or index.rows is not None)
+            indexed_dense = retrieve.dense_scores(q, docs, index)
+            for expected_score, got_score in zip(retrieve.dense_scores(q, docs), indexed_dense):
+                self.assertAlmostEqual(got_score, expected_score, places=5)
+        finally:
+            retrieve._SEARCH_INDEX_MAX_BYTES = saved_max
+            retrieve._SEARCH_INDEX.pop(key, None)
+
 
 class EmbedTest(unittest.TestCase):
     def test_hash_deterministic_and_normalized(self):
@@ -150,6 +232,60 @@ class StoreTest(unittest.TestCase):
         self.assertEqual([d["text"] for d in docs], ["first", "second", "third"])
         self.assertEqual([d["seq"] for d in docs], [0, 1, 2])
 
+    def test_user_cache_hits_and_appends_after_add(self):
+        store.add_memories([self._item("r1", "first")])
+        cold = {}
+        first = store.fetch_user("u1", stats=cold)
+        self.assertFalse(cold["cache_hit"])
+        hot = {}
+        hot_docs = store.fetch_user("u1", stats=hot)
+        self.assertTrue(hot["cache_hit"])
+        self.assertIsNot(hot_docs, first)
+        hot_docs[0]["text"] = "caller mutation"
+        self.assertEqual(store.fetch_user("u1")[0]["text"], "first")
+
+        store.add_memories([self._item("r2", "second")])
+        refreshed = {}
+        docs = store.fetch_user("u1", stats=refreshed)
+        self.assertTrue(refreshed["cache_hit"])  # append-only Add keeps the cache warm
+        self.assertEqual([d["text"] for d in docs], ["first", "second"])
+        self.assertEqual([d["seq"] for d in docs], [0, 1])
+        self.assertEqual(store.count("u1"), 2)
+
+        # A replayed Add writes nothing and must not duplicate cached rows.
+        store.add_memories([self._item("r2", "second")])
+        self.assertEqual([d["text"] for d in store.fetch_user("u1")], ["first", "second"])
+
+        # Appended cache rows must match what a fresh DB read would return.
+        cached_rows = [(d["text"], d["created_at"], d["seq"]) for d in store.fetch_user("u1")]
+        db_rows = [(d["text"], d["created_at"], d["seq"])
+                   for d in store.fetch_user("u1", with_images=True)]
+        self.assertEqual(cached_rows, db_rows)
+
+    def test_user_cache_accounting_matches_entries(self):
+        store.add_memories([self._item("r1", "first")])
+        store.fetch_user("u1")
+        store.add_memories([self._item("r2", "second"), self._item("r3", "third")])
+        store.fetch_user("u1")
+        self.assertEqual(store._USER_CACHE_BYTES,
+                         sum(size for _, size in store._USER_CACHE.values()))
+        self.assertEqual(len(store.fetch_user("u1")), 3)
+
+    def test_user_cache_oversized_add_drops_entry_instead_of_corrupting(self):
+        store.add_memories([self._item("r1", "first")])
+        store.fetch_user("u1")
+        saved = store._USER_CACHE_MAX_BYTES
+        try:
+            store._USER_CACHE_MAX_BYTES = 1024  # below the existing entry size
+            store.add_memories([self._item("r2", "second")])
+            self.assertNotIn((store.DB_PATH, "u1"), store._USER_CACHE)
+            self.assertEqual([d["text"] for d in store.fetch_user("u1")], ["first", "second"])
+            self.assertNotIn((store.DB_PATH, "u1"), store._USER_CACHE)
+        finally:
+            store._USER_CACHE_MAX_BYTES = saved
+            store._USER_CACHE.clear()
+            store._USER_CACHE_BYTES = 0
+
     def test_isolation(self):
         store.add_memories([self._item("r1", "a")])
         self.assertEqual(store.fetch_user("u2"), [])
@@ -164,6 +300,322 @@ class StoreTest(unittest.TestCase):
 
     def test_ping(self):
         self.assertTrue(store.ping())
+
+
+class TemporalTest(unittest.TestCase):
+    """时态一致性规则：近分平局时优先回答「现在」问的旧事实不能被抢到第一。
+
+    阈值取自留出评测（`tools/tune.py --temporal`）：hand 留出 temporal MRR 0.750→1.000，
+    合成留出 0.909→1.000，且没有 query 类型退化。
+    """
+
+    def _docs(self, texts):
+        vecs = embed.embed(texts)
+        return [
+            {"id": f"d{i}", "text": t, "images": [], "seq": i,
+             "created_at": f"2026-01-01T00:00:{i:02d}Z", "ts": None, "vec": embed.pack(v)}
+            for i, (t, v) in enumerate(zip(texts, vecs))
+        ]
+
+    def test_query_tense_detection(self):
+        self.assertEqual(retrieve.query_tense("Alice 现在住在哪个城市？"), "present")
+        self.assertEqual(retrieve.query_tense("Where does Bob live now?"), "present")
+        self.assertEqual(retrieve.query_tense("Alice 以前住在哪里？"), "past")
+        self.assertEqual(retrieve.query_tense("Alice 的护照号是多少？"), None)
+        # 同时含两个时态：不确定，不启用
+        self.assertIsNone(retrieve.query_tense("以前住哪，现在住哪？"))
+
+    def test_present_query_demotes_past_only_memory(self):
+        docs = self._docs(["Alice 去年住在慕尼黑。", "Alice 现在住在柏林。"])
+        qv = embed.embed(["Alice 现在住在哪个城市？"])[0]
+        ranked = retrieve.run(qv, "Alice 现在住在哪个城市？", docs)
+        self.assertEqual(ranked[0][0], 1, "问「现在」时旧事实不应排第一")
+
+    def test_mixed_tense_memory_is_not_penalised(self):
+        mixed = "Alice 去年住在慕尼黑，现在住在柏林。"
+        self.assertEqual(retrieve.doc_tense_state({"text": mixed}), "neutral")
+        self.assertEqual(retrieve.tense_bias([{"text": mixed}], "present"), None)
+
+    def test_past_query_promotes_past_memory(self):
+        docs = self._docs(["Alice 现在住在柏林。", "Alice 去年住在慕尼黑。"])
+        q = "Alice 去年住在哪个城市？"
+        qv = embed.embed([q])[0]
+        ranked = retrieve.run(qv, q, docs)
+        self.assertEqual(ranked[0][0], 1)
+
+    def test_rule_is_inert_without_tense_cue(self):
+        docs = self._docs(["Alice 去年住在慕尼黑。", "Alice 现在住在柏林。"])
+        q = "Alice 的护照号是多少？"
+        self.assertIsNone(retrieve.tense_bias(docs, retrieve.query_tense(q)))
+        qv = embed.embed([q])[0]
+        self.assertEqual(retrieve.run(qv, q, docs), retrieve.hybrid(qv, q, docs))
+
+    def test_bias_keeps_scores_bounded_and_deterministic(self):
+        docs = self._docs(["Alice 去年住在慕尼黑。", "Alice 现在住在柏林。", "Bob likes jazz."])
+        q = "Alice 现在住在哪个城市？"
+        qv = embed.embed([q])[0]
+        first = retrieve.run(qv, q, docs)
+        self.assertEqual(first, retrieve.run(qv, q, docs))
+        for _, score in first:
+            self.assertGreaterEqual(score, 0.0)
+            self.assertLessEqual(score, 1.0)
+
+    def test_rule_can_be_disabled(self):
+        docs = self._docs(["Alice 去年住在慕尼黑。", "Alice 现在住在柏林。"])
+        q = "Alice 现在住在哪个城市？"
+        qv = embed.embed([q])[0]
+        saved = retrieve.TEMPORAL_RULE
+        try:
+            retrieve.TEMPORAL_RULE = "off"
+            self.assertEqual(retrieve.run(qv, q, docs), retrieve.hybrid(qv, q, docs))
+        finally:
+            retrieve.TEMPORAL_RULE = saved
+
+
+class RerankTest(unittest.TestCase):
+    """精排旁路：保序重排 / 分数量纲 / 降级与熔断。
+
+    精排是唯一不受官方模型限制的增益点（本地 bge-reranker-v2-m3），
+    但它同时也是唯一的外部依赖 ⇒ 必须证明「挂了也不影响 Search」。
+    """
+
+    @classmethod
+    def setUpClass(cls):
+        import json as _json
+        import threading
+        from http.server import BaseHTTPRequestHandler, ThreadingHTTPServer
+
+        cls.plan = {"rows": [], "mode": "full"}  # mode: full | partial | error
+
+        class H(BaseHTTPRequestHandler):
+            protocol_version = "HTTP/1.1"
+
+            def log_message(self, *a):
+                pass
+
+            def do_POST(self):
+                n = int(self.headers.get("Content-Length") or 0)
+                req = _json.loads(self.rfile.read(n).decode() or "{}")
+                docs = req.get("documents") or []
+                mode = self.server.plan["mode"]
+                if mode == "error":
+                    body = b'{"detail":"boom"}'
+                    self.send_response(500)
+                else:
+                    rows = self.server.plan["rows"]
+                    if mode == "partial":
+                        rows = rows[: max(1, len(docs) // 2)]
+                    body = _json.dumps({"results": rows}).encode()
+                    self.send_response(200)
+                self.send_header("Content-Type", "application/json")
+                self.send_header("Content-Length", str(len(body)))
+                self.end_headers()
+                self.wfile.write(body)
+
+        cls.srv = ThreadingHTTPServer(("127.0.0.1", 0), H)
+        cls.srv.plan = cls.plan
+        cls.url = f"http://127.0.0.1:{cls.srv.server_port}/rerank"
+        cls.thread = threading.Thread(target=cls.srv.serve_forever, daemon=True)
+        cls.thread.start()
+
+    @classmethod
+    def tearDownClass(cls):
+        cls.srv.shutdown()
+        cls.srv.server_close()
+
+    def setUp(self):
+        self._saved = (retrieve.RERANK_MODE, retrieve.RERANK_URL, retrieve.RERANK_TOP,
+                       retrieve.RERANK_FAILS, retrieve.RERANK_COOLDOWN, retrieve.DEDUP_COS)
+        retrieve.DEDUP_COS = 1.1  # 本组只测精排：关掉近重复去重，避免合成语料被合并
+        retrieve._rerank_fails = 0
+        retrieve._rerank_cooldown_until = 0.0
+        retrieve.RERANK_MODE = "http"
+        retrieve.RERANK_URL = self.url
+        retrieve.RERANK_TOP = 4
+        self.plan["mode"] = "full"
+        self.plan["rows"] = []
+
+    def tearDown(self):
+        (retrieve.RERANK_MODE, retrieve.RERANK_URL, retrieve.RERANK_TOP,
+         retrieve.RERANK_FAILS, retrieve.RERANK_COOLDOWN, retrieve.DEDUP_COS) = self._saved
+        retrieve._rerank_fails = 0
+        retrieve._rerank_cooldown_until = 0.0
+
+    def _docs(self, n=6):
+        texts = [f"第{i}号独立事实：编号 {1000 + i}，地点 {chr(65 + i)} 市。" for i in range(n)]
+        vecs = [[1.0 if j == 0 else 0.01 * (i + 1) for j in range(3)] for i in range(n)]
+        return [
+            {"id": f"d{i}", "text": t, "images": [], "seq": i,
+             "created_at": f"2026-01-01T00:00:{i:02d}Z", "vec": embed.pack(v)}
+            for i, (t, v) in enumerate(zip(texts, vecs))
+        ]
+
+    def test_rerank_reorders_and_keeps_score_band(self):
+        """精排序生效；头部分数落在融合区间内、尾部不反超头部。"""
+        docs = self._docs()
+        qv = embed.embed(["fact"])[0]
+        fused = retrieve.hybrid(qv, "fact", docs)
+        fused_scores = {docs[i]["id"]: s for i, s in fused}
+        # 让原第 2 名（d1）拿最高精排分
+        self.plan["rows"] = [
+            {"index": 1, "score": 0.9}, {"index": 0, "score": 0.5},
+            {"index": 2, "score": 0.2}, {"index": 3, "score": 0.05},
+        ]
+        got = retrieve.run(qv, "fact", docs)
+        self.assertEqual(docs[got[0][0]]["id"], "d1", "精排第一名必须置顶")
+        scores = [s for _, s in got]
+        self.assertEqual(scores, sorted(scores, reverse=True), "输出必须按 score 降序")
+        self.assertTrue(all(0.0 <= s <= 1.0 for s in scores), scores)
+        # 头部仍然 ≥ 尾部：不能出现尾部融合分反超头部精排分
+        head_min = min(s for _, s in got[:4])
+        tail_max = max(s for _, s in got[4:]) if len(got) > 4 else -1.0
+        self.assertGreaterEqual(head_min, tail_max)
+        # 量纲守恒：头部最高分不超过融合分最高分
+        self.assertLessEqual(max(scores), max(fused_scores.values()) + 1e-12)
+
+    def test_rerank_error_degrades_and_breaks_circuit(self):
+        """服务 500：首次降级为融合序；连续失败达阈值后进入冷却，不再逐次等超时。"""
+        import time
+
+        docs = self._docs()
+        qv = embed.embed(["fact"])[0]
+        fused = [(docs[i]["id"], round(s, 12)) for i, s in retrieve.hybrid(qv, "fact", docs)]
+        self.plan["mode"] = "error"
+        retrieve.RERANK_FAILS, retrieve.RERANK_COOLDOWN = 2, 30
+        self.assertEqual([(docs[i]["id"], round(s, 12)) for i, s in retrieve.run(qv, "fact", docs)], fused)
+        self.assertEqual(retrieve._rerank_cooldown_until, 0.0, "一次失败不该熔断")
+        retrieve.run(qv, "fact", docs)
+        self.assertGreater(retrieve._rerank_cooldown_until, time.time(), "达到阈值应进入冷却")
+
+    def test_rerank_partial_response_is_rejected(self):
+        """返回条数不足 ⇒ 视为无效响应，整体降级（不能丢候选）。"""
+        docs = self._docs()
+        qv = embed.embed(["fact"])[0]
+        fused = [(docs[i]["id"], round(s, 12)) for i, s in retrieve.hybrid(qv, "fact", docs)]
+        self.plan["mode"] = "partial"
+        self.plan["rows"] = [{"index": i, "score": 0.5} for i in range(len(docs))]
+        got = retrieve.run(qv, "fact", docs)
+        self.assertEqual(len(got), len(fused), "候选不能少")
+        self.assertEqual([(docs[i]["id"], round(s, 12)) for i, s in got], fused)
+
+    def test_equal_rerank_scores_preserve_fusion_order_and_scores(self):
+        docs = self._docs()
+        ranked = [(i, 0.9 - i * 0.1) for i in range(len(docs))]
+        for position, (i, _) in enumerate(ranked):
+            docs[i]["created_at"] = f"{len(ranked) - position:02d}"
+        self.plan["rows"] = [{"index": i, "score": 0.5} for i in range(4)]
+        self.assertEqual(retrieve.rerank("query", ranked, docs), ranked)
+
+    def test_duplicate_rerank_indices_degrade_without_losing_candidates(self):
+        docs = self._docs()
+        ranked = [(i, 0.9 - i * 0.1) for i in range(len(docs))]
+        self.plan["rows"] = [
+            {"index": 0, "score": 0.9}, {"index": 1, "score": 0.8},
+            {"index": 1, "score": 0.7}, {"index": 3, "score": 0.6},
+        ]
+        self.assertEqual(retrieve.rerank("query", ranked, docs), ranked)
+
+    def test_non_finite_rerank_score_degrades(self):
+        docs = self._docs()
+        ranked = [(i, 0.9 - i * 0.1) for i in range(len(docs))]
+        self.plan["rows"] = [
+            {"index": 0, "score": 0.9}, {"index": 1, "score": float("nan")},
+            {"index": 2, "score": 0.7}, {"index": 3, "score": 0.6},
+        ]
+        self.assertEqual(retrieve.rerank("query", ranked, docs), ranked)
+
+
+class FusionRegressionTest(unittest.TestCase):
+    """回归测试：修掉的两个真实缺陷 + 融合契约。
+
+    缺陷 1：BM25 全零时 _rank() 退化成按文档插入顺序打分，最早写入的分块白拿名次分
+    缺陷 2：RRF 只取名次，把 cos 0.64 vs 0.27 压成几乎并列，弱 sparse 也能掀翻强 dense
+    缺陷 3：中文只切 bigram，"下周几开会" 与 "会议安排在周五" 零重叠
+    缺陷 4：score 上限恒为 2/(K+1)≈0.0328，无法当阈值用
+    """
+
+    def _docs(self, texts, vecs=None):
+        if vecs is None:
+            vecs = embed.embed(texts)
+        return [
+            {"id": f"d{i}", "text": t, "images": [], "seq": i,
+             "created_at": f"2026-01-01T00:00:{i:02d}Z", "vec": embed.pack(v)}
+            for i, (t, v) in enumerate(zip(texts, vecs))
+        ]
+
+    def test_sparse_all_zero_does_not_reward_insertion_order(self):
+        """三篇互不相关：dense 明确的赢家不能因为排在后面就输给 d0。"""
+        texts = ["alpha alpha", "beta beta", "gamma gamma"]
+        docs = self._docs(texts)
+        qv = embed.embed(["gamma"])[0]
+        ranked = retrieve.hybrid(qv, "gamma", docs)
+        self.assertEqual(ranked[0][0], 2, "dense 赢家必须是第 3 篇，不是插入最早的 d0")
+        # 稀疏侧真的全零（无词面重叠）
+        self.assertIsNone(retrieve.bm25_norm(retrieve.bm25_scores("zzzz", docs)))
+
+    def test_rrf_mode_also_abstains_on_zero_sparse(self):
+        saved = retrieve.FUSION
+        try:
+            retrieve.FUSION = "rrf"
+            docs = self._docs(["alpha alpha", "beta beta", "gamma gamma"])
+            qv = embed.embed(["gamma"])[0]
+            self.assertEqual(retrieve.hybrid(qv, "zzzz", docs)[0][0], 2)
+        finally:
+            retrieve.FUSION = saved
+
+    def test_dense_winner_not_flipped_by_weak_sparse(self):
+        """cos 0.71 的文档不能被「只沾一个通用词」的另一篇挤下去。"""
+        dim = 8
+        q = [1.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0]
+        strong = [0.71, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0]   # cos=0.71
+        weak = [0.31, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0]     # cos=0.31
+        docs = self._docs(["柏林的公寓租金是九八零欧", "柏林的天气不错"], [strong, weak])
+        ranked = retrieve.hybrid(q, "柏林的公寓租金是九八零欧", docs)
+        self.assertEqual(ranked[0][0], 0)
+
+    def test_cjk_unigram_recall_keeps_bm25_nonzero(self):
+        """'下周几开会' 与 '会议安排在周五' 只共享单字；bigram-only 会全零。"""
+        docs = self._docs(["会议安排在周五 14:00", "天气不错"])
+        sparse = retrieve.bm25_scores("下周几开会", docs)
+        self.assertGreater(sparse[0], 0.0, "单字回退应让 BM25 非零")
+        self.assertEqual(sparse[1], 0.0)
+
+    def test_score_is_bounded_and_thresholdable(self):
+        """score ∈ [0,1]：相关文档高、无关文档低，可直接做阈值。"""
+        docs = self._docs(["Alice lives in Berlin.", "Bob plays jazz.",
+                           "weather is nice today", "cats sleep a lot"])
+        qv = embed.embed(["Where does Alice live?"])[0]
+        ranked = retrieve.hybrid(qv, "Where does Alice live?", docs)
+        scores = [s for _, s in ranked]
+        self.assertTrue(all(0.0 <= s <= 1.0 for s in scores), scores)
+        self.assertAlmostEqual(ranked[0][1], max(scores), places=12)
+        self.assertGreater(ranked[0][1], ranked[-1][1])
+
+    def test_full_order_is_deterministic_and_tie_broken(self):
+        """并列必须按 created_at → id 全序，不能受 dict 顺序影响。"""
+        v = embed.embed(["same text"])[0]
+        a = self._docs(["same text", "same text"], [v, v])
+        b = list(reversed(a))
+        qv = embed.embed(["same text"])[0]
+        ra = retrieve.hybrid(qv, "same text", a)
+        rb = retrieve.hybrid(qv, "same text", b)
+        self.assertEqual([a[i]["id"] for i, _ in ra][:2], [d["id"] for d in a][:2])
+        self.assertEqual([s for _, s in ra], [s for _, s in rb])
+
+    def test_rare_df_filter_ignores_common_terms_only(self):
+        """稀有词过滤：只剩通用词时应回退，不把 BM25 打成全零。"""
+        docs = self._docs(["用户住在柏林", "用户住在慕尼黑", "用户住在汉堡"])
+        saved = retrieve.BM25_RARE_DF
+        try:
+            retrieve.BM25_RARE_DF = 0.15
+            self.assertIsNotNone(retrieve.bm25_norm(retrieve.bm25_scores("住在哪", docs)))
+            retrieve.BM25_RARE_DF = 1.5      # 放宽 ⇒ 与不过滤一致
+            loose = retrieve.bm25_scores("用户住在柏林", docs)
+            retrieve.BM25_RARE_DF = 0.0
+            none_f = retrieve.bm25_scores("用户住在柏林", docs)
+            self.assertEqual([round(x, 9) for x in loose], [round(x, 9) for x in none_f])
+        finally:
+            retrieve.BM25_RARE_DF = saved
 
 
 if __name__ == "__main__":

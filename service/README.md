@@ -1,19 +1,21 @@
 # service/ · Add / Search 服务
 
-纯标准库实现，**不需要 pip install**。当前状态：契约自检 **27/27**，单元+端到端测试 **27 项**，
+纯标准库实现，**不需要 pip install**。当前状态：契约自检 **27/27**，单元+端到端测试 **52 项**，
 幂等/确定性通过；默认 `hash` 离线模式，正式评测需配置 DashScope Key。
 
 ```
 service/  server.py    HTTP、鉴权、幂等锁、并发闸门、结构化日志、优雅退出
           embed.py     text-embedding-v4（DashScope）或离线 hash；LRU 缓存
           store.py     SQLite：记忆 + 向量 + 幂等表；全局递增 seq
-          retrieve.py  dense + BM25 → RRF → 去重 → 可选精排
+          retrieve.py  dense + BM25 → 加权融合 → 时态微调 → 去重 → 可选精排
           budget.py    117,760 token / 28 MiB / 图片配额 三重裁剪
           dotenv.py    极简 .env 加载器（无第三方依赖）
 tools/    contract_check.py  11 类 27 项契约自检
           replay.py          幂等 + 确定性检查
           doctor.py          配置体检 / 生成 .env
           smoke.py           线上 smoke
+          search_load.py     Search 并发负载与延迟分位数
+          rerank_bench.py    精排质量与单 query 延迟对比
 ```
 
 ## 一、本地启动
@@ -120,21 +122,61 @@ python3 tools/smoke.py  https://mem.example.com --key "$KEY"
 | `MAX_INFLIGHT` | 64 | 超出返回 429 + Retry-After |
 | `MAX_IMAGES` | 6 | 单次 Search 图片配额 |
 | `STARTUP_CHECK` | 1 | api 模式启动时探活 |
+| `FUSION` | linear | `linear`（α·cos+β·bm25）/ `rrf`（旧名次融合，A/B 用） |
+| `DENSE_WEIGHT` / `SPARSE_WEIGHT` | 0.95 / 0.05 | 融合权重 α / β，实测见根 README §六 |
+| `SPARSE_NORM` | sat | `sat` 饱和校准 / `max` 除以最大值 |
+| `BM25_RARE_DF` | 0.15 | 只让 df/N ≤ 该值的稀有词进 BM25；0=关闭 |
+| `CJK_TOKENS` | bigram_unigram | `bigram` / `bigram_unigram` / `unigram` |
+| `TEMPORAL_RULE` | tense | `tense` 时态一致性微调 / `off` 关闭 |
+| `TEMPORAL_WEIGHT` | 0.06 | 时态加分上限（融合分 ∈[0,1]，只改写近分平局） |
 | `DEDUP_COS` | 0.97 | 近重复阈值 |
-| `RECALL_N` | 50 | 预留候选池参数 |
+| `USER_CACHE_MAX_BYTES` | 64 MiB | 用户记忆缓存估算上限；0 关闭 |
+| `RANK_INDEX_MAX_MB` | 64 | 检索索引（倒排 + 向量矩阵/行）缓存上限；超限自动退回逐文档计算 |
 | `RERANK_MODE` | none | `http` 时启用精排 |
 | `RERANK_URL` / `RERANK_MODEL` / `RERANK_API_KEY` | — | 精排端点 |
 | `RERANK_KIND` | tei | `tei` / `dashscope` |
-| `RERANK_TOP` / `RERANK_TIMEOUT` | 30 / 8s | 精排条数与超时 |
+| `RERANK_TOP` / `RERANK_TIMEOUT` | 10 / 8s | 精排条数与超时 |
 | `APPEND_OPTIONS` | 0 | 是否把 `options` 拼进 query |
 | `LOG_JSON` | 1 | JSON 结构化日志 |
+
+本地 `tools/rerank_server.py` 默认只监听 `127.0.0.1`；跨主机访问需显式设置 `RERANK_HOST`，并自行限制网络访问。
+
+Search 的 JSON 日志包含 `search_store_ms`、`search_embed_ms`、`search_rank_ms`、`search_images_ms`、`search_format_ms`，以及记忆数、用户缓存命中（`search_store_cache_hit`）、索引命中（`search_index_cache_hit`）与追加建索引（`search_index_extended`）标志；顶层 `ms` 是整次 HTTP 请求耗时。用已有用户的真实 query 做并发压测：
+
+```sh
+python3 tools/search_load.py http://127.0.0.1:8080 --user-id USER_ID --queries-file tools/eval_queries.json --requests 200 --concurrency 16 --key "$MEMORY_SYSTEM_KEY"
+```
+
+压测会重复循环 query 文件中的问题，输出成功吞吐及 P50/P95/P99；请在隔离的测试服务上逐级增加并发，避免对正式数据集制造负载。
+
+### 检索缓存与实测性能
+
+每个用户的检索索引（BM25 倒排表 + 向量矩阵/行）按 `(DB_PATH, user_id)` 有界缓存，Add 之后不会整表重建：只要旧索引对应的记忆仍是新列表的前缀，就只追加新文档的倒排与向量行（`search_index_extended=true`）；只有改写或删除时才重建。用户记忆缓存同样按追加维护，容量超限才丢弃。
+
+搜索本身只做“够用”的工作：头部用部分排序（score-only 取头 + 边界平局再用完整 tie-break），去重只贪心到 `top_k`（需要精排时再加 `RERANK_TOP`），向量比较直接复用索引里的矩阵（numpy 下为一次 `pool × pool` 矩阵乘）。
+
+6,742 条邮件记忆（1,024 维，`tools/atm_proxy.py` 数据切片的 ATM-Bench 文本；hash 向量只用于性能对照）：
+
+| 场景 | 旧路径 | 当前实现 |
+|---|---|---|
+| 单次 `run()` P50，numpy | 469 ms | **8–10 ms** |
+| 单次 `run()` P50，纯标准库 | 353 ms | **83 ms** |
+| HTTP Search P50（1 并发，numpy） | — | **25 ms** |
+| HTTP 吞吐 / 进程（numpy，8–32 并发） | — | **35–41 req/s** |
+| HTTP 吞吐 / 进程（纯标准库） | 3.9 req/s | **10 req/s** |
+| Add 后重算索引 | 176–391 ms 全量重建 | **50–65 ms 追加** |
+| Add 后首次 Search（HTTP P50） | 旧缓存失效后整表重读 | **64 ms** |
+
+同一数据上 top-10 排序与逐文档精确计算逐位一致（BM25/dense 分值差为 0，20 条 query 全部相同）。纯标准库仍可用，但 dense 慢约 10 倍，**生产建议安装 numpy**：Dockerfile 已装，`tools/doctor.py` 会提示当前走哪条路径。
+
+吞吐受单进程 GIL 限制（numpy 下约 25 ms CPU/请求）；要更高并发请按进程数横向扩展，而不是只调大 `MAX_INFLIGHT`。这些是刻意构造的规模压力测试，不代表官方数据分布。
 
 预算常量在 `budget.py`：`TOKEN_BUDGET=109,516`、`BYTE_BUDGET=28 MiB`、`IMG_TOKEN_COST=2,500`。
 
 ## 六、已知边界
 
-1. **精排默认关闭**：dense+BM25+RRF；开启 `RERANK_MODE=http` 后失败会自动降级，不阻断 Search。
+1. **精排默认关闭**：dense + BM25 线性融合；开启 `RERANK_MODE=http` 后失败会自动降级，不阻断 Search。
 2. **无 LLM 抽取**：正文保留原文与时间戳，满足「时间粒度不归一化」；后续接 `gpt-4o-mini` 只能附加字段。
 3. **多模态只用文本检索**：图片 Base64 存下并按需回传，查询图片不参与向量化。
-4. **单机 SQLite**：按 `user_id` 分片暴力检索，10 万条/用户以内足够；更大需 ANN。
-5. **并发**：stdlib 线程服务器，Full 前务必压测；申报并发取实测 60–70%。
+4. **单机 SQLite，不引入 ANN**：按 `user_id` 做精确全量打分；热用户复用有界记忆、BM25 倒排与向量矩阵/行缓存，返回头部使用部分排序，Add 走追加式索引扩展。选型依据与阈值见 `research/15-ann-index-selection.md`（真实 v4 向量实测：11k 条精确 3.2 ms，ANN 最多省 2.8 ms 但召回 0.95–1.0）。单用户 ≥5 万条或点积 P95 ≥20 ms 时再评估，用 `tools/ann_bench.py` 复测。
+5. **并发**：stdlib 线程服务器、单进程 GIL 受限，Full 前用真实 Search 请求压测；申报并发取实测稳定吞吐的 60–70%，必要时多进程横向扩展。`tools/rerank_bench.py` 比较精排质量与单 query 延迟，不是并发压测。

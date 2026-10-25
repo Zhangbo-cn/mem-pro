@@ -18,6 +18,7 @@
 | `06-open-method-track-checklist.md` | 开源方法榜参赛清单与合规要求 |
 | `07-open-questions.md` | 未证实项、口径冲突、需澄清问题 |
 | `13-multimodal-direction-candidates.md` | **多模态可做方向评估**（基准论文已定位、7 条消融证据、方向打分与推荐组合、13 天路线、市场方向） |
+| `15-ann-index-selection.md` | **向量索引（ANN）选型**：官方规模实测（真实 v4 向量）、索引类型对比、不上的理由与触发阈值 |
 | `urlcheck.txt` | 53 条 URL 的实际 HTTP 校验原始结果 |
 | `gh_raw.txt` | 16 个 GitHub 仓库的 API 原始返回 |
 | `arxiv_raw*.txt` | arXiv API 原始返回（论文标题/ID/日期/作者） |

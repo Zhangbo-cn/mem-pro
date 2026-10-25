@@ -1,0 +1,1007 @@
+{
+ "_note": "由 tools/gen_eval.py 确定性生成，勿手改。用于 α/β 调优的统计功率补充。",
+ "docs": [
+  {
+   "id": "g001",
+   "tag": "city:张伟",
+   "text": "张伟 现在住在柏林。"
+  },
+  {
+   "id": "g002",
+   "tag": "job:Alice",
+   "text": "Alice 在西门子做牙医。"
+  },
+  {
+   "id": "g003",
+   "tag": "allergy:张伟",
+   "text": "张伟 对花生过敏，吃饭要避开。"
+  },
+  {
+   "id": "g004",
+   "tag": "pet:Alice",
+   "text": "Alice 养了一只叫Momo的橘猫。"
+  },
+  {
+   "id": "g005",
+   "tag": "old-city:张伟",
+   "text": "张伟 以前住在北京，后来搬走了。"
+  },
+  {
+   "id": "g006",
+   "tag": "birthday:Alice",
+   "text": "Alice 的生日是 3 月 1 日。"
+  },
+  {
+   "id": "g007",
+   "tag": "city:Bob",
+   "text": "Bob currently lives in 慕尼黑."
+  },
+  {
+   "id": "g008",
+   "tag": "job:李娜",
+   "text": "李娜 works as a 后端工程师 at 字节跳动."
+  },
+  {
+   "id": "g009",
+   "tag": "allergy:Bob",
+   "text": "Bob is allergic to 海鲜."
+  },
+  {
+   "id": "g010",
+   "tag": "pet:李娜",
+   "text": "李娜 has a 柴犬 named Lucky."
+  },
+  {
+   "id": "g011",
+   "tag": "old-job:李娜",
+   "text": "李娜 previously worked at SAP."
+  },
+  {
+   "id": "g012",
+   "tag": "birthday:Bob",
+   "text": "Bob 的生日是 5 月 2 日。"
+  },
+  {
+   "id": "g013",
+   "tag": "city:王芳",
+   "text": "王芳 现在住在里斯本。"
+  },
+  {
+   "id": "g014",
+   "tag": "job:Carol",
+   "text": "Carol 在博世做产品经理。"
+  },
+  {
+   "id": "g015",
+   "tag": "allergy:王芳",
+   "text": "王芳 对牛奶过敏，吃饭要避开。"
+  },
+  {
+   "id": "g016",
+   "tag": "pet:Carol",
+   "text": "Carol 养了一只叫豆豆的兔子。"
+  },
+  {
+   "id": "g017",
+   "tag": "old-city:王芳",
+   "text": "王芳 以前住在天津，后来搬走了。"
+  },
+  {
+   "id": "g018",
+   "tag": "birthday:Carol",
+   "text": "Carol 的生日是 7 月 3 日。"
+  },
+  {
+   "id": "g019",
+   "tag": "city:David",
+   "text": "David currently lives in 上海."
+  },
+  {
+   "id": "g020",
+   "tag": "job:刘洋",
+   "text": "刘洋 works as a 会计师 at 德勤."
+  },
+  {
+   "id": "g021",
+   "tag": "allergy:David",
+   "text": "David is allergic to 鸡蛋."
+  },
+  {
+   "id": "g022",
+   "tag": "pet:刘洋",
+   "text": "刘洋 has a 鹦鹉 named Coco."
+  },
+  {
+   "id": "g023",
+   "tag": "old-job:刘洋",
+   "text": "刘洋 previously worked at 大众."
+  },
+  {
+   "id": "g024",
+   "tag": "birthday:David",
+   "text": "David 的生日是 9 月 4 日。"
+  },
+  {
+   "id": "g025",
+   "tag": "city:陈静",
+   "text": "陈静 现在住在成都。"
+  },
+  {
+   "id": "g026",
+   "tag": "job:Emma",
+   "text": "Emma 在SAP做中学老师。"
+  },
+  {
+   "id": "g027",
+   "tag": "allergy:陈静",
+   "text": "陈静 对芒果过敏，吃饭要避开。"
+  },
+  {
+   "id": "g028",
+   "tag": "pet:Emma",
+   "text": "Emma 养了一只叫咪咪的仓鼠。"
+  },
+  {
+   "id": "g029",
+   "tag": "old-city:陈静",
+   "text": "陈静 以前住在青岛，后来搬走了。"
+  },
+  {
+   "id": "g030",
+   "tag": "birthday:Emma",
+   "text": "Emma 的生日是 11 月 5 日。"
+  },
+  {
+   "id": "g031",
+   "tag": "city:Frank",
+   "text": "Frank currently lives in 杭州."
+  },
+  {
+   "id": "g032",
+   "tag": "job:赵磊",
+   "text": "赵磊 works as a 兽医 at 阿里巴巴."
+  },
+  {
+   "id": "g033",
+   "tag": "allergy:Frank",
+   "text": "Frank is allergic to 坚果."
+  },
+  {
+   "id": "g034",
+   "tag": "pet:赵磊",
+   "text": "赵磊 has a 布偶猫 named Bella."
+  },
+  {
+   "id": "g035",
+   "tag": "old-job:赵磊",
+   "text": "赵磊 previously worked at 飞利浦."
+  },
+  {
+   "id": "g036",
+   "tag": "birthday:Frank",
+   "text": "Frank 的生日是 1 月 6 日。"
+  },
+  {
+   "id": "g037",
+   "tag": "city:孙悦",
+   "text": "孙悦 现在住在武汉。"
+  },
+  {
+   "id": "g038",
+   "tag": "job:Grace",
+   "text": "Grace 在大众做建筑师。"
+  },
+  {
+   "id": "g039",
+   "tag": "allergy:孙悦",
+   "text": "孙悦 对小麦过敏，吃饭要避开。"
+  },
+  {
+   "id": "g040",
+   "tag": "pet:Grace",
+   "text": "Grace 养了一只叫阿黄的柯基。"
+  },
+  {
+   "id": "g041",
+   "tag": "old-city:孙悦",
+   "text": "孙悦 以前住在合肥，后来搬走了。"
+  },
+  {
+   "id": "g042",
+   "tag": "birthday:Grace",
+   "text": "Grace 的生日是 4 月 7 日。"
+  },
+  {
+   "id": "g043",
+   "tag": "city:Henry",
+   "text": "Henry currently lives in 西安."
+  },
+  {
+   "id": "g044",
+   "tag": "job:周涛",
+   "text": "周涛 works as a 律师 at 安联."
+  },
+  {
+   "id": "g045",
+   "tag": "allergy:Henry",
+   "text": "Henry is allergic to 大豆."
+  },
+  {
+   "id": "g046",
+   "tag": "pet:周涛",
+   "text": "周涛 has a 乌龟 named Max."
+  },
+  {
+   "id": "g047",
+   "tag": "old-job:周涛",
+   "text": "周涛 previously worked at 西门子."
+  },
+  {
+   "id": "g048",
+   "tag": "birthday:Henry",
+   "text": "Henry 的生日是 6 月 8 日。"
+  },
+  {
+   "id": "g049",
+   "tag": "city:吴敏",
+   "text": "吴敏 现在住在南京。"
+  },
+  {
+   "id": "g050",
+   "tag": "job:Ivy",
+   "text": "Ivy 在飞利浦做数据分析师。"
+  },
+  {
+   "id": "g051",
+   "tag": "allergy:吴敏",
+   "text": "吴敏 对芝麻过敏，吃饭要避开。"
+  },
+  {
+   "id": "g052",
+   "tag": "pet:Ivy",
+   "text": "Ivy 养了一只叫团子的雪貂。"
+  },
+  {
+   "id": "g053",
+   "tag": "old-city:吴敏",
+   "text": "吴敏 以前住在昆明，后来搬走了。"
+  },
+  {
+   "id": "g054",
+   "tag": "birthday:Ivy",
+   "text": "Ivy 的生日是 8 月 9 日。"
+  },
+  {
+   "id": "g055",
+   "tag": "city:Jack",
+   "text": "Jack currently lives in 苏州."
+  },
+  {
+   "id": "g056",
+   "tag": "job:郑凯",
+   "text": "郑凯 works as a 摄影师 at 蔡司."
+  },
+  {
+   "id": "g057",
+   "tag": "allergy:Jack",
+   "text": "Jack is allergic to 菠萝."
+  },
+  {
+   "id": "g058",
+   "tag": "pet:郑凯",
+   "text": "郑凯 has a 边牧 named Rocky."
+  },
+  {
+   "id": "g059",
+   "tag": "old-job:郑凯",
+   "text": "郑凯 previously worked at 博世."
+  },
+  {
+   "id": "g060",
+   "tag": "birthday:Jack",
+   "text": "Jack 的生日是 12 月 10 日。"
+  }
+ ],
+ "queries": [
+  {
+   "gold": [
+    "g001"
+   ],
+   "kind": "direct",
+   "q": "张伟 现在住在哪个城市？"
+  },
+  {
+   "gold": [
+    "g001"
+   ],
+   "kind": "paraphrase",
+   "q": "张伟 目前落脚在哪里？"
+  },
+  {
+   "gold": [
+    "g002"
+   ],
+   "kind": "direct",
+   "q": "Alice 做什么工作？"
+  },
+  {
+   "gold": [
+    "g002"
+   ],
+   "kind": "paraphrase",
+   "q": "Alice 的职业是什么？"
+  },
+  {
+   "gold": [
+    "g003"
+   ],
+   "kind": "direct",
+   "q": "张伟 对什么食物过敏？"
+  },
+  {
+   "gold": [
+    "g003"
+   ],
+   "kind": "paraphrase",
+   "q": "张伟 吃什么东西会不舒服？"
+  },
+  {
+   "gold": [
+    "g004"
+   ],
+   "kind": "direct",
+   "q": "Alice 的宠物叫什么？"
+  },
+  {
+   "gold": [
+    "g004"
+   ],
+   "kind": "paraphrase",
+   "q": "Alice 家里养了什么小动物？"
+  },
+  {
+   "gold": [
+    "g001"
+   ],
+   "kind": "temporal",
+   "q": "张伟 现在住在哪个城市？"
+  },
+  {
+   "gold": [
+    "g006"
+   ],
+   "kind": "needle",
+   "q": "Alice 的生日是哪天？"
+  },
+  {
+   "gold": [
+    "g007"
+   ],
+   "kind": "paraphrase",
+   "q": "Bob 目前落脚在哪里？"
+  },
+  {
+   "gold": [
+    "g007"
+   ],
+   "kind": "direct",
+   "q": "Bob 现在住在哪个城市？"
+  },
+  {
+   "gold": [
+    "g008"
+   ],
+   "kind": "paraphrase",
+   "q": "李娜 的职业是什么？"
+  },
+  {
+   "gold": [
+    "g008"
+   ],
+   "kind": "direct",
+   "q": "李娜 做什么工作？"
+  },
+  {
+   "gold": [
+    "g009"
+   ],
+   "kind": "paraphrase",
+   "q": "Bob 吃什么东西会不舒服？"
+  },
+  {
+   "gold": [
+    "g009"
+   ],
+   "kind": "direct",
+   "q": "Bob 对什么食物过敏？"
+  },
+  {
+   "gold": [
+    "g010"
+   ],
+   "kind": "paraphrase",
+   "q": "李娜 家里养了什么小动物？"
+  },
+  {
+   "gold": [
+    "g010"
+   ],
+   "kind": "direct",
+   "q": "李娜 的宠物叫什么？"
+  },
+  {
+   "gold": [
+    "g008"
+   ],
+   "kind": "temporal",
+   "q": "李娜 做什么工作？"
+  },
+  {
+   "gold": [
+    "g012"
+   ],
+   "kind": "needle",
+   "q": "Bob 的生日是哪天？"
+  },
+  {
+   "gold": [
+    "g013"
+   ],
+   "kind": "cross-lingual",
+   "q": "Where does 王芳 live now?"
+  },
+  {
+   "gold": [
+    "g013"
+   ],
+   "kind": "direct",
+   "q": "王芳 现在住在哪个城市？"
+  },
+  {
+   "gold": [
+    "g014"
+   ],
+   "kind": "cross-lingual",
+   "q": "What does Carol do for a living?"
+  },
+  {
+   "gold": [
+    "g014"
+   ],
+   "kind": "direct",
+   "q": "Carol 做什么工作？"
+  },
+  {
+   "gold": [
+    "g015"
+   ],
+   "kind": "cross-lingual",
+   "q": "What is 王芳 allergic to?"
+  },
+  {
+   "gold": [
+    "g015"
+   ],
+   "kind": "direct",
+   "q": "王芳 对什么食物过敏？"
+  },
+  {
+   "gold": [
+    "g016"
+   ],
+   "kind": "cross-lingual",
+   "q": "What pet does Carol have?"
+  },
+  {
+   "gold": [
+    "g016"
+   ],
+   "kind": "direct",
+   "q": "Carol 的宠物叫什么？"
+  },
+  {
+   "gold": [
+    "g013"
+   ],
+   "kind": "temporal",
+   "q": "王芳 现在住在哪个城市？"
+  },
+  {
+   "gold": [
+    "g018"
+   ],
+   "kind": "needle",
+   "q": "Carol 的生日是哪天？"
+  },
+  {
+   "gold": [
+    "g019"
+   ],
+   "kind": "direct",
+   "q": "David 现在住在哪个城市？"
+  },
+  {
+   "gold": [
+    "g019"
+   ],
+   "kind": "cross-lingual",
+   "q": "Where does David live now?"
+  },
+  {
+   "gold": [
+    "g020"
+   ],
+   "kind": "direct",
+   "q": "刘洋 做什么工作？"
+  },
+  {
+   "gold": [
+    "g020"
+   ],
+   "kind": "cross-lingual",
+   "q": "What does 刘洋 do for a living?"
+  },
+  {
+   "gold": [
+    "g021"
+   ],
+   "kind": "direct",
+   "q": "David 对什么食物过敏？"
+  },
+  {
+   "gold": [
+    "g021"
+   ],
+   "kind": "cross-lingual",
+   "q": "What is David allergic to?"
+  },
+  {
+   "gold": [
+    "g022"
+   ],
+   "kind": "direct",
+   "q": "刘洋 的宠物叫什么？"
+  },
+  {
+   "gold": [
+    "g022"
+   ],
+   "kind": "cross-lingual",
+   "q": "What pet does 刘洋 have?"
+  },
+  {
+   "gold": [
+    "g020"
+   ],
+   "kind": "temporal",
+   "q": "刘洋 做什么工作？"
+  },
+  {
+   "gold": [
+    "g024"
+   ],
+   "kind": "needle",
+   "q": "David 的生日是哪天？"
+  },
+  {
+   "gold": [
+    "g025"
+   ],
+   "kind": "paraphrase",
+   "q": "陈静 目前落脚在哪里？"
+  },
+  {
+   "gold": [
+    "g025"
+   ],
+   "kind": "cross-lingual",
+   "q": "Where does 陈静 live now?"
+  },
+  {
+   "gold": [
+    "g026"
+   ],
+   "kind": "paraphrase",
+   "q": "Emma 的职业是什么？"
+  },
+  {
+   "gold": [
+    "g026"
+   ],
+   "kind": "cross-lingual",
+   "q": "What does Emma do for a living?"
+  },
+  {
+   "gold": [
+    "g027"
+   ],
+   "kind": "paraphrase",
+   "q": "陈静 吃什么东西会不舒服？"
+  },
+  {
+   "gold": [
+    "g027"
+   ],
+   "kind": "cross-lingual",
+   "q": "What is 陈静 allergic to?"
+  },
+  {
+   "gold": [
+    "g028"
+   ],
+   "kind": "paraphrase",
+   "q": "Emma 家里养了什么小动物？"
+  },
+  {
+   "gold": [
+    "g028"
+   ],
+   "kind": "cross-lingual",
+   "q": "What pet does Emma have?"
+  },
+  {
+   "gold": [
+    "g025"
+   ],
+   "kind": "temporal",
+   "q": "陈静 现在住在哪个城市？"
+  },
+  {
+   "gold": [
+    "g030"
+   ],
+   "kind": "needle",
+   "q": "Emma 的生日是哪天？"
+  },
+  {
+   "gold": [
+    "g031"
+   ],
+   "kind": "cross-lingual",
+   "q": "Where does Frank live now?"
+  },
+  {
+   "gold": [
+    "g031"
+   ],
+   "kind": "paraphrase",
+   "q": "Frank 目前落脚在哪里？"
+  },
+  {
+   "gold": [
+    "g032"
+   ],
+   "kind": "cross-lingual",
+   "q": "What does 赵磊 do for a living?"
+  },
+  {
+   "gold": [
+    "g032"
+   ],
+   "kind": "paraphrase",
+   "q": "赵磊 的职业是什么？"
+  },
+  {
+   "gold": [
+    "g033"
+   ],
+   "kind": "cross-lingual",
+   "q": "What is Frank allergic to?"
+  },
+  {
+   "gold": [
+    "g033"
+   ],
+   "kind": "paraphrase",
+   "q": "Frank 吃什么东西会不舒服？"
+  },
+  {
+   "gold": [
+    "g034"
+   ],
+   "kind": "cross-lingual",
+   "q": "What pet does 赵磊 have?"
+  },
+  {
+   "gold": [
+    "g034"
+   ],
+   "kind": "paraphrase",
+   "q": "赵磊 家里养了什么小动物？"
+  },
+  {
+   "gold": [
+    "g032"
+   ],
+   "kind": "temporal",
+   "q": "赵磊 做什么工作？"
+  },
+  {
+   "gold": [
+    "g036"
+   ],
+   "kind": "needle",
+   "q": "Frank 的生日是哪天？"
+  },
+  {
+   "gold": [
+    "g037"
+   ],
+   "kind": "direct",
+   "q": "孙悦 现在住在哪个城市？"
+  },
+  {
+   "gold": [
+    "g037"
+   ],
+   "kind": "paraphrase",
+   "q": "孙悦 目前落脚在哪里？"
+  },
+  {
+   "gold": [
+    "g038"
+   ],
+   "kind": "direct",
+   "q": "Grace 做什么工作？"
+  },
+  {
+   "gold": [
+    "g038"
+   ],
+   "kind": "paraphrase",
+   "q": "Grace 的职业是什么？"
+  },
+  {
+   "gold": [
+    "g039"
+   ],
+   "kind": "direct",
+   "q": "孙悦 对什么食物过敏？"
+  },
+  {
+   "gold": [
+    "g039"
+   ],
+   "kind": "paraphrase",
+   "q": "孙悦 吃什么东西会不舒服？"
+  },
+  {
+   "gold": [
+    "g040"
+   ],
+   "kind": "direct",
+   "q": "Grace 的宠物叫什么？"
+  },
+  {
+   "gold": [
+    "g040"
+   ],
+   "kind": "paraphrase",
+   "q": "Grace 家里养了什么小动物？"
+  },
+  {
+   "gold": [
+    "g037"
+   ],
+   "kind": "temporal",
+   "q": "孙悦 现在住在哪个城市？"
+  },
+  {
+   "gold": [
+    "g042"
+   ],
+   "kind": "needle",
+   "q": "Grace 的生日是哪天？"
+  },
+  {
+   "gold": [
+    "g043"
+   ],
+   "kind": "paraphrase",
+   "q": "Henry 目前落脚在哪里？"
+  },
+  {
+   "gold": [
+    "g043"
+   ],
+   "kind": "direct",
+   "q": "Henry 现在住在哪个城市？"
+  },
+  {
+   "gold": [
+    "g044"
+   ],
+   "kind": "paraphrase",
+   "q": "周涛 的职业是什么？"
+  },
+  {
+   "gold": [
+    "g044"
+   ],
+   "kind": "direct",
+   "q": "周涛 做什么工作？"
+  },
+  {
+   "gold": [
+    "g045"
+   ],
+   "kind": "paraphrase",
+   "q": "Henry 吃什么东西会不舒服？"
+  },
+  {
+   "gold": [
+    "g045"
+   ],
+   "kind": "direct",
+   "q": "Henry 对什么食物过敏？"
+  },
+  {
+   "gold": [
+    "g046"
+   ],
+   "kind": "paraphrase",
+   "q": "周涛 家里养了什么小动物？"
+  },
+  {
+   "gold": [
+    "g046"
+   ],
+   "kind": "direct",
+   "q": "周涛 的宠物叫什么？"
+  },
+  {
+   "gold": [
+    "g044"
+   ],
+   "kind": "temporal",
+   "q": "周涛 做什么工作？"
+  },
+  {
+   "gold": [
+    "g048"
+   ],
+   "kind": "needle",
+   "q": "Henry 的生日是哪天？"
+  },
+  {
+   "gold": [
+    "g049"
+   ],
+   "kind": "cross-lingual",
+   "q": "Where does 吴敏 live now?"
+  },
+  {
+   "gold": [
+    "g049"
+   ],
+   "kind": "direct",
+   "q": "吴敏 现在住在哪个城市？"
+  },
+  {
+   "gold": [
+    "g050"
+   ],
+   "kind": "cross-lingual",
+   "q": "What does Ivy do for a living?"
+  },
+  {
+   "gold": [
+    "g050"
+   ],
+   "kind": "direct",
+   "q": "Ivy 做什么工作？"
+  },
+  {
+   "gold": [
+    "g051"
+   ],
+   "kind": "cross-lingual",
+   "q": "What is 吴敏 allergic to?"
+  },
+  {
+   "gold": [
+    "g051"
+   ],
+   "kind": "direct",
+   "q": "吴敏 对什么食物过敏？"
+  },
+  {
+   "gold": [
+    "g052"
+   ],
+   "kind": "cross-lingual",
+   "q": "What pet does Ivy have?"
+  },
+  {
+   "gold": [
+    "g052"
+   ],
+   "kind": "direct",
+   "q": "Ivy 的宠物叫什么？"
+  },
+  {
+   "gold": [
+    "g049"
+   ],
+   "kind": "temporal",
+   "q": "吴敏 现在住在哪个城市？"
+  },
+  {
+   "gold": [
+    "g054"
+   ],
+   "kind": "needle",
+   "q": "Ivy 的生日是哪天？"
+  },
+  {
+   "gold": [
+    "g055"
+   ],
+   "kind": "direct",
+   "q": "Jack 现在住在哪个城市？"
+  },
+  {
+   "gold": [
+    "g055"
+   ],
+   "kind": "cross-lingual",
+   "q": "Where does Jack live now?"
+  },
+  {
+   "gold": [
+    "g056"
+   ],
+   "kind": "direct",
+   "q": "郑凯 做什么工作？"
+  },
+  {
+   "gold": [
+    "g056"
+   ],
+   "kind": "cross-lingual",
+   "q": "What does 郑凯 do for a living?"
+  },
+  {
+   "gold": [
+    "g057"
+   ],
+   "kind": "direct",
+   "q": "Jack 对什么食物过敏？"
+  },
+  {
+   "gold": [
+    "g057"
+   ],
+   "kind": "cross-lingual",
+   "q": "What is Jack allergic to?"
+  },
+  {
+   "gold": [
+    "g058"
+   ],
+   "kind": "direct",
+   "q": "郑凯 的宠物叫什么？"
+  },
+  {
+   "gold": [
+    "g058"
+   ],
+   "kind": "cross-lingual",
+   "q": "What pet does 郑凯 have?"
+  },
+  {
+   "gold": [
+    "g056"
+   ],
+   "kind": "temporal",
+   "q": "郑凯 做什么工作？"
+  },
+  {
+   "gold": [
+    "g060"
+   ],
+   "kind": "needle",
+   "q": "Jack 的生日是哪天？"
+  }
+ ]
+}
