@@ -24,6 +24,7 @@ import dotenv
 
 dotenv.load()
 from embed import norm, unpack  # noqa: E402
+import http_pool  # noqa: E402
 
 try:  # numpy 是可选的加速路径；没有也完全能跑
     import numpy as _np
@@ -68,11 +69,19 @@ RERANK_KIND = os.environ.get("RERANK_KIND", "tei").lower()   # tei | dashscope
 RERANK_URL = os.environ.get("RERANK_URL", "").rstrip("/")
 RERANK_MODEL = os.environ.get("RERANK_MODEL", "")
 RERANK_TOP = int(os.environ.get("RERANK_TOP", "10"))   # 精排候选数：实测 10 与 30 质量相同，延迟 ÷3
-RERANK_TIMEOUT = float(os.environ.get("RERANK_TIMEOUT", "8"))  # 单次精排超时（秒）
+# 精排正常 0.4 s：给 5 s 已经足够宽容，再长只是把尾部延迟留给 Search
+RERANK_TIMEOUT = float(os.environ.get("RERANK_TIMEOUT", "5"))  # 单次精排超时（秒）
 RERANK_API_KEY = os.environ.get("RERANK_API_KEY", "")
 RERANK_FAILS = int(os.environ.get("RERANK_FAILS", "3"))      # 连续失败几次后熔断
 RERANK_COOLDOWN = float(os.environ.get("RERANK_COOLDOWN", "60"))  # 熔断冷却秒数
 RERANK_RETRIES = int(os.environ.get("RERANK_RETRIES", "2"))     # 单次精排的瞬时故障重试次数
+# 精排侧并发：0.4 s/call × 16 ≈ 40 req/s，远高于实测总吞吐天花板（约 28/s），
+# 再大开只会和 embedding 抢上游配额、换来 429。
+CONCURRENCY_RERANK = int(os.environ.get("RERANK_POOL", "16"))   # 精排侧长连接上限
+# 上游精排分不是逐位可复现的：同一 (query, documents) 实测抖动到 1e-5
+# （0.713495 / 0.713481）。分数会原样写进响应，不量化就会破坏「同一 query 重放
+# 字节一致」。量化到 1e-3 远大于抖动、远小于候选间距，配上确定性的 tie-break 即可。
+RERANK_SCORE_DIGITS = int(os.environ.get("RERANK_SCORE_DIGITS", "3"))
 
 # 精排健康度：旁路降级会改变排序，必须能在 /version 里看到发生了什么
 _RERANK_STATS = {"calls": 0, "fails": 0, "degraded": 0, "cooldown_skips": 0}
@@ -834,23 +843,19 @@ def rerank(query_text: str, ranked: list[tuple[int, float]], docs: list[dict]) -
                       "documents": payload["documents"]},
             "parameters": {"return_documents": False},
         }
-    req = urllib.request.Request(
-        RERANK_URL,
-        data=json.dumps(payload, ensure_ascii=False).encode("utf-8"),
-        headers={"Content-Type": "application/json",
-                 **({"Authorization": f"Bearer {RERANK_API_KEY}"} if RERANK_API_KEY else {})},
-        method="POST",
-    )
+    headers = {"Content-Type": "application/json",
+               **({"Authorization": f"Bearer {RERANK_API_KEY}"} if RERANK_API_KEY else {})}
     try:
         resp = None
         for attempt in range(max(1, RERANK_RETRIES + 1)):
             try:
-                with urllib.request.urlopen(req, timeout=RERANK_TIMEOUT) as r:
-                    resp = json.loads(r.read().decode("utf-8"))
+                raw = http_pool.post(RERANK_URL, json.dumps(payload, ensure_ascii=False).encode(),
+                                     headers, RERANK_TIMEOUT, size=CONCURRENCY_RERANK)
+                resp = json.loads(raw.decode("utf-8"))
                 break
-            except urllib.error.HTTPError as e:
+            except http_pool.HTTPStatusError as e:
                 # 429 / 5xx 是一次抖动；4xx（鉴权、参数）重试无意义，直接走降级
-                if e.code < 500 and e.code != 429:
+                if e.status < 500 and e.status != 429:
                     raise
                 if attempt >= RERANK_RETRIES:
                     raise
@@ -882,7 +887,7 @@ def rerank(query_text: str, ranked: list[tuple[int, float]], docs: list[dict]) -
             if not math.isfinite(s):
                 raise ValueError("rerank result score must be finite")
             seen.add(j)
-            scored.append((head[j][0], s))
+            scored.append((head[j][0], round(s, RERANK_SCORE_DIGITS)))
         if len(seen) != len(head):
             raise ValueError(f"rerank returned {len(seen)}/{len(head)} unique results")
         scored.sort(key=lambda t: t[0])                                     # 3rd: id 升序

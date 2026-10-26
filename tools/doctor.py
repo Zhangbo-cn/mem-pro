@@ -173,6 +173,19 @@ def check_caption() -> None:
     add(OK if ok else FAIL, "图片描述", msg)
 
 
+def check_pool() -> None:
+    import embed
+    import http_pool
+    import retrieve
+
+    size = http_pool.pool_size()
+    need = embed.CONCURRENCY + (retrieve.CONCURRENCY_RERANK if retrieve.RERANK_MODE == "http" else 0)
+    add(OK if size >= need else WARN, "连接池",
+        f"HTTP_POOL_SIZE={size}，需要 ≥ embedding {embed.CONCURRENCY}"
+        f"{f' + 精排 {retrieve.CONCURRENCY_RERANK}' if retrieve.RERANK_MODE == 'http' else ''}",
+        "" if size >= need else "池小于并发时请求会在池上排队，表现为 p95 变长")
+
+
 def check_capacity() -> None:
     """并发自检：闸门、backlog、申报口径。
 
@@ -204,7 +217,7 @@ def check_rerank() -> None:
 
     if retrieve.RERANK_MODE != "http":
         add(OK, "Reranker", "未启用（dense+BM25 线性融合 + 时态规则）",
-            "代理榜实测：开 gte-rerank-v2 后 MRR 0.761→0.808，代价是单请求多一次往返、吞吐减半。"
+            "代理榜实测：开 gte-rerank-v2 后 MRR 0.761→0.808，代价是 p50 多约 0.7 s、吞吐降约 15%。"
             "填 RERANK_MODE/KIND/URL/MODEL/API_KEY 即可启用（见 service/.env.example）")
         return
     if not retrieve.RERANK_URL:
@@ -320,6 +333,7 @@ def main() -> int:
     check_port()
     check_rerank()
     check_caption()
+    check_pool()
     check_capacity()
     if args.url:
         check_target(args.url, args.key)

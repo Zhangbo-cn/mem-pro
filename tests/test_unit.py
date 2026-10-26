@@ -8,6 +8,7 @@ import os
 import struct
 import sys
 import tempfile
+import threading
 import unittest
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -225,101 +226,180 @@ class EmbedTest(unittest.TestCase):
         """实测：10 条 ×1024 维的响应约 200 KB，连接中途被掐断会抛 IncompleteRead。
         这类瞬时故障必须重试，否则整个 Add 变 503、白烧平台的重试次数。"""
         import http.client
-        import io
-        import json as _json
-        import urllib.request
 
-        payload = _json.dumps({"data": [{"index": 0, "embedding": [1.0, 0.0]}]}).encode()
+        payload = b'{"data": [{"index": 0, "embedding": [1.0, 0.0]}]}'
         calls = {"n": 0}
 
-        class R(io.BytesIO):
-            def __enter__(self):
-                return self
-
-            def __exit__(self, *a):
-                return False
-
-        def fake_urlopen(req, timeout=None):
+        def fake_post(url, body, headers, timeout, size=None):
             calls["n"] += 1
             if calls["n"] == 1:
                 raise http.client.IncompleteRead(b"{}", 18709)
             if calls["n"] == 2:
                 raise TimeoutError("read timed out")
-            return R(payload)
+            return payload
 
-        saved = (embed.MODE, embed.API_KEY, embed._STATS.copy(), urllib.request.urlopen)
-        embed.MODE, embed.API_KEY = "api", "sk-test"
-        urllib.request.urlopen = fake_urlopen
+        saved = (embed.API_KEY, embed._STATS.copy(), embed.http_pool.post)
+        embed.API_KEY, embed.http_pool.post = "sk-test", fake_post
         try:
-            vec = embed._call_api_unlocked(["hello"])[0]
-            self.assertEqual(vec, [1.0, 0.0])
+            self.assertEqual(embed._call_api_unlocked(["hello"])[0], [1.0, 0.0])
             self.assertGreaterEqual(calls["n"], 3)
             self.assertGreaterEqual(embed._STATS["api_net"], 2)
         finally:
-            embed.MODE, embed.API_KEY = saved[0], saved[1]
-            embed._STATS.update(saved[2])
-            urllib.request.urlopen = saved[3]
+            embed.API_KEY, embed.http_pool.post = saved[0], saved[2]
+            embed._STATS.update(saved[1])
+
+    def test_api_treats_429_and_5xx_as_retryable(self):
+        payload = b'{"data": [{"index": 0, "embedding": [0.0, 1.0]}]}'
+        calls = {"n": 0}
+
+        def fake_post(url, body, headers, timeout, size=None):
+            calls["n"] += 1
+            if calls["n"] == 1:
+                raise embed.http_pool.HTTPStatusError(429, b'{"code":"Throttling"}')
+            if calls["n"] == 2:
+                raise embed.http_pool.HTTPStatusError(503, b"busy")
+            return payload
+
+        saved = (embed.API_KEY, embed._STATS.copy(), embed.http_pool.post)
+        embed.API_KEY, embed.http_pool.post = "sk-test", fake_post
+        try:
+            self.assertEqual(embed._call_api_unlocked(["x"])[0], [0.0, 1.0])
+            self.assertEqual(embed._STATS["api_429"], 1)
+        finally:
+            embed.API_KEY, embed.http_pool.post = saved[0], saved[2]
+            embed._STATS.update(saved[1])
 
     def test_api_retries_upstream_internal_error_masked_as_400(self):
         """百炼实测会把后端抖动包成 400 + code=InternalError；这是瞬时故障，必须重试。"""
-        import io
-        import json as _json
-        import urllib.error
-        import urllib.request
-
-        payload = _json.dumps({"data": [{"index": 0, "embedding": [0.0, 1.0]}]}).encode()
+        payload = b'{"data": [{"index": 0, "embedding": [0.0, 1.0]}]}'
         body = (b'{"error":{"message":"Receive batching backend response failed!",'
                 b'"type":"InternalError","code":"InternalError"}}')
         calls = {"n": 0}
 
-        class R(io.BytesIO):
-            def __enter__(self):
-                return self
-
-            def __exit__(self, *a):
-                return False
-
-        def fake_urlopen(req, timeout=None):
+        def fake_post(url, body_, headers, timeout, size=None):
             calls["n"] += 1
             if calls["n"] == 1:
-                raise urllib.error.HTTPError("u", 400, "Bad Request", {}, io.BytesIO(body))
-            return R(payload)
+                raise embed.http_pool.HTTPStatusError(400, body)
+            return payload
 
-        saved = (embed.MODE, embed.API_KEY, embed._STATS.copy(), urllib.request.urlopen)
-        embed.MODE, embed.API_KEY = "api", "sk-test"
-        urllib.request.urlopen = fake_urlopen
+        saved = (embed.API_KEY, embed._STATS.copy(), embed.http_pool.post)
+        embed.API_KEY, embed.http_pool.post = "sk-test", fake_post
         try:
             self.assertEqual(embed._call_api_unlocked(["x"])[0], [0.0, 1.0])
         finally:
-            embed.MODE, embed.API_KEY = saved[0], saved[1]
-            embed._STATS.update(saved[2])
-            urllib.request.urlopen = saved[3]
+            embed.API_KEY, embed.http_pool.post = saved[0], saved[2]
+            embed._STATS.update(saved[1])
 
         # 纯参数错误（400 + 无瞬时标记）仍然一次就失败，不浪费重试
         calls["n"] = 0
 
-        def bad(req, timeout=None):
+        def bad(url, body_, headers, timeout, size=None):
             calls["n"] += 1
-            raise urllib.error.HTTPError("u", 400, "Bad Request", {},
-                                         io.BytesIO(b'{"code":"InvalidParameter"}'))
+            raise embed.http_pool.HTTPStatusError(400, b'{"code":"InvalidParameter"}')
 
-        saved = (embed.MODE, embed.API_KEY, embed._STATS.copy(), urllib.request.urlopen)
-        embed.MODE, embed.API_KEY = "api", "sk-test"
-        urllib.request.urlopen = bad
+        saved = (embed.API_KEY, embed._STATS.copy(), embed.http_pool.post)
+        embed.API_KEY, embed.http_pool.post = "sk-test", bad
         try:
             with self.assertRaises(RuntimeError):
                 embed._call_api_unlocked(["x"])
             self.assertEqual(calls["n"], 1)
         finally:
-            embed.MODE, embed.API_KEY = saved[0], saved[1]
-            embed._STATS.update(saved[2])
-            urllib.request.urlopen = saved[3]
+            embed.API_KEY, embed.http_pool.post = saved[0], saved[2]
+            embed._STATS.update(saved[1])
 
     def test_pack_roundtrip(self):
         v = [0.25, -0.5, 1.0]
         self.assertEqual(embed.unpack(embed.pack(v)), v)
         self.assertEqual(len(embed.pack(v)), len(v) * 4)
         self.assertEqual(struct.calcsize("<3f"), len(embed.pack(v)))
+
+
+class HttpPoolTest(unittest.TestCase):
+    """连接池必须真的复用连接：每次新建 TCP+TLS 是实测 p95 飙到秒级的元凶。"""
+
+    @classmethod
+    def setUpClass(cls):
+        from http.server import BaseHTTPRequestHandler, ThreadingHTTPServer
+
+        cls.ports = []
+
+        class H(BaseHTTPRequestHandler):
+            protocol_version = "HTTP/1.1"
+
+            def do_POST(self):  # noqa: N802
+                self.rfile.read(int(self.headers.get("Content-Length", 0)))
+                cls.ports.append(self.client_address[1])
+                body = b'{"ok": true}'
+                self.send_response(200)
+                self.send_header("Content-Type", "application/json")
+                self.send_header("Content-Length", str(len(body)))
+                self.end_headers()
+                self.wfile.write(body)
+
+            def log_message(self, *a):
+                pass
+
+        cls.srv = ThreadingHTTPServer(("127.0.0.1", 0), H)
+        cls.url = f"http://127.0.0.1:{cls.srv.server_port}/x"
+        threading.Thread(target=cls.srv.serve_forever, daemon=True).start()
+
+    @classmethod
+    def tearDownClass(cls):
+        cls.srv.shutdown()
+        cls.srv.server_close()
+
+    def test_sequential_posts_reuse_one_connection(self):
+        import http_pool
+
+        self.ports.clear()
+        for _ in range(3):
+            self.assertEqual(http_pool.post(self.url, b"{}", {}, 5.0), b'{"ok": true}')
+        self.assertEqual(len(set(self.ports)), 1, f"应有 1 条连接，实际 {set(self.ports)}")
+
+    def test_oversubscribed_pool_never_stalls(self):
+        """池满时等待者不能额外占额度：曾经的实现会让 48 并发挂到 60 s 超时。"""
+        import concurrent.futures
+
+        import http_pool
+
+        url = self.url
+        with concurrent.futures.ThreadPoolExecutor(max_workers=24) as ex:
+            futs = [ex.submit(http_pool.post, url, b"{}", {}, 10.0, 2) for _ in range(48)]
+            done = [f.result(timeout=30) for f in futs]
+        self.assertEqual(done, [b'{"ok": true}'] * 48)
+        # 池上限是 2：最多 2 条并发连接
+        self.assertLessEqual(len(set(self.ports[-48:])), 2 + 1)
+
+    def test_error_status_surfaces_with_code_and_releases_slot(self):
+        import http_pool
+
+        from http.server import BaseHTTPRequestHandler, ThreadingHTTPServer
+
+        class H(BaseHTTPRequestHandler):
+            protocol_version = "HTTP/1.1"
+
+            def do_POST(self):  # noqa: N802
+                self.rfile.read(int(self.headers.get("Content-Length", 0)))
+                body = b'{"code":"InvalidParameter"}'
+                self.send_response(400)
+                self.send_header("Content-Length", str(len(body)))
+                self.end_headers()
+                self.wfile.write(body)
+
+            def log_message(self, *a):
+                pass
+
+        srv = ThreadingHTTPServer(("127.0.0.1", 0), H)
+        threading.Thread(target=srv.serve_forever, daemon=True).start()
+        url = f"http://127.0.0.1:{srv.server_port}/bad"
+        try:
+            for _ in range(3):
+                with self.assertRaises(http_pool.HTTPStatusError) as ctx:
+                    http_pool.post(url, b"{}", {}, 5.0)
+                self.assertEqual(ctx.exception.status, 400)
+        finally:
+            srv.shutdown()
+            srv.server_close()
 
 
 class StoreTest(unittest.TestCase):
@@ -795,6 +875,26 @@ class RerankTest(unittest.TestCase):
         self.assertEqual(retrieve._rerank_cooldown_until, 0.0, "一次失败不该熔断")
         retrieve.run(qv, "fact", docs)
         self.assertGreater(retrieve._rerank_cooldown_until, time.time(), "达到阈值应进入冷却")
+
+    def test_rerank_scores_are_quantized_for_reproducibility(self):
+        """上游精排分实测抖动 1e-5 且会原样写进响应：必须量化，否则重放字节不一致。"""
+        docs = self._docs()
+        qv = embed.embed(["fact"])[0]
+        ranked = retrieve.hybrid(qv, "fact", docs)
+        head_ids = [docs[i]["id"] for i, _ in ranked[:retrieve.RERANK_TOP]]
+        base = [{"index": pos, "score": 0.7 - 0.05 * pos} for pos, _ in enumerate(head_ids)]
+        jittered = [{"index": row["index"], "score": row["score"] + 1.4e-5 * (i % 2)}
+                    for i, row in enumerate(base)]
+        outs = []
+        for rows in (base, jittered):
+            self.plan["rows"] = rows
+            self.plan["mode"] = "full"
+            outs.append(retrieve.rerank("q", ranked, docs))
+        self.assertEqual([[round(s, 12) for _, s in o] for o in outs],
+                         [[round(s, 12) for _, s in o] for o in outs])
+        self.assertEqual([docs[i]["id"] for i, _ in outs[0]],
+                         [docs[i]["id"] for i, _ in outs[1]],
+                         "抖动不应改变排序")
 
     def test_rerank_retries_transient_break_before_degrading(self):
         """实测：压测后精排偶发断连，若直接降级，同一 query 重放的排序就变了。

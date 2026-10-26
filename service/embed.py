@@ -1,6 +1,6 @@
 """text-embedding-v4 客户端（DashScope / 阿里云百炼）+ 离线 hash 模式。
 
-- 只用标准库（urllib），无需 pip 安装
+- 只用标准库（http.client + 自建 keep-alive 连接池），无需 pip 安装
 - EMBED_MODE=hash 时完全离线、确定性，用于开发与契约测试
 - EMBED_MODE=api 时调用 DashScope 的 OpenAI 兼容端点
 - 进程内 LRU 缓存：同一文本（重复 caption / 重试）只付一次钱
@@ -23,10 +23,9 @@ import os
 import struct
 import threading
 import time
-import urllib.error
-import urllib.request
 
 import dotenv
+import http_pool
 
 dotenv.load()
 
@@ -44,6 +43,10 @@ CONCURRENCY = max(1, int(os.environ.get("EMBED_CONCURRENCY", "16")))
 _API_SLOTS = threading.BoundedSemaphore(CONCURRENCY)
 _STATS = {"api_calls": 0, "api_retries": 0, "api_429": 0, "api_net": 0, "api_wait_ms": 0.0}
 EMBED_TIMEOUT = float(os.environ.get("EMBED_TIMEOUT", "60"))
+# 单次 embed() 的「等待墙」：429 风暴时 5 次指数退避能撑到 60 s，把请求和闸门槽
+# 一起占死，p95 直接爆表。超过预算就尽快失败 → 503 + Retry-After，交给平台退避，
+# 比我们在这里空等更划算（槽位腾出来给健康请求）。
+RETRY_BUDGET = float(os.environ.get("EMBED_RETRY_BUDGET", "12"))
 _STATS_LOCK = threading.Lock()
 _CACHE: dict[str, list[float]] = {}
 _CACHE_LOCK = threading.Lock()
@@ -102,55 +105,70 @@ def _call_api_unlocked(texts: list[str]) -> list[list[float]]:
         ensure_ascii=False,
     ).encode("utf-8")
     last = None
+    deadline = time.monotonic() + RETRY_BUDGET
     for attempt in range(5):
-        req = urllib.request.Request(
-            f"{BASE}/embeddings",
-            data=body,
-            headers={"Content-Type": "application/json", "Authorization": f"Bearer {API_KEY}"},
-            method="POST",
-        )
+        if attempt and time.monotonic() > deadline:
+            break
         try:
-            with urllib.request.urlopen(req, timeout=EMBED_TIMEOUT) as r:
-                raw = r.read()
+            raw = http_pool.post(
+                f"{BASE}/embeddings", body,
+                {"Content-Type": "application/json", "Authorization": f"Bearer {API_KEY}"},
+                EMBED_TIMEOUT, size=CONCURRENCY)
             if len(raw) < 2:
                 raise http.client.IncompleteRead(raw, 64)
             payload = json.loads(raw.decode("utf-8"))
             data = payload["data"]
             data.sort(key=lambda d: d["index"])  # 保证顺序
             return [d["embedding"] for d in data]
-        except urllib.error.HTTPError as e:
+        except http_pool.HTTPStatusError as e:
             last = e
+            detail = e.body[:300].decode("utf-8", "replace")
             # 429 / 5xx 才值得退避；4xx（鉴权、参数）重试没有意义。
             # 例外：百炼偶尔把后端抖动包成 400（实测
             # `"code":"InternalError","message":"Receive batching backend response failed!"`），
             # 这类报文明确可重试，否则一整批 Add 直接失败。
-            if e.code != 429 and e.code < 500:
-                detail = e.read()[:300].decode("utf-8", "replace")
+            if e.status != 429 and e.status < 500:
                 transient = ("InternalError" in detail or "backend response failed" in detail
                              or "please retry" in detail.lower())
                 if not transient:
-                    raise RuntimeError(f"embedding 调用失败 HTTP {e.code}: {detail}") from e
+                    raise RuntimeError(
+                        f"embedding 调用失败 HTTP {e.status}: {detail}") from e
                 with _STATS_LOCK:
                     _STATS["api_retries"] += 1
                     _STATS["api_net"] += 1
-                time.sleep(0.5 * (2**attempt) + 0.1 * attempt)
+                _sleep(0.5 * (2**attempt) + 0.1 * attempt, deadline)
                 continue
-            retry_after = e.headers.get("Retry-After") if e.headers else None
-            delay = float(retry_after) if retry_after and retry_after.isdigit() else 0.8 * (2**attempt)
+            delay = 0.8 * (2**attempt)
+            if e.status == 429:
+                try:
+                    retry_after = json.loads(detail).get("Retry-After")
+                except Exception:
+                    retry_after = None
+                if isinstance(retry_after, (int, float)) and 0 < retry_after <= 30:
+                    delay = float(retry_after)
             with _STATS_LOCK:
                 _STATS["api_retries"] += 1
-                _STATS["api_429"] += int(e.code == 429)
-            time.sleep(min(delay, 30))
-        except (urllib.error.URLError, TimeoutError, KeyError,
-                http.client.HTTPException, OSError, ValueError) as e:
+                _STATS["api_429"] += int(e.status == 429)
+            _sleep(min(delay, 30), deadline)
+        except (TimeoutError, KeyError, http.client.HTTPException,
+                OSError, ValueError) as e:
             # 网络抖动 / 读大响应时 IncompleteRead / 半截 JSON 都算瞬时故障：
             # 实测 10 条 × 1024 维的响应约 200 KB，连接被中途掐断就会 IncompleteRead。
             last = e
             with _STATS_LOCK:
                 _STATS["api_retries"] += 1
                 _STATS["api_net"] += 1
-            time.sleep(0.5 * (2**attempt) + 0.1 * attempt)
+            _sleep(0.5 * (2**attempt) + 0.1 * attempt, deadline)
     raise RuntimeError(f"embedding 调用失败: {last}")
+
+
+def _sleep(delay: float, deadline: float) -> bool:
+    """睡到 min(delay, 剩余预算)；预算已用尽则返回 False（不再重试）。"""
+    left = deadline - time.monotonic()
+    if left <= 0:
+        return False
+    time.sleep(min(delay, left))
+    return True
 
 
 def _cache_key(text: str) -> str:

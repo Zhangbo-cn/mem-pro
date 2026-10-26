@@ -1,6 +1,6 @@
 # service/ · Add / Search 服务
 
-纯标准库实现，**不需要 pip install**。当前状态：契约自检 **27/27**，单元+端到端测试 **64 项**，
+纯标准库实现，**不需要 pip install**。当前状态：契约自检 **27/27**，单元+端到端测试 **73 项**，
 幂等/确定性通过；默认 `hash` 离线模式，正式评测需配置 DashScope Key。
 
 ```
@@ -117,6 +117,8 @@ python3 tools/smoke.py  https://mem.example.com --key "$KEY"
 | `EMBED_BATCH` | 10 | 官方单次上限 10 行 |
 | `EMBED_CHUNK_CHARS` | 3000 | 单段字符上限（中文≈3k token） |
 | `EMBED_CACHE_MAX` | 20000 | 进程内向量缓存条数 |
+| `HTTP_POOL_SIZE` | 32 | 上游 keep-alive 连接池上限（embedding + 精排共用额度上限） |
+| `EMBED_TIMEOUT` / `EMBED_RETRY_BUDGET` | 60s / 12s | 单次超时与重试总预算（超预算即 503 + Retry-After） |
 | `EMBED_CONCURRENCY` | 16 | 同时发往 DashScope 的请求上限（按 QPM 配额设；超了只会换来 429→503） |
 | `EMBED_CONTEXT` | 0 | 向量化时拼接同一 Add 内前后 N 条消息（只影响向量，不改正文） |
 | `LISTEN_BACKLOG` | 512 | TCP listen backlog；默认 5 时高并发丢 SYN，p95 飙到秒级 |
@@ -139,7 +141,10 @@ python3 tools/smoke.py  https://mem.example.com --key "$KEY"
 | `RERANK_MODE` | none | `http` 时启用精排 |
 | `RERANK_URL` / `RERANK_MODEL` / `RERANK_API_KEY` | — | 精排端点 |
 | `RERANK_KIND` | tei | `tei` / `dashscope` |
-| `RERANK_TOP` / `RERANK_TIMEOUT` | 10 / 8s | 精排条数与超时 |
+| `RERANK_TOP` / `RERANK_TIMEOUT` | 10 / 5s | 精排条数与单次超时 |
+| `RERANK_RETRIES` / `RERANK_FAILS` / `RERANK_COOLDOWN` | 2 / 3 / 60 | 瞬时重试、熔断阈值与冷却秒数 |
+| `RERANK_POOL` | 16 | 精排侧连接池上限 |
+| `RERANK_SCORE_DIGITS` | 3 | 精排分量化位数（上游分数抖动 1e-5，不量化会破坏重放一致性） |
 | `APPEND_OPTIONS` | 0 | 是否把 `options` 拼进 query |
 | `LOG_JSON` | 1 | JSON 结构化日志 |
 
@@ -169,7 +174,7 @@ python3 tools/search_load.py http://127.0.0.1:8080 --user-id USER_ID --queries-f
 | HTTP 吞吐 / 进程（numpy，8–32 并发） | — | **35–41 req/s** |
 | HTTP 吞吐 / 进程（纯标准库） | 3.9 req/s | **10 req/s** |
 | Add 后重算索引 | 176–391 ms 全量重建 | **50–65 ms 追加** |
-| Add 后首次 Search（HTTP P50） | 旧缓存失效后整表重读 | **64 ms** |
+| Add 后首次 Search（HTTP P50） | 旧缓存失效后整表重读 | **73 ms** |
 
 同一数据上 top-10 排序与逐文档精确计算逐位一致（BM25/dense 分值差为 0，20 条 query 全部相同）。纯标准库仍可用，但 dense 慢约 10 倍，**生产建议安装 numpy**：Dockerfile 已装，`tools/doctor.py` 会提示当前走哪条路径。
 
