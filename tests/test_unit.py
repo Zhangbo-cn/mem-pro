@@ -297,15 +297,35 @@ class EmbedTest(unittest.TestCase):
             calls["n"] += 1
             raise embed.http_pool.HTTPStatusError(400, b'{"code":"InvalidParameter"}')
 
+        before = embed._STATS["api_give_up"]
         saved = (embed.API_KEY, embed._STATS.copy(), embed.http_pool.post)
         embed.API_KEY, embed.http_pool.post = "sk-test", bad
         try:
             with self.assertRaises(RuntimeError):
                 embed._call_api_unlocked(["x"])
             self.assertEqual(calls["n"], 1)
+            # 参数错误是「快速失败」，不算重试预算耗尽
+            self.assertEqual(embed._STATS["api_give_up"], before)
         finally:
             embed.API_KEY, embed.http_pool.post = saved[0], saved[2]
             embed._STATS.update(saved[1])
+
+    def test_retry_budget_exhaustion_is_counted(self):
+        """重试预算耗尽 → 计数 + 抛错；Full 期间靠 /version 的 api_give_up 判断是配额还是 bug。"""
+        def boom(url, body_, headers, timeout, size=None):
+            raise TimeoutError("upstream timeout")
+
+        saved = (embed.API_KEY, embed.RETRY_BUDGET, embed._STATS.copy(), embed.http_pool.post)
+        before = embed._STATS["api_give_up"]
+        embed.API_KEY, embed.RETRY_BUDGET, embed.http_pool.post = "sk-test", 0.01, boom
+        try:
+            with self.assertRaises(RuntimeError):
+                embed._call_api_unlocked(["x"])
+            self.assertEqual(embed._STATS["api_give_up"], before + 1)
+        finally:
+            (embed.API_KEY, embed.RETRY_BUDGET,
+             embed.http_pool.post) = saved[0], saved[1], saved[3]
+            embed._STATS.update(saved[2])
 
     def test_pack_roundtrip(self):
         v = [0.25, -0.5, 1.0]

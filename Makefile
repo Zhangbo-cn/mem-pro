@@ -13,7 +13,7 @@ MODE ?= search
 help:
 	@echo "make init      生成 service/.env（随机 Memory System Key）"
 	@echo "make run       本地启动服务（默认 hash 模式，读取 .env）"
-	@echo "make test      单元 + 端到端测试（73 项）"
+	@echo "make test      单元 + 端到端测试（74 项）"
 	@echo "make contract  契约自检 27 项（服务需已启动）"
 	@echo "make replay    幂等 + 确定性检查（服务需已启动）"
 	@echo "make check     起临时服务并跑 contract + replay（无需手动启动）"

@@ -209,7 +209,8 @@ def check_capacity() -> None:
         add(WARN, "容量", detail + "；闸门大于在途上限，说明 MAX_INFLIGHT 会先拒绝请求",
             "让 MAX_INFLIGHT ≥ EMBED_CONCURRENCY")
         return
-    add(OK, "容量", detail + "；申报值请用 tools/search_load.py --sweep 实测后取 60–70%")
+    add(OK, "容量", detail + "；申报值用 tools/search_load.py --duration 180 持续压测，"
+        "取 100% 成功那一档（本机实测 Search/Add 各 16）")
 
 
 def check_rerank() -> None:

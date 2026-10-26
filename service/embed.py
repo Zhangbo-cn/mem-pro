@@ -41,7 +41,8 @@ CACHE_MAX = int(os.environ.get("EMBED_CACHE_MAX", "20000"))
 # 按百炼控制台的 RPM 配额设置：并发 ≈ RPM / 60 × 单次延迟(s)。
 CONCURRENCY = max(1, int(os.environ.get("EMBED_CONCURRENCY", "16")))
 _API_SLOTS = threading.BoundedSemaphore(CONCURRENCY)
-_STATS = {"api_calls": 0, "api_retries": 0, "api_429": 0, "api_net": 0, "api_wait_ms": 0.0}
+_STATS = {"api_calls": 0, "api_retries": 0, "api_429": 0, "api_net": 0,
+          "api_wait_ms": 0.0, "api_give_up": 0}   # give_up：重试预算耗尽 → 上层 503
 EMBED_TIMEOUT = float(os.environ.get("EMBED_TIMEOUT", "60"))
 # 单次 embed() 的「等待墙」：429 风暴时 5 次指数退避能撑到 60 s，把请求和闸门槽
 # 一起占死，p95 直接爆表。超过预算就尽快失败 → 503 + Retry-After，交给平台退避，
@@ -159,6 +160,8 @@ def _call_api_unlocked(texts: list[str]) -> list[list[float]]:
                 _STATS["api_retries"] += 1
                 _STATS["api_net"] += 1
             _sleep(0.5 * (2**attempt) + 0.1 * attempt, deadline)
+    with _STATS_LOCK:
+        _STATS["api_give_up"] += 1
     raise RuntimeError(f"embedding 调用失败: {last}")
 
 
