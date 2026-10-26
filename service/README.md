@@ -1,6 +1,6 @@
 # service/ · Add / Search 服务
 
-纯标准库实现，**不需要 pip install**。当前状态：契约自检 **27/27**，单元+端到端测试 **52 项**，
+纯标准库实现，**不需要 pip install**。当前状态：契约自检 **27/27**，单元+端到端测试 **64 项**，
 幂等/确定性通过；默认 `hash` 离线模式，正式评测需配置 DashScope Key。
 
 ```
@@ -117,13 +117,17 @@ python3 tools/smoke.py  https://mem.example.com --key "$KEY"
 | `EMBED_BATCH` | 10 | 官方单次上限 10 行 |
 | `EMBED_CHUNK_CHARS` | 3000 | 单段字符上限（中文≈3k token） |
 | `EMBED_CACHE_MAX` | 20000 | 进程内向量缓存条数 |
+| `EMBED_CONCURRENCY` | 16 | 同时发往 DashScope 的请求上限（按 QPM 配额设；超了只会换来 429→503） |
+| `EMBED_CONTEXT` | 0 | 向量化时拼接同一 Add 内前后 N 条消息（只影响向量，不改正文） |
+| `LISTEN_BACKLOG` | 512 | TCP listen backlog；默认 5 时高并发丢 SYN，p95 飙到秒级 |
+| `CAPTION_MODE` | none | `none` 只用平台 caption / `openai` 用 gpt-4o-mini 生成描述 |
 | `MEMORY_SYSTEM_KEY` | 空（不鉴权） | 生产必须设置 |
 | `DB_PATH` | service/mem.db | 相对路径按仓库根解析 |
 | `MAX_INFLIGHT` | 64 | 超出返回 429 + Retry-After |
 | `MAX_IMAGES` | 6 | 单次 Search 图片配额 |
 | `STARTUP_CHECK` | 1 | api 模式启动时探活 |
 | `FUSION` | linear | `linear`（α·cos+β·bm25）/ `rrf`（旧名次融合，A/B 用） |
-| `DENSE_WEIGHT` / `SPARSE_WEIGHT` | 0.95 / 0.05 | 融合权重 α / β，实测见根 README §六 |
+| `DENSE_WEIGHT` / `SPARSE_WEIGHT` | 0.95 / 0.05 | 融合权重 α / β，实测见根 README §十一 |
 | `SPARSE_NORM` | sat | `sat` 饱和校准 / `max` 除以最大值 |
 | `BM25_RARE_DF` | 0.15 | 只让 df/N ≤ 该值的稀有词进 BM25；0=关闭 |
 | `CJK_TOKENS` | bigram_unigram | `bigram` / `bigram_unigram` / `unigram` |
@@ -177,6 +181,6 @@ python3 tools/search_load.py http://127.0.0.1:8080 --user-id USER_ID --queries-f
 
 1. **精排默认关闭**：dense + BM25 线性融合；开启 `RERANK_MODE=http` 后失败会自动降级，不阻断 Search。
 2. **无 LLM 抽取**：正文保留原文与时间戳，满足「时间粒度不归一化」；后续接 `gpt-4o-mini` 只能附加字段。
-3. **多模态只用文本检索**：图片 Base64 存下并按需回传，查询图片不参与向量化。
+3. **图片不参与向量化**：Base64 存下并按需回传，图片指纹参与去重；语义检索靠平台 caption 或 `CAPTION_MODE=openai` 生成的描述（gpt-4o-mini，按图片 sha256 缓存）。
 4. **单机 SQLite，不引入 ANN**：按 `user_id` 做精确全量打分；热用户复用有界记忆、BM25 倒排与向量矩阵/行缓存，返回头部使用部分排序，Add 走追加式索引扩展。选型依据与阈值见 `research/15-ann-index-selection.md`（真实 v4 向量实测：11k 条精确 3.2 ms，ANN 最多省 2.8 ms 但召回 0.95–1.0）。单用户 ≥5 万条或点积 P95 ≥20 ms 时再评估，用 `tools/ann_bench.py` 复测。
-5. **并发**：stdlib 线程服务器、单进程 GIL 受限，Full 前用真实 Search 请求压测；申报并发取实测稳定吞吐的 60–70%，必要时多进程横向扩展。`tools/rerank_bench.py` 比较精排质量与单 query 延迟，不是并发压测。
+5. **并发**：stdlib 线程服务器、单进程 GIL 受限；embedding 调用有全局信号量（`EMBED_CONCURRENCY`），`/version` 暴露 `api_429`/`api_wait_ms`。Full 前用 `tools/search_load.py --sweep` 在 api 模式实测，申报并发取稳定区间的 60–70%，必要时多进程横向扩展。
