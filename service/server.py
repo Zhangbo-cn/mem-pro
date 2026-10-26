@@ -55,11 +55,12 @@ MAX_ADD_BYTES = 30 * 1024 * 1024
 MAX_RESPONSE_BYTES = 30 * 1024 * 1024
 MAX_IMAGES = int(os.environ.get("MAX_IMAGES", str(budget.MAX_IMAGES)))
 # 返回条数上限（0 = 老实按平台给的 top_k）。契约只要求「不得超过 top_k」，所以收窄合法。
-# 依据 tools/e2e_proxy.py 的端到端答案评测（1,711 条 QA，qwen-flash 作答）：
+# 默认 20，依据 tools/e2e_proxy.py 的端到端答案评测（1,711 条 QA，qwen-flash 作答）：
 #   top_k  5 / 10 / 20 / 50 / 100 → token-F1 0.504 / 0.527 / 0.521 / 0.514 / 0.505
-# 答案是 10–20 条饱和，再往后只是把提示塞长（TTL 类从 0.33 掉到 0.17）。
-# 带宽受限的部署可以设 20：响应体积降约 1/3，答案质量不变。
-MAX_RESULTS = int(os.environ.get("MAX_RESULTS", "0"))
+# 答案在 10–20 条饱和，再往后只是把提示塞长：TTL（看图答名字）EM 0.33→0.17，
+# 而平台 Top K 固定为 100 时多给的 80 条既换不来答案、又让响应体积多 50%。
+# 想老实按 top_k 返回就设 MAX_RESULTS=0。
+MAX_RESULTS = int(os.environ.get("MAX_RESULTS", "20"))
 MAX_INFLIGHT = int(os.environ.get("MAX_INFLIGHT", "64"))
 STARTUP_CHECK = os.environ.get("STARTUP_CHECK", "1") == "1"
 APPEND_OPTIONS = os.environ.get("APPEND_OPTIONS", "0") == "1"
@@ -97,6 +98,8 @@ def _config_fingerprint() -> str:
                                             retrieve.SPARSE_WEIGHT, retrieve.SPARSE_NORM,
                                             retrieve.BM25_RARE_DF),
              "temporal:%s:%.3f" % (retrieve.TEMPORAL_RULE, retrieve.TEMPORAL_WEIGHT),
+             "date:%s:%.3f:%.3f" % (retrieve.RECENCY_RULE, retrieve.DATE_WEIGHT,
+                                    retrieve.RECENCY_WEIGHT),
              "dedup:%.3f" % retrieve.DEDUP_COS, "ctx:%d" % EMBED_CONTEXT,
              "rerank:%s:%s:%d:%.5f" % (retrieve.RERANK_MODE, retrieve.RERANK_MODEL,
                                        retrieve.RERANK_TOP, retrieve.RERANK_TOL),

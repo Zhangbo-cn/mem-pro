@@ -49,6 +49,11 @@ SPARSE_NORM = os.environ.get("SPARSE_NORM", "sat").strip().lower()
 # 只让「稀有词」（df/N ≤ 该值）参与 BM25：专有名词、证件号、型号等，避免「住/城市」这类高频字掀翻 dense
 BM25_RARE_DF = float(os.environ.get("BM25_RARE_DF", "0.15"))
 DEDUP_COS = float(os.environ.get("DEDUP_COS", "0.97"))  # 近重复阈值
+# 多样性重排（MMR-lite）：多线索题（FR 列全、CD 对比、KR 更新链）要的是「覆盖不同事实」，
+# 而同话题的多条记忆彼此余弦很高，会把 top-10 占满。λ 越大越偏向去重。
+# 0 = 关闭（默认）；实测见 README §十七。
+DIVERSITY = float(os.environ.get("DIVERSITY", "0"))
+DIVERSITY_POOL = int(os.environ.get("DIVERSITY_POOL", "50"))
 DEDUP_POOL = int(os.environ.get("DEDUP_POOL", "200"))   # 只对头部候选做去重（控制 O(n²)）
 # 时态一致性规则：off / tense。查询里的时间词 + 记忆正文里的时间词做确定性微调，不依赖 LLM。
 # 只调「近分平局」：权重远小于融合分差，纯 dense 的强赢家不会被掀翻。
@@ -61,6 +66,17 @@ _PAST_CUES = ("以前", "之前", "过去", "原来", "曾经", "去年", "上�
 _PAST_MARKERS = ("去年", "前年", "以前", "之前", "曾经", "原先", "原来", "早年", "当时",
                  "上一份", "前一份", "离职", "旧地址", "旧工位",
                  "used to", "previously", "formerly", "former", "last year", "in the past")
+# 日期匹配：查询里写了具体日期（"Which image shown in 2024-06-17" / "the conversation of
+# July 21"）时，把 created_at 落在同一天的记忆抬上来。只加分、不扣分——日期常是问题的
+# 附注而不是过滤器（"on 2024-06-17, what did I say about X" 里答案未必那天写入）。
+DATE_WEIGHT = float(os.environ.get("DATE_WEIGHT", "0"))   # 0 = 关闭
+# 更新类问题（"latest / most recent / 现在 / 最新"）额外按写入时间抬新的：
+# 时态规则只读正文措辞，读不到「后写的更权威」。同样只做小幅加成。
+RECENCY_RULE = os.environ.get("RECENCY_RULE", "off").strip().lower()   # off | update
+RECENCY_WEIGHT = float(os.environ.get("RECENCY_WEIGHT", "0.05"))
+_UPDATE_CUES = ("latest", "most recent", "newest", "current", "currently", "now",
+                "up to date", "as of now", "最新", "现在", "目前", "当前",
+                "如今", "现阶段", "现在的工作", "现在住")
 # 一条记忆常同时陈述旧事实与新事实（「去年在慕尼黑，现在住柏林」）：这种要中立，不能扣分
 _PRESENT_MARKERS = ("现在", "目前", "当前", "如今", "现阶段", "今年",
                     "currently", "now ", "nowadays")
@@ -639,6 +655,18 @@ def fused_scores(qvec: list[float], query_text: str, docs: list[dict],
             fused = [min(1.0, max(0.0, s + b)) for s, b in zip(fused, bias)]
             if stats is not None:
                 stats["temporal"] = tense
+    if DATE_WEIGHT > 0:                      # 问题里写了具体日期 → 那天写入的抬上来
+        bias = date_bias(docs, query_text)
+        if bias is not None:
+            fused = [min(1.0, max(0.0, s + b)) for s, b in zip(fused, bias)]
+            if stats is not None:
+                stats["date_matched"] = sum(1 for b in bias if b > 0)
+    if RECENCY_RULE == "update":             # 更新类问题 → 后写的更权威
+        bias = recency_bias(docs, query_text)
+        if bias is not None:
+            fused = [min(1.0, max(0.0, s + b)) for s, b in zip(fused, bias)]
+            if stats is not None:
+                stats["recency"] = True
     return [round(s, _SCORE_DIGITS) for s in fused]
 
 
@@ -725,6 +753,110 @@ def tense_bias(docs: list[dict], tense: str | None,
     if tense == "present":
         return [-w if f else 0.0 for f in past]
     return [w if f else 0.0 for f in past]
+
+
+# ---------- 日期匹配 / 更新类新鲜度 ----------
+_MONTHS = {m: i for i, m in enumerate(
+    ("january february march april may june july august september october november december"
+     ).split(), 1)}
+_MONTHS.update({m[:3]: i for m, i in list(_MONTHS.items())})
+_MON = "(?:" + "|".join(sorted(_MONTHS, key=len, reverse=True)) + ")"
+_DATE_RXS = (
+    re.compile(r"(?<!\d)(\d{4})-(\d{1,2})-(\d{1,2})(?!\d)"),
+    re.compile(r"(?<!\d)(\d{4})/(\d{1,2})/(\d{1,2})(?!\d)"),
+    re.compile(r"(?<!\d)(\d{4})年(\d{1,2})月(\d{1,2})日"),
+)
+_MONTH_DAY_RX = re.compile(r"(?<![a-z])(" + _MON + r")\.?\s+(\d{1,2})(?:st|nd|rd|th)?"
+                           r"(?:,?\s*(\d{4}))?(?![\d])", re.I)
+_DAY_MONTH_RX = re.compile(r"(?<!\d)(\d{1,2})(?:st|nd|rd|th)?\s+(" + _MON + r")\.?"
+                           r"(?:,?\s*(\d{4}))?", re.I)
+_MONTH_YEAR_RX = re.compile(r"(?<![a-z])(" + _MON + r")\.?,?\s+(\d{4})(?!\d)", re.I)
+
+
+def query_dates(text: str) -> tuple[set[tuple[int, int, int]], set[tuple[int, int]]]:
+    """抽出查询里的显式日期。返回 (精确到日, 精确到月)。
+
+    只认「年-月-日」和「月 日 [年]」两种：只给「月 日」时按 (0, m, d) 处理，
+    与任何年份的该天匹配——问题里常有 "on June 17" 这种省略年份的写法。
+    """
+    if not text:
+        return set(), set()
+    days: set[tuple[int, int, int]] = set()
+    months: set[tuple[int, int]] = set()
+    for rx in _DATE_RXS:
+        for y, m, d in rx.findall(text):
+            if 1 <= int(m) <= 12 and 1 <= int(d) <= 31:
+                days.add((int(y), int(m), int(d)))
+    for mon, d, y in _MONTH_DAY_RX.findall(text):
+        m = _MONTHS.get(mon.lower())
+        if m and 1 <= int(d) <= 31:
+            days.add((int(y) if y else 0, m, int(d)))
+    for d, mon, y in _DAY_MONTH_RX.findall(text):
+        m = _MONTHS.get(mon.lower())
+        if m and 1 <= int(d) <= 31:
+            days.add((int(y) if y else 0, m, int(d)))
+    for mon, y in _MONTH_YEAR_RX.findall(text):
+        m = _MONTHS.get(mon.lower())
+        if m:
+            months.add((int(y), m))
+    return days, months
+
+
+def _doc_date(created_at: str) -> tuple[int, int, int]:
+    try:
+        return int(created_at[0:4]), int(created_at[5:7]), int(created_at[8:10])
+    except Exception:  # noqa: BLE001 — 时间戳形状异常时不参与匹配
+        return (0, 0, 0)
+
+
+def date_bias(docs: list[dict], query_text: str, weight: float | None = None) -> list[float] | None:
+    """命中所问日期的记忆加分（同月给 1/3）。只加分，不惩罚。"""
+    w = DATE_WEIGHT if weight is None else weight
+    if w <= 0 or len(docs) < 2:
+        return None
+    days, months = query_dates(query_text)
+    if not days and not months:
+        return None
+    bias = []
+    hit = False
+    for d in docs:
+        y, m, dd = _doc_date(d.get("created_at", ""))
+        add = 0.0
+        for qy, qm, qd in days:
+            if qm == m and qd == dd and (qy == 0 or qy == y):
+                add = w
+                break
+        if add == 0.0 and (y, m) in months:
+            add = w / 3.0
+        bias.append(add)
+        hit = hit or add > 0.0
+    return bias if hit else None
+
+
+_has_update_cue = _cue_matcher(_UPDATE_CUES)
+
+
+def recency_bias(docs: list[dict], query_text: str, weight: float | None = None) -> list[float] | None:
+    """更新类问题：按写入时间线性抬新压旧（最老 −w、最新 +w）。"""
+    w = RECENCY_WEIGHT if weight is None else weight
+    if RECENCY_RULE != "update" or w <= 0 or len(docs) < 3:
+        return None
+    if not _has_update_cue((query_text or "").lower()):
+        return None
+    stamps = []
+    for d in docs:
+        try:
+            stamps.append(calendar.timegm(time.strptime(d["created_at"][:19], "%Y-%m-%dT%H:%M:%S")))
+        except Exception:  # noqa: BLE001
+            stamps.append(0)
+    lo, hi = min(stamps), max(stamps)
+    if hi <= lo:
+        return None
+    span = float(hi - lo)
+    out = []
+    for t in stamps:
+        out.append(w * (2.0 * (t - lo) / span - 1.0))
+    return out
 
 
 # ---------- 近重复去重（同一事实的多副本只留一条）----------
@@ -916,6 +1048,60 @@ def rerank(query_text: str, ranked: list[tuple[int, float]], docs: list[dict]) -
         return ranked
 
 
+def diversify(ranked: list[tuple[int, float]], docs: list[dict], index=None,
+              want: int | None = None, lam: float | None = None) -> list[tuple[int, float]]:
+    """MMR-lite：在头部池里贪心挑「分数高且与已选项不相似」的，尾部原样接上。
+
+    只重排，不改分：输出仍是 (index, score)，score 用来排序/展示，避免影响可复现契约。
+    """
+    lam = DIVERSITY if lam is None else lam
+    if lam <= 0 or len(ranked) < 3:
+        return ranked
+    pool = ranked[:max(3, DIVERSITY_POOL)]
+    tail = ranked[len(pool):]
+    rows = _vec_rows([i for i, _ in pool], docs, index)
+    if rows is None:
+        return ranked
+    n = len(pool)
+    sims = [[0.0] * n for _ in range(n)]
+    for a in range(n):
+        va = rows[a]
+        for b in range(a + 1, n):
+            v = float(_np.dot(va, rows[b])) if _np is not None else cosine(va, rows[b])
+            sims[a][b] = sims[b][a] = v
+    order = list(range(n))
+    order.sort(key=lambda i: -pool[i][1])       # 确定性起点：分数降序
+    chosen = [order[0]]
+    left = set(order[1:])
+    limit = want if want is not None else n
+    while left and len(chosen) < limit:
+        best, best_v = None, None
+        for i in sorted(left):
+            m = max(sims[i][j] for j in chosen)
+            v = pool[i][1] - lam * m
+            if best_v is None or v > best_v + 1e-15:
+                best, best_v = i, v
+        chosen.append(best)
+        left.discard(best)
+    chosen.extend(sorted(left))
+    return [pool[i] for i in chosen] + tail
+
+
+def _vec_rows(idxs: list[int], docs: list[dict], index):
+    """取候选向量（尽量复用索引里已解码的矩阵/行）。"""
+    if not idxs:
+        return None
+    n_rows = max(idxs) + 1
+    if index is not None and index.matrix is not None and n_rows <= index.matrix.shape[0]:
+        return [index.matrix[i] for i in idxs]
+    if index is not None and index.rows is not None and n_rows <= len(index.rows):
+        return [index.rows[i] for i in idxs]
+    try:
+        return [unpack(docs[i]["vec"]) for i in idxs]
+    except Exception:  # noqa: BLE001
+        return None
+
+
 def run(qvec: list[float], query_text: str, docs: list[dict],
         limit: int | None = None, cache_key=None,
         stats: dict | None = None) -> list[tuple[int, float]]:
@@ -929,6 +1115,8 @@ def run(qvec: list[float], query_text: str, docs: list[dict],
     ranked = [(i, fused[i]) for i in _order(fused, docs, rank_limit)]
     ranked = dedup(ranked, docs, index, want=None if limit is None else
                    limit + (max(0, RERANK_TOP) if RERANK_MODE == "http" else 0))
+    if DIVERSITY > 0:
+        ranked = diversify(ranked, docs, index, want=limit)
     ranked = rerank(query_text, ranked, docs)
     return ranked if limit is None else ranked[:limit]
 
@@ -938,7 +1126,8 @@ def info() -> dict:
     return {"fusion": FUSION, "dense_weight": DENSE_WEIGHT, "sparse_weight": SPARSE_WEIGHT,
             "sparse_norm": SPARSE_NORM, "bm25_rare_df": BM25_RARE_DF, "cjk_tokens": CJK_TOKENS,
             "temporal_rule": TEMPORAL_RULE, "temporal_weight": TEMPORAL_WEIGHT,
-            "dedup_cos": DEDUP_COS,
+            "date_weight": DATE_WEIGHT, "recency_rule": RECENCY_RULE,
+            "dedup_cos": DEDUP_COS, "diversity": DIVERSITY,
             "rerank": {"mode": RERANK_MODE, "kind": RERANK_KIND,
                        "model": RERANK_MODEL or None, "top": RERANK_TOP,
                        **_RERANK_STATS}}

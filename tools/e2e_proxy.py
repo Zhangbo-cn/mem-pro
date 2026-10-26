@@ -150,6 +150,8 @@ def main() -> int:
     ap.add_argument("--jobs", type=int, default=8)
     ap.add_argument("--no-warm", action="store_true")
     ap.add_argument("--vec-cache", default=os.path.join(ROOT, "data", ".cache", "gallery-vecs.db"))
+    ap.add_argument("--oracle", action="store_true",
+                    help="上限诊断：直接喂金标 clue 记忆，量「检索完美时答案能到多少」")
     ap.add_argument("--report", default="")
     args = ap.parse_args()
     if not args.answer_key:
@@ -181,6 +183,7 @@ def main() -> int:
 
     # 1) 写入（与 gallery_proxy 同口径：一次 Add = 一个 session）
     uid_of: dict[str, str] = {}
+    round_text: dict[tuple[str, str], str] = {}   # (user, round_id) → 该轮的正文，oracle 用
     for f, d in dialogs:
         uid = "gallery:" + os.path.splitext(os.path.basename(f))[0]
         uid_of[f] = uid
@@ -190,6 +193,11 @@ def main() -> int:
             if msgs:
                 server.do_add({"request_id": s["session_id"], "user_id": uid,
                                "session_id": s["session_id"], "messages": msgs})
+            for r, m in zip(s["dialogues"], range(0, len(msgs))):
+                body = " ".join(str(x) for x in [r.get("user"), r.get("assistant")] if x)
+                for img_id, cap in zip(r.get("image_id") or [], r.get("image_caption") or []):
+                    body += f" [image {img_id}] {cap}"
+                round_text[(uid, r["round"])] = body
 
     # 2) 每条 QA 只 Search 一次（最大档），小档取前缀
     kept = pick([((f, i), q) for f, d in dialogs
@@ -199,10 +207,16 @@ def main() -> int:
         for i, q in enumerate(d["human-annotated QAs"]):
             if kept and (f, i) not in kept:
                 continue
+            if args.oracle:
+                items = [{"content": round_text.get((uid_of[f], c), "")}
+                         for c in (q.get("clue") or [])]
+                tasks.append((q, items))
+                continue
             out = server.do_search({"query": gp.query_content(q, False),
                                     "user_id": uid_of[f], "top_k": top})
             tasks.append((q, out["data"]))
-    print(f"QA {len(tasks)} 条，top_k 档位 {ks}，回答模型 {args.answer_model}", flush=True)
+    mode = "oracle（金标 clue 直接作证据）" if args.oracle else f"top_k 档位 {ks}"
+    print(f"QA {len(tasks)} 条，{mode}，回答模型 {args.answer_model}", flush=True)
 
     # 3) 并发调用回答模型
     lock = threading.Lock()

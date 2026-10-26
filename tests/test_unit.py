@@ -327,6 +327,54 @@ class EmbedTest(unittest.TestCase):
              embed.http_pool.post) = saved[0], saved[1], saved[3]
             embed._STATS.update(saved[2])
 
+    def test_query_dates_parses_the_formats_we_actually_see(self):
+        import retrieve
+        self.assertEqual(retrieve.query_dates("Which image shown in 2024-06-17?")[0],
+                         {(2024, 6, 17)})
+        self.assertEqual(retrieve.query_dates("the conversation of July 21")[0], {(0, 7, 21)})
+        self.assertIn((2024, 6, 17), retrieve.query_dates("June 17, 2024 and 2024/06/17")[0])
+        self.assertEqual(retrieve.query_dates("2024年7月21日 有几张照片")[0], {(2024, 7, 21)})
+        # 没有日期时不能凭空造出来（否则会误伤普通问题）
+        self.assertEqual(retrieve.query_dates("How many photos are there?"), (set(), set()))
+        self.assertEqual(retrieve.query_dates("version 1.2.3 notes"), (set(), set()))
+
+    def test_date_bias_only_adds_never_subtracts(self):
+        import retrieve
+        docs = [{"created_at": "2024-06-17T09:00:00Z"},
+                {"created_at": "2024-07-21T09:00:00Z"}]
+        bias = retrieve.date_bias(docs, "Which image shown in 2024-06-17?", weight=0.1)
+        self.assertEqual(bias, [0.1, 0.0])
+        self.assertTrue(all(b >= 0 for b in bias))
+        # 一条都不匹配 ⇒ 返回 None，完全不改动排序
+        self.assertIsNone(retrieve.date_bias(docs, "on 2024-01-01", weight=0.1))
+
+    def test_recency_bias_is_monotonic_and_cue_gated(self):
+        import retrieve
+        docs = [{"created_at": f"2024-06-{d:02d}T09:00:00Z"} for d in (1, 10, 20)]
+        old_rule, old_w = retrieve.RECENCY_RULE, retrieve.RECENCY_WEIGHT
+        try:
+            retrieve.RECENCY_RULE, retrieve.RECENCY_WEIGHT = "update", 0.05
+            bias = retrieve.recency_bias(docs, "what is his latest stance?")
+            self.assertIsNotNone(bias)
+            self.assertAlmostEqual(bias[0], -0.05, places=6)   # 最老
+            self.assertAlmostEqual(bias[-1], 0.05, places=6)   # 最新
+            self.assertEqual(bias, sorted(bias))
+            # 没有更新线索 ⇒ 不启用（普通问题不该被时间戳带偏）
+            self.assertIsNone(retrieve.recency_bias(docs, "what did he say about robots?"))
+        finally:
+            retrieve.RECENCY_RULE, retrieve.RECENCY_WEIGHT = old_rule, old_w
+
+    def test_diversify_keeps_the_same_items_and_is_deterministic(self):
+        import retrieve
+        docs = [{"id": f"m{i}", "text": f"t{i}", "vec": [1.0, 0.0, 0.0] if i % 2 else [0.0, 1.0, 0.0]}
+                for i in range(6)]
+        ranked = [(i, 1.0 - i * 0.05) for i in range(6)]
+        a = retrieve.diversify(ranked, docs, None, want=6, lam=0.2)
+        b = retrieve.diversify(ranked, docs, None, want=6, lam=0.2)
+        self.assertEqual([i for i, _ in a], [i for i, _ in b])       # 确定性
+        self.assertEqual(sorted(i for i, _ in a), list(range(6)))     # 不丢也不增
+        self.assertEqual(retrieve.diversify(ranked, docs, None, lam=0.0), ranked)
+
     def test_rerank_default_model_is_the_supported_one(self):
         """默认精排模型必须是 qwen3-rerank：gte-rerank-v2 已标注下线，
         实测同一请求分值最大跳 1.3e-3、48 次里 4 次顺序翻转，不能作为默认。"""
