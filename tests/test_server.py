@@ -257,6 +257,17 @@ class ServerTest(unittest.TestCase):
         self.assertEqual(now["data"][0]["content"], "Alice 住在柏林。")
         self.assertLess(past_now, past_plain)
 
+    def test_12_distinct_image_only_memories_all_returned(self):
+        imgs = [PNG.replace("iVBORw0KGgo", f"iVBORw0KGg{c}", 1) for c in "oAB"]
+        self.assertEqual(len(set(imgs)), 3)
+        for k, img in enumerate(imgs):
+            st, _ = self.add(f"e2e:img{k}", "e2e:gallery", messages=[{
+                "role": "user", "content": [{"type": "image_url", "image_url": {"url": img}}]}])
+            self.assertEqual(st, 200)
+        st, body = self.search("photo", "e2e:gallery", 10)
+        self.assertEqual(st, 200)
+        self.assertEqual(len(body["data"]), 3, "不同图片的纯图记忆被当成重复丢了")
+
     def test_10_unknown_path(self):
         self.assertEqual(self.call("/nope", key=None)[0], 404)
         self.assertEqual(self.call("/nope", {}, key=KEY)[0], 404)

@@ -40,6 +40,7 @@ import dotenv  # noqa: E402
 dotenv.load()
 
 import budget  # noqa: E402
+import caption  # noqa: E402
 import embed  # noqa: E402
 import retrieve  # noqa: E402
 import store  # noqa: E402
@@ -193,9 +194,19 @@ def do_add(req: dict) -> dict:
             if total_bytes > MAX_ADD_BYTES:
                 raise Bad("单次 Add 的图片总量超过 30 MiB")
             ts = m.get("timestamp")
-            if ts is not None and not isinstance(ts, (int, float)):
+            if ts is not None and (isinstance(ts, bool) or not isinstance(ts, (int, float))):
                 raise Bad(f"messages[{mi}].timestamp 必须是毫秒时间戳")
             created = iso(ts)
+            if images:
+                try:
+                    descs = [d for d in caption.describe(images) if d]
+                except caption.CaptionError as e:
+                    raise Upstream(str(e)) from e
+                if descs:
+                    # 派生文本只追加并显式标注，原文一字不改
+                    derived = "\n".join(f"{caption.MARKER} {d}" for d in descs)
+                    text = derived if text == "(image only)" else f"{text}\n{derived}"
+            sig = caption.image_sig(images)
             for si, seg in enumerate(split_text(text)):
                 pending.append(
                     {
@@ -208,6 +219,7 @@ def do_add(req: dict) -> dict:
                         "text": seg,
                         # 图片只挂在第一条分块上，避免同一图重复占用返回预算
                         "images": images if si == 0 else [],
+                        "img_sig": sig if si == 0 else "",
                         "ts": ts if isinstance(ts, (int, float)) else None,
                         "created_at": created,
                     }
@@ -247,7 +259,16 @@ def do_search(req: dict, timings: dict | None = None) -> dict:
     if isinstance(req["top_k"], bool) or not isinstance(req["top_k"], int) or req["top_k"] <= 0:
         raise Bad("top_k 必须是正整数")
 
-    qtext, _ = norm_content(req["query"], "query")
+    qtext, qimages = norm_content(req["query"], "query")
+    if qimages and caption.enabled():
+        # 以图搜记忆：把查询图也转成同一口径的描述（同样只用 gpt-4o-mini，结果缓存）
+        try:
+            descs = [d for d in caption.describe(qimages) if d]
+        except caption.CaptionError as e:
+            raise Upstream(str(e)) from e
+        if descs:
+            joined = "\n".join(descs)
+            qtext = joined if qtext == "(image only)" else f"{qtext}\n{joined}"
     if APPEND_OPTIONS and isinstance(req.get("options"), list):
         qtext += "\n" + "\n".join(str(o) for o in req["options"])
 
@@ -393,7 +414,9 @@ class Handler(BaseHTTPRequestHandler):
                                   {"Connection": "close"})
             if path == "/version":
                 self._log(200, started)
-                return self._send(200, {"version": SERVER_VERSION, "embed": embed.info()})
+                return self._send(200, {"version": SERVER_VERSION, "embed": embed.info(),
+                                        "caption": caption.info(),
+                                        "retrieval": retrieve.info()})
             self._log(200, started)
             return self._send(200, {"memories": store.count(), "embed": embed.info(),
                                     "budget": {"tokens": budget.TOKEN_BUDGET,
@@ -456,6 +479,10 @@ class Server(ThreadingHTTPServer):
 
 def main():
     store.init()
+    ok_cap, cap_msg = caption.check()
+    if not ok_cap:
+        print(f"[mem-pro] 启动失败：{cap_msg}", file=sys.stderr, flush=True)
+        sys.exit(2)
     ok, msg = embed.ping() if (STARTUP_CHECK and embed.MODE == "api") else (True, "hash 模式")
     if not ok:
         print(f"[mem-pro] 启动失败：{msg}", file=sys.stderr, flush=True)
@@ -470,7 +497,8 @@ def main():
         signal.signal(sig, _stop)
 
     print(f"[mem-pro] listen {HOST}:{PORT}  embed={embed.info()}  "
-          f"auth={'on' if AUTH_KEY else 'off'}  max_inflight={MAX_INFLIGHT}", flush=True)
+          f"auth={'on' if AUTH_KEY else 'off'}  max_inflight={MAX_INFLIGHT}  "
+          f"caption={caption.info()}  rerank={retrieve.RERANK_MODE}", flush=True)
     try:
         srv.serve_forever()
     finally:

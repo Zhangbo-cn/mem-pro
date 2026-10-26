@@ -408,6 +408,127 @@ class TemporalTest(unittest.TestCase):
             retrieve.TEMPORAL_RULE = saved
 
 
+class ImageDedupTest(unittest.TestCase):
+    """图集式检索：正文相同（甚至都是占位符）但图片不同的记忆不能被当成重复删掉。"""
+
+    def test_distinct_images_survive_dedup(self):
+        texts = ["(image only)"] * 3 + ["(image only)"]
+        vecs = embed.embed(texts)
+        docs = [{"id": f"i{k}", "text": t, "images": [], "seq": k, "ts": None,
+                 "created_at": f"2026-01-01T00:00:{k:02d}Z", "vec": embed.pack(v),
+                 "img_sig": f"sig{k}" if k < 3 else "sig0"}
+                for k, (t, v) in enumerate(zip(texts, vecs))]
+        q = embed.embed(["photo"])[0]
+        got = [docs[i]["id"] for i, _ in retrieve.run(q, "photo", docs)]
+        self.assertEqual(sorted(got), ["i0", "i1", "i2"])  # i3 与 i0 同图同文 ⇒ 真重复
+
+    def test_text_duplicates_without_images_still_dedup(self):
+        docs = [{"id": f"t{k}", "text": "Alice lives in Berlin.", "images": [], "seq": k,
+                 "ts": None, "created_at": "2026-01-01T00:00:00Z",
+                 "vec": embed.pack(embed.embed(["Alice lives in Berlin."])[0])} for k in range(3)]
+        q = embed.embed(["Alice"])[0]
+        self.assertEqual(len(retrieve.run(q, "Alice", docs)), 1)
+
+
+class CaptionTest(unittest.TestCase):
+    """可选的 gpt-4o-mini 图片描述：只追加、可缓存、确定性、合规闸门。"""
+
+    @classmethod
+    def setUpClass(cls):
+        import json as _json
+        import threading
+        from http.server import BaseHTTPRequestHandler, ThreadingHTTPServer
+        import caption
+
+        cls.caption = caption
+        cls.calls = []
+
+        class H(BaseHTTPRequestHandler):
+            def log_message(self, *a):
+                pass
+
+            def do_POST(self):
+                n = int(self.headers.get("Content-Length") or 0)
+                req = _json.loads(self.rfile.read(n).decode())
+                cls.calls.append(req)
+                if self.server.fail:
+                    self.send_response(400)
+                    self.end_headers()
+                    self.wfile.write(b"bad")
+                    return
+                url = req["messages"][0]["content"][1]["image_url"]["url"]
+                body = _json.dumps({"choices": [{"message": {
+                    "content": f"A green bar chart  ({len(url)})"}}]}).encode()
+                self.send_response(200)
+                self.send_header("Content-Length", str(len(body)))
+                self.end_headers()
+                self.wfile.write(body)
+
+        cls.srv = ThreadingHTTPServer(("127.0.0.1", 0), H)
+        cls.srv.fail = False
+        threading.Thread(target=cls.srv.serve_forever, daemon=True).start()
+        cls.tmp = tempfile.TemporaryDirectory()
+
+    @classmethod
+    def tearDownClass(cls):
+        cls.srv.shutdown()
+        cls.srv.server_close()
+        cls.tmp.cleanup()
+
+    def setUp(self):
+        c = self.caption
+        self._saved = (c.MODE, c.API_KEY, c.BASE, c.MODEL, c.STRICT, store.DB_PATH)
+        c.MODE, c.API_KEY, c.MODEL, c.STRICT = "openai", "k", "gpt-4o-mini", True
+        c.BASE = f"http://127.0.0.1:{self.srv.server_port}"
+        store.DB_PATH = os.path.join(self.tmp.name, f"cap-{self._testMethodName}.db")
+        c._MEM.clear()
+        self.srv.fail = False
+        self.calls.clear()
+
+    def tearDown(self):
+        c = self.caption
+        c.MODE, c.API_KEY, c.BASE, c.MODEL, c.STRICT, store.DB_PATH = self._saved
+        c._MEM.clear()
+
+    def test_describe_is_deterministic_and_cached(self):
+        img = "data:image/png;base64,AAAA"
+        first = self.caption.describe([img])
+        self.caption._MEM.clear()  # 进程重启后仍命中 SQLite 持久缓存
+        second = self.caption.describe([img])
+        self.assertEqual(first, ["A green bar chart (26)"])
+        self.assertEqual(first, second)
+        self.assertEqual(len(self.calls), 1)
+        req = self.calls[0]
+        self.assertEqual(req["model"], "gpt-4o-mini")
+        self.assertEqual(req["temperature"], 0)
+
+    def test_non_compliant_model_is_rejected(self):
+        self.caption.MODEL = "gpt-4o"
+        ok, msg = self.caption.check()
+        self.assertFalse(ok)
+        self.assertIn("gpt-4o-mini", msg)
+
+    def test_strict_failure_raises_and_lenient_skips(self):
+        self.srv.fail = True
+        with self.assertRaises(self.caption.CaptionError):
+            self.caption.describe(["data:image/png;base64,BBBB"])
+        self.caption.STRICT = False
+        self.assertEqual(self.caption.describe(["data:image/png;base64,BBBB"]), [""])
+
+    def test_disabled_makes_no_calls(self):
+        self.caption.MODE = "none"
+        self.assertEqual(self.caption.describe(["data:image/png;base64,CCCC"]), [""])
+        self.assertEqual(self.calls, [])
+
+    def test_image_sig_orders_and_distinguishes(self):
+        a, b = "data:image/png;base64,AAAA", "data:image/png;base64,BBBB"
+        sig = self.caption.image_sig
+        self.assertEqual(sig([]), "")
+        self.assertEqual(sig([a, b]), sig([a, b]))
+        self.assertNotEqual(sig([a, b]), sig([b, a]))
+        self.assertNotEqual(sig([a]), sig([b]))
+
+
 class RerankTest(unittest.TestCase):
     """精排旁路：保序重排 / 分数量纲 / 降级与熔断。
 

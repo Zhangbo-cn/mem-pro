@@ -159,11 +159,25 @@ def check_port() -> None:
                 "若服务已在运行则正常；否则换 PORT")
 
 
+def check_caption() -> None:
+    try:
+        import caption
+    except Exception as e:  # noqa: BLE001
+        add(FAIL, "图片描述", f"caption 导入失败：{e}")
+        return
+    ok, msg = caption.check()
+    if not caption.enabled():
+        add(OK, "图片描述", msg + "；只依赖平台 caption 文本",
+            "纯图消息无法被文本检索命中时，可设 CAPTION_MODE=openai（仅 gpt-4o-mini）")
+        return
+    add(OK if ok else FAIL, "图片描述", msg)
+
+
 def check_rerank() -> None:
     import retrieve
 
     if retrieve.RERANK_MODE != "http":
-        add(OK, "Reranker", "未启用（dense+BM25+RRF，MVP 默认）")
+        add(OK, "Reranker", "未启用（dense+BM25 线性融合 + 时态规则，MVP 默认）")
         return
     if not retrieve.RERANK_URL:
         add(FAIL, "Reranker", "RERANK_MODE=http 但 RERANK_URL 为空")
@@ -273,6 +287,7 @@ def main() -> int:
     check_auth()
     check_port()
     check_rerank()
+    check_caption()
     if args.url:
         check_target(args.url, args.key)
 

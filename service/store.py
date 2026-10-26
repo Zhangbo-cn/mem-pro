@@ -38,7 +38,8 @@ CREATE TABLE IF NOT EXISTS memories(
   images      TEXT NOT NULL DEFAULT '[]',
   ts          INTEGER,
   created_at  TEXT NOT NULL,
-  vec         BLOB NOT NULL
+  vec         BLOB NOT NULL,
+  img_sig     TEXT NOT NULL DEFAULT ''
 );
 CREATE INDEX IF NOT EXISTS idx_mem_user ON memories(user_id, seq);
 
@@ -63,6 +64,9 @@ def _conn() -> sqlite3.Connection:
 def init() -> None:
     with _LOCK, _conn() as c:
         c.executescript(SCHEMA)
+        cols = {r[1] for r in c.execute("PRAGMA table_info(memories)").fetchall()}
+        if "img_sig" not in cols:  # 旧库迁移：图片指纹用于去重，缺省为空
+            c.execute("ALTER TABLE memories ADD COLUMN img_sig TEXT NOT NULL DEFAULT ''")
 
 
 # ---------- 幂等 ----------
@@ -91,7 +95,8 @@ def _row_size(row: dict) -> int:
 def _cache_rows(out: list[dict]) -> list[dict]:
     """Store rows in Search shape (no images) so callers can be served from cache."""
     return [{"id": r["id"], "text": r["text"], "images": [], "ts": r["ts"],
-             "created_at": r["created_at"], "seq": r["seq"], "vec": r["vec"]} for r in out]
+             "created_at": r["created_at"], "seq": r["seq"], "vec": r["vec"],
+             "img_sig": r.get("img_sig") or ""} for r in out]
 
 
 def add_memories(items: list[dict]) -> None:
@@ -126,12 +131,13 @@ def add_memories(items: list[dict]) -> None:
                 )
             c.executemany(
                 """INSERT OR IGNORE INTO memories
-                   (id,user_id,session_id,request_id,seq,text,images,ts,created_at,vec)
-                   VALUES(:id,:user_id,:session_id,:request_id,:seq,:text,:images,:ts,:created_at,:vec)""",
+                   (id,user_id,session_id,request_id,seq,text,images,ts,created_at,vec,img_sig)
+                   VALUES(:id,:user_id,:session_id,:request_id,:seq,:text,:images,:ts,:created_at,:vec,:img_sig)""",
                 [
                     {
                         **it,
                         "images": json.dumps(it.get("images") or [], ensure_ascii=False),
+                        "img_sig": it.get("img_sig") or "",
                     }
                     for it in items
                 ],
@@ -204,7 +210,8 @@ def fetch_user(user_id: str, with_images: bool = False,
         return [row.copy() for row in cached[0]]
 
     with _LOCK:
-        cols = "id,text,images,ts,created_at,seq,vec" if with_images else "id,text,ts,created_at,seq,vec"
+        cols = ("id,text,images,ts,created_at,seq,vec,img_sig" if with_images
+                else "id,text,ts,created_at,seq,vec,img_sig")
         with _conn() as c:
             rows = c.execute(
                 f"""SELECT {cols} FROM memories
@@ -213,10 +220,10 @@ def fetch_user(user_id: str, with_images: bool = False,
             ).fetchall()
         if with_images:
             out = [{"id": r[0], "text": r[1], "images": json.loads(r[2]), "ts": r[3],
-                    "created_at": r[4], "seq": r[5], "vec": r[6]} for r in rows]
+                    "created_at": r[4], "seq": r[5], "vec": r[6], "img_sig": r[7]} for r in rows]
         else:
             out = [{"id": r[0], "text": r[1], "images": [], "ts": r[2],
-                    "created_at": r[3], "seq": r[4], "vec": r[5]} for r in rows]
+                    "created_at": r[3], "seq": r[4], "vec": r[5], "img_sig": r[6]} for r in rows]
         if stats is not None:
             stats["cache_hit"] = False
         if not with_images and out and _USER_CACHE_MAX_BYTES > 0:

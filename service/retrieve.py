@@ -714,11 +714,14 @@ def dedup(ranked: list[tuple[int, float]], docs: list[dict], index=None,
     seen: set[str] = set()
     out: list[tuple[int, float]] = []
     kept: list[int] = []
+    sigs = [docs[i].get("img_sig") or "" for i, _ in pool]
     for pos, (i, sc) in enumerate(pool):
-        key = _norm_text(docs[i]["text"])
+        # 图片不同的记忆不是重复：两张不同的图即使 caption/正文相同（甚至都是
+        # "(image only)"），也必须各自保留，否则图集式检索（Mem-Gallery）会丢证据。
+        key = _norm_text(docs[i]["text"]) + "\x00" + sigs[pos]
         if key in seen:
             continue
-        window = kept[-40:]
+        window = [j for j in kept[-40:] if sigs[j] == sigs[pos]]
         if gram is not None:
             if window and float(gram[pos][window].max()) > DEDUP_COS:
                 continue
@@ -855,3 +858,13 @@ def run(qvec: list[float], query_text: str, docs: list[dict],
                    limit + (max(0, RERANK_TOP) if RERANK_MODE == "http" else 0))
     ranked = rerank(query_text, ranked, docs)
     return ranked if limit is None else ranked[:limit]
+
+
+def info() -> dict:
+    """当前生效的检索配置（/version 披露；复现与提交材料核对用）。"""
+    return {"fusion": FUSION, "dense_weight": DENSE_WEIGHT, "sparse_weight": SPARSE_WEIGHT,
+            "sparse_norm": SPARSE_NORM, "bm25_rare_df": BM25_RARE_DF, "cjk_tokens": CJK_TOKENS,
+            "temporal_rule": TEMPORAL_RULE, "temporal_weight": TEMPORAL_WEIGHT,
+            "dedup_cos": DEDUP_COS,
+            "rerank": {"mode": RERANK_MODE, "kind": RERANK_KIND,
+                       "model": RERANK_MODEL or None, "top": RERANK_TOP}}
