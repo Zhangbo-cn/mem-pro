@@ -20,3 +20,5 @@ doctor.json
 smoke*.json
 nohup.out
 .playwright-mcp/
+load.json
+gallery*.json
