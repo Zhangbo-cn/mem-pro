@@ -13,12 +13,14 @@ MODE ?= search
 help:
 	@echo "make init      生成 service/.env（随机 Memory System Key）"
 	@echo "make run       本地启动服务（默认 hash 模式，读取 .env）"
-	@echo "make test      单元 + 端到端测试（74 项）"
+	@echo "make test      单元 + 端到端测试（77 项）"
 	@echo "make contract  契约自检 27 项（服务需已启动）"
 	@echo "make replay    幂等 + 确定性检查（服务需已启动）"
 	@echo "make check     起临时服务并跑 contract + replay（无需手动启动）"
 	@echo "make doctor    配置体检（含 DashScope 连通性）"
 	@echo "make smoke     URL=... KEY=... 对线上服务做 smoke"
+	@echo "make watch     URL=... KEY=... 评测期看护 /version（可加 FEISHU=<webhook>）"
+	@echo "make purge     PREFIX=aml: 按用户前缀清理评测数据（dry-run；去掉 --dry-run 见 tools/purge.py）"
 	@echo "make load      URL=... KEY=... USER_ID=... 并发扫描（DURATION=180 转持续压测），给出申报并发建议"
 	@echo "make gallery   Mem-Gallery 本地代理榜（走线上 Add/Search 代码路径）"
 	@echo "make image     构建 Docker 镜像"
@@ -53,11 +55,21 @@ load:
 		--mode $(MODE) --sweep $(SWEEP) $(if $(filter 1,$(SWEEP_NONCE)),--nonce) \
 		$(if $(filter-out 0,$(DURATION)),--duration $(DURATION)) --report load.json
 
+watch:
+	$(PY) tools/watch.py $(URL) --key "$(KEY)" $(if $(INTERVAL),--interval $(INTERVAL),) \
+		$(if $(FEISHU),--feishu "$(FEISHU)",)
+
+purge:
+	$(PY) tools/purge.py --db $$(grep -E "^DB_PATH" .env 2>/dev/null | cut -d= -f2 | head -1 || echo data/mem.db) \
+		--user-prefix "$(PREFIX)" --dry-run
+
 gallery:
 	$(PY) tools/gallery_proxy.py
 
 image:
-	docker build -t mem-pro:local .
+	docker build -t mem-pro:local \
+		--build-arg GIT_COMMIT=$$(git rev-parse --short=12 HEAD 2>/dev/null || echo unknown) \
+		--label org.opencontainers.image.revision=$$(git rev-parse HEAD 2>/dev/null || echo unknown) .
 
 docker-up:
 	docker compose up -d

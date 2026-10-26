@@ -7,6 +7,10 @@ ENV PYTHONUNBUFFERED=1 \
     PORT=8080 \
     DB_PATH=/data/mem.db
 
+# 版本可核验：镜像里没有 .git，构建时注入 commit，/version 会原样回显
+ARG GIT_COMMIT=unknown
+ENV GIT_COMMIT=${GIT_COMMIT}
+
 WORKDIR /app
 
 # numpy 是可选的 dense 检索加速；代码在没有 numpy 时自动回退纯 Python

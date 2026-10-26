@@ -26,6 +26,7 @@ import json
 import os
 import re
 import signal
+import subprocess
 import sys
 import threading
 import time
@@ -61,6 +62,44 @@ EMBED_CONTEXT = int(os.environ.get("EMBED_CONTEXT", "0"))
 EMBED_CONTEXT_CHARS = int(os.environ.get("EMBED_CONTEXT_CHARS", "400"))
 LOG_JSON = os.environ.get("LOG_JSON", "1") == "1"
 SERVER_VERSION = "mem-pro/0.2.0"
+
+
+def _commit() -> str:
+    """线上跑的到底是哪份代码。镜像里没有 .git，构建时用 GIT_COMMIT 注入。"""
+    sha = os.environ.get("GIT_COMMIT", "").strip()
+    if sha:
+        return sha[:12]
+    try:
+        root = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+        out = subprocess.run(["git", "-C", root, "rev-parse", "--short=12", "HEAD"],
+                             capture_output=True, text=True, timeout=2)
+        if out.returncode == 0:
+            return out.stdout.strip() + ("-dirty" if subprocess.run(
+                ["git", "-C", root, "status", "--porcelain", "--untracked-files=no"],
+                capture_output=True, text=True, timeout=2).stdout.strip() else "")
+    except (OSError, subprocess.SubprocessError):
+        pass
+    return "unknown"
+
+
+def _config_fingerprint() -> str:
+    """影响排序结果的配置指纹：改了任何一个都会改变输出字节。
+    平台核对「版本一致」时，commit + 这个指纹才说明线上配置没被临时改过。"""
+    import retrieve
+    parts = [SERVER_VERSION, "embed:%s:%s:%d" % (embed.MODE, embed.MODEL, embed.DIM),
+             "fusion:%s:%.3f:%.3f:%s:%s" % (retrieve.FUSION, retrieve.DENSE_WEIGHT,
+                                            retrieve.SPARSE_WEIGHT, retrieve.SPARSE_NORM,
+                                            retrieve.BM25_RARE_DF),
+             "temporal:%s:%.3f" % (retrieve.TEMPORAL_RULE, retrieve.TEMPORAL_WEIGHT),
+             "dedup:%.3f" % retrieve.DEDUP_COS, "ctx:%d" % EMBED_CONTEXT,
+             "rerank:%s:%s:%d:%.5f" % (retrieve.RERANK_MODE, retrieve.RERANK_MODEL,
+                                       retrieve.RERANK_TOP, retrieve.RERANK_TOL),
+             "budget:%d:%d:%d" % (budget.TOKEN_BUDGET, budget.BYTE_BUDGET, MAX_IMAGES),
+             "caption:%s:%s" % (caption.MODE, caption.MODEL)]
+    return hashlib.sha256("|".join(parts).encode()).hexdigest()[:16]
+
+
+COMMIT = _commit()
 
 IMG_URI = re.compile(r"^data:image/(jpeg|jpg|png|webp);base64,[A-Za-z0-9+/=\s]+$", re.I)
 
@@ -430,7 +469,9 @@ class Handler(BaseHTTPRequestHandler):
                                   {"Connection": "close"})
             if path == "/version":
                 self._log(200, started)
-                return self._send(200, {"version": SERVER_VERSION, "embed": embed.info(),
+                return self._send(200, {"version": SERVER_VERSION, "commit": COMMIT,
+                                        "config_hash": _config_fingerprint(),
+                                        "embed": embed.info(),
                                         "caption": caption.info(),
                                         "retrieval": retrieve.info()})
             self._log(200, started)

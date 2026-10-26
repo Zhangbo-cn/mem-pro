@@ -218,7 +218,7 @@ def check_rerank() -> None:
 
     if retrieve.RERANK_MODE != "http":
         add(OK, "Reranker", "未启用（dense+BM25 线性融合 + 时态规则）",
-            "代理榜实测：开 gte-rerank-v2 后 MRR 0.761→0.808，代价是 p50 多约 0.7 s、吞吐降约 15%。"
+            "代理榜实测：开精排后 MRR 0.761→0.795，代价是 p50 多约 0.7 s、吞吐降约 15%。"
             "填 RERANK_MODE/KIND/URL/MODEL/API_KEY 即可启用（见 service/.env.example）")
         return
     if not retrieve.RERANK_URL:
@@ -228,7 +228,7 @@ def check_rerank() -> None:
     if retrieve.RERANK_API_KEY:
         headers["Authorization"] = f"Bearer {retrieve.RERANK_API_KEY}"
     if retrieve.RERANK_KIND == "dashscope":
-        payload = {"model": retrieve.RERANK_MODEL or "gte-rerank-v2",
+        payload = {"model": retrieve.RERANK_MODEL or "qwen3-rerank",
                    "input": {"query": "ping", "documents": ["pong"]},
                    "parameters": {"return_documents": False}}
     else:
@@ -242,8 +242,11 @@ def check_rerank() -> None:
         with urllib.request.urlopen(req, timeout=retrieve.RERANK_TIMEOUT) as r:
             body = json.loads(r.read().decode())
         ok = isinstance(body, (dict, list))
+        dep = ("；注意 gte-rerank-v2 官方已标注下线、且分值双峰抖动（实测最大 1.3e-3），"
+               "建议换 RERANK_MODEL=qwen3-rerank" if "gte-rerank" in retrieve.RERANK_MODEL else "")
         add(OK if ok else FAIL, "Reranker",
-            f"{retrieve.RERANK_URL} 可用（kind={retrieve.RERANK_KIND}）")
+            f"{retrieve.RERANK_URL} 可用（kind={retrieve.RERANK_KIND}，"
+            f"model={retrieve.RERANK_MODEL or '默认'}）{dep}")
     except Exception as e:  # noqa: BLE001
         add(FAIL, "Reranker", f"{retrieve.RERANK_URL} 不可用：{type(e).__name__}: {e}",
             "服务会自动降级为融合序，但精排收益会丢失")

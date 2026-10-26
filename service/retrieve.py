@@ -68,7 +68,10 @@ _PRESENT_MARKERS = ("现在", "目前", "当前", "如今", "现阶段", "今年
 RERANK_MODE = os.environ.get("RERANK_MODE", "none").lower()
 RERANK_KIND = os.environ.get("RERANK_KIND", "tei").lower()   # tei | dashscope
 RERANK_URL = os.environ.get("RERANK_URL", "").rstrip("/")
-RERANK_MODEL = os.environ.get("RERANK_MODEL", "")
+# 默认 qwen3-rerank：gte-rerank-v2 官方标注 2026-05-30 下线，且实测分值是双峰的
+# （24 条 query × 3 次：最大偏差 1.3e-3、48 次里 4 次顺序翻转）；qwen3-rerank 同样
+# 条件下偏差 6.4e-8、0 次翻转，a/b 两半 MRR 与 gte 持平（0.791/0.798 vs 0.781/0.808）。
+RERANK_MODEL = os.environ.get("RERANK_MODEL", "qwen3-rerank")
 RERANK_TOP = int(os.environ.get("RERANK_TOP", "10"))   # 精排候选数：实测 10 与 30 质量相同，延迟 ÷3
 # 精排正常 0.4 s：给 5 s 已经足够宽容，再长只是把尾部延迟留给 Search
 RERANK_TIMEOUT = float(os.environ.get("RERANK_TIMEOUT", "5"))  # 单次精排超时（秒）

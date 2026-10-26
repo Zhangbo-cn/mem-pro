@@ -1,6 +1,9 @@
 services:
   mem-pro:
-    build: .
+    build:
+      context: .
+      args:
+        GIT_COMMIT: ${GIT_COMMIT:-unknown}
     image: mem-pro:local
     restart: unless-stopped
     ports:
@@ -16,6 +19,17 @@ services:
       DB_PATH: /data/mem.db        # 固定在持久卷里，忽略 .env 里的本地路径
     volumes:
       - memdata:/data
+    # 评测连跑 1–2 天：日志必须轮转，且只留元数据（不落请求正文）
+    logging:
+      driver: json-file
+      options:
+        max-size: "50m"
+        max-file: "3"
+    # 2 GiB 的机器上给容器留余量；宿主机还要给 Docker/Caddy 留位置
+    deploy:
+      resources:
+        limits:
+          memory: 1536M
     healthcheck:
       test: ["CMD", "python", "-c", "import urllib.request; urllib.request.urlopen('http://127.0.0.1:8080/health', timeout=2)"]
       interval: 30s

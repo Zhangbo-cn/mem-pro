@@ -12,15 +12,15 @@ Agent Memory Leaderboard（记忆之巅）**多模态记忆赛道 / 开源方法
 | 项 | 状态 | 说明 |
 |---|---|---|
 | 契约自检 | ✅ **27 / 27** | `tools/contract_check.py`，覆盖 11 类官方约束 |
-| 自动化测试 | ✅ **74 项** | `make test`：API 端到端、融合/时态回归、缓存、精排降级、多模态去重、caption 缓存 |
+| 自动化测试 | ✅ **77 项** | `make test`：API 端到端、融合/时态回归、缓存、精排降级、多模态去重、caption 缓存 |
 | 幂等 / 确定性 | ✅ | 并发重放只写一次；Search 响应字节级可复现（索引与非索引路径逐位一致） |
 | 多模态 | ✅ 可用 | 内联 Base64 解析/存储/回传；图片指纹参与去重；可选 `gpt-4o-mini` 生成图片描述并持久缓存（见 §十四） |
 | 部署物料 | ✅ | Dockerfile / compose（透明透传全部 `.env`）/ Caddy / systemd / **GitHub Actions CI（3.10 + 3.12 双跑，numpy 与纯标准库两条路径）** |
-| 生产形态实测 | ✅ | 容器 + `text-embedding-v4` + `gte-rerank-v2` 真实 API：契约 27/27（连跑 2 次）、replay 幂等/确定性、smoke 18/18 |
+| 生产形态实测 | ✅ | 容器 + `text-embedding-v4` + `qwen3-rerank` 真实 API：契约 27/27（连跑 2 次）、replay 幂等/确定性、smoke 18/18 |
 | **真实 Embedding API** | ✅ **已配置** | `service/.env` 内 `EMBED_MODE=api` + `text-embedding-v4`，`doctor` 显示连通性 OK；Key 不入库 |
 | 公网 HTTPS 部署 | ❌ 未发布 | 需要一台公网主机 + 域名（见 §五） |
 | 检索打分校准 | ✅ **已调优** | α=0.95 / β=0.05 + 时态一致性规则；另有 Mem-Gallery 1,711 条 QA 代理榜（见 §十二） |
-| 精排 | ✅ **默认关闭，实测 +0.047 MRR** | `gte-rerank-v2`（API）或本地 `bge-reranker-v2-m3`；`RERANK_TOP=10`，启用后单请求多一次往返 |
+| 精排 | ✅ **默认关闭，实测 +0.04 MRR** | `qwen3-rerank`（API，现默认）或本地 `bge-reranker-v2-m3`；`RERANK_TOP=10`，启用后单请求多一次往返 |
 | 并发/容量 | ✅ **有工具与闸门** | embedding 全局并发闸门 + listen backlog 512；`make load` 扫描并给出申报区间（见 §十二） |
 
 > **关于「API 配置」**：`service/.env` 已配好 DashScope（`EMBED_MODE=api`），该文件被 `.gitignore` 排除。
@@ -58,7 +58,7 @@ curl -s -X POST localhost:8080/search -H 'Content-Type: application/json' \
 一键验证（自动起临时服务 + 契约 + 复现性 + smoke）：
 
 ```bash
-make test      # 74 项单元/端到端测试
+make test      # 77 项单元/端到端测试
 make check     # contract 27/27 + replay + local smoke
 ```
 
@@ -179,13 +179,15 @@ Authentication `Authorization: Token`、Memory System Key = 你生成的那个�
 | `make init` / `tools/doctor.py --init` | 生成 `service/.env`（随机 key，600 权限） |
 | `make doctor` | 配置体检：模式/Key/连通性/SQLite/端口/鉴权/精排 |
 | `make run` | 启动服务（自动加载 `.env`） |
-| `make test` | 74 项单元 + 端到端测试 |
+| `make test` | 77 项单元 + 端到端测试 |
 | `make check` | 临时服务上跑契约 27 项 + replay + smoke |
 | `make contract` / `make replay` | 对已启动服务做契约 / 确定性检查 |
 | `make smoke URL=https://... KEY=...` | 线上 smoke（18 项） |
 | `make load URL=... KEY=... USER_ID=... SWEEP=1,4,8,16,32` | 并发扫描 Add / Search，输出 p50/p95/p99 与**申报并发区间**；加 `DURATION=180` 转持续压测（burst 通过 ≠ 稳态可过） |
 | `make gallery` / `tools/gallery_proxy.py` | Mem-Gallery 本地代理榜（走线上 Add/Search 代码路径，无需额度） |
-| `make image` / `make docker-up` | 构建镜像 / compose 启动 |
+| `make watch URL=... KEY=... FEISHU=<webhook>` | 评测期看护：定时拉 `/version`，`api_give_up` 增长 / 精排降级 / 429 占比过高时告警 |
+| `make purge PREFIX=aml:` | 合规清理：按 `user_id` 前缀删评测数据并 VACUUM（默认 dry-run） |
+| `make image` / `make docker-up` | 构建镜像（注入 `GIT_COMMIT`）/ compose 启动 |
 
 ---
 
@@ -212,10 +214,13 @@ mem-pro/
 │   ├── ann_bench.py         # ANN 选型：精确 vs IVF vs PQ vs HNSW（召回/延迟/构建）
 │   ├── atm_proxy.py         # ATM-Bench 本地代理榜（检索指标）
 │   ├── rerank_server.py     # 本地 TEI 风格精排服务
-│   └── rerank_bench.py      # 精排质量与单 query 延迟对比
+│   ├── rerank_bench.py      # 精排质量与单 query 延迟对比
+│   ├── watch.py             # 评测期看护：/version 计数器异常告警（可推飞书）
+│   └── purge.py             # 合规清理：按 user 前缀删评测数据 + VACUUM
 ├── tests/                   # unittest（无 pytest 依赖）
 ├── scripts/verify.sh        # 一键契约 + replay + smoke
-├── deploy/                  # Caddyfile / systemd unit
+├── deploy/                  # Caddyfile / systemd unit / LOCAL_DEPLOY.md（本地公网部署三方案）
+├── RUNBOOK.md · SUBMISSION.md   # 评测当天看护流程 / 15 项提交材料
 ├── Dockerfile · docker-compose.yml · Makefile
 ├── data/                    # 小样本数据（大文件已忽略）
 └── research/                # 16 份调研 + 原始核验数据
@@ -240,6 +245,11 @@ mem-pro/
 - [ ] **部署公网 HTTPS 并通过 `tools/smoke.py`**
 - [x] 本地精排集成与留出集评测（`RERANK_TOP=10`，默认关闭）
 - [x] ATM-Bench 本地代理榜交叉验证（`tools/atm_proxy.py`）：邮件模态 381 条，精排 +0.077 MRR
+- [x] `/version` 可核验（`commit` + `config_hash`），镜像构建注入 `GIT_COMMIT`
+- [x] 合规：日志只留元数据（有测试守护）、日志轮转、`tools/purge.py` 按用户删除
+- [x] 精排默认模型换成 `qwen3-rerank`（gte 已标注下线，实测抖动 1.3e-3 / 4 次顺序翻转）
+- [x] 评测期看护 `tools/watch.py`（`api_give_up` 增长、精排降级、429 占比告警）
+- [x] 提交材料草稿 `SUBMISSION.md`、运行手册 `RUNBOOK.md`、本地部署 `deploy/LOCAL_DEPLOY.md`
 
 ---
 
@@ -381,7 +391,7 @@ python3 tools/tune.py --set hand --split tune --temporal --temporal-weight 0.06
 2. **listen backlog 512**（`LISTEN_BACKLOG`）：Python `HTTPServer` 默认 `request_queue_size=5`，
    32 并发同时建连时 SYN 被丢、客户端 1s/3s 重传，实测 p95 从 70 ms 飙到 1,200 ms 且吞吐掉到 1/10。
    改完后 64 并发 p95 ≈ 150 ms。
-3. **`make load` 并发扫描**：给出每档并发的成功率、吞吐、p50/p95/p99，并直接算出「最高稳定并发 → 申报 60–70%」。
+3. **`make load` 并发扫描**：给出每档并发的成功率、吞吐、p50/p95/p99，并直接算出「最高稳定并发 → 申报 60–70%」。**加 `DURATION=180` 才是持续压测**，申报值只看后者。
 
 ### 实测（2026-10-26，`text-embedding-v4`，真实 API，单进程）
 
@@ -532,7 +542,11 @@ hash 代理榜上 MRR +0.007 但 R@100 反降 0.031，方向不一致，**默认
 |---|---|---|---|---|
 | 无精排 | — | split a / b | 0.725 / 0.761 | 0 |
 | 本地 | `bge-reranker-v2-m3`（CPU） | 74 条自建 odd 集 | 0.949 → 0.980 | ≈1.0 s |
-| API | DashScope `gte-rerank-v2` | split a / b | **0.781 / 0.808** | ≈0.4 s（同区内网） |
+| API | `gte-rerank-v2`（已标注下线） | split a / b | 0.781 / 0.808 | ≈0.24 s（同区内网） |
+| API | **`qwen3-rerank`（现默认）** | split a / b | **0.791 / 0.798** | ≈0.32 s（同区内网） |
+
+两个 API 模型质量打平（两半均值都是 0.795），但**确定性差 4 个数量级**（见下），
+而且 `gte-rerank-v2` 官方标注 2026-05-30 下线 —— 所以默认模型改成 `qwen3-rerank`。
 
 代理榜 split b 的分类别变化（`RERANK_TOP=10`）：TR 0.558→0.652、VR 0.725→0.827、KR 0.542→0.624、
 VS 0.827→0.901、MR 0.729→0.827；只有 CD（计数）略降 0.562→0.531。**推理类问题获益最大**，
@@ -544,11 +558,12 @@ VS 0.827→0.901、MR 0.729→0.827；只有 CD（计数）略降 0.562→0.531�
 | | Recall@1 | Recall@5 | Recall@10 | MRR@10 | nDCG@10 |
 |---|---|---|---|---|---|
 | 无精排 | 0.671 | 0.894 | 0.935 | 0.784 | 0.818 |
-| `gte-rerank-v2`（rtop 30） | **0.773** | **0.935** | **0.950** | **0.861** | **0.880** |
+| `gte-rerank-v2`（rtop 30） | 0.773 | 0.935 | 0.950 | 0.861 | 0.880 |
+| **`qwen3-rerank`（rtop 30）** | **0.777** | **0.944** | **0.958** | **0.863** | **0.885** |
 
 一份是「多会话待办 + 图片」，一份是「个人邮件 + 多跳数字」，精排的收益都是 +0.05 ~ +0.08 MRR，
-方向一致 —— 说明这不是在 Mem-Gallery 上过拟合出来的。代价也一致：P50 245 ms → 1,134 ms
-（这里每次都真的打网络，没有连接池内网优势）。
+方向一致 —— 说明这不是在 Mem-Gallery 上过拟合出来的。代价也一致：P50 192 ms → 1,134 ms（`gte`）
+/ 1,998 ms（`qwen3`，长邮件文本下更慢；本系统里精排只吃单条消息，实际只 +0.08 s）。
 
 `RERANK_TOP` 10 与 30 的质量差只有 0.003（0.808 vs 0.811），但候选翻三倍、延迟与费用同涨，
 所以默认 10 不变。
@@ -571,8 +586,9 @@ VS 0.827→0.901、MR 0.729→0.827；只有 CD（计数）略降 0.562→0.531�
    `calls/fails/degraded/cooldown_skips`——降级必须能被看见。
 2. 更隐蔽：`gte-rerank-v2` 的分数**不是逐位可复现**的，而且是**双峰**的——同一
    `(query, documents)` 连续 12 次调用，分数在 `0.104684` 和 `0.104543` 两套精确值之间跳
-   （差 1.4e-4），像是有两台后端各算一遍。这个分数会原样写进响应 `score` 字段，于是
-   「同一 query 重放字节一致」被破坏（排序没变、字节变了）。
+   （差 1.4e-4），像是有两台后端各算一遍。扩到 24 条真实 query × 3 次，最大偏差 **1.3e-3**、
+   48 次里有 **4 次顺序直接翻转**；同样条件下 `qwen3-rerank` 偏差 **6.4e-8**、**0 次翻转**。
+   这个分数会原样写进响应 `score` 字段，于是「同一 query 重放字节一致」被破坏（排序没变、字节变了）。
    **量化治不了**：任何网格都会在边界上翻转（先试过 1e-3 取整，仍能复现失败）。两手改：
    - 顺序：分差 `< RERANK_TOL`（0.0003，≈2× 观测到的双峰间距）一律按**并列**处理，
      交给确定性的「融合分降序 → `created_at` 降序 → id 升序」决定。于是无论上游落在
@@ -589,7 +605,7 @@ VS 0.827→0.901、MR 0.729→0.827；只有 CD（计数）略降 0.562→0.531�
 RERANK_MODE=http
 RERANK_KIND=dashscope
 RERANK_URL=https://dashscope.aliyuncs.com/api/v1/services/rerank/text-rerank/text-rerank
-RERANK_MODEL=gte-rerank-v2
+RERANK_MODEL=qwen3-rerank
 RERANK_API_KEY=$DASHSCOPE_API_KEY
 ```
 

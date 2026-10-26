@@ -327,6 +327,16 @@ class EmbedTest(unittest.TestCase):
              embed.http_pool.post) = saved[0], saved[1], saved[3]
             embed._STATS.update(saved[2])
 
+    def test_rerank_default_model_is_the_supported_one(self):
+        """默认精排模型必须是 qwen3-rerank：gte-rerank-v2 已标注下线，
+        实测同一请求分值最大跳 1.3e-3、48 次里 4 次顺序翻转，不能作为默认。"""
+        import retrieve
+        if os.environ.get("RERANK_MODEL"):
+            self.skipTest("环境显式指定了 RERANK_MODEL")
+        self.assertEqual(retrieve.RERANK_MODEL, "qwen3-rerank")
+        # 容差必须大于上游抖动，否则顺序仍会翻转
+        self.assertGreaterEqual(retrieve.RERANK_TOL, 1e-5)
+
     def test_pack_roundtrip(self):
         v = [0.25, -0.5, 1.0]
         self.assertEqual(embed.unpack(embed.pack(v)), v)

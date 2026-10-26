@@ -113,6 +113,21 @@ class ServerTest(unittest.TestCase):
         self.assertEqual(body["db"], "ok")
         self.assertNotIn(KEY, raw.decode())
 
+    def test_01b_version_is_verifiable(self):
+        """/version 必须能证明「线上跑的是哪个 commit、哪套配置」——
+        平台公榜准入要求「版本一致」，没有这两项就无法自证。"""
+        st, raw = self.call("/version")
+        self.assertEqual(st, 200)
+        body = json.loads(raw)
+        self.assertTrue(body["version"].startswith("mem-pro/"))
+        self.assertRegex(body["commit"], r"^[0-9a-f]{7,12}(-dirty)?$|^unknown$")
+        self.assertRegex(body["config_hash"], r"^[0-9a-f]{16}$")
+        # 同一进程内多次请求必须一致（防火墙后不许有随机成分）
+        self.assertEqual(json.loads(self.call("/version")[1])["config_hash"], body["config_hash"])
+        # 配置指纹必须覆盖影响排序的项
+        self.assertIn("rerank", body["retrieval"])
+        self.assertIn("temporal_rule", body["retrieval"])
+
     def test_02_auth(self):
         self.assertEqual(self.call("/stats", key=None)[0], 401)
         self.assertEqual(self.call("/stats", key="wrong")[0], 401)
@@ -271,6 +286,60 @@ class ServerTest(unittest.TestCase):
     def test_10_unknown_path(self):
         self.assertEqual(self.call("/nope", key=None)[0], 404)
         self.assertEqual(self.call("/nope", {}, key=KEY)[0], 404)
+
+
+class LogHygieneTest(unittest.TestCase):
+    """合规：评测数据只能用于完成当前任务 —— 日志里不许落请求正文。
+
+    规则见 research/06 §八。这里用唯一标记串验证：write/add/search 之后，
+    服务端日志里查不到任何消息正文或 query 原文。
+    """
+
+    def test_logs_carry_no_request_bodies(self):
+        tmp = tempfile.TemporaryDirectory()
+        port = free_port()
+        log = os.path.join(tmp.name, "server.log")
+        marker = "SEKRIT-marker-9f2c1b"
+        env = {**os.environ, "EMBED_MODE": "hash", "LOG_JSON": "1",
+               "DB_PATH": os.path.join(tmp.name, "log.db"), "MEMORY_SYSTEM_KEY": KEY,
+               "PORT": str(port), "HOST": "127.0.0.1", "STARTUP_CHECK": "0"}
+        with open(log, "w") as fh:
+            proc = subprocess.Popen([sys.executable, os.path.join(ROOT, "service", "server.py")],
+                                    env=env, stdout=fh, stderr=fh, text=True)
+            try:
+                base = f"http://127.0.0.1:{port}"
+                for _ in range(150):
+                    try:
+                        urllib.request.urlopen(base + "/health", timeout=1).read()
+                        break
+                    except Exception:
+                        time.sleep(0.1)
+                for path, body in (
+                    ("/add", {"request_id": "log-1", "user_id": f"log:{marker}",
+                              "session_id": "s", "messages": [
+                                  {"role": "user", "content": f"secret body {marker}",
+                                   "timestamp": 1704067200000}]}),
+                    ("/search", {"query": f"query text {marker}", "user_id": f"log:{marker}",
+                                 "top_k": 10}),
+                ):
+                    req = urllib.request.Request(
+                        base + path, data=json.dumps(body).encode(),
+                        headers={"Content-Type": "application/json",
+                                 "Authorization": f"Token {KEY}"})
+                    urllib.request.urlopen(req, timeout=30).read()
+            finally:
+                proc.terminate()
+                try:
+                    proc.wait(timeout=5)
+                except subprocess.TimeoutExpired:
+                    proc.kill()
+            time.sleep(0.3)
+        with open(log) as fh:
+            text = fh.read()
+        tmp.cleanup()
+        self.assertIn("/search", text, "日志开关被关掉了，这项检查失效")
+        self.assertNotIn(marker, text, "请求正文/query 原文进了日志，违反数据使用规则")
+        self.assertNotIn(KEY, text, "Memory System Key 出现在日志里")
 
 
 if __name__ == "__main__":
