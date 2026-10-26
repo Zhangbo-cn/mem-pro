@@ -222,7 +222,7 @@ mem-pro/
 ├── tests/                   # unittest（无 pytest 依赖）
 ├── scripts/verify.sh        # 一键契约 + replay + smoke
 ├── deploy/                  # Caddyfile / systemd unit / LOCAL_DEPLOY.md（本地公网部署三方案）
-├── RUNBOOK.md · SUBMISSION.md   # 评测当天看护流程 / 15 项提交材料
+├── TODO.md · RUNBOOK.md · SUBMISSION.md   # 待办 / 评测当天看护流程 / 15 项提交材料
 ├── Dockerfile · docker-compose.yml · Makefile
 ├── data/                    # 小样本数据（大文件已忽略）
 └── research/                # 16 份调研 + 原始核验数据
