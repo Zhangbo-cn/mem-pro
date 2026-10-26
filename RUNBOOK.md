@@ -35,7 +35,7 @@ curl -s -H "Authorization: Token $KEY" $BASE/version | python3 -c 'import json,s
 
 通过标准：契约 27/27、smoke 18/18、replay 一致、压测 100% 成功、`api_give_up == 0`。
 
-- [ ] `sqlite3 /data/mem.db ".backup '/data/snapshot-empty.db'"` 留一个空库快照
+- [ ] `make backup DB_PATH=/data/mem.db BACKUP=/data/snapshot-empty.db` 留一个空库快照
 - [ ] 磁盘剩余 > 2 GB（`df -h /data`）
 - [ ] 宿主机不休眠、不自动更新（见 `deploy/LOCAL_DEPLOY.md` §五）
 - [ ] 飞书告警已开（`tools/watch.py` 每 5 分钟拉一次 `/version`）
@@ -89,6 +89,9 @@ docker compose logs --tail 50 mem-pro | grep -c '"status":200'
 # 1) 归档这次运行的证据（写进提交材料）
 curl -s -H "Authorization: Token $KEY" $BASE/version > run-version.json
 curl -s -H "Authorization: Token $KEY" $BASE/stats   > run-stats.json
+
+# 3) Add 阶段跑完后立刻热备一份（坏盘不用从零重来）
+make backup DB_PATH=/data/mem.db
 
 # 2) 核对：commit / config_hash 与提交材料一致，且 Full 期间没变过
 diff <(python3 -c 'import json;print(json.load(open("run-version.json"))["config_hash"])') \
