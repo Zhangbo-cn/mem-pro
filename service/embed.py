@@ -36,6 +36,13 @@ DIM = int(os.environ.get("EMBED_DIM", "1024"))
 BASE = os.environ.get("DASHSCOPE_BASE", "https://dashscope.aliyuncs.com/compatible-mode/v1").rstrip("/")
 BATCH = max(1, min(10, int(os.environ.get("EMBED_BATCH", "10"))))  # 官方上限 10 行
 CACHE_MAX = int(os.environ.get("EMBED_CACHE_MAX", "20000"))
+# 进程内同时发往 DashScope 的请求上限。Full 时 Add/Search 并发由平台决定，
+# 不限制就会把上游 QPS 打爆 → 大面积 429 → 我们返回 503、平台退避，整体反而更慢。
+# 按百炼控制台的 RPM 配额设置：并发 ≈ RPM / 60 × 单次延迟(s)。
+CONCURRENCY = max(1, int(os.environ.get("EMBED_CONCURRENCY", "16")))
+_API_SLOTS = threading.BoundedSemaphore(CONCURRENCY)
+_STATS = {"api_calls": 0, "api_retries": 0, "api_429": 0, "api_wait_ms": 0.0}
+_STATS_LOCK = threading.Lock()
 _CACHE: dict[str, list[float]] = {}
 _CACHE_LOCK = threading.Lock()
 
@@ -79,6 +86,15 @@ def _hash_embed(text: str, dim: int = DIM) -> list[float]:
 def _call_api(texts: list[str]) -> list[list[float]]:
     if not API_KEY:
         raise RuntimeError("EMBED_MODE=api 但未设置 DASHSCOPE_API_KEY")
+    started = time.perf_counter()
+    with _API_SLOTS:
+        with _STATS_LOCK:
+            _STATS["api_wait_ms"] += (time.perf_counter() - started) * 1000
+            _STATS["api_calls"] += 1
+        return _call_api_unlocked(texts)
+
+
+def _call_api_unlocked(texts: list[str]) -> list[list[float]]:
     body = json.dumps(
         {"model": MODEL, "input": texts, "dimensions": DIM, "encoding_format": "float"},
         ensure_ascii=False,
@@ -105,6 +121,9 @@ def _call_api(texts: list[str]) -> list[list[float]]:
                 raise RuntimeError(f"embedding 调用失败 HTTP {e.code}: {detail}") from e
             retry_after = e.headers.get("Retry-After") if e.headers else None
             delay = float(retry_after) if retry_after and retry_after.isdigit() else 0.8 * (2**attempt)
+            with _STATS_LOCK:
+                _STATS["api_retries"] += 1
+                _STATS["api_429"] += int(e.code == 429)
             time.sleep(min(delay, 30))
         except (urllib.error.URLError, TimeoutError, KeyError) as e:  # 网络/超时/响应异常
             last = e
@@ -129,12 +148,23 @@ def embed(texts: list[str]) -> list[list[float]]:
                 out[i] = _CACHE[k]
 
     todo = [i for i, v in enumerate(out) if v is None]
-    for start in range(0, len(todo), BATCH):
-        idx = todo[start : start + BATCH]
+    batches = [todo[s : s + BATCH] for s in range(0, len(todo), BATCH)]
+
+    def run(idx: list[int]) -> list[list[float]]:
         batch = [texts[i] for i in idx]
         vecs = [norm(v) for v in _call_api(batch)] if MODE == "api" else [_hash_embed(t) for t in batch]
         if len(vecs) != len(idx):
             raise RuntimeError(f"embedding 返回条数不匹配: {len(vecs)} != {len(idx)}")
+        return vecs
+
+    if MODE == "api" and len(batches) > 1:
+        # 大 Add（几十条消息）不再串行等 N 个来回；全局信号量仍保证不超上游配额
+        from concurrent.futures import ThreadPoolExecutor
+        with ThreadPoolExecutor(max_workers=min(len(batches), CONCURRENCY)) as ex:
+            results = list(ex.map(run, batches))
+    else:
+        results = [run(idx) for idx in batches]
+    for idx, vecs in zip(batches, results):
         for i, v in zip(idx, vecs):
             out[i] = v
 
@@ -163,5 +193,7 @@ def ping() -> tuple[bool, str]:
 
 
 def info() -> dict:
+    with _STATS_LOCK:
+        stats = {k: round(v, 1) if isinstance(v, float) else v for k, v in _STATS.items()}
     return {"mode": MODE, "model": MODEL if MODE == "api" else "hash-bow", "dim": DIM,
-            "cache": len(_CACHE)}
+            "cache": len(_CACHE), "concurrency": CONCURRENCY, **stats}

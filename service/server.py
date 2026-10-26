@@ -475,6 +475,9 @@ class Handler(BaseHTTPRequestHandler):
 class Server(ThreadingHTTPServer):
     daemon_threads = True
     allow_reuse_address = True
+    # 默认 listen backlog 只有 5：平台按申报并发同时建连时 SYN 会被丢，
+    # 客户端 1s/3s 重传 ⇒ p95 飙到秒级（实测 32 并发 p95 1.2s）。
+    request_queue_size = int(os.environ.get("LISTEN_BACKLOG", "512"))
 
 
 def main():
