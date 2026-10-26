@@ -16,7 +16,7 @@ Agent Memory Leaderboard（记忆之巅）**多模态记忆赛道 / 开源方法
 | 幂等 / 确定性 | ✅ | 并发重放只写一次；Search 响应字节级可复现（索引与非索引路径逐位一致） |
 | 多模态 | ✅ 可用 | 内联 Base64 解析/存储/回传；图片指纹参与去重；可选 `gpt-4o-mini` 生成图片描述并持久缓存（见 §十四） |
 | 部署物料 | ✅ | Dockerfile / compose（透明透传全部 `.env`）/ Caddy / systemd / **GitHub Actions CI（3.10 + 3.12 双跑，numpy 与纯标准库两条路径）** |
-| 生产形态实测 | ✅ | 容器 + `text-embedding-v4` 真实 API：契约 27/27、replay 幂等/确定性、smoke 18/18 |
+| 生产形态实测 | ✅ | 容器 + `text-embedding-v4` + `gte-rerank-v2` 真实 API：契约 27/27（连跑 2 次）、replay 幂等/确定性、smoke 18/18 |
 | **真实 Embedding API** | ✅ **已配置** | `service/.env` 内 `EMBED_MODE=api` + `text-embedding-v4`，`doctor` 显示连通性 OK；Key 不入库 |
 | 公网 HTTPS 部署 | ❌ 未发布 | 需要一台公网主机 + 域名（见 §五） |
 | 检索打分校准 | ✅ **已调优** | α=0.95 / β=0.05 + 时态一致性规则；另有 Mem-Gallery 1,711 条 QA 代理榜（见 §十二） |
