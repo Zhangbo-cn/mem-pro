@@ -199,7 +199,8 @@ class RetrieveTest(unittest.TestCase):
             self.assertEqual(got, exact[:7])
             index = retrieve._SEARCH_INDEX[key]
             self.assertIsNone(index.postings)
-            self.assertTrue(index.matrix is not None or index.rows is not None)
+            if retrieve._np is not None or retrieve._DOT is not None:  # 3.10 无 numpy 时无向量索引
+                self.assertTrue(index.matrix is not None or index.rows is not None)
             indexed_dense = retrieve.dense_scores(q, docs, index)
             for expected_score, got_score in zip(retrieve.dense_scores(q, docs), indexed_dense):
                 self.assertAlmostEqual(got_score, expected_score, places=5)

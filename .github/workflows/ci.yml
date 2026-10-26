@@ -1,7 +1,3 @@
-# GitHub Actions 工作流模板。
-# 因当前 gh token 缺少 workflow scope，先放在 deploy/ 下；启用方式：
-#   mkdir -p .github/workflows && cp deploy/ci.yml .github/workflows/ci.yml
-#   gh auth refresh -h github.com -s workflow   # 授权后再提交该文件
 
 name: CI
 
@@ -22,8 +18,12 @@ jobs:
       - uses: actions/setup-python@v5
         with:
           python-version: ${{ matrix.python }}
-      - name: Unit + end-to-end tests
-        run: python -m unittest discover -s tests -v
+      - name: Unit + end-to-end tests (numpy path)
+        run: pip install "numpy>=2,<3" && python -m unittest discover -s tests -v
+      - name: Unit tests (pure stdlib path)
+        run: pip uninstall -y numpy && python -m unittest discover -s tests -v
+      - name: Mem-Gallery proxy (hash, smoke)
+        run: python tools/gallery_proxy.py --limit 2
       - name: Contract + replay + smoke (hash mode)
         run: bash scripts/verify.sh
       - name: Doctor (hash mode, warnings allowed)

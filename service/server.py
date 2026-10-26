@@ -56,6 +56,9 @@ MAX_IMAGES = int(os.environ.get("MAX_IMAGES", str(budget.MAX_IMAGES)))
 MAX_INFLIGHT = int(os.environ.get("MAX_INFLIGHT", "64"))
 STARTUP_CHECK = os.environ.get("STARTUP_CHECK", "1") == "1"
 APPEND_OPTIONS = os.environ.get("APPEND_OPTIONS", "0") == "1"
+# 向量化时拼接同一 Add 内前后各 N 条消息作为上下文（0=关闭）；只影响向量，不影响返回正文
+EMBED_CONTEXT = int(os.environ.get("EMBED_CONTEXT", "0"))
+EMBED_CONTEXT_CHARS = int(os.environ.get("EMBED_CONTEXT_CHARS", "400"))
 LOG_JSON = os.environ.get("LOG_JSON", "1") == "1"
 SERVER_VERSION = "mem-pro/0.2.0"
 
@@ -182,6 +185,7 @@ def do_add(req: dict) -> dict:
             return cached
 
         pending, total_bytes = [], 0
+        msg_texts: list[tuple[int, str]] = []
         for mi, m in enumerate(msgs):
             if not isinstance(m, dict):
                 raise Bad("messages 的每一项必须是对象")
@@ -207,6 +211,7 @@ def do_add(req: dict) -> dict:
                     derived = "\n".join(f"{caption.MARKER} {d}" for d in descs)
                     text = derived if text == "(image only)" else f"{text}\n{derived}"
             sig = caption.image_sig(images)
+            msg_texts.append((mi, text))
             for si, seg in enumerate(split_text(text)):
                 pending.append(
                     {
@@ -222,13 +227,24 @@ def do_add(req: dict) -> dict:
                         "img_sig": sig if si == 0 else "",
                         "ts": ts if isinstance(ts, (int, float)) else None,
                         "created_at": created,
+                        "_mi": mi,
                     }
                 )
 
-        embed_input = [
-            p["text"] + (f" [images:{len(p['images'])}]" if p["images"] else "")
-            for p in pending
-        ]
+        # 上下文化向量：只改「用于向量化的文本」，返回的正文仍是原文。
+        # 单条 assistant 回复（"好的，发我看看"）自身几乎没有语义，拼上同一 Add
+        # 内的相邻消息后才可能被问题命中。默认关闭：hash 代理榜上 R@100 反降 0.03，需用真实 embedding 复测。
+        embed_input = []
+        for k, p in enumerate(pending):
+            body = p["text"] + (f" [images:{len(p['images'])}]" if p["images"] else "")
+            if EMBED_CONTEXT > 0:
+                mi = p["_mi"]
+                ctx = [t for j, t in msg_texts if j != mi and abs(j - mi) <= EMBED_CONTEXT]
+                if ctx:
+                    body = body + "\n[context] " + " ".join(c[:EMBED_CONTEXT_CHARS] for c in ctx)
+            embed_input.append(body)
+        for p in pending:
+            p.pop("_mi", None)
         try:
             vecs = embed.embed(embed_input)
         except Exception as e:  # 上游 / 配额 / 网络 → 让平台重试

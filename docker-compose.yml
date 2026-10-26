@@ -5,15 +5,15 @@ services:
     restart: unless-stopped
     ports:
       - "127.0.0.1:8080:8080"      # 由 Caddy/Nginx 终止 TLS 后再暴露 443
+    # 全部配置走 .env（检索/精排/时态/caption/并发…）：旧版只透传 8 个变量，
+    # RERANK_* / TEMPORAL_* / CAPTION_* 等在容器里静默失效。
+    env_file:
+      - path: .env
+        required: false
     environment:
-      EMBED_MODE: ${EMBED_MODE:-hash}
-      DASHSCOPE_API_KEY: ${DASHSCOPE_API_KEY:-}
-      EMBED_MODEL: ${EMBED_MODEL:-text-embedding-v4}
-      EMBED_DIM: ${EMBED_DIM:-1024}
-      MEMORY_SYSTEM_KEY: ${MEMORY_SYSTEM_KEY:-}
-      MAX_INFLIGHT: ${MAX_INFLIGHT:-64}
-      MAX_IMAGES: ${MAX_IMAGES:-6}
-      LOG_JSON: ${LOG_JSON:-1}
+      HOST: 0.0.0.0
+      PORT: "8080"
+      DB_PATH: /data/mem.db        # 固定在持久卷里，忽略 .env 里的本地路径
     volumes:
       - memdata:/data
     healthcheck:
