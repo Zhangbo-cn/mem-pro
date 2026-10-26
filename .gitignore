@@ -8,6 +8,7 @@ models/
 data/*.npy
 data/processed_memory/
 data/atm_docs.json
+data/atm_vecs.npy
 .DS_Store
 *.log
 *.db

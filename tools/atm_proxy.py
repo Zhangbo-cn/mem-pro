@@ -64,11 +64,23 @@ def _flat(v) -> str:
     return ", ".join(o for o in out if o)[:300]
 
 
+def _load_optional(rel: str):
+    """图片/视频的 VLM 结果不一定在仓库里：缺就跳过，只评文本模态。
+
+    早期版本直接 open() 会让缺文件的机器整个工具跑不起来，也让「只评邮件」
+    这种交叉验证没法做。
+    """
+    path = os.path.join(DATA, rel)
+    if not os.path.exists(path):
+        print(f"跳过 {rel}（不存在）：相关模态的记忆不进语料")
+        return None
+    return json.load(open(path))
+
+
 def load_docs() -> list[dict]:
     docs = []
-    # 图片
-    img = json.load(open(os.path.join(DATA, "processed_memory/image_batch_results.json")))
-    for it in img:
+    img = _load_optional("processed_memory/image_batch_results.json")
+    for it in img or []:
         did = os.path.splitext(os.path.basename(it["image_path"]))[0]
         tags = _flat(it.get("tags"))
         ents = _flat(it.get("entities"))
@@ -79,8 +91,8 @@ def load_docs() -> list[dict]:
                      f"tags: {tags}\nentities: {ents}"),
         })
     # 视频
-    vid = json.load(open(os.path.join(DATA, "processed_memory/video_batch_results.json")))
-    for it in vid:
+    vid = _load_optional("processed_memory/video_batch_results.json")
+    for it in vid or []:
         did = os.path.splitext(os.path.basename(it["video_path"]))[0]
         docs.append({
             "id": did, "kind": "video", "ts": it.get("timestamp", ""),
@@ -88,7 +100,7 @@ def load_docs() -> list[dict]:
                      f"{_trim(it.get('caption',''), 900)}"),
         })
     # 邮件
-    em = json.load(open(os.path.join(DATA, "raw_memory/email/emails.json")))
+    em = _load_optional("raw_memory/email/emails.json") or []
     for it in em:
         docs.append({
             "id": it["id"], "kind": "email", "ts": it.get("timestamp", ""),
@@ -200,9 +212,16 @@ def evaluate(qas, docs, vecs, bm, topk, rerank_cfg=None, rtop=30) -> dict:
     id2i = {d["id"]: i for i, d in enumerate(docs)}
     res = []
     lat = []
+    skipped = 0
     for qa in qas:
         gold_ids = [e for e in qa["evidence_ids"] if e in id2i]
+        # 语料只覆盖部分模态时，缺证据的样本没有意义：gold 少一条就等于把
+        # 「召回全部证据」偷偷换成「召回一部分」，指标虚高。
+        if len(gold_ids) != len(qa["evidence_ids"]):
+            skipped += 1
+            continue
         if not gold_ids:
+            skipped += 1
             continue
         gold = set(gold_ids)
         t0 = time.time()
@@ -231,6 +250,8 @@ def evaluate(qas, docs, vecs, bm, topk, rerank_cfg=None, rtop=30) -> dict:
         r["modality"] = "+".join(sorted(kinds))
         r["n_gold"] = len(gold_ids)
         res.append(r)
+    if skipped:
+        print(f"跳过 {skipped} 条（证据不在当前语料里）")
     return {"rows": res, "lat": lat}
 
 
