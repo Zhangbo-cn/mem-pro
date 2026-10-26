@@ -173,6 +173,32 @@ def check_caption() -> None:
     add(OK if ok else FAIL, "图片描述", msg)
 
 
+def check_capacity() -> None:
+    """并发自检：闸门、backlog、申报口径。
+
+    平台「申报即承诺」，所以本地只能检查参数是否自相矛盾，实测必须靠 tools/search_load.py。
+    """
+    import embed
+
+    inflight = int(env("MAX_INFLIGHT") or 64)
+    backlog = int(env("LISTEN_BACKLOG") or 512)
+    conc = embed.CONCURRENCY
+    detail = f"在途上限 {inflight}，embedding 并发闸门 {conc}，listen backlog {backlog}"
+    if backlog < 128:
+        add(WARN, "容量", detail + "；backlog 过小，高并发建连会丢 SYN、p95 飙到秒级",
+            "设 LISTEN_BACKLOG=512")
+        return
+    if embed.MODE == "api" and conc > 32:
+        add(WARN, "容量", detail + "；api 模式下并发闸门 >32 容易撞 DashScope QPM",
+            "先按百炼控制台 RPM 定 EMBED_CONCURRENCY，再用 tools/search_load.py 实测")
+        return
+    if conc > inflight:
+        add(WARN, "容量", detail + "；闸门大于在途上限，说明 MAX_INFLIGHT 会先拒绝请求",
+            "让 MAX_INFLIGHT ≥ EMBED_CONCURRENCY")
+        return
+    add(OK, "容量", detail + "；申报值请用 tools/search_load.py --sweep 实测后取 60–70%")
+
+
 def check_rerank() -> None:
     import retrieve
 
@@ -258,6 +284,10 @@ RERANK_MODE=none
 # RERANK_API_KEY=
 RERANK_TOP=30
 MAX_INFLIGHT=64
+# 同时发往 DashScope 的请求上限（按百炼 RPM 配额设）
+EMBED_CONCURRENCY=16
+# TCP listen backlog；默认 5 时高并发会丢 SYN
+LISTEN_BACKLOG=512
 MAX_IMAGES=6
 LOG_JSON=1
 """
@@ -288,6 +318,7 @@ def main() -> int:
     check_port()
     check_rerank()
     check_caption()
+    check_capacity()
     if args.url:
         check_target(args.url, args.key)
 

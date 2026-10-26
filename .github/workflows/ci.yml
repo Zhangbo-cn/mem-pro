@@ -14,8 +14,8 @@ jobs:
       matrix:
         python: ["3.10", "3.12"]
     steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-python@v5
+      - uses: actions/checkout@v5
+      - uses: actions/setup-python@v6
         with:
           python-version: ${{ matrix.python }}
       - name: Unit + end-to-end tests (numpy path)
@@ -28,7 +28,7 @@ jobs:
         run: bash scripts/verify.sh
       - name: Doctor (hash mode, warnings allowed)
         run: python tools/doctor.py --json > doctor.json || true
-      - uses: actions/upload-artifact@v4
+      - uses: actions/upload-artifact@v5
         if: always()
         with:
           name: doctor-${{ matrix.python }}
