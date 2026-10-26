@@ -135,6 +135,17 @@ DOMAIN=mem.example.com docker compose --profile tls up -d
 ```
 
 Caddy 自动申请证书；`deploy/Caddyfile` 已把反代超时设为 31 分钟。
+
+**TLS 这一段本地已经端到端跑过**（不用等公网主机）：用同一个 `docker-compose.yml`
+（`--profile tls`）+ 一份只把 Caddyfile 换成 `tls internal` 的 override，起在
+`https://localhost:8444`，拿容器自己的根 CA 做校验后：
+
+- 契约 **27/27**（含 gzip 压缩、`ContentPart[]` 多模态、响应体积上限、重放一致性）
+- smoke **18/18**
+- 中间隔着 Caddy 时 Search p50 49 ms（纯内网 + 已预热向量）
+
+也就是说上线时唯一没验证过的只剩「DNS 解析 + Let's Encrypt 签发」这两件外部依赖。
+
 CI 模板在 `deploy/ci.yml`：复制到 `.github/workflows/` 并在 token 具备 `workflow` scope 后推送即可启用。
 
 ### 方案 B：systemd + 宿主机 Caddy
