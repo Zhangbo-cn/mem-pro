@@ -311,6 +311,42 @@ class StoreTest(unittest.TestCase):
         self.assertEqual(store.count("u1"), 1)
         self.assertEqual(store.count("u2"), 0)
 
+    def test_retry_after_embedding_failure_writes_exactly_once(self):
+        """平台会用同一 request_id 重试最多 32 次：中途失败不能留下半截或重复记忆。"""
+        import server
+
+        saved_batch = embed.BATCH
+        embed.BATCH = 5                     # 25 条 → 5 个 batch，便于在第 3 个 batch 掉线
+        real = embed._hash_embed
+        state = {"n": 0}
+
+        def flaky(text):
+            state["n"] += 1
+            if state["n"] > 10:             # 前 2 个 batch 正常，之后上游 429
+                raise RuntimeError("simulated 429")
+            return real(text)
+
+        req = {"request_id": "r-partial", "user_id": "u-partial", "session_id": "s1",
+               "messages": [{"role": "user", "content": f"独立记忆内容 alpha{i}",
+                             "timestamp": 1735689600000 + i} for i in range(25)]}
+        embed._hash_embed = flaky
+        try:
+            with self.assertRaises(Exception):
+                server.do_add(req)
+            self.assertEqual(len(store.fetch_user("u-partial")), 0, "失败不得留下部分写入")
+            embed._hash_embed = real       # 上游恢复，平台重试
+            server.do_add(req)
+            server.do_add(req)             # 再重试一次：幂等，不重复
+            # 另一个崩溃窗口：记忆已落库、幂等记录还没写就崩了 → 重试仍不能重复
+            with store._conn() as c:
+                c.execute("DELETE FROM idem WHERE user_id=? AND request_id=?",
+                          ("u-partial", "r-partial"))
+            server.do_add(req)
+        finally:
+            embed._hash_embed = real
+            embed.BATCH = saved_batch
+        self.assertEqual(len(store.fetch_user("u-partial")), 25)
+
     def test_idempotent_response(self):
         self.assertIsNone(store.get_idempotent("u1", "r1"))
         store.put_idempotent("u1", "r1", {"success": True, "request_id": "r1"})
