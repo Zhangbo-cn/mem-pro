@@ -109,6 +109,10 @@ def main() -> int:
     ap.add_argument("--sweep", default="", help="comma list of concurrency levels, e.g. 1,4,8,16,32")
     ap.add_argument("--p95-budget-ms", type=float, default=5000,
                     help="a sweep level counts as stable only if p95 is within this budget")
+    ap.add_argument("--nonce", action="store_true",
+                    help="append a per-request token so every query is a fresh embedding call "
+                         "(otherwise the in-process vector cache absorbs the load and the "
+                         "numbers say nothing about upstream capacity)")
     ap.add_argument("--report", default="", help="write sweep rows as JSON")
     args = ap.parse_args()
     if min(args.top_k, args.requests, args.concurrency) <= 0 or args.warmup < 0 or args.timeout <= 0:
@@ -127,7 +131,8 @@ def main() -> int:
         return add_body(args.user_id, f"load-{run_id}-{tag}{i}", args.messages, i)
 
     for i in range(args.warmup):
-        result = call(url, args.key, args.user_id, queries[i % len(queries)],
+        q = queries[i % len(queries)] + (f" #warm{run_id}{i}" if args.nonce else "")
+        result = call(url, args.key, args.user_id, q,
                       args.top_k, args.timeout, f"load-{run_id}-warm-{i}", body_for("w", i))
         if result["status"] != 200 or not result["valid"]:
             print(f"warm-up failed: status={result['status']} {result['error']}", file=sys.stderr)
@@ -136,7 +141,10 @@ def main() -> int:
     def measure(concurrency: int, offset: int) -> dict:
         def task(i: int) -> dict:
             j = offset + i
-            return call(url, args.key, args.user_id, queries[j % len(queries)], args.top_k,
+            q = queries[j % len(queries)]
+            if args.nonce:
+                q = f"{q} #{run_id}{j}"
+            return call(url, args.key, args.user_id, q, args.top_k,
                         args.timeout, f"load-{run_id}-{j}", body_for("r", j))
 
         started = time.perf_counter()

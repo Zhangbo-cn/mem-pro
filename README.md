@@ -370,21 +370,43 @@ python3 tools/tune.py --set hand --split tune --temporal --temporal-weight 0.06
    改完后 64 并发 p95 ≈ 150 ms。
 3. **`make load` 并发扫描**：给出每档并发的成功率、吞吐、p50/p95/p99，并直接算出「最高稳定并发 → 申报 60–70%」。
 
-本地 hash 模式参考值（16 核 / 15 GB，100 请求/档，不含上游 embedding）：
+### 实测（2026-10-26，`text-embedding-v4`，真实 API，单进程）
 
-| 并发 | Search 吞吐 | Search p95 | Add 吞吐 | Add p95 |
+先看 hash 模式（16 核 / 15 GB，100 请求/档，完全没有上游延迟）：
+
+| 并发 | Search 吞吐 | Search p95 |
+|---|---|---|
+| 1 | 255 req/s | 6 ms |
+| 8 | 491 req/s | 20 ms |
+| 32 | 455 req/s | 71 ms |
+| 64 | 359 req/s（99/100） | 199 ms |
+
+**hash 模式的数字只说明服务本身不是瓶颈**。api 模式（每次 Search 要一次真实的 query embedding，
+`--nonce` 保证每条 query 都是新文本、不吃进程内缓存）的结论完全不同：
+
+| 并发 | Search 吞吐 | p50 | p95 | 上游 429 |
 |---|---|---|---|---|
-| 1 | 255 req/s | 6 ms | 250 req/s | 16 ms |
-| 8 | 491 req/s | 20 ms | — | — |
-| 32 | 455 req/s | 71 ms | — | — |
-| 64 | 359 req/s（99/100） | 199 ms | — | — |
+| 1 | 0.9 req/s | 1.43 s | 2.17 s | 0 |
+| 8 | 7.7 req/s | 0.65 s | 1.85 s | 0 |
+| 24 | **14.1 req/s** | 1.44 s | 1.75 s | 0 |
+| 48 | 14.0 req/s（**饱和**） | 0.92 s | 4.06 s | **23** |
 
-**上线前必须在 api 模式对真实 embedding 重测**（hash 模式完全没有上游延迟，结论不可直接搬）：
+Add（每次 10 条消息 = 1 次 embedding 调用）：
 
-```bash
-make load URL=https://mem.example.com KEY=$KEY USER_ID=bench-search SWEEP=1,4,8,16,32
-make load URL=https://mem.example.com KEY=$KEY USER_ID=bench-add SWEEP=1,2,4,8 MODE=add
-```
+| 并发 | Add 吞吐 | p50 | p95 |
+|---|---|---|---|
+| 2 | 1.7 req/s | 0.55 s | 2.67 s |
+| 6 | 3.8 req/s | 0.65 s | 2.89 s |
+| 12 | **4.6 req/s** | 2.53 s | 3.54 s |
+
+三条可以直接用的结论：
+
+1. **瓶颈就是 DashScope**：这个账号的 `text-embedding-v4` 稳定在 **≈14 次 embedding/s**，
+   再往上只会换来 429（48 并发时 23 次），吞吐一点不涨、p95 从 1.75 s 涨到 4 s。
+2. **单次 Search 的下限是 1.2–1.4 s**（一次 query 向量化的往返），吞吐 ≈ 并发 / 单次延迟。
+   想要 14 req/s 只能靠并发 16–24；靠加机器没用，除非换多个账号/多云分流。
+3. **429 已经被吸收**：上面 23 次 429 全部由 `embed.embed` 内部重试消化，`valid=60/60`，
+   平台侧看不到失败。这正是闸门 + 重试要的效果——宁可在我们这里排队，也不要让平台看到 503。
 
 申报值取两者中**更低**的稳定区间的 60–70%，并同时看 `/version` 的 `api_429` 是否为 0。
 

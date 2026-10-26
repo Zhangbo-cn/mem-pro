@@ -3,7 +3,9 @@ PORT ?= 8080
 URL ?= http://127.0.0.1:$(PORT)
 KEY ?= $(MEMORY_SYSTEM_KEY)
 USER_ID ?= bench-user
-SWEEP ?= 1,4,8,16,32
+SWEEP ?= 1,4,8,16,24
+SWEEP_NONCE ?= 1
+MODE ?= search
 
 .PHONY: help init run test check contract replay doctor smoke load gallery image docker-up clean
 
@@ -46,7 +48,9 @@ smoke:
 	$(PY) tools/smoke.py $(URL) --key "$(KEY)"
 
 load:
-	$(PY) tools/search_load.py $(URL) --key "$(KEY)" --user-id "$(USER_ID)" --sweep $(SWEEP) --report load.json
+	$(PY) tools/search_load.py $(URL) --key "$(KEY)" --user-id "$(USER_ID)" \
+		--mode $(MODE) --sweep $(SWEEP) $(if $(filter 1,$(SWEEP_NONCE)),--nonce) \
+		--report load.json
 
 gallery:
 	$(PY) tools/gallery_proxy.py
