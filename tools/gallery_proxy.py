@@ -32,6 +32,7 @@ import json
 import os
 import sys
 import tempfile
+import threading
 import time
 import zlib
 import struct
@@ -86,6 +87,97 @@ def query_content(q: dict, with_images: bool):
     return parts
 
 
+def _attach_disk_cache(path: str, embed) -> None:
+    """把 embed.embed 包一层 SQLite 缓存：同一 (模型,维度,文本) 跨进程只算一次。
+
+    复现性靠它：同一次提交的语料/查询向量恒定，A/B 只重新计算改了的那部分。
+    """
+    import sqlite3
+
+    os.makedirs(os.path.dirname(path), exist_ok=True)
+    db = sqlite3.connect(path, check_same_thread=False)
+    db.execute("PRAGMA journal_mode=WAL")
+    db.execute("CREATE TABLE IF NOT EXISTS vec("
+               "k TEXT PRIMARY KEY, v BLOB, hits INTEGER DEFAULT 0)")
+    db.commit()
+    tag = f"{embed.MODE}:{embed.MODEL}:{embed.DIM}"
+    lock = threading.Lock()
+    real = embed.embed
+
+    def cached(texts: list[str]) -> list[list[float]]:
+        keys = [hashlib.sha256(f"{tag}\x00{t}".encode()).hexdigest() for t in texts]
+        out: list[list[float] | None] = [None] * len(texts)
+        with lock:
+            for start in range(0, len(keys), 400):
+                chunk = keys[start:start + 400]
+                marks = ",".join("?" * len(chunk))
+                for k, v in db.execute(
+                        f"SELECT k, v FROM vec WHERE k IN ({marks})", chunk).fetchall():
+                    out[keys.index(k)] = struct.unpack(f"{embed.DIM}f", v)
+        todo = [i for i, v in enumerate(out) if v is None]
+        if todo:
+            for i, v in zip(todo, real([texts[i] for i in todo])):
+                out[i] = v
+            rows = [(keys[i], struct.pack(f"{embed.DIM}f", *(out[i] or []))) for i in todo]
+            with lock:
+                db.executemany("INSERT OR REPLACE INTO vec(k, v) VALUES(?,?)", rows)
+                db.commit()
+        return [v for v in out if v is not None]
+
+    cached.cache_info = lambda: {"vec_cache": path, **_count(db)}  # type: ignore[attr-defined]
+    embed.embed = cached
+
+
+def _count(db) -> dict:
+    row = db.execute("SELECT COUNT(*) FROM vec").fetchone()
+    return {"vec_cached": int(row[0])}
+
+
+def _warm(dialogs, server, embed, args) -> None:
+    """按 server 的真实规则预计算「将被向量化的文本」，并行灌进缓存。
+
+    规则必须与 do_add / do_search 一致：norm_content → split_text →
+    有图片的消息在首段加 " [images:N]" → （可选）拼同 Add 相邻消息作上下文。
+    """
+    import concurrent.futures
+
+    texts: list[str] = []
+    for _, d in dialogs:
+        for s in d["multi_session_dialogues"]:
+            bodies: list[str] = []
+            imgs: list[list[str]] = []
+            for k, r in enumerate(s["dialogues"]):
+                for m in round_messages(r, s["date"], k, not args.no_images):
+                    text, images = server.norm_content(m["content"], "warm")
+                    bodies.append(text)
+                    imgs.append(images)
+            for mi, text in enumerate(bodies):
+                ctx = ([t for j, t in enumerate(bodies)
+                        if j != mi and abs(j - mi) <= server.EMBED_CONTEXT]
+                       if server.EMBED_CONTEXT > 0 else [])
+                for si, seg in enumerate(server.split_text(text)):
+                    piece = seg + (f" [images:{len(imgs[mi])}]" if imgs[mi] and si == 0 else "")
+                    if ctx:
+                        piece += "\n[context] " + " ".join(
+                            c[:server.EMBED_CONTEXT_CHARS] for c in ctx)
+                    texts.append(piece)
+        for q in d["human-annotated QAs"]:
+            qt, _ = server.norm_content(query_content(q, not args.no_images), "warm")
+            texts.append(qt)
+
+    texts = list(dict.fromkeys(texts))
+    print(f"预热 {len(texts)} 条文本（jobs={args.jobs}, embed={embed.MODE}）…", flush=True)
+    t0 = time.time()
+    size = max(1, int(embed.BATCH))
+    chunks = [texts[i:i + size] for i in range(0, len(texts), size)]
+    done = 0
+    with concurrent.futures.ThreadPoolExecutor(max_workers=args.jobs) as ex:
+        for n in ex.map(lambda c: (embed.embed(c), len(c))[1], chunks):
+            done += n
+    info = getattr(embed.embed, "cache_info", None)
+    print(f"预热完成 {done} 条 / {time.time() - t0:.0f}s"
+          f" {info() if info else ''}", flush=True)
+
 def main() -> int:
     ap = argparse.ArgumentParser(description="Mem-Gallery retrieval proxy (in-process Add/Search)")
     ap.add_argument("--limit", type=int, default=0, help="only the first N dialogue files")
@@ -94,6 +186,13 @@ def main() -> int:
     ap.add_argument("--no-images", action="store_true", help="send captions only")
     ap.add_argument("--add-by", choices=("round", "session"), default="session",
                     help="one Add per round, or one Add per session (closer to platform chunking)")
+    ap.add_argument("--no-warm", action="store_true",
+                    help="skip the parallel embedding warm-up (api mode: warms cache so Adds are local)")
+    ap.add_argument("--vec-cache", default=os.path.join(ROOT, "data", ".cache", "gallery-vecs.db"),
+                    help="persistent embedding cache; the same run repeats for free (empty = off)")
+    ap.add_argument("--jobs", type=int, default=8, help="parallel warm-up workers")
+    ap.add_argument("--split", choices=("all", "a", "b"), default="all",
+                    help="a/b: alternating files — tune on one half, verify on the other")
     ap.add_argument("--report", default="")
     args = ap.parse_args()
     ks = [int(x) for x in args.k.split(",")]
@@ -107,16 +206,27 @@ def main() -> int:
 
     store.init()
     files = sorted(glob.glob(os.path.join(DATA, "*.json")))
+    if args.split != "all":
+        # 交替取：两个半集的主题分布尽量接近，避免「a 全是旅行、b 全是编程」
+        want = 0 if args.split == "a" else 1
+        files = [f for i, f in enumerate(files) if i % 2 == want]
     if args.limit:
         files = files[: args.limit]
+
+    if args.vec_cache:
+        _attach_disk_cache(args.vec_cache, embed)
+    dialogs = [(f, json.load(open(f, encoding="utf-8"))) for f in files]
+    if not args.no_warm:
+        # Add 是同步的：不预热就是「等 200 ms → 写 → 等 200 ms」。先并行把要用到的
+        # 文本全灌进进程内缓存（以及磁盘缓存），后面的 Add/Search 全是本地命中。
+        _warm(dialogs, server, embed, args)
 
     per_point: dict[str, dict[str, float]] = {}
     rows = []
     add_ms = search_ms = 0.0
     n_add = n_search = 0
     started = time.time()
-    for f in files:
-        d = json.load(open(f, encoding="utf-8"))
+    for f, d in dialogs:
         uid = "gallery:" + os.path.splitext(os.path.basename(f))[0]
         msg_owner: dict[tuple[str, str, int], str] = {}
         for s in d["multi_session_dialogues"]:
@@ -177,7 +287,7 @@ def main() -> int:
         cells = "  ".join(f"R@{k}={a[f'R@{k}'] / n:.3f}" for k in ks)
         return f"{name:<5} n={n:<4} MRR={a['mrr'] / n:.3f}  {cells}  All@{ks[-1]}={a[f'All@{ks[-1]}'] / n:.3f}"
 
-    print(f"Mem-Gallery proxy  files={len(files)} embed={embed.info()['mode']} "
+    print(f"Mem-Gallery proxy  split={args.split} files={len(files)} embed={embed.info()['mode']} "
           f"images={'off' if args.no_images else 'placeholder'}  top_k={args.top_k}")
     print(f"Add {n_add} 次 avg {add_ms / max(1, n_add):.1f} ms | Search {n_search} 次 "
           f"avg {search_ms / max(1, n_search):.1f} ms | 总耗时 {time.time() - started:.0f}s")

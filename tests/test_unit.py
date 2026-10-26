@@ -221,6 +221,100 @@ class EmbedTest(unittest.TestCase):
         second = embed.embed(["cache me"])[0]
         self.assertEqual(first, second)
 
+    def test_api_retries_transient_read_errors(self):
+        """实测：10 条 ×1024 维的响应约 200 KB，连接中途被掐断会抛 IncompleteRead。
+        这类瞬时故障必须重试，否则整个 Add 变 503、白烧平台的重试次数。"""
+        import http.client
+        import io
+        import json as _json
+        import urllib.request
+
+        payload = _json.dumps({"data": [{"index": 0, "embedding": [1.0, 0.0]}]}).encode()
+        calls = {"n": 0}
+
+        class R(io.BytesIO):
+            def __enter__(self):
+                return self
+
+            def __exit__(self, *a):
+                return False
+
+        def fake_urlopen(req, timeout=None):
+            calls["n"] += 1
+            if calls["n"] == 1:
+                raise http.client.IncompleteRead(b"{}", 18709)
+            if calls["n"] == 2:
+                raise TimeoutError("read timed out")
+            return R(payload)
+
+        saved = (embed.MODE, embed.API_KEY, embed._STATS.copy(), urllib.request.urlopen)
+        embed.MODE, embed.API_KEY = "api", "sk-test"
+        urllib.request.urlopen = fake_urlopen
+        try:
+            vec = embed._call_api_unlocked(["hello"])[0]
+            self.assertEqual(vec, [1.0, 0.0])
+            self.assertGreaterEqual(calls["n"], 3)
+            self.assertGreaterEqual(embed._STATS["api_net"], 2)
+        finally:
+            embed.MODE, embed.API_KEY = saved[0], saved[1]
+            embed._STATS.update(saved[2])
+            urllib.request.urlopen = saved[3]
+
+    def test_api_retries_upstream_internal_error_masked_as_400(self):
+        """百炼实测会把后端抖动包成 400 + code=InternalError；这是瞬时故障，必须重试。"""
+        import io
+        import json as _json
+        import urllib.error
+        import urllib.request
+
+        payload = _json.dumps({"data": [{"index": 0, "embedding": [0.0, 1.0]}]}).encode()
+        body = (b'{"error":{"message":"Receive batching backend response failed!",'
+                b'"type":"InternalError","code":"InternalError"}}')
+        calls = {"n": 0}
+
+        class R(io.BytesIO):
+            def __enter__(self):
+                return self
+
+            def __exit__(self, *a):
+                return False
+
+        def fake_urlopen(req, timeout=None):
+            calls["n"] += 1
+            if calls["n"] == 1:
+                raise urllib.error.HTTPError("u", 400, "Bad Request", {}, io.BytesIO(body))
+            return R(payload)
+
+        saved = (embed.MODE, embed.API_KEY, embed._STATS.copy(), urllib.request.urlopen)
+        embed.MODE, embed.API_KEY = "api", "sk-test"
+        urllib.request.urlopen = fake_urlopen
+        try:
+            self.assertEqual(embed._call_api_unlocked(["x"])[0], [0.0, 1.0])
+        finally:
+            embed.MODE, embed.API_KEY = saved[0], saved[1]
+            embed._STATS.update(saved[2])
+            urllib.request.urlopen = saved[3]
+
+        # 纯参数错误（400 + 无瞬时标记）仍然一次就失败，不浪费重试
+        calls["n"] = 0
+
+        def bad(req, timeout=None):
+            calls["n"] += 1
+            raise urllib.error.HTTPError("u", 400, "Bad Request", {},
+                                         io.BytesIO(b'{"code":"InvalidParameter"}'))
+
+        saved = (embed.MODE, embed.API_KEY, embed._STATS.copy(), urllib.request.urlopen)
+        embed.MODE, embed.API_KEY = "api", "sk-test"
+        urllib.request.urlopen = bad
+        try:
+            with self.assertRaises(RuntimeError):
+                embed._call_api_unlocked(["x"])
+            self.assertEqual(calls["n"], 1)
+        finally:
+            embed.MODE, embed.API_KEY = saved[0], saved[1]
+            embed._STATS.update(saved[2])
+            urllib.request.urlopen = saved[3]
+
     def test_pack_roundtrip(self):
         v = [0.25, -0.5, 1.0]
         self.assertEqual(embed.unpack(embed.pack(v)), v)

@@ -16,6 +16,7 @@
 from __future__ import annotations
 
 import hashlib
+import http.client
 import json
 import math
 import os
@@ -41,7 +42,8 @@ CACHE_MAX = int(os.environ.get("EMBED_CACHE_MAX", "20000"))
 # 按百炼控制台的 RPM 配额设置：并发 ≈ RPM / 60 × 单次延迟(s)。
 CONCURRENCY = max(1, int(os.environ.get("EMBED_CONCURRENCY", "16")))
 _API_SLOTS = threading.BoundedSemaphore(CONCURRENCY)
-_STATS = {"api_calls": 0, "api_retries": 0, "api_429": 0, "api_wait_ms": 0.0}
+_STATS = {"api_calls": 0, "api_retries": 0, "api_429": 0, "api_net": 0, "api_wait_ms": 0.0}
+EMBED_TIMEOUT = float(os.environ.get("EMBED_TIMEOUT", "60"))
 _STATS_LOCK = threading.Lock()
 _CACHE: dict[str, list[float]] = {}
 _CACHE_LOCK = threading.Lock()
@@ -108,26 +110,46 @@ def _call_api_unlocked(texts: list[str]) -> list[list[float]]:
             method="POST",
         )
         try:
-            with urllib.request.urlopen(req, timeout=60) as r:
-                payload = json.loads(r.read().decode("utf-8"))
+            with urllib.request.urlopen(req, timeout=EMBED_TIMEOUT) as r:
+                raw = r.read()
+            if len(raw) < 2:
+                raise http.client.IncompleteRead(raw, 64)
+            payload = json.loads(raw.decode("utf-8"))
             data = payload["data"]
             data.sort(key=lambda d: d["index"])  # 保证顺序
             return [d["embedding"] for d in data]
         except urllib.error.HTTPError as e:
             last = e
-            # 429 / 5xx 才值得退避；4xx（鉴权、参数）重试没有意义
+            # 429 / 5xx 才值得退避；4xx（鉴权、参数）重试没有意义。
+            # 例外：百炼偶尔把后端抖动包成 400（实测
+            # `"code":"InternalError","message":"Receive batching backend response failed!"`），
+            # 这类报文明确可重试，否则一整批 Add 直接失败。
             if e.code != 429 and e.code < 500:
                 detail = e.read()[:300].decode("utf-8", "replace")
-                raise RuntimeError(f"embedding 调用失败 HTTP {e.code}: {detail}") from e
+                transient = ("InternalError" in detail or "backend response failed" in detail
+                             or "please retry" in detail.lower())
+                if not transient:
+                    raise RuntimeError(f"embedding 调用失败 HTTP {e.code}: {detail}") from e
+                with _STATS_LOCK:
+                    _STATS["api_retries"] += 1
+                    _STATS["api_net"] += 1
+                time.sleep(0.5 * (2**attempt) + 0.1 * attempt)
+                continue
             retry_after = e.headers.get("Retry-After") if e.headers else None
             delay = float(retry_after) if retry_after and retry_after.isdigit() else 0.8 * (2**attempt)
             with _STATS_LOCK:
                 _STATS["api_retries"] += 1
                 _STATS["api_429"] += int(e.code == 429)
             time.sleep(min(delay, 30))
-        except (urllib.error.URLError, TimeoutError, KeyError) as e:  # 网络/超时/响应异常
+        except (urllib.error.URLError, TimeoutError, KeyError,
+                http.client.HTTPException, OSError, ValueError) as e:
+            # 网络抖动 / 读大响应时 IncompleteRead / 半截 JSON 都算瞬时故障：
+            # 实测 10 条 × 1024 维的响应约 200 KB，连接被中途掐断就会 IncompleteRead。
             last = e
-            time.sleep(0.8 * (2**attempt))
+            with _STATS_LOCK:
+                _STATS["api_retries"] += 1
+                _STATS["api_net"] += 1
+            time.sleep(0.5 * (2**attempt) + 0.1 * attempt)
     raise RuntimeError(f"embedding 调用失败: {last}")
 
 
