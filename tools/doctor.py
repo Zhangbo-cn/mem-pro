@@ -203,7 +203,9 @@ def check_rerank() -> None:
     import retrieve
 
     if retrieve.RERANK_MODE != "http":
-        add(OK, "Reranker", "未启用（dense+BM25 线性融合 + 时态规则，MVP 默认）")
+        add(OK, "Reranker", "未启用（dense+BM25 线性融合 + 时态规则）",
+            "代理榜实测：开 gte-rerank-v2 后 MRR 0.761→0.808，代价是单请求多一次往返、吞吐减半。"
+            "填 RERANK_MODE/KIND/URL/MODEL/API_KEY 即可启用（见 service/.env.example）")
         return
     if not retrieve.RERANK_URL:
         add(FAIL, "Reranker", "RERANK_MODE=http 但 RERANK_URL 为空")

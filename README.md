@@ -12,7 +12,7 @@ Agent Memory Leaderboard（记忆之巅）**多模态记忆赛道 / 开源方法
 | 项 | 状态 | 说明 |
 |---|---|---|
 | 契约自检 | ✅ **27 / 27** | `tools/contract_check.py`，覆盖 11 类官方约束 |
-| 自动化测试 | ✅ **64 项** | `make test`：API 端到端、融合/时态回归、缓存、精排降级、多模态去重、caption 缓存 |
+| 自动化测试 | ✅ **68 项** | `make test`：API 端到端、融合/时态回归、缓存、精排降级、多模态去重、caption 缓存 |
 | 幂等 / 确定性 | ✅ | 并发重放只写一次；Search 响应字节级可复现（索引与非索引路径逐位一致） |
 | 多模态 | ✅ 可用 | 内联 Base64 解析/存储/回传；图片指纹参与去重；可选 `gpt-4o-mini` 生成图片描述并持久缓存（见 §十四） |
 | 部署物料 | ✅ | Dockerfile / compose（透明透传全部 `.env`）/ Caddy / systemd / **GitHub Actions CI（3.10 + 3.12 双跑，numpy 与纯标准库两条路径）** |
@@ -20,7 +20,7 @@ Agent Memory Leaderboard（记忆之巅）**多模态记忆赛道 / 开源方法
 | **真实 Embedding API** | ✅ **已配置** | `service/.env` 内 `EMBED_MODE=api` + `text-embedding-v4`，`doctor` 显示连通性 OK；Key 不入库 |
 | 公网 HTTPS 部署 | ❌ 未发布 | 需要一台公网主机 + 域名（见 §五） |
 | 检索打分校准 | ✅ **已调优** | α=0.95 / β=0.05 + 时态一致性规则；另有 Mem-Gallery 1,711 条 QA 代理榜（见 §十二） |
-| 精排 | ✅ **本地已验证，可选启用** | `RERANK_TOP=10`；CPU 留出评测有效，默认仍关闭 |
+| 精排 | ✅ **默认关闭，实测 +0.047 MRR** | `gte-rerank-v2`（API）或本地 `bge-reranker-v2-m3`；`RERANK_TOP=10`，启用后单请求多一次往返 |
 | 并发/容量 | ✅ **有工具与闸门** | embedding 全局并发闸门 + listen backlog 512；`make load` 扫描并给出申报区间（见 §十二） |
 
 > **关于「API 配置」**：`service/.env` 已配好 DashScope（`EMBED_MODE=api`），该文件被 `.gitignore` 排除。
@@ -236,7 +236,8 @@ mem-pro/
 
 1. **Embedding 凭据**：本机 `.env` 已配置 DashScope；仓库不包含 Key。离线 `hash` 模式用于验证契约，不代表线上语义检索效果。
 2. **图片不进入向量，只进入检索文本**：图片按 Base64 存储/回传并计入去重指纹；图片内容靠平台 caption 或可选 `gpt-4o-mini` 描述转成文本后参与检索（见 §十四）。查询图片同理——没有图像编码器，纯图片查询只有在带 caption 时才有语义。
-3. **精排默认关闭**：默认线性 dense + BM25；本地 reranker 的留出集评测见 §十一，启用前需启动 `tools/rerank_server.py`。
+3. **精排默认关闭**：默认线性 dense + BM25。两种接法都实测过（§十一 本地模型、§十五 API）：质量提升明显，
+   但每次 Search 多一次跨网络往返、吞吐减半，是否开启按时间预算取舍。
 4. **单机 SQLite，不引入 ANN**：按 `user_id` 精确全量打分；热用户复用有界记忆、BM25 倒排与向量矩阵/行缓存，返回头部用部分排序，Add 走追加式索引扩展（实测见 §十一）。ANN 选型见 `research/15-ann-index-selection.md`：官方 `user_id` 是会话级，11k 条时精确点积仅 3 ms，而最佳 ANN 只省 2.8 ms 且召回掉 0.4–5%，因此保留精确检索，并按该文的阈值（单用户 ≥5 万条或点积 P95 ≥20 ms）再评估。
 5. **未做 LLM 抽取**：正文保留原文与时间戳，满足「时间粒度不归一化」的判分要求；后续若接 `gpt-4o-mini` 只能附加字段。
 6. **并发**：见 §十二。`MAX_INFLIGHT` 默认 64，embedding 有独立全局闸门（`EMBED_CONCURRENCY`）；stdlib 线程服务单进程 GIL 受限，Full 前必须用 `make load` 在 api 模式实测，申报值取稳定区间的 60–70%。
@@ -496,3 +497,49 @@ hash 代理榜上 MRR +0.007 但 R@100 反降 0.031，方向不一致，**默认
 
 ---
 
+## 十五、精排：两个真实后端都量过了（2026-10-26）
+
+规则里精排器不限（Add 侧才限 `gpt-4o-mini`），所以这里对比了「本地模型」和「API」两种接法。
+
+| 接法 | 后端 | 留出集 | MRR | 单 query 额外延迟 |
+|---|---|---|---|---|
+| 无精排 | — | split a / b | 0.725 / 0.761 | 0 |
+| 本地 | `bge-reranker-v2-m3`（CPU） | 74 条自建 odd 集 | 0.949 → 0.980 | ≈1.0 s |
+| API | DashScope `gte-rerank-v2` | split a / b | **0.781 / 0.808** | ≈0.4 s（同区内网） |
+
+代理榜 split b 的分类别变化（`RERANK_TOP=10`）：TR 0.558→0.652、VR 0.725→0.827、KR 0.542→0.624、
+VS 0.827→0.901、MR 0.729→0.827；只有 CD（计数）略降 0.562→0.531。**推理类问题获益最大**，
+符合「融合分只能粗筛、交叉编码器才看得懂约束」的直觉。
+
+`RERANK_TOP` 10 与 30 的质量差只有 0.003（0.808 vs 0.811），但候选翻三倍、延迟与费用同涨，
+所以默认 10 不变。
+
+**代价（真实 API 实测，24 并发、`--nonce` 强制每条 query 新文本）**：
+
+| | Search 吞吐 | p50 | p95 |
+|---|---|---|---|
+| 无精排 | 14.1 req/s | 1.44 s | 1.75 s |
+| 有精排 | 7.7 req/s | 1.85 s | 3.61 s |
+
+单次 Search 变成两次串行 API 调用（查向量化 → 精排），吞吐正好减半。若 Full 有时间预算压力，
+这是唯一需要权衡的开关；按 1,711 条 query 估算，开精排总共约 3.7 分钟，通常值得。
+
+**确定性**：同一 `(query, documents)` 连续 4 次调用 `gte-rerank-v2`，分数逐位一致（实测 `0.94887` ×4）。
+但精排是**旁路**：上游抖动时会降级为融合序，排序就变了。压测后实测触发过一次
+（契约第 11 项「3 次响应字节一致」失败），所以精排调用加了**瞬时故障重试**
+（`RERANK_RETRIES=2`，只重试 429/5xx/超时/断连，4xx 立刻降级），并在 `/version` 暴露
+`calls/fails/degraded/cooldown_skips` 四个计数——降级必须能被看见。加完重试后，
+连跑 40 请求 × 24 并发再验契约：`fails=0`，27/27 全过。
+
+启用（把三行填进 `.env`，`RERANK_MODE` 不填就是关）：
+
+```bash
+RERANK_MODE=http
+RERANK_KIND=dashscope
+RERANK_URL=https://dashscope.aliyuncs.com/api/v1/services/rerank/text-rerank/text-rerank
+RERANK_MODEL=gte-rerank-v2
+RERANK_API_KEY=$DASHSCOPE_API_KEY
+```
+
+**为什么仍然默认关**：它会把每台部署都变成「必须有外网 + 必须有 rerank 额度」，
+而上游抖动时会改变排序。默认关、文档写明收益与代价、`make doctor` 提示，比默认开更稳。

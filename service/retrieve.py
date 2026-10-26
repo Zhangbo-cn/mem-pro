@@ -72,6 +72,10 @@ RERANK_TIMEOUT = float(os.environ.get("RERANK_TIMEOUT", "8"))  # 单次精排超
 RERANK_API_KEY = os.environ.get("RERANK_API_KEY", "")
 RERANK_FAILS = int(os.environ.get("RERANK_FAILS", "3"))      # 连续失败几次后熔断
 RERANK_COOLDOWN = float(os.environ.get("RERANK_COOLDOWN", "60"))  # 熔断冷却秒数
+RERANK_RETRIES = int(os.environ.get("RERANK_RETRIES", "2"))     # 单次精排的瞬时故障重试次数
+
+# 精排健康度：旁路降级会改变排序，必须能在 /version 里看到发生了什么
+_RERANK_STATS = {"calls": 0, "fails": 0, "degraded": 0, "cooldown_skips": 0}
 
 # 熔断状态：精排是旁路，宕机时必须秒级降级，不能每个 query 都等 timeout
 _rerank_fails = 0
@@ -810,7 +814,9 @@ def rerank(query_text: str, ranked: list[tuple[int, float]], docs: list[dict]) -
     if RERANK_MODE != "http" or not RERANK_URL or RERANK_TOP <= 0:
         return ranked
     if time.time() < _rerank_cooldown_until:
+        _RERANK_STATS["cooldown_skips"] += 1
         return ranked  # 熔断中：旁路失效不影响 Search
+    _RERANK_STATS["calls"] += 1
     head = ranked[:RERANK_TOP]
     tail = ranked[RERANK_TOP:]
     payload = {
@@ -836,8 +842,25 @@ def rerank(query_text: str, ranked: list[tuple[int, float]], docs: list[dict]) -
         method="POST",
     )
     try:
-        with urllib.request.urlopen(req, timeout=RERANK_TIMEOUT) as r:
-            resp = json.loads(r.read().decode("utf-8"))
+        resp = None
+        for attempt in range(max(1, RERANK_RETRIES + 1)):
+            try:
+                with urllib.request.urlopen(req, timeout=RERANK_TIMEOUT) as r:
+                    resp = json.loads(r.read().decode("utf-8"))
+                break
+            except urllib.error.HTTPError as e:
+                # 429 / 5xx 是一次抖动；4xx（鉴权、参数）重试无意义，直接走降级
+                if e.code < 500 and e.code != 429:
+                    raise
+                if attempt >= RERANK_RETRIES:
+                    raise
+                time.sleep(0.2 * (2 ** attempt))
+            except Exception:
+                # 超时、IncompleteRead、半截 JSON：重试比降级便宜——
+                # 降级会改变排序，破坏「同一 query 重放结果一致」。
+                if attempt >= RERANK_RETRIES:
+                    raise
+                time.sleep(0.2 * (2 ** attempt))
         if isinstance(resp, dict) and isinstance(resp.get("output"), dict):
             rows = resp["output"].get("results", resp)
         else:
@@ -869,6 +892,7 @@ def rerank(query_text: str, ranked: list[tuple[int, float]], docs: list[dict]) -
         return _rebased(head, scored) + tail
     except Exception:
         # 精排是旁路：失败降级为融合序，绝不阻断 Search；失败多了就熔断一段时间
+        _RERANK_STATS["fails"] += 1
         _rerank_fails += 1
         if _rerank_fails >= RERANK_FAILS:
             _rerank_fails = 0
@@ -900,4 +924,5 @@ def info() -> dict:
             "temporal_rule": TEMPORAL_RULE, "temporal_weight": TEMPORAL_WEIGHT,
             "dedup_cos": DEDUP_COS,
             "rerank": {"mode": RERANK_MODE, "kind": RERANK_KIND,
-                       "model": RERANK_MODEL or None, "top": RERANK_TOP}}
+                       "model": RERANK_MODEL or None, "top": RERANK_TOP,
+                       **_RERANK_STATS}}

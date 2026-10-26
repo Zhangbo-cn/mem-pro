@@ -699,6 +699,13 @@ class RerankTest(unittest.TestCase):
                 if mode == "error":
                     body = b'{"detail":"boom"}'
                     self.send_response(500)
+                elif mode == "flaky" and not self.server.plan.get("flaked"):
+                    # 模拟「响应读到一半连接被掐断」：不发 Content-Length、直接关连接
+                    self.server.plan["flaked"] = True
+                    self.wfile.write(b'{"results":[{"inde')
+                    self.wfile.flush()
+                    self.close_connection = True
+                    return
                 else:
                     rows = self.server.plan["rows"]
                     if mode == "partial":
@@ -727,6 +734,8 @@ class RerankTest(unittest.TestCase):
         retrieve.DEDUP_COS = 1.1  # 本组只测精排：关掉近重复去重，避免合成语料被合并
         retrieve._rerank_fails = 0
         retrieve._rerank_cooldown_until = 0.0
+        retrieve._RERANK_STATS.update({"calls": 0, "fails": 0, "degraded": 0,
+                                       "cooldown_skips": 0})
         retrieve.RERANK_MODE = "http"
         retrieve.RERANK_URL = self.url
         retrieve.RERANK_TOP = 4
@@ -786,6 +795,21 @@ class RerankTest(unittest.TestCase):
         self.assertEqual(retrieve._rerank_cooldown_until, 0.0, "一次失败不该熔断")
         retrieve.run(qv, "fact", docs)
         self.assertGreater(retrieve._rerank_cooldown_until, time.time(), "达到阈值应进入冷却")
+
+    def test_rerank_retries_transient_break_before_degrading(self):
+        """实测：压测后精排偶发断连，若直接降级，同一 query 重放的排序就变了。
+        一次断连必须靠重试吃掉，不能落到降级路径。"""
+        docs = self._docs()
+        qv = embed.embed(["fact"])[0]
+        head_ids = [docs[i]["id"] for i, _ in retrieve.hybrid(qv, "fact", docs)[:retrieve.RERANK_TOP]]
+        self.plan["rows"] = [{"index": pos, "score": 0.9 - 0.1 * pos}
+                             for pos, _ in enumerate(head_ids)]
+        self.plan["mode"] = "flaky"
+        self.plan["flaked"] = False
+        got = retrieve.run(qv, "fact", docs)
+        self.assertEqual(retrieve._RERANK_STATS["fails"], 0, "断连应被重试吃掉")
+        self.assertEqual(docs[got[0][0]]["id"], head_ids[0], "重试成功后必须用精排结果")
+        self.assertEqual(retrieve._rerank_cooldown_until, 0.0)
 
     def test_rerank_partial_response_is_rejected(self):
         """返回条数不足 ⇒ 视为无效响应，整体降级（不能丢候选）。"""
