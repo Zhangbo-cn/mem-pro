@@ -113,6 +113,56 @@ class ServerTest(unittest.TestCase):
         self.assertEqual(body["db"], "ok")
         self.assertNotIn(KEY, raw.decode())
 
+    def test_01c_max_results_caps_response_but_never_exceeds_top_k(self):
+        """MAX_RESULTS 只能收窄，不能放大；契约要求「返回数量不得超过 top_k」。
+
+        单独起一个设了 MAX_RESULTS=3 的实例（配置在 import 时读取，不能在线改）。
+        """
+        port = free_port()
+        base = f"http://127.0.0.1:{port}"
+        db = os.path.join(self.tmp.name, "cap.db")
+        env = {**os.environ, "EMBED_MODE": "hash", "DB_PATH": db, "MEMORY_SYSTEM_KEY": KEY,
+               "PORT": str(port), "HOST": "127.0.0.1", "STARTUP_CHECK": "0", "MAX_RESULTS": "3"}
+        proc = subprocess.Popen([sys.executable, os.path.join(ROOT, "service", "server.py")],
+                                env=env, stdout=subprocess.PIPE, stderr=subprocess.PIPE, text=True)
+        try:
+            deadline = time.time() + 15
+            while time.time() < deadline:
+                try:
+                    urllib.request.urlopen(base + "/health", timeout=1).read()
+                    break
+                except Exception:
+                    time.sleep(0.1)
+            msgs = [{"role": "user", "content": f"alpha beta cap item {i}",
+                     "timestamp": 1700000000000 + i * 1000} for i in range(8)]
+            self._post(base, "/add", {"request_id": "cap-1", "user_id": "cap-user",
+                                      "session_id": "s1", "messages": msgs})
+            for top_k, want in ((10, 3), (2, 2)):
+                body = self._post(base, "/search", {"query": "alpha beta cap item",
+                                                    "user_id": "cap-user", "top_k": top_k})
+                self.assertEqual(len(body["data"]), want, f"top_k={top_k}")
+            ver = self._get(base, "/version")
+            self.assertIn("max_results", json.dumps(ver))
+        finally:
+            proc.terminate()
+            try:
+                proc.wait(timeout=5)
+            except subprocess.TimeoutExpired:
+                proc.kill()
+
+    def _post(self, base, path, body):
+        req = urllib.request.Request(base + path, data=json.dumps(body).encode(),
+                                     headers={"Content-Type": "application/json",
+                                              "Authorization": f"Token {KEY}"}, method="POST")
+        with urllib.request.urlopen(req, timeout=30) as r:
+            return json.loads(r.read().decode())
+
+    def _get(self, base, path):
+        req = urllib.request.Request(base + path,
+                                     headers={"Authorization": f"Token {KEY}"})
+        with urllib.request.urlopen(req, timeout=30) as r:
+            return json.loads(r.read().decode())
+
     def test_01b_version_is_verifiable(self):
         """/version 必须能证明「线上跑的是哪个 commit、哪套配置」——
         平台公榜准入要求「版本一致」，没有这两项就无法自证。"""

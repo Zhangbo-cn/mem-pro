@@ -185,6 +185,7 @@ Authentication `Authorization: Token`、Memory System Key = 你生成的那个�
 | `make smoke URL=https://... KEY=...` | 线上 smoke（18 项） |
 | `make load URL=... KEY=... USER_ID=... SWEEP=1,4,8,16,32` | 并发扫描 Add / Search，输出 p50/p95/p99 与**申报并发区间**；加 `DURATION=180` 转持续压测（burst 通过 ≠ 稳态可过） |
 | `make gallery` / `tools/gallery_proxy.py` | Mem-Gallery 本地代理榜（走线上 Add/Search 代码路径，无需额度） |
+| `make e2e SAMPLE=400` | 端到端答案评测：证据喂回答模型，扫 `top_k`，比 EM/F1（见 §十六） |
 | `make watch URL=... KEY=... FEISHU=<webhook>` | 评测期看护：定时拉 `/version`，`api_give_up` 增长 / 精排降级 / 429 占比过高时告警 |
 | `make backup DB_PATH=... BACKUP=...` | SQLite 在线热备（`sqlite3` backup API，不用停服务） |
 | `make purge PREFIX=aml:` | 合规清理：按 `user_id` 前缀删评测数据并 VACUUM（默认 dry-run） |
@@ -214,6 +215,7 @@ mem-pro/
 │   ├── gallery_proxy.py     # Mem-Gallery 本地代理榜（Recall/MRR，按 QA 类型拆分）
 │   ├── ann_bench.py         # ANN 选型：精确 vs IVF vs PQ vs HNSW（召回/延迟/构建）
 │   ├── atm_proxy.py         # ATM-Bench 本地代理榜（检索指标）
+│   ├── e2e_proxy.py         # 端到端答案评测（证据 → 回答模型 → EM/F1，扫 top_k）
 │   ├── rerank_server.py     # 本地 TEI 风格精排服务
 │   ├── rerank_bench.py      # 精排质量与单 query 延迟对比
 │   ├── watch.py             # 评测期看护：/version 计数器异常告警（可推飞书）
@@ -618,3 +620,56 @@ RERANK_API_KEY=$DASHSCOPE_API_KEY
 
 **为什么仍然默认关**：它会把每台部署都变成「必须有外网 + 必须有 rerank 额度」，
 而上游抖动时会改变排序。默认关、文档写明收益与代价、`make doctor` 提示，比默认开更稳。
+
+---
+
+## 十六、端到端答案评测：召回高 ≠ 答得对（2026-10-26）
+
+上面所有数字都是**召回**指标，但平台最终按**答案**打分（`记忆之巅QA`：平台统一 Answer + 评分）。
+所以补了一个端到端代理 `tools/e2e_proxy.py`：用我们真实返回的证据喂一个便宜的回答模型
+（`qwen-flash`，temperature 0），跟官方答案比对，量 EM / Contains / token-F1。
+
+> 平台用的是它自己的回答模型，我们只是**代理**：绝对值不可直接对比官方 F1，但**相对比较**有效
+> （同一提示词、同一模型、同一批 QA，只换被评测的那一个变量）。
+>
+> **局限必须说清**：仓库里的 Mem-Gallery 只有 `image_caption`，`data/mem-gallery/image/` 是空的
+> ——没有真实图片字节。所以这里量的是 **caption 通道**：能回答「caption 够不够用来答题」，
+> **不能**回答「给原图比给 caption 多赚多少」。后者只能在官方 Full 或自备图集上量。
+
+全量 1,711 条 QA × 5 档 top_k（8,555 次调用，18.0M token，约 23 分钟）：
+
+| top_k | EM | Contains | token-F1 |
+|---|---|---|---|
+| 5 | 0.333 | 0.455 | 0.504 |
+| **10** | **0.342** | **0.477** | **0.527** |
+| 20 | 0.341 | 0.465 | 0.521 |
+| 50 | 0.331 | 0.448 | 0.514 |
+| 100 | 0.332 | 0.434 | 0.505 |
+
+**答案在 10–20 条就饱和了，100 条反而略降。** 不是召回的问题（R@100 比 R@10 高 0.18），
+而是提示被塞长之后模型注意力被稀释——最典型的是 TTL（"图里这个产品叫什么"）：
+top10 EM 0.33 → top100 **0.17**，一多半的分数被 90 条无关条目挤掉了。KR（更新类）反过来，
+顶到 100 才 0.41（0.32 @10）——它需要跨会话比对，条目多才有料。
+
+于是加了一个开关 `MAX_RESULTS`（默认 0 = 老实按平台 top_k）：契约只要求「返回数量不得超过
+top_k」，收窄是合法的，`MAX_RESULTS=20` 能让响应体积降约 1/3、答案质量不变。
+
+**精排在答案端量不出收益**（同 400 条分层子集，其余配置完全一致）：
+
+| | EM@10 | EM@20 | EM@50 | F1@10 | F1@20 | F1@50 |
+|---|---|---|---|---|---|---|
+| 无精排 | 0.323 | **0.361** | 0.354 | 0.491 | **0.527** | 0.514 |
+| 开精排 | 0.321 | 0.341 | **0.366** | 0.484 | 0.506 | **0.532** |
+
+两行互有胜负、差值都在 ±0.02（n=400 的 1σ 约 0.023），**结论是「没有可测的答案收益」**。
+这和 §十五 的 MRR +0.04 并不矛盾：精排改善的是「第 3 条变第 1 条」，而答案模型只要证据
+在 top-10 里就够用。既然答案端量不出收益，它就不值得成为 Full 的硬依赖
+（多一个外部服务 + 一次上游抖动风险）——**Full 建议关精排**，这与「宁可 MRR 低 0.05 也要可复现」
+的原则一致。
+
+```bash
+# 全量扫描（约 ¥3、23 分钟）
+EMBED_MODE=api DASHSCOPE_API_KEY=$KEY python3 tools/e2e_proxy.py --top-ks 5,10,20,50,100
+# 只比两种配置（400 条分层子集，3 分钟）
+EMBED_MODE=api DASHSCOPE_API_KEY=$KEY python3 tools/e2e_proxy.py --sample 400 --top-ks 10,20,50
+```

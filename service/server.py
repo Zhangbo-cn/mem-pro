@@ -54,6 +54,12 @@ MAX_IMG_BYTES = 10 * 1024 * 1024
 MAX_ADD_BYTES = 30 * 1024 * 1024
 MAX_RESPONSE_BYTES = 30 * 1024 * 1024
 MAX_IMAGES = int(os.environ.get("MAX_IMAGES", str(budget.MAX_IMAGES)))
+# 返回条数上限（0 = 老实按平台给的 top_k）。契约只要求「不得超过 top_k」，所以收窄合法。
+# 依据 tools/e2e_proxy.py 的端到端答案评测（1,711 条 QA，qwen-flash 作答）：
+#   top_k  5 / 10 / 20 / 50 / 100 → token-F1 0.504 / 0.527 / 0.521 / 0.514 / 0.505
+# 答案是 10–20 条饱和，再往后只是把提示塞长（TTL 类从 0.33 掉到 0.17）。
+# 带宽受限的部署可以设 20：响应体积降约 1/3，答案质量不变。
+MAX_RESULTS = int(os.environ.get("MAX_RESULTS", "0"))
 MAX_INFLIGHT = int(os.environ.get("MAX_INFLIGHT", "64"))
 STARTUP_CHECK = os.environ.get("STARTUP_CHECK", "1") == "1"
 APPEND_OPTIONS = os.environ.get("APPEND_OPTIONS", "0") == "1"
@@ -94,7 +100,8 @@ def _config_fingerprint() -> str:
              "dedup:%.3f" % retrieve.DEDUP_COS, "ctx:%d" % EMBED_CONTEXT,
              "rerank:%s:%s:%d:%.5f" % (retrieve.RERANK_MODE, retrieve.RERANK_MODEL,
                                        retrieve.RERANK_TOP, retrieve.RERANK_TOL),
-             "budget:%d:%d:%d" % (budget.TOKEN_BUDGET, budget.BYTE_BUDGET, MAX_IMAGES),
+             "budget:%d:%d:%d:%d" % (budget.TOKEN_BUDGET, budget.BYTE_BUDGET,
+                                     MAX_IMAGES, MAX_RESULTS),
              "caption:%s:%s" % (caption.MODE, caption.MODEL)]
     return hashlib.sha256("|".join(parts).encode()).hexdigest()[:16]
 
@@ -370,6 +377,8 @@ def do_search(req: dict, timings: dict | None = None) -> dict:
     timings["search_images_ms"] = round((time.perf_counter() - started) * 1000, 2)
 
     started = time.perf_counter()
+    if MAX_RESULTS > 0:
+        items = items[:MAX_RESULTS]
     items = budget.clip(items, req["top_k"], MAX_IMAGES)
     data = []
     for it in items:
@@ -473,6 +482,7 @@ class Handler(BaseHTTPRequestHandler):
                                         "config_hash": _config_fingerprint(),
                                         "embed": embed.info(),
                                         "caption": caption.info(),
+                                        "max_results": MAX_RESULTS,
                                         "retrieval": retrieve.info()})
             self._log(200, started)
             return self._send(200, {"memories": store.count(), "embed": embed.info(),

@@ -20,6 +20,7 @@ help:
 	@echo "make doctor    配置体检（含 DashScope 连通性）"
 	@echo "make smoke     URL=... KEY=... 对线上服务做 smoke"
 	@echo "make backup    DB_PATH=... 在线热备 SQLite（BACKUP=... 指定目标）"
+	@echo "make e2e      端到端答案评测（SAMPLE=400 TOPKS=10,20,50），扫 top_k 看答案收益"
 	@echo "make watch     URL=... KEY=... 评测期看护 /version（可加 FEISHU=<webhook>）"
 	@echo "make purge     PREFIX=aml: 按用户前缀清理评测数据（dry-run；去掉 --dry-run 见 tools/purge.py）"
 	@echo "make load      URL=... KEY=... USER_ID=... 并发扫描（DURATION=180 转持续压测），给出申报并发建议"
@@ -58,6 +59,12 @@ load:
 
 backup:
 	$(PY) tools/backup.py $(if $(DB_PATH),--db $(DB_PATH),) $(if $(BACKUP),--out $(BACKUP),)
+
+SAMPLE ?= 400
+TOPKS ?= 10,20,50
+
+e2e:
+	$(PY) tools/e2e_proxy.py --sample $(SAMPLE) --top-ks $(TOPKS)
 
 watch:
 	$(PY) tools/watch.py $(URL) --key "$(KEY)" $(if $(INTERVAL),--interval $(INTERVAL),) \
