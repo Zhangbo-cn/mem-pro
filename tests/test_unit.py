@@ -344,6 +344,15 @@ class TemporalTest(unittest.TestCase):
         # 同时含两个时态：不确定，不启用
         self.assertIsNone(retrieve.query_tense("以前住哪，现在住哪？"))
 
+    def test_english_cues_need_word_boundaries(self):
+        # 子串误触发：know/snowing ⊃ now、performer ⊃ former
+        for q in ("Do you know what species is shown?", "Is it snowing?",
+                  "Which performer sang?", "Did she acknowledge it?"):
+            self.assertIsNone(retrieve.query_tense(q), q)
+        self.assertEqual(retrieve.doc_tense_state({"text": "The performer was great."}), "neutral")
+        self.assertEqual(retrieve.doc_tense_state({"text": "A former colleague."}), "past")
+        self.assertEqual(retrieve.query_tense("Where did Alice used to live?"), "past")
+
     def test_present_query_demotes_past_only_memory(self):
         docs = self._docs(["Alice 去年住在慕尼黑。", "Alice 现在住在柏林。"])
         qv = embed.embed(["Alice 现在住在哪个城市？"])[0]

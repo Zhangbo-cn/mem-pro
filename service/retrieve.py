@@ -619,11 +619,31 @@ def hybrid(qvec: list[float], query_text: str, docs: list[dict],
 
 
 # ---------- 时态一致性：查询问「现在」就压旧事实，问「以前」就抬旧事实 ----------
+# 英文线索必须按词边界匹配：子串匹配会把 know/snowing→now、performer→former、
+# acknowledge→now 误判（Mem-Gallery 1,711 条英文问题里大量误触发）。中文无词边界，仍按子串。
+def _cue_matcher(cues: tuple[str, ...]):
+    ascii_cues = [c.strip() for c in cues if c.strip().isascii()]
+    cjk = tuple(c for c in cues if not c.strip().isascii())
+    rx = (re.compile(r"(?<![a-z0-9])(?:" + "|".join(re.escape(c) for c in ascii_cues)
+                     + r")(?![a-z0-9])")
+          if ascii_cues else None)
+
+    def match(low: str) -> bool:
+        return any(c in low for c in cjk) or (rx is not None and rx.search(low) is not None)
+    return match
+
+
+_has_present_cue = _cue_matcher(_PRESENT_CUES)
+_has_past_cue = _cue_matcher(_PAST_CUES)
+_has_past_marker = _cue_matcher(_PAST_MARKERS)
+_has_present_marker = _cue_matcher(_PRESENT_MARKERS)
+
+
 def query_tense(text: str) -> str | None:
     """返回 "present" / "past" / None。同时含两个时态时视为不确定。"""
     low = text.lower()
-    present = any(c in low for c in _PRESENT_CUES)
-    past = any(c in low for c in _PAST_CUES)
+    present = _has_present_cue(low)
+    past = _has_past_cue(low)
     if present == past:
         return None
     return "present" if present else "past"
@@ -644,9 +664,9 @@ def doc_tense_state(d: dict) -> str:
         got = _TENSE_CACHE.get(key)
     if got is not None:
         return got
-    low = " " + text.lower() + " "
-    has_past = any(m in low for m in _PAST_MARKERS)
-    has_present = any(m in low for m in _PRESENT_MARKERS)
+    low = text.lower()
+    has_past = _has_past_marker(low)
+    has_present = _has_present_marker(low)
     state = "past" if has_past and not has_present else "neutral"
     with _TENSE_LOCK:
         if len(_TENSE_CACHE) >= _TOK_MAX:
