@@ -520,7 +520,21 @@ def dense_scores(qvec: list[float], docs: list[dict], index=None) -> list[float]
 
 
 def _order(scores: list[float], docs: list[dict], limit: int | None = None) -> list[int]:
-    """全序 tie-break：score desc → created_at asc → id asc（契约要求复现确定）。"""
+    """全序 tie-break：score desc → created_at desc → id asc（契约要求复现确定）。
+
+    created_at 取降序：平台 Answer 侧遇到冲突时偏「更新的记忆」，而平局最常出现在
+    「同一事实重述两次」（旧值在后来的会话里被再确认），升序会把过期拷贝排在前面。
+    """
+    def _key(i: int) -> tuple[str, str]:
+        return (docs[i].get("id", ""), docs[i].get("created_at", ""))
+
+    def _sorted(indices: list[int]) -> list[int]:
+        # 稳定排序链：先 id 升序，再 created_at 降序，最后 score 降序
+        indices.sort(key=lambda i: _key(i)[0])
+        indices.sort(key=lambda i: _key(i)[1], reverse=True)
+        indices.sort(key=lambda i: -scores[i])
+        return indices
+
     n = len(scores)
     if limit is not None and 0 <= limit < n:
         if limit == 0:
@@ -531,11 +545,8 @@ def _order(scores: list[float], docs: list[dict], limit: int | None = None) -> l
         cutoff = scores[head[-1]]
         chosen = set(head)
         candidates = head + [i for i, s in enumerate(scores) if s == cutoff and i not in chosen]
-        candidates.sort(key=lambda i: (-scores[i], docs[i].get("created_at", ""),
-                                       docs[i].get("id", "")))
-        return candidates[:limit]
-    return sorted(range(n), key=lambda i: (-scores[i], docs[i].get("created_at", ""),
-                                           docs[i].get("id", "")))
+        return _sorted(candidates)[:limit]
+    return _sorted(list(range(n)))
 
 
 def bm25_norm(sparse: list[float], mode: str | None = None) -> list[float] | None:
@@ -851,7 +862,9 @@ def rerank(query_text: str, ranked: list[tuple[int, float]], docs: list[dict]) -
             scored.append((head[j][0], s))
         if len(seen) != len(head):
             raise ValueError(f"rerank returned {len(seen)}/{len(head)} unique results")
-        scored.sort(key=lambda t: (-t[1], docs[t[0]]["created_at"], t[0]))
+        scored.sort(key=lambda t: t[0])                                     # 3rd: id 升序
+        scored.sort(key=lambda t: docs[t[0]]["created_at"], reverse=True)    # 2nd: 新的在前
+        scored.sort(key=lambda t: -t[1])                                    # 1st: 精排分降序
         _rerank_fails = 0
         return _rebased(head, scored) + tail
     except Exception:

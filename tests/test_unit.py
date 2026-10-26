@@ -466,7 +466,8 @@ class ImageDedupTest(unittest.TestCase):
                 for k, (t, v) in enumerate(zip(texts, vecs))]
         q = embed.embed(["photo"])[0]
         got = [docs[i]["id"] for i, _ in retrieve.run(q, "photo", docs)]
-        self.assertEqual(sorted(got), ["i0", "i1", "i2"])  # i3 与 i0 同图同文 ⇒ 真重复
+        # i3 与 i0 同图同文 ⇒ 真重复，只留一条；平局按 created_at 降序，留最新的 i3
+        self.assertEqual(sorted(got), ["i1", "i2", "i3"])
 
     def test_text_duplicates_without_images_still_dedup(self):
         docs = [{"id": f"t{k}", "text": "Alice lives in Berlin.", "images": [], "seq": k,
@@ -659,13 +660,15 @@ class RerankTest(unittest.TestCase):
         qv = embed.embed(["fact"])[0]
         fused = retrieve.hybrid(qv, "fact", docs)
         fused_scores = {docs[i]["id"]: s for i, s in fused}
-        # 让原第 2 名（d1）拿最高精排分
+        # TEI 契约里的 index 是「提给精排的候选列表」里的位置，不是文档下标
+        head_ids = [docs[i]["id"] for i, _ in fused[:retrieve.RERANK_TOP]]
+        winner = head_ids[1]
         self.plan["rows"] = [
-            {"index": 1, "score": 0.9}, {"index": 0, "score": 0.5},
-            {"index": 2, "score": 0.2}, {"index": 3, "score": 0.05},
+            {"index": pos, "score": 0.9 if did == winner else 0.5 - 0.1 * pos}
+            for pos, did in enumerate(head_ids)
         ]
         got = retrieve.run(qv, "fact", docs)
-        self.assertEqual(docs[got[0][0]]["id"], "d1", "精排第一名必须置顶")
+        self.assertEqual(docs[got[0][0]]["id"], winner, "精排第一名必须置顶")
         scores = [s for _, s in got]
         self.assertEqual(scores, sorted(scores, reverse=True), "输出必须按 score 降序")
         self.assertTrue(all(0.0 <= s <= 1.0 for s in scores), scores)
@@ -795,15 +798,23 @@ class FusionRegressionTest(unittest.TestCase):
         self.assertGreater(ranked[0][1], ranked[-1][1])
 
     def test_full_order_is_deterministic_and_tie_broken(self):
-        """并列必须按 created_at → id 全序，不能受 dict 顺序影响。"""
+        """并列必须按 created_at 降序 → id 升序 全序，不能受 dict 顺序影响。
+
+        平台 Answer 侧遇到冲突时偏最新记忆，所以平局把后写入的排前
+        （同一事实被重述时，先看到的是最新那次确认）。
+        """
         v = embed.embed(["same text"])[0]
         a = self._docs(["same text", "same text"], [v, v])
         b = list(reversed(a))
         qv = embed.embed(["same text"])[0]
         ra = retrieve.hybrid(qv, "same text", a)
         rb = retrieve.hybrid(qv, "same text", b)
-        self.assertEqual([a[i]["id"] for i, _ in ra][:2], [d["id"] for d in a][:2])
+        self.assertEqual([a[i]["id"] for i, _ in ra][:2], ["d1", "d0"])
         self.assertEqual([s for _, s in ra], [s for _, s in rb])
+        # 同一时间戳时退化到 id 升序
+        same = [dict(d, created_at="2026-01-01T00:00:00Z") for d in a]
+        rc = retrieve.hybrid(qv, "same text", same)
+        self.assertEqual([same[i]["id"] for i, _ in rc][:2], ["d0", "d1"])
 
     def test_rare_df_filter_ignores_common_terms_only(self):
         """稀有词过滤：只剩通用词时应回退，不把 BM25 打成全零。"""
