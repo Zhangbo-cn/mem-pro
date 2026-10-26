@@ -876,25 +876,30 @@ class RerankTest(unittest.TestCase):
         retrieve.run(qv, "fact", docs)
         self.assertGreater(retrieve._rerank_cooldown_until, time.time(), "达到阈值应进入冷却")
 
-    def test_rerank_scores_are_quantized_for_reproducibility(self):
-        """上游精排分实测抖动 1e-5 且会原样写进响应：必须量化，否则重放字节不一致。"""
+    def test_rerank_jitter_does_not_change_scores_or_order(self):
+        """上游精排分双峰抖动 1.4e-4 且会写进响应：容差以内必须按并列处理。"""
         docs = self._docs()
         qv = embed.embed(["fact"])[0]
         ranked = retrieve.hybrid(qv, "fact", docs)
         head_ids = [docs[i]["id"] for i, _ in ranked[:retrieve.RERANK_TOP]]
         base = [{"index": pos, "score": 0.7 - 0.05 * pos} for pos, _ in enumerate(head_ids)]
-        jittered = [{"index": row["index"], "score": row["score"] + 1.4e-5 * (i % 2)}
-                    for i, row in enumerate(base)]
+        # 两套精确值：实测 gte-rerank-v2 在 0.104684 / 0.104543 之间跳（差 1.4e-4），
+        # 而且靠近并列的两条会跨越容差——第二套特意把相邻两条压到 5e-5 以内。
+        variant_a = [{"index": row["index"], "score": row["score"] + 7e-5 * (i % 2)}
+                     for i, row in enumerate(base)]
+        variant_b = [{"index": row["index"], "score": row["score"] - 7e-5 * (i % 2)}
+                     for i, row in enumerate(base)]
         outs = []
-        for rows in (base, jittered):
+        for rows in (base, variant_a, variant_b):
             self.plan["rows"] = rows
             self.plan["mode"] = "full"
             outs.append(retrieve.rerank("q", ranked, docs))
-        self.assertEqual([[round(s, 12) for _, s in o] for o in outs],
-                         [[round(s, 12) for _, s in o] for o in outs])
-        self.assertEqual([docs[i]["id"] for i, _ in outs[0]],
-                         [docs[i]["id"] for i, _ in outs[1]],
-                         "抖动不应改变排序")
+        for o in outs[1:]:
+            self.assertEqual([(s) for _, s in o], [s for _, s in outs[0]],
+                             "上游抖动不应改变响应里的分数")
+            self.assertEqual([docs[i]["id"] for i, _ in o],
+                             [docs[i]["id"] for i, _ in outs[0]],
+                             "上游抖动不应改变排序")
 
     def test_rerank_retries_transient_break_before_degrading(self):
         """实测：压测后精排偶发断连，若直接降级，同一 query 重放的排序就变了。

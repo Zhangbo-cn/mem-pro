@@ -11,6 +11,7 @@ from __future__ import annotations
 import heapq
 import json
 import calendar
+import functools
 import math
 import os
 import re
@@ -78,10 +79,14 @@ RERANK_RETRIES = int(os.environ.get("RERANK_RETRIES", "2"))     # 单次精排�
 # 精排侧并发：0.4 s/call × 16 ≈ 40 req/s，远高于实测总吞吐天花板（约 28/s），
 # 再大开只会和 embedding 抢上游配额、换来 429。
 CONCURRENCY_RERANK = int(os.environ.get("RERANK_POOL", "16"))   # 精排侧长连接上限
-# 上游精排分不是逐位可复现的：同一 (query, documents) 实测抖动到 1e-5
-# （0.713495 / 0.713481）。分数会原样写进响应，不量化就会破坏「同一 query 重放
-# 字节一致」。量化到 1e-3 远大于抖动、远小于候选间距，配上确定性的 tie-break 即可。
-RERANK_SCORE_DIGITS = int(os.environ.get("RERANK_SCORE_DIGITS", "3"))
+# 上游精排分**不是逐位可复现**的，而且是双峰的：同一 (query, documents) 反复调用，
+# gte-rerank-v2 给出两套精确值（实测 0.104684 / 0.104543，差 1.4e-4），显然是两台
+# 后端各算一遍。因此「量化」治不了——任何网格都会在边界上翻转。两手：
+#   · RERANK_TOL：分差在此以内一律视为并列，改用融合分/时间/ID 决定顺序，于是两个
+#     变体都落进同一个并列区，顺序与分数都不再随选中哪台后端而变；
+#   · 响应里的 score 改为按**名次**映射回融合分区间（与上游分值大小无关），
+#     这样字节只依赖最终顺序。
+RERANK_TOL = float(os.environ.get("RERANK_TOL", "0.0003"))
 
 # 精排健康度：旁路降级会改变排序，必须能在 /version 里看到发生了什么
 _RERANK_STATS = {"calls": 0, "fails": 0, "degraded": 0, "cooldown_skips": 0}
@@ -798,24 +803,22 @@ def _rebased(head: list[tuple[int, float]], scored: list[tuple[int, float]]) -> 
 
     精排分（sigmoid 后的 cross-encoder 分）与融合分不可比：直接拼接会出现
     「尾部融合分 > 头部精排分」的倒挂，`score` 也就不再单调可解释。
-    这里把头部精排分线性压到 [min(head), max(head)]：
+    这里把头部按**名次**等距压到 [min(head), max(head)]（不看上游分值大小）：
       · 头部内部顺序 = 精排顺序（保序）
       · 头部任何一条都 ≥ 尾部首条（融合分递减）
-      · 仍在 [0,1] 内，可当阈值用
+      · 仍在 [0,1] 内，可当阈值用且逐位可复现
     """
     if not scored:
         return head
     fused = [s for _, s in head]
     hi, lo = max(fused), min(fused)
-    vals = [s for _, s in scored]
-    vmin, vmax = min(vals), max(vals)
-    span = hi - lo
-    if vmax - vmin <= 1e-9:
-        return head  # 无排序信号时保留融合序及其分数
-    out = []
-    for i, s in scored:
-        out.append((i, lo + (s - vmin) / (vmax - vmin) * span))
-    return out
+    n = len(scored)
+    if n == 1:
+        return [(scored[0][0], hi)]
+    # 按名次等距映射，不看上游分值大小：上游同一请求会在两套精确值之间跳
+    # （见 RERANK_TOL 注释），按分值映射会把那份抖动原样搬进响应。
+    step = (hi - lo) / (n - 1)
+    return [(i, hi - k * step) for k, (i, _) in enumerate(scored)]
 
 
 def rerank(query_text: str, ranked: list[tuple[int, float]], docs: list[dict]) -> list[tuple[int, float]]:
@@ -887,12 +890,17 @@ def rerank(query_text: str, ranked: list[tuple[int, float]], docs: list[dict]) -
             if not math.isfinite(s):
                 raise ValueError("rerank result score must be finite")
             seen.add(j)
-            scored.append((head[j][0], round(s, RERANK_SCORE_DIGITS)))
+            scored.append((head[j][0], s))
         if len(seen) != len(head):
             raise ValueError(f"rerank returned {len(seen)}/{len(head)} unique results")
-        scored.sort(key=lambda t: t[0])                                     # 3rd: id 升序
-        scored.sort(key=lambda t: docs[t[0]]["created_at"], reverse=True)    # 2nd: 新的在前
-        scored.sort(key=lambda t: -t[1])                                    # 1st: 精排分降序
+        fused = {i: s for i, s in head}
+        scored.sort(key=lambda t: t[0])                                     # 4th: id 升序
+        scored.sort(key=lambda t: docs[t[0]]["created_at"], reverse=True)    # 3rd: 新的在前
+        scored.sort(key=lambda t: -fused[t[0]])                             # 2nd: 融合分降序
+        # 1st: 精排分降序，但容差内算并列（cmp_to_key 让「并列」变成真正的等价类，
+        # 顺序完全由上面几轮确定性的键决定）
+        scored.sort(key=functools.cmp_to_key(
+            lambda a, b: 0 if abs(a[1] - b[1]) <= RERANK_TOL else (-1 if a[1] > b[1] else 1)))
         _rerank_fails = 0
         return _rebased(head, scored) + tail
     except Exception:

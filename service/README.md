@@ -144,7 +144,7 @@ python3 tools/smoke.py  https://mem.example.com --key "$KEY"
 | `RERANK_TOP` / `RERANK_TIMEOUT` | 10 / 5s | 精排条数与单次超时 |
 | `RERANK_RETRIES` / `RERANK_FAILS` / `RERANK_COOLDOWN` | 2 / 3 / 60 | 瞬时重试、熔断阈值与冷却秒数 |
 | `RERANK_POOL` | 16 | 精排侧连接池上限 |
-| `RERANK_SCORE_DIGITS` | 3 | 精排分量化位数（上游分数抖动 1e-5，不量化会破坏重放一致性） |
+| `RERANK_TOL` | 0.0003 | 精排分容差：上游分数双峰抖动 1.4e-4，容差内视为并列并按融合分排序 |
 | `APPEND_OPTIONS` | 0 | 是否把 `options` 拼进 query |
 | `LOG_JSON` | 1 | JSON 结构化日志 |
 
