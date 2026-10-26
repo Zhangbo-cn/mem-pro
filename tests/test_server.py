@@ -244,6 +244,19 @@ class ServerTest(unittest.TestCase):
                 for _ in range(3)]
         self.assertTrue(outs[0] == outs[1] == outs[2], "Search 响应不确定")
 
+    def test_11_search_applies_temporal_rule(self):
+        """时态规则要在真实 /search 路径上生效（旧版只在评测用的 hybrid() 里）。"""
+        self.add("e2e:tense", "e2e:tense", messages=[
+            {"role": "user", "content": "Alice 去年住在慕尼黑。"},
+            {"role": "user", "content": "Alice 住在柏林。"},
+        ])
+        _, now = self.search("Alice 现在住在哪个城市？", "e2e:tense", 5)
+        _, plain = self.search("Alice 住在哪个城市？", "e2e:tense", 5)
+        past_now = next(d["score"] for d in now["data"] if "去年" in d["content"])
+        past_plain = next(d["score"] for d in plain["data"] if "去年" in d["content"])
+        self.assertEqual(now["data"][0]["content"], "Alice 住在柏林。")
+        self.assertLess(past_now, past_plain)
+
     def test_10_unknown_path(self):
         self.assertEqual(self.call("/nope", key=None)[0], 404)
         self.assertEqual(self.call("/nope", {}, key=KEY)[0], 404)

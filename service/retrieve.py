@@ -482,12 +482,24 @@ def _rank(scores: list[float]) -> list[int]:
     return idx
 
 
+# 所有 dense 路径统一「float32 存储 × float64 累加」：
+# 旧实现 numpy 走 float32 matmul、纯 Python 走 float64，二者差 ~1e-7，
+# 同一 query 在索引缓存命中/淘汰时 score 会变、并列时顺序也可能变 ⇒ 破坏字节级复现。
+# einsum(dtype=float64) 与 math.sumprod 的差在 1e-16 量级，且速度与 float32 matmul 相当。
+_SCORE_DIGITS = 12  # 再裁掉累加顺序带来的最后几位噪声
+
+
+def _np_dense(mat, qvec) -> list[float]:
+    q = _np.asarray(qvec, dtype=_np.float64)
+    out = _np.einsum("ij,j->i", mat, q, dtype=_np.float64, casting="unsafe")
+    return _np.round(out, _SCORE_DIGITS).tolist()
+
+
 def dense_scores(qvec: list[float], docs: list[dict], index=None) -> list[float]:
     dim = len(qvec)
     if index is not None and index.matrix is not None and index.matrix.shape[1] == dim:
         try:
-            q = _np.asarray(qvec, dtype="<f4")
-            return (index.matrix @ q).astype(float).tolist()
+            return _np_dense(index.matrix, qvec)
         except Exception:  # fall through to the exact compatibility path
             pass
     if _np is not None and len(docs) >= 128:
@@ -495,17 +507,16 @@ def dense_scores(qvec: list[float], docs: list[dict], index=None) -> list[float]
             blobs = [d["vec"] for d in docs]
             if all(len(b) == dim * 4 for b in blobs):
                 mat = _np.frombuffer(b"".join(blobs), dtype="<f4").reshape(len(blobs), dim)
-                q = _np.asarray(qvec, dtype="<f4")
-                return (mat @ q).astype(float).tolist()
+                return _np_dense(mat, qvec)
         except Exception:  # 回退到纯 Python，检索绝不因加速失败而中断
             pass
     if index is not None and index.rows is not None and index.dim == dim:
         try:
             q = [float(x) for x in qvec]
-            return [_DOT(q, row) for row in index.rows]
+            return [round(_DOT(q, row), _SCORE_DIGITS) for row in index.rows]
         except Exception:  # pragma: no cover - defensive; decoded rows are width-checked
             pass
-    return [cosine(qvec, unpack(d["vec"])) for d in docs]
+    return [round(cosine(qvec, unpack(d["vec"])), _SCORE_DIGITS) for d in docs]
 
 
 def _order(scores: list[float], docs: list[dict], limit: int | None = None) -> list[int]:
@@ -583,17 +594,27 @@ def fuse_rrf(dense: list[float], sparse: list[float]) -> list[float]:
     return rrf
 
 
-def hybrid(qvec: list[float], query_text: str, docs: list[dict],
-           limit: int | None = None, cache_key=None,
-           stats: dict | None = None) -> list[tuple[int, float]]:
-    index = _get_search_index(cache_key, docs, stats)
+def fused_scores(qvec: list[float], query_text: str, docs: list[dict],
+                 index=None, stats: dict | None = None) -> list[float]:
+    """融合分 + 时态微调。`hybrid()` 与线上 `run()` 共用这一份，避免评测与服务两套逻辑。"""
     dense = dense_scores(qvec, docs, index)
     sparse = bm25_scores(query_text, docs, index)
     fused = fuse_rrf(dense, sparse) if FUSION == "rrf" else fuse_linear(dense, sparse)
     if TEMPORAL_RULE == "tense":
-        bias = tense_bias(docs, query_tense(query_text))
+        tense = query_tense(query_text)
+        bias = tense_bias(docs, tense)
         if bias is not None:
             fused = [min(1.0, max(0.0, s + b)) for s, b in zip(fused, bias)]
+            if stats is not None:
+                stats["temporal"] = tense
+    return [round(s, _SCORE_DIGITS) for s in fused]
+
+
+def hybrid(qvec: list[float], query_text: str, docs: list[dict],
+           limit: int | None = None, cache_key=None,
+           stats: dict | None = None) -> list[tuple[int, float]]:
+    index = _get_search_index(cache_key, docs, stats)
+    fused = fused_scores(qvec, query_text, docs, index, stats)
     return [(i, fused[i]) for i in _order(fused, docs, limit)]
 
 
@@ -685,7 +706,7 @@ def dedup(ranked: list[tuple[int, float]], docs: list[dict], index=None,
     gram = None
     if matrix is not None:
         try:
-            pool_matrix = matrix[pool_rows]
+            pool_matrix = matrix[pool_rows].astype(_np.float64)  # 与纯 Python 路径同精度
             gram = pool_matrix @ pool_matrix.T
         except Exception:  # pragma: no cover - defensive; fall back to decoded rows
             gram = None
@@ -703,7 +724,8 @@ def dedup(ranked: list[tuple[int, float]], docs: list[dict], index=None,
                 continue
         elif matrix is not None:
             if window:
-                sims = matrix[[pool_rows[j] for j in window]] @ matrix[pool_rows[pos]]
+                sims = (matrix[[pool_rows[j] for j in window]].astype(_np.float64)
+                        @ matrix[pool_rows[pos]].astype(_np.float64))
                 if float(sims.max()) > DEDUP_COS:
                     continue
         elif rows is not None:
@@ -827,9 +849,7 @@ def run(qvec: list[float], query_text: str, docs: list[dict],
     if limit is not None:
         rank_limit = min(len(docs), limit + max(0, DEDUP_POOL) + max(0, RERANK_TOP))
     index = _get_search_index(cache_key, docs, stats)
-    dense = dense_scores(qvec, docs, index)
-    sparse = bm25_scores(query_text, docs, index)
-    fused = fuse_rrf(dense, sparse) if FUSION == "rrf" else fuse_linear(dense, sparse)
+    fused = fused_scores(qvec, query_text, docs, index, stats)
     ranked = [(i, fused[i]) for i in _order(fused, docs, rank_limit)]
     ranked = dedup(ranked, docs, index, want=None if limit is None else
                    limit + (max(0, RERANK_TOP) if RERANK_MODE == "http" else 0))

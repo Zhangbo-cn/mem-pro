@@ -79,10 +79,12 @@ def metrics(ranked_ids: list[str], gold: list[str], k: int = 5) -> tuple[float, 
 
 
 def rank(retrieve, qvec, qtext, docs):
-    """默认只用融合序；RERANK_URL 非空时走「融合 → 去重 → 精排」完整链路。"""
-    if RERANK_URL:
-        return retrieve.run(qvec, qtext, docs)
-    return retrieve.hybrid(qvec, qtext, docs)
+    """始终评测线上同一条链路 `retrieve.run()`：融合 → 时态 → 去重 →（可选）精排。
+
+    旧版在无精排时评测 `hybrid()`，而服务走 `run()`；时态规则只在前者生效，
+    导致 README 里的时态增益线上拿不到。现在评测与服务共用一份代码。
+    """
+    return retrieve.run(qvec, qtext, docs, limit=10)
 
 
 def evaluate(retrieve, docs, qvecs, queries, topk=10, kinds=None):

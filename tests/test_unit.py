@@ -168,6 +168,24 @@ class RetrieveTest(unittest.TestCase):
         finally:
             retrieve._SEARCH_INDEX_MAX_BYTES = saved_max
 
+    def test_scores_identical_with_and_without_index_cache(self):
+        """缓存命中/淘汰不影响 score：否则同一 query 响应字节会变（复现风险）。"""
+        docs = self._docs([f"record {i} about topic {i % 7} and item {i % 3}" for i in range(200)])
+        q = embed.embed(["topic 3 item 1"])[0]
+        plain = retrieve.run(q, "topic 3 item 1", docs, limit=20)
+        key = ("unit-score-identity", str(id(self)))
+        cached = retrieve.run(q, "topic 3 item 1", docs, limit=20, cache_key=key)
+        again = retrieve.run(q, "topic 3 item 1", docs, limit=20, cache_key=key)
+        self.assertEqual(plain, cached)
+        self.assertEqual(cached, again)
+        saved = retrieve._np
+        try:
+            retrieve._np = None
+            py = retrieve.run(q, "topic 3 item 1", docs, limit=20)
+        finally:
+            retrieve._np = saved
+        self.assertEqual(py, plain)
+
     def test_sparse_budget_exhaustion_keeps_vector_path_exact(self):
         docs = self._docs([f"semi structured log line {i} keyword{i % 5}" for i in range(60)])
         q = embed.embed(["log line 3"])[0]
@@ -359,6 +377,24 @@ class TemporalTest(unittest.TestCase):
         for _, score in first:
             self.assertGreaterEqual(score, 0.0)
             self.assertLessEqual(score, 1.0)
+
+    def test_run_applies_same_temporal_bias_as_hybrid(self):
+        """线上 Search 走 run()：时态规则必须在 run() 生效，且分数与 hybrid() 一致。"""
+        docs = self._docs(["Alice 去年住在慕尼黑。", "Alice 住在柏林。"] +
+                          [f"无关记录 {i}" for i in range(5)])
+        q = "Alice 现在住在哪个城市？"
+        qv = embed.embed([q])[0]
+        saved = retrieve.TEMPORAL_RULE
+        try:
+            retrieve.TEMPORAL_RULE = "off"
+            off = dict(retrieve.run(qv, q, docs))
+            retrieve.TEMPORAL_RULE = "tense"
+            on = dict(retrieve.run(qv, q, docs))
+            self.assertEqual(on, dict(retrieve.hybrid(qv, q, docs)))
+        finally:
+            retrieve.TEMPORAL_RULE = saved
+        self.assertAlmostEqual(off[0] - on[0], retrieve.TEMPORAL_WEIGHT, places=9)
+        self.assertEqual(off[1], on[1])
 
     def test_rule_can_be_disabled(self):
         docs = self._docs(["Alice 去年住在慕尼黑。", "Alice 现在住在柏林。"])
