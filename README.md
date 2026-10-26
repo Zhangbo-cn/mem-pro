@@ -186,6 +186,7 @@ Authentication `Authorization: Token`、Memory System Key = 你生成的那个�
 | `make load URL=... KEY=... USER_ID=... SWEEP=1,4,8,16,32` | 并发扫描 Add / Search，输出 p50/p95/p99 与**申报并发区间**；加 `DURATION=180` 转持续压测（burst 通过 ≠ 稳态可过） |
 | `make gallery` / `tools/gallery_proxy.py` | Mem-Gallery 本地代理榜（走线上 Add/Search 代码路径，无需额度） |
 | `make watch URL=... KEY=... FEISHU=<webhook>` | 评测期看护：定时拉 `/version`，`api_give_up` 增长 / 精排降级 / 429 占比过高时告警 |
+| `make backup DB_PATH=... BACKUP=...` | SQLite 在线热备（`sqlite3` backup API，不用停服务） |
 | `make purge PREFIX=aml:` | 合规清理：按 `user_id` 前缀删评测数据并 VACUUM（默认 dry-run） |
 | `make image` / `make docker-up` | 构建镜像（注入 `GIT_COMMIT`）/ compose 启动 |
 
@@ -216,7 +217,8 @@ mem-pro/
 │   ├── rerank_server.py     # 本地 TEI 风格精排服务
 │   ├── rerank_bench.py      # 精排质量与单 query 延迟对比
 │   ├── watch.py             # 评测期看护：/version 计数器异常告警（可推飞书）
-│   └── purge.py             # 合规清理：按 user 前缀删评测数据 + VACUUM
+│   ├── purge.py             # 合规清理：按 user 前缀删评测数据 + VACUUM
+│   └── backup.py            # SQLite 在线热备（评测中途坏了能救回来）
 ├── tests/                   # unittest（无 pytest 依赖）
 ├── scripts/verify.sh        # 一键契约 + replay + smoke
 ├── deploy/                  # Caddyfile / systemd unit / LOCAL_DEPLOY.md（本地公网部署三方案）

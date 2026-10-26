@@ -19,6 +19,7 @@ help:
 	@echo "make check     起临时服务并跑 contract + replay（无需手动启动）"
 	@echo "make doctor    配置体检（含 DashScope 连通性）"
 	@echo "make smoke     URL=... KEY=... 对线上服务做 smoke"
+	@echo "make backup    DB_PATH=... 在线热备 SQLite（BACKUP=... 指定目标）"
 	@echo "make watch     URL=... KEY=... 评测期看护 /version（可加 FEISHU=<webhook>）"
 	@echo "make purge     PREFIX=aml: 按用户前缀清理评测数据（dry-run；去掉 --dry-run 见 tools/purge.py）"
 	@echo "make load      URL=... KEY=... USER_ID=... 并发扫描（DURATION=180 转持续压测），给出申报并发建议"
@@ -54,6 +55,9 @@ load:
 	$(PY) tools/search_load.py $(URL) --key "$(KEY)" --user-id "$(USER_ID)" \
 		--mode $(MODE) --sweep $(SWEEP) $(if $(filter 1,$(SWEEP_NONCE)),--nonce) \
 		$(if $(filter-out 0,$(DURATION)),--duration $(DURATION)) --report load.json
+
+backup:
+	$(PY) tools/backup.py $(if $(DB_PATH),--db $(DB_PATH),) $(if $(BACKUP),--out $(BACKUP),)
 
 watch:
 	$(PY) tools/watch.py $(URL) --key "$(KEY)" $(if $(INTERVAL),--interval $(INTERVAL),) \

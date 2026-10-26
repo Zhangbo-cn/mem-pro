@@ -115,6 +115,22 @@ def check_storage() -> None:
         add(OK, "SQLite", f"{db}（现有 {count} 条记忆）")
     else:
         add(FAIL, "SQLite", f"{db} ping 失败", "删除损坏的库或换 DB_PATH")
+        return
+    # 磁盘余量：Full 会连续写入 0.5–2 天，写满就是 503 db_unavailable，
+    # 而 Full 只有一次机会 —— 这一项必须在开跑前就看见。
+    try:
+        import shutil
+        free = shutil.disk_usage(parent).free
+        gb = free / 1024**3
+        detail = f"{parent} 剩余 {gb:.1f} GiB"
+        if gb < 1:
+            add(FAIL, "磁盘", detail, "评测前清理；至少留 2 GiB 给 SQLite + WAL")
+        elif gb < 2:
+            add(WARN, "磁盘", detail, "评测期会持续写入，建议留 2 GiB 以上")
+        else:
+            add(OK, "磁盘", detail)
+    except OSError as e:  # noqa: BLE001
+        add(WARN, "磁盘", f"无法读取 {parent} 的剩余空间：{e}")
 
 
 def check_retrieval() -> None:
