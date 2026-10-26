@@ -4,6 +4,7 @@ URL ?= http://127.0.0.1:$(PORT)
 KEY ?= $(MEMORY_SYSTEM_KEY)
 USER_ID ?= bench-user
 SWEEP ?= 1,4,8,16,24
+DURATION ?= 0
 SWEEP_NONCE ?= 1
 MODE ?= search
 
@@ -18,7 +19,7 @@ help:
 	@echo "make check     起临时服务并跑 contract + replay（无需手动启动）"
 	@echo "make doctor    配置体检（含 DashScope 连通性）"
 	@echo "make smoke     URL=... KEY=... 对线上服务做 smoke"
-	@echo "make load      URL=... KEY=... USER_ID=... 并发扫描，给出申报并发建议"
+	@echo "make load      URL=... KEY=... USER_ID=... 并发扫描（DURATION=180 转持续压测），给出申报并发建议"
 	@echo "make gallery   Mem-Gallery 本地代理榜（走线上 Add/Search 代码路径）"
 	@echo "make image     构建 Docker 镜像"
 	@echo "make docker-up docker compose up -d"
@@ -50,7 +51,7 @@ smoke:
 load:
 	$(PY) tools/search_load.py $(URL) --key "$(KEY)" --user-id "$(USER_ID)" \
 		--mode $(MODE) --sweep $(SWEEP) $(if $(filter 1,$(SWEEP_NONCE)),--nonce) \
-		--report load.json
+		$(if $(filter-out 0,$(DURATION)),--duration $(DURATION)) --report load.json
 
 gallery:
 	$(PY) tools/gallery_proxy.py

@@ -6,14 +6,18 @@ Examples:
   python3 tools/search_load.py http://127.0.0.1:8080 --mode add --user-id bench-add --requests 100 --concurrency 8
   python3 tools/search_load.py http://127.0.0.1:8080 --user-id bench-user --requests 200 --concurrency 16
   python3 tools/search_load.py https://memory.example.com --user-id u1 --queries-file tools/eval_queries.json --key "$MEMORY_SYSTEM_KEY"
+  # 持续压测（burst 通过 ≠ 稳态可过）：--duration 180 秒内不停打，看 429/503 是否堆积
+  python3 tools/search_load.py http://127.0.0.1:8080 --user-id bench --concurrency 16 --duration 180 --nonce
 """
 from __future__ import annotations
 
 import argparse
 import concurrent.futures
+import itertools
 import json
 import math
 import statistics
+import threading
 import sys
 import time
 import urllib.error
@@ -114,6 +118,10 @@ def main() -> int:
                          "(otherwise the in-process vector cache absorbs the load and the "
                          "numbers say nothing about upstream capacity)")
     ap.add_argument("--report", default="", help="write sweep rows as JSON")
+    ap.add_argument("--duration", type=float, default=0,
+                    help="sustained mode: keep each level running for N seconds instead of "
+                         "a fixed --requests count (short bursts can pass while the sustained "
+                         "rate still exceeds the account quota)")
     args = ap.parse_args()
     if min(args.top_k, args.requests, args.concurrency) <= 0 or args.warmup < 0 or args.timeout <= 0:
         ap.error("top-k, requests, concurrency, and timeout must be positive; warmup must be nonnegative")
@@ -148,8 +156,28 @@ def main() -> int:
                         args.timeout, f"load-{run_id}-{j}", body_for("r", j))
 
         started = time.perf_counter()
-        with concurrent.futures.ThreadPoolExecutor(max_workers=concurrency) as pool:
-            results = list(pool.map(task, range(args.requests)))
+        if args.duration:
+            # 持续模式：每个 worker 循环取任务直到到点。短 burst 能过、持续压测却 429 打满，
+            # 就是这个差别——平台侧 1,711 条 query 是持续的，不是 burst。
+            deadline = started + args.duration
+            counter = itertools.count()
+            lock = threading.Lock()
+            results = []
+
+            def loop() -> None:
+                while True:
+                    with lock:
+                        j = next(counter)
+                    if time.perf_counter() >= deadline:
+                        return
+                    results.append(task(j))
+
+            with concurrent.futures.ThreadPoolExecutor(max_workers=concurrency) as pool:
+                for _ in pool.map(lambda _: loop(), range(concurrency)):
+                    pass
+        else:
+            with concurrent.futures.ThreadPoolExecutor(max_workers=concurrency) as pool:
+                results = list(pool.map(task, range(args.requests)))
         elapsed = time.perf_counter() - started
         latencies = [r["ms"] for r in results]
         valid = [r for r in results if r["status"] == 200 and r["valid"]]
@@ -190,6 +218,9 @@ def main() -> int:
             mark = " *" if r in stable else ""
             print(f"{r['concurrency']:>5} {r['valid']:>4}/{r['requests']:<4} {r['rps']:>8.2f} "
                   f"{r['p50']:>8.1f} {r['p95']:>8.1f} {r['p99']:>8.1f}{mark}")
+        if stable and not args.duration:
+            print("提示：短 burst 全过不等于可持续——真实评测是持续流量（1,711 条 query），"
+                  "用 --duration 180 复核，申报值取「持续压测 100% 成功」的那一档。")
         if stable:
             best = max(stable, key=lambda r: r["concurrency"])
             lo, hi = max(1, int(best["concurrency"] * 0.6)), max(1, int(best["concurrency"] * 0.7))

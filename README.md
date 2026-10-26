@@ -183,7 +183,7 @@ Authentication `Authorization: Token`、Memory System Key = 你生成的那个�
 | `make check` | 临时服务上跑契约 27 项 + replay + smoke |
 | `make contract` / `make replay` | 对已启动服务做契约 / 确定性检查 |
 | `make smoke URL=https://... KEY=...` | 线上 smoke（18 项） |
-| `make load URL=... KEY=... USER_ID=... SWEEP=1,4,8,16,32` | 并发扫描 Add / Search，输出 p50/p95/p99 与**申报并发区间** |
+| `make load URL=... KEY=... USER_ID=... SWEEP=1,4,8,16,32` | 并发扫描 Add / Search，输出 p50/p95/p99 与**申报并发区间**；加 `DURATION=180` 转持续压测（burst 通过 ≠ 稳态可过） |
 | `make gallery` / `tools/gallery_proxy.py` | Mem-Gallery 本地代理榜（走线上 Add/Search 代码路径，无需额度） |
 | `make image` / `make docker-up` | 构建镜像 / compose 启动 |
 
@@ -251,7 +251,7 @@ mem-pro/
    但每次 Search 多一次跨网络往返、吞吐减半，是否开启按时间预算取舍。
 4. **单机 SQLite，不引入 ANN**：按 `user_id` 精确全量打分；热用户复用有界记忆、BM25 倒排与向量矩阵/行缓存，返回头部用部分排序，Add 走追加式索引扩展（实测见 §十一）。ANN 选型见 `research/15-ann-index-selection.md`：官方 `user_id` 是会话级，11k 条时精确点积仅 3 ms，而最佳 ANN 只省 2.8 ms 且召回掉 0.4–5%，因此保留精确检索，并按该文的阈值（单用户 ≥5 万条或点积 P95 ≥20 ms）再评估。
 5. **未做 LLM 抽取**：正文保留原文与时间戳，满足「时间粒度不归一化」的判分要求；后续若接 `gpt-4o-mini` 只能附加字段。
-6. **并发**：见 §十二。`MAX_INFLIGHT` 默认 64，embedding 有独立全局闸门（`EMBED_CONCURRENCY`）；stdlib 线程服务单进程 GIL 受限，Full 前必须用 `make load` 在 api 模式实测，申报值取稳定区间的 60–70%。
+6. **并发**：见 §十二。`MAX_INFLIGHT` 默认 64，embedding 有独立全局闸门（`EMBED_CONCURRENCY`）；stdlib 线程服务单进程 GIL 受限，Full 前必须用 `make load ... DURATION=180` 在 api 模式做**持续**压测，申报值取「100% 成功」的那一档（实测 16）。
 
 ---
 
@@ -423,9 +423,21 @@ Add（每次 10 条消息 = 1 次 embedding 调用，同样 `--nonce`）：4 并
    平台侧看到的是 200。但 5 次指数退避能撑到 60 s，把请求和闸门槽一起占死、p95 爆表；
    `EMBED_RETRY_BUDGET=12` 到点就失败成 503 + `Retry-After`，把槽让给健康请求更划算。
 
-申报值：Search 与 Add 都在 48 并发仍 60/60 通过，取稳定区间的 60–70% ⇒
-**Search 28–32、Add 24–32**；跑完看 `/version` 的 `api_429` 是否接近 0，涨了就往下退一档。
-Full 只能跑一次，宁可低报（跑得慢但稳）也不要高报（大面积 429 直接跑不完）。
+**但短 burst 全过不等于可持续**。真实评测是持续流量（1,711 条 query 连续打），
+所以用 `--duration` 做稳态复核（每档 3 分钟、每条 query 新文本）：
+
+| 并发 | 稳态吞吐 | 状态码分布 | p95 |
+|---|---|---|---|
+| 8 | 14.9 req/s | 200 ×2,695（**100%**） | 1.36 s |
+| **16** | **27.9 req/s** | 200 ×5,120 / 503 ×1（99.98%） | 1.65 s |
+| 24 | 29.0 req/s | 200 ×5,289 / 503 ×24（99.55%） | 2.71 s |
+
+Add 侧稳态（2 分钟）：12 并发 19.8 req/s 100% 200、16 并发 **27.6 req/s 100% 200**。
+
+结论：**申报 Search 16 / Add 16**。16 与 24 的吞吐已经一样（29 req/s 是账号天花板），
+但 24 并发开始零星 503（0.45%）、p95 从 1.65 s 涨到 2.71 s——多报的并发不会更快，
+只会把余量换成重试。按 16 算，1,711 条 query 的 Search 阶段约 **61 秒**跑完。
+跑完看 `/version` 的 `api_429`，涨得厉害就再退一档；Full 只有一次机会，低报比高报安全。
 
 ---
 
