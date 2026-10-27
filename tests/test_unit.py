@@ -15,6 +15,8 @@ ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 sys.path.insert(0, os.path.join(ROOT, "service"))
 
 os.environ.setdefault("EMBED_MODE", "hash")
+# 单元测试必须与开发者本地 .env 解耦（否则开精排/换模型会改到测试结果）
+os.environ.setdefault("DOTENV_DISABLE", "1")
 
 import budget  # noqa: E402
 import embed  # noqa: E402
@@ -1169,6 +1171,49 @@ class FusionRegressionTest(unittest.TestCase):
             self.assertEqual([round(x, 9) for x in loose], [round(x, 9) for x in none_f])
         finally:
             retrieve.BM25_RARE_DF = saved
+
+
+class DotenvTest(unittest.TestCase):
+    """`$VAR` / `${VAR}` 展开：让 `.env.example` 里的 RERANK_API_KEY=$DASHSCOPE_API_KEY 真能用。
+
+    不展开的话会把这个字面量当 Bearer 发出去 → 401 → 精排静默降级，很难在日志里看出来。
+    """
+
+    def setUp(self):
+        import tempfile
+        self.tmp = tempfile.TemporaryDirectory()
+        self.path = os.path.join(self.tmp.name, ".env")
+        self.keys = ["TEST_DASHSCOPE", "TEST_RERANK", "TEST_DQ", "TEST_SQ", "TEST_MISSING"]
+        for k in self.keys:
+            os.environ.pop(k, None)
+
+    def tearDown(self):
+        for k in self.keys:
+            os.environ.pop(k, None)
+        self.tmp.cleanup()
+
+    def _load(self, body):
+        with open(self.path, "w", encoding="utf-8") as f:
+            f.write(body)
+        import dotenv
+        dotenv.load([self.path])
+
+    def test_reference_to_earlier_line(self):
+        self._load("TEST_DASHSCOPE=sk-test\nTEST_RERANK=$TEST_DASHSCOPE\n")
+        self.assertEqual(os.environ["TEST_RERANK"], "sk-test")
+
+    def test_braced_reference_and_double_quotes(self):
+        self._load('TEST_DASHSCOPE=sk-test\nTEST_DQ="${TEST_DASHSCOPE}-x"\n')
+        self.assertEqual(os.environ["TEST_DQ"], "sk-test-x")
+
+    def test_single_quotes_are_literal(self):
+        self._load("TEST_SQ='a$b'\n")
+        self.assertEqual(os.environ["TEST_SQ"], "a$b")
+
+    def test_undefined_reference_becomes_empty(self):
+        self._load("TEST_MISSING=$NO_SUCH_VAR_ANYWHERE\n")
+        self.assertEqual(os.environ["TEST_MISSING"], "",
+                         "未定义变量必须展开成空串，不能把字面量当密钥")
 
 
 if __name__ == "__main__":

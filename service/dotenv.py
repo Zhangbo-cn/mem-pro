@@ -13,10 +13,25 @@
 from __future__ import annotations
 
 import os
+import re
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent.parent
 _LOADED = False
+
+
+_VAR = re.compile(r"\$\{([A-Za-z_][A-Za-z0-9_]*)\}|\$([A-Za-z_][A-Za-z0-9_]*)")
+
+
+def _expand(val: str) -> str:
+    """展开 $VAR / ${VAR}，引用已存在的环境变量（同一文件里先出现的行也算）。
+
+    未定义的变量展开成空串：`RERANK_API_KEY=$DASHSCOPE_API_KEY` 在没配 Key 时必须
+    变成空值并由 doctor 报出来，而不是把字面量 `$DASHSCOPE_API_KEY` 当密钥发出去。
+    """
+    if "$" not in val:
+        return val
+    return _VAR.sub(lambda m: os.environ.get(m.group(1) or m.group(2), ""), val)
 
 
 def _parse_line(line: str) -> tuple[str, str] | None:
@@ -31,9 +46,11 @@ def _parse_line(line: str) -> tuple[str, str] | None:
     key, val = key.strip(), val.strip()
     if not key:
         return None
+    quoted = ""
     if len(val) >= 2 and val[0] == val[-1] and val[0] in ("'", '"'):
-        val = val[1:-1]
-    return key, val
+        quoted, val = val[0], val[1:-1]
+    # 单引号按 shell 语义不做变量展开；双引号与裸值展开
+    return key, val if quoted == "'" else _expand(val)
 
 
 def load(paths: list[str | os.PathLike] | None = None, override: bool = False) -> list[str]:

@@ -19,8 +19,9 @@ cleanup() {
 trap cleanup EXIT
 
 # 默认离线 hash（免费、可复现）；VERIFY_EMBED_MODE=api 可让同一套契约跑真实 embedding
+# DOTENV_DISABLE/RERANK_MODE：契约与复现性必须与开发者本地 .env 解耦（本地可能已开精排）
 EMBED_MODE="${VERIFY_EMBED_MODE:-hash}" DB_PATH="$TMP/verify.db" MEMORY_SYSTEM_KEY="$KEY" \
-  PORT="$PORT" HOST=127.0.0.1 STARTUP_CHECK=0 \
+  PORT="$PORT" HOST=127.0.0.1 STARTUP_CHECK=0 DOTENV_DISABLE=1 RERANK_MODE=none \
   "$PY" service/server.py >"$TMP/server.log" 2>&1 &
 PID=$!
 

@@ -12,7 +12,7 @@ Agent Memory Leaderboard（记忆之巅）**多模态记忆赛道 / 开源方法
 | 项 | 状态 | 说明 |
 |---|---|---|
 | 契约自检 | ✅ **27 / 27** | `tools/contract_check.py`，覆盖 11 类官方约束 |
-| 自动化测试 | ✅ **85 项** | `make test`：API 端到端、融合/时态回归、缓存、精排降级、多模态去重、caption 缓存 |
+| 自动化测试 | ✅ **89 项** | `make test`：API 端到端、融合/时态回归、缓存、精排降级、多模态去重、caption 缓存 |
 | 幂等 / 确定性 | ✅ | 并发重放只写一次；Search 响应字节级可复现（索引与非索引路径逐位一致） |
 | 多模态 | ✅ 可用 | 内联 Base64 解析/存储/回传；图片指纹参与去重；可选 `gpt-4o-mini` 生成图片描述并持久缓存（见 §十四） |
 | 部署物料 | ✅ | Dockerfile / compose（透明透传全部 `.env`）/ Caddy / systemd / **GitHub Actions CI（3.10 + 3.12 双跑，numpy 与纯标准库两条路径）** |
@@ -21,7 +21,7 @@ Agent Memory Leaderboard（记忆之巅）**多模态记忆赛道 / 开源方法
 | 公网 HTTPS 部署 | ❌ 未发布 | 需要一台公网主机 + 域名（见 §五） |
 | 检索打分校准 | ✅ **已调优** | α=0.95 / β=0.05 + 时态一致性规则；另有 Mem-Gallery 1,711 条 QA 代理榜（见 §十二） |
 | 返回条数 | ⚠️ **默认按 top_k（`MAX_RESULTS=0`）** | 答案 F1 在 10–20 条饱和，但若按 Search 输出评分则收窄伤召回；**待官方答复评分口径**（§十六） |
-| 精排 | ✅ **默认关闭，实测 +0.04 MRR** | `qwen3-rerank`（API，现默认）或本地 `bge-reranker-v2-m3`；`RERANK_TOP=10`，启用后单请求多一次往返 |
+| 精排 | ✅ **已启用（2026-10-27 定稿）** | `qwen3-rerank`（DashScope API），`RERANK_TOP=10`；实测 +0.04 MRR，单请求多一次往返（约 0.4 s） |
 | 并发/容量 | ✅ **有工具与闸门** | embedding 全局并发闸门 + listen backlog 512；`make load` 扫描并给出申报区间（见 §十二） |
 
 > **关于「API 配置」**：`service/.env` 已配好 DashScope（`EMBED_MODE=api`），该文件被 `.gitignore` 排除。
@@ -59,7 +59,7 @@ curl -s -X POST localhost:8080/search -H 'Content-Type: application/json' \
 一键验证（自动起临时服务 + 契约 + 复现性 + smoke）：
 
 ```bash
-make test      # 85 项单元/端到端测试
+make test      # 89 项单元/端到端测试
 make check     # contract 27/27 + replay + local smoke
 ```
 
@@ -180,7 +180,7 @@ Authentication `Authorization: Token`、Memory System Key = 你生成的那个�
 | `make init` / `tools/doctor.py --init` | 生成 `service/.env`（随机 key，600 权限） |
 | `make doctor` | 配置体检：模式/Key/连通性/SQLite/端口/鉴权/精排 |
 | `make run` | 启动服务（自动加载 `.env`） |
-| `make test` | 85 项单元 + 端到端测试 |
+| `make test` | 89 项单元 + 端到端测试 |
 | `make check` | 临时服务上跑契约 27 项 + replay + smoke |
 | `make contract` / `make replay` | 对已启动服务做契约 / 确定性检查 |
 | `make smoke URL=https://... KEY=...` | 线上 smoke（18 项） |

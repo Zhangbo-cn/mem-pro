@@ -18,6 +18,8 @@ import urllib.error
 import urllib.request
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+# 端到端测试只验证契约：不读开发者 .env（精排/真实 API 不应影响断言）
+os.environ.setdefault("DOTENV_DISABLE", "1")
 KEY = "test-key-0123456789"
 PNG = ("data:image/png;base64," + base64.b64encode(
     bytes.fromhex("89504e470d0a1a0a0000000d49484452000000010000000108060000001f15c4"

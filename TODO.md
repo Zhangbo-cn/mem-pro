@@ -17,11 +17,17 @@
       *完成标准*：`curl https://<域名>/health` 从手机 4G 能通
 - [ ] **A2 带宽**：2 Mbit/s 的机器跑 Full 要 50 分钟以上；升到 ≥20 Mbit/s 或改家宽
       *完成标准*：`DURATION=180` 持续压测 100% 成功，据此定申报值
-- [ ] **A3 精排开不开**：我给的数据是「开」（掉吞吐 0，确定性已验证，+0.04 MRR）
-      *完成标准*：`.env` 里 `RERANK_MODE` 定稿，冻结后不再改
+- [x] **A3 精排开不开 → 开（2026-10-27 用户决定）**
+      已写入 `service/.env`：`RERANK_MODE=http` / `KIND=dashscope` / `MODEL=qwen3-rerank` / `TOP=10`，
+      `RERANK_API_KEY=$DASHSCOPE_API_KEY`（dotenv 现支持 `$VAR` 展开，未定义会展开成空串并由 doctor 报错）。
+      实测：doctor 探活 ✅；同 query 连查 3 次响应字节一致；单次 Search 本地约 0.16 s（query 命中向量缓存时）。
+      *完成标准*：冻结后不再改；如需回滚，`RERANK_MODE=none`。
 - [ ] **A4 报名信息**：联系人、机构/团队、可公开展示的信息范围
       *完成标准*：`SUBMISSION.md` 里 4 个空位填满
-- [ ] **A6 问官方评分口径（最高优先级，决定 MAX_RESULTS）**
+- [x] **A6 问官方评分口径（2026-10-27 已答复）**
+      答复：少于 `top_k` **允许**（是上限，不要求凑足），但"返回较少可能减少有效证据，不能保证对得分没有影响"；
+      统一多模态 Answer 路径会消费按协议返回且成功解析的图片，**没有全局固定的最多几张**（取决于尺寸/detail/上下文预算）。
+      → 决定：`MAX_RESULTS=0`（不额外截断，上限即 `top_k`）；`MAX_IMAGES=6` 保留为**自设**带宽取舍。全文见 `research/07` 附录 A。
       原话可直接复制：「Mem-Gallery 的 F1 是在统一 Answer 输出上计算，还是在 Search 返回条目上计算？
       Search 返回条数少于 top_k 是否扣分？」
       *完成标准*：拿到书面答复存入 research/07；答案口径 → `MAX_RESULTS=20`，检索口径 / 不明 → 保持 0

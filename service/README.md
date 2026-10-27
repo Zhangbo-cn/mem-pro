@@ -9,7 +9,7 @@ service/  server.py    HTTP、鉴权、幂等锁、并发闸门、结构化日�
           store.py     SQLite：记忆 + 向量 + 幂等表；全局递增 seq
           retrieve.py  dense + BM25 → 加权融合 → 时态微调 → 去重 → 可选精排
           budget.py    117,760 token / 28 MiB / 图片配额 三重裁剪
-          dotenv.py    极简 .env 加载器（无第三方依赖）
+          dotenv.py    极简 .env 加载器（无第三方依赖，支持 $VAR 展开）
 tools/    contract_check.py  11 类 27 项契约自检
           replay.py          幂等 + 确定性检查
           doctor.py          配置体检 / 生成 .env
@@ -138,7 +138,7 @@ python3 tools/smoke.py  https://mem.example.com --key "$KEY"
 | `DEDUP_COS` | 0.97 | 近重复阈值 |
 | `USER_CACHE_MAX_BYTES` | 64 MiB | 用户记忆缓存估算上限；0 关闭 |
 | `RANK_INDEX_MAX_MB` | 64 | 检索索引（倒排 + 向量矩阵/行）缓存上限；超限自动退回逐文档计算 |
-| `RERANK_MODE` | none | `http` 时启用精排 |
+| `RERANK_MODE` | none | `http` 时启用精排（本部署已设为 `http`） |
 | `RERANK_URL` / `RERANK_MODEL` / `RERANK_API_KEY` | — | 精排端点 |
 | `RERANK_KIND` | tei | `tei` / `dashscope` |
 | `RERANK_TOP` / `RERANK_TIMEOUT` | 10 / 5s | 精排条数与单次超时 |

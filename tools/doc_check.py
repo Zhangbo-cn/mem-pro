@@ -42,6 +42,19 @@ print(json.dumps({
     return json.loads(out.stdout.strip().splitlines()[-1])
 
 
+def submission_rerank_on() -> bool:
+    """提交配置（service/.env）是否启用精排：文档必须与实际提交的配置一致。"""
+    env_file = os.path.join(ROOT, "service", ".env")
+    try:
+        for line in open(env_file, encoding="utf-8"):
+            line = line.strip()
+            if line.startswith("RERANK_MODE="):
+                return line.split("=", 1)[1].strip().lower() == "http"
+    except OSError:
+        return False
+    return False
+
+
 def test_count() -> int:
     n = 0
     for f in os.listdir(os.path.join(ROOT, "tests")):
@@ -63,7 +76,9 @@ def main() -> int:
         ("SUBMISSION 时态权重", sub, f"扣 {rt['temporal_weight']:g}"),
         ("SUBMISSION 精排容差", sub, f"分差 < {rt['rerank_tol']:g}"),
         ("SUBMISSION 精排模型", sub, rt["rerank_model"]),
-        ("SUBMISSION 精排默认", sub, "默认关闭" if rt["rerank_mode"] == "none" else "默认开启"),
+        ("SUBMISSION 精排状态",
+         sub,
+         ("RERANK_MODE=http" if submission_rerank_on() else "代码默认值仍为 `RERANK_MODE=none`")),
         ("SUBMISSION 返回条数", sub, f"MAX_RESULTS={rt['max_results']}"),
         ("SUBMISSION 图片上限", sub, f"图片 ≤ {rt['max_images']} 张"),
         ("SUBMISSION token 预算", sub, f"token ≤ {tok}"),
