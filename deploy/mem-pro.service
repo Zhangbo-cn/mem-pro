@@ -8,7 +8,8 @@ Type=simple
 User=mempro
 Group=mempro
 WorkingDirectory=/opt/mem-pro
-EnvironmentFile=/opt/mem-pro/service/.env
+# 不要用 EnvironmentFile：systemd 不展开 $VAR，会把 `RERANK_API_KEY=$DASHSCOPE_API_KEY`
+# 当成字面量写进环境变量，导致精排 401 后静默降级。交给 service/dotenv.py 读取并展开。
 Environment=MALLOC_ARENA_MAX=2
 ExecStart=/usr/bin/python3 service/server.py
 Restart=always

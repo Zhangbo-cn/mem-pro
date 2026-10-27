@@ -21,7 +21,7 @@
 | 公开仓库 | https://github.com/Zhangbo-cn/mem-pro |
 | 联系人 / 团队 | ☐ |
 | 赛道 / 组别 | 多模态记忆赛道 / **开源方法榜**（组别只能选一个） |
-| 接口地址 | ☐ `https://<domain>/add`、`https://<domain>/search`（公网 HTTPS） |
+| 接口地址 | `http://113.44.133.30/add`、`http://113.44.133.30/search`（公网 IP + 80；域名 `comp.mem-pro.asia` 未备案，80/443 被按 Host/SNI 拦截，见 `deploy/LOCAL_DEPLOY.md` §七） |
 | 鉴权方式 | `Authorization: Token <Memory System Key>`（同时接受 `Bearer` / `X-Api-Key`） |
 | 允许公开展示 | ☐（建议：方法说明、架构图、评测分类指标；不含任何 Key、不含评测数据样本） |
 
@@ -115,7 +115,7 @@ POST /search query ──▶ embedding ──┬─▶ 稠密余弦(归一化向
 git clone https://github.com/Zhangbo-cn/mem-pro && cd mem-pro
 cp service/.env.example .env      # 填 MEMORY_SYSTEM_KEY / DASHSCOPE_API_KEY
 docker compose --profile tls up -d --build
-curl -s https://<domain>/version  # commit 与 config_hash 必须与提交材料一致
+curl -s -H "Authorization: Token $KEY" http://113.44.133.30/version  # commit 与 config_hash 必须与提交材料一致
 ```
 
 - 复现性：`EMBED_MODE=api`、`text-embedding-v4`、`temperature=0`（caption 关闭时无采样）；打分全程 float64；并列按 `融合分 ↓ → created_at ↓ → id ↑` 定序；`tools/replay.py` 验证 5 次重放字节一致。

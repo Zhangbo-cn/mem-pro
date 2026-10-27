@@ -178,3 +178,53 @@ curl -s -H "Authorization: Token <key>" https://你的域名:8443/version
 | `401 invalid credential` | 平台用的是 `Memory System Key`，不是 Leaderboard Key | 核对凭证用途（`research/06` §三） |
 | 中途 IP 变了 | 动态 IP 未更新 | DDNS 缩短 TTL；或直接用方案 B |
 | 评测中断 | 平台支持断点续跑，同一 `request_id` 幂等 | 不要删库、不要改版本，重启后等平台恢复 |
+
+---
+
+## 七、云主机实测部署记录（2026-10-28，华为云 2C2G 深圳）
+
+### 7.1 结果
+
+| 项 | 值 |
+|---|---|
+| 机器 | `hcss-ecs-4f13`，Ubuntu 24.04，2 vCPU / 1.7 GiB / 40 GiB，**2 Mbit/s 峰值带宽** |
+| 部署 | `/opt/mem-pro`（`git clone` 自 bundle，commit `08d5de2`），systemd `mem-pro.service`（`mempro` 用户，`MALLOC_ARENA_MAX=2`，`python3-numpy` 1.26.4） |
+| 反向代理 | Caddy 2.11.7，`/etc/caddy/Caddyfile`，**当前只监听 `:80`（HTTP + IP）** |
+| 接口 | `http://113.44.133.30/add`、`http://113.44.133.30/search` |
+| 自检 | 外网 `contract 27/27`、`smoke 18/18`、replay 幂等 + 5 次字节一致 ✅ |
+| 版本 | `/version` → `commit=08d5de2ea109`、`config_hash=1db7510cb14b0baf` |
+| 配置 | `EMBED_MODE=api`（text-embedding-v4）、精排 `qwen3-rerank`（`RERANK_TOP=10`）、**`MAX_IMAGES=3`**、`MAX_INFLIGHT=32`、`EMBED_CONCURRENCY=12`、`MAX_RESULTS=0` |
+
+### 7.2 两个必须记住的坑
+
+1. **不要用 systemd `EnvironmentFile=` 传 `.env`**：systemd 不展开 `$VAR`，会把
+   `RERANK_API_KEY=$DASHSCOPE_API_KEY` 当字面量写进环境变量；`dotenv` 见到变量已存在便不再展开 →
+   精排每次 401 → 静默降级（`/version` 的 `rerank.fails` 会持续增长）。
+   正确做法：单元里不设 `EnvironmentFile`，让 `service/dotenv.py` 自己读 `/opt/mem-pro/service/.env`。
+   实测：改前 `calls=3 / fails=3`，改后 `calls=5 / fails=0`。
+2. **大陆未备案域名无法直接对外**：`comp.mem-pro.asia` 已解析到该 IP，但
+   `http://comp.mem-pro.asia/...` 返回 `Server: ADM/2.1.1` 的 **403**，`https://` 带该 SNI 会被重置
+   （TLS-ALPN 校验报 `Connection reset by peer`）。**按 IP 访问 80/443 正常**。
+   要域名 + HTTPS，只有三条路：ICP 备案（来不及）、CDN 前置（Cloudflare 代理 + 源站走非标端口）、隧道
+   （Cloudflare Tunnel 之类，出向建立连接）。
+
+### 7.3 实测容量（2 vCPU，回环，`--nonce` 绕开向量缓存）
+
+```
+ conc        ok    req/s      p50      p95      p99
+    1   336/336      7.46    115.9    248.8    364.9
+    4  1323/1323     29.06    103.7    344.0    943.5
+    8  2442/2442     53.18     51.0    924.4    990.0
+   16  3497/3497     76.04     50.6    982.7   1138.9
+```
+
+**回环能到 76 req/s，但公网只有 2 Mbit**：实测该机上行 0.22–0.52 MB/s（=1.8–4.2 Mbit，持续值约 0.25 MB/s）。
+按 `MAX_IMAGES=3` 平均 1.20 MiB/次响应算，单次传输 ≈4.8 s → **公网吞吐上限 ≈0.2 req/s**，
+与平台并发 C 同跑时单请求耗时 ≈ `C × 4.8 s`。因此申报：
+
+| 方向 | 建议申报 | 依据 |
+|---|---|---|
+| Search | **2**（最多 4） | 2 Mbit ÷ 1.20 MiB ≈ 0.2 req/s；并发 2 时单请求 ≈10 s，远小于 30 min |
+| Add | **2–4** | 单次 Add 上传 ≤30 MiB 走上行，但平台侧是它下行我们下行… 实测下行 1.26 MB/s，图片 Add 主要吃它自己的下行 |
+
+> 结论：这台机器**能过 Smoke/单条请求**，但要按 2 并发申报；想按原来的 16 并发申报必须换 ≥100 Mbit 出方向。
