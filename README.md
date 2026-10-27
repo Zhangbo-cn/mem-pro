@@ -554,6 +554,10 @@ hash 代理榜上 MRR +0.007 但 R@100 反降 0.031，方向不一致，**默认
 | 单图大小 p50 / p90 / max | 41 KB / 776 KB / 18.9 MiB | 同 |
 
 - **全部在 30 MiB 上限内**：`budget.clip` 的字节预算（28 MiB）起作用，max 22.4 MiB。
+- **内存差点 OOM**：真图库（505 MiB DB）下并发 Search，RSS 峰值 4 并发 0.7 / 16 并发 1.2 / **32 并发 1.76 GiB**，
+  超过 compose 的 1.5 GiB 限额。根因是 glibc 每线程一个 malloc arena，几 MiB 的 Base64 在各 arena 里碎片化不归还。
+  镜像 / systemd / `make run` 统一设 `MALLOC_ARENA_MAX=2` 后峰值 **0.52 / 0.57 / 0.60 GiB**，吞吐不变（20–24 req/s）。
+  另把 Search 取图改为按 10 条一批、够 `MAX_IMAGES×2` 张就停（输出字节不变，已比对 1,711×2 次响应 hash）。
 - 官方集里有 **7 张超过 10 MiB 单图上限**——平台按规则不会发，代理榜照此跳过；万一平台真发了，服务端 422（不静默截断）。
 - **带宽重新估算**：旧表按每图 150 KB 估，实际平均每次响应 2.38 MiB，20 Mbit 跑完 1,711 条要 **≈29 分钟**
   而不是 6 分钟。新表见 `deploy/LOCAL_DEPLOY.md`。带宽 < 50 Mbit 时建议 `MAX_IMAGES=3`

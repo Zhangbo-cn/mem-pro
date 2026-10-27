@@ -9,6 +9,7 @@ User=mempro
 Group=mempro
 WorkingDirectory=/opt/mem-pro
 EnvironmentFile=/opt/mem-pro/service/.env
+Environment=MALLOC_ARENA_MAX=2
 ExecStart=/usr/bin/python3 service/server.py
 Restart=always
 RestartSec=2

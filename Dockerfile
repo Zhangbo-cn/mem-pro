@@ -5,7 +5,11 @@ ENV PYTHONUNBUFFERED=1 \
     PYTHONDONTWRITEBYTECODE=1 \
     HOST=0.0.0.0 \
     PORT=8080 \
-    DB_PATH=/data/mem.db
+    DB_PATH=/data/mem.db \
+    MALLOC_ARENA_MAX=2
+# MALLOC_ARENA_MAX=2：glibc 默认每线程一个 malloc arena，真图 Search（单次几 MiB Base64）
+# 在 32 并发下把 RSS 推到 1.7 GiB（compose 限额 1.5 GiB → OOM）；限到 2 个 arena 后
+# 峰值 0.6 GiB，吞吐不变（实测 20–24 req/s 两边一致，见 README §14.1）
 
 # 版本可核验：镜像里没有 .git，构建时注入 commit，/version 会原样回显
 ARG GIT_COMMIT=unknown

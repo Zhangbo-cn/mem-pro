@@ -389,9 +389,19 @@ def do_search(req: dict, timings: dict | None = None) -> dict:
                       "score": round(float(score), 6), "created_at": d["created_at"]})
     started = time.perf_counter()
     if items:
-        images = store.fetch_images([it["id"] for it in items], req["user_id"])
-        for it in items:
-            it["images"] = images.get(it["id"], [])
+        # 只取够用的图片：budget.clip 最多放 MAX_IMAGES 张，按顺序分批取、够数就停。
+        # 之前一次取 100 条的全部 Base64（真图实测单次可达几十 MiB），16 并发时 RSS 1.2 GiB。
+        # 预算裁掉图片时（字节/ token 超限）后面的条目才可能补位，所以多取一批余量。
+        need = MAX_IMAGES * 2 if MAX_IMAGES > 0 else 0
+        got = 0
+        for start in range(0, len(items), 10):
+            if got >= need:
+                break
+            chunk = items[start:start + 10]
+            images = store.fetch_images([it["id"] for it in chunk], req["user_id"])
+            for it in chunk:
+                it["images"] = images.get(it["id"], [])
+                got += len(it["images"])
     timings["search_images_ms"] = round((time.perf_counter() - started) * 1000, 2)
 
     started = time.perf_counter()

@@ -32,7 +32,7 @@ init:
 	$(PY) tools/doctor.py --init
 
 run:
-	$(PY) service/server.py
+	MALLOC_ARENA_MAX=2 $(PY) service/server.py
 
 test:
 	$(PY) -m unittest discover -s tests -v
