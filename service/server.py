@@ -54,13 +54,12 @@ MAX_IMG_BYTES = 10 * 1024 * 1024
 MAX_ADD_BYTES = 30 * 1024 * 1024
 MAX_RESPONSE_BYTES = 30 * 1024 * 1024
 MAX_IMAGES = int(os.environ.get("MAX_IMAGES", str(budget.MAX_IMAGES)))
-# 返回条数上限（0 = 老实按平台给的 top_k）。契约只要求「不得超过 top_k」，所以收窄合法。
-# 默认 20，依据 tools/e2e_proxy.py 的端到端答案评测（1,711 条 QA，qwen-flash 作答）：
+# 返回条数上限（0 = 老实按平台给的 top_k，默认）。契约只要求「不得超过 top_k」，收窄合法。
+# 端到端答案评测（tools/e2e_proxy.py，1,711 条 QA，qwen-flash 作答）：
 #   top_k  5 / 10 / 20 / 50 / 100 → token-F1 0.504 / 0.527 / 0.521 / 0.514 / 0.505
-# 答案在 10–20 条饱和，再往后只是把提示塞长：TTL（看图答名字）EM 0.33→0.17，
-# 而平台 Top K 固定为 100 时多给的 80 条既换不来答案、又让响应体积多 50%。
-# 想老实按 top_k 返回就设 MAX_RESULTS=0。
-MAX_RESULTS = int(os.environ.get("MAX_RESULTS", "20"))
+# 但若评分对象是 Search 输出本身（研究笔记 08/09/10 的口径），收窄到 20 会让
+# R@100 0.70→0.35。两种口径下最优值相反，官方答复前默认不收窄（见 README §十六）。
+MAX_RESULTS = int(os.environ.get("MAX_RESULTS", "0"))
 MAX_INFLIGHT = int(os.environ.get("MAX_INFLIGHT", "64"))
 STARTUP_CHECK = os.environ.get("STARTUP_CHECK", "1") == "1"
 APPEND_OPTIONS = os.environ.get("APPEND_OPTIONS", "0") == "1"
@@ -89,29 +88,42 @@ def _commit() -> str:
     return "unknown"
 
 
+_RUNTIME_COUNTERS = ("calls", "fails", "degraded", "cooldown_skips")
+
+
 def _config_fingerprint() -> str:
-    """影响排序结果的配置指纹：改了任何一个都会改变输出字节。
-    平台核对「版本一致」时，commit + 这个指纹才说明线上配置没被临时改过。"""
+    """影响输出字节的配置指纹：改了任何一个都会改变它。
+
+    检索侧直接取 `retrieve.info()` 全量（去掉运行时计数器），新加开关只要进了 info()
+    就自动进指纹——之前手工列字段漏过 DIVERSITY / DATE_WEIGHT。
+    """
     import retrieve
-    parts = [SERVER_VERSION, "embed:%s:%s:%d" % (embed.MODE, embed.MODEL, embed.DIM),
-             "fusion:%s:%.3f:%.3f:%s:%s" % (retrieve.FUSION, retrieve.DENSE_WEIGHT,
-                                            retrieve.SPARSE_WEIGHT, retrieve.SPARSE_NORM,
-                                            retrieve.BM25_RARE_DF),
-             "temporal:%s:%.3f" % (retrieve.TEMPORAL_RULE, retrieve.TEMPORAL_WEIGHT),
-             "date:%s:%.3f:%.3f" % (retrieve.RECENCY_RULE, retrieve.DATE_WEIGHT,
-                                    retrieve.RECENCY_WEIGHT),
-             "dedup:%.3f" % retrieve.DEDUP_COS, "ctx:%d" % EMBED_CONTEXT,
-             "rerank:%s:%s:%d:%.5f" % (retrieve.RERANK_MODE, retrieve.RERANK_MODEL,
-                                       retrieve.RERANK_TOP, retrieve.RERANK_TOL),
-             "budget:%d:%d:%d:%d" % (budget.TOKEN_BUDGET, budget.BYTE_BUDGET,
-                                     MAX_IMAGES, MAX_RESULTS),
+    r = retrieve.info()
+    r["rerank"] = {k: v for k, v in r.get("rerank", {}).items() if k not in _RUNTIME_COUNTERS}
+    ecfg = {"mode": embed.MODE, "model": embed.MODEL, "dim": embed.DIM}
+    parts = [SERVER_VERSION, json.dumps(ecfg, sort_keys=True),
+             json.dumps(r, sort_keys=True, default=str),
+             "ctx:%d:%d" % (EMBED_CONTEXT, EMBED_CONTEXT_CHARS),
+             "budget:%d:%d:%d:%d:%d" % (budget.TOKEN_BUDGET, budget.BYTE_BUDGET,
+                                        MAX_IMAGES, MAX_RESULTS, budget.IMG_TOKEN_COST),
              "caption:%s:%s" % (caption.MODE, caption.MODEL)]
     return hashlib.sha256("|".join(parts).encode()).hexdigest()[:16]
 
 
 COMMIT = _commit()
 
-IMG_URI = re.compile(r"^data:image/(jpeg|jpg|png|webp);base64,[A-Za-z0-9+/=\s]+$", re.I)
+# 任意 image/* 子类型都收：ATM-Bench 是手机相册（heic/gif 常见），这里只存、只回传，
+# 不解码，没理由因为子类型不认识就让整条 Add 失败（规则要求「所有评测任务均执行成功」）。
+IMG_URI = re.compile(r"^data:image/[a-z0-9.+-]+;base64,[A-Za-z0-9+/=\s]+$", re.I)
+# 宽进：空 text 段 / 未知 part 类型 / 非 data URI 的图片 → 跳过该 part 并计数，不拒整条。
+# 只有整条 content 跳完之后什么都不剩才 422。计数在 /version 的 skipped_parts 里。
+_SKIPPED: dict[str, int] = {"empty_text": 0, "unknown_type": 0, "bad_image": 0}
+_SKIPPED_LOCK = threading.Lock()
+
+
+def _skip(kind: str) -> None:
+    with _SKIPPED_LOCK:
+        _SKIPPED[kind] += 1
 
 
 class Bad(Exception):
@@ -158,21 +170,24 @@ def norm_content(content, field: str = "content") -> tuple[str, list[str]]:
         if t == "text":
             v = part.get("text")
             if not isinstance(v, str) or not v.strip():
-                raise Bad(f"{field} 中 type=text 必须带非空 text")
+                _skip("empty_text")          # 平台「原图 + caption」里 caption 可能为空
+                continue
             texts.append(v)
         elif t == "image_url":
             iu = part.get("image_url")
-            url = iu.get("url") if isinstance(iu, dict) else None
+            url = iu.get("url") if isinstance(iu, dict) else iu
             if not isinstance(url, str) or not IMG_URI.match(url):
-                raise Bad(f"{field} 中 image_url.url 必须是内联 Base64 data URI（不接受远程 URL）")
+                _skip("bad_image")           # 远程 URL / 非图片：不抓取，跳过
+                continue
             if body_bytes(url) > MAX_IMG_BYTES:
                 raise Bad(f"{field} 中单图超过 10 MiB")
             images.append(url)
         else:
-            raise Bad(f"{field} 中出现不支持的 type: {t!r}")
+            _skip("unknown_type")
+            continue
     text = "\n".join(texts).strip()
     if not text and not images:
-        raise Bad(f"{field} 没有任何内容")
+        raise Bad(f"{field} 没有任何可用内容（需要非空 text 或内联 Base64 图片）")
     return (text or "(image only)"), images
 
 
@@ -486,6 +501,7 @@ class Handler(BaseHTTPRequestHandler):
                                         "embed": embed.info(),
                                         "caption": caption.info(),
                                         "max_results": MAX_RESULTS,
+                                        "skipped_parts": dict(_SKIPPED),
                                         "retrieval": retrieve.info()})
             self._log(200, started)
             return self._send(200, {"memories": store.count(), "embed": embed.info(),

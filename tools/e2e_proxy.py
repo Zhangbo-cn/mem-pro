@@ -163,6 +163,9 @@ def main() -> int:
     tmp = tempfile.mkdtemp(prefix="mempro-e2e-")
     os.environ["DB_PATH"] = os.path.join(tmp, "e2e.db")
     os.environ.setdefault("STARTUP_CHECK", "0")
+    # 代理榜量的是「检索质量」：返回条数必须等于 --top-k，不能被服务默认的 MAX_RESULTS 截断
+    # （否则 R@100 会被悄悄砍成 R@20，跟历史基线不可比）。要测收窄效果就显式传环境变量。
+    os.environ.setdefault("MAX_RESULTS", "0")
     import server  # noqa: E402
     import store   # noqa: E402
     import embed   # noqa: E402

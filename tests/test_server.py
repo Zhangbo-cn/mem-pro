@@ -333,6 +333,46 @@ class ServerTest(unittest.TestCase):
         self.assertEqual(st, 200)
         self.assertEqual(len(body["data"]), 3, "不同图片的纯图记忆被当成重复丢了")
 
+    def test_09b_lenient_parts_never_fail_the_whole_add(self):
+        """平台数据里出现不常见的图片子类型 / 空 caption / 未知 part 时，跳过那一段而不是 400。
+
+        规则要求「所有评测任务均执行成功」：一条 Add 被拒 = 那条对话的记忆全丢。
+        """
+        gif = "data:image/gif;base64,R0lGODlhAQABAAAAACw="
+        heic = "data:image/heic;base64,AAAAGGZ0eXBoZWlj"
+        cases = {
+            "gif": [{"type": "text", "text": "gif photo"},
+                    {"type": "image_url", "image_url": {"url": gif}}],
+            "heic": [{"type": "text", "text": "heic photo"},
+                     {"type": "image_url", "image_url": {"url": heic}}],
+            "empty-caption": [{"type": "image_url", "image_url": {"url": PNG}},
+                              {"type": "text", "text": ""}],
+            "unknown-part": [{"type": "input_audio", "data": "x"},
+                             {"type": "text", "text": "still keep this text"}],
+        }
+        for rid, content in cases.items():
+            st, body = self.add(f"lenient:{rid}", "e2e:lenient", "s1",
+                                [{"role": "user", "content": content}])
+            self.assertEqual(st, 200, f"{rid}: {body}")
+        st, body = self.search("still keep this text", "e2e:lenient", 10)
+        self.assertEqual(st, 200)
+        self.assertTrue(any("still keep" in d["content"] if isinstance(d["content"], str)
+                            else any(p.get("text", "").startswith("still keep")
+                                     for p in d["content"]) for d in body["data"]))
+        # heic 图片原样回传（不解码、不转码）
+        st, body = self.search("heic photo", "e2e:lenient", 10)
+        urls = [p["image_url"]["url"] for d in body["data"] if isinstance(d["content"], list)
+                for p in d["content"] if p.get("type") == "image_url"]
+        self.assertIn(heic, urls)
+        # 跳过的段要计数，否则问题被静默吞掉
+        v = self._get(self.base, "/version")
+        self.assertGreaterEqual(v["skipped_parts"]["empty_text"], 1)
+        self.assertGreaterEqual(v["skipped_parts"]["unknown_type"], 1)
+        # 跳完一无所有才拒：只有一张远程 URL 图
+        st, _ = self.add("lenient:remote-only", "e2e:lenient", "s1", [{"role": "user", "content": [
+            {"type": "image_url", "image_url": {"url": "https://example.com/a.png"}}]}])
+        self.assertTrue(400 <= st < 500)
+
     def test_10_unknown_path(self):
         self.assertEqual(self.call("/nope", key=None)[0], 404)
         self.assertEqual(self.call("/nope", {}, key=KEY)[0], 404)

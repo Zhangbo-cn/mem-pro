@@ -4,7 +4,7 @@
 - user_id 隔离 ⇒ 每次只对该用户的记忆做精确打分；热数据与 query-independent 索引有界缓存
 - Search 只部分排序到 top_k 与去重/精排所需的 overfetch，避免全量排序
 - 精排是唯一不受模型限制的环节，但只对短名单做（延迟预算）
-- 并列必须全序 tie-break（score desc, created_at asc, id asc）⇒ 复现确定
+- 并列必须全序 tie-break（score desc, created_at desc, id asc）⇒ 复现确定
 """
 from __future__ import annotations
 
@@ -1123,11 +1123,16 @@ def run(qvec: list[float], query_text: str, docs: list[dict],
 
 def info() -> dict:
     """当前生效的检索配置（/version 披露；复现与提交材料核对用）。"""
+    # 这里列的每一项都会进 server._config_fingerprint()：凡影响排序的开关必须在此出现
+    # （tests 里有一条测试逐个改环境变量验证指纹会变）。纯运维参数（超时/重试/池大小）不列。
     return {"fusion": FUSION, "dense_weight": DENSE_WEIGHT, "sparse_weight": SPARSE_WEIGHT,
-            "sparse_norm": SPARSE_NORM, "bm25_rare_df": BM25_RARE_DF, "cjk_tokens": CJK_TOKENS,
+            "rrf_k": RRF_K, "sparse_norm": SPARSE_NORM, "bm25_rare_df": BM25_RARE_DF,
+            "cjk_tokens": CJK_TOKENS,
             "temporal_rule": TEMPORAL_RULE, "temporal_weight": TEMPORAL_WEIGHT,
             "date_weight": DATE_WEIGHT, "recency_rule": RECENCY_RULE,
-            "dedup_cos": DEDUP_COS, "diversity": DIVERSITY,
+            "recency_weight": RECENCY_WEIGHT,
+            "dedup_cos": DEDUP_COS, "dedup_pool": DEDUP_POOL,
+            "diversity": DIVERSITY, "diversity_pool": DIVERSITY_POOL,
             "rerank": {"mode": RERANK_MODE, "kind": RERANK_KIND,
-                       "model": RERANK_MODEL or None, "top": RERANK_TOP,
+                       "model": RERANK_MODEL or None, "top": RERANK_TOP, "tol": RERANK_TOL,
                        **_RERANK_STATS}}

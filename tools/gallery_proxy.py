@@ -53,6 +53,39 @@ def _png(seed: str) -> str:
     return "data:image/png;base64," + base64.b64encode(png).decode()
 
 
+IMG_DIR = os.path.join(ROOT, "data", "mem-gallery", "image")
+_REAL = {"on": False, "topic": "", "missing": 0, "oversize": 0, "bytes": 0}
+_MIME = {"jpg": "jpeg", "jpeg": "jpeg", "png": "png", "webp": "webp", "gif": "gif"}
+
+
+def _real(rel: str) -> str | None:
+    """真实图片 → data URI。缺文件或超过官方单图 10 MiB 上限时返回 None（平台不会发这种图）。"""
+    path = os.path.join(IMG_DIR, _REAL["topic"], rel)
+    for cand in (path, path + ".jpg", path + ".png"):
+        if os.path.isfile(cand):
+            path = cand
+            break
+    else:
+        _REAL["missing"] += 1
+        return None
+    raw = open(path, "rb").read()
+    if len(raw) > 10 * 1024 * 1024:
+        _REAL["oversize"] += 1
+        return None
+    _REAL["bytes"] += len(raw)
+    ext = path.rsplit(".", 1)[-1].lower()
+    return f"data:image/{_MIME.get(ext, 'jpeg')};base64," + base64.b64encode(raw).decode()
+
+
+def _image(img_id: str) -> str | None:
+    """--real-images 时读 data/mem-gallery/image/<topic>/D1_IMG_001.jpg，否则 1×1 占位图。"""
+    if not _REAL["on"]:
+        return _png(img_id)
+    if img_id.startswith("../image/"):          # QA 的 question_image 是相对路径
+        return _real(img_id.split("/", 3)[-1])
+    return _real(img_id.replace(":", "_"))
+
+
 def _ts(date: str, k: int) -> int:
     t = calendar.timegm(time.strptime(date, "%Y-%m-%d"))
     return t * 1000 + k * 60_000
@@ -62,8 +95,8 @@ def round_messages(r: dict, date: str, k: int, with_images: bool) -> list[dict]:
     user_parts = [{"type": "text", "text": r["user"]}] if r.get("user") else []
     for img_id, cap in zip(r.get("image_id") or [], r.get("image_caption") or []):
         user_parts.append({"type": "text", "text": f"[image {img_id}] {cap}"})
-        if with_images:
-            user_parts.append({"type": "image_url", "image_url": {"url": _png(img_id)}})
+        if with_images and (url := _image(img_id)):
+            user_parts.append({"type": "image_url", "image_url": {"url": url}})
     msgs = []
     if user_parts:
         content = user_parts if len(user_parts) > 1 else user_parts[0]["text"]
@@ -82,8 +115,8 @@ def query_content(q: dict, with_images: bool):
         cap = " ".join(cap)
     if cap:
         parts.append({"type": "text", "text": f"[image] {cap}"})
-    if with_images:
-        parts.append({"type": "image_url", "image_url": {"url": _png(q["question_image"])}})
+    if with_images and (url := _image(q["question_image"])):
+        parts.append({"type": "image_url", "image_url": {"url": url}})
     return parts
 
 
@@ -142,7 +175,8 @@ def _warm(dialogs, server, embed, args) -> None:
     import concurrent.futures
 
     texts: list[str] = []
-    for _, d in dialogs:
+    for f, d in dialogs:
+        _REAL["topic"] = os.path.splitext(os.path.basename(f))[0]
         for s in d["multi_session_dialogues"]:
             bodies: list[str] = []
             imgs: list[list[str]] = []
@@ -193,13 +227,20 @@ def main() -> int:
     ap.add_argument("--jobs", type=int, default=8, help="parallel warm-up workers")
     ap.add_argument("--split", choices=("all", "a", "b"), default="all",
                     help="a/b: alternating files — tune on one half, verify on the other")
+    ap.add_argument("--real-images", action="store_true",
+                    help="用 data/mem-gallery/image/ 下的真实图片（先下载，见 README §十四）"
+                         "替换 1×1 占位图：测体积、预算裁剪与延迟")
     ap.add_argument("--report", default="")
     args = ap.parse_args()
+    _REAL["on"] = args.real_images
     ks = [int(x) for x in args.k.split(",")]
 
     tmp = tempfile.mkdtemp(prefix="mempro-gallery-")
     os.environ["DB_PATH"] = os.path.join(tmp, "gallery.db")
     os.environ.setdefault("STARTUP_CHECK", "0")
+    # 代理榜量的是「检索质量」：返回条数必须等于 --top-k，不能被服务默认的 MAX_RESULTS 截断
+    # （否则 R@100 会被悄悄砍成 R@20，跟历史基线不可比）。要测收窄效果就显式传环境变量。
+    os.environ.setdefault("MAX_RESULTS", "0")
     import server  # noqa: E402  (reads env at import)
     import store   # noqa: E402
     import embed   # noqa: E402
@@ -226,8 +267,11 @@ def main() -> int:
     add_ms = search_ms = 0.0
     n_add = n_search = 0
     started = time.time()
+    resp_bytes: list[int] = []
+    resp_images: list[int] = []
     for f, d in dialogs:
         uid = "gallery:" + os.path.splitext(os.path.basename(f))[0]
+        _REAL["topic"] = os.path.splitext(os.path.basename(f))[0]
         msg_owner: dict[tuple[str, str, int], str] = {}
         for s in d["multi_session_dialogues"]:
             per_round = []
@@ -262,6 +306,10 @@ def main() -> int:
                                     "user_id": uid, "top_k": args.top_k})
             search_ms += (time.perf_counter() - t0) * 1000
             n_search += 1
+            if args.real_images:
+                resp_bytes.append(len(json.dumps(out, ensure_ascii=False).encode()))
+                resp_images.append(sum(1 for it in out["data"] if isinstance(it["content"], list)
+                                       for p in it["content"] if p.get("type") == "image_url"))
             got = [id2round.get(it["id"]) for it in out["data"]]
             gold = set(q.get("clue") or [])
             acc = per_point.setdefault(q["point"], {"n": 0, "mrr": 0.0, "returned": 0.0,
@@ -288,9 +336,19 @@ def main() -> int:
         return f"{name:<5} n={n:<4} MRR={a['mrr'] / n:.3f}  {cells}  All@{ks[-1]}={a[f'All@{ks[-1]}'] / n:.3f}"
 
     print(f"Mem-Gallery proxy  split={args.split} files={len(files)} embed={embed.info()['mode']} "
-          f"images={'off' if args.no_images else 'placeholder'}  top_k={args.top_k}")
+          f"images={'off' if args.no_images else ('real' if args.real_images else 'placeholder')}  top_k={args.top_k}  "
+          f"max_results={server.MAX_RESULTS}  config_hash={server._config_fingerprint()}")
     print(f"Add {n_add} 次 avg {add_ms / max(1, n_add):.1f} ms | Search {n_search} 次 "
           f"avg {search_ms / max(1, n_search):.1f} ms | 总耗时 {time.time() - started:.0f}s")
+    if args.real_images and resp_bytes:
+        rb = sorted(resp_bytes)
+        ri = sorted(resp_images)
+        print(f"真图: 写入 {_REAL['bytes'] / 2**20:.0f} MiB；缺失 {_REAL['missing']} 张、"
+              f"超 10 MiB 跳过 {_REAL['oversize']} 张（平台不会发）")
+        print(f"Search 响应体积 p50 {rb[len(rb) // 2] / 2**20:.2f} MiB / "
+              f"p95 {rb[int(len(rb) * .95)] / 2**20:.2f} MiB / max {rb[-1] / 2**20:.2f} MiB / "
+              f"均值 {sum(rb) / len(rb) / 2**20:.2f} MiB"
+              f"（上限 30 MiB）；每次返回图片 p50 {ri[len(ri) // 2]} / max {ri[-1]} 张")
     total = {"n": 0, "mrr": 0.0, "returned": 0.0, **{f"R@{k}": 0.0 for k in ks},
              **{f"All@{k}": 0.0 for k in ks}}
     for name in sorted(per_point):
@@ -302,7 +360,9 @@ def main() -> int:
     print("  " + fmt_row("ALL", total).replace("ALL  ", "ALL* ") + "   (*不含 AR)")
     if args.report:
         with open(args.report, "w", encoding="utf-8") as fh:
-            json.dump({"per_point": per_point, "total": total, "rows": rows}, fh,
+            json.dump({"config_hash": server._config_fingerprint(),
+                       "max_results": server.MAX_RESULTS, "top_k": args.top_k,
+                       "per_point": per_point, "total": total, "rows": rows}, fh,
                       ensure_ascii=False, indent=1)
     return 0
 

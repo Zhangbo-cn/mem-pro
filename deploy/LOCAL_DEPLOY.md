@@ -20,14 +20,20 @@ ip route get 1.1.1.1 | awk '{print $7}'      # 或看路由器 WAN 口地址
 # 3) 端口是否被封：80/443 在国内家宽基本被封，入站要用高端口
 ```
 
-带宽和 Search 吞吐的关系（实测数据，真图 150 KB 口径）：
+带宽和 Search 吞吐的关系（**2026-10-26 用 Mem-Gallery 官方真图重测**，旧表按「每图 150 KB」估算，
+低估了 5 倍以上——真图 p50 只有 41 KB，但长尾到 10 MiB，平均每次 Search 响应 **2.38 MiB**）：
 
-| 出口带宽 | 有效吞吐 | 1,711 条 query 耗时 |
+| 出口带宽 | `MAX_IMAGES=6`（默认，均值 2.38 MiB/次） | `MAX_IMAGES=3`（均值 1.20 MiB/次） |
 |---|---|---|
-| 2 Mbit/s | ≈0.5 req/s | 50 分钟以上 |
-| 20 Mbit/s | ≈5 req/s | ≈6 分钟 |
-| 50 Mbit/s | ≈12 req/s | ≈2.5 分钟 |
-| 100 Mbit/s | ≈16–20 req/s（上游配额封顶） | ≈1.5 分钟 |
+| 2 Mbit/s | ≈0.1 req/s，1,711 条 ≈ **4.8 小时** | ≈0.2 req/s，≈2.4 小时 |
+| 20 Mbit/s | ≈1 req/s，≈ **29 分钟** | ≈2 req/s，≈14 分钟 |
+| 50 Mbit/s | ≈2.5 req/s，≈11 分钟 | ≈5 req/s，≈6 分钟 |
+| 100 Mbit/s | ≈5 req/s，≈6 分钟 | ≈10 req/s，≈3 分钟 |
+
+> 量法：`EMBED_MODE=hash python3 tools/gallery_proxy.py --real-images --no-warm`
+> （先 `bash tools/fetch_gallery_images.sh` 下 520 MiB 官方图）。单次响应 p95 10.2 MiB、max 22.4 MiB，
+> 都在 30 MiB 上限内。**带宽才是瓶颈**：上游 embedding 配额封顶在 28 req/s，100 Mbit 都到不了。
+> 申报并发按这张表来：并发 ≈ 吞吐 × 单次耗时（≈ 带宽决定的传输时间 + 0.3 s）。
 
 ---
 

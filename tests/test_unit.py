@@ -375,6 +375,44 @@ class EmbedTest(unittest.TestCase):
         self.assertEqual(sorted(i for i, _ in a), list(range(6)))     # 不丢也不增
         self.assertEqual(retrieve.diversify(ranked, docs, None, lam=0.0), ranked)
 
+    def test_config_hash_covers_every_ranking_knob(self):
+        """每个影响输出字节的开关改一下，config_hash 都必须变（之前漏过 DIVERSITY/DATE_WEIGHT）。
+
+        每个变体起一个子进程读环境变量（配置在 import 时冻结）。
+        """
+        import subprocess
+        knobs = {"FUSION": "rrf", "DENSE_WEIGHT": "0.9", "SPARSE_WEIGHT": "0.1", "RRF_K": "30",
+                 "SPARSE_NORM": "max", "BM25_RARE_DF": "0.2", "TEMPORAL_RULE": "off",
+                 "TEMPORAL_WEIGHT": "0.1", "DATE_WEIGHT": "0.1", "RECENCY_RULE": "update",
+                 "RECENCY_WEIGHT": "0.1", "DEDUP_COS": "0.9", "DEDUP_POOL": "100",
+                 "DIVERSITY": "0.1", "DIVERSITY_POOL": "20", "RERANK_MODE": "http",
+                 "RERANK_MODEL": "x", "RERANK_TOP": "20", "RERANK_TOL": "0.001",
+                 "EMBED_CONTEXT": "1", "EMBED_CONTEXT_CHARS": "100", "MAX_IMAGES": "3",
+                 "MAX_RESULTS": "20"}
+        code = "import server; print(server._config_fingerprint())"
+        base_env = {k: v for k, v in os.environ.items() if k not in knobs}
+        base_env.update(EMBED_MODE="hash", STARTUP_CHECK="0", DOTENV_DISABLE="1",
+                        DB_PATH=os.path.join(tempfile.mkdtemp(), "h.db"))
+
+        def fp(extra):
+            out = subprocess.run([sys.executable, "-c", code], env={**base_env, **extra},
+                                 cwd=os.path.join(ROOT, "service"), capture_output=True,
+                                 text=True, timeout=30)
+            self.assertEqual(out.returncode, 0, out.stderr)
+            return out.stdout.strip().splitlines()[-1]
+
+        base = fp({})
+        self.assertEqual(base, fp({}), "指纹本身必须确定")
+        unchanged = [k for k, v in knobs.items() if fp({k: v}) == base]
+        self.assertEqual(unchanged, [], f"这些开关改了但 config_hash 没变：{unchanged}")
+
+    def test_submission_docs_match_runtime_defaults(self):
+        """SUBMISSION.md / README.md 写的数字必须等于代码默认值（审核按文档核对）。"""
+        import subprocess
+        out = subprocess.run([sys.executable, os.path.join(ROOT, "tools", "doc_check.py")],
+                             capture_output=True, text=True, timeout=60)
+        self.assertEqual(out.returncode, 0, out.stdout + out.stderr)
+
     def test_rerank_default_model_is_the_supported_one(self):
         """默认精排模型必须是 qwen3-rerank：gte-rerank-v2 已标注下线，
         实测同一请求分值最大跳 1.3e-3、48 次里 4 次顺序翻转，不能作为默认。"""

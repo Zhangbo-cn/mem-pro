@@ -5,6 +5,7 @@
   2) <repo>/.env
   3) <repo>/service/.env
 
+`DOTENV_DISABLE=1` 时完全不读（tools/doc_check.py、指纹测试用来读纯默认值）。
 支持 `KEY=value`、`export KEY=value`、单/双引号、`#` 行注释。
 服务与工具在读取配置前调用 `load()`，因此本地开发只需复制
 `service/.env.example` 为 `service/.env`，无需手动 export。
@@ -39,6 +40,9 @@ def load(paths: list[str | os.PathLike] | None = None, override: bool = False) -
     """加载 .env；返回实际读取的文件列表。重复调用只生效一次。"""
     global _LOADED
     if _LOADED and not override and paths is None:
+        return []
+    if os.environ.get("DOTENV_DISABLE") == "1" and paths is None:   # 测试/文档核对要读纯默认值
+        _LOADED = True
         return []
     candidates: list[Path] = []
     if paths:
