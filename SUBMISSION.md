@@ -16,7 +16,7 @@
 |---|---|
 | 系统名称 | **mem-pro** |
 | 版本号 | `mem-pro/0.2.0`（Full 受理后冻结，不得更换） |
-| 固定 Commit | ☐ 填 `git rev-parse HEAD`（线上 `/version` 的 `commit` 必须与之相同） |
+| 固定 Commit | `6d2147e9a1a88a344461b20b374a81c4d200d547`（tag `v1.0.0`；线上 `/version` 的 `commit` = `6d2147e9a1a8`，`config_hash` = `92d381b0beb88e5a`） |
 | 配置指纹 | `92d381b0beb88e5a`（16 位；`/version` 可对；改任何排序参数或 `MAX_IMAGES` / `MAX_RESULTS` / `IMG_MAX_SIDE` 都会变） |
 | 公开仓库 | https://github.com/Zhangbo-cn/mem-pro |
 | 联系人 / 团队 | ☐ |
