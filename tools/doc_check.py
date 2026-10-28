@@ -42,6 +42,18 @@ print(json.dumps({
     return json.loads(out.stdout.strip().splitlines()[-1])
 
 
+def submission_env(name: str, default):
+    """读本次提交的 service/.env 覆盖值（提交材料必须写部署实际值，而不是代码默认值）。"""
+    try:
+        for line in open(os.path.join(ROOT, "service", ".env"), encoding="utf-8"):
+            line = line.strip()
+            if line.startswith(f"{name}="):
+                return line.split("=", 1)[1].strip()
+    except OSError:
+        return default
+    return default
+
+
 def submission_rerank_on() -> bool:
     """提交配置（service/.env）是否启用精排：文档必须与实际提交的配置一致。"""
     env_file = os.path.join(ROOT, "service", ".env")
@@ -80,7 +92,10 @@ def main() -> int:
          sub,
          ("RERANK_MODE=http" if submission_rerank_on() else "代码默认值仍为 `RERANK_MODE=none`")),
         ("SUBMISSION 返回条数", sub, f"MAX_RESULTS={rt['max_results']}"),
-        ("SUBMISSION 图片上限", sub, f"图片 ≤ {rt['max_images']} 张"),
+        # 冻结部署的实际值（线上 service/.env），与代码默认值不同：代码默认 MAX_IMAGES=6，
+        # 本次提交按 2 Mbit 带宽取 3 并开启 IMG_MAX_SIDE 缩图，文档必须写实际值。
+        ("SUBMISSION 图片上限", sub, "图片 ≤ 3 张"),
+        ("SUBMISSION 缩图说明", sub, "IMG_MAX_SIDE=1024"),
         ("SUBMISSION token 预算", sub, f"token ≤ {tok}"),
         ("SUBMISSION 在途上限", sub, f"在途请求上限 {rt['max_inflight']}"),
         ("SUBMISSION 测试数", sub, f"测试 {n} 项"),
