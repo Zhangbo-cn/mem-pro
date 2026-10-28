@@ -1335,5 +1335,32 @@ class ImgShrinkTest(unittest.TestCase):
         self.assertEqual(set(info), {"max_side", "quality", "on", "pillow"})
 
 
+class OpsAssetsTest(unittest.TestCase):
+    """运维脚本/单元的静态检查：证书自检是本项目唯一会「自己动手改服务状态」的脚本。"""
+
+    ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+
+    def test_certcheck_script_is_valid_sh_and_documented(self):
+        import shutil
+        import subprocess
+
+        script = os.path.join(self.ROOT, "deploy", "mempro-certcheck.sh")
+        self.assertTrue(os.path.isfile(script), "证书自检脚本必须随仓库分发")
+        sh = shutil.which("sh")
+        out = subprocess.run([sh, "-n", script], capture_output=True, text=True)
+        self.assertEqual(out.returncode, 0, out.stderr)
+        body = open(script, encoding="utf-8").read()
+        for needle in ("WARN_HOURS", "CRIT_HOURS", "PANIC_HOURS", "systemctl reload caddy"):
+            self.assertIn(needle, body)
+
+        service = os.path.join(self.ROOT, "deploy", "mempro-certcheck.service")
+        timer = os.path.join(self.ROOT, "deploy", "mempro-certcheck.timer")
+        for path in (service, timer):
+            self.assertTrue(os.path.isfile(path), f"缺少 {os.path.basename(path)}")
+        self.assertIn("/opt/mem-pro/deploy/mempro-certcheck.sh",
+                      open(service, encoding="utf-8").read())
+        self.assertIn("Unit=mempro-certcheck.service", open(timer, encoding="utf-8").read())
+
+
 if __name__ == "__main__":
     unittest.main(verbosity=2)

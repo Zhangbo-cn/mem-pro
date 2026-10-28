@@ -125,21 +125,39 @@ python3 tools/replay.py         https://113.44.133.30 --key <Key>   # 幂等 + �
 
 ### 1.8 续期与监控（6 天有效期，必须盯）
 
-Caddy 会在证书剩余 1/3 时自动续；`renew_interval 15m` 已把检查频率调高。加一条每日自检
-（在开发机或服务器 crontab，出错就发邮件/飞书）：
+Caddy 会在证书剩余 1/3 时自动续；`renew_interval 15m` 已把检查频率调高。但**只靠 Caddy 不够**：
+证书只有 160 小时，一旦续期失败，最容易正好落在 Full 期间断服。因此装一个 systemd timer
+（每 30 分钟）做「剩余时间 + 本地握手」双重自检：
 
 ```bash
-# /etc/cron.d/mempro-cert  （服务器上，每天 03:17）
-17 3 * * * root curl -sS -o /dev/null --max-time 20 https://113.44.133.30/health \
-  || echo "mem-pro HTTPS 自检失败 $(date -Is)" | logger -t mempro-cert
+# 服务器上（仓库已带这三个文件）
+sudo cp /opt/mem-pro/deploy/mempro-certcheck.sh /opt/mem-pro/deploy/
+sudo install -m 644 /opt/mem-pro/deploy/mempro-certcheck.service \
+                    /opt/mem-pro/deploy/mempro-certcheck.timer /etc/systemd/system/
+sudo systemctl daemon-reload && sudo systemctl enable --now mempro-certcheck.timer
+sudo systemctl list-timers mempro-certcheck.timer      # NEXT 应该是 30 分钟内
+sudo systemctl start mempro-certcheck.service          # 立刻跑一次
+sudo tail -3 /var/log/mempro-cert.log
 ```
 
-再补一条「剩余天数」检查，低于 3 天说明续期没生效：
+判定与动作（阈值可用环境变量覆盖，便于演练）：
+
+| 剩余时间 | 动作 | 退出码 |
+|---|---|---|
+| > 7 天 | 只记 OK | 0 |
+| < 48 h（`WARN_HOURS`） | `systemctl reload caddy` 触发立即续期 | 0 |
+| < 24 h（`CRIT_HOURS`） | `systemctl restart caddy`，systemd 标 failed | 2 |
+| < 6 h（`PANIC_HOURS`） | 同上报 CRITICAL，需人工介入 | 2 |
+
+本地 HTTPS 握手失败时也会 reload 一次并等 20 秒复验（`wait_https`），避免把网络抖动误判成证书问题。
+
+演练（不改真实阈值，强制走 CRITICAL 分支，预期 restart Caddy 且退出码 2）：
 
 ```bash
-echo | openssl s_client -connect 113.44.133.30:443 -servername 113.44.133.30 2>/dev/null \
-  | openssl x509 -noout -checkend 259200 && echo OK || echo "证书 3 天内到期，检查 caddy 续期"
+sudo WARN_HOURS=9999 CRIT_HOURS=9999 PANIC_HOURS=9999 /opt/mem-pro/deploy/mempro-certcheck.sh; echo $?
 ```
+
+> 旧的 `/etc/cron.d/mempro-cert` 已删除，避免与 timer 重复 reload。
 
 ### 1.9 回滚
 

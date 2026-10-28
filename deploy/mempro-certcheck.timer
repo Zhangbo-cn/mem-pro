@@ -1,0 +1,11 @@
+[Unit]
+Description=Run mem-pro certificate check every 30 minutes
+
+[Timer]
+OnBootSec=2min
+OnUnitActiveSec=30min
+AccuracySec=1min
+Unit=mempro-certcheck.service
+
+[Install]
+WantedBy=timers.target

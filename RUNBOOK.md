@@ -42,6 +42,13 @@ curl -s -H "Authorization: Token $KEY" $BASE/version | python3 -c 'import json,s
 
 ---
 
+## 一·五、Full 前的证书检查（IP 证书只有 6.7 天）
+
+- [ ] `openssl x509 -enddate` 的到期时间 **晚于 11-04 23:59**；否则先 `systemctl restart caddy` 触发续期
+- [ ] `systemctl list-timers mempro-certcheck.timer` 有 NEXT；`tail /var/log/mempro-cert.log` 最近一条是 OK
+- [ ] 外网 `curl -sS -o /dev/null -w '%{http_code} %{ssl_verify_result}\n' https://113.44.133.30/health` → `200 0`
+- [ ] 失败兜底：改回 `http://113.44.133.30`（官方只「建议」HTTPS），先保 Full 跑完
+
 ## 二、跑起来之后盯什么
 
 每 5 分钟一条命令：

@@ -1,0 +1,11 @@
+[Unit]
+Description=mem-pro certificate check (IP cert is short-lived: 6.7 days)
+After=network-online.target caddy.service
+Wants=network-online.target
+
+[Service]
+Type=oneshot
+ExecStart=/opt/mem-pro/deploy/mempro-certcheck.sh
+# 退出码 2 = 证书进入危险区（<CRIT_HOURS）或自检失败；让 systemd 标 failed 以便监控
+SuccessExitStatus=0 1
+Nice=10

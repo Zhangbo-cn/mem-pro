@@ -12,7 +12,7 @@ Agent Memory Leaderboard（记忆之巅）**多模态记忆赛道 / 开源方法
 | 项 | 状态 | 说明 |
 |---|---|---|
 | 契约自检 | ✅ **27 / 27** | `tools/contract_check.py`，覆盖 11 类官方约束 |
-| 自动化测试 | ✅ **96 项** | `make test`：API 端到端、融合/时态回归、缓存、精排降级、多模态去重、caption 缓存 |
+| 自动化测试 | ✅ **97 项** | `make test`：API 端到端、融合/时态回归、缓存、精排降级、多模态去重、caption 缓存 |
 | 幂等 / 确定性 | ✅ | 并发重放只写一次；Search 响应字节级可复现（索引与非索引路径逐位一致） |
 | 多模态 | ✅ 可用 | 内联 Base64 解析/存储/回传；图片指纹参与去重；可选 `gpt-4o-mini` 生成图片描述并持久缓存（见 §十四） |
 | 部署物料 | ✅ | Dockerfile / compose（透明透传全部 `.env`）/ Caddy / systemd / **GitHub Actions CI（3.10 + 3.12 双跑，numpy 与纯标准库两条路径）** |
@@ -59,7 +59,7 @@ curl -s -X POST localhost:8080/search -H 'Content-Type: application/json' \
 一键验证（自动起临时服务 + 契约 + 复现性 + smoke）：
 
 ```bash
-make test      # 96 项单元/端到端测试
+make test      # 97 项单元/端到端测试
 make check     # contract 27/27 + replay + local smoke
 ```
 
@@ -188,7 +188,7 @@ Authentication `Authorization: Token`、Memory System Key = 你生成的那个�
 | `make init` / `tools/doctor.py --init` | 生成 `service/.env`（随机 key，600 权限） |
 | `make doctor` | 配置体检：模式/Key/连通性/SQLite/端口/鉴权/精排 |
 | `make run` | 启动服务（自动加载 `.env`） |
-| `make test` | 96 项单元 + 端到端测试 |
+| `make test` | 97 项单元 + 端到端测试 |
 | `make check` | 临时服务上跑契约 27 项 + replay + smoke |
 | `make contract` / `make replay` | 对已启动服务做契约 / 确定性检查 |
 | `make smoke URL=https://... KEY=...` | 线上 smoke（18 项） |
