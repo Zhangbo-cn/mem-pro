@@ -208,6 +208,10 @@ curl -s -H "Authorization: Token <key>" https://你的域名:8443/version
    要域名 + HTTPS，只有三条路：ICP 备案（来不及）、CDN 前置（Cloudflare 代理 + 源站走非标端口）、隧道
    （Cloudflare Tunnel 之类，出向建立连接）。
 
+   **但还有第四条、也是最好的第四条：不要域名，直接给 IP 签证书。** Let's Encrypt 自 2026-01-15 起
+   对 IP 地址签发 `shortlived` 证书（6.7 天，Caddy 自动续），备案拦截按域名/SNI 生效，纯 IP 不受影响。
+   配置见 `deploy/Caddyfile.ip`，步骤见 `deploy/REMOTE_OPS.md` §1。
+
 ### 7.3 实测容量（2 vCPU，回环，`--nonce` 绕开向量缓存）
 
 ```

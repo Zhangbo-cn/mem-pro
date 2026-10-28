@@ -1,0 +1,54 @@
+# Caddy 站点配置：直接给公网 IP 签 HTTPS 证书（无域名、无备案）
+#
+# 为什么这样可以：Let's Encrypt 自 2026-01-15 起对 IP 地址正式签发证书
+# （必须使用 shortlived 配置档，有效期 160 小时 ≈ 6.7 天，Caddy 自动续期）。
+# 大陆的备案拦截按域名/SNI 生效，纯 IP 访问不受影响，因此这条路绕开了备案。
+#
+# 前提：
+#   1. 安全组放通 80 与 443（80 只用于 ACME HTTP-01 校验，别关）
+#   2. Caddy ≥ 2.10.2（IPv4 签发修复版本；本项目实测 2.11.7）
+#   3. 不要写 caddy 的 email 全局指令也可以，Let's Encrypt 允许无邮箱
+#
+# 日志目录先建好：mkdir -p /var/log/caddy && chown caddy:caddy /var/log/caddy
+# 部署：cp deploy/Caddyfile.ip /etc/caddy/Caddyfile && caddy validate --config /etc/caddy/Caddyfile \
+#         --adapter caddyfile && systemctl reload caddy
+
+{
+	# 证书到期 6 天，把续期检查频率提高到 15 分钟（默认 10 分钟也够，这里更保守）
+	renew_interval 15m
+}
+
+# ACME HTTP-01 必须能从公网访问 80 端口明文
+http://113.44.133.30 {
+	redir https://113.44.133.30{uri} permanent
+}
+
+https://113.44.133.30 {
+	tls {
+		issuer acme {
+			profile shortlived
+		}
+	}
+
+	# 不暴露反代软件版本（Caddy 默认回 "Server: Caddy"）
+	header -Server
+
+	# 平台单次请求最长 30 分钟（评测窗口按 30 min 设计），反代超时必须大于它
+	reverse_proxy 127.0.0.1:8080 {
+		transport http {
+			read_timeout 31m
+			write_timeout 31m
+		}
+		# 单次 Search 响应可达 20+ MiB：不压缩（图片已是 Base64，压缩白耗 CPU）、
+		# 不缓冲（边算边发，避免整包攒在 Caddy 内存里）
+		flush_interval -1
+	}
+
+	log {
+		output file /var/log/caddy/access.log {
+			roll_size 100MiB
+			roll_keep 5
+		}
+		format json
+	}
+}

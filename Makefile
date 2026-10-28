@@ -47,6 +47,9 @@ check:
 	bash scripts/verify.sh
 	$(PY) tools/doc_check.py
 
+wan:  ## 公网上行带宽实测：make wan URL=https://113.44.133.30 KEY=xxx
+	$(PY) tools/wan_bench.py --url "$(URL)" --key "$(KEY)" --report /tmp/wan.json
+
 doctor:
 	$(PY) tools/doctor.py
 

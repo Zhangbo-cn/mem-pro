@@ -173,6 +173,14 @@ Authentication `Authorization: Token`、Memory System Key = 你生成的那个�
 
 ---
 
+### 5.1 部署与运维文档索引
+
+| 文档 | 内容 |
+|---|---|
+| `deploy/LOCAL_DEPLOY.md` | 本机 / 内网部署、带宽↔吞吐表、方案 A/B/C |
+| `deploy/REMOTE_OPS.md` | **远端上线后的运维**：IP 证书 HTTPS、带宽改按流量计费、精排降级核验、SSH 加固、提报字段 |
+| `deploy/Caddyfile.ip` | 给公网 IP 直签 Let's Encrypt `shortlived` 证书的 Caddy 配置（绕开备案） |
+
 ## 六、命令一览
 
 | 命令 | 作用 |
@@ -218,6 +226,7 @@ mem-pro/
 │   ├── atm_proxy.py         # ATM-Bench 本地代理榜（检索指标）
 │   ├── e2e_proxy.py         # 端到端答案评测（证据 → 回答模型 → EM/F1，扫 top_k；--oracle 上限诊断）
 │   ├── doc_check.py         # 提交文档 ↔ 代码默认值一致性检查（make check 会跑）
+│   ├── wan_bench.py         # 公网上行带宽/吞吐实测（真图 Add+Search，算评测总耗时）
 │   ├── fetch_gallery_images.sh  # 下载 Mem-Gallery 官方真图（520 MiB，gallery_proxy --real-images 用）
 │   ├── rerank_server.py     # 本地 TEI 风格精排服务
 │   ├── rerank_bench.py      # 精排质量与单 query 延迟对比
