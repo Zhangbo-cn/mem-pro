@@ -195,6 +195,7 @@ Authentication `Authorization: Token`、Memory System Key = 你生成的那个�
 | `make load URL=... KEY=... USER_ID=... SWEEP=1,4,8,16,32` | 并发扫描 Add / Search，输出 p50/p95/p99 与**申报并发区间**；加 `DURATION=180` 转持续压测（burst 通过 ≠ 稳态可过） |
 | `make gallery` / `tools/gallery_proxy.py` | Mem-Gallery 本地代理榜（走线上 Add/Search 代码路径，无需额度） |
 | `make e2e SAMPLE=400` | 端到端答案评测：证据喂回答模型，扫 `top_k`，比 EM/F1（见 §十六） |
+| `make wan URL=... KEY=...` | 公网上行带宽/吞吐实测（真图 Add + Search，直接算评测总耗时；`tools/wan_bench.py`） |
 | `make watch URL=... KEY=... FEISHU=<webhook>` | 评测期看护：定时拉 `/version`，`api_give_up` 增长 / 精排降级 / 429 占比过高时告警 |
 | `make backup DB_PATH=... BACKUP=...` | SQLite 在线热备（`sqlite3` backup API，不用停服务） |
 | `make purge PREFIX=aml:` | 合规清理：按 `user_id` 前缀删评测数据并 VACUUM（默认 dry-run） |
