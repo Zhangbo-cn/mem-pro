@@ -17,11 +17,11 @@
 | 系统名称 | **mem-pro** |
 | 版本号 | `mem-pro/0.2.0`（Full 受理后冻结，不得更换） |
 | 固定 Commit | ☐ 填 `git rev-parse HEAD`（线上 `/version` 的 `commit` 必须与之相同） |
-| 配置指纹 | ☐ 填 `/version` 的 `config_hash`（16 位；改任何排序参数都会变） |
+| 配置指纹 | `0d8a5260ffd4479d`（16 位；`/version` 可对；改任何排序参数或 `MAX_IMAGES` / `MAX_RESULTS` / `IMG_MAX_SIDE` 都会变） |
 | 公开仓库 | https://github.com/Zhangbo-cn/mem-pro |
 | 联系人 / 团队 | ☐ |
 | 赛道 / 组别 | 多模态记忆赛道 / **开源方法榜**（组别只能选一个） |
-| 接口地址 | `http://113.44.133.30/add`、`http://113.44.133.30/search`（公网 IP + 80；域名 `comp.mem-pro.asia` 未备案，80/443 被按 Host/SNI 拦截，见 `deploy/LOCAL_DEPLOY.md` §七） |
+| 接口地址 | **`https://113.44.133.30/add`**、**`https://113.44.133.30/search`**（IP 直签 Let's Encrypt，无需域名/备案；`http://` 308 跳 https，Caddy 需 `default_sni`，见 `deploy/REMOTE_OPS.md` §1.4.1） |
 | 鉴权方式 | `Authorization: Token <Memory System Key>`（同时接受 `Bearer` / `X-Api-Key`） |
 | 允许公开展示 | ☐（建议：方法说明、架构图、评测分类指标；不含任何 Key、不含评测数据样本） |
 
@@ -90,7 +90,7 @@ POST /search query ──▶ embedding ──┬─▶ 稠密余弦(归一化向
 
 ### 3.2 改动说明
 
-本仓库**全部代码自研**（`service/` 约 2.7k 行、`tools/` 约 3.5k 行、测试 89 项），未复用任何论文官方实现或第三方框架代码，因此无「相对原始工作的代码级改动」需披露。参考的仅为上述通用算法思想，实现细节（融合权重、时态线索匹配、去重阈值、证据预算、确定性处理）均为本团队在公开数据集 Mem-Gallery 与 ATM-Bench 上实测调出的。
+本仓库**全部代码自研**（`service/` 约 2.7k 行、`tools/` 约 3.5k 行、测试 95 项），未复用任何论文官方实现或第三方框架代码，因此无「相对原始工作的代码级改动」需披露。参考的仅为上述通用算法思想，实现细节（融合权重、时态线索匹配、去重阈值、证据预算、确定性处理）均为本团队在公开数据集 Mem-Gallery 与 ATM-Bench 上实测调出的。
 
 ---
 
@@ -100,8 +100,8 @@ POST /search query ──▶ embedding ──┬─▶ 稠密余弦(归一化向
 |---|---|
 | 部署形态 | 单机 Docker（Python 3.12-slim + numpy），1 容器 + 可选 Caddy 反代 |
 | 资源 | 2 vCPU / 2 GiB / 40 GiB 起（实测 29 req/s 时 CPU 0.52 核、RSS 242 MiB） |
-| **申报并发（上界）** | Search **16** / Add **16**（依据：`--duration` 持续压测 100% 成功档；burst 全过不作为依据） |
-| 平均延迟 | Search 持续 16 并发：p50 ≈ 0.21 s、p95 ≈ 1.65 s（含向量化往返）；若开启精排 p50 ≈ 0.33 s、p95 ≈ 1.24 s |
+| **申报并发（上界）** | Search **3** / Add **4**（依据：公网 2 Mbit 下 `tools/rehearse.py` 实测，3 并发吞吐 0.243 req/s / p95 7.9s 为甜点；6 并发吞吐不再涨、p95 抬到 16s。回环压测 16 并发 76 req/s 不作为依据——瓶颈在 EIP 出网带宽） |
+| 平均延迟 | 公网实测（真图）：Search p50 ≈ 3.5 s、p95 ≈ 7.9 s（响应 p50 0.33 MiB，缩图后）；回环 16 并发 p50 ≈ 0.21 s |
 | 单请求超时 | 服务端不主动断连；平台 30 分钟上限内均可用 |
 | 限流 | 在途请求上限 64（超出返回 `429` + `Retry-After`）；上游配额不足时内部重试，重试预算 12 s，耗尽返回 `503` + `Retry-After: 5` |
 | 数据规模 | 单 user 记忆量线性扩展，1 万条记忆时检索 p50 仍在百毫秒级 |
@@ -146,7 +146,7 @@ curl -s -H "Authorization: Token $KEY" http://113.44.133.30/version  # commit �
 | 2 | 联系人 / 机构 | ☐ 待填 |
 | 3 | 赛道 + 组别 | ✅ 多模态 / 开源方法榜 |
 | 4 | 方法说明 + 引用 | ✅ §二、§三 |
-| 5 | 在线 Add / Search（HTTPS 公网） | ✅ `https://113.44.133.30/add`、`https://113.44.133.30/search`（Let's Encrypt IP 证书，`commit=08d5de2ea109`、`config_hash=1db7510cb14b0baf`；contract 27/27、smoke 18/18、replay 幂等+5 次字节一致均走 https 复验） |
+| 5 | 在线 Add / Search（HTTPS 公网） | ✅ `https://113.44.133.30/add`、`https://113.44.133.30/search`（Let's Encrypt IP 证书，`commit` 见 `/version`、`config_hash=0d8a5260ffd4479d`（含 `IMG_MAX_SIDE=1024` 缩图）；contract 27/27、smoke 18/18、replay 幂等+5 次字节一致均走 https 复验） |
 | 6 | 鉴权方式声明 | ✅ §一 |
 | 7 | 容量与运行限制 | ✅ §四 |
 | 8 | 公开 GitHub 仓库 | ✅ |

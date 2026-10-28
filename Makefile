@@ -50,6 +50,10 @@ check:
 wan:  ## 公网上行带宽实测：make wan URL=https://113.44.133.30 KEY=xxx
 	$(PY) tools/wan_bench.py --url "$(URL)" --key "$(KEY)" --report /tmp/wan.json
 
+rehearse:  ## 远端评测预演（真图 Add + 全量 Search）：make rehearse URL=... KEY=... FILES=4 N=60
+	$(PY) tools/rehearse.py --url "$(URL)" --key "$(KEY)" --limit "$(or $(FILES),3)" \
+		--sample "$(or $(N),60)" --jobs "$(or $(JOBS),2)" --report /tmp/rehearse.json
+
 doctor:
 	$(PY) tools/doctor.py
 

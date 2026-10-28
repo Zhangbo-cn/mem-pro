@@ -1216,5 +1216,86 @@ class DotenvTest(unittest.TestCase):
                          "未定义变量必须展开成空串，不能把字面量当密钥")
 
 
+class ImgShrinkTest(unittest.TestCase):
+    """返回侧缩图：默认关闭时逐字节不变，打开后才能真的变小。"""
+
+    def setUp(self):
+        import imgsize
+        self.m = imgsize
+        self._old = (imgsize.MAX_SIDE, imgsize.QUALITY)
+
+    def tearDown(self):
+        self.m.MAX_SIDE, self.m.QUALITY = self._old
+
+    @staticmethod
+    def _png(w, h, color=(200, 30, 30)):
+        import io as _io
+        from PIL import Image
+        buf = _io.BytesIO()
+        Image.new("RGB", (w, h), color).save(buf, format="PNG")
+        import base64 as _b64
+        return "data:image/png;base64," + _b64.b64encode(buf.getvalue()).decode()
+
+    def test_default_off_is_byte_identical(self):
+        self.m.MAX_SIDE = 0
+        uri = self._png(64, 64) if self.m.Image else "data:image/png;base64,AAAA"
+        self.assertEqual(self.m.shrink_uri(uri), uri)
+        self.assertFalse(self.m.enabled())
+
+    def test_non_data_uri_passthrough(self):
+        self.m.MAX_SIDE = 512
+        self.assertEqual(self.m.shrink_uri("https://x/y.png"), "https://x/y.png")
+        self.assertEqual(self.m.shrink_uri("garbage"), "garbage")
+
+    def test_bad_base64_passthrough(self):
+        self.m.MAX_SIDE = 512
+        uri = "data:image/png;base64,!!!!not-base64!!!!"
+        self.assertEqual(self.m.shrink_uri(uri), uri)
+
+    def test_shrinks_and_keeps_jpeg(self):
+        if not self.m.Image:
+            self.skipTest("没装 Pillow")
+        self.m.MAX_SIDE, self.m.QUALITY = 128, 82
+        uri = self._png(1200, 900)
+        out = self.m.shrink_uri(uri)
+        self.assertLess(len(out), len(uri) / 4)
+        self.assertTrue(out.startswith("data:image/jpeg;base64,"))
+        import base64 as _b64
+        import io as _io
+        from PIL import Image
+        with Image.open(_io.BytesIO(_b64.b64decode(out.split(",", 1)[1]))) as im:
+            self.assertLessEqual(max(im.size), 128)
+
+    def test_alpha_flattened_to_white(self):
+        if not self.m.Image:
+            self.skipTest("没装 Pillow")
+        self.m.MAX_SIDE = 256
+        import base64 as _b64
+        import io as _io
+        from PIL import Image
+        buf = _io.BytesIO()
+        # 伪随机噪点（固定种子）+ 渐变 alpha：PNG 压不动才验得出「真的变小」，
+        # 同时覆盖 alpha 合成白底的路径。
+        seed = 12345
+        px = bytearray()
+        for _ in range(300 * 300):
+            seed = (1103515245 * seed + 12345) & 0x7FFFFFFF
+            px.append(seed >> 16 & 0xFF)
+        img = Image.frombytes("L", (300, 300), bytes(px)).convert("RGBA")
+        alpha = Image.linear_gradient("L").resize((300, 300))
+        img.putalpha(alpha)
+        img.save(buf, format="PNG")
+        uri = "data:image/png;base64," + _b64.b64encode(buf.getvalue()).decode()
+        out = self.m.shrink_uri(uri)
+        self.assertTrue(out.startswith("data:image/jpeg;base64,"))
+        with Image.open(_io.BytesIO(_b64.b64decode(out.split(",", 1)[1]))) as im:
+            self.assertEqual(im.mode, "RGB")
+            self.assertEqual(im.getpixel((0, 0)), (255, 255, 255))
+
+    def test_info_shape(self):
+        info = self.m.info()
+        self.assertEqual(set(info), {"max_side", "quality", "on", "pillow"})
+
+
 if __name__ == "__main__":
     unittest.main(verbosity=2)

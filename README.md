@@ -12,7 +12,7 @@ Agent Memory Leaderboard（记忆之巅）**多模态记忆赛道 / 开源方法
 | 项 | 状态 | 说明 |
 |---|---|---|
 | 契约自检 | ✅ **27 / 27** | `tools/contract_check.py`，覆盖 11 类官方约束 |
-| 自动化测试 | ✅ **89 项** | `make test`：API 端到端、融合/时态回归、缓存、精排降级、多模态去重、caption 缓存 |
+| 自动化测试 | ✅ **95 项** | `make test`：API 端到端、融合/时态回归、缓存、精排降级、多模态去重、caption 缓存 |
 | 幂等 / 确定性 | ✅ | 并发重放只写一次；Search 响应字节级可复现（索引与非索引路径逐位一致） |
 | 多模态 | ✅ 可用 | 内联 Base64 解析/存储/回传；图片指纹参与去重；可选 `gpt-4o-mini` 生成图片描述并持久缓存（见 §十四） |
 | 部署物料 | ✅ | Dockerfile / compose（透明透传全部 `.env`）/ Caddy / systemd / **GitHub Actions CI（3.10 + 3.12 双跑，numpy 与纯标准库两条路径）** |
@@ -59,7 +59,7 @@ curl -s -X POST localhost:8080/search -H 'Content-Type: application/json' \
 一键验证（自动起临时服务 + 契约 + 复现性 + smoke）：
 
 ```bash
-make test      # 89 项单元/端到端测试
+make test      # 95 项单元/端到端测试
 make check     # contract 27/27 + replay + local smoke
 ```
 
@@ -188,7 +188,7 @@ Authentication `Authorization: Token`、Memory System Key = 你生成的那个�
 | `make init` / `tools/doctor.py --init` | 生成 `service/.env`（随机 key，600 权限） |
 | `make doctor` | 配置体检：模式/Key/连通性/SQLite/端口/鉴权/精排 |
 | `make run` | 启动服务（自动加载 `.env`） |
-| `make test` | 89 项单元 + 端到端测试 |
+| `make test` | 95 项单元 + 端到端测试 |
 | `make check` | 临时服务上跑契约 27 项 + replay + smoke |
 | `make contract` / `make replay` | 对已启动服务做契约 / 确定性检查 |
 | `make smoke URL=https://... KEY=...` | 线上 smoke（18 项） |
@@ -196,6 +196,7 @@ Authentication `Authorization: Token`、Memory System Key = 你生成的那个�
 | `make gallery` / `tools/gallery_proxy.py` | Mem-Gallery 本地代理榜（走线上 Add/Search 代码路径，无需额度） |
 | `make e2e SAMPLE=400` | 端到端答案评测：证据喂回答模型，扫 `top_k`，比 EM/F1（见 §十六） |
 | `make wan URL=... KEY=...` | 公网上行带宽/吞吐实测（真图 Add + Search，直接算评测总耗时；`tools/wan_bench.py`） |
+| `make rehearse URL=... KEY=... FILES=4 N=60` | **远端评测预演**：真图按「单次 Add ≤ 30 MiB」切块写入 + 按申报并发打 Search，量 4xx/5xx、延迟、响应体积、全量外推（`tools/rehearse.py`） |
 | `make watch URL=... KEY=... FEISHU=<webhook>` | 评测期看护：定时拉 `/version`，`api_give_up` 增长 / 精排降级 / 429 占比过高时告警 |
 | `make backup DB_PATH=... BACKUP=...` | SQLite 在线热备（`sqlite3` backup API，不用停服务） |
 | `make purge PREFIX=aml:` | 合规清理：按 `user_id` 前缀删评测数据并 VACUUM（默认 dry-run） |
@@ -228,6 +229,7 @@ mem-pro/
 │   ├── e2e_proxy.py         # 端到端答案评测（证据 → 回答模型 → EM/F1，扫 top_k；--oracle 上限诊断）
 │   ├── doc_check.py         # 提交文档 ↔ 代码默认值一致性检查（make check 会跑）
 │   ├── wan_bench.py         # 公网上行带宽/吞吐实测（真图 Add+Search，算评测总耗时）
+│   ├── rehearse.py          # 远端评测预演（真图切块 Add + 并发 Search，找线上卡点）
 │   ├── fetch_gallery_images.sh  # 下载 Mem-Gallery 官方真图（520 MiB，gallery_proxy --real-images 用）
 │   ├── rerank_server.py     # 本地 TEI 风格精排服务
 │   ├── rerank_bench.py      # 精排质量与单 query 延迟对比
@@ -572,6 +574,38 @@ hash 代理榜上 MRR +0.007 但 R@100 反降 0.031，方向不一致，**默认
 - **带宽重新估算**：旧表按每图 150 KB 估，实际平均每次响应 2.38 MiB，20 Mbit 跑完 1,711 条要 **≈29 分钟**
   而不是 6 分钟。新表见 `deploy/LOCAL_DEPLOY.md`。带宽 < 50 Mbit 时建议 `MAX_IMAGES=3`
   （体积减半；对答案的影响量不了——官方 Answer 模型是否看图、看几张都不知道）。
+
+### 14.2 公网 2 Mbit 下端到端预演（2026-10-28）
+
+`tools/rehearse.py` 打真机（`https://113.44.133.30`），按申报并发发 Search，只走网络、不走进程内。
+
+**修之前**（`MAX_IMAGES=3`、原图直传）：一条响应 p50 4.81 MiB、p95 12.12 MiB、max 20.49 MiB。
+
+| 项 | jobs=1 | jobs=2 |
+|---|---|---|
+| Search 延迟 p50 / p95 | 18.6s / 48.5s | **31.3s / 88.8s** |
+| 吞吐 | 0.040 req/s | 0.039 req/s |
+| 全量 1,711 条外推 | 12.0 小时 | 12.3 小时 |
+
+- **并发在 2 Mbit + 大响应下是负作用**：单流已能跑满 ~2.1 Mbit（`curl` 实测 250–278 KB/s），
+  两条流同时抢把 p95 从 48s 抬到 89s，吞吐一点没多，还出现过「客户端零字节、Caddy→服务端 Send-Q 堆积 3.4 MB」的 stall。
+- **瓶颈是响应体积，不是服务端**：同时间服务端 `/search` 日志 180–450ms、精排 0 degraded/0 fail、
+  `load` 近 0、内存 0.9/1.7 GiB。3 张原图 Base64 后一张就能有 2.58 MiB，比 100 条文本（~40 KB）大两个数量级。
+
+**修之后**（`IMG_MAX_SIDE=1024` + `IMG_QUALITY=82`，`service/imgsize.py`）：
+
+| jobs | Search 响应 p50 / p95 / max | 延迟 p50 / p95 / max | 吞吐 | 全量外推 |
+|---|---|---|---|---|
+| 1 | 0.33 / 0.63 / 0.67 MiB | 1.48s / 3.56s / 5.01s | 0.177 req/s | 161 分钟 |
+| 2 | 同 | 2.37s / 5.55s / 6.79s | 0.204 req/s | 140 分钟 |
+| 3 | 同 | 3.52s / 7.88s / 19.2s | **0.243 req/s** | 117 分钟 |
+| 6 | 同 | 6.50s / 16.4s / 25.5s | 0.237 req/s | 120 分钟 |
+
+- 同一批图 **2.71 MiB → 0.29 MiB（9.3×）**，一条响应 2.74 MiB → 0.32 MiB，3 次请求字节完全一致（可复现）。
+- 服务端 `apt install python3-pil`（Pillow 10.2.0）；缺 Pillow 或 `IMG_MAX_SIDE=0` 时行为与历史版本逐字节一致。
+- 只改 Search 响应字节，**库里的原图不动**（仍按单图 ≤10 MiB 原样入库）。
+- 并发甜点在 2–3：6 并发吞吐不再涨、p95 反而 16s。**申报 Search 3 / Add 4**（上行不计费也不限速，Add 瓶颈在 embedding）。
+- 全量 1,711 条出网约 600 MiB ≈ ¥0.5，**约 2 小时**跑完（原 12 小时）。
 
 ## 十五、精排：两个真实后端都量过了（2026-10-26）
 

@@ -43,6 +43,7 @@ dotenv.load()
 import budget  # noqa: E402
 import caption  # noqa: E402
 import embed  # noqa: E402
+import imgsize  # noqa: E402
 import retrieve  # noqa: E402
 import store  # noqa: E402
 
@@ -106,7 +107,8 @@ def _config_fingerprint() -> str:
              "ctx:%d:%d" % (EMBED_CONTEXT, EMBED_CONTEXT_CHARS),
              "budget:%d:%d:%d:%d:%d" % (budget.TOKEN_BUDGET, budget.BYTE_BUDGET,
                                         MAX_IMAGES, MAX_RESULTS, budget.IMG_TOKEN_COST),
-             "caption:%s:%s" % (caption.MODE, caption.MODEL)]
+             "caption:%s:%s" % (caption.MODE, caption.MODEL),
+             "imgsize:%d:%d" % (imgsize.MAX_SIDE, imgsize.QUALITY)]
     return hashlib.sha256("|".join(parts).encode()).hexdigest()[:16]
 
 
@@ -400,8 +402,11 @@ def do_search(req: dict, timings: dict | None = None) -> dict:
             chunk = items[start:start + 10]
             images = store.fetch_images([it["id"] for it in chunk], req["user_id"])
             for it in chunk:
-                it["images"] = images.get(it["id"], [])
-                got += len(it["images"])
+                got_list = images.get(it["id"], [])
+                if imgsize.enabled():
+                    got_list = [imgsize.shrink_uri(u) for u in got_list]
+                it["images"] = got_list
+                got += len(got_list)
     timings["search_images_ms"] = round((time.perf_counter() - started) * 1000, 2)
 
     started = time.perf_counter()
@@ -508,6 +513,7 @@ class Handler(BaseHTTPRequestHandler):
                 self._log(200, started)
                 return self._send(200, {"version": SERVER_VERSION, "commit": COMMIT,
                                         "config_hash": _config_fingerprint(),
+                                        "imgsize": imgsize.info(),
                                         "embed": embed.info(),
                                         "caption": caption.info(),
                                         "max_results": MAX_RESULTS,
