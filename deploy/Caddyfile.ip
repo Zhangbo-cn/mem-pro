@@ -14,6 +14,11 @@
 #         --adapter caddyfile && systemctl reload caddy
 
 {
+	# 必须有：客户端用 IP 访问时通常不发 SNI（RFC 6066 不允许 IP 当 ServerName），
+	# Caddy 按 SNI 选证书，收不到 SNI 就回 `tlsv1 alert internal error`。
+	# curl / python requests / 浏览器对 IP 字面量都不发 SNI —— 实测三方全挂在这。
+	default_sni 113.44.133.30
+
 	# 证书到期 6 天，把续期检查频率提高到 15 分钟（默认 10 分钟也够，这里更保守）
 	renew_interval 15m
 }

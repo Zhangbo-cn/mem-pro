@@ -189,8 +189,11 @@ curl -s -H "Authorization: Token <key>" https://你的域名:8443/version
 |---|---|
 | 机器 | `hcss-ecs-4f13`，Ubuntu 24.04，2 vCPU / 1.7 GiB / 40 GiB，**2 Mbit/s 峰值带宽** |
 | 部署 | `/opt/mem-pro`（`git clone` 自 bundle，commit `08d5de2`），systemd `mem-pro.service`（`mempro` 用户，`MALLOC_ARENA_MAX=2`，`python3-numpy` 1.26.4） |
-| 反向代理 | Caddy 2.11.7，`/etc/caddy/Caddyfile`，**当前只监听 `:80`（HTTP + IP）** |
-| 接口 | `http://113.44.133.30/add`、`http://113.44.133.30/search` |
+| 反向代理 | Caddy 2.11.7，`/etc/caddy/Caddyfile` |
+| 接口 | **`https://113.44.133.30/add`**、**`https://113.44.133.30/search`**（2026-10-28 起） |
+| HTTPS | Let's Encrypt **IP 证书**（无域名、无需备案）：`SAN IP:113.44.133.30`，有效期 2026-10-28 02:04 → **2026-11-03 18:04 UTC**，Caddy 自动续；`/etc/cron.d/mempro-cert` 每 6 小时自检握手，失败即 reload。全局 `default_sni 113.44.133.30` 是必须的（客户端对 IP 不发 SNI，细节见 `REMOTE_OPS.md` §1.4.1） |
+| SSH | 仅密钥（`PasswordAuthentication no`），密码登录已验证被拒 |
+| 带宽基线 | 2026-10-28 实测出网 **1.9 Mbit/s**、串行 0.65 req/s，1,711 条 query 预计 **44 分钟**（`tools/wan_bench.py`）；2 Mbit 不动则申报 Search 2 |
 | 自检 | 外网 `contract 27/27`、`smoke 18/18`、replay 幂等 + 5 次字节一致 ✅ |
 | 版本 | `/version` → `commit=08d5de2ea109`、`config_hash=1db7510cb14b0baf` |
 | 配置 | `EMBED_MODE=api`（text-embedding-v4）、精排 `qwen3-rerank`（`RERANK_TOP=10`）、**`MAX_IMAGES=3`**、`MAX_INFLIGHT=32`、`EMBED_CONCURRENCY=12`、`MAX_RESULTS=0` |

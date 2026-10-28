@@ -51,14 +51,26 @@ sudo mkdir -p /var/log/caddy && sudo chown caddy:caddy /var/log/caddy
 
 ### 1.4 写入新配置
 
-仓库里 `deploy/Caddyfile.ip` 就是成品（内容要点：`https://113.44.133.30` + `tls { issuer acme { profile shortlived } }`，
-`renew_interval 15m`，反代超时 31m，访问日志落 `/var/log/caddy/access.log`）：
+仓库里 `deploy/Caddyfile.ip` 就是成品。**两个关键行缺一不可**：
+
+1. 站点写 `https://113.44.133.30` + `tls { issuer acme { profile shortlived } }`；
+2. 全局写 `default_sni 113.44.133.30` —— **最容易漏、漏了必挂**（见 §1.4.1）
 
 ```bash
 sudo cp /opt/mem-pro/deploy/Caddyfile.ip /etc/caddy/Caddyfile
 sudo caddy validate --config /etc/caddy/Caddyfile --adapter caddyfile   # 必须 "Valid configuration"
 sudo systemctl reload caddy
 ```
+
+### 1.4.1 为什么必须有 `default_sni`（2026-10-28 实测踩坑）
+
+证书签下来了、`openssl s_client -servername 113.44.133.30` 能看到 Let's Encrypt 证书，**但 `curl` 用 IP 访问直接报**
+`OpenSSL/3.0.13: error:0A000438:SSL routines::tlsv1 alert internal error`（连服务器本机 `curl -k https://127.0.0.1/health` 也一样）。
+
+原因：**RFC 6066 规定 SNI 只能是主机名，不能是 IP**，所以 curl / python requests / 浏览器访问 IP 字面量时**不发 SNI**；
+Caddy 按 SNI 选证书，收不到 SNI 就没有证书可给，直接回 `alert internal error`（日志里连一行 handshake 都不留，很容易误判成网络问题）。
+
+修法：全局 `default_sni 113.44.133.30`，让无 SNI 的握手落到这张 IP 证书上。加完立刻 200 / `verify=0`。
 
 > **注意**：不要同时保留 `comp.mem-pro.asia` 那条站点。Caddy 会为它申请证书，而 ACME 校验会被备案策略重置
 > （`Connection reset by peer`），日志里会一直刷错误。
@@ -109,6 +121,7 @@ python3 tools/replay.py         https://113.44.133.30 --key <Key>   # 幂等 + �
 | `connection reset by peer` 且 SNI 是**域名** | 备案拦截 | 只用 IP，删掉域名站点 |
 | `too many certificates` / rate limit | IP 证书重复申请过多 | 等 24 小时再试；不要反复 reload |
 | 证书签下了但 `curl` 报 `SSL: no alternative certificate subject name` | 客户端用域名访问 | 提交给平台的 URL 必须写 `https://113.44.133.30`（IP 字面量） |
+| `tlsv1 alert internal error`，`openssl s_client` 却能成功 | **缺 `default_sni`**（客户端不发 SNI） | 全局加 `default_sni 113.44.133.30`，见 §1.4.1 |
 
 ### 1.8 续期与监控（6 天有效期，必须盯）
 
@@ -399,4 +412,5 @@ python3 tools/smoke.py https://113.44.133.30 --key <Key>
 5. **`MAX_IMAGES` / `MAX_RESULTS` / 精排开关都在 `config_hash` 里**，冻结后不要动。
 6. **按流量计费只算出向**，但被刷流量会烧钱：Token 不要把库清空，评测结束后按 §4.4 清理。
 7. **Caddy 的 access.log 目录要先建并 chown caddy**，否则 reload 失败。
-8. **申报并发是上界**，报大了平台并发打进来会超时判失败，宁可报小。
+8. **IP 证书必须配 `default_sni`**：客户端对 IP 字面量不发 SNI，缺这行所有正常 HTTP 客户端都握不上手（§1.4.1）。
+9. **申报并发是上界**，报大了平台并发打进来会超时判失败，宁可报小。
