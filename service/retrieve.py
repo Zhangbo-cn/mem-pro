@@ -88,7 +88,9 @@ RERANK_URL = os.environ.get("RERANK_URL", "").rstrip("/")
 # （24 条 query × 3 次：最大偏差 1.3e-3、48 次里 4 次顺序翻转）；qwen3-rerank 同样
 # 条件下偏差 6.4e-8、0 次翻转，a/b 两半 MRR 与 gte 持平（0.791/0.798 vs 0.781/0.808）。
 RERANK_MODEL = os.environ.get("RERANK_MODEL", "qwen3-rerank")
-RERANK_TOP = int(os.environ.get("RERANK_TOP", "10"))   # 精排候选数：实测 10 与 30 质量相同，延迟 ÷3
+# 精排候选数：纯精排 10→30 只换来 +0.03 R@10（还倒退 TTL），配合下面 RERANK_BLEND=0.7
+# 才是 +0.04 R@10 / +0.01 MRR，a/b 两半一致；30 与 50 打平（50 仅 R@20 +0.003），取 30。
+RERANK_TOP = int(os.environ.get("RERANK_TOP", "30"))
 # 精排正常 0.4 s：给 5 s 已经足够宽容，再长只是把尾部延迟留给 Search
 RERANK_TIMEOUT = float(os.environ.get("RERANK_TIMEOUT", "5"))  # 单次精排超时（秒）
 RERANK_API_KEY = os.environ.get("RERANK_API_KEY", "")
@@ -106,6 +108,12 @@ CONCURRENCY_RERANK = int(os.environ.get("RERANK_POOL", "16"))   # 精排侧长�
 #   · 响应里的 score 改为按**名次**映射回融合分区间（与上游分值大小无关），
 #     这样字节只依赖最终顺序。
 RERANK_TOL = float(os.environ.get("RERANK_TOL", "0.0003"))
+# 纯精排会在深候选上「换血过多」：实测 RERANK_TOP 从 10 加到 30，
+# FR/MR/CD 的前 10 召回各涨 7~8 个点，但 TTL（时序）掉 8.8 个点——交叉编码器看不懂
+# 「最新/去年」这类约束，把融合序里本来对的时序证据挤了出去。
+# 折中：把精排名次与融合名次做 RRF 混合，w=1 即纯精排（默认，行为与历史一致）。
+RERANK_BLEND = float(os.environ.get("RERANK_BLEND", "0.7"))
+RERANK_RRF_K = float(os.environ.get("RERANK_RRF_K", "10"))
 
 # 精排健康度：旁路降级会改变排序，必须能在 /version 里看到发生了什么
 _RERANK_STATS = {"calls": 0, "fails": 0, "degraded": 0, "cooldown_skips": 0}
@@ -1036,6 +1044,18 @@ def rerank(query_text: str, ranked: list[tuple[int, float]], docs: list[dict]) -
         # 顺序完全由上面几轮确定性的键决定）
         scored.sort(key=functools.cmp_to_key(
             lambda a, b: 0 if abs(a[1] - b[1]) <= RERANK_TOL else (-1 if a[1] > b[1] else 1)))
+        if RERANK_BLEND < 1:
+            # RRF 混合：精排名次与融合名次各算一份 1/(k+rank)，按 w 加权。
+            # 两个名次都是整数，权重固定 → 结果逐位可复现，不依赖上游分值大小。
+            f_rank = {idx: k for k, (idx, _) in enumerate(head)}
+            r_rank = {idx: k for k, (idx, _) in enumerate(scored)}
+            kk = RERANK_RRF_K
+            w = RERANK_BLEND
+            mix = {idx: w / (kk + r_rank[idx]) + (1 - w) / (kk + f_rank[idx]) for idx in r_rank}
+            scored.sort(key=lambda t: t[0])
+            scored.sort(key=lambda t: docs[t[0]]["created_at"], reverse=True)
+            scored.sort(key=lambda t: -fused[t[0]])
+            scored.sort(key=lambda t: -mix[t[0]])
         _rerank_fails = 0
         return _rebased(head, scored) + tail
     except Exception:
@@ -1135,4 +1155,5 @@ def info() -> dict:
             "diversity": DIVERSITY, "diversity_pool": DIVERSITY_POOL,
             "rerank": {"mode": RERANK_MODE, "kind": RERANK_KIND,
                        "model": RERANK_MODEL or None, "top": RERANK_TOP, "tol": RERANK_TOL,
+                       "blend": RERANK_BLEND, "rrf_k": RERANK_RRF_K,
                        **_RERANK_STATS}}

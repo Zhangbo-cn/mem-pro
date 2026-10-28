@@ -928,7 +928,8 @@ class RerankTest(unittest.TestCase):
 
     def setUp(self):
         self._saved = (retrieve.RERANK_MODE, retrieve.RERANK_URL, retrieve.RERANK_TOP,
-                       retrieve.RERANK_FAILS, retrieve.RERANK_COOLDOWN, retrieve.DEDUP_COS)
+                       retrieve.RERANK_FAILS, retrieve.RERANK_COOLDOWN, retrieve.DEDUP_COS,
+                       retrieve.RERANK_BLEND, retrieve.RERANK_RRF_K)
         retrieve.DEDUP_COS = 1.1  # 本组只测精排：关掉近重复去重，避免合成语料被合并
         retrieve._rerank_fails = 0
         retrieve._rerank_cooldown_until = 0.0
@@ -942,7 +943,8 @@ class RerankTest(unittest.TestCase):
 
     def tearDown(self):
         (retrieve.RERANK_MODE, retrieve.RERANK_URL, retrieve.RERANK_TOP,
-         retrieve.RERANK_FAILS, retrieve.RERANK_COOLDOWN, retrieve.DEDUP_COS) = self._saved
+         retrieve.RERANK_FAILS, retrieve.RERANK_COOLDOWN, retrieve.DEDUP_COS,
+         retrieve.RERANK_BLEND, retrieve.RERANK_RRF_K) = self._saved
         retrieve._rerank_fails = 0
         retrieve._rerank_cooldown_until = 0.0
 
@@ -979,6 +981,42 @@ class RerankTest(unittest.TestCase):
         self.assertGreaterEqual(head_min, tail_max)
         # 量纲守恒：头部最高分不超过融合分最高分
         self.assertLessEqual(max(scores), max(fused_scores.values()) + 1e-12)
+
+    def test_rerank_blend_limits_damage_from_deep_candidates(self):
+        """深候选 + 纯精排会把融合序的头部换血；RERANK_BLEND 必须限制住这个动作。
+
+        场景：融合序第一名的证据在精排里被压到最后（交叉编码器看不懂时序约束时就是这个样子），
+        纯精排会把它挤出头名，混合后不应被挤掉。
+        """
+        docs = self._docs()
+        qv = embed.embed(["fact"])[0]
+        fused = retrieve.hybrid(qv, "fact", docs)
+        head_ids = [docs[i]["id"] for i, _ in fused[:retrieve.RERANK_TOP]]
+        top_id = head_ids[0]
+        # 精排把融合第一名压到最后、把最后一名抬到第一
+        self.plan["rows"] = [
+            {"index": pos, "score": 0.10 if did == top_id else (0.9 if pos == len(head_ids) - 1
+                                                                else 0.5)}
+            for pos, did in enumerate(head_ids)
+        ]
+        retrieve.RERANK_BLEND = 1.0
+        pure = [docs[i]["id"] for i, _ in retrieve.run(qv, "fact", docs)]
+        self.assertNotEqual(pure[0], top_id, "纯精排副作用：融合第一名被挤掉（本测试前提）")
+        retrieve.RERANK_BLEND = 0.7
+        blended = [docs[i]["id"] for i, _ in retrieve.run(qv, "fact", docs)]
+        # 混合不是「不许动」，而是把深候选的换血幅度压住：名次必须回抬
+        self.assertLess(blended.index(top_id), pure.index(top_id),
+                        "RERANK_BLEND 应把被误压的融合头部名次拉回来")
+        retrieve.RERANK_BLEND = 0.5
+        half = [docs[i]["id"] for i, _ in retrieve.run(qv, "fact", docs)]
+        self.assertLessEqual(half.index(top_id), blended.index(top_id),
+                             "权重越低越贴融合序（单调）")
+        # 顺序变了但分数仍单调、仍在融合区间内
+        scores = [s for _, s in retrieve.run(qv, "fact", docs)]
+        self.assertEqual(scores, sorted(scores, reverse=True))
+        self.assertTrue(all(0.0 <= s <= 1.0 for s in scores), scores)
+        # 可复现：同样输入连跑两次字节一致
+        self.assertEqual(retrieve.run(qv, "fact", docs), retrieve.run(qv, "fact", docs))
 
     def test_rerank_error_degrades_and_breaks_circuit(self):
         """服务 500：首次降级为融合序；连续失败达阈值后进入冷却，不再逐次等超时。"""

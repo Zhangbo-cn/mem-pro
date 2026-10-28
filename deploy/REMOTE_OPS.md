@@ -249,10 +249,10 @@ python3 tools/wan_bench.py --url https://113.44.133.30 --key <Key> --images 12 -
 ```bash
 curl -s -H "Authorization: Token <Key>" https://113.44.133.30/version \
   | python3 -c "import json,sys;r=json.load(sys.stdin)['retrieval']['rerank'];print(r)"
-# 期望：mode=tei, model=qwen3-rerank, top=10, calls>0, fails=0, degraded=0, cooldown_skips=0
+# 期望：mode=http, model=qwen3-rerank, top=30, blend=0.7, calls>0, fails=0, degraded=0
 ```
 
-跑 10 次 Search 后再看一次：`calls` 应 += 10 左右（`RERANK_TOP=10` 时只有前 10 名参与精排前的候选择优，
+跑 10 次 Search 后再看一次：`calls` 应 += 10 左右（`RERANK_TOP=30` 时只有前 30 名参与精排前的候选择优，
 实际 calls 可能少于 10），`fails` 必须仍为 **0**。
 
 ### 3.3 401 陷阱（已踩过一次，务必复验）

@@ -196,7 +196,7 @@ curl -s -H "Authorization: Token <key>" https://你的域名:8443/version
 | 带宽基线 | 2026-10-28 实测出网 **1.9 Mbit/s**、串行 0.65 req/s，1,711 条 query 预计 **44 分钟**（`tools/wan_bench.py`）；2 Mbit 不动则申报 Search 2 |
 | 自检 | 外网 `contract 27/27`、`smoke 18/18`、replay 幂等 + 5 次字节一致 ✅ |
 | 版本 | `/version` → `commit=08d5de2ea109`、`config_hash=1db7510cb14b0baf` |
-| 配置 | `EMBED_MODE=api`（text-embedding-v4）、精排 `qwen3-rerank`（`RERANK_TOP=10`）、**`MAX_IMAGES=3`**、`MAX_INFLIGHT=32`、`EMBED_CONCURRENCY=12`、`MAX_RESULTS=0` |
+| 配置 | `EMBED_MODE=api`（text-embedding-v4）、精排 `qwen3-rerank`（`RERANK_TOP=30` + `RERANK_BLEND=0.7`）、**`MAX_IMAGES=3`**、`MAX_INFLIGHT=32`、`EMBED_CONCURRENCY=12`、`MAX_RESULTS=0` |
 
 ### 7.2 两个必须记住的坑
 
