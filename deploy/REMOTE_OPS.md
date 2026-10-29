@@ -363,6 +363,56 @@ sudo journalctl --rotate && sudo journalctl --vacuum-time=1d
 sudo rm -f /var/log/caddy/access*.log*
 ```
 
+### 4.5 fail2ban：封禁暴力试 Key / 扫路径的 IP（2026-10-29 新增）
+
+仓库公开后会有人扫这台机器（IP 本来就在 Let's Encrypt 的 CT 日志里）。服务本身已鉴权，
+未带正确 Key 的请求不会调 embedding，这一步只是**省流量费、降噪**。
+规则读 Caddy 的 JSON 访问日志（mem-pro 在反代后面只看得到 127.0.0.1）：
+
+| jail | 触发 | 封禁 |
+|---|---|---|
+| `sshd` | 10 分钟 5 次失败 | 1 天 |
+| `mempro-auth` | 1 分钟 20 次 401/403 | 1 小时（80/443） |
+| `mempro-probe` | 5 分钟 30 次 404/405 | 1 天（80/443） |
+
+平台只调 `/health` `/add` `/search` 且 Key 正确，两条规则都碰不到它。
+
+**部署机保持在 `v1.0.0`，不要 `git pull`**（会改 `/version` 的 commit）。从本机拷文件过去：
+
+```bash
+# 本机
+scp deploy/fail2ban/mempro.conf deploy/fail2ban/mempro-probe.conf \
+    deploy/fail2ban/mempro.local <user>@113.44.133.30:/tmp/
+
+# 服务器
+sudo apt install -y fail2ban
+sudo install -m 644 /tmp/mempro.conf /tmp/mempro-probe.conf /etc/fail2ban/filter.d/
+sudo install -m 644 /tmp/mempro.local /etc/fail2ban/jail.d/
+# 把自己的固定出口 IP 加进 ignoreip，防止把自己封掉
+sudo sed -i 's|^ignoreip = .*|ignoreip = 127.0.0.1/8 ::1 <你的出口IP>/32|' /etc/fail2ban/jail.d/mempro.local
+
+# 先对真实日志试跑，确认能匹配（401 行数应 > 0 若有人试过错 Key）
+sudo fail2ban-regex /var/log/caddy/access.log /etc/fail2ban/filter.d/mempro.conf
+sudo fail2ban-regex /var/log/caddy/access.log /etc/fail2ban/filter.d/mempro-probe.conf
+
+sudo systemctl enable --now fail2ban && sudo systemctl restart fail2ban
+sudo fail2ban-client status                 # 应列出 sshd, mempro-auth, mempro-probe
+sudo fail2ban-client status mempro-auth
+```
+
+验证（从另一台机器/手机热点，**不要用你在 ignoreip 里的 IP**）：
+
+```bash
+for i in $(seq 25); do curl -sk -o /dev/null -w '%{http_code} ' -X POST https://113.44.133.30/search; done
+# 前 20 次 401，之后连接超时 = 已封；服务器上解封：
+sudo fail2ban-client set mempro-auth unbanip <该IP>
+```
+
+再加两项控制台设置：
+
+1. 安全组：22 只放通自己出口 IP；80/443 保持 `0.0.0.0/0`（ACME 续期与平台调用都需要）；其余全关。
+2. 费用中心 → 预算管理：给弹性公网 IP 流量设月度预算告警（如 ¥50），防被刷流量。
+
 ---
 
 ## 5. HTTPS 全量复验 + 冻结提报

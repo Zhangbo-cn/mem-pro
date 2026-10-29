@@ -18,12 +18,12 @@
 | 版本号 | `mem-pro/0.2.0`（Full 受理后冻结，不得更换） |
 | 固定 Commit | `6d2147e9a1a88a344461b20b374a81c4d200d547`（tag `v1.0.0`；线上 `/version` 的 `commit` = `6d2147e9a1a8`，`config_hash` = `92d381b0beb88e5a`） |
 | 配置指纹 | `92d381b0beb88e5a`（16 位；`/version` 可对；改任何排序参数或 `MAX_IMAGES` / `MAX_RESULTS` / `IMG_MAX_SIDE` 都会变） |
-| 公开仓库 | https://github.com/Zhangbo-cn/mem-pro （**当前为私有**，按官方要求向评委开放只读访问；如需完全公开，改为 public 即可，代码内无凭据） |
+| 公开仓库 | https://github.com/Zhangbo-cn/mem-pro （**公开**，MIT 许可；仓库内无任何凭据；评测版本以 tag `v1.0.0` 为准） |
 | 联系人 / 团队 | **张播（个人参赛）**；电话/邮箱与报名表一致（不写入仓库，避免仓库扩散联系信息） |
 | 赛道 / 组别 | 多模态记忆赛道 / **开源方法榜**（组别只能选一个） |
 | 接口地址 | **`https://113.44.133.30/add`**、**`https://113.44.133.30/search`**（IP 直签 Let's Encrypt，无需域名/备案；`http://` 308 跳 https，Caddy 需 `default_sni`，见 `deploy/REMOTE_OPS.md` §1.4.1） |
 | 鉴权方式 | `Authorization: Token <Memory System Key>`（同时接受 `Bearer` / `X-Api-Key`） |
-| 允许公开展示 | ✅ ① 系统名 + 方法说明 + 分类指标；② 架构图；③ 代码仓库（**只读**，见 §1.1）。**不公开**：Memory System Key、评测数据样本、原始 query |
+| 允许公开展示 | ✅ ① 系统名 + 方法说明 + 分类指标；② 架构图；③ 代码仓库（公开）。**不公开**：Memory System Key、评测数据样本、原始 query |
 
 ---
 
@@ -87,6 +87,8 @@ POST /search query ──▶ embedding ──┬─▶ 稠密余弦(归一化向
 | 交叉编码器精排 | 本次提交启用（top-30 候选重排 + RRF 混合 `blend=0.7`，失败自动降级） | 模型服务：阿里云百炼 `qwen3-rerank`（`gte-rerank-v2` 官方标注 2026-05-30 下线） |
 | 文本向量 | 稠密通道 | 阿里云百炼 `text-embedding-v4`（Qwen3-Embedding 系列） |
 | 近重复抑制 | 检索结果去重 | 余弦阈值法，本仓库自实现 |
+| Mem-Gallery（本地代理榜数据） | `data/mem-gallery/`，`tools/gallery_proxy.py` / `e2e_proxy.py` | Bei et al., arXiv:2601.03515；数据 MIT（`Ethan-Bei/Mem-Gallery`） |
+| ATM-Bench（本地代理榜数据） | `data/atm-bench/`、`data/raw_memory/`，`tools/atm_proxy.py` | Mei et al., *According to Me*, arXiv:2603.01990；数据 **CC BY-NC 4.0**（`Jingbiao/ATM-Bench`），见 `data/README.md` |
 
 ### 3.2 改动说明
 
@@ -149,11 +151,11 @@ curl -s -H "Authorization: Token $KEY" http://113.44.133.30/version  # commit �
 | 5 | 在线 Add / Search（HTTPS 公网） | ✅ `https://113.44.133.30/add`、`https://113.44.133.30/search`（Let's Encrypt IP 证书，`commit` 见 `/version`、`config_hash=92d381b0beb88e5a`（含 `IMG_MAX_SIDE=1024` 缩图）；contract 27/27、smoke 18/18、replay 幂等+5 次字节一致均走 https 复验） |
 | 6 | 鉴权方式声明 | ✅ §一 |
 | 7 | 容量与运行限制 | ✅ §四 |
-| 8 | GitHub 仓库 | ✅ 私有仓库 + 向评委开放只读（如需 public 可直接切换，代码无凭据） |
+| 8 | GitHub 仓库 | ✅ 公开仓库（MIT），代码无凭据 |
 | 9 | 固定 Commit | ✅ `6d2147e9a1a8…`（tag `v1.0.0`），线上 `/version` 一致 |
 | 10 | 原始工作引用 | ✅ §3.1 |
 | 11 | 方法改动说明 | ✅ §3.2 |
-| 12 | 可公开展示的信息范围 | ✅ 方法说明 / 分类指标 / 架构图 / 代码仓库（只读）；不含 Key、数据样本、原始 query |
+| 12 | 可公开展示的信息范围 | ✅ 方法说明 / 分类指标 / 架构图 / 代码仓库（公开）；不含 Key、数据样本、原始 query |
 | 13 | 依赖与运行说明 | ✅ §五 |
 | 14 | 原创性披露 + 诚信承诺 | ✅ §六 |
 | 15 | Memory System Key | ✅ 随报名表私有字段提交（48 位 hex，仅存服务器 `.env`，**不入仓库**） |
@@ -178,8 +180,8 @@ curl -s -H "Authorization: Token $KEY" http://113.44.133.30/version  # commit �
 | 固定 Commit | `6d2147e9a1a88a344461b20b374a81c4d200d547`（tag `v1.0.0`） |
 | 配置指纹 | `92d381b0beb88e5a` |
 | 申报并发 | Search **2** / Add **2** |
-| 仓库 | `https://github.com/Zhangbo-cn/mem-pro`（私有，向评委开放**只读**） |
-| 可公开展示 | 方法说明、分类指标、架构图、代码仓库（只读）；不公开 Key、评测数据样本、原始 query |
+| 仓库 | `https://github.com/Zhangbo-cn/mem-pro`（公开，MIT） |
+| 可公开展示 | 方法说明、分类指标、架构图、代码仓库；不公开 Key、评测数据样本、原始 query |
 
 ### 8.2 系统简介（中文，约 120 字，可直接粘）
 

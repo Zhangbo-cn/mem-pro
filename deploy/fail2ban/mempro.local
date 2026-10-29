@@ -1,0 +1,35 @@
+# /etc/fail2ban/jail.d/mempro.local
+# Install: see deploy/REMOTE_OPS.md §4.5
+[DEFAULT]
+# Add your own fixed egress IP here so you can never lock yourself out.
+ignoreip = 127.0.0.1/8 ::1
+banaction = iptables-multiport
+
+[sshd]
+enabled  = true
+maxretry = 5
+findtime = 10m
+bantime  = 1d
+
+# 20 wrong/missing keys in 1 minute => ban 1 hour on 80/443.
+# The platform always sends the right key, so it cannot trip this.
+[mempro-auth]
+enabled  = true
+filter   = mempro
+logpath  = /var/log/caddy/access.log
+backend  = auto
+port     = http,https
+maxretry = 20
+findtime = 1m
+bantime  = 1h
+
+# 30 not-found/method errors in 5 minutes => ban 1 day.
+[mempro-probe]
+enabled  = true
+filter   = mempro-probe
+logpath  = /var/log/caddy/access.log
+backend  = auto
+port     = http,https
+maxretry = 30
+findtime = 5m
+bantime  = 1d
