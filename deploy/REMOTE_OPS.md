@@ -369,6 +369,10 @@ sudo rm -f /var/log/caddy/access*.log*
 未带正确 Key 的请求不会调 embedding，这一步只是**省流量费、降噪**。
 规则读 Caddy 的 JSON 访问日志（mem-pro 在反代后面只看得到 127.0.0.1）：
 
+> 前提：Caddy 站点块里要有 `log`（`deploy/Caddyfile.ip` 已含）。**必须带 `format filter … request>headers delete`**，
+> 否则请求头里的 `Authorization` / `X-Api-Key` 会明文写进 access.log。
+> 2026-10-29 线上实装时发现服务器 `/etc/caddy/Caddyfile` 没有 log 块（access.log 停在 10-28），已补上并 reload。
+
 | jail | 触发 | 封禁 |
 |---|---|---|
 | `sshd` | 10 分钟 5 次失败 | 1 天 |
@@ -407,6 +411,9 @@ for i in $(seq 25); do curl -sk -o /dev/null -w '%{http_code} ' -X POST https://
 # 前 20 次 401，之后连接超时 = 已封；服务器上解封：
 sudo fail2ban-client set mempro-auth unbanip <该IP>
 ```
+
+2026-10-29 线上实测：`fail2ban-regex` 对现有日志 auth 命中 6 / probe 命中 11；从本机连发 23 次无 Key 的
+`/search`，第 21 次起 80/443 被 nftables reject（SSH 不受影响），`unbanip` 后恢复 200。
 
 再加两项控制台设置：
 
