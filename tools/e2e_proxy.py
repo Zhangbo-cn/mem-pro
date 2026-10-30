@@ -59,6 +59,21 @@ SYSTEM = (
 )
 
 
+# 中性提示：不提示「答不出就写 Not mentioned」。官方 Prompt51 未公开，上面的 SYSTEM 会把
+# 弃答「教」给回答模型，本地 AR 因此虚高（本地 0.65 vs 官方 smoke abstention 0.11）。
+NEUTRAL = ("You are given memory records about a user (each starts with [n]). "
+           "Answer the question using the memories. Be concise.")
+
+_ABSTAIN = re.compile(r"not mentioned|no (relevant )?(information|mention|record|evidence|memory)|"
+                      r"not (specified|provided|stated|available|included|known)|"
+                      r"(don't|do not|cannot|can't) (know|determine|find|tell|answer)|unknown|"
+                      r"没有(提到|提及|相关|信息|记录)|未(提及|提到|说明)|无法(确定|回答|判断)", re.I)
+
+
+def is_abstain(text: str) -> bool:
+    return bool(_ABSTAIN.search(text or ""))
+
+
 def evidence(results: list[dict], max_chars: int) -> str:
     lines = []
     for i, it in enumerate(results, 1):
@@ -70,9 +85,9 @@ def evidence(results: list[dict], max_chars: int) -> str:
 
 
 def ask(url: str, key: str, model: str, q: str, ev: str, timeout: float,
-        retries: int = 3) -> tuple[str, int]:
+        retries: int = 3, system: str = SYSTEM) -> tuple[str, int]:
     payload = {"model": model, "temperature": 0, "max_tokens": 200,
-               "messages": [{"role": "system", "content": SYSTEM},
+               "messages": [{"role": "system", "content": system},
                             {"role": "user", "content": f"记忆条目：\n{ev}\n\n问题：{q}"}]}
     data = json.dumps(payload).encode()
     last = ""
@@ -109,6 +124,9 @@ def score(pred: str, gold: str) -> tuple[int, int, float]:
     p, g = norm(pred), norm(gold)
     if not g:
         return 0, 0, 0.0
+    if norm(gold) == "not mentioned":           # 弃答题：任何明确弃答的表述都算对
+        hit = int(is_abstain(pred))
+        return hit, hit, float(hit)
     em = int(p == g)
     contains = int(g in p or (p and p in g))
     ps, gs = set(p.split()), set(g.split())
@@ -152,6 +170,8 @@ def main() -> int:
     ap.add_argument("--vec-cache", default=os.path.join(ROOT, "data", ".cache", "gallery-vecs.db"))
     ap.add_argument("--oracle", action="store_true",
                     help="上限诊断：直接喂金标 clue 记忆，量「检索完美时答案能到多少」")
+    ap.add_argument("--prompt", choices=("primed", "neutral"), default="primed",
+                    help="neutral = 不提示弃答，更接近官方未公开的 Answer 提示")
     ap.add_argument("--report", default="")
     args = ap.parse_args()
     if not args.answer_key:
@@ -235,7 +255,8 @@ def main() -> int:
         for k in ks:
             try:
                 pred, ntok = ask(args.answer_url, args.answer_key, args.answer_model,
-                                 q["question"], evidence(hits[:k], args.max_chars), 60)
+                                 q["question"], evidence(hits[:k], args.max_chars), 60,
+                                 system=NEUTRAL if args.prompt == "neutral" else SYSTEM)
             except Exception as e:  # noqa: BLE001
                 with lock:
                     fails[0] += 1
