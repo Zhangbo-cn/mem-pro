@@ -212,8 +212,11 @@ curl -s -H "Authorization: Token $KEY" http://113.44.133.30/version  # commit �
 | Add API URL | `https://113.44.133.30/add`（不变） |
 | Search API URL | `https://113.44.133.30/search`（不变） |
 | 鉴权 | 沿用 v1.0.0（`Authorization: Token <Memory System Key>`） |
-| 固定 Commit | tag `v2.0`（线上 `/version` 的 `commit` 与之一致） |
+| 固定 Commit | `52de40923ff0f4aa0679d5a64f249e10d1595482`（tag `v2.0`；线上 `/version` 的 `commit` = `52de40923ff0`，与 tag 一致） |
 | config_hash | `8b8e31d7bacbafe8`（v1.0.0 为 `92d381b0beb88e5a`） |
+
+> 说明：tag `v2.0` 之后 `main` 还有 `a398d44`，只改 `tools/e2e_proxy.py`（本地评测代理）与 README，
+> 不涉及 `service/` 任何代码或配置，`config_hash` 与服务输出不变；评测版本以 tag `v2.0`（`52de409`）为准。
 
 改动：线上 `.env` 加 `MEMORY_UNIT=round`、`CONTENT_HEADER=1`——user 消息与紧随的 assistant 回复合成一条记忆，
 正文前加 `[YYYY-MM-DD HH:MM] user:` / `assistant:` 来源抬头（原文不改写）；检索/精排/预算零改动。
