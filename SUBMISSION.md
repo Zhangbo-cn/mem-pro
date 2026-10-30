@@ -92,7 +92,7 @@ POST /search query ──▶ embedding ──┬─▶ 稠密余弦(归一化向
 
 ### 3.2 改动说明
 
-本仓库**全部代码自研**（`service/` 约 2.7k 行、`tools/` 约 3.5k 行、测试 97 项），未复用任何论文官方实现或第三方框架代码，因此无「相对原始工作的代码级改动」需披露。参考的仅为上述通用算法思想，实现细节（融合权重、时态线索匹配、去重阈值、证据预算、确定性处理）均为本团队在公开数据集 Mem-Gallery 与 ATM-Bench 上实测调出的。
+本仓库**全部代码自研**（`service/` 约 2.7k 行、`tools/` 约 3.5k 行、测试 98 项），未复用任何论文官方实现或第三方框架代码，因此无「相对原始工作的代码级改动」需披露。参考的仅为上述通用算法思想，实现细节（融合权重、时态线索匹配、去重阈值、证据预算、确定性处理）均为本团队在公开数据集 Mem-Gallery 与 ATM-Bench 上实测调出的。
 
 ---
 
@@ -199,3 +199,23 @@ curl -s -H "Authorization: Token $KEY" http://113.44.133.30/version  # commit �
 - 单请求：服务端不主动断连，平台 30 分钟上限内均可用；在途超 64 返回 `429`+`Retry-After`。
 - 数据：评测数据仅用于完成本次任务，不训练、不外传；任务结束 30 天内用 `tools/purge.py` 删除。
 - 可复现：`/version` 返回 `commit`、`config_hash`、检索配置与 rerank 计数，可与本材料逐项核对。
+
+---
+
+## 九、v2.0（给已有 Key 新增版本，2026-10-30）
+
+平台规定同一 Key 的接口地址不可变（`endpoint is immutable`），所以 v2.0 **沿用原地址**，只换线上配置与代码版本。
+
+| 表单字段 | 填写 |
+|---|---|
+| Version name | `v2.0` |
+| Add API URL | `https://113.44.133.30/add`（不变） |
+| Search API URL | `https://113.44.133.30/search`（不变） |
+| 鉴权 | 沿用 v1.0.0（`Authorization: Token <Memory System Key>`） |
+| 固定 Commit | tag `v2.0`（线上 `/version` 的 `commit` 与之一致） |
+| config_hash | `8b8e31d7bacbafe8`（v1.0.0 为 `92d381b0beb88e5a`） |
+
+改动：线上 `.env` 加 `MEMORY_UNIT=round`、`CONTENT_HEADER=1`——user 消息与紧随的 assistant 回复合成一条记忆，
+正文前加 `[YYYY-MM-DD HH:MM] user:` / `assistant:` 来源抬头（原文不改写）；检索/精排/预算零改动。
+依据：QA「首次接入或接口行为变更后，先使用独立的兼容性 smoke 检查接口规范」「Smoke 可根据错误信息修正接口、鉴权和运行配置」；
+Full 尚未提交。根因与实测见 README §十八：Mem-Gallery 全量 1,711 题端到端 EM 0.324→0.392（TR +0.31、VR +0.15、AR +0.09）。

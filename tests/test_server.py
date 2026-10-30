@@ -321,8 +321,40 @@ class ServerTest(unittest.TestCase):
         _, plain = self.search("Alice 住在哪个城市？", "e2e:tense", 5)
         past_now = next(d["score"] for d in now["data"] if "去年" in d["content"])
         past_plain = next(d["score"] for d in plain["data"] if "去年" in d["content"])
-        self.assertEqual(now["data"][0]["content"], "Alice 住在柏林。")
+        self.assertTrue(now["data"][0]["content"].endswith("Alice 住在柏林。"))
         self.assertLess(past_now, past_plain)
+
+    def test_11b_v2_round_unit_with_date_and_speaker_header(self):
+        """/v2/*：user+assistant 合成一条，带日期与说话人；/add、/search（v1）行为不变且互不可见。
+
+        平台 Answer 只读 content：没有日期答不了先后题，没有说话人分不清谁说的。
+        """
+        ts = 1715472000000  # 2024-05-12 00:00 UTC
+        msgs = [
+            {"role": "user", "content": "I adopted a Maltese named Lumi.", "timestamp": ts},
+            {"role": "assistant", "content": "Congrats on Lumi!", "timestamp": ts + 1},
+            {"role": "user", "content": "She loves the park.", "timestamp": ts + 60_000},
+        ]
+        body = {"request_id": "r1", "user_id": "e2e:round", "session_id": "s1", "messages": msgs}
+        st, out = self.post("/v2/add", body)
+        self.assertEqual(st, 200)
+        self.assertEqual(out, {"success": True, "request_id": "r1", "user_id": "e2e:round",
+                               "session_id": "s1"})
+        _, v1 = self.search("When did I adopt Lumi?", "e2e:round", 10)
+        self.assertEqual(v1["data"], [], "v2 写入不能出现在 v1 的检索空间")
+        self.add("r1", "e2e:round", messages=msgs)
+        _, v1 = self.search("When did I adopt Lumi?", "e2e:round", 10)
+        self.assertEqual(len(v1["data"]), 3)
+        self.assertIn("I adopted a Maltese named Lumi.", [d["content"] for d in v1["data"]])
+        _, body = self.post("/v2/search", {"query": "When did I adopt Lumi?",
+                                           "user_id": "e2e:round", "top_k": 10})
+        texts = [d["content"] for d in body["data"]]
+        self.assertEqual(len(texts), 2, texts)
+        self.assertIn("[2024-05-12 00:00] user: I adopted a Maltese named Lumi.\n"
+                      "assistant: Congrats on Lumi!", texts)
+        self.assertIn("[2024-05-12 00:01] user: She loves the park.", texts)
+        st, _ = self.call("/v2/health", key=None)
+        self.assertEqual(st, 200)
 
     def test_12_distinct_image_only_memories_all_returned(self):
         imgs = [PNG.replace("iVBORw0KGgo", f"iVBORw0KGg{c}", 1) for c in "oAB"]

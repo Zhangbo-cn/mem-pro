@@ -67,6 +67,14 @@ APPEND_OPTIONS = os.environ.get("APPEND_OPTIONS", "0") == "1"
 # 向量化时拼接同一 Add 内前后各 N 条消息作为上下文（0=关闭）；只影响向量，不影响返回正文
 EMBED_CONTEXT = int(os.environ.get("EMBED_CONTEXT", "0"))
 EMBED_CONTEXT_CHARS = int(os.environ.get("EMBED_CONTEXT_CHARS", "400"))
+# 记忆单元与正文抬头（见 _units）：message|round；1=正文带「[日期 时间] 角色:」
+# /add、/search（已绑定的 v1.0.0）保持历史行为；/v2/add、/v2/search 用 V2_PROFILE。
+MEMORY_UNIT = os.environ.get("MEMORY_UNIT", "message").strip().lower()
+CONTENT_HEADER = os.environ.get("CONTENT_HEADER", "0") == "1"
+V2_PROFILE = {"unit": "round", "header": True}
+ROUTES = {"/add": ("add", None), "/search": ("search", None),
+          "/v2/add": ("add", V2_PROFILE), "/v2/search": ("search", V2_PROFILE)}
+V2_NS = "\x1fv2\x1f"   # 不能用 \x00：SQLite 的 LIKE/比较遇 NUL 截断
 LOG_JSON = os.environ.get("LOG_JSON", "1") == "1"
 SERVER_VERSION = "mem-pro/0.2.0"
 
@@ -92,7 +100,7 @@ def _commit() -> str:
 _RUNTIME_COUNTERS = ("calls", "fails", "degraded", "cooldown_skips")
 
 
-def _config_fingerprint() -> str:
+def _config_fingerprint(profile: dict | None = None) -> str:
     """影响输出字节的配置指纹：改了任何一个都会改变它。
 
     检索侧直接取 `retrieve.info()` 全量（去掉运行时计数器），新加开关只要进了 info()
@@ -109,6 +117,9 @@ def _config_fingerprint() -> str:
                                         MAX_IMAGES, MAX_RESULTS, budget.IMG_TOKEN_COST),
              "caption:%s:%s" % (caption.MODE, caption.MODEL),
              "imgsize:%d:%d" % (imgsize.MAX_SIDE, imgsize.QUALITY)]
+    unit, header = _profile(profile)
+    if (unit, header) != ("message", False):   # 历史配置不加这一段：v1 的 config_hash 保持不变
+        parts.append("unit:%s:%d" % (unit, header))
     return hashlib.sha256("|".join(parts).encode()).hexdigest()[:16]
 
 
@@ -214,6 +225,48 @@ def split_text(text: str, limit: int = 3000) -> list[str]:
     return parts or [text]
 
 
+def _profile(profile: dict | None) -> tuple[str, bool]:
+    if profile is None:
+        return MEMORY_UNIT, CONTENT_HEADER
+    return profile["unit"], bool(profile["header"])
+
+
+def _units(normed: list[dict], profile: dict | None = None) -> list[dict]:
+    """消息 → 记忆单元。
+
+    MEMORY_UNIT=message：一条消息一条记忆（历史行为）。
+    MEMORY_UNIT=round：把 user 消息与紧随其后的 assistant 回复合成一条——基准的证据粒度
+    （Mem-Gallery 的 clue `D1:3`）就是「一轮」，单条 assistant 回复脱离提问几乎不可读，
+    单条 user 消息又丢了对方补充的名字/结论。图片、时间戳跟随 user 消息。
+
+    CONTENT_HEADER=1 时正文前加 `[YYYY-MM-DD HH:MM] user:` 抬头：平台 Answer 只看 content，
+    不看 created_at，没有日期就答不了先后/跨会话题，没有说话人就分不清谁说的。
+    抬头只是来源元数据（时间+角色），不改写原文。
+    """
+    unit, header = _profile(profile)
+    out: list[dict] = []
+    for m in normed:
+        prev = out[-1] if out else None
+        if (unit == "round" and prev is not None and m["role"] == "assistant"
+                and prev["roles"] == ["user"]):
+            prev["roles"].append("assistant")
+            prev["parts"].append(("assistant", m["text"]))
+            prev["images"] = prev["images"] + m["images"]
+            continue
+        out.append({"mi": m["mi"], "roles": [m["role"]], "parts": [(m["role"], m["text"])],
+                    "images": list(m["images"]), "ts": m["ts"], "created": m["created"]})
+    for u in out:
+        lines = []
+        for k, (role, text) in enumerate(u["parts"]):
+            if header:
+                head = f"[{u['created'][:10]} {u['created'][11:16]}] " if k == 0 and u["ts"] else ""
+                lines.append(f"{head}{role}: {text}")
+            else:
+                lines.append(text)
+        u["text"] = "\n".join(lines)
+    return out
+
+
 def det_id(*parts) -> str:
     h = hashlib.sha1("|".join(str(p) for p in parts).encode("utf-8")).hexdigest()
     return f"mem_{h[:20]}"
@@ -230,7 +283,84 @@ def uid_hash(user_id: str) -> str:
 
 
 # ---------------- 业务 ----------------
-def do_add(req: dict) -> dict:
+def plan_add(req: dict, profile: dict | None = None) -> tuple[list[dict], list[str]]:
+    """校验并展开一次 Add：返回待写入的记忆行与对应的向量化文本（不调用 embedding）。
+
+    tools/gallery_proxy 的预热复用它，保证预热文本与真实写入逐字一致。
+    """
+    msgs = req["messages"]
+    normed, total_bytes = [], 0
+    for mi, m in enumerate(msgs):
+        if not isinstance(m, dict):
+            raise Bad("messages 的每一项必须是对象")
+        if m.get("role") not in ("user", "assistant"):
+            raise Bad("messages[].role 必须是 user 或 assistant")
+        if m.get("content") is None:
+            raise Bad(f"messages[{mi}] 缺少 content")
+        text, images = norm_content(m.get("content"), f"messages[{mi}].content")
+        total_bytes += sum(body_bytes(u) for u in images)
+        if total_bytes > MAX_ADD_BYTES:
+            raise Bad("单次 Add 的图片总量超过 30 MiB")
+        ts = m.get("timestamp")
+        if ts is not None and (isinstance(ts, bool) or not isinstance(ts, (int, float))):
+            raise Bad(f"messages[{mi}].timestamp 必须是毫秒时间戳")
+        created = iso(ts)
+        if images:
+            try:
+                descs = [d for d in caption.describe(images) if d]
+            except caption.CaptionError as e:
+                raise Upstream(str(e)) from e
+            if descs:
+                # 派生文本只追加并显式标注，原文一字不改
+                derived = "\n".join(f"{caption.MARKER} {d}" for d in descs)
+                text = derived if text == "(image only)" else f"{text}\n{derived}"
+        normed.append({"mi": mi, "role": m["role"], "text": text, "images": images,
+                       "ts": ts if isinstance(ts, (int, float)) else None,
+                       "created": created})
+
+    pending = []
+    msg_texts: list[tuple[int, str]] = []
+    for u in _units(normed, profile):
+        mi, text, images, ts, created = u["mi"], u["text"], u["images"], u["ts"], u["created"]
+        sig = caption.image_sig(images)
+        msg_texts.append((mi, text))
+        for si, seg in enumerate(split_text(text)):
+            pending.append(
+                {
+                    "id": det_id(req["user_id"], req["session_id"],
+                                 req["request_id"], mi, si),
+                    "user_id": req["user_id"],
+                    "session_id": req["session_id"],
+                    "request_id": req["request_id"],
+                    "seq": None,  # 由 store 分配该 user 的全局递增序号
+                    "text": seg,
+                    # 图片只挂在第一条分块上，避免同一图重复占用返回预算
+                    "images": images if si == 0 else [],
+                    "img_sig": sig if si == 0 else "",
+                    "ts": ts,
+                    "created_at": created,
+                    "_mi": mi,
+                }
+            )
+
+    # 上下文化向量：只改「用于向量化的文本」，返回的正文仍是原文。
+    # 单条 assistant 回复（"好的，发我看看"）自身几乎没有语义，拼上同一 Add
+    # 内的相邻消息后才可能被问题命中。默认关闭：hash 代理榜上 R@100 反降 0.03，需用真实 embedding 复测。
+    embed_input = []
+    for k, p in enumerate(pending):
+        body = p["text"] + (f" [images:{len(p['images'])}]" if p["images"] else "")
+        if EMBED_CONTEXT > 0:
+            mi = p["_mi"]
+            ctx = [t for j, t in msg_texts if j != mi and abs(j - mi) <= EMBED_CONTEXT]
+            if ctx:
+                body = body + "\n[context] " + " ".join(c[:EMBED_CONTEXT_CHARS] for c in ctx)
+        embed_input.append(body)
+    for p in pending:
+        p.pop("_mi", None)
+    return pending, embed_input
+
+
+def do_add(req: dict, profile: dict | None = None) -> dict:
     for k in ("request_id", "messages", "user_id", "session_id"):
         if not req.get(k):
             raise Bad(f"缺少必填字段 {k}")
@@ -239,7 +369,7 @@ def do_add(req: dict) -> dict:
         raise Bad("messages 必须是非空数组")
     if not isinstance(req["request_id"], str) or len(req["request_id"]) > 512:
         raise Bad("request_id 必须是字符串且 ≤512 字符")
-    if not isinstance(req["user_id"], str) or len(req["user_id"]) > 512:
+    if not isinstance(req["user_id"], str) or len(req["user_id"].removeprefix(V2_NS)) > 512:
         raise Bad("user_id 必须是字符串且 ≤512 字符")
     if not isinstance(req["session_id"], str) or len(req["session_id"]) > 512:
         raise Bad("session_id 必须是字符串且 ≤512 字符")
@@ -250,67 +380,7 @@ def do_add(req: dict) -> dict:
         if cached is not None:
             return cached
 
-        pending, total_bytes = [], 0
-        msg_texts: list[tuple[int, str]] = []
-        for mi, m in enumerate(msgs):
-            if not isinstance(m, dict):
-                raise Bad("messages 的每一项必须是对象")
-            if m.get("role") not in ("user", "assistant"):
-                raise Bad("messages[].role 必须是 user 或 assistant")
-            if m.get("content") is None:
-                raise Bad(f"messages[{mi}] 缺少 content")
-            text, images = norm_content(m.get("content"), f"messages[{mi}].content")
-            total_bytes += sum(body_bytes(u) for u in images)
-            if total_bytes > MAX_ADD_BYTES:
-                raise Bad("单次 Add 的图片总量超过 30 MiB")
-            ts = m.get("timestamp")
-            if ts is not None and (isinstance(ts, bool) or not isinstance(ts, (int, float))):
-                raise Bad(f"messages[{mi}].timestamp 必须是毫秒时间戳")
-            created = iso(ts)
-            if images:
-                try:
-                    descs = [d for d in caption.describe(images) if d]
-                except caption.CaptionError as e:
-                    raise Upstream(str(e)) from e
-                if descs:
-                    # 派生文本只追加并显式标注，原文一字不改
-                    derived = "\n".join(f"{caption.MARKER} {d}" for d in descs)
-                    text = derived if text == "(image only)" else f"{text}\n{derived}"
-            sig = caption.image_sig(images)
-            msg_texts.append((mi, text))
-            for si, seg in enumerate(split_text(text)):
-                pending.append(
-                    {
-                        "id": det_id(req["user_id"], req["session_id"],
-                                     req["request_id"], mi, si),
-                        "user_id": req["user_id"],
-                        "session_id": req["session_id"],
-                        "request_id": req["request_id"],
-                        "seq": None,  # 由 store 分配该 user 的全局递增序号
-                        "text": seg,
-                        # 图片只挂在第一条分块上，避免同一图重复占用返回预算
-                        "images": images if si == 0 else [],
-                        "img_sig": sig if si == 0 else "",
-                        "ts": ts if isinstance(ts, (int, float)) else None,
-                        "created_at": created,
-                        "_mi": mi,
-                    }
-                )
-
-        # 上下文化向量：只改「用于向量化的文本」，返回的正文仍是原文。
-        # 单条 assistant 回复（"好的，发我看看"）自身几乎没有语义，拼上同一 Add
-        # 内的相邻消息后才可能被问题命中。默认关闭：hash 代理榜上 R@100 反降 0.03，需用真实 embedding 复测。
-        embed_input = []
-        for k, p in enumerate(pending):
-            body = p["text"] + (f" [images:{len(p['images'])}]" if p["images"] else "")
-            if EMBED_CONTEXT > 0:
-                mi = p["_mi"]
-                ctx = [t for j, t in msg_texts if j != mi and abs(j - mi) <= EMBED_CONTEXT]
-                if ctx:
-                    body = body + "\n[context] " + " ".join(c[:EMBED_CONTEXT_CHARS] for c in ctx)
-            embed_input.append(body)
-        for p in pending:
-            p.pop("_mi", None)
+        pending, embed_input = plan_add(req, profile)
         try:
             vecs = embed.embed(embed_input)
         except Exception as e:  # 上游 / 配额 / 网络 → 让平台重试
@@ -496,6 +566,8 @@ class Handler(BaseHTTPRequestHandler):
         started = time.time()
         self.req_id = self.headers.get("X-Request-Id", "")[:128]
         path = self.path.split("?", 1)[0].rstrip("/")
+        if path == "/v2" or path.startswith("/v2/"):
+            path = path[3:]  # /v2/health 等与 v1 共用（契约/烟测工具以 BASE+路径 拼接）
         if path in ("/health", "/healthz", "/ready", ""):
             if not store.ping():
                 self._log(503, started, reason="db_unavailable")
@@ -513,6 +585,8 @@ class Handler(BaseHTTPRequestHandler):
                 self._log(200, started)
                 return self._send(200, {"version": SERVER_VERSION, "commit": COMMIT,
                                         "config_hash": _config_fingerprint(),
+                                        "config_hash_v2": _config_fingerprint(V2_PROFILE),
+                                        "v2_profile": V2_PROFILE,
                                         "imgsize": imgsize.info(),
                                         "embed": embed.info(),
                                         "caption": caption.info(),
@@ -535,7 +609,7 @@ class Handler(BaseHTTPRequestHandler):
         acquired = False
         search_timings = {}
         try:
-            if path not in ("/add", "/search"):
+            if path not in ROUTES:
                 self._log(404, started)
                 return self._send(404, {"detail": {"reason": "not found"}})
             if not self._auth():
@@ -551,8 +625,17 @@ class Handler(BaseHTTPRequestHandler):
                     return self._send(429, {"detail": {"reason": "too many in-flight requests"}},
                                       {"Retry-After": "1", "Connection": "close"})
             req = self._read_json()
-            if path == "/add":
-                out = do_add(req)
+            op, profile = ROUTES[path]
+            if profile is not None and isinstance(req.get("user_id"), str) and req["user_id"]:
+                # v2 的记忆按单元粒度不同，不能和 v1 写进同一个 user 空间（也避免幂等缓存串用）
+                uid = req["user_id"]
+                req = {**req, "user_id": V2_NS + uid}
+            else:
+                uid = None
+            if op == "add":
+                out = do_add(req, profile)
+                if uid is not None:
+                    out = {**out, "user_id": uid}
             else:
                 out = do_search(req, search_timings)
             self._log(200, started, user=uid_hash(str(req.get("user_id", ""))),

@@ -42,4 +42,14 @@ echo
 echo "== smoke (local) =="
 "$PY" tools/smoke.py "http://127.0.0.1:$PORT" --key "$KEY" --skip-image
 echo
+# v2（/v2/add、/v2/search：轮次单元 + 日期/说话人抬头）走同一套契约与复现性检查
+echo "== contract_check (v2) =="
+"$PY" tools/contract_check.py "http://127.0.0.1:$PORT/v2" --key "$KEY"
+echo
+echo "== replay (v2) =="
+"$PY" tools/replay.py "http://127.0.0.1:$PORT/v2" 5 --key "$KEY"
+echo
+echo "== smoke (v2) =="
+"$PY" tools/smoke.py "http://127.0.0.1:$PORT/v2" --key "$KEY" --skip-image
+echo
 echo "全部通过 ✅"

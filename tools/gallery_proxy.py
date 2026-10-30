@@ -169,8 +169,7 @@ def _count(db) -> dict:
 def _warm(dialogs, server, embed, args) -> None:
     """按 server 的真实规则预计算「将被向量化的文本」，并行灌进缓存。
 
-    规则必须与 do_add / do_search 一致：norm_content → split_text →
-    有图片的消息在首段加 " [images:N]" → （可选）拼同 Add 相邻消息作上下文。
+    写入侧直接复用 server.plan_add（与 do_add 逐字一致），查询侧走 norm_content。
     """
     import concurrent.futures
 
@@ -178,23 +177,12 @@ def _warm(dialogs, server, embed, args) -> None:
     for f, d in dialogs:
         _REAL["topic"] = os.path.splitext(os.path.basename(f))[0]
         for s in d["multi_session_dialogues"]:
-            bodies: list[str] = []
-            imgs: list[list[str]] = []
-            for k, r in enumerate(s["dialogues"]):
-                for m in round_messages(r, s["date"], k, not args.no_images):
-                    text, images = server.norm_content(m["content"], "warm")
-                    bodies.append(text)
-                    imgs.append(images)
-            for mi, text in enumerate(bodies):
-                ctx = ([t for j, t in enumerate(bodies)
-                        if j != mi and abs(j - mi) <= server.EMBED_CONTEXT]
-                       if server.EMBED_CONTEXT > 0 else [])
-                for si, seg in enumerate(server.split_text(text)):
-                    piece = seg + (f" [images:{len(imgs[mi])}]" if imgs[mi] and si == 0 else "")
-                    if ctx:
-                        piece += "\n[context] " + " ".join(
-                            c[:server.EMBED_CONTEXT_CHARS] for c in ctx)
-                    texts.append(piece)
+            msgs = [m for k, r in enumerate(s["dialogues"])
+                    for m in round_messages(r, s["date"], k, not args.no_images)]
+            if msgs:
+                _, inputs = server.plan_add({"request_id": s["session_id"], "user_id": "warm",
+                                             "session_id": s["session_id"], "messages": msgs})
+                texts.extend(inputs)
         for q in d["human-annotated QAs"]:
             qt, _ = server.norm_content(query_content(q, not args.no_images), "warm")
             texts.append(qt)

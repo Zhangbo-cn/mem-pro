@@ -46,12 +46,14 @@ def main() -> int:
     c.execute("PRAGMA busy_timeout=30000")
     where, params = [], []
     if not args.all:
+        # /v2/* 的记忆存在 "\\x1fv2\\x1f<user_id>" 下（见 server.V2_NS），按前缀/ID 删时一并删
         if args.user_prefix:
-            where.append("user_id LIKE ?")
-            params.append(args.user_prefix.replace("%", "\\%").replace("_", "\\_") + "%")
+            pat = args.user_prefix.replace("%", "\\%").replace("_", "\\_") + "%"
+            where.append("(user_id LIKE ? ESCAPE '\\' OR user_id LIKE ? ESCAPE '\\')")
+            params += [pat, "\x1fv2\x1f" + pat]
         if args.user_id:
-            where.append("user_id = ?")
-            params.append(args.user_id)
+            where.append("user_id IN (?, ?)")
+            params += [args.user_id, "\x1fv2\x1f" + args.user_id]
         clause = " AND ".join(where)
         eq = " WHERE " + clause
     else:

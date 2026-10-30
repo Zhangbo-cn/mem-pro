@@ -12,7 +12,7 @@ Agent Memory Leaderboard（记忆之巅）**多模态记忆赛道 / 开源方法
 | 项 | 状态 | 说明 |
 |---|---|---|
 | 契约自检 | ✅ **27 / 27** | `tools/contract_check.py`，覆盖 11 类官方约束 |
-| 自动化测试 | ✅ **97 项** | `make test`：API 端到端、融合/时态回归、缓存、精排降级、多模态去重、caption 缓存 |
+| 自动化测试 | ✅ **98 项** | `make test`：API 端到端、融合/时态回归、缓存、精排降级、多模态去重、caption 缓存 |
 | 幂等 / 确定性 | ✅ | 并发重放只写一次；Search 响应字节级可复现（索引与非索引路径逐位一致） |
 | 多模态 | ✅ 可用 | 内联 Base64 解析/存储/回传；图片指纹参与去重；可选 `gpt-4o-mini` 生成图片描述并持久缓存（见 §十四） |
 | 部署物料 | ✅ | Dockerfile / compose（透明透传全部 `.env`）/ Caddy / systemd / **GitHub Actions CI（3.10 + 3.12 双跑，numpy 与纯标准库两条路径）** |
@@ -59,7 +59,7 @@ curl -s -X POST localhost:8080/search -H 'Content-Type: application/json' \
 一键验证（自动起临时服务 + 契约 + 复现性 + smoke）：
 
 ```bash
-make test      # 97 项单元/端到端测试
+make test      # 98 项单元/端到端测试
 make check     # contract 27/27 + replay + local smoke
 ```
 
@@ -188,7 +188,7 @@ Authentication `Authorization: Token`、Memory System Key = 你生成的那个�
 | `make init` / `tools/doctor.py --init` | 生成 `service/.env`（随机 key，600 权限） |
 | `make doctor` | 配置体检：模式/Key/连通性/SQLite/端口/鉴权/精排 |
 | `make run` | 启动服务（自动加载 `.env`） |
-| `make test` | 97 项单元 + 端到端测试 |
+| `make test` | 98 项单元 + 端到端测试 |
 | `make check` | 临时服务上跑契约 27 项 + replay + smoke |
 | `make contract` / `make replay` | 对已启动服务做契约 / 确定性检查 |
 | `make smoke URL=https://... KEY=...` | 线上 smoke（18 项） |
@@ -827,6 +827,48 @@ EMBED_MODE=api，top_k=100）。**结论：全部默认关闭**，代码留着�
 **这说明什么**：公开子集的检索召回已经到顶（R@100 0.98–0.99，All@100 0.96–0.98），
 剩下 12 个点的差距在**证据集形状**（要不要按日期/会话收窄）和**回答侧推理**，
 不在"再调一个打分项"。继续调参数的边际收益接近 0，这也是为什么后面把精力转去部署与提交材料。
+
+---
+
+## 十八、v2：smoke 0 分项的根因与修复（2026-10-30）
+
+**现象**（官方 multimodal smoke，v1.0.0）：总分 15；Retrieval 66.67（atomic_retrieval 100 / **direct_recall 0**），
+Relational reasoning **0**（multi_session_reasoning 0），Evidence governance **0**（abstention 0）。
+
+**根因**：平台 Answer 模型**只读 `content`**，不读 `created_at`/`session_id`。v1 一条消息一条记忆、正文只有原话：
+
+1. **没有日期** → 跨会话 / 先后 / 「什么时候」类题，证据里根本没有时间，只能瞎答（本地 TR EM 0.24）；
+2. **没有说话人、问答被拆开** → assistant 回复（常含名字/结论）脱离提问不可读，user 一句又缺补充，
+   多会话推理拼不起来；
+3. **拒答**：100 条孤立碎句里总有「沾边」的，诱发硬答；整轮证据能让模型看清「确实没提过」。
+
+smoke 每项题量很小（总 15 分说明只有个位数题），单题对错就是 0/100 的跳变，不能拿 smoke 分数直接做 A/B；
+所以用本地 Mem-Gallery 全量 1,711 题 × 同款 Answer 链路（`tools/e2e_proxy.py`，qwen-flash，top_k=100）量。
+
+**修复（只改 Add 侧的记忆单元与正文格式，检索打分零改动）**：
+
+- `MEMORY_UNIT=round`：user 消息与紧随其后的 assistant 回复合成一条记忆（= 基准 clue `D1:3` 的粒度）；
+- `CONTENT_HEADER=1`：正文前加 `[YYYY-MM-DD HH:MM] user:` / `assistant:`——只是来源元数据（时间+角色），原文一字不改；
+- 以 **`/v2/add`、`/v2/search`** 暴露（存储空间与 v1 隔离），**`/add`、`/search` 与 v1.0.0 逐字节一致**
+  （同一组请求、新旧代码对比输出与 `config_hash=71780ada…`（hash 模式）完全相同），已绑定的 v1 不受影响。
+
+全量 1,711 题，EM（top_k=100）：
+
+| 类型 | n | v1 | v2 | Δ |
+|---|---|---|---|---|
+| TR（时间/先后，跨会话） | 123 | 0.244 | **0.553** | **+0.309** |
+| VR（视觉推理/关系） | 174 | 0.264 | **0.414** | **+0.149** |
+| AR（拒答） | 184 | 0.582 | **0.674** | **+0.092** |
+| KR（知识更新） | 81 | 0.395 | 0.457 | +0.062 |
+| VS | 306 | 0.582 | 0.631 | +0.049 |
+| TTL | 337 | 0.178 | 0.208 | +0.030 |
+| FR | 219 | 0.265 | 0.288 | +0.023 |
+| MR | 206 | 0.083 | 0.097 | +0.015 |
+| CD | 81 | 0.333 | 0.284 | −0.049（n=81，1σ≈0.05，噪声内） |
+| **ALL** | 1711 | **0.324** | **0.392** | **+0.068**（token-F1 0.506→0.577） |
+
+消融（450 题分层子集）：只开抬头 EM 0.353→0.404，只开轮次 0.353→0.369，两者都开 0.413——**日期/说话人抬头是主因**，
+轮次合并主要贡献检索（R@10 0.838→0.856、All@100 0.973→0.982，MRR 持平 0.745→0.742）。
 
 ---
 

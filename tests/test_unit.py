@@ -390,7 +390,7 @@ class EmbedTest(unittest.TestCase):
                  "DIVERSITY": "0.1", "DIVERSITY_POOL": "20", "RERANK_MODE": "http",
                  "RERANK_MODEL": "x", "RERANK_TOP": "20", "RERANK_TOL": "0.001",
                  "EMBED_CONTEXT": "1", "EMBED_CONTEXT_CHARS": "100", "MAX_IMAGES": "3",
-                 "MAX_RESULTS": "20"}
+                 "MAX_RESULTS": "20", "MEMORY_UNIT": "round", "CONTENT_HEADER": "1"}
         code = "import server; print(server._config_fingerprint())"
         base_env = {k: v for k, v in os.environ.items() if k not in knobs}
         base_env.update(EMBED_MODE="hash", STARTUP_CHECK="0", DOTENV_DISABLE="1",
