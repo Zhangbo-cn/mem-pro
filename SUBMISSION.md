@@ -215,13 +215,17 @@ curl -s -H "Authorization: Token $KEY" http://113.44.133.30/version  # commit �
 | 固定 Commit | `66de25ca719c…`（tag `v2.0` = `52de409`；`66de25c` 是 tag 之后的**运维补丁**，只改 `service/http_pool.py` 的连接重试，线上 `/version` 的 `commit` = `66de25ca719c`） |
 | config_hash | `8b8e31d7bacbafe8`（v1.0.0 为 `92d381b0beb88e5a`；线上 `/version` 的 `config_hash` 与 `config_hash_v2` 均为本值——两条路由在线上等价，见下方说明） |
 
-> 说明：tag `v2.0` 之后 `main` 还有两条提交：`a398d44`（只改 `tools/e2e_proxy.py` 与 README）
-> 与 `66de25c`（**线上已部署**：只改 `service/http_pool.py` 的「旧连接已死」重试策略）。两条都不涉及
-> 检索打分、预算、embedding/rerank 参数，`config_hash` 仍为 `8b8e31d7bacbafe8`，返回字节与打分完全不变。
-> 为何要上 `66de25c`：19 小时无流量后连接池里 12 条 keep-alive 全部被上游关掉，一次 Add 的 5 次重试
+> **线上 = 申报 = `66de25c`**。tag `v2.0` 之后 `main` 的提交分三类，都不影响评测行为：
+> `a398d44` 与 `be1553b` 只动 `tools/` 和默认关闭的检索实验旋钮（`EXPAND_MODE` / `REL_GATE` /
+> `DATE_FILTER`，全量实测无效、见 README §二十，**未部署**），`de49195` 等为文档提交。
+> 线上实际跑的就是 `66de25c`（`/version` 的 `commit` = `66de25ca719c`，`git describe` = `v2.0-4-g66de25c`），
+> 只比 tag `v2.0` 多一处 `service/http_pool.py` 的「旧连接已死」重试修复：不涉及检索打分、预算、
+> embedding/rerank 参数，`config_hash` 仍为 `8b8e31d7bacbafe8`，返回字节与打分完全不变。
+> 为何要上它：19 小时无流量后连接池里 12 条 keep-alive 全部被上游关掉，一次 Add 的 5 次重试
 > 全部撞在死连接上、预算耗尽 → 503（详情见 README §十九）；修复后 contract 27/27、smoke 18/18、
-> replay 幂等+字节一致均过。评审若要求「冻结后代码一字不改」，回滚命令：
-> `cd /opt/mem-pro && git checkout 52de409 && systemctl restart mem-pro`。
+> replay 幂等 + 5 次字节一致均过。评审若要求「代码与 tag 完全一致」，回滚命令：
+> `cd /opt/mem-pro && git checkout 52de409 && systemctl restart mem-pro`（同时把本节 `固定 Commit`
+> 改回 `52de409`）。
 >
 > **/v2/* 与 /add、/search 的关系（2026-10-31 线上实测）**：`MEMORY_UNIT=round`、`CONTENT_HEADER=1` 写在线上
 > `service/.env` 里，对 v1 路由同样生效（代码默认值是 `message` / `0`），所以平台登记的 `/add`、`/search`
