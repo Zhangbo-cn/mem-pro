@@ -45,16 +45,17 @@ class _Pool:
         return http.client.HTTPConnection(self.host, self.port, timeout=timeout)
 
     def acquire(self, timeout: float):
+        """返回 (conn, 是否来自池)。第二项用于判定「可能是上游早已关掉的空闲连接」。"""
         try:
-            return self._free.get_nowait()
+            return self._free.get_nowait(), True
         except queue.Empty:
             pass
         if self._slots.acquire(blocking=False):
             # 额度换一条新连接；额度只有在连接归还/关闭时才释放
-            return self._new(timeout)
+            return self._new(timeout), False
         # 已达连接上限：等别人归还，绝不能再占一个额度（否则额度被等待者占死后
         # 永远没有连接可归还，整个池卡死——实测 48 并发时表现为请求挂到 60 s 超时）
-        return self._free.get()
+        return self._free.get(), True
 
     def release(self, conn, reuse: bool) -> None:
         # 注意：HTTPConnection 本身没有 will_close 属性，判定必须用 response.will_close
@@ -63,6 +64,24 @@ class _Pool:
         else:
             conn.close()
             self._slots.release()
+
+    def flush_idle(self) -> int:
+        """丢弃所有空闲连接并归还额度，返回丢弃条数。
+
+        为什么需要：上游（DashScope）会关掉长时间空闲的 keep-alive 连接，而我们这边
+        只有读写时才能发现。实测线上 19 小时无流量后，池里 12 条连接全部已死，一次 Add
+        的 5 次重试正好把 5 条死连接各撞一次 → 重试预算耗尽 → 503。因此只要有一条空闲
+        连接报「对端已关闭」，就认为整池都不可信，全部丢掉用新连接。
+        """
+        n = 0
+        while True:
+            try:
+                conn = self._free.get_nowait()
+            except queue.Empty:
+                return n
+            conn.close()
+            self._slots.release()
+            n += 1
 
 
 _POOLS: dict[tuple, _Pool] = {}
@@ -86,20 +105,52 @@ def _pool_for(url: str, size: int | None = None) -> _Pool:
 
 def post(url: str, body: bytes, headers: dict, timeout: float,
          size: int | None = None) -> bytes:
-    """POST 一段 JSON，返回响应体字节。失败一律抛出（由调用方决定是否重试）。"""
+    """POST 一段 JSON，返回响应体字节。失败一律抛出（由调用方决定是否重试）。
+
+    唯一的内部重试：如果报错的是**从池里取出的旧连接**且错误是「对端已关闭/重置」，
+    则清空池子、换全新连接重试一次，这次重试对调用方透明（不计入 embed 的重试统计）。
+    这是长空闲后必现的故障（见 `_Pool.flush_idle`），不重试就只能靠调用方的 5 次预算
+    去撞 5 条死连接。
+    """
     u = urllib.parse.urlsplit(url)
     path = u.path + (f"?{u.query}" if u.query else "")
     p = _pool_for(url, size)
-    conn = p.acquire(timeout)
-    reuse = False
-    try:
-        conn.request("POST", path, body=body, headers=headers)
-        resp = conn.getresponse()
-        data = resp.read()
-        # 4xx/5xx 也把响应读完再归还连接——读完才能复用
-        reuse = not resp.will_close
-        if resp.status >= 400:
-            raise HTTPStatusError(resp.status, data)
-        return data
-    finally:
+    conn, reused = p.acquire(timeout)
+    while True:
+        try:
+            data, reuse = _exchange(conn, path, body, headers)
+        except _STALE_CONNECTION:
+            p.release(conn, reuse=False)
+            if not reused:
+                raise
+            # 空闲期被上游关掉的连接通常不止一条：整池作废，用新连接再来一次
+            p.flush_idle()
+            conn, reused = p.acquire(timeout)
+            continue
+        except HTTPStatusError as e:
+            p.release(conn, getattr(e, "reuse", False))
+            raise
+        except BaseException:
+            p.release(conn, reuse=False)
+            raise
         p.release(conn, reuse)
+        return data
+
+
+# 「对端已经不声不响把连接关了」：浏览器/urllib 里统称 stale connection。
+# RemoteDisconnected 是 ConnectionResetError 的子类，这里一并列出以示意图。
+_STALE_CONNECTION = (http.client.RemoteDisconnected, ConnectionResetError, BrokenPipeError)
+
+
+def _exchange(conn, path: str, body: bytes, headers: dict):
+    """在一条连接上做一次完整请求，返回 (响应体, 连接是否可复用)。"""
+    conn.request("POST", path, body=body, headers=headers)
+    resp = conn.getresponse()
+    data = resp.read()
+    # 4xx/5xx 也把响应读完再归还连接——读完才能复用
+    reuse = not resp.will_close
+    if resp.status >= 400:
+        err = HTTPStatusError(resp.status, data)
+        err.reuse = reuse
+        raise err
+    return data, reuse

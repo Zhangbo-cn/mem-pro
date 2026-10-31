@@ -447,6 +447,7 @@ class HttpPoolTest(unittest.TestCase):
             def do_POST(self):  # noqa: N802
                 self.rfile.read(int(self.headers.get("Content-Length", 0)))
                 cls.ports.append(self.client_address[1])
+                cls.handlers.append(self)
                 body = b'{"ok": true}'
                 self.send_response(200)
                 self.send_header("Content-Type", "application/json")
@@ -457,9 +458,22 @@ class HttpPoolTest(unittest.TestCase):
             def log_message(self, *a):
                 pass
 
+        cls.handlers = []
         cls.srv = ThreadingHTTPServer(("127.0.0.1", 0), H)
         cls.url = f"http://127.0.0.1:{cls.srv.server_port}/x"
         threading.Thread(target=cls.srv.serve_forever, daemon=True).start()
+
+    def _kill_server_side_connections(self):
+        """模拟上游把空闲 keep-alive 连接关掉（线上 19h 无流量后必现）。"""
+        import socket
+
+        for h in list(self.handlers):
+            try:
+                h.connection.shutdown(socket.SHUT_RDWR)
+                h.connection.close()
+            except OSError:
+                pass
+        self.handlers.clear()
 
     @classmethod
     def tearDownClass(cls):
@@ -487,6 +501,63 @@ class HttpPoolTest(unittest.TestCase):
         self.assertEqual(done, [b'{"ok": true}'] * 48)
         # 池上限是 2：最多 2 条并发连接
         self.assertLessEqual(len(set(self.ports[-48:])), 2 + 1)
+
+    def test_stale_pooled_connection_is_retried_on_fresh_one(self):
+        """空闲期被上游关掉的连接：自动清空池子、换新连接重试，不能让调用方吃亏。
+
+        线上真实形态：19 小时无流量后池里 12 条连接全部已死，一次 Add 的 5 次重试
+        正好各撞一条死连接 → 12 s 预算耗尽 → 503。
+        """
+        import http_pool
+
+        self.ports.clear()
+        self.assertEqual(http_pool.post(self.url, b"{}", {}, 5.0, 2), b'{"ok": true}')
+        first = set(self.ports)
+        self._kill_server_side_connections()
+        # 第一次调用撞上死连接：内部重试必须把它救回来
+        self.assertEqual(http_pool.post(self.url, b"{}", {}, 5.0, 2), b'{"ok": true}')
+        new_ports = set(self.ports) - first
+        self.assertEqual(len(new_ports), 1, f"应该换一条新连接，实际新增 {new_ports}")
+        # 后续请求继续在新连接上复用（说明 flush 没把池子搞坏）
+        port_after = set(self.ports)
+        self.assertEqual(http_pool.post(self.url, b"{}", {}, 5.0, 2), b'{"ok": true}')
+        self.assertEqual(set(self.ports), port_after, "重试后应恢复复用，不再新建连接")
+
+    def test_refused_connection_is_not_retried_forever(self):
+        """连不上（非「池里旧连接」）要直接抛，不能在池里空转。"""
+        import socket
+
+        import http_pool
+
+        s = socket.socket()
+        s.bind(("127.0.0.1", 0))
+        port = s.getsockname()[1]
+        s.close()  # 端口已释放，连过去必然 refused
+        with self.assertRaises(OSError):
+            http_pool.post(f"http://127.0.0.1:{port}/x", b"{}", {}, 3.0, 2)
+
+    def test_flush_idle_closes_connections_and_returns_credit(self):
+        """flush_idle 要同时关连接并把额度还回去，否则池会慢性泄漏。"""
+        import socket
+
+        import http_pool
+
+        p = http_pool._Pool("http", "127.0.0.1", 1, 3)
+        # 用 acquire 拿到真连接对象（占额度），伪装成已建链后再归还成空闲连接
+        conns = [p.acquire(1.0)[0] for _ in range(3)]  # 3 条新连接，额度用满
+        for conn in conns:
+            conn.sock = socket.socket()  # release 用 sock 非 None 判定「可复用」；
+            # 用真 socket 是因为 close() 会去调 sock.close()
+            p.release(conn, reuse=True)
+        self.assertEqual(p.flush_idle(), 3)
+        self.assertTrue(all(c.sock is None for c in conns), "连接应已关闭")
+        self.assertEqual(p.flush_idle(), 0)
+        # 额度已归还：还能再拿 3 条
+        got = [p.acquire(1.0) for _ in range(3)]
+        self.assertEqual(len(got), 3)
+        for conn, reused in got:
+            self.assertFalse(reused)
+            p.release(conn, reuse=False)
 
     def test_error_status_surfaces_with_code_and_releases_slot(self):
         import http_pool
