@@ -888,6 +888,35 @@ smoke 每项题量很小（总 15 分说明只有个位数题），单题对错�
 
 ---
 
+## 十九、运维：长空闲后整池死连接导致 503（2026-10-31 修）
+
+**现象**：`/add` 连续两次卡满 12 s 后返回 503（`embedding failed: Remote end closed connection without response`），
+紧接着同样请求 5/5 成功（135–523 ms）。
+
+**根因**（不是上游挂，也不是 IPv6）：DashScope 会关掉空闲的 keep-alive 连接，客户端只有读写时才发现。
+上一次真实流量是 10-30 06:24Z（重启后的 smoke 95 条），到 10-31 01:17Z 已静默 **19 小时**，
+`http_pool` 里 12 条连接全部已死；而一次 Add 的 embed 最多重试 5 次，正好每条死连接各撞一次，
+退避就把 12 s 重试预算耗光 → 503。池里死连接越多越容易连续撞光重试次数，**靠「多重试」本身治不了**。
+（已排除 IPv6：服务器 `getaddrinfo` 始终首选 `AF_INET`，IPv4 直连 embedding 0.16 s；
+15 分钟空闲也复现不出来——上游空闲关闭阀值更长。）
+
+**修法**（`service/http_pool.py`，不改任何检索/预算/embed 参数）：
+
+- `acquire()` 返回 `(conn, 是否来自池)`；
+- 新增 `flush_idle()`：丢弃全部空闲连接并归还额度（对端关掉一条，整池都不可信）；
+- `post()`：仅当报错的是**池中旧连接**且错误为「对端已关闭/重置」时，丢连接 + flush 整池 + 新连接重试一次，
+  对调用方透明（不计入 `embed` 的重试统计）；新建连接失败照旧直接抛。
+
+**验证**：
+
+- 真实链路：预热后在服务器 `ss -K` 删掉那条约的连接 → 池里取出的旧连接单次请求必现
+  `SSLEOFError`/`RemoteDisconnected`，修复后的 `post()` 0.15 s 返回 OK（自动换新连接）。
+- 3 项回归测试（本地假服务端主动关连接）：旧代码上必失败（`BrokenPipeError` 直接冒给调用方）。
+- `make test` 101 项通过；线上 contract 27/27、smoke 18/18、replay 幂等+5 次字节一致全过；
+  `/version` 的 `config_hash` 仍为 `8b8e31d7bacbafe8`（补丁不碰输出）。
+
+---
+
 ## 许可
 
 代码与文档：MIT（见 `LICENSE`）。`data/` 下的第三方基准数据保留原许可，ATM-Bench 为 **CC BY-NC 4.0（仅限非商业）**，见 `data/README.md`。
