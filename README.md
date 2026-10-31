@@ -830,7 +830,10 @@ EMBED_MODE=api，top_k=100）。**结论：全部默认关闭**，代码留着�
 
 ---
 
-## 十八、v2：smoke 0 分项的根因与修复（2026-10-30）
+## 十八、v2（内部代号）：smoke 0 分项的根因与修复（2026-10-30）
+
+> 命名说明：`v2` 只是这轮改动的**内部代号**（`MEMORY_UNIT=round` + `CONTENT_HEADER=1` 这一 profile）。
+> 报给平台的 Version name 仍是 **`v1.0.0`**（沿用已有 Key，不新增版本），固定 Commit = 线上 `66de25c`。
 
 **现象**（官方 multimodal smoke，v1.0.0）：总分 15；Retrieval 66.67（atomic_retrieval 100 / **direct_recall 0**），
 Relational reasoning **0**（multi_session_reasoning 0），Evidence governance **0**（abstention 0）。

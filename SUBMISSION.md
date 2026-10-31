@@ -15,10 +15,10 @@
 | 项 | 内容 |
 |---|---|
 | 系统名称 | **mem-pro** |
-| 版本号 | `mem-pro/0.2.0`（Full 受理后冻结，不得更换） |
-| 固定 Commit | `6d2147e9a1a88a344461b20b374a81c4d200d547`（tag `v1.0.0`；**v1.0.0 冻结时**线上 `/version` 的 `commit` = `6d2147e9a1a8`，`config_hash` = `92d381b0beb88e5a`；当前线上已升到 v2.0，见 §九） |
-| 配置指纹 | `92d381b0beb88e5a`（v1.0.0 冻结值，16 位；改任何排序参数或 `MAX_IMAGES` / `MAX_RESULTS` / `IMG_MAX_SIDE` / `MEMORY_UNIT` / `CONTENT_HEADER` 都会变；v2.0 为 `8b8e31d7bacbafe8`） |
-| 公开仓库 | https://github.com/Zhangbo-cn/mem-pro （**公开**，MIT 许可；仓库内无任何凭据；评测版本以 tag `v1.0.0` 为准） |
+| 版本号 | `mem-pro/0.2.0`；平台 **Version name = `v1.0.0`**（沿用已有 Key 的版本，不新增版本；Full 受理后冻结，不得更换） |
+| 固定 Commit | `66de25ca719c761b18edc0107eed0ec9f7f0b793`（线上 `/version` 的 `commit` = `66de25ca719c`，与之逐位一致；`git describe` = `v2.0-4-g66de25c`） |
+| 配置指纹 | `8b8e31d7bacbafe8`（16 位；线上 `/version` 的 `config_hash` 与 `config_hash_v2` 均为本值；改任何排序参数或 `MAX_IMAGES` / `MAX_RESULTS` / `IMG_MAX_SIDE` / `MEMORY_UNIT` / `CONTENT_HEADER` 都会变） |
+| 公开仓库 | https://github.com/Zhangbo-cn/mem-pro （**公开**，MIT 许可；仓库内无任何凭据；评测版本以上表**固定 Commit `66de25c`** 为准，仓库里 `git checkout 66de25c` 即线上代码） |
 | 联系人 / 团队 | **张播（个人参赛）**；电话/邮箱与报名表一致（不写入仓库，避免仓库扩散联系信息） |
 | 赛道 / 组别 | 多模态记忆赛道 / **开源方法榜**（组别只能选一个） |
 | 接口地址 | **`https://113.44.133.30/add`**、**`https://113.44.133.30/search`**（IP 直签 Let's Encrypt，无需域名/备案；`http://` 308 跳 https，Caddy 需 `default_sni`，见 `deploy/REMOTE_OPS.md` §1.4.1） |
@@ -148,11 +148,11 @@ curl -s -H "Authorization: Token $KEY" http://113.44.133.30/version  # commit �
 | 2 | 联系人 / 机构 | ✅ 张播（个人）；联系方式见报名表 |
 | 3 | 赛道 + 组别 | ✅ 多模态 / 开源方法榜 |
 | 4 | 方法说明 + 引用 | ✅ §二、§三 |
-| 5 | 在线 Add / Search（HTTPS 公网） | ✅ `https://113.44.133.30/add`、`https://113.44.133.30/search`（Let's Encrypt IP 证书，`commit` 见 `/version`、`config_hash=92d381b0beb88e5a`（v1.0.0 冻结值，含 `IMG_MAX_SIDE=1024` 缩图；当前线上为 v2.0 的 `8b8e31d7bacbafe8`，见 §九）；contract 27/27、smoke 18/18、replay 幂等+5 次字节一致均走 https 复验） |
+| 5 | 在线 Add / Search（HTTPS 公网） | ✅ `https://113.44.133.30/add`、`https://113.44.133.30/search`（Let's Encrypt IP 证书，`commit` = `66de25ca719c`、`config_hash` = `8b8e31d7bacbafe8`，含 `IMG_MAX_SIDE=1024` 缩图与 `MEMORY_UNIT=round`+`CONTENT_HEADER=1`，见 §九；contract 27/27（含 `/v2` 路由 27/27）、smoke 18/18、replay 幂等+5 次字节一致均走 https 复验） |
 | 6 | 鉴权方式声明 | ✅ §一 |
 | 7 | 容量与运行限制 | ✅ §四 |
 | 8 | GitHub 仓库 | ✅ 公开仓库（MIT），代码无凭据 |
-| 9 | 固定 Commit | ✅ `6d2147e9a1a8…`（tag `v1.0.0`），线上 `/version` 一致 |
+| 9 | 固定 Commit | ✅ `66de25ca719c…`，线上 `/version` 的 `commit` 逐位一致 |
 | 10 | 原始工作引用 | ✅ §3.1 |
 | 11 | 方法改动说明 | ✅ §3.2 |
 | 12 | 可公开展示的信息范围 | ✅ 方法说明 / 分类指标 / 架构图 / 代码仓库（公开）；不含 Key、数据样本、原始 query |
@@ -170,6 +170,7 @@ curl -s -H "Authorization: Token $KEY" http://113.44.133.30/version  # commit �
 |---|---|
 | 系统名称 | `mem-pro` |
 | 版本号 | `mem-pro/0.2.0` |
+| Version name（平台版本名） | `v1.0.0`（沿用已有 Key，不新增版本） |
 | 赛道 / 组别 | 多模态记忆 / 开源方法榜 |
 | 联系人 | 张播 |
 | 电话 / 邮箱 | 只填在报名表里（不写入仓库） |
@@ -177,8 +178,8 @@ curl -s -H "Authorization: Token $KEY" http://113.44.133.30/version  # commit �
 | Add 地址 | `https://113.44.133.30/add` |
 | Search 地址 | `https://113.44.133.30/search` |
 | 鉴权头 | `Authorization: Token <Memory System Key>`（48 位 hex，随本表私有字段提交） |
-| 固定 Commit | `6d2147e9a1a88a344461b20b374a81c4d200d547`（tag `v1.0.0`） |
-| 配置指纹 | `92d381b0beb88e5a`（v1.0.0 冻结值；v2.0 见 §九） |
+| 固定 Commit | `66de25ca719c761b18edc0107eed0ec9f7f0b793` |
+| 配置指纹 | `8b8e31d7bacbafe8` |
 | 申报并发 | Search **2** / Add **2** |
 | 仓库 | `https://github.com/Zhangbo-cn/mem-pro`（公开，MIT） |
 | 可公开展示 | 方法说明、分类指标、架构图、代码仓库；不公开 Key、评测数据样本、原始 query |
@@ -202,18 +203,20 @@ curl -s -H "Authorization: Token $KEY" http://113.44.133.30/version  # commit �
 
 ---
 
-## 九、v2.0（给已有 Key 新增版本，2026-10-30）
+## 九、版本 `v1.0.0` 的最终形态（2026-10-31 定稿；`v2` 仅为内部代号）
 
-平台规定同一 Key 的接口地址不可变（`endpoint is immutable`），所以 v2.0 **沿用原地址**，只换线上配置与代码版本。
+**不再新增版本**：平台 Version name 仍填 `v1.0.0`（同一 Key、同一地址，`endpoint is immutable`）。
+下文原先把这一轮改动叫「v2.0」，指的是内部 profile（`MEMORY_UNIT=round` + `CONTENT_HEADER=1`）；
+它是**当前 `v1.0.0` 申报版本的组成部分**，固定 Commit 即 `66de25c`。
 
 | 表单字段 | 填写 |
 |---|---|
-| Version name | `v2.0` |
+| Version name | `v1.0.0`（沿用已有 Key，不新增版本） |
 | Add API URL | `https://113.44.133.30/add`（不变） |
 | Search API URL | `https://113.44.133.30/search`（不变） |
 | 鉴权 | 沿用 v1.0.0（`Authorization: Token <Memory System Key>`） |
-| 固定 Commit | `66de25ca719c…`（tag `v2.0` = `52de409`；`66de25c` 是 tag 之后的**运维补丁**，只改 `service/http_pool.py` 的连接重试，线上 `/version` 的 `commit` = `66de25ca719c`） |
-| config_hash | `8b8e31d7bacbafe8`（v1.0.0 为 `92d381b0beb88e5a`；线上 `/version` 的 `config_hash` 与 `config_hash_v2` 均为本值——两条路由在线上等价，见下方说明） |
+| 固定 Commit | `66de25ca719c761b18edc0107eed0ec9f7f0b793`（线上 `/version` 的 `commit` = `66de25ca719c`，逐位一致） |
+| config_hash | `8b8e31d7bacbafe8`（线上 `/version` 的 `config_hash` 与 `config_hash_v2` 均为本值——两条路由在线上等价，见下方说明） |
 
 > **线上 = 申报 = `66de25c`**。tag `v2.0` 之后 `main` 的提交分三类，都不影响评测行为：
 > `a398d44` 与 `be1553b` 只动 `tools/` 和默认关闭的检索实验旋钮（`EXPAND_MODE` / `REL_GATE` /
@@ -223,16 +226,17 @@ curl -s -H "Authorization: Token $KEY" http://113.44.133.30/version  # commit �
 > embedding/rerank 参数，`config_hash` 仍为 `8b8e31d7bacbafe8`，返回字节与打分完全不变。
 > 为何要上它：19 小时无流量后连接池里 12 条 keep-alive 全部被上游关掉，一次 Add 的 5 次重试
 > 全部撞在死连接上、预算耗尽 → 503（详情见 README §十九）；修复后 contract 27/27、smoke 18/18、
-> replay 幂等 + 5 次字节一致均过。评审若要求「代码与 tag 完全一致」，回滚命令：
-> `cd /opt/mem-pro && git checkout 52de409 && systemctl restart mem-pro`（同时把本节 `固定 Commit`
-> 改回 `52de409`）。
+> replay 幂等 + 5 次字节一致均过。若评审要求「代码必须等于某个 tag」：
+> 回到内部代号 v2（去掉 http_pool 修复）→ `cd /opt/mem-pro && git checkout 52de409 && systemctl restart mem-pro`
+> （申报 commit 改 `52de409`）；回到最初的 v1.0.0 → `git checkout 6d2147e`（申报 commit 改 `6d2147e`，
+> `config_hash` 同时变回 `92d381b0beb88e5a`，会丢掉本轮 EM 0.324→0.392 的收益，不建议）。
 >
 > **/v2/* 与 /add、/search 的关系（2026-10-31 线上实测）**：`MEMORY_UNIT=round`、`CONTENT_HEADER=1` 写在线上
 > `service/.env` 里，对 v1 路由同样生效（代码默认值是 `message` / `0`），所以平台登记的 `/add`、`/search`
 > **就是 v2 行为**；`/v2/add`、`/v2/search` 是同一进程、同一库内以 `\x1fv2\x1f` 前缀隔离 user 空间的别名路由，
 > 供契约/复验工具在 v2 语义下自检。实测：向 `/add` 写一轮 user+assistant，落库正文为
 > `[2023-11-14 22:13] user: …\nassistant: …`，与 `/v2/add` 一致。这样做是因为平台规定
-> 同一 Key 的接口地址不可变，v2.0 必须沿用原地址才能被评测到新行为。
+> 同一 Key 的接口地址不可变（`endpoint is immutable`），只能在原地址上换版本，这也是不新增版本号的原因。
 
 改动：线上 `.env` 加 `MEMORY_UNIT=round`、`CONTENT_HEADER=1`——user 消息与紧随的 assistant 回复合成一条记忆，
 正文前加 `[YYYY-MM-DD HH:MM] user:` / `assistant:` 来源抬头（原文不改写）；检索/精排/预算零改动。
