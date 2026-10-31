@@ -71,7 +71,11 @@ EMBED_CONTEXT_CHARS = int(os.environ.get("EMBED_CONTEXT_CHARS", "400"))
 # /add、/search（已绑定的 v1.0.0）保持历史行为；/v2/add、/v2/search 用 V2_PROFILE。
 MEMORY_UNIT = os.environ.get("MEMORY_UNIT", "message").strip().lower()
 CONTENT_HEADER = os.environ.get("CONTENT_HEADER", "0") == "1"
-V2_PROFILE = {"unit": "round", "header": True}
+# HEADER_SESSION=1：抬头里再加会话标识，例如 `[2024-06-17 09:00 D1] user: …`。
+# 为什么：基准的许多问题（「哪张图是 6-17 那次对话里的」「跨会话有没有矛盾」）答案本身
+# 就带会话身份，正文里没有会话标识时回答模型只能猜（本地 VS 类 EM 因此长期接近 0）。
+HEADER_SESSION = os.environ.get("HEADER_SESSION", "0") == "1"
+V2_PROFILE = {"unit": "round", "header": True, "session": HEADER_SESSION}
 ROUTES = {"/add": ("add", None), "/search": ("search", None),
           "/v2/add": ("add", V2_PROFILE), "/v2/search": ("search", V2_PROFILE)}
 V2_NS = "\x1fv2\x1f"   # 不能用 \x00：SQLite 的 LIKE/比较遇 NUL 截断
@@ -117,9 +121,9 @@ def _config_fingerprint(profile: dict | None = None) -> str:
                                         MAX_IMAGES, MAX_RESULTS, budget.IMG_TOKEN_COST),
              "caption:%s:%s" % (caption.MODE, caption.MODEL),
              "imgsize:%d:%d" % (imgsize.MAX_SIDE, imgsize.QUALITY)]
-    unit, header = _profile(profile)
+    unit, header, with_session = _profile(profile)
     if (unit, header) != ("message", False):   # 历史配置不加这一段：v1 的 config_hash 保持不变
-        parts.append("unit:%s:%d" % (unit, header))
+        parts.append("unit:%s:%d:%d" % (unit, header, with_session))
     return hashlib.sha256("|".join(parts).encode()).hexdigest()[:16]
 
 
@@ -225,13 +229,24 @@ def split_text(text: str, limit: int = 3000) -> list[str]:
     return parts or [text]
 
 
-def _profile(profile: dict | None) -> tuple[str, bool]:
+def _profile(profile: dict | None) -> tuple[str, bool, bool]:
     if profile is None:
-        return MEMORY_UNIT, CONTENT_HEADER
-    return profile["unit"], bool(profile["header"])
+        return MEMORY_UNIT, CONTENT_HEADER, HEADER_SESSION
+    return profile["unit"], bool(profile["header"]), bool(profile.get("session"))
 
 
-def _units(normed: list[dict], profile: dict | None = None) -> list[dict]:
+def sess_label(session_id) -> str:
+    """抬头里的会话标识：短 id 原样用（基准的 `D1`／`D2`），长 id（平台 uuid）折叠成 7 字符。"""
+    sid = str(session_id or "")
+    if not sid:
+        return ""
+    if len(sid) <= 16:
+        return sid
+    return "s" + hashlib.sha1(sid.encode("utf-8")).hexdigest()[:6]
+
+
+def _units(normed: list[dict], profile: dict | None = None,
+           session_id=None) -> list[dict]:
     """消息 → 记忆单元。
 
     MEMORY_UNIT=message：一条消息一条记忆（历史行为）。
@@ -243,7 +258,8 @@ def _units(normed: list[dict], profile: dict | None = None) -> list[dict]:
     不看 created_at，没有日期就答不了先后/跨会话题，没有说话人就分不清谁说的。
     抬头只是来源元数据（时间+角色），不改写原文。
     """
-    unit, header = _profile(profile)
+    unit, header, with_session = _profile(profile)
+    sid = sess_label(session_id) if with_session else ""
     out: list[dict] = []
     for m in normed:
         prev = out[-1] if out else None
@@ -259,7 +275,10 @@ def _units(normed: list[dict], profile: dict | None = None) -> list[dict]:
         lines = []
         for k, (role, text) in enumerate(u["parts"]):
             if header:
-                head = f"[{u['created'][:10]} {u['created'][11:16]}] " if k == 0 and u["ts"] else ""
+                stamp = f"{u['created'][:10]} {u['created'][11:16]}"
+                if sid:
+                    stamp += f" {sid}"
+                head = f"[{stamp}] " if k == 0 and u["ts"] else ""
                 lines.append(f"{head}{role}: {text}")
             else:
                 lines.append(text)
@@ -320,7 +339,7 @@ def plan_add(req: dict, profile: dict | None = None) -> tuple[list[dict], list[s
 
     pending = []
     msg_texts: list[tuple[int, str]] = []
-    for u in _units(normed, profile):
+    for u in _units(normed, profile, req.get("session_id")):
         mi, text, images, ts, created = u["mi"], u["text"], u["images"], u["ts"], u["created"]
         sig = caption.image_sig(images)
         msg_texts.append((mi, text))

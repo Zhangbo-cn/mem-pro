@@ -70,6 +70,34 @@ _PAST_MARKERS = ("去年", "前年", "以前", "之前", "曾经", "原先", "�
 # July 21"）时，把 created_at 落在同一天的记忆抬上来。只加分、不扣分——日期常是问题的
 # 附注而不是过滤器（"on 2024-06-17, what did I say about X" 里答案未必那天写入）。
 DATE_WEIGHT = float(os.environ.get("DATE_WEIGHT", "0"))   # 0 = 关闭
+
+# ---------- 上下文扩展（默认关闭） ----------
+# 为什么：平台 Answer 只读 content，而很多问题是「一轮问题 + 一轮补充」才能答对
+# （FR 列全、MR 多跳、CD 跨会话对比、TTL 先后）。命中的那一轮往往只有半句前提，
+# 邻居轮在库里明明存在，但因为和 query 不相似永远排不进 top-k。
+#   none    ：不扩展（历史行为）
+#   neighbor：命中轮的同一会话邻轮（±EXPAND_ROUNDS）
+#   session ：同一会话内命中 ≥EXPAND_MIN_HITS 次就把该会话其余轮一起带上
+# 只追加候选，不改任何分数/排序逻辑；追加项沿用锚点分数，整体仍是确定性的。
+EXPAND_MODE = os.environ.get("EXPAND_MODE", "none").strip().lower()
+EXPAND_ROUNDS = int(os.environ.get("EXPAND_ROUNDS", "1"))
+EXPAND_POOL = int(os.environ.get("EXPAND_POOL", "20"))     # 只给前 N 名找上下文
+EXPAND_MIN_HITS = int(os.environ.get("EXPAND_MIN_HITS", "2"))   # session 模式的命中阈值
+EXPAND_MAX = int(os.environ.get("EXPAND_MAX", "60"))       # 单次最多追加条数
+
+# 相对门限收窄：只保留「分数 ≥ REL_GATE × 最高分」的证据（0 = 关闭）。
+# 与绝对阈值不同：不判断「够不够相关」，只判断「跟最高分差多远」，所以不依赖分数刻度；
+# 目的不是弃答，而是把 100 条同话题干扰项压成一小撮真正同场景的证据
+# （数图/选图题被干扰项带偏是 §16.1 里最大的一块差距）。
+REL_GATE = float(os.environ.get("REL_GATE", "0"))
+REL_MIN_KEEP = int(os.environ.get("REL_MIN_KEEP", "5"))
+
+# 日期收窄：问题里写了具体某天（"in the conversation of 2024-07-21" / "on June 17"）时，
+# 只保留那一天写入的记忆（少于 DATE_FILL 条则用原排名补齐）。0 = 关闭。
+# 与 DATE_WEIGHT（加分）不同：这是硬筛，用来把「数那天有几张车辆照片」「哪张图是那天的」
+# 这类题的同话题跨日干扰项直接剔出证据集。
+DATE_FILTER = float(os.environ.get("DATE_FILTER", "0"))   # 0=off，1=按日收窄
+DATE_FILL = int(os.environ.get("DATE_FILL", "10"))
 # 更新类问题（"latest / most recent / 现在 / 最新"）额外按写入时间抬新的：
 # 时态规则只读正文措辞，读不到「后写的更权威」。同样只做小幅加成。
 RECENCY_RULE = os.environ.get("RECENCY_RULE", "off").strip().lower()   # off | update
@@ -1122,6 +1150,104 @@ def _vec_rows(idxs: list[int], docs: list[dict], index):
         return None
 
 
+def date_filter(ranked: list[tuple[int, float]], docs: list[dict], query_text: str,
+                limit: int | None) -> list[tuple[int, float]]:
+    """只保留「问题所写那天」的记忆；命中不足 DATE_FILL 条时按原排名补齐。"""
+    days, _months = query_dates(query_text)
+    if not days:
+        return ranked
+    head, tail = [], []
+    for i, sc in ranked:
+        y, m, d = _doc_date(docs[i].get("created_at", ""))
+        ok = any(qm == m and qd == d and qy in (0, y) for qy, qm, qd in days)
+        (head if ok else tail).append((i, sc))
+    want = min(limit, len(ranked)) if limit else len(ranked)
+    if len(head) < min(DATE_FILL, want):
+        return ranked
+    return head + tail
+
+
+def _session_order(docs: list[dict]) -> dict[str, list[int]]:
+    """session_id → 该会话内的记忆按写入顺序（seq）排列的索引。"""
+    by: dict[str, list[int]] = {}
+    for i, d in enumerate(docs):
+        s = d.get("session_id")
+        if s is None:
+            continue
+        by.setdefault(s, []).append(i)
+    for idxs in by.values():
+        idxs.sort(key=lambda i: (docs[i].get("seq") if docs[i].get("seq") is not None else 0,
+                                 docs[i].get("created_at") or "", i))
+    return by
+
+
+def expand(ranked: list[tuple[int, float]], docs: list[dict], limit: int | None,
+           by_session: dict[str, list[int]] | None = None) -> list[tuple[int, float]]:
+    """把命中轮的上下文补进结果（EXPAND_MODE=none 时原样返回）。
+
+    原则：只能“追加”，不能“重排”——锚点之间的相对次序不变，新条目紧跟锚点，
+    分数沿用锚点（并列由 server 侧的 created_at/id 定序保证确定性）。
+    返回条数仍 ≤ limit（平台预算），所以上下文只能占尾部/低名次锚点的位置。
+    """
+    if EXPAND_MODE not in ("neighbor", "session") or not ranked or limit is None:
+        return ranked
+    by_session = _session_order(docs) if by_session is None else by_session
+    anchors = ranked[:max(1, min(len(ranked), EXPAND_POOL))]
+    rest = ranked[len(anchors):]
+    pos = {}
+    for turns in by_session.values():
+        for k, i in enumerate(turns):
+            pos[i] = k
+    hits: dict[str, int] = {}
+    if EXPAND_MODE == "session":
+        for i, _ in anchors:
+            s = docs[i].get("session_id")
+            hits[s] = hits.get(s, 0) + 1
+
+    out: list[tuple[int, float]] = []
+    seen: set[int] = set()
+    used_sessions: set[str] = set()
+    anchor_ids = {i for i, _ in anchors}   # 本身已是锚点的，不重复插入（它在自己的名次上出现）
+    added = 0
+
+    def push(i: int, score: float) -> None:
+        nonlocal added
+        if i in seen or i in anchor_ids or added >= EXPAND_MAX or len(out) >= limit:
+            return
+        out.append((i, score))
+        seen.add(i)
+        added += 1
+
+    for i, score in anchors:
+        if i in seen:
+            continue
+        out.append((i, score))
+        seen.add(i)
+        s = docs[i].get("session_id")
+        turns = by_session.get(s) or []
+        if EXPAND_MODE == "neighbor":
+            k = pos.get(i, -1)
+            if k < 0:
+                continue
+            # 先近后远：±1 优先于 ±2，这样位置被预算截断时保留的是最贴近的轮
+            for step in range(1, EXPAND_ROUNDS + 1):
+                for j in (k - step, k + step):
+                    if 0 <= j < len(turns):
+                        push(turns[j], score)
+        elif s is not None and s not in used_sessions and hits.get(s, 0) >= EXPAND_MIN_HITS:
+            used_sessions.add(s)   # 同一会话只在它第一次出现的位置展开一次
+            for j in turns:
+                push(j, score)
+
+    for i, score in rest:          # 还有预算就接回原排名，不做额外筛选
+        if len(out) >= limit:
+            break
+        if i not in seen:
+            out.append((i, score))
+            seen.add(i)
+    return out
+
+
 def run(qvec: list[float], query_text: str, docs: list[dict],
         limit: int | None = None, cache_key=None,
         stats: dict | None = None) -> list[tuple[int, float]]:
@@ -1138,6 +1264,15 @@ def run(qvec: list[float], query_text: str, docs: list[dict],
     if DIVERSITY > 0:
         ranked = diversify(ranked, docs, index, want=limit)
     ranked = rerank(query_text, ranked, docs)
+    if DATE_FILTER > 0 and ranked:
+        ranked = date_filter(ranked, docs, query_text, limit)
+    if REL_GATE > 0 and ranked:
+        top = ranked[0][1]
+        if top > 0:
+            keep = [r for r in ranked if r[1] >= REL_GATE * top]
+            ranked = ranked[:REL_MIN_KEEP] if len(keep) < REL_MIN_KEEP else keep
+    if EXPAND_MODE != "none" and limit is not None:
+        ranked = expand(ranked, docs, limit)
     return ranked if limit is None else ranked[:limit]
 
 
@@ -1153,6 +1288,10 @@ def info() -> dict:
             "recency_weight": RECENCY_WEIGHT,
             "dedup_cos": DEDUP_COS, "dedup_pool": DEDUP_POOL,
             "diversity": DIVERSITY, "diversity_pool": DIVERSITY_POOL,
+            "expand": {"mode": EXPAND_MODE, "rounds": EXPAND_ROUNDS, "pool": EXPAND_POOL,
+                       "min_hits": EXPAND_MIN_HITS, "max": EXPAND_MAX},
+            "rel_gate": REL_GATE, "rel_min_keep": REL_MIN_KEEP,
+            "date_filter": DATE_FILTER, "date_fill": DATE_FILL,
             "rerank": {"mode": RERANK_MODE, "kind": RERANK_KIND,
                        "model": RERANK_MODEL or None, "top": RERANK_TOP, "tol": RERANK_TOL,
                        "blend": RERANK_BLEND, "rrf_k": RERANK_RRF_K,

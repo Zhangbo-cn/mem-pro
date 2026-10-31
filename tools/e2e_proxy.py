@@ -173,6 +173,7 @@ def main() -> int:
     ap.add_argument("--prompt", choices=("primed", "neutral"), default="primed",
                     help="neutral = 不提示弃答，更接近官方未公开的 Answer 提示")
     ap.add_argument("--report", default="")
+    ap.add_argument("--dump", default="", help="逐题明细 JSON（点类型/问题/金标/预测/EM）")
     args = ap.parse_args()
     if not args.answer_key:
         print("需要 --answer-key 或 DASHSCOPE_API_KEY", file=sys.stderr)
@@ -247,6 +248,7 @@ def main() -> int:
         lambda: {"n": 0, "em": 0, "contains": 0, "f1": 0.0})
     tokens = [0]
     fails = [0]
+    rows: list[dict] = []
     done = [0]
     started = time.time()
 
@@ -263,6 +265,11 @@ def main() -> int:
                 print(f"  ⚠️ {type(e).__name__}: {e}", file=sys.stderr)
                 continue
             em, contains, f1 = score(pred, q.get("answer") or "")
+            if args.dump:
+                with lock:
+                    rows.append({"point": q["point"], "k": k, "q": q["question"],
+                                 "gold": q.get("answer"), "pred": pred,
+                                 "em": em, "contains": contains, "clue": q.get("clue")})
             with lock:
                 a = stats[(q["point"], k)]
                 a["n"] += 1
@@ -313,6 +320,10 @@ def main() -> int:
         print(f"{label:<8} " + "  ".join(f"{v:<6}" for v in row))
     best = max(ks, key=lambda k: agg[k]["em"] / max(1, agg[k]["n"]))
     print(f"\n最优 top_k = {best}（EM 最高）；更大的档只增加 token 与延迟")
+    if args.dump:
+        with open(args.dump, "w", encoding="utf-8") as fh:
+            json.dump(rows, fh, ensure_ascii=False)
+        print(f"逐题明细：{args.dump}（{len(rows)} 行）")
     if args.report:
         with open(args.report, "w", encoding="utf-8") as fh:
             json.dump({"model": args.answer_model, "top_ks": ks, "tokens": tokens[0],

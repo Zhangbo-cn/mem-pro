@@ -1433,5 +1433,115 @@ class OpsAssetsTest(unittest.TestCase):
         self.assertIn("Unit=mempro-certcheck.service", open(timer, encoding="utf-8").read())
 
 
+class ExpandTest(unittest.TestCase):
+    """上下文扩展（EXPAND_MODE）：只追加、不重排、不超预算、逐位可复现。"""
+
+    def setUp(self):
+        self.saved = (retrieve.EXPAND_MODE, retrieve.EXPAND_ROUNDS, retrieve.EXPAND_POOL,
+                      retrieve.EXPAND_MIN_HITS, retrieve.EXPAND_MAX)
+        self.docs = []
+        for s, n in (("D1", 6), ("D2", 6)):
+            for k in range(n):
+                self.docs.append({"id": f"{s}:{k}", "session_id": s, "seq": len(self.docs),
+                                  "text": f"{s} round {k}", "images": [],
+                                  "created_at": f"2024-01-0{s[-1]}T00:00:{k:02d}Z"})
+
+    def tearDown(self):
+        (retrieve.EXPAND_MODE, retrieve.EXPAND_ROUNDS, retrieve.EXPAND_POOL,
+         retrieve.EXPAND_MIN_HITS, retrieve.EXPAND_MAX) = self.saved
+
+    def _ranked(self, order):
+        return [(self.docs.index(d), 1.0 - 0.1 * k) for k, d in enumerate(order)]
+
+    def test_mode_none_is_identity(self):
+        ranked = [(i, 0.5) for i in range(10)]
+        self.assertEqual(retrieve.expand(ranked, self.docs, 10), ranked)
+        self.assertEqual(retrieve.expand(ranked, self.docs, None), ranked)
+
+    def test_neighbor_adds_both_sides_after_anchor(self):
+        retrieve.EXPAND_MODE, retrieve.EXPAND_ROUNDS, retrieve.EXPAND_POOL = "neighbor", 1, 12
+        anchor = self.docs[3]                       # D1 round 3
+        out = retrieve.expand(self._ranked([anchor]), self.docs, 10)
+        ids = [self.docs[i]["id"] for i, _ in out]
+        self.assertEqual(ids[:3], ["D1:3", "D1:2", "D1:4"], "紧邻轮必须紧跟锚点，按近→远")
+        self.assertLessEqual(len(out), 10)
+        self.assertEqual(out[0][1], 1.0, "锚点分数不变")
+        self.assertEqual(out[1][1], 1.0, "上下文沿用锚点分数")
+
+    def test_neighbor_respects_limit_and_keeps_anchor_first(self):
+        retrieve.EXPAND_MODE, retrieve.EXPAND_ROUNDS, retrieve.EXPAND_POOL = "neighbor", 2, 12
+        out = retrieve.expand(self._ranked([self.docs[3]]), self.docs, 3)
+        self.assertEqual(len(out), 3, "不能超过平台预算")
+        self.assertEqual(self.docs[out[0][0]]["id"], "D1:3")
+
+    def test_session_mode_pulls_whole_session_when_hits_repeat(self):
+        retrieve.EXPAND_MODE, retrieve.EXPAND_MIN_HITS, retrieve.EXPAND_POOL = "session", 2, 12
+        ranked = self._ranked([self.docs[0], self.docs[2], self.docs[7]])   # D1 命中 2 次
+        out = retrieve.expand(ranked, self.docs, 20)
+        ids = [self.docs[i]["id"] for i, _ in out]
+        self.assertEqual(ids[0], "D1:0", "首次命中保持原位置")
+        self.assertEqual(sorted(i for i in ids if i.startswith("D1:")),
+                         [f"D1:{k}" for k in range(6)], "该会话 6 轮全在，且不重复")
+        self.assertIn("D2:1", ids, "D2 只命中 1 次，不展开，但按原排名接上")
+
+    def test_session_mode_needs_min_hits(self):
+        retrieve.EXPAND_MODE, retrieve.EXPAND_MIN_HITS, retrieve.EXPAND_POOL = "session", 2, 12
+        ranked = self._ranked([self.docs[0], self.docs[7]])
+        out = retrieve.expand(ranked, self.docs, 20)
+        self.assertEqual([self.docs[i]["id"] for i, _ in out], ["D1:0", "D2:1"],
+                         "各会话只命中 1 次 ⇒ 不展开")
+
+    def test_expand_is_deterministic_and_dedupes(self):
+        retrieve.EXPAND_MODE, retrieve.EXPAND_ROUNDS, retrieve.EXPAND_POOL = "neighbor", 2, 12
+        ranked = self._ranked([self.docs[3], self.docs[4]])   # 两个锚点互为邻居
+        a = retrieve.expand(ranked, self.docs, 10)
+        b = retrieve.expand(ranked, self.docs, 10)
+        self.assertEqual(a, b, "同样输入必须逐位相同")
+        self.assertEqual(len([i for i, _ in a]), len({i for i, _ in a}), "不能出现重复条目")
+        self.assertEqual([self.docs[i]["id"] for i, _ in a][:2], ["D1:3", "D1:2"],
+                         "邻居按近→远插入，且已在锚点里的轮不重复插入")
+        self.assertEqual([x for x in [self.docs[i]["id"] for i, _ in a]].count("D1:4"), 1)
+
+    def test_expand_enters_config_fingerprint(self):
+        saved = retrieve.EXPAND_MODE
+        try:
+            base = retrieve.info()["expand"]
+            self.assertEqual(base["mode"], "none")
+            retrieve.EXPAND_MODE = "neighbor"
+            self.assertEqual(retrieve.info()["expand"]["mode"], "neighbor")
+        finally:
+            retrieve.EXPAND_MODE = saved
+
+    def test_rel_gate_keeps_tight_cluster_and_floor(self):
+        """相对门限只保留贴着最高分的证据；候选太少时保底 REL_MIN_KEEP 条。"""
+        saved = (retrieve.REL_GATE, retrieve.REL_MIN_KEEP)
+        try:
+            retrieve.REL_GATE, retrieve.REL_MIN_KEEP = 0.9, 2
+            ranked = [(0, 1.0), (1, 0.95), (2, 0.80), (3, 0.10)]
+            got = retrieve.expand(ranked, [], None)          # expand 关闭时原样返回
+            self.assertEqual(got, ranked)
+            kept = [r for r in ranked if r[1] >= 0.9 * ranked[0][1]]
+            self.assertEqual([i for i, _ in kept], [0, 1])
+        finally:
+            retrieve.REL_GATE, retrieve.REL_MIN_KEEP = saved
+
+    def test_date_filter_only_on_explicit_day(self):
+        """只对写了具体某天的问题收窄，且命中不足时不能把结果掏空。"""
+        saved = (retrieve.DATE_FILL,)
+        try:
+            retrieve.DATE_FILL = 2
+            docs = [{"created_at": "2024-07-21T00:00:00Z"}, {"created_at": "2024-07-21T01:00:00Z"},
+                    {"created_at": "2024-07-22T00:00:00Z"}]
+            ranked = [(0, 0.9), (2, 0.8), (1, 0.7)]
+            self.assertEqual(retrieve.date_filter(ranked, docs, "no date here", 3), ranked)
+            got = retrieve.date_filter(ranked, docs, "in the conversation of 2024-07-21", 3)
+            self.assertEqual([i for i, _ in got], [0, 1, 2], "该日 2 条在前，其余按原序补齐")
+            retrieve.DATE_FILL = 99
+            self.assertEqual(retrieve.date_filter(ranked, docs, "of 2024-07-21", 3), ranked,
+                             "命中少于 DATE_FILL ⇒ 不收窄")
+        finally:
+            retrieve.DATE_FILL = saved[0]
+
+
 if __name__ == "__main__":
     unittest.main(verbosity=2)
