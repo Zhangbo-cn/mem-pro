@@ -16,9 +16,9 @@
 |---|---|
 | 系统名称 | **mem-pro** |
 | 版本号 | `mem-pro/0.2.0`；平台 **Version name = `v1.0.0`**（沿用已有 Key 的版本，不新增版本；Full 受理后冻结，不得更换） |
-| 固定 Commit | `66de25ca719c761b18edc0107eed0ec9f7f0b793`（线上 `/version` 的 `commit` = `66de25ca719c`，与之逐位一致；`git describe` = `v2.0-4-g66de25c`） |
+| 固定 Commit | `52de40923ff0f4aa0679d5a64f249e10d1595482`（tag `v2.0`；线上 `/version` 的 `commit` = `52de40923ff0`，与之逐位一致） |
 | 配置指纹 | `8b8e31d7bacbafe8`（16 位；线上 `/version` 的 `config_hash` 与 `config_hash_v2` 均为本值；改任何排序参数或 `MAX_IMAGES` / `MAX_RESULTS` / `IMG_MAX_SIDE` / `MEMORY_UNIT` / `CONTENT_HEADER` 都会变） |
-| 公开仓库 | https://github.com/Zhangbo-cn/mem-pro （**公开**，MIT 许可；仓库内无任何凭据；评测版本以上表**固定 Commit `66de25c`** 为准，仓库里 `git checkout 66de25c` 即线上代码） |
+| 公开仓库 | https://github.com/Zhangbo-cn/mem-pro （**公开**，MIT 许可；仓库内无任何凭据；评测版本以上表**固定 Commit `52de409`** 为准，仓库里 `git checkout 52de409` 即线上代码） |
 | 联系人 / 团队 | **张播（个人参赛）**；电话/邮箱与报名表一致（不写入仓库，避免仓库扩散联系信息） |
 | 赛道 / 组别 | 多模态记忆赛道 / **开源方法榜**（组别只能选一个） |
 | 接口地址 | **`https://113.44.133.30/add`**、**`https://113.44.133.30/search`**（IP 直签 Let's Encrypt，无需域名/备案；`http://` 308 跳 https，Caddy 需 `default_sni`，见 `deploy/REMOTE_OPS.md` §1.4.1） |
@@ -148,11 +148,11 @@ curl -s -H "Authorization: Token $KEY" http://113.44.133.30/version  # commit �
 | 2 | 联系人 / 机构 | ✅ 张播（个人）；联系方式见报名表 |
 | 3 | 赛道 + 组别 | ✅ 多模态 / 开源方法榜 |
 | 4 | 方法说明 + 引用 | ✅ §二、§三 |
-| 5 | 在线 Add / Search（HTTPS 公网） | ✅ `https://113.44.133.30/add`、`https://113.44.133.30/search`（Let's Encrypt IP 证书，`commit` = `66de25ca719c`、`config_hash` = `8b8e31d7bacbafe8`，含 `IMG_MAX_SIDE=1024` 缩图与 `MEMORY_UNIT=round`+`CONTENT_HEADER=1`，见 §九；contract 27/27（含 `/v2` 路由 27/27）、smoke 18/18、replay 幂等+5 次字节一致均走 https 复验） |
+| 5 | 在线 Add / Search（HTTPS 公网） | ✅ `https://113.44.133.30/add`、`https://113.44.133.30/search`（Let's Encrypt IP 证书，`commit` = `52de40923ff0`、`config_hash` = `8b8e31d7bacbafe8`，含 `IMG_MAX_SIDE=1024` 缩图与 `MEMORY_UNIT=round`+`CONTENT_HEADER=1`，见 §九；contract 27/27（含 `/v2` 路由 27/27）、smoke 18/18、replay 幂等+5 次字节一致均走 https 复验） |
 | 6 | 鉴权方式声明 | ✅ §一 |
 | 7 | 容量与运行限制 | ✅ §四 |
 | 8 | GitHub 仓库 | ✅ 公开仓库（MIT），代码无凭据 |
-| 9 | 固定 Commit | ✅ `66de25ca719c…`，线上 `/version` 的 `commit` 逐位一致 |
+| 9 | 固定 Commit | ✅ `52de40923ff0…`（tag `v2.0`），线上 `/version` 的 `commit` 逐位一致 |
 | 10 | 原始工作引用 | ✅ §3.1 |
 | 11 | 方法改动说明 | ✅ §3.2 |
 | 12 | 可公开展示的信息范围 | ✅ 方法说明 / 分类指标 / 架构图 / 代码仓库（公开）；不含 Key、数据样本、原始 query |
@@ -178,7 +178,7 @@ curl -s -H "Authorization: Token $KEY" http://113.44.133.30/version  # commit �
 | Add 地址 | `https://113.44.133.30/add` |
 | Search 地址 | `https://113.44.133.30/search` |
 | 鉴权头 | `Authorization: Token <Memory System Key>`（48 位 hex，随本表私有字段提交） |
-| 固定 Commit | `66de25ca719c761b18edc0107eed0ec9f7f0b793` |
+| 固定 Commit | `52de40923ff0f4aa0679d5a64f249e10d1595482`（tag `v2.0`） |
 | 配置指纹 | `8b8e31d7bacbafe8` |
 | 申报并发 | Search **2** / Add **2** |
 | 仓库 | `https://github.com/Zhangbo-cn/mem-pro`（公开，MIT） |
@@ -207,7 +207,7 @@ curl -s -H "Authorization: Token $KEY" http://113.44.133.30/version  # commit �
 
 **不再新增版本**：平台 Version name 仍填 `v1.0.0`（同一 Key、同一地址，`endpoint is immutable`）。
 下文原先把这一轮改动叫「v2.0」，指的是内部 profile（`MEMORY_UNIT=round` + `CONTENT_HEADER=1`）；
-它是**当前 `v1.0.0` 申报版本的组成部分**，固定 Commit 即 `66de25c`。
+它是**当前 `v1.0.0` 申报版本的组成部分**，固定 Commit 即 `52de409`（tag `v2.0`）。
 
 | 表单字段 | 填写 |
 |---|---|
@@ -215,21 +215,20 @@ curl -s -H "Authorization: Token $KEY" http://113.44.133.30/version  # commit �
 | Add API URL | `https://113.44.133.30/add`（不变） |
 | Search API URL | `https://113.44.133.30/search`（不变） |
 | 鉴权 | 沿用 v1.0.0（`Authorization: Token <Memory System Key>`） |
-| 固定 Commit | `66de25ca719c761b18edc0107eed0ec9f7f0b793`（线上 `/version` 的 `commit` = `66de25ca719c`，逐位一致） |
+| 固定 Commit | `52de40923ff0f4aa0679d5a64f249e10d1595482`（tag `v2.0`；线上 `/version` 的 `commit` = `52de40923ff0`，逐位一致） |
 | config_hash | `8b8e31d7bacbafe8`（线上 `/version` 的 `config_hash` 与 `config_hash_v2` 均为本值——两条路由在线上等价，见下方说明） |
 
-> **线上 = 申报 = `66de25c`**。tag `v2.0` 之后 `main` 的提交分三类，都不影响评测行为：
-> `a398d44` 与 `be1553b` 只动 `tools/` 和默认关闭的检索实验旋钮（`EXPAND_MODE` / `REL_GATE` /
-> `DATE_FILTER`，全量实测无效、见 README §二十，**未部署**），`de49195` 等为文档提交。
-> 线上实际跑的就是 `66de25c`（`/version` 的 `commit` = `66de25ca719c`，`git describe` = `v2.0-4-g66de25c`），
-> 只比 tag `v2.0` 多一处 `service/http_pool.py` 的「旧连接已死」重试修复：不涉及检索打分、预算、
-> embedding/rerank 参数，`config_hash` 仍为 `8b8e31d7bacbafe8`，返回字节与打分完全不变。
-> 为何要上它：19 小时无流量后连接池里 12 条 keep-alive 全部被上游关掉，一次 Add 的 5 次重试
-> 全部撞在死连接上、预算耗尽 → 503（详情见 README §十九）；修复后 contract 27/27、smoke 18/18、
-> replay 幂等 + 5 次字节一致均过。若评审要求「代码必须等于某个 tag」：
-> 回到内部代号 v2（去掉 http_pool 修复）→ `cd /opt/mem-pro && git checkout 52de409 && systemctl restart mem-pro`
-> （申报 commit 改 `52de409`）；回到最初的 v1.0.0 → `git checkout 6d2147e`（申报 commit 改 `6d2147e`，
-> `config_hash` 同时变回 `92d381b0beb88e5a`，会丢掉本轮 EM 0.324→0.392 的收益，不建议）。
+> **线上 = 申报 = `52de40923ff0f4aa0679d5a64f249e10d1595482`（tag `v2.0`）**。这是 2026-10-30 跑出 smoke **30.77**（Retrieval 100 /
+> direct_recall 100 / atomic_retrieval 100 / abstention 11.11）的同一版本；2026-10-31 已按提交要求回退到此版本，
+> `/version` 的 `commit` 复核为 `52de40923ff0`，`config_hash` 仍为 `8b8e31d7bacbafe8`（与 30.77 那次逐位相同）。
+>
+> **未部署的补丁（仅记录，不影响任何输出）**：`66de25c` 只改 `service/http_pool.py`——上游把空闲 keep-alive
+> 连接关掉时作废整池、换新连接重试一次（修「长空闲后首个 Add 503」，见 README §十九）。它不碰检索打分、
+> 预算、embedding/rerank 参数，`config_hash` 与返回字节完全不变；本次为让申报 commit 与 smoke 记录严格一致而未部署。
+> 若要启用：`cd /opt/mem-pro && git checkout 66de25c && systemctl restart mem-pro`（申报 commit 同步改 `66de25c`）。
+>
+> `main` 上的 `a398d44` / `be1553b` 等提交只动 `tools/` 与默认关闭的实验旋钮（`EXPAND_MODE` / `REL_GATE` /
+> `DATE_FILTER`，全量实测无效、见 README §二十），均**未部署**。
 >
 > **/v2/* 与 /add、/search 的关系（2026-10-31 线上实测）**：`MEMORY_UNIT=round`、`CONTENT_HEADER=1` 写在线上
 > `service/.env` 里，对 v1 路由同样生效（代码默认值是 `message` / `0`），所以平台登记的 `/add`、`/search`
