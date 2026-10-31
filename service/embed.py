@@ -48,6 +48,8 @@ EMBED_TIMEOUT = float(os.environ.get("EMBED_TIMEOUT", "60"))
 # 一起占死，p95 直接爆表。超过预算就尽快失败 → 503 + Retry-After，交给平台退避，
 # 比我们在这里空等更划算（槽位腾出来给健康请求）。
 RETRY_BUDGET = float(os.environ.get("EMBED_RETRY_BUDGET", "12"))
+# 单次尝试的最小超时（秒）：预算快用完时不要退到「必然超时」的极小值
+EMBED_ATTEMPT_MIN = float(os.environ.get("EMBED_ATTEMPT_MIN", "6"))
 _STATS_LOCK = threading.Lock()
 _CACHE: dict[str, list[float]] = {}
 _CACHE_LOCK = threading.Lock()
@@ -110,11 +112,16 @@ def _call_api_unlocked(texts: list[str]) -> list[list[float]]:
     for attempt in range(5):
         if attempt and time.monotonic() > deadline:
             break
+        # 单次尝试的超时必须被重试预算约束：否则一次「读超时」能占到 EMBED_TIMEOUT(60s)，
+        # 12 个槽位被几个挂住的连接占死，Add 的 p99 直接飙到几十秒（2026-11-01 那次 Full：
+        # Add p99 64.5s / max 287s，平台侧超时后中断 → 我们读出半截请求体 → 422）。
+        budget_left = deadline - time.monotonic()
+        attempt_timeout = min(EMBED_TIMEOUT, max(EMBED_ATTEMPT_MIN, budget_left))
         try:
             raw = http_pool.post(
                 f"{BASE}/embeddings", body,
                 {"Content-Type": "application/json", "Authorization": f"Bearer {API_KEY}"},
-                EMBED_TIMEOUT, size=CONCURRENCY)
+                attempt_timeout, size=CONCURRENCY)
             if len(raw) < 2:
                 raise http.client.IncompleteRead(raw, 64)
             payload = json.loads(raw.decode("utf-8"))

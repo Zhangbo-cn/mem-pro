@@ -431,6 +431,35 @@ class EmbedTest(unittest.TestCase):
         self.assertEqual(len(embed.pack(v)), len(v) * 4)
         self.assertEqual(struct.calcsize("<3f"), len(embed.pack(v)))
 
+    def test_embed_attempt_timeout_is_bounded_by_retry_budget(self):
+        """单次尝试的超时不能超过重试预算：否则一次读超时能占满 60s、把连接槽位挂死。
+
+        回归背景：2026-11-01 Full 期间 38 次 503 全是 `The read operation timed out`，
+        Add p99 64.5s / max 287s，平台侧超时中断后我们读出半截请求体 → 422 → 任务失败。
+        """
+        saved = (embed.API_KEY, embed.http_pool.post, embed.RETRY_BUDGET,
+                 embed.EMBED_TIMEOUT, embed.EMBED_ATTEMPT_MIN)
+        seen = []
+
+        def fake_post(url, body, headers, timeout, size=None):
+            seen.append(timeout)
+            raise TimeoutError("The read operation timed out")
+
+        try:
+            embed.API_KEY = "sk-test"
+            embed.http_pool.post = fake_post
+            embed.RETRY_BUDGET, embed.EMBED_TIMEOUT, embed.EMBED_ATTEMPT_MIN = 12.0, 60.0, 6.0
+            with self.assertRaises(RuntimeError):
+                embed._call_api_unlocked(["hello"])
+        finally:
+            (embed.API_KEY, embed.http_pool.post, embed.RETRY_BUDGET,
+             embed.EMBED_TIMEOUT, embed.EMBED_ATTEMPT_MIN) = saved
+        self.assertTrue(seen, "应当至少尝试一次")
+        self.assertLessEqual(max(seen), 12.0 + 1e-6, f"单次超时不得超过预算：{seen}")
+        self.assertGreaterEqual(min(seen), 6.0 - 1e-6, f"单次超时不得退到极小值：{seen}")
+        self.assertLessEqual(len(seen), 5, f"最多 5 次尝试：{seen}")
+        self.assertEqual(seen, sorted(seen, reverse=True), f"剩余预算递减 ⇒ 超时上限单调不增：{seen}")
+
 
 class HttpPoolTest(unittest.TestCase):
     """连接池必须真的复用连接：每次新建 TCP+TLS 是实测 p95 飙到秒级的元凶。"""

@@ -549,7 +549,18 @@ class Handler(BaseHTTPRequestHandler):
                     break
         return hmac.compare_digest(got, AUTH_KEY)
 
-    def _read_json(self) -> dict:
+    def _read_body(self) -> bytes:
+        """按协议读请求体：支持 Content-Length 与 Transfer-Encoding: chunked。
+
+        为什么必须支持 chunked：官方 Full（2026-11-01 00:32 那次）在 1h20m 处被判
+        `ADD_API_CONTRACT_MISMATCH · HTTP 422`，服务端日志里 145 次「请求体为空」——
+        平台对较大的多模态 Add 会用 `Transfer-Encoding: chunked`（没有 Content-Length），
+        旧实现只按 Content-Length 读，直接读 0 字节然后 422。客户端按协议发的请求，
+        服务端必须能收。
+        """
+        te = (self.headers.get("Transfer-Encoding") or "").lower()
+        if "chunked" in te:
+            return self._read_chunked()
         try:
             n = int(self.headers.get("Content-Length") or 0)
         except ValueError:
@@ -558,7 +569,45 @@ class Handler(BaseHTTPRequestHandler):
             raise Bad("请求体为空")
         if n > MAX_BODY:
             raise Bad("请求体过大")
-        raw = self.rfile.read(n)
+        return self._read_exact(n)
+
+    def _read_exact(self, n: int) -> bytes:
+        """读满 n 字节；读到一半对端断开时明确报错，不要当成 JSON 解析失败。"""
+        chunks, got = [], 0
+        while got < n:
+            part = self.rfile.read(min(65536, n - got))
+            if not part:
+                raise Bad(f"请求体不完整（{got}/{n} 字节后被对端关闭）")
+            chunks.append(part)
+            got += len(part)
+        return b"".join(chunks)
+
+    def _read_chunked(self) -> bytes:
+        """解析 HTTP/1.1 分块体（只支持长度块，不做 trailer 语义）。"""
+        chunks, total = [], 0
+        while True:
+            line = self.rfile.readline(1024)
+            if not line:
+                raise Bad("分块请求体在块长度处被对端关闭")
+            size_txt = line.split(b";", 1)[0].strip()
+            try:
+                size = int(size_txt, 16)
+            except ValueError:
+                raise Bad("分块请求体的块长度非法")
+            if size == 0:
+                while True:                      # 读掉 trailer 直到空行
+                    tail = self.rfile.readline(1024)
+                    if tail in (b"\r\n", b"\n", b""):
+                        break
+                return b"".join(chunks)
+            total += size
+            if total > MAX_BODY:
+                raise Bad("请求体过大")
+            chunks.append(self._read_exact(size))
+            self.rfile.read(2)                   # 块尾 CRLF
+
+    def _read_json(self) -> dict:
+        raw = self._read_body()
         try:
             obj = json.loads(raw.decode("utf-8"))
         except Exception:

@@ -411,6 +411,60 @@ class ServerTest(unittest.TestCase):
         self.assertEqual(self.call("/nope", key=None)[0], 404)
         self.assertEqual(self.call("/nope", {}, key=KEY)[0], 404)
 
+    def test_add_accepts_chunked_request_body(self):
+        """平台对大 Add 用 Transfer-Encoding: chunked：服务端必须能收。
+
+        回归背景：2026-11-01 00:32 那次 Full 被判 ADD_API_CONTRACT_MISMATCH · HTTP 422，
+        服务端日志里大量「请求体为空」——旧实现只按 Content-Length 读，chunked 请求被当成空体。
+        """
+        body = json.dumps({"request_id": "chunked-1", "user_id": "u-chunk", "session_id": "s1",
+                           "messages": [{"role": "user", "timestamp": 1700000000000,
+                                         "content": [{"type": "text", "text": "分块编码的记忆"}]}]},
+                          ensure_ascii=False).encode()
+        # 手写分块：前 30 字节 / 剩余 / 结束块
+        parts = [body[:30], body[30:]]
+        wire = b"".join(b"%x\r\n%s\r\n" % (len(p), p) for p in parts) + b"0\r\n\r\n"
+        req = (b"POST /add HTTP/1.1\r\nHost: 127.0.0.1\r\n"
+               b"Authorization: Token " + KEY.encode() + b"\r\n"
+               b"Content-Type: application/json\r\n"
+               b"Transfer-Encoding: chunked\r\nConnection: close\r\n\r\n")
+        with socket.create_connection(("127.0.0.1", self.port), timeout=10) as s:
+            s.sendall(req + wire)
+            raw = b""
+            while True:
+                part = s.recv(65536)
+                if not part:
+                    break
+                raw += part
+        head, _, resp = raw.partition(b"\r\n\r\n")
+        self.assertIn(b"200", head.split(b"\r\n")[0], raw[:200])
+        self.assertTrue(json.loads(resp)["success"], resp)
+        # 真的写进去了
+        st, raw = self.call("/search", {"request_id": "chunked-q", "user_id": "u-chunk",
+                                        "query": "分块编码", "top_k": 5})
+        self.assertEqual(st, 200)
+        self.assertEqual(len(json.loads(raw)["data"]), 1)
+
+    def test_truncated_body_is_reported_not_misparsed(self):
+        """Content-Length 大于实际字节：要报「不完整」，而不是把它当 JSON 解析失败。"""
+        body = b'{"request_id":"x"}'
+        req = (b"POST /add HTTP/1.1\r\nHost: 127.0.0.1\r\n"
+               b"Authorization: Token " + KEY.encode() + b"\r\n"
+               b"Content-Type: application/json\r\n"
+               b"Content-Length: " + str(len(body) + 100).encode() + b"\r\n"
+               b"Connection: close\r\n\r\n" + body)
+        with socket.create_connection(("127.0.0.1", self.port), timeout=10) as s:
+            s.sendall(req)
+            s.shutdown(socket.SHUT_WR)
+            raw = b""
+            while True:
+                part = s.recv(65536)
+                if not part:
+                    break
+                raw += part
+        self.assertIn(b"422", raw.split(b"\r\n")[0])
+        self.assertIn("请求体不完整".encode(), raw)
+
 
 class LogHygieneTest(unittest.TestCase):
     """合规：评测数据只能用于完成当前任务 —— 日志里不许落请求正文。
