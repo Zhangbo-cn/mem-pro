@@ -16,8 +16,8 @@
 |---|---|
 | 系统名称 | **mem-pro** |
 | 版本号 | `mem-pro/0.2.0`（Full 受理后冻结，不得更换） |
-| 固定 Commit | `6d2147e9a1a88a344461b20b374a81c4d200d547`（tag `v1.0.0`；线上 `/version` 的 `commit` = `6d2147e9a1a8`，`config_hash` = `92d381b0beb88e5a`） |
-| 配置指纹 | `92d381b0beb88e5a`（16 位；`/version` 可对；改任何排序参数或 `MAX_IMAGES` / `MAX_RESULTS` / `IMG_MAX_SIDE` 都会变） |
+| 固定 Commit | `6d2147e9a1a88a344461b20b374a81c4d200d547`（tag `v1.0.0`；**v1.0.0 冻结时**线上 `/version` 的 `commit` = `6d2147e9a1a8`，`config_hash` = `92d381b0beb88e5a`；当前线上已升到 v2.0，见 §九） |
+| 配置指纹 | `92d381b0beb88e5a`（v1.0.0 冻结值，16 位；改任何排序参数或 `MAX_IMAGES` / `MAX_RESULTS` / `IMG_MAX_SIDE` / `MEMORY_UNIT` / `CONTENT_HEADER` 都会变；v2.0 为 `8b8e31d7bacbafe8`） |
 | 公开仓库 | https://github.com/Zhangbo-cn/mem-pro （**公开**，MIT 许可；仓库内无任何凭据；评测版本以 tag `v1.0.0` 为准） |
 | 联系人 / 团队 | **张播（个人参赛）**；电话/邮箱与报名表一致（不写入仓库，避免仓库扩散联系信息） |
 | 赛道 / 组别 | 多模态记忆赛道 / **开源方法榜**（组别只能选一个） |
@@ -148,7 +148,7 @@ curl -s -H "Authorization: Token $KEY" http://113.44.133.30/version  # commit �
 | 2 | 联系人 / 机构 | ✅ 张播（个人）；联系方式见报名表 |
 | 3 | 赛道 + 组别 | ✅ 多模态 / 开源方法榜 |
 | 4 | 方法说明 + 引用 | ✅ §二、§三 |
-| 5 | 在线 Add / Search（HTTPS 公网） | ✅ `https://113.44.133.30/add`、`https://113.44.133.30/search`（Let's Encrypt IP 证书，`commit` 见 `/version`、`config_hash=92d381b0beb88e5a`（含 `IMG_MAX_SIDE=1024` 缩图）；contract 27/27、smoke 18/18、replay 幂等+5 次字节一致均走 https 复验） |
+| 5 | 在线 Add / Search（HTTPS 公网） | ✅ `https://113.44.133.30/add`、`https://113.44.133.30/search`（Let's Encrypt IP 证书，`commit` 见 `/version`、`config_hash=92d381b0beb88e5a`（v1.0.0 冻结值，含 `IMG_MAX_SIDE=1024` 缩图；当前线上为 v2.0 的 `8b8e31d7bacbafe8`，见 §九）；contract 27/27、smoke 18/18、replay 幂等+5 次字节一致均走 https 复验） |
 | 6 | 鉴权方式声明 | ✅ §一 |
 | 7 | 容量与运行限制 | ✅ §四 |
 | 8 | GitHub 仓库 | ✅ 公开仓库（MIT），代码无凭据 |
@@ -178,7 +178,7 @@ curl -s -H "Authorization: Token $KEY" http://113.44.133.30/version  # commit �
 | Search 地址 | `https://113.44.133.30/search` |
 | 鉴权头 | `Authorization: Token <Memory System Key>`（48 位 hex，随本表私有字段提交） |
 | 固定 Commit | `6d2147e9a1a88a344461b20b374a81c4d200d547`（tag `v1.0.0`） |
-| 配置指纹 | `92d381b0beb88e5a` |
+| 配置指纹 | `92d381b0beb88e5a`（v1.0.0 冻结值；v2.0 见 §九） |
 | 申报并发 | Search **2** / Add **2** |
 | 仓库 | `https://github.com/Zhangbo-cn/mem-pro`（公开，MIT） |
 | 可公开展示 | 方法说明、分类指标、架构图、代码仓库；不公开 Key、评测数据样本、原始 query |
@@ -213,10 +213,17 @@ curl -s -H "Authorization: Token $KEY" http://113.44.133.30/version  # commit �
 | Search API URL | `https://113.44.133.30/search`（不变） |
 | 鉴权 | 沿用 v1.0.0（`Authorization: Token <Memory System Key>`） |
 | 固定 Commit | `52de40923ff0f4aa0679d5a64f249e10d1595482`（tag `v2.0`；线上 `/version` 的 `commit` = `52de40923ff0`，与 tag 一致） |
-| config_hash | `8b8e31d7bacbafe8`（v1.0.0 为 `92d381b0beb88e5a`） |
+| config_hash | `8b8e31d7bacbafe8`（v1.0.0 为 `92d381b0beb88e5a`；线上 `/version` 的 `config_hash` 与 `config_hash_v2` 均为本值——两条路由在线上等价，见下方说明） |
 
 > 说明：tag `v2.0` 之后 `main` 还有 `a398d44`，只改 `tools/e2e_proxy.py`（本地评测代理）与 README，
 > 不涉及 `service/` 任何代码或配置，`config_hash` 与服务输出不变；评测版本以 tag `v2.0`（`52de409`）为准。
+>
+> **/v2/* 与 /add、/search 的关系（2026-10-31 线上实测）**：`MEMORY_UNIT=round`、`CONTENT_HEADER=1` 写在线上
+> `service/.env` 里，对 v1 路由同样生效（代码默认值是 `message` / `0`），所以平台登记的 `/add`、`/search`
+> **就是 v2 行为**；`/v2/add`、`/v2/search` 是同一进程、同一库内以 `\x1fv2\x1f` 前缀隔离 user 空间的别名路由，
+> 供契约/复验工具在 v2 语义下自检。实测：向 `/add` 写一轮 user+assistant，落库正文为
+> `[2023-11-14 22:13] user: …\nassistant: …`，与 `/v2/add` 一致。这样做是因为平台规定
+> 同一 Key 的接口地址不可变，v2.0 必须沿用原地址才能被评测到新行为。
 
 改动：线上 `.env` 加 `MEMORY_UNIT=round`、`CONTENT_HEADER=1`——user 消息与紧随的 assistant 回复合成一条记忆，
 正文前加 `[YYYY-MM-DD HH:MM] user:` / `assistant:` 来源抬头（原文不改写）；检索/精排/预算零改动。

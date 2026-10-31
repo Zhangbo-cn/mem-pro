@@ -849,8 +849,17 @@ smoke 每项题量很小（总 15 分说明只有个位数题），单题对错�
 
 - `MEMORY_UNIT=round`：user 消息与紧随其后的 assistant 回复合成一条记忆（= 基准 clue `D1:3` 的粒度）；
 - `CONTENT_HEADER=1`：正文前加 `[YYYY-MM-DD HH:MM] user:` / `assistant:`——只是来源元数据（时间+角色），原文一字不改；
-- 以 **`/v2/add`、`/v2/search`** 暴露（存储空间与 v1 隔离），**`/add`、`/search` 与 v1.0.0 逐字节一致**
-  （同一组请求、新旧代码对比输出与 `config_hash=71780ada…`（hash 模式）完全相同），已绑定的 v1 不受影响。
+- 两个旋钮**在代码里默认关闭**（`MEMORY_UNIT=message`、`CONTENT_HEADER=0`）：不写环境变量的部署，`/add`、`/search`
+  与 v1.0.0 逐字节一致（同一组请求、新旧代码对比输出与 `config_hash=71780ada…`（hash 模式）完全相同）。
+- 另有 **`/v2/add`、`/v2/search`**：固定用代码里的 `V2_PROFILE`（`round` + 抬头），与 v1 同一进程、同一库，
+  user 空间以 `\x1fv2\x1f` 前缀隔离，供本地契约/复验工具在 v2 语义下自检。
+
+**线上实际形态（2026-10-31 核实）**：本次部署把 `MEMORY_UNIT=round`、`CONTENT_HEADER=1` 写进了 `service/.env`，
+而这两个值对 v1 路由同样生效（`_profile(None)` 回落读环境变量）——所以**平台登记的 `/add`、`/search` 直接就是 v2 行为**，
+`/version` 的 `config_hash` 也相应变成 `8b8e31d7bacbafe8`（`config_hash_v2` 与之相同）。这不是漂移而是必需：
+平台规定同一 Key 的接口地址不可变，v2.0 只能沿用原地址，隔离只是代码默认值层面的性质。
+已实测：向 `/add` 写一轮 user+assistant，落库正文为
+`[2023-11-14 22:13] user: …\nassistant: …`（合并轮次 + 抬头），与 `/v2/add` 一致。
 
 全量 1,711 题，EM（top_k=100）：
 
