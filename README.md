@@ -967,6 +967,50 @@ top_k 10 与 100 各跑一遍，回答模型 qwen-flash。**同配置重跑两�
 
 ---
 
+## 二十一、Full 第一次失败（HTTP 422）的复盘与修复（2026-11-01）
+
+**现场**：`teval_5602c1c4174f886f`，full，跑 **1h 20m** 后在 00:32:38 被判
+`ADD_API_CONTRACT_MISMATCH · HTTP 422`。服务端同期统计：8,639 次 200、166 次 422、38 次 503、7 次 500。
+
+**根因（两个独立缺陷叠加，都不是分数问题）**：
+
+1. **只按 `Content-Length` 读请求体**。平台对大 Add 用 `Transfer-Encoding: chunked`（没有 CL），
+   旧实现 `n=int(CL or 0)` → `n=0` → 直接 422「请求体为空」。日志里 **145 次**这样的 422，
+   Caddy 侧对应 499/502（平台收到 422 后断开）。这是**协议实现缺失**，不是配置问题。
+2. **单次 embedding 尝试的超时不受重试预算约束**。`EMBED_TIMEOUT=60s` 是单次上限，
+   而 12s 的 `RETRY_BUDGET` 只在两次尝试之间检查 → 一次「读超时」能占满 60s，
+   把 12 个连接槽一个个挂死。同期量级：**Add p50 1.6 s / p90 11.0 s / p99 64.5 s / max 287 s**，
+   38 次 503 全是 `embedding failed: The read operation timed out`。平台侧等不及就中断
+   → 我们读到半截请求体（422「不是合法 JSON」）或写响应时 `BrokenPipeError`（500）。
+
+**修复**（`service/server.py` + `service/embed.py`）：
+
+- `_read_body()`：`Transfer-Encoding: chunked` 走 `_read_chunked()`（解析长度块、读掉 trailer、累计上限
+  `MAX_BODY`）；`Content-Length` 路径改 `_read_exact()`，读到一半对端关闭时明确报
+  「请求体不完整（已收/应收字节）」，不再伪装成「不是合法 JSON」。
+- `attempt_timeout = min(EMBED_TIMEOUT, max(EMBED_ATTEMPT_MIN(6 s), 剩余预算))`：超时上限**单调不增**，
+  最坏总耗时仍 ≈ `RETRY_BUDGET`，挂住的连接最多占一个预算周期。
+
+**验证**：
+
+| 项 | 结果 |
+|---|---|
+| chunked 收包（HTTP/1.1 真分块，经 Caddy） | 1 KB / 78 KB 请求体均 **200** |
+| 三条回归测试 | chunked 可收并可检索、截断体明确报不完整、embed 超时上限 ≤ 预算且单调不增 |
+| `make test` | **113 项**通过；`doc_check` 全部一致 |
+| 线上契约 | contract 27/27、smoke 18/18、replay 幂等 + 5 次字节一致 |
+| **16 并发压测**（平台 Full 的并发口径） | Add p50 226 ms / p90 411 ms / **p99 1.08 s**；Search p50 215 ms / p99 745 ms；<br>带 626 KB 图片的 Add p50 333 ms / **p99 3.4 s**；全部 2xx |
+
+**行为没变**：检索打分、预算、embedding/rerank 参数零改动；`config_hash` 由 `8b8e31d7bacbafe8`
+变为 `309c69e8bb7b136b`，原因是代码里新增的**默认关闭**实验旋钮（§二十）会进 `info()` 因而进指纹。
+关掉状态下排序与输出与 v2.0 一致。
+
+**教训**：契约层的失败（收包、超时）比分数重要得多——smoke 只跑 13 个 task、几十秒就过，
+Full 是近 5,000 个实例、上千次 Add，任何「只在长尾出现」的实现缺陷都会在那里暴露。
+以后上线前至少要在 16 并发下跑一轮带图的 Add/Search 压测（见上表）。
+
+---
+
 ## 许可
 
 代码与文档：MIT（见 `LICENSE`）。`data/` 下的第三方基准数据保留原许可，ATM-Bench 为 **CC BY-NC 4.0（仅限非商业）**，见 `data/README.md`。

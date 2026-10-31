@@ -16,9 +16,9 @@
 |---|---|
 | 系统名称 | **mem-pro** |
 | 版本号 | `mem-pro/0.2.0`；平台 **Version name = `v1.0.0`**（沿用已有 Key 的版本，不新增版本；Full 受理后冻结，不得更换） |
-| 固定 Commit | `52de40923ff0f4aa0679d5a64f249e10d1595482`（tag `v2.0`；线上 `/version` 的 `commit` = `52de40923ff0`，与之逐位一致） |
-| 配置指纹 | `8b8e31d7bacbafe8`（16 位；线上 `/version` 的 `config_hash` 与 `config_hash_v2` 均为本值；改任何排序参数或 `MAX_IMAGES` / `MAX_RESULTS` / `IMG_MAX_SIDE` / `MEMORY_UNIT` / `CONTENT_HEADER` 都会变） |
-| 公开仓库 | https://github.com/Zhangbo-cn/mem-pro （**公开**，MIT 许可；仓库内无任何凭据；评测版本以上表**固定 Commit `52de409`** 为准，仓库里 `git checkout 52de409` 即线上代码） |
+| 固定 Commit | `83ec5a35476ae472ce0a74390a26de298105c1e7`（tag `v2.0` + 收包/超时两处健壮性修复；线上 `/version` 的 `commit` = `83ec5a35476a`，与之逐位一致） |
+| 配置指纹 | `309c69e8bb7b136b`（16 位；线上 `/version` 的 `config_hash` 与 `config_hash_v2` 均为本值；改任何排序参数或 `MAX_IMAGES` / `MAX_RESULTS` / `IMG_MAX_SIDE` / `MEMORY_UNIT` / `CONTENT_HEADER` 都会变） |
+| 公开仓库 | https://github.com/Zhangbo-cn/mem-pro （**公开**，MIT 许可；仓库内无任何凭据；评测版本以上表**固定 Commit `83ec5a35476a`** 为准，仓库里 `git checkout 83ec5a35476a` 即线上代码） |
 | 联系人 / 团队 | **张播（个人参赛）**；电话/邮箱与报名表一致（不写入仓库，避免仓库扩散联系信息） |
 | 赛道 / 组别 | 多模态记忆赛道 / **开源方法榜**（组别只能选一个） |
 | 接口地址 | **`https://113.44.133.30/add`**、**`https://113.44.133.30/search`**（IP 直签 Let's Encrypt，无需域名/备案；`http://` 308 跳 https，Caddy 需 `default_sni`，见 `deploy/REMOTE_OPS.md` §1.4.1） |
@@ -148,11 +148,11 @@ curl -s -H "Authorization: Token $KEY" http://113.44.133.30/version  # commit �
 | 2 | 联系人 / 机构 | ✅ 张播（个人）；联系方式见报名表 |
 | 3 | 赛道 + 组别 | ✅ 多模态 / 开源方法榜 |
 | 4 | 方法说明 + 引用 | ✅ §二、§三 |
-| 5 | 在线 Add / Search（HTTPS 公网） | ✅ `https://113.44.133.30/add`、`https://113.44.133.30/search`（Let's Encrypt IP 证书，`commit` = `52de40923ff0`、`config_hash` = `8b8e31d7bacbafe8`，含 `IMG_MAX_SIDE=1024` 缩图与 `MEMORY_UNIT=round`+`CONTENT_HEADER=1`，见 §九；contract 27/27（含 `/v2` 路由 27/27）、smoke 18/18、replay 幂等+5 次字节一致均走 https 复验） |
+| 5 | 在线 Add / Search（HTTPS 公网） | ✅ `https://113.44.133.30/add`、`https://113.44.133.30/search`（Let's Encrypt IP 证书，`commit` = `83ec5a35476a`、`config_hash` = `309c69e8bb7b136b`，含 `IMG_MAX_SIDE=1024` 缩图与 `MEMORY_UNIT=round`+`CONTENT_HEADER=1`，见 §九；contract 27/27（含 `/v2` 路由 27/27）、smoke 18/18、replay 幂等+5 次字节一致均走 https 复验） |
 | 6 | 鉴权方式声明 | ✅ §一 |
 | 7 | 容量与运行限制 | ✅ §四 |
 | 8 | GitHub 仓库 | ✅ 公开仓库（MIT），代码无凭据 |
-| 9 | 固定 Commit | ✅ `52de40923ff0…`（tag `v2.0`），线上 `/version` 的 `commit` 逐位一致 |
+| 9 | 固定 Commit | ✅ `83ec5a35476a…`，线上 `/version` 的 `commit` 逐位一致 |
 | 10 | 原始工作引用 | ✅ §3.1 |
 | 11 | 方法改动说明 | ✅ §3.2 |
 | 12 | 可公开展示的信息范围 | ✅ 方法说明 / 分类指标 / 架构图 / 代码仓库（公开）；不含 Key、数据样本、原始 query |
@@ -178,8 +178,8 @@ curl -s -H "Authorization: Token $KEY" http://113.44.133.30/version  # commit �
 | Add 地址 | `https://113.44.133.30/add` |
 | Search 地址 | `https://113.44.133.30/search` |
 | 鉴权头 | `Authorization: Token <Memory System Key>`（48 位 hex，随本表私有字段提交） |
-| 固定 Commit | `52de40923ff0f4aa0679d5a64f249e10d1595482`（tag `v2.0`） |
-| 配置指纹 | `8b8e31d7bacbafe8` |
+| 固定 Commit | `83ec5a35476ae472ce0a74390a26de298105c1e7` |
+| 配置指纹 | `309c69e8bb7b136b` |
 | 申报并发 | Search **2** / Add **2** |
 | 仓库 | `https://github.com/Zhangbo-cn/mem-pro`（公开，MIT） |
 | 可公开展示 | 方法说明、分类指标、架构图、代码仓库；不公开 Key、评测数据样本、原始 query |
@@ -203,39 +203,44 @@ curl -s -H "Authorization: Token $KEY" http://113.44.133.30/version  # commit �
 
 ---
 
-## 九、版本 `v1.0.0` 的最终形态（2026-10-31 定稿；`v2` 仅为内部代号）
+## 九、版本 `v1.0.0` 的最终形态（2026-11-01 定稿；`v2` 仅为内部代号）
 
-**不再新增版本**：平台 Version name 仍填 `v1.0.0`（同一 Key、同一地址，`endpoint is immutable`）。
-下文原先把这一轮改动叫「v2.0」，指的是内部 profile（`MEMORY_UNIT=round` + `CONTENT_HEADER=1`）；
-它是**当前 `v1.0.0` 申报版本的组成部分**，固定 Commit 即 `52de409`（tag `v2.0`）。
+**不新增版本**：平台 Version name 仍填 `v1.0.0`（同一 Key、同一地址，`endpoint is immutable`）。
+「v2」是内部 profile 代号（`MEMORY_UNIT=round` + `CONTENT_HEADER=1`），属于当前 `v1.0.0` 的组成部分。
 
 | 表单字段 | 填写 |
 |---|---|
-| Version name | `v1.0.0`（沿用已有 Key，不新增版本） |
-| Add API URL | `https://113.44.133.30/add`（不变） |
-| Search API URL | `https://113.44.133.30/search`（不变） |
-| 鉴权 | 沿用 v1.0.0（`Authorization: Token <Memory System Key>`） |
-| 固定 Commit | `52de40923ff0f4aa0679d5a64f249e10d1595482`（tag `v2.0`；线上 `/version` 的 `commit` = `52de40923ff0`，逐位一致） |
-| config_hash | `8b8e31d7bacbafe8`（线上 `/version` 的 `config_hash` 与 `config_hash_v2` 均为本值——两条路由在线上等价，见下方说明） |
+| Version name | `v1.0.0` |
+| Add API URL | `https://113.44.133.30/add` |
+| Search API URL | `https://113.44.133.30/search` |
+| 鉴权 | `Authorization: Token <Memory System Key>` |
+| 固定 Commit | `83ec5a35476ae472ce0a74390a26de298105c1e7`（线上 `/version` 的 `commit` = `83ec5a35476a`，逐位一致） |
+| config_hash | `309c69e8bb7b136b`（线上 `config_hash` 与 `config_hash_v2` 同值；两条路由等价，见下） |
 
-> **线上 = 申报 = `52de40923ff0f4aa0679d5a64f249e10d1595482`（tag `v2.0`）**。这是 2026-10-30 跑出 smoke **30.77**（Retrieval 100 /
-> direct_recall 100 / atomic_retrieval 100 / abstention 11.11）的同一版本；2026-10-31 已按提交要求回退到此版本，
-> `/version` 的 `commit` 复核为 `52de40923ff0`，`config_hash` 仍为 `8b8e31d7bacbafe8`（与 30.77 那次逐位相同）。
+> **线上 = 申报 = `83ec5a35476a`** = tag `v2.0`（`52de409`，smoke **30.77** 的那一版）+ 两处健壮性修复。
+> **修复不改行为**：检索打分、预算、embedding/rerank 参数一个没动，`retrieval` / `budget` 段与
+> 30.77 那次逐项相同；`config_hash` 由 `8b8e31d7bacbafe8` 变为 `309c69e8bb7b136b` 的原因是代码里新增了
+> **默认关闭**的实验旋钮条目（`expand` / `rel_gate` / `date_filter`，全量实测无效，见 README §二十），
+> 它们进了 `info()` 因而进了指纹；关掉状态下输出与排序与 v2.0 完全一致。
 >
-> **未部署的补丁（仅记录，不影响任何输出）**：`66de25c` 只改 `service/http_pool.py`——上游把空闲 keep-alive
-> 连接关掉时作废整池、换新连接重试一次（修「长空闲后首个 Add 503」，见 README §十九）。它不碰检索打分、
-> 预算、embedding/rerank 参数，`config_hash` 与返回字节完全不变；本次为让申报 commit 与 smoke 记录严格一致而未部署。
-> 若要启用：`cd /opt/mem-pro && git checkout 66de25c && systemctl restart mem-pro`（申报 commit 同步改 `66de25c`）。
+> **为什么在 tag 之后要修**（2026-11-01 00:32 那次 Full `teval_5602c1c4174f886f`，跑 1h20m 后失败）：
 >
-> `main` 上的 `a398d44` / `be1553b` 等提交只动 `tools/` 与默认关闭的实验旋钮（`EXPAND_MODE` / `REL_GATE` /
-> `DATE_FILTER`，全量实测无效、见 README §二十），均**未部署**。
+> 1. `ADD_API_CONTRACT_MISMATCH · HTTP 422`：服务端只按 `Content-Length` 读请求体，而平台对大 Add
+>    使用 `Transfer-Encoding: chunked` → 读 0 字节 → 422（日志里 145 次「请求体为空」）。
+>    已支持 chunked；`Content-Length` 路径也改成精确读，读到半截明确报「请求体不完整」。
+> 2. 同一轮 38 次 503 全是 `The read operation timed out`，Add p99 64.5 s / max 287 s：单次 embedding
+>    尝试用固定 60 s 超时、不受 12 s 重试预算约束，把连接槽挂死。已改
+>    `attempt_timeout = min(EMBED_TIMEOUT, max(6 s, 剩余预算))`。
 >
-> **/v2/* 与 /add、/search 的关系（2026-10-31 线上实测）**：`MEMORY_UNIT=round`、`CONTENT_HEADER=1` 写在线上
-> `service/.env` 里，对 v1 路由同样生效（代码默认值是 `message` / `0`），所以平台登记的 `/add`、`/search`
-> **就是 v2 行为**；`/v2/add`、`/v2/search` 是同一进程、同一库内以 `\x1fv2\x1f` 前缀隔离 user 空间的别名路由，
-> 供契约/复验工具在 v2 语义下自检。实测：向 `/add` 写一轮 user+assistant，落库正文为
-> `[2023-11-14 22:13] user: …\nassistant: …`，与 `/v2/add` 一致。这样做是因为平台规定
-> 同一 Key 的接口地址不可变（`endpoint is immutable`），只能在原地址上换版本，这也是不新增版本号的原因。
+> 修复后线上实测：`contract 27/27`、`smoke 18/18`、`replay` 幂等 + 5 次字节一致；16 并发压测
+> （平台 Full 的并发口径）Add p50 226 ms / p99 1.08 s、Search p50 215 ms / p99 745 ms，
+> 带 626 KB 图片的 Add p99 3.4 s，全部 2xx。详见 README §二十一。
+>
+> 平台提示「不要创建重复 Full、可从断点续跑」——修复部署后**续跑原任务**即可。
+>
+> **/v2/* 与 /add、/search 的关系**：`MEMORY_UNIT=round`、`CONTENT_HEADER=1` 写在线上 `service/.env`，
+> 对 v1 路由同样生效（代码默认是 `message` / `0`），所以平台登记的 `/add`、`/search` 就是 v2 行为；
+> `/v2/add`、`/v2/search` 是同进程、同库内以 `\x1fv2\x1f` 前缀隔离 user 空间的别名路由，供契约工具自检。
 
 改动：线上 `.env` 加 `MEMORY_UNIT=round`、`CONTENT_HEADER=1`——user 消息与紧随的 assistant 回复合成一条记忆，
 正文前加 `[YYYY-MM-DD HH:MM] user:` / `assistant:` 来源抬头（原文不改写）；检索/精排/预算零改动。
