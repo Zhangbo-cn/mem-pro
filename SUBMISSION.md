@@ -16,9 +16,9 @@
 |---|---|
 | 系统名称 | **mem-pro** |
 | 版本号 | `mem-pro/0.2.0`；平台 **Version name = `v1.0.0`**（沿用已有 Key 的版本，不新增版本；Full 受理后冻结，不得更换） |
-| 固定 Commit | `766faceda4a1dbdee786e6aadcd4b6062c4b6c75`（tag `v2.0` + 收包/超时/连接三处健壮性修复；线上 `/version` 的 `commit` = `766faceda4a1`，与之逐位一致） |
+| 固定 Commit | `9b2be078cca7c2aea88a316d836a70b8469727bc`（tag `v2.0` + 收包/超时/连接三处健壮性修复；线上 `/version` 的 `commit` = `9b2be078cca7`，与之逐位一致） |
 | 配置指纹 | `309c69e8bb7b136b`（16 位；线上 `/version` 的 `config_hash` 与 `config_hash_v2` 均为本值；改任何排序参数或 `MAX_IMAGES` / `MAX_RESULTS` / `IMG_MAX_SIDE` / `MEMORY_UNIT` / `CONTENT_HEADER` 都会变） |
-| 公开仓库 | https://github.com/Zhangbo-cn/mem-pro （**公开**，MIT 许可；仓库内无任何凭据；评测版本以上表**固定 Commit `766faceda4a1`** 为准，仓库里 `git checkout 766faceda4a1` 即线上代码） |
+| 公开仓库 | https://github.com/Zhangbo-cn/mem-pro （**公开**，MIT 许可；仓库内无任何凭据；评测版本以上表**固定 Commit `9b2be078cca7`** 为准，仓库里 `git checkout 9b2be078cca7` 即线上代码） |
 | 联系人 / 团队 | **张播（个人参赛）**；电话/邮箱与报名表一致（不写入仓库，避免仓库扩散联系信息） |
 | 赛道 / 组别 | 多模态记忆赛道 / **开源方法榜**（组别只能选一个） |
 | 接口地址 | **`https://113.44.133.30/add`**、**`https://113.44.133.30/search`**（IP 直签 Let's Encrypt，无需域名/备案；`http://` 308 跳 https，Caddy 需 `default_sni`，见 `deploy/REMOTE_OPS.md` §1.4.1） |
@@ -148,11 +148,11 @@ curl -s -H "Authorization: Token $KEY" http://113.44.133.30/version  # commit �
 | 2 | 联系人 / 机构 | ✅ 张播（个人）；联系方式见报名表 |
 | 3 | 赛道 + 组别 | ✅ 多模态 / 开源方法榜 |
 | 4 | 方法说明 + 引用 | ✅ §二、§三 |
-| 5 | 在线 Add / Search（HTTPS 公网） | ✅ `https://113.44.133.30/add`、`https://113.44.133.30/search`（Let's Encrypt IP 证书，`commit` = `766faceda4a1`、`config_hash` = `309c69e8bb7b136b`，含 `IMG_MAX_SIDE=1024` 缩图与 `MEMORY_UNIT=round`+`CONTENT_HEADER=1`，见 §九；contract 27/27（含 `/v2` 路由 27/27）、smoke 18/18、replay 幂等+5 次字节一致均走 https 复验） |
+| 5 | 在线 Add / Search（HTTPS 公网） | ✅ `https://113.44.133.30/add`、`https://113.44.133.30/search`（Let's Encrypt IP 证书，`commit` = `9b2be078cca7`、`config_hash` = `309c69e8bb7b136b`，含 `IMG_MAX_SIDE=1024` 缩图与 `MEMORY_UNIT=round`+`CONTENT_HEADER=1`，见 §九；contract 27/27（含 `/v2` 路由 27/27）、smoke 18/18、replay 幂等+5 次字节一致均走 https 复验） |
 | 6 | 鉴权方式声明 | ✅ §一 |
 | 7 | 容量与运行限制 | ✅ §四 |
 | 8 | GitHub 仓库 | ✅ 公开仓库（MIT），代码无凭据 |
-| 9 | 固定 Commit | ✅ `766faceda4a1…`，线上 `/version` 的 `commit` 逐位一致 |
+| 9 | 固定 Commit | ✅ `9b2be078cca7…`，线上 `/version` 的 `commit` 逐位一致 |
 | 10 | 原始工作引用 | ✅ §3.1 |
 | 11 | 方法改动说明 | ✅ §3.2 |
 | 12 | 可公开展示的信息范围 | ✅ 方法说明 / 分类指标 / 架构图 / 代码仓库（公开）；不含 Key、数据样本、原始 query |
@@ -178,7 +178,7 @@ curl -s -H "Authorization: Token $KEY" http://113.44.133.30/version  # commit �
 | Add 地址 | `https://113.44.133.30/add` |
 | Search 地址 | `https://113.44.133.30/search` |
 | 鉴权头 | `Authorization: Token <Memory System Key>`（48 位 hex，随本表私有字段提交） |
-| 固定 Commit | `766faceda4a1dbdee786e6aadcd4b6062c4b6c75` |
+| 固定 Commit | `9b2be078cca7c2aea88a316d836a70b8469727bc` |
 | 配置指纹 | `309c69e8bb7b136b` |
 | 申报并发 | Search **2** / Add **2** |
 | 仓库 | `https://github.com/Zhangbo-cn/mem-pro`（公开，MIT） |
@@ -214,27 +214,26 @@ curl -s -H "Authorization: Token $KEY" http://113.44.133.30/version  # commit �
 | Add API URL | `https://113.44.133.30/add` |
 | Search API URL | `https://113.44.133.30/search` |
 | 鉴权 | `Authorization: Token <Memory System Key>` |
-| 固定 Commit | `766faceda4a1dbdee786e6aadcd4b6062c4b6c75`（线上 `/version` 的 `commit` = `766faceda4a1`，逐位一致） |
+| 固定 Commit | `9b2be078cca7c2aea88a316d836a70b8469727bc`（线上 `/version` 的 `commit` = `9b2be078cca7`，逐位一致） |
 | config_hash | `309c69e8bb7b136b`（线上 `config_hash` 与 `config_hash_v2` 同值；两条路由等价，见下） |
 
-> **线上 = 申报 = `83ec5a35476a`** = tag `v2.0`（`52de409`，smoke **30.77** 的那一版）+ 两处健壮性修复。
-> **修复不改行为**：检索打分、预算、embedding/rerank 参数一个没动，`retrieval` / `budget` 段与
-> 30.77 那次逐项相同；`config_hash` 由 `8b8e31d7bacbafe8` 变为 `309c69e8bb7b136b` 的原因是代码里新增了
-> **默认关闭**的实验旋钮条目（`expand` / `rel_gate` / `date_filter`，全量实测无效，见 README §二十），
-> 它们进了 `info()` 因而进了指纹；关掉状态下输出与排序与 v2.0 完全一致。
+> **线上 = 申报 = `9b2be078cca7c2aea88a316d836a70b8469727bc`** = tag `v2.0`（`52de409`，smoke **30.77** 的那一版）
+> + 三轮健壮性修复。**修复不改评测行为**：检索打分、预算、embedding/rerank 参数一个没动，
+> `retrieval` / `budget` 段与 30.77 那次逐项相同；`config_hash` 由 `8b8e31d7bacbafe8` 变为
+> `309c69e8bb7b136b`，原因是代码里新增了**默认关闭**的实验旋钮条目（`expand` / `rel_gate` /
+> `date_filter`，全量实测无效、见 README §二十），它们进了 `info()` 因而进了指纹。
 >
-> **为什么在 tag 之后要修**（2026-11-01 00:32 那次 Full `teval_5602c1c4174f886f`，跑 1h20m 后失败）：
+> **tag 之后为什么还要动代码**（同一 Run `teval_5602c1c4174f886f` 的三轮失败，全部定位到服务端实现缺陷）：
 >
-> 1. `ADD_API_CONTRACT_MISMATCH · HTTP 422`：服务端只按 `Content-Length` 读请求体，而平台对大 Add
->    使用 `Transfer-Encoding: chunked` → 读 0 字节 → 422（日志里 145 次「请求体为空」）。
->    已支持 chunked；`Content-Length` 路径也改成精确读，读到半截明确报「请求体不完整」。
-> 2. 同一轮 38 次 503 全是 `The read operation timed out`，Add p99 64.5 s / max 287 s：单次 embedding
->    尝试用固定 60 s 超时、不受 12 s 重试预算约束，把连接槽挂死。已改
->    `attempt_timeout = min(EMBED_TIMEOUT, max(6 s, 剩余预算))`。
+> | 轮次 | 失败码 | 根因 | 修复 |
+> |---|---|---|---|
+> | attempt 1 | `ADD_API_CONTRACT_MISMATCH · HTTP 422` | 只按 `Content-Length` 读请求体，平台对大 Add 用 `Transfer-Encoding: chunked` → 读 0 字节 → 422（145 次「请求体为空」） | 支持 chunked；CL 路径精确读，半截明确报「请求体不完整」 |
+> | attempt 2 | `ADD_API_CONTRACT_MISMATCH · HTTP 400` | ① 池里死连接不发 FIN，读超时被当「上游慢」（1,499 次 503）；② 出错后没关连接，残留请求体把下一个请求顶成 400 | ① 超时也判 stale → 作废整池换新连接、单次尝试只取半预算；② `status>=400` 一律 `Connection: close` |
+> | attempt 3 | `SEARCH_HTTP_499 · HTTP 499` | **OOM**：20:43 内核 kill 了 mem-pro（RSS 1.46 GB / 机器 1.7 GB），重启后在途 Search 全断 | ① 图片 Base64 拆到 `blobs` 表（线上迁移 9.52 GB，单用户历史读取 3.00 s→0.051 s）；② 内存闸门罩住 `fetch_user`+排序（默认 3）；③ 分词缓存按 48 MB 限流；④ systemd `MemoryMax=1G` |
 >
-> 修复后线上实测：`contract 27/27`、`smoke 18/18`、`replay` 幂等 + 5 次字节一致；16 并发压测
-> （平台 Full 的并发口径）Add p50 226 ms / p99 1.08 s、Search p50 215 ms / p99 745 ms，
-> 带 626 KB 图片的 Add p99 3.4 s，全部 2xx。详见 README §二十一。
+> 修复后线上实测：最大历史用户（6,614 条）单条 Search **3.5 s**；3 并发（闸门打满）全部 200、
+> **RSS 峰值 431 MB**；`contract 27/27`、`smoke 18/18`、`replay` 幂等 + 5 次字节一致；
+> 16 并发混合压测（160 Add + 160 Search）全部 200、Add p99 1.07 s。
 >
 > 平台提示「不要创建重复 Full、可从断点续跑」——修复部署后**续跑原任务**即可。
 >

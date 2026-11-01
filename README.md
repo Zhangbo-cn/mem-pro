@@ -1081,6 +1081,35 @@ Nov 01 20:40:59 oom-kill: ... openclaw-gateway.service, task=node   ← 连代�
 「平台并发 × 单请求工作集」来设计，而不是按申报值。OOM 的破坏力比 503 大得多——进程重启后
 在途请求全断，直接毁掉整轮 Full。
 
+### 23.1 第二轮归因：图片内联 + 分词缓存（2026-11-01 深夜）
+
+闸门加上后本地复现仍然 OOM，于是逐层量了内存：
+
+| 环节 | 实测 | 结论 |
+|---|---|---|
+| `SELECT id,text,ts,created_at,seq,vec,img_sig … WHERE user_id=?`（6,614 行） | **5.32 s** | Base64 图片内联在 `memories` 行里（该用户 463 MB，全库 **9.5 GB**），SQLite 每次读都要跳过 overflow 页 |
+| `retrieve._TOK_CACHE` | 6,605 条 ≈ **120 MB/用户** | 按「10 万条」限流，理论允许 1.8 GB |
+
+三处修复：
+
+1. **图片拆表**：新增 `blobs(mem_id, images)`，写入时图片进 blobs、`memories.images` 恒 `'[]'`；
+   `fetch_images` 先查 blobs 再回落历史内联行。`tools/migrate_blobs.py` 把线上 **9.52 GB / 55,263 行**
+   迁完（688 s），迁后单用户历史读取 **3.00 s → 0.051 s**。
+2. **内存闸门上移**：罩住 `store.fetch_user` + `retrieve.run` 整段（embedding 网络调用留在闸门外，
+   避免被 12 s 上游超时占死），默认 `SEARCH_RANK_CONCURRENCY=3`。
+3. **分词缓存按字节限流**：`TOK_CACHE_MB=48`（LRU）+ 条数兜底，取代「10 万条」。
+
+线上实测（最大历史用户 6,614 行、top_k=100）：
+
+| 场景 | 修复前 | 修复后 |
+|---|---|---|
+| 单条 Search | 80 s+ / 超时 | **3.5 s** |
+| 3 并发 Search（闸门打满） | OOM（RSS 1.46 GB 被内核杀） | 全部 200、~3.9 s、**RSS 峰值 431 MB** |
+| 单用户历史读取 | 3.00 s | **0.051 s** |
+
+另外给 systemd 加了 `MemoryMax=1G / MemoryHigh=768M / OOMPolicy=continue`：万一再失控，
+只会杀掉我们自己的服务，不会连 sshd 与代理进程一起拖死机器。
+
 ---
 
 ## 许可
