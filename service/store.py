@@ -43,6 +43,15 @@ CREATE TABLE IF NOT EXISTS memories(
 );
 CREATE INDEX IF NOT EXISTS idx_mem_user ON memories(user_id, seq);
 
+-- 图片字节单独存：Search 要读「某用户全部记忆」，如果把 Base64 图片留在 memories 行内，
+-- SQLite 每次都要跳过这些 overflow 页——实测 6,614 行 / 463 MB 图片的一次读取要 5.3 s，
+-- 平台 16 并发 Search 直接把它变成 80 s+，再叠加内存放大就 OOM（2026-11-01 的 499）。
+-- 拆表后 Search 只读小行（id/text/ts/vec…），图片只按最终返回的 ≤3 条去 blobs 取。
+CREATE TABLE IF NOT EXISTS blobs(
+  mem_id  TEXT PRIMARY KEY,
+  images  TEXT NOT NULL
+);
+
 CREATE TABLE IF NOT EXISTS idem(
   user_id    TEXT NOT NULL,
   request_id TEXT NOT NULL,
@@ -132,15 +141,13 @@ def add_memories(items: list[dict]) -> None:
             c.executemany(
                 """INSERT OR IGNORE INTO memories
                    (id,user_id,session_id,request_id,seq,text,images,ts,created_at,vec,img_sig)
-                   VALUES(:id,:user_id,:session_id,:request_id,:seq,:text,:images,:ts,:created_at,:vec,:img_sig)""",
-                [
-                    {
-                        **it,
-                        "images": json.dumps(it.get("images") or [], ensure_ascii=False),
-                        "img_sig": it.get("img_sig") or "",
-                    }
-                    for it in items
-                ],
+                   VALUES(:id,:user_id,:session_id,:request_id,:seq,:text,'[]',:ts,:created_at,:vec,:img_sig)""",
+                [{**it, "img_sig": it.get("img_sig") or ""} for it in items],
+            )
+            c.executemany(
+                "INSERT OR REPLACE INTO blobs(mem_id, images) VALUES(?,?)",
+                [(it["id"], json.dumps(it.get("images") or [], ensure_ascii=False))
+                 for it in items if it.get("images")],
             )
         inserted = [it for it in items if it["id"] not in existing]
         for user_id in users:
@@ -249,12 +256,19 @@ def fetch_images(ids: list[str], user_id: str) -> dict[str, list[str]]:
         for start in range(0, len(ids), 400):
             chunk = ids[start : start + 400]
             marks = ",".join("?" * len(chunk))
-            rows = c.execute(
-                f"SELECT id,images FROM memories WHERE user_id=? AND id IN ({marks})",
-                (user_id, *chunk),
-            ).fetchall()
-            for mid, raw in rows:
+            for mid, raw in c.execute(
+                    f"SELECT mem_id,images FROM blobs WHERE mem_id IN ({marks})", chunk).fetchall():
                 out[mid] = json.loads(raw)
+            # 兼容未迁移的历史行（images 仍内联在 memories 里）
+            rest = [i for i in chunk if i not in out]
+            if not rest:
+                continue
+            marks = ",".join("?" * len(rest))
+            for mid, raw in c.execute(
+                    f"SELECT id,images FROM memories WHERE user_id=? AND id IN ({marks})",
+                    (user_id, *rest)).fetchall():
+                if raw and raw != "[]":
+                    out[mid] = json.loads(raw)
     return out
 
 

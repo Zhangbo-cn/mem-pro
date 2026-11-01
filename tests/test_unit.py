@@ -4,6 +4,7 @@
 """
 from __future__ import annotations
 
+import json
 import os
 import struct
 import sys
@@ -460,7 +461,6 @@ class EmbedTest(unittest.TestCase):
         self.assertLessEqual(len(seen), 5, f"最多 5 次尝试：{seen}")
         self.assertEqual(seen, sorted(seen, reverse=True), f"剩余预算递减 ⇒ 超时上限单调不增：{seen}")
 
-
 class HttpPoolTest(unittest.TestCase):
     """连接池必须真的复用连接：每次新建 TCP+TLS 是实测 p95 飙到秒级的元凶。"""
 
@@ -803,6 +803,36 @@ class StoreTest(unittest.TestCase):
 
     def test_ping(self):
         self.assertTrue(store.ping())
+
+    def test_images_are_stored_out_of_line_but_still_returned(self):
+        """图片必须存进 blobs 表、memories 行里留空：Search 读整用户历史时不能被图片拖慢。
+
+        回归背景：2026-11-01 的 SEARCH_HTTP_499 —— 6,614 行 / 463 MB 内联图片的读取要 5.3 s，
+        16 并发 Search 放大成 80 s+ 并 OOM。
+        """
+        g = globals()
+        saved = None
+        try:
+            with tempfile.TemporaryDirectory() as tmp:
+                saved = store.DB_PATH
+                store.DB_PATH = os.path.join(tmp, "blobs.db")
+                store.init()
+                img = "data:image/png;base64," + "A" * 200
+                store.add_memories([{
+                    "id": "m1", "user_id": "u1", "session_id": "s1", "request_id": "r1",
+                    "seq": None, "text": "带图记忆", "images": [img], "ts": 1,
+                    "created_at": "2026-01-01T00:00:00Z", "vec": embed.pack(embed.embed(["x"])[0]),
+                    "img_sig": "sig",
+                }])
+                with store._conn() as c:
+                    inline = c.execute("SELECT images FROM memories WHERE id='m1'").fetchone()[0]
+                    blob = c.execute("SELECT images FROM blobs WHERE mem_id='m1'").fetchone()[0]
+                self.assertEqual(inline, "[]", "memories 行里不能再留 Base64")
+                self.assertEqual(json.loads(blob), [img])
+                self.assertEqual(store.fetch_images(["m1"], "u1"), {"m1": [img]})
+        finally:
+            if saved is not None:
+                store.DB_PATH = saved
 
 
 class TemporalTest(unittest.TestCase):
