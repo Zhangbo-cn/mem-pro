@@ -619,6 +619,62 @@ class HttpPoolTest(unittest.TestCase):
             srv.shutdown()
             srv.server_close()
 
+    def test_pooled_connection_timeout_is_retried_on_fresh_connection(self):
+        """池里的死连接不发 FIN：写成功、读超时。这种情况也必须换新连接重试。
+
+        回归背景：2026-11-01 的 Full 里有 1,499 次 503，全部是
+        `embedding failed: The read operation timed out`；重试仍从池里拿死连接、
+        预算又被超时吃光 → 直接放弃。
+        """
+        import http_pool
+
+        class Resp:
+            status = 200
+            will_close = False
+
+            def read(self):
+                return b'{"ok": true}'
+
+        class Conn:
+            sock = object()
+
+            def __init__(self, fail):
+                self.fail, self.closed = fail, False
+
+            def request(self, *a, **k):
+                if self.fail:
+                    raise TimeoutError("The read operation timed out")
+
+            def getresponse(self):
+                return Resp()
+
+            def close(self):
+                self.closed = True
+
+        stale, fresh = Conn(True), Conn(False)
+        released, flushed = [], []
+
+        class Pool:
+            def acquire(self, timeout):
+                return (stale, True) if not released else (fresh, False)
+
+            def release(self, conn, reuse):
+                released.append((conn, reuse))
+
+            def flush_idle(self):
+                flushed.append(True)
+                return 1
+
+        saved = http_pool._pool_for
+        try:
+            http_pool._pool_for = lambda url, size=None: Pool()
+            self.assertEqual(http_pool.post("http://x/y", b"{}", {}, 5.0), b'{"ok": true}')
+        finally:
+            http_pool._pool_for = saved
+        self.assertTrue(flushed, "超时后应作废整池")
+        self.assertEqual(released[0], (stale, False), "死连接必须丢弃")
+        self.assertEqual(released[-1], (fresh, True), "新连接正常归还复用")
+
 
 class StoreTest(unittest.TestCase):
     def setUp(self):

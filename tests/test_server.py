@@ -465,6 +465,32 @@ class ServerTest(unittest.TestCase):
         self.assertIn(b"422", raw.split(b"\r\n")[0])
         self.assertIn("请求体不完整".encode(), raw)
 
+    def test_error_response_closes_connection(self):
+        """出错时必须关连接：请求体没读完时复用会把残留字节当下一个请求 → 400。
+
+        回归背景：2026-11-01 续跑失败在 ADD_API_CONTRACT_MISMATCH · HTTP 400，
+        Caddy 日志里 30 个 /add 400，响应体是 ~409 字节的解析错误页（不是我们的 JSON）。
+        """
+        body = b'{"request_id": "x"'          # 故意坏 JSON
+        req = (b"POST /add HTTP/1.1\r\nHost: 127.0.0.1\r\n"
+               b"Authorization: Token " + KEY.encode() + b"\r\n"
+               b"Content-Type: application/json\r\n"
+               b"Content-Length: " + str(len(body)).encode() + b"\r\n\r\n" + body)
+        with socket.create_connection(("127.0.0.1", self.port), timeout=10) as s:
+            s.sendall(req)
+            raw = b""
+            while b"\r\n\r\n" not in raw:
+                part = s.recv(65536)
+                if not part:
+                    break
+                raw += part
+            head = raw.split(b"\r\n\r\n")[0]
+            self.assertIn(b"422", head.split(b"\r\n")[0])
+            self.assertIn(b"Connection: close", head)
+            # 服务端应主动关连接：再读应当立刻得到 EOF
+            s.settimeout(5)
+            self.assertEqual(s.recv(65536), b"")
+
 
 class LogHygieneTest(unittest.TestCase):
     """合规：评测数据只能用于完成当前任务 —— 日志里不许落请求正文。

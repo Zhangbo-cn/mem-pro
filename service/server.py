@@ -528,6 +528,13 @@ class Handler(BaseHTTPRequestHandler):
         if len(payload) > MAX_RESPONSE_BYTES:  # 理论不可达；兜底防止契约违规
             payload = json.dumps({"data": []}, ensure_ascii=False).encode("utf-8")
             code = 200
+        if code >= 400:
+            # 出错时请求体很可能没读完（「请求体过大」「请求体不完整」「Content-Length 非法」等），
+            # keep-alive 复用会把残留字节当成下一个请求 → http.server 直接回 400。
+            # 2026-11-01 那次续跑就是这样失败的：Caddy 日志里 30 个 /add 400（响应体 ~409 B 的解析错误页），
+            # 平台随即判 ADD_API_CONTRACT_MISMATCH · HTTP 400。出错一律关连接，彻底消掉连接错位。
+            self.close_connection = True
+            headers = {**(headers or {}), "Connection": "close"}
         self.send_response(code)
         self.send_header("Content-Type", "application/json; charset=utf-8")
         self.send_header("Content-Length", str(len(payload)))

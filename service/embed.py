@@ -116,7 +116,9 @@ def _call_api_unlocked(texts: list[str]) -> list[list[float]]:
         # 12 个槽位被几个挂住的连接占死，Add 的 p99 直接飙到几十秒（2026-11-01 那次 Full：
         # Add p99 64.5s / max 287s，平台侧超时后中断 → 我们读出半截请求体 → 422）。
         budget_left = deadline - time.monotonic()
-        attempt_timeout = min(EMBED_TIMEOUT, max(EMBED_ATTEMPT_MIN, budget_left))
+        # 一半预算给这一次尝试：这样「第一次就超时」时还有余量做一次重试
+        # （超时多半是池里的死连接，换新连接后通常 1s 内就返回）。
+        attempt_timeout = min(EMBED_TIMEOUT, max(EMBED_ATTEMPT_MIN, budget_left / 2.0))
         try:
             raw = http_pool.post(
                 f"{BASE}/embeddings", body,

@@ -138,8 +138,13 @@ def post(url: str, body: bytes, headers: dict, timeout: float,
 
 
 # 「对端已经不声不响把连接关了」：浏览器/urllib 里统称 stale connection。
-# RemoteDisconnected 是 ConnectionResetError 的子类，这里一并列出以示意图。
-_STALE_CONNECTION = (http.client.RemoteDisconnected, ConnectionResetError, BrokenPipeError)
+# RemoteDisconnected 是 ConnectionResetError 的子类，这里一并列出以示意。
+# 关键一条：**读超时也要算**。池里被上游悄悄丢掉的连接不会发 FIN，写请求能成功、
+# 读响应就一直等到超时（线上表现为 `The read operation timed out`，占 Full 期间 2% 的
+# Add）。旧逻辑把它当「上游慢」重试，但重试仍从池里拿连接、预算又被这次超时吃光 → 503。
+# 现在只要「超时 + 连接来自池」就作废整池、换新连接重试一次（实测新连接 0.2~1s 就好）。
+_STALE_CONNECTION = (http.client.RemoteDisconnected, ConnectionResetError, BrokenPipeError,
+                     TimeoutError)
 
 
 def _exchange(conn, path: str, body: bytes, headers: dict):
