@@ -175,9 +175,15 @@ def tokens(text: str) -> list[str]:
 
 
 # ---------- BM25 ----------
-_TOK_CACHE: dict[tuple[int, int], list[str]] = {}
+# 分词缓存：按「估算字节」限流，而不是条数。
+# 一条 6,600 记忆的用户会塞进约 6,600 条缓存、每条约 300 个 token 字符串（≈18 KB），
+# 单用户就 ~120 MB；原来按 10 万条计上限，等于允许 1.8 GB。2026-11-01 的 OOM
+# （Search 16 并发 → RSS 1.46 GB 被内核杀）主要就是它 + 每请求的 docs/索引叠加。
+_TOK_CACHE: "OrderedDict[tuple[int, int], tuple[list[str], int]]" = OrderedDict()
 _TOK_LOCK = threading.Lock()
-_TOK_MAX = 100_000
+_TOK_MAX = 100_000                                    # 条数兜底（不再单独依赖）
+_TOK_BYTES_MAX = max(1, int(float(os.environ.get("TOK_CACHE_MB", "48")) * 1024 * 1024))
+_TOK_BYTES = 0
 _SEARCH_INDEX_MIN_DOCS = 32
 _SEARCH_INDEX_MAX_ENTRIES = 16
 _SEARCH_INDEX_MAX_BYTES = max(1, int(float(os.environ.get("RANK_INDEX_MAX_MB", "64")) * 1024 * 1024))
@@ -193,17 +199,23 @@ def doc_tokens(d: dict) -> list[str]:
     `id` would go stale if an id is ever reused with different text (the tests
     do exactly that, and a rebuild could otherwise disagree with the fallback).
     """
+    global _TOK_BYTES
     text = d["text"]
     key = (len(text), hash(text))
     with _TOK_LOCK:
         got = _TOK_CACHE.get(key)
-    if got is not None:
-        return got
+        if got is not None:
+            _TOK_CACHE.move_to_end(key)
+            return got[0]
     out = tokens(text)
+    size = 64 + sum(56 + len(t) for t in out)          # 估算：list 元素 + str 对象开销
     with _TOK_LOCK:
-        if len(_TOK_CACHE) >= _TOK_MAX:
-            _TOK_CACHE.clear()
-        _TOK_CACHE[key] = out
+        if len(_TOK_CACHE) >= _TOK_MAX or _TOK_BYTES + size > _TOK_BYTES_MAX:
+            while _TOK_CACHE and (len(_TOK_CACHE) >= _TOK_MAX or _TOK_BYTES + size > _TOK_BYTES_MAX):
+                _, (_, old_size) = _TOK_CACHE.popitem(last=False)
+                _TOK_BYTES -= old_size
+        _TOK_CACHE[key] = (out, size)
+        _TOK_BYTES += size
     return out
 
 
