@@ -16,9 +16,9 @@
 |---|---|
 | 系统名称 | **mem-pro** |
 | 版本号 | `mem-pro/0.2.0`；平台 **Version name = `v1.0.0`**（沿用已有 Key 的版本，不新增版本；Full 受理后冻结，不得更换） |
-| 固定 Commit | `83ec5a35476ae472ce0a74390a26de298105c1e7`（tag `v2.0` + 收包/超时两处健壮性修复；线上 `/version` 的 `commit` = `83ec5a35476a`，与之逐位一致） |
+| 固定 Commit | `766faceda4a1dbdee786e6aadcd4b6062c4b6c75`（tag `v2.0` + 收包/超时/连接三处健壮性修复；线上 `/version` 的 `commit` = `766faceda4a1`，与之逐位一致） |
 | 配置指纹 | `309c69e8bb7b136b`（16 位；线上 `/version` 的 `config_hash` 与 `config_hash_v2` 均为本值；改任何排序参数或 `MAX_IMAGES` / `MAX_RESULTS` / `IMG_MAX_SIDE` / `MEMORY_UNIT` / `CONTENT_HEADER` 都会变） |
-| 公开仓库 | https://github.com/Zhangbo-cn/mem-pro （**公开**，MIT 许可；仓库内无任何凭据；评测版本以上表**固定 Commit `83ec5a35476a`** 为准，仓库里 `git checkout 83ec5a35476a` 即线上代码） |
+| 公开仓库 | https://github.com/Zhangbo-cn/mem-pro （**公开**，MIT 许可；仓库内无任何凭据；评测版本以上表**固定 Commit `766faceda4a1`** 为准，仓库里 `git checkout 766faceda4a1` 即线上代码） |
 | 联系人 / 团队 | **张播（个人参赛）**；电话/邮箱与报名表一致（不写入仓库，避免仓库扩散联系信息） |
 | 赛道 / 组别 | 多模态记忆赛道 / **开源方法榜**（组别只能选一个） |
 | 接口地址 | **`https://113.44.133.30/add`**、**`https://113.44.133.30/search`**（IP 直签 Let's Encrypt，无需域名/备案；`http://` 308 跳 https，Caddy 需 `default_sni`，见 `deploy/REMOTE_OPS.md` §1.4.1） |
@@ -148,11 +148,11 @@ curl -s -H "Authorization: Token $KEY" http://113.44.133.30/version  # commit �
 | 2 | 联系人 / 机构 | ✅ 张播（个人）；联系方式见报名表 |
 | 3 | 赛道 + 组别 | ✅ 多模态 / 开源方法榜 |
 | 4 | 方法说明 + 引用 | ✅ §二、§三 |
-| 5 | 在线 Add / Search（HTTPS 公网） | ✅ `https://113.44.133.30/add`、`https://113.44.133.30/search`（Let's Encrypt IP 证书，`commit` = `83ec5a35476a`、`config_hash` = `309c69e8bb7b136b`，含 `IMG_MAX_SIDE=1024` 缩图与 `MEMORY_UNIT=round`+`CONTENT_HEADER=1`，见 §九；contract 27/27（含 `/v2` 路由 27/27）、smoke 18/18、replay 幂等+5 次字节一致均走 https 复验） |
+| 5 | 在线 Add / Search（HTTPS 公网） | ✅ `https://113.44.133.30/add`、`https://113.44.133.30/search`（Let's Encrypt IP 证书，`commit` = `766faceda4a1`、`config_hash` = `309c69e8bb7b136b`，含 `IMG_MAX_SIDE=1024` 缩图与 `MEMORY_UNIT=round`+`CONTENT_HEADER=1`，见 §九；contract 27/27（含 `/v2` 路由 27/27）、smoke 18/18、replay 幂等+5 次字节一致均走 https 复验） |
 | 6 | 鉴权方式声明 | ✅ §一 |
 | 7 | 容量与运行限制 | ✅ §四 |
 | 8 | GitHub 仓库 | ✅ 公开仓库（MIT），代码无凭据 |
-| 9 | 固定 Commit | ✅ `83ec5a35476a…`，线上 `/version` 的 `commit` 逐位一致 |
+| 9 | 固定 Commit | ✅ `766faceda4a1…`，线上 `/version` 的 `commit` 逐位一致 |
 | 10 | 原始工作引用 | ✅ §3.1 |
 | 11 | 方法改动说明 | ✅ §3.2 |
 | 12 | 可公开展示的信息范围 | ✅ 方法说明 / 分类指标 / 架构图 / 代码仓库（公开）；不含 Key、数据样本、原始 query |
@@ -178,7 +178,7 @@ curl -s -H "Authorization: Token $KEY" http://113.44.133.30/version  # commit �
 | Add 地址 | `https://113.44.133.30/add` |
 | Search 地址 | `https://113.44.133.30/search` |
 | 鉴权头 | `Authorization: Token <Memory System Key>`（48 位 hex，随本表私有字段提交） |
-| 固定 Commit | `83ec5a35476ae472ce0a74390a26de298105c1e7` |
+| 固定 Commit | `766faceda4a1dbdee786e6aadcd4b6062c4b6c75` |
 | 配置指纹 | `309c69e8bb7b136b` |
 | 申报并发 | Search **2** / Add **2** |
 | 仓库 | `https://github.com/Zhangbo-cn/mem-pro`（公开，MIT） |
@@ -214,7 +214,7 @@ curl -s -H "Authorization: Token $KEY" http://113.44.133.30/version  # commit �
 | Add API URL | `https://113.44.133.30/add` |
 | Search API URL | `https://113.44.133.30/search` |
 | 鉴权 | `Authorization: Token <Memory System Key>` |
-| 固定 Commit | `83ec5a35476ae472ce0a74390a26de298105c1e7`（线上 `/version` 的 `commit` = `83ec5a35476a`，逐位一致） |
+| 固定 Commit | `766faceda4a1dbdee786e6aadcd4b6062c4b6c75`（线上 `/version` 的 `commit` = `766faceda4a1`，逐位一致） |
 | config_hash | `309c69e8bb7b136b`（线上 `config_hash` 与 `config_hash_v2` 同值；两条路由等价，见下） |
 
 > **线上 = 申报 = `83ec5a35476a`** = tag `v2.0`（`52de409`，smoke **30.77** 的那一版）+ 两处健壮性修复。
