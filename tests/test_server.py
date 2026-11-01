@@ -478,18 +478,20 @@ class ServerTest(unittest.TestCase):
                b"Content-Length: " + str(len(body)).encode() + b"\r\n\r\n" + body)
         with socket.create_connection(("127.0.0.1", self.port), timeout=10) as s:
             s.sendall(req)
-            raw = b""
-            while b"\r\n\r\n" not in raw:
-                part = s.recv(65536)
-                if not part:
-                    break
-                raw += part
-            head = raw.split(b"\r\n\r\n")[0]
-            self.assertIn(b"422", head.split(b"\r\n")[0])
-            self.assertIn(b"Connection: close", head)
-            # 服务端应主动关连接：再读应当立刻得到 EOF
             s.settimeout(5)
-            self.assertEqual(s.recv(65536), b"")
+            raw = b""
+            try:
+                # 一直读到 EOF：服务端若还保持 keep-alive，这里会卡到 5s 超时
+                while True:
+                    part = s.recv(65536)
+                    if not part:
+                        break
+                    raw += part
+            except socket.timeout:
+                self.fail("服务端没有关闭连接（错误响应必须带 Connection: close）")
+        head = raw.split(b"\r\n\r\n")[0]
+        self.assertIn(b"422", head.split(b"\r\n")[0])
+        self.assertIn(b"Connection: close", head)
 
 
 class LogHygieneTest(unittest.TestCase):
