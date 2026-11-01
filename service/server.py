@@ -67,7 +67,7 @@ MAX_INFLIGHT = int(os.environ.get("MAX_INFLIGHT", "64"))
 # 若 16 个搜索各建一份 → 峰值 1 GB+，在 1.7 GB 的机器上直接 OOM
 # （2026-11-01 12:43Z 实测：mem-pro RSS 1.46 GB 被内核 oom-kill，随后 Search 499、该轮 Full 失败）。
 # 这里给「重排序阶段」单独设并发闸门：内存峰值 ≈ 闸门值 × 单用户工作集，与平台并发解耦。
-SEARCH_RANK_CONCURRENCY = int(os.environ.get("SEARCH_RANK_CONCURRENCY", "4"))
+SEARCH_RANK_CONCURRENCY = int(os.environ.get("SEARCH_RANK_CONCURRENCY", "3"))
 _RANK_GATE = (threading.BoundedSemaphore(SEARCH_RANK_CONCURRENCY)
               if SEARCH_RANK_CONCURRENCY > 0 else None)
 STARTUP_CHECK = os.environ.get("STARTUP_CHECK", "1") == "1"
@@ -465,16 +465,7 @@ def do_search(req: dict, timings: dict | None = None) -> dict:
     if APPEND_OPTIONS and isinstance(req.get("options"), list):
         qtext += "\n" + "\n".join(str(o) for o in req["options"])
 
-    started = time.perf_counter()
-    store_stats = {}
-    docs = store.fetch_user(req["user_id"], stats=store_stats)
-    timings["search_store_ms"] = round((time.perf_counter() - started) * 1000, 2)
-    timings["search_store_cache_hit"] = store_stats.get("cache_hit", False)
-    timings["search_docs"] = len(docs)
-    if not docs:
-        timings["search_results"] = 0
-        return {"data": []}
-
+    # 先把 query 向量算出来（网络调用，不进内存闸门，否则闸门被 12s 的上游超时占死）
     started = time.perf_counter()
     try:
         qvec = embed.embed([qtext])[0]
@@ -483,18 +474,30 @@ def do_search(req: dict, timings: dict | None = None) -> dict:
     finally:
         timings["search_embed_ms"] = round((time.perf_counter() - started) * 1000, 2)
 
-    rank_stats = {}
-    started = time.perf_counter()
+    # 内存闸门必须罩住「把整个用户历史读进内存 + 建索引 + 打分」这一整段：
+    # 单用户 6,600 条记忆的 docs 列表就 ~60-80 MB，如果只罩 retrieve.run，
+    # store.fetch_user() 已经在闸门外把内存吃掉了（实测闸门只罩 run 时 RSS 仍冲到 1.37 GB）。
+    store_stats, rank_stats = {}, {}
+    gate = _RANK_GATE
+    if gate is not None:
+        gate.acquire()
     try:
-        if _RANK_GATE is not None:
-            with _RANK_GATE:      # 内存闸门：见 SEARCH_RANK_CONCURRENCY
-                ranked = retrieve.run(qvec, qtext, docs, limit=req["top_k"],
-                                      cache_key=(store.DB_PATH, req["user_id"]), stats=rank_stats)
-        else:
-            ranked = retrieve.run(qvec, qtext, docs, limit=req["top_k"],
-                                  cache_key=(store.DB_PATH, req["user_id"]), stats=rank_stats)
-    finally:
+        started = time.perf_counter()
+        docs = store.fetch_user(req["user_id"], stats=store_stats)
+        timings["search_store_ms"] = round((time.perf_counter() - started) * 1000, 2)
+        timings["search_store_cache_hit"] = store_stats.get("cache_hit", False)
+        timings["search_docs"] = len(docs)
+        if not docs:
+            timings["search_results"] = 0
+            return {"data": []}
+
+        started = time.perf_counter()
+        ranked = retrieve.run(qvec, qtext, docs, limit=req["top_k"],
+                              cache_key=(store.DB_PATH, req["user_id"]), stats=rank_stats)
         timings["search_rank_ms"] = round((time.perf_counter() - started) * 1000, 2)
+    finally:
+        if gate is not None:
+            gate.release()
     timings["search_index_cache_hit"] = rank_stats.get("index_cache_hit", False)
     if rank_stats.get("index_extended"):
         timings["search_index_extended"] = True
