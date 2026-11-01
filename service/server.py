@@ -62,6 +62,14 @@ MAX_IMAGES = int(os.environ.get("MAX_IMAGES", str(budget.MAX_IMAGES)))
 # R@100 0.70→0.35。两种口径下最优值相反，官方答复前默认不收窄（见 README §十六）。
 MAX_RESULTS = int(os.environ.get("MAX_RESULTS", "0"))
 MAX_INFLIGHT = int(os.environ.get("MAX_INFLIGHT", "64"))
+# 重排序（稠密矩阵 + BM25 索引）是内存大头：一个 6,600 条记忆的用户，
+# docs 列表约 40 MB、float32 矩阵再 27 MB。平台按 Add/Search 16 并发压，
+# 若 16 个搜索各建一份 → 峰值 1 GB+，在 1.7 GB 的机器上直接 OOM
+# （2026-11-01 12:43Z 实测：mem-pro RSS 1.46 GB 被内核 oom-kill，随后 Search 499、该轮 Full 失败）。
+# 这里给「重排序阶段」单独设并发闸门：内存峰值 ≈ 闸门值 × 单用户工作集，与平台并发解耦。
+SEARCH_RANK_CONCURRENCY = int(os.environ.get("SEARCH_RANK_CONCURRENCY", "4"))
+_RANK_GATE = (threading.BoundedSemaphore(SEARCH_RANK_CONCURRENCY)
+              if SEARCH_RANK_CONCURRENCY > 0 else None)
 STARTUP_CHECK = os.environ.get("STARTUP_CHECK", "1") == "1"
 APPEND_OPTIONS = os.environ.get("APPEND_OPTIONS", "0") == "1"
 # 向量化时拼接同一 Add 内前后各 N 条消息作为上下文（0=关闭）；只影响向量，不影响返回正文
@@ -99,6 +107,20 @@ def _commit() -> str:
     except (OSError, subprocess.SubprocessError):
         pass
     return "unknown"
+
+
+def _mem_info() -> dict:
+    """进程内存与重排闸门（/version 披露，用来盯 OOM 风险）。"""
+    out = {"rank_gate": SEARCH_RANK_CONCURRENCY}
+    try:
+        with open("/proc/self/status", encoding="utf-8") as fh:
+            for line in fh:
+                if line.startswith(("VmRSS:", "VmHWM:")):
+                    key = "rss_kb" if line.startswith("VmRSS") else "hwm_kb"
+                    out[key] = int(line.split()[1])
+    except OSError:
+        pass
+    return out
 
 
 _RUNTIME_COUNTERS = ("calls", "fails", "degraded", "cooldown_skips")
@@ -464,8 +486,13 @@ def do_search(req: dict, timings: dict | None = None) -> dict:
     rank_stats = {}
     started = time.perf_counter()
     try:
-        ranked = retrieve.run(qvec, qtext, docs, limit=req["top_k"],
-                              cache_key=(store.DB_PATH, req["user_id"]), stats=rank_stats)
+        if _RANK_GATE is not None:
+            with _RANK_GATE:      # 内存闸门：见 SEARCH_RANK_CONCURRENCY
+                ranked = retrieve.run(qvec, qtext, docs, limit=req["top_k"],
+                                      cache_key=(store.DB_PATH, req["user_id"]), stats=rank_stats)
+        else:
+            ranked = retrieve.run(qvec, qtext, docs, limit=req["top_k"],
+                                  cache_key=(store.DB_PATH, req["user_id"]), stats=rank_stats)
     finally:
         timings["search_rank_ms"] = round((time.perf_counter() - started) * 1000, 2)
     timings["search_index_cache_hit"] = rank_stats.get("index_cache_hit", False)
@@ -666,6 +693,7 @@ class Handler(BaseHTTPRequestHandler):
                                         "embed": embed.info(),
                                         "caption": caption.info(),
                                         "max_results": MAX_RESULTS,
+                                        "memory": _mem_info(),
                                         "skipped_parts": dict(_SKIPPED),
                                         "retrieval": retrieve.info()})
             self._log(200, started)

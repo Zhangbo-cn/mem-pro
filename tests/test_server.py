@@ -493,6 +493,16 @@ class ServerTest(unittest.TestCase):
         self.assertIn(b"422", head.split(b"\r\n")[0])
         self.assertIn(b"Connection: close", head)
 
+    def test_version_discloses_memory_and_rank_gate(self):
+        """/version 要报进程内存与重排闸门：2026-11-01 的 OOM（RSS 1.46 GB 被 kill）
+        就是靠盯这个指标提前发现的。"""
+        v = self._get(self.base, "/version")
+        self.assertIn("memory", v)
+        self.assertGreater(v["memory"]["rss_kb"], 0)
+        self.assertGreaterEqual(v["memory"]["rank_gate"], 0)
+        self.assertGreaterEqual(v["memory"]["hwm_kb"], v["memory"]["rss_kb"])
+
+
 
 class LogHygieneTest(unittest.TestCase):
     """合规：评测数据只能用于完成当前任务 —— 日志里不许落请求正文。

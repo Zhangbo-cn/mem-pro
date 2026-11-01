@@ -12,7 +12,7 @@ Agent Memory Leaderboard（记忆之巅）**多模态记忆赛道 / 开源方法
 | 项 | 状态 | 说明 |
 |---|---|---|
 | 契约自检 | ✅ **27 / 27** | `tools/contract_check.py`，覆盖 11 类官方约束 |
-| 自动化测试 | ✅ **115 项** | `make test`：API 端到端、融合/时态回归、缓存、精排降级、多模态去重、caption 缓存 |
+| 自动化测试 | ✅ **116 项** | `make test`：API 端到端、融合/时态回归、缓存、精排降级、多模态去重、caption 缓存 |
 | 幂等 / 确定性 | ✅ | 并发重放只写一次；Search 响应字节级可复现（索引与非索引路径逐位一致） |
 | 多模态 | ✅ 可用 | 内联 Base64 解析/存储/回传；图片指纹参与去重；可选 `gpt-4o-mini` 生成图片描述并持久缓存（见 §十四） |
 | 部署物料 | ✅ | Dockerfile / compose（透明透传全部 `.env`）/ Caddy / systemd / **GitHub Actions CI（3.10 + 3.12 双跑，numpy 与纯标准库两条路径）** |
@@ -59,7 +59,7 @@ curl -s -X POST localhost:8080/search -H 'Content-Type: application/json' \
 一键验证（自动起临时服务 + 契约 + 复现性 + smoke）：
 
 ```bash
-make test      # 115 项单元/端到端测试
+make test      # 116 项单元/端到端测试
 make check     # contract 27/27 + replay + local smoke
 ```
 
@@ -188,7 +188,7 @@ Authentication `Authorization: Token`、Memory System Key = 你生成的那个�
 | `make init` / `tools/doctor.py --init` | 生成 `service/.env`（随机 key，600 权限） |
 | `make doctor` | 配置体检：模式/Key/连通性/SQLite/端口/鉴权/精排 |
 | `make run` | 启动服务（自动加载 `.env`） |
-| `make test` | 115 项单元 + 端到端测试 |
+| `make test` | 116 项单元 + 端到端测试 |
 | `make check` | 临时服务上跑契约 27 项 + replay + smoke |
 | `make contract` / `make replay` | 对已启动服务做契约 / 确定性检查 |
 | `make smoke URL=https://... KEY=...` | 线上 smoke（18 项） |
@@ -1047,6 +1047,39 @@ Full 是近 5,000 个实例、上千次 Add，任何「只在长尾出现」的�
 | 新增 2 项回归测试 | 池内连接超时 → 作废整池换新连接重试；错误响应必须关连接（raw socket 验证 EOF） |
 
 `config_hash` 未变（`309c69e8bb7b136b`）。
+
+---
+
+## 二十三、Full 第三次失败（HTTP 499）的复盘：OOM（2026-11-01 21:17）
+
+**现场**：attempt 3 跑完 Add 阶段进入 Search，21:17:26 失败于 `SEARCH_HTTP_499 · HTTP 499`
+（499 = 客户端（平台）先关连接）。该轮窗口内 `/search` 延迟曲线离谱：p50 从 0.9 s 一路涨到
+**395 s / 1087 s**，p99 出现 **2,716 s（45 分钟）**。
+
+**根因：服务进程被内核 OOM 杀掉**
+
+```
+Nov 01 20:43:47 oom-kill: task_memcg=/system.slice/mem-pro.service, task=python3
+                anon-rss:1463324kB   ← 1.46 GB
+Nov 01 20:40:59 oom-kill: ... openclaw-gateway.service, task=node   ← 连代理进程一起被杀
+```
+
+机器只有 1,775 MB 内存；2.7 万条/用户的历史（库 11 GB、28.9 万行、单用户最多 6,614 行）下，
+**单个用户的工作集就约 70 MB**（docs 列表 ~40 MB + float32 矩阵 27 MB）。
+平台按 Search 16 并发压 → 16 × 70 MB ≈ 1.1 GB，叠加缓存与 Python 开销 → 触发全局 OOM。
+
+**修法（内存与平台并发解耦）**：
+
+- `SEARCH_RANK_CONCURRENCY`（默认 **4**）：只给「重排序阶段」加一个独立闸门，
+  峰值内存 ≈ 闸门值 × 单用户工作集 ≈ 300 MB，与平台 16 并发无关；超出部分排队等闸门。
+- 缓存预算改小（线上 `.env`）：`RANK_INDEX_MAX_MB=32`、`USER_CACHE_MAX_BYTES=32 MB`。
+- `/version` 新增 `memory.rss_kb / hwm_kb / rank_gate`，可以实时盯 RSS（这次就是靠它定位的）。
+
+**验证**：`make test` 116 项通过；线上部署后 16 并发混合压测 + RSS 监控。
+
+**教训**：平台的并发声明（16/16）不会因为我们申报 2/2 就变小；服务的资源上界必须按
+「平台并发 × 单请求工作集」来设计，而不是按申报值。OOM 的破坏力比 503 大得多——进程重启后
+在途请求全断，直接毁掉整轮 Full。
 
 ---
 
